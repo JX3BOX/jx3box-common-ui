@@ -1,0 +1,20 @@
+# JX3BOX UI
+通用UI组件
+
+## Step.1 Install
+```
+npm install @jx3box/jx3box-common-ui
+```  
+
+## Step.2 Import
++ 基础布局(标准三栏布局,公共头底,侧边栏)
+```javascript
+import JX3BOX_UI from '@jx3box/jx3box-common-ui'
+Vue.use(JX3BOX_UI);
+```
+
++ 指定模块
+```javascript
+import xx from "./src/xx.vue"
+Vue.component(xx.name, xx)
+```
