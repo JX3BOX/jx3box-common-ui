@@ -15,6 +15,6 @@ Vue.use(JX3BOX_UI);
 
 + 指定模块
 ```javascript
-import xx from "./src/xx.vue"
+import xx from "@jx3box/jx3box-common-ui/src/xx.vue"
 Vue.component(xx.name, xx)
 ```

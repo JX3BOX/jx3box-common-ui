@@ -1,15 +1,15 @@
-import Header from './Header.vue'
-import Breadcrumb from './Breadcrumb.vue'
+import Header from './src/Header.vue'
+import Breadcrumb from './src/Breadcrumb.vue'
 
-import LeftSidebar from './LeftSidebar.vue'
-import Main from './Main.vue'
-import RightSidebar from './RightSidebar.vue'
+import LeftSidebar from './src/LeftSidebar.vue'
+import Main from './src/Main.vue'
+import RightSidebar from './src/RightSidebar.vue'
 
-import Footer from './Footer.vue'
+import Footer from './src/Footer.vue'
 
-import Bottom from './Bottom.vue'
-import RightSideMsg from './RightSideMsg.vue'
-import Github_REPO from './Github_REPO.vue'
+import Bottom from './src/Bottom.vue'
+import RightSideMsg from './src/RightSideMsg.vue'
+import Github_REPO from './src/Github_REPO.vue'
 
 
 const components = {
