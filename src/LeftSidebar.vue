@@ -108,7 +108,7 @@ export default {
     .rb(0);
     .size(20px);
     .pointer;
-    padding: 20px;
+    padding: 10px;
     svg {
         fill: @color;
     }

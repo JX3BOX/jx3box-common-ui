@@ -1,20 +1,26 @@
 <template>
-    <main class="c-main" :class="{'without-right':withoutRight}">
+    <main class="c-main" :class="{'without-right':withoutRight,'without-left':expanding}">
         <slot></slot>
     </main>
 </template>
 
 <script>
+const Bus = require('./bus');
     export default {
         name : 'Main',
         props:['withoutRight'],
         data : function(){
             return {
+                expanding : false
             }
         },
         computed:{},
         methods:{},
-        mounted:function(){},
+        mounted:function(){
+            Bus.$on('toggleLeftSide',(data)=>{
+                this.expanding = !data
+            })
+        },
     }
 </script>
 
@@ -31,9 +37,13 @@ a{
     .pr;
     min-height: calc(100vh - @header-height - @bread-height);
     margin-top:@header-height + @bread-height;
+    transition:0.2s ease-in;
 }
 .c-main.without-right{
     .mr(0) !important;
+}
+.c-main.without-left{
+    .ml(0) !important;
 }
 
 
