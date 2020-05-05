@@ -14,6 +14,7 @@
         </a>
         <slot></slot>
         <a
+            v-if="publishEnable"
             :href="slug | publish_url(slug)"
             class="u-publish el-button el-button--primary"
             ><i class="el-icon-edit-outline"></i><span>发布</span></a
@@ -26,7 +27,7 @@ const Bus = require('./bus');
 const { JX3BOX } = require("@jx3box/jx3box-common");
 export default {
     name: "Breadcrumb",
-    props: ["name", "slug", "root"],
+    props: ["name", "slug", "root","publishEnable"],
     data: function () {
         return {
             isOpen: true,
