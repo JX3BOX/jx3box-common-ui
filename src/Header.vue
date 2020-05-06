@@ -131,13 +131,13 @@ export default {
     name: "Header",
     data: function () {
         return {
+            isPhone: false,
             // 导航菜单
             JX3BOX,
             nav,
             // 是否有消息
             pop: false,
             // 是否折叠
-            isPhone: false,
             fold: true,
             // 登录信息
             logged_in: false,
@@ -165,7 +165,6 @@ export default {
             this.fold = !this.fold
         },
         closeExpandList: function () {
-            this.isPhone = window.innerWidth < 720 ? true : false;
             const vm = this
             document.addEventListener('click',function(){
                 vm.fold = true
@@ -197,12 +196,13 @@ export default {
             this.logged_in = false;
             this.user = User.getInfo();
             if (location.href.indexOf("dashboard") > 0) {
-                this.location.href = JX3BOX.__Root;
+                location.href = JX3BOX.__Root;
             }
         },
     },
     filters: {},
     mounted: function () {
+        this.isPhone = window.innerWidth < 720 ? true : false;
         this.closeExpandList();
 
         this.logged_in = User.isLogin();

@@ -45,7 +45,7 @@ export default {
             this.isOpen = data
         })
 
-        if (window.outerWidth < 768) {
+        if (window.innerWidth < 1024) {
             this.isOpen = false;
 
             document.addEventListener("click", function() {
