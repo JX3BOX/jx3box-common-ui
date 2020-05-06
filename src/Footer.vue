@@ -13,9 +13,9 @@
         <div class="c-footer-right">
             <a class="u-about" :href="about" target="_blank">关于我们</a>
             <em>|</em>
-            <a class="u-doc" href="https://github.com/JX3BOX/apidocs/wiki/%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3%E4%B8%AD%E5%BF%83" target="_blank">API文档</a>
+            <a class="u-doc" href="https://github.com/JX3BOX/apidocs/wiki" target="_blank">API文档</a>
             <em>|</em>
-            <a class="u-log" href="https://github.com/JX3BOX/jx3box.github.io/wiki/v2-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97" target="_blank">更新日志</a>
+            <a class="u-log" href="https://github.com/JX3BOX/apidocs/issues" target="_blank">更新日志</a>
             <em>|</em>
             <a class="u-feedback" :href="feedback" target="_blank">帮助反馈</a>
         </div>
