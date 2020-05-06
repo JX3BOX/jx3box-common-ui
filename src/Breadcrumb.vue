@@ -82,9 +82,11 @@ export default {
         .fl;
         .size(28px);
         .mr(10px);
+        box-sizing: border-box;
         svg {
             .size(100%);
             fill: @bg-black;
+            box-sizing: border-box;
         }
     }
 

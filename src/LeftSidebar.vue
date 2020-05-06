@@ -69,6 +69,7 @@ export default {
     background-color: @bg-light;
     border-right: 1px solid #eee;
 
+    overflow-y: auto;
     &::-webkit-scrollbar {
         width: 4px;
     }
