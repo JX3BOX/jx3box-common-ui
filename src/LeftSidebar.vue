@@ -3,7 +3,7 @@
         class="c-sidebar-left c-sidebar"
         :class="{ isclose: !isOpen, isopen: isOpen }"
     >
-        <slot></slot>
+        <div class="c-sidebar-left-inner"><slot></slot></div>
         <span
             class="c-sidebar-left-toggle"
             @click="toggleLeftSide"
@@ -68,7 +68,9 @@ export default {
     bottom: 0;
     background-color: @bg-light;
     border-right: 1px solid #eee;
-
+}
+.c-sidebar-left-inner{
+    .size(100%);
     overflow-y: auto;
     &::-webkit-scrollbar {
         width: 4px;
