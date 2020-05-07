@@ -26,7 +26,11 @@
                             name="q"
                             placeholder="搜索.."
                         />
-                        <i class="u-btn"><img svg-inline src="../assets/img/header/search-key-slash.svg" /></i>
+                        <i class="u-btn"
+                            ><img
+                                svg-inline
+                                src="../assets/img/header/search-key-slash.svg"
+                        /></i>
                     </form>
                 </div>
             </div>
@@ -57,7 +61,7 @@
                         ><i class="u-icon u-icon-msg">
                             <img
                                 svg-inline
-                                src="../assets/img/header/msg.svg" /></i
+                                src="../assets/img/header/msg.svg"/></i
                     ></a>
                 </div>
 
@@ -68,7 +72,10 @@
                     id="c-header-panel"
                 >
                     <a class="u-post" :href="JX3BOX.__Links.dashboard.publish"
-                        ><img class="u-add" svg-inline src="../assets/img/header/add.svg"
+                        ><img
+                            class="u-add"
+                            svg-inline
+                            src="../assets/img/header/add.svg"
                     /></a>
                 </div>
 
@@ -121,15 +128,16 @@
 </template>
 
 <script>
-const { JX3BOX, User } = require('@jx3box/jx3box-common');
-const nav = require('../data/nav');
+const { JX3BOX, User } = require("@jx3box/jx3box-common");
+const nav = require("../data/nav");
 
 const axios = require("axios");
 const MSG_API = JX3BOX.__helperUrl + "api/messages";
+const Logout_API = JX3BOX.__server + "account/logout";
 
 export default {
     name: "Header",
-    data: function () {
+    data: function() {
         return {
             isPhone: false,
             // 导航菜单
@@ -145,10 +153,10 @@ export default {
         };
     },
     computed: {
-        login_url: function () {
+        login_url: function() {
             return JX3BOX.__Links.account.login + "?redirect=" + location.href;
         },
-        register_url: function () {
+        register_url: function() {
             return (
                 JX3BOX.__Links.account.register + "?redirect=" + location.href
             );
@@ -156,22 +164,22 @@ export default {
     },
     methods: {
         // 导航焦点
-        isFocus: function (type) {
+        isFocus: function(type) {
             return location.pathname.includes(type);
         },
         // 菜单
-        expandList: function (e) {
+        expandList: function(e) {
             e.stopPropagation();
-            this.fold = !this.fold
+            this.fold = !this.fold;
         },
-        closeExpandList: function () {
-            const vm = this
-            document.addEventListener('click',function(){
-                vm.fold = true
-            })
+        closeExpandList: function() {
+            const vm = this;
+            document.addEventListener("click", function() {
+                vm.fold = true;
+            });
         },
         // 消息
-        checkMSG: function () {
+        checkMSG: function() {
             let condition = encodeURIComponent("where[user_id]");
             if (Number(this.user.uid)) {
                 axios({
@@ -191,17 +199,19 @@ export default {
             }
         },
         // 注销
-        logout: function () {
-            User.destroy();
-            this.logged_in = false;
-            this.user = User.getInfo();
-            if (location.href.indexOf("dashboard") > 0) {
-                location.href = JX3BOX.__Root;
-            }
+        logout: function() {
+            axios.post(Logout_API).then((res) => {
+                User.destroy();
+                this.logged_in = false;
+                this.user = User.getInfo();
+                if (location.href.indexOf("dashboard") > 0) {
+                    location.href = JX3BOX.__Root;
+                }
+            });
         },
     },
     filters: {},
-    mounted: function () {
+    mounted: function() {
         this.isPhone = window.innerWidth < 720 ? true : false;
         this.closeExpandList();
 
@@ -211,11 +221,10 @@ export default {
         if (this.logged_in) {
             this.checkMSG();
         }
-        
     },
 };
 </script>
 
 <style lang="less">
-@import '../assets/css/header.less';
+@import "../assets/css/header.less";
 </style>

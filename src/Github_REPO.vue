@@ -5,7 +5,6 @@
                 ><img svg-inline src="../assets/img/rightsidebar/github.svg"
             /></i>
             <span class="u-name">{{ full_name }}</span>
-            <em class="u-join">Contribute</em>
         </a>
         <div class="u-detail">
             <time class="u-update">Last updated:{{ updated_at }}</time>
@@ -20,6 +19,7 @@
             </ul>
             <slot></slot>
         </div>
+        <a class="u-join" :href="html_url">Contribute</a>
     </div>
 </template>
 
@@ -76,6 +76,7 @@ export default {
                 fill:#555;
             }
         }
+        .nobreak;
     }
     .i-github {
         .dbi;
@@ -85,12 +86,6 @@ export default {
     .u-name {
         .fz(1em, 32px);
         font-weight: 600;
-    }
-    .u-join{
-        .fr;
-        .fz(12px,32px);
-        padding:0 5px;
-        color:#999;
     }
     .u-detail{
         padding:3px 10px 0 10px;
@@ -124,6 +119,13 @@ export default {
                 .none;
             }
         }
+    }
+    .u-join{
+        .db;
+        .x(right);
+        .fz(12px,32px);
+        padding:0 5px;
+        color:#999;
     }
 }
 </style>
