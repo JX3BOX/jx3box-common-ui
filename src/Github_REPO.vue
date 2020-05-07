@@ -1,5 +1,5 @@
 <template>
-    <div class="c-github-repo">
+    <div class="c-github-repo" :class="{mini:MINI}">
         <a class="u-repo" :href="html_url" target="_blank">
             <i class="i-github"
                 ><img svg-inline src="../assets/img/rightsidebar/github.svg"
@@ -19,7 +19,10 @@
             </ul>
             <slot></slot>
         </div>
-        <a class="u-join" :href="html_url">Contribute</a>
+        <div class="u-more">
+            <a class="u-report" :href="issue_url">提建议 | 发现Bug</a>
+            <a class="u-join" :href="html_url">+ Contribute</a>
+        </div>
     </div>
 </template>
 
@@ -27,7 +30,7 @@
 const axios = require("axios");
 export default {
     name: "Github_REPO",
-    props: ["REPO"],
+    props: ["REPO","MINI"],
     data: function() {
         return {
             full_name: "",
@@ -36,7 +39,11 @@ export default {
             contributors: [],
         };
     },
-    computed: {},
+    computed: {
+        issue_url : function (){
+            return this.html_url + '/issues'
+        }
+    },
     methods: {},
     mounted: function() {
         axios
@@ -65,6 +72,12 @@ export default {
     border: 1px solid #eee;
     .r(4px);
     margin: 10px;
+
+    &.mini{
+        .u-repo,.u-detail,.u-more .u-join{
+            .none;
+        }
+    }
 
     .u-repo {
         .db;
@@ -120,12 +133,17 @@ export default {
             }
         }
     }
-    .u-join{
-        .db;
-        .x(right);
+    .u-more{
         .fz(12px,32px);
         padding:0 5px;
         color:#999;
+        .clearfix;
+    }
+    .u-join{
+        .fr;
+    }
+    .u-report{
+        .fl;
     }
 }
 </style>
