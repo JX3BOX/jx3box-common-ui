@@ -33,13 +33,17 @@ export default {
     props: ["REPO","MINI"],
     data: function() {
         return {
-            full_name: "",
-            html_url: "",
             updated_at: "",
             contributors: [],
         };
     },
     computed: {
+        full_name : function (){
+            return `JX3BOX/${this.REPO}`
+        },
+        html_url : function (){
+            return `https://github.com/JX3BOX/${this.REPO}`
+        },
         issue_url : function (){
             return this.html_url + '/issues'
         }
@@ -50,8 +54,6 @@ export default {
             .get(`https://api.github.com/repos/JX3BOX/${this.REPO}`)
             .then((res) => {
                 let data = res.data;
-                this.full_name = data.full_name;
-                this.html_url = data.html_url;
                 this.updated_at = data.updated_at;
             });
         axios
@@ -138,6 +140,9 @@ export default {
         padding:0 5px;
         color:#999;
         .clearfix;
+        a:hover{
+            text-decoration:underline;
+        }
     }
     .u-join{
         .fr;
