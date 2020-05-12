@@ -13,8 +13,7 @@
             <RightSidebar>
                 right extend
                 <RightSideMsg>Test</RightSideMsg>
-                <Github_REPO REPO="jx3box-common"></Github_REPO>
-                
+                <Github_REPO REPO="jx3box-common" coder="1,8"></Github_REPO>
             </RightSidebar>
             <Footer></Footer>
             <Bottom></Bottom>

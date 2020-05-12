@@ -9,7 +9,7 @@
         <div class="u-detail">
             <time class="u-update">Last updated:{{ updated_at }}</time>
             <h5 class="u-contributors">Contributors</h5>
-            <ul class="u-list">
+            <ul class="u-list" v-if="!coder">
                 <li v-for="(c, i) in contributors" :key="c + i">
                     <a :href="c.html_url" :title="c.login" target="_blank">
                         <img :src="c.avatar_url" :alt="c.login" />
@@ -17,24 +17,34 @@
                     </a>
                 </li>
             </ul>
+            <ul class="u-list" v-if="coder">
+                <li v-for="(c, i) in coders" :key="c + i">
+                    <a :href="author_link + '?' + c.ID" :title="c.display_name" target="_blank">
+                        <img :src="c.user_avatar" :alt="c.display_name" />
+                    </a>
+                </li>
+            </ul>
             <slot></slot>
         </div>
         <div class="u-more">
-            <a class="u-report" :href="issue_url">提建议 | 发现Bug</a>
-            <a class="u-join" :href="html_url">+ Contribute</a>
+            <a class="u-report" :href="issue_url" target="_blank">提建议 | 发现Bug</a>
+            <a class="u-join" :href="html_url" target="_blank">+ Contribute</a>
         </div>
     </div>
 </template>
 
 <script>
 const axios = require("axios");
+const { JX3BOX } = require("@jx3box/jx3box-common");
 export default {
     name: "Github_REPO",
-    props: ["REPO","MINI"],
+    props: ["REPO","MINI","coder"],
     data: function() {
         return {
             updated_at: "",
             contributors: [],
+            coders : [],
+            author_link : JX3BOX.__Links.author
         };
     },
     computed: {
@@ -46,7 +56,7 @@ export default {
         },
         issue_url : function (){
             return this.html_url + '/issues'
-        }
+        },
     },
     methods: {},
     mounted: function() {
@@ -56,7 +66,19 @@ export default {
                 let data = res.data;
                 this.updated_at = data.updated_at;
             });
-        axios
+        // 指定了贡献人员
+        if(this.coder){
+            axios
+            .get(
+                // `${JX3BOX.__server}user/list?uid=${this.coder}`
+                `http://localhost:5160/user/list?uid=${this.coder}`
+            )
+            .then((res) => {
+                let data = res.data.data.list;
+                this.coders = data;
+            });
+        }else{
+            axios
             .get(
                 `https://api.github.com/repos/JX3BOX/${this.REPO}/contributors`
             )
@@ -64,6 +86,9 @@ export default {
                 let data = res.data;
                 this.contributors = data;
             });
+        }
+
+        
     },
 };
 </script>
