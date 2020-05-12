@@ -19,7 +19,7 @@
             </ul>
             <ul class="u-list" v-if="coder">
                 <li v-for="(c, i) in coders" :key="c + i">
-                    <a :href="author_link + '?' + c.ID" :title="c.display_name" target="_blank">
+                    <a :href="author_link + '?uid=' + c.ID" :title="c.display_name" target="_blank">
                         <img :src="c.user_avatar" :alt="c.display_name" />
                     </a>
                 </li>
