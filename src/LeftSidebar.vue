@@ -145,5 +145,8 @@ export default {
     .c-sidebar-left-toggle {
         .none;
     }
+    .c-sidebar-left.isopen{
+        box-shadow:2px 0 3px rgba(0,0,0,.1);
+    }
 }
 </style>

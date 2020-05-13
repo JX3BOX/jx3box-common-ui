@@ -13,11 +13,11 @@
         <div class="c-footer-right">
             <a class="u-about" :href="about" target="_blank">关于我们</a>
             <em>|</em>
-            <a class="u-doc" href="https://github.com/JX3BOX/apidocs/wiki" target="_blank">API文档</a>
+            <a class="u-doc" href="https://github.com/JX3BOX/apidocs/wiki" target="_blank">帮助文档</a>
             <em>|</em>
             <a class="u-log" href="https://github.com/JX3BOX/apidocs/issues" target="_blank">更新日志</a>
             <em>|</em>
-            <a class="u-feedback" :href="feedback" target="_blank">帮助反馈</a>
+            <a class="u-feedback" :href="feedback" target="_blank">反馈建议</a>
         </div>
         <slot></slot>
     </footer>
