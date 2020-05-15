@@ -5,7 +5,7 @@
 </template>
 
 <script>
-const Bus = require('./bus');
+import Bus from './bus';
     export default {
         name : 'Main',
         props:['withoutRight'],

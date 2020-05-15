@@ -75,7 +75,15 @@ export default {
             )
             .then((res) => {
                 let data = res.data.data.list;
-                this.coders = data;
+                let sequence = this.coder.split(',')
+                this.coders = []
+                for(let uid of sequence){
+                    for(let coder of data){
+                        if(coder.ID == uid){
+                            this.coders.push(coder)
+                        }
+                    }
+                }
             });
         }else{
             axios

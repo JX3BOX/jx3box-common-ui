@@ -1,5 +1,6 @@
+import Vue from "vue";
 const Bus = new Vue();
-module.exports = Bus
+export default Bus
 
 // Use like
 // Bus.$emit(事件名,数据);

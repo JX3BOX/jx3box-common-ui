@@ -1,7 +1,7 @@
 <template>
     <div class="c-container-page">
         <Header></Header>
-        <Breadcrumb name="频道名称" slug="slug" root="/slug">
+        <Breadcrumb name="频道名称" slug="slug" root="/slug" :publishEnable="true">
             <img slot="logo" svg-inline src="../assets/img/jx3.svg" />
             bread info
         </Breadcrumb>
@@ -13,7 +13,7 @@
             <RightSidebar>
                 right extend
                 <RightSideMsg>Test</RightSideMsg>
-                <Github_REPO REPO="jx3box-common" coder="1,8"></Github_REPO>
+                <Github_REPO REPO="jx3box-common" coder="8,1"></Github_REPO>
             </RightSidebar>
             <Footer></Footer>
             <Bottom></Bottom>

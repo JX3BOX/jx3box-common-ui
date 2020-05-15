@@ -23,7 +23,7 @@
 </template>
 
 <script>
-const Bus = require('./bus');
+import Bus from './bus';
 const { JX3BOX } = require("@jx3box/jx3box-common");
 export default {
     name: "Breadcrumb",
