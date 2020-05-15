@@ -20,7 +20,7 @@
             <ul class="u-list" v-if="coder">
                 <li v-for="(c, i) in coders" :key="c + i">
                     <a :href="author_link + '?uid=' + c.ID" :title="c.display_name" target="_blank">
-                        <img :src="c.user_avatar" :alt="c.display_name" />
+                        <img :src="c.user_avatar | resolveAvatarPath" :alt="c.display_name" />
                     </a>
                 </li>
             </ul>
@@ -59,6 +59,11 @@ export default {
         },
     },
     methods: {},
+    filters : {
+        resolveAvatarPath : function (val){
+            return val.replace(JX3BOX.__ossRoot,JX3BOX.__ossMirror)
+        }
+    },
     mounted: function() {
         axios
             .get(`https://api.github.com/repos/JX3BOX/${this.REPO}`)
