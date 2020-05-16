@@ -10,6 +10,7 @@ import Footer from './src/Footer.vue'
 import Bottom from './src/Bottom.vue'
 import RightSideMsg from './src/RightSideMsg.vue'
 import Github_REPO from './src/Github_REPO.vue'
+import Mark from './src/Mark.vue'
 
 
 const components = {
@@ -25,6 +26,7 @@ const components = {
     Bottom,
     RightSideMsg,
     Github_REPO,
+    Mark,
 
 }
 
