@@ -20,13 +20,32 @@
 
 <style lang="less">
 .c-sidebar-right{
-    .pa;
-    .lt(100%,0);
+    // .pa;.lt(100%,0);
+    .pf;.rt(0,@header-height + @bread-height);
     .w(@aside-right);
     background-color:#fff;
     border-left:1px solid #eee;
     height:100%;
     box-sizing: border-box;
+
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-track-piece {
+        background-color: #fafafa;
+        border-radius: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #eee;
+        border-radius: 6px;
+    }
+    &::-webkit-scrollbar-button,
+    &::-webkit-scrollbar-corner,
+    &::-webkit-resizer {
+        display: none;
+    }
 }
 
 // 笔记本<1440 缩小双边栏

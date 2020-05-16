@@ -12,16 +12,18 @@
             left nav
         </LeftSidebar>
 
-        <Main :withoutRight="false" style="position:relative">
+        <Main :withoutRight="false" style="position:relative;height:1800px">
 
             primary content
             <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39"/>
 
             <RightSidebar>
+                <div style="height:1200px;">
                 right extend
                 <RightSideMsg>Test</RightSideMsg>
                 <Postauthor :author="author"/>
                 <Github_REPO REPO="jx3box-common" coder="8,1"></Github_REPO>
+                </div>
             </RightSidebar>
 
 
