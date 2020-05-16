@@ -8,8 +8,9 @@
         <LeftSidebar>
             left nav
         </LeftSidebar>
-        <Main :withoutRight="false">
+        <Main :withoutRight="false" style="position:relative">
             primary content
+            <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39"/>
             <RightSidebar>
                 right extend
                 <RightSideMsg>Test</RightSideMsg>
@@ -31,6 +32,7 @@ import Footer from "./Footer.vue";
 import Bottom from "./Bottom.vue";
 import RightSideMsg from "./RightSideMsg.vue";
 import Github_REPO from "./Github_REPO.vue";
+import Mark from "./Mark.vue";
 
 export default {
     name : 'App',
@@ -43,7 +45,8 @@ export default {
         Footer,
         Bottom,
         RightSideMsg,
-        Github_REPO
+        Github_REPO,
+        Mark
     },
 };
 </script>
