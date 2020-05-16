@@ -66,9 +66,9 @@ export default {
     },
     mounted: function() {
         axios
-            .get(`https://api.github.com/repos/JX3BOX/${this.REPO}`)
+            .get(`${JX3BOX.__server}github?repo=${this.REPO}`)
             .then((res) => {
-                let data = res.data;
+                let data = res.data.data;
                 this.updated_at = data.updated_at;
             });
         // 指定了贡献人员
@@ -76,7 +76,6 @@ export default {
             axios
             .get(
                 `${JX3BOX.__server}user/list?uid=${this.coder}`
-                // `http://localhost:5160/user/list?uid=${this.coder}`
             )
             .then((res) => {
                 let data = res.data.data.list;
