@@ -11,6 +11,7 @@ import Bottom from './src/Bottom.vue'
 import RightSideMsg from './src/RightSideMsg.vue'
 import Github_REPO from './src/Github_REPO.vue'
 import Mark from './src/Mark.vue'
+import Postauthor from './src/Postauthor.vue'
 
 
 const components = {
@@ -27,6 +28,7 @@ const components = {
     RightSideMsg,
     Github_REPO,
     Mark,
+    Postauthor,
 
 }
 
