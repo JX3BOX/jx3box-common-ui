@@ -66,7 +66,7 @@ export default {
     },
     mounted: function() {
         axios
-            .get(`${JX3BOX.__server}github?repo=${this.REPO}`)
+            .get(`https://api.github.com/repos/JX3BOX/${this.REPO}`)
             .then((res) => {
                 let data = res.data.data;
                 this.updated_at = data.updated_at;
