@@ -1,0 +1,60 @@
+// 折叠文本
+.e-details,.e-summary{
+	font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+	white-space: pre-wrap;
+	margin:0;
+}
+.e-summary{
+	cursor: pointer;
+	position: relative;
+	border:1px solid #ddd;
+	background-color:#fafbfc;
+	padding:8px 10px 8px 26px;
+	display: block;
+	margin-bottom:0;
+	border-radius:4px;
+
+	// color: #0366d6;
+	// font-size:14px;
+	&:before{
+		content:'>';
+		display: block;
+		position: absolute;
+		left:10px;
+		top:8px;
+		font-family:'宋体',Consolas;
+		color:#aaa;
+		transform:rotate(0);
+	}
+	&:after{
+		content:'🌷';
+		display: block;
+		position: absolute;
+		right: 10px;
+		top: 8px;
+	}
+	&.on{
+		&:before{
+			transform:rotate(90deg);
+		}
+		&:after{
+			content:'🌸'
+		}
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}
+
+.e-details{
+	padding:10px;
+	border:1px dashed #ddd;
+	margin-top:0;
+	background:none;
+	border-top:none;
+	display: none;
+}
+.c-article.c-article-editor{
+	.e-details{
+		display: block;
+	}
+}

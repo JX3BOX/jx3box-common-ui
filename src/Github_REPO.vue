@@ -69,7 +69,7 @@ export default {
             .get(`https://api.github.com/repos/JX3BOX/${this.REPO}`)
             .then((res) => {
                 let data = res.data.data;
-                this.updated_at = data.updated_at;
+                if(data) this.updated_at = data.updated_at;
             });
         // 指定了贡献人员
         if(this.coder){

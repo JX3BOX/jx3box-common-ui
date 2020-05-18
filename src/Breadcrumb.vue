@@ -111,6 +111,7 @@ export default {
         .h(28px);
         padding: 10px;
         .none;
+        .pointer;
 
         svg {
             .h(29px);

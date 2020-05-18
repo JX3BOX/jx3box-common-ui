@@ -1,0 +1,349 @@
+.w-qixue-box{
+
+    @url:'https://console.cnyixun.com/img/';
+
+    zoom:1;
+
+    @color:#2e4946;
+    @gray:#6f888a;
+    @xf-l:10px;@xf-r:5px;@xf:23px;@out-bo:2px;
+    @lp:@xf-l + @xf-r + @xf + @out-bo;
+    @space:10px;@bo:2px;
+
+    //局部z级别
+    @icon-decorate:5;   //装饰框
+    @item-description:999;   //描述
+
+    .white(){
+        color:#fff;
+        text-shadow:1px 1px 1px rgba(0,0,0,.9);
+    }
+    .dbi;
+    background-color: @color;
+    .r(5px);
+    border:@out-bo solid @gray;
+    box-shadow:0 0 3px rgba(0,0,0,.4);
+    //padding-right:5px;
+    padding-top:8px;
+    padding-bottom:8px;
+    padding-right:20px; //fix
+    white-space: nowrap;
+    font-size:0;
+
+    //单项
+    li{
+        list-style:none;
+    }
+
+    //图片
+    img{
+        .db;.size(48px);.r(5px);.auto(x);
+        box-sizing: border-box;
+        filter:saturate(110%) brightness(110%);
+        box-shadow: 0 0 3px rgba(0,0,0,.5);
+        user-select: none;
+    }
+
+    //心法label
+    .w-qixue-xf{
+        .dbi;.y(top);
+        .fz(14px);.white;.x;
+        padding:0 4px 0 0;
+        box-sizing:border-box;
+        .retext(y);
+        background:url('@{url}qixue/label.png') no-repeat 0 0;
+        .size(@xf,86px);
+        .mr(@xf-r);
+        .ml(@xf-l);
+        user-select: none;
+        //针对正文覆写
+        border:none;
+        font-weight:normal;
+        margin-top:0;
+        margin-bottom:0;
+        line-height:1.1;
+    }
+
+    .w-qixue-clist{
+        margin:0;
+    }
+
+
+    //公共单项
+    .w-qixue-clist-item,.w-qixue-olist-item{
+
+        .u-pic{
+            .db;
+            .pr;
+            &:before,&:after{
+                content:"";
+                .db;
+            }
+            &:after{
+                .size(52px);
+                .pa;.lt(-2px,-2px);
+                background:url('@{url}qixue/bg.png') no-repeat 0 0;
+                .z(@icon-decorate + 1);
+            }
+        }
+        img{
+            .r(48px);
+            //针对正文覆写
+            padding:0;
+            margin:0;
+            border:none;
+        }
+        .u-title{
+            .white;
+            .fz(13px,14px);
+            .x;.db;.auto(x);
+            .mt(6px);
+            .w(48px);
+        }
+    }
+
+    //当前盒子
+    .w-qixue-clist{
+        .dbi;.y(top);
+        font-size:0;
+        white-space:nowrap;
+        margin-top:8px;
+        .pr;.z(2);
+
+        //针对正文覆写
+        padding-left:0;
+    }
+    //当前单项
+    .w-qixue-clist-item{
+        .dbi;.y;
+        padding-left:@space;
+        padding-right:@space;
+        .pr;
+
+        &:last-child{
+            margin-right:0;
+        }
+
+        /* &.w-qixue-isskill .u-pic{
+            &:before{
+                .pa;.lt(0);
+                .full;
+                border:2px solid @color-cyan;
+            }
+        } */
+
+        &:before{
+            content:"";
+            .size(44px,11px);
+            background:url('@{url}qixue/fold.png') no-repeat 0 0;
+            margin:0 2px;
+
+            .none;
+        }
+
+        &.on{
+            &:before{
+                background-image:url('@{url}qixue/unfold.png');
+            }
+        }
+
+    }
+
+    .pr;
+    .w-qixue-obox,.w-qixue-olist,.w-qixue-item-pop{
+        .none;
+    }
+    //全部扩展列表容器
+    .w-qixue-obox{
+        .pa;.lb(@lp,100%);
+        white-space:nowrap;
+        font-size:0;
+        &.on{
+            .db;
+        }
+    }
+    //单个扩展列表
+    .w-qixue-olist{
+        .pr;.z(3);
+        .dbi;.y(bottom);
+        background-color: @color;
+        padding:@space - @bo;
+        border-top-left-radius:5px;
+        border-top-right-radius:5px;
+        border:@bo solid @gray;
+        border-bottom:none;
+        box-shadow:3px -3px 3px rgba(0,0,0,.4);
+
+        &:last-child{
+            margin-right:0;
+        }
+
+        transform:scale(0);
+        &.on{
+            transform:scale(1);
+        }
+
+    }
+    .w-qixue-olist-item{
+        margin-bottom:8px;
+        .pr;
+
+        .u-pic{
+            &:before{
+                .full;
+                .pa;.lt(0);
+                background-color: rgba(0,0,0,.6);
+                .r(48px);
+                .z(@icon-decorate);
+            }
+        }
+
+        &:hover{
+
+            .u-pic{
+                &:before{
+                    .tm(0);
+                }
+            }
+        }
+
+        &:last-child{
+            margin-bottom:0;
+        }
+
+    }
+
+    //特殊技能
+    .w-qixue-is_skill{
+        .u-pic{
+            &:before,img{
+                .r(0);
+            }
+            &:after{
+                .none;
+            }
+        }
+    }
+
+    //单个浮层描述
+    .w-qixue-item-pop{
+        .pa;.lt(100%,0);.z(@item-description);
+        background-color:rgba(0,0,0,.8);
+        margin-left:4px;
+        .r(3px);
+        padding:10px;
+        width:320px;
+
+        *{
+            .db;
+            white-space: normal;
+            word-wrap: break-word;word-break: break-all;
+        }
+        .u-name,.u-desc{
+            color:#ffff00;
+        }
+        .u-name{
+            .fz(14px,2);
+        }
+        .u-desc{
+            .fz(12px,20px);
+        }
+        .u-skill{
+            color:#fff;
+            .fz(13px,20px);
+        }
+        .u-meta,.u-extend{
+            color:#ff9600;
+            .fz(13px,2);
+        }
+        &.on{
+            .db;
+        }
+    }
+    //展示版奇穴的pop显示位置
+    .w-qixue-clist-item .w-qixue-item-pop{
+        left:0;
+        top:auto;bottom:100%;.mb(10px);
+    }
+
+}
+@media screen and (max-width:@ipad){
+    .w-qixue-box{
+        zoom:0.8;
+
+        .db;
+        .w(100%);
+        li,.w-qixue-xf{
+            .fl;
+            margin-bottom:10px;
+        }
+        .w-qixue-xf{.none;}
+    }
+}
+
+.w-qixue-editable{
+    li{
+        .pointer;
+    }
+    .w-qixue-clist-item{
+        user-select:none;
+    }
+    .w-qixue-clist-item:before{
+        .db;
+    }
+
+    &.disabled:after{
+        content:'';
+        .db;
+        .full;
+        .pa;.lt(0);.z(10);
+        background-color: rgba(0,0,0,.5);
+    }
+
+    &.active{
+        &:after{
+            .none;
+        }
+    }
+    //编辑模式下当前版不加载pop
+    .w-qixue-clist-item .w-qixue-item-pop{
+        .none !important;
+    }
+}
+
+@media screen and (max-width:@ipad){
+    .w-qixue-editable{
+        zoom:0.8;
+
+        .db;
+        .w(100%);
+        //overflow-x:auto;
+        //overflow-y:visible;
+        li,.w-qixue-xf{
+            .fl;
+            margin-bottom:10px;
+        }
+        .w-qixue-obox{
+            left:0;
+        }
+        .w-qixue-olist{
+            .clearfix;
+            .none;
+            &.on{
+                .db;
+            }
+
+            li{
+                .mr(10px);
+                &:last-child{.mr(0);}
+                transform:scale(1);
+            }
+        }
+
+        .w-qixue-item-pop{
+            left:0;
+            top:auto;
+            bottom:100%;
+        }
+    }
+}

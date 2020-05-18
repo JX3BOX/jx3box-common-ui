@@ -9,12 +9,14 @@
         </Breadcrumb>
 
         <LeftSidebar>
+            <div id="directory"></div>
             left nav
         </LeftSidebar>
 
         <Main :withoutRight="false" style="position:relative;height:1800px">
 
-            primary content
+            <Article :content="content" directorybox="#directory" style="padding:20px;" @contentRendered="test1" @directoryRendered="test2"/>
+
             <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39"/>
 
             <RightSidebar>
@@ -45,9 +47,12 @@ import RightSideMsg from "./RightSideMsg.vue";
 import Github_REPO from "./Github_REPO.vue";
 import Mark from "./Mark.vue";
 import Postauthor from "./Postauthor.vue";
+import Article from "./Article.vue";
 
 import axios from 'axios'
 import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
+
+import demohtml from '../demo/article'
 
 export default {
     name : 'App',
@@ -62,17 +67,27 @@ export default {
         RightSideMsg,
         Github_REPO,
         Mark,
-        Postauthor
+        Postauthor,
+        Article
     },
     data : function (){
         return {
-            author : {}
+            author : {},
+            content : demohtml
         }
     },
     created : function (){
         axios.get(__server + 'user/info?uid=8').then((res) => {
             this.author = res.data.data
         })
+    },
+    methods : {
+        test1 : function(){
+            console.log('文章已渲染')
+        },
+        test2 :function (){
+            console.log('目录已渲染')
+        }
     }
 };
 </script>

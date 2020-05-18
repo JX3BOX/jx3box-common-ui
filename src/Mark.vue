@@ -6,7 +6,7 @@
                 src="../assets/img/header/logo.svg"
             />{{mark_key}}</i
         >
-        <span class="w-mark-value" :style="{'background-color':BGR}">{{mark_value}}</span>
+        <span v-if="mark_value" class="w-mark-value" :style="{'background-color':BGR}">{{mark_value}}</span>
     </span>
 </template>
 
@@ -17,13 +17,13 @@ export default {
     data: function() {
         return {
             mark_key : this.label || 'JX3BOX',
-            mark_value: this.value || 'COM',
+            mark_value: this.value,
         };
     },
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .w-mark{
     .pa;;.r(3px);.clip;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);

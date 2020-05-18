@@ -19,8 +19,12 @@
         "name": "成就",
         "path": "https://v2.jx3box.com/cj"
     },
+    "tool": {
+        "name": "教程",
+        "path": "https://www.jx3box.com/tool"
+    },
     "pvx": {
-        "name": "休闲",
+        "name": "捏脸",
         "path": "https://www.jx3box.com/share"
     },
     "bbs": {
