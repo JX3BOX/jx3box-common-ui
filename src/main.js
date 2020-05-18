@@ -1,7 +1,8 @@
 // 第三方UI组件
 import Vue from "vue";
-// import ElementUI from "element-ui";
-// Vue.use(ElementUI);
+import {Pagination,Button}from 'element-ui';
+Vue.use(Pagination);
+Vue.use(Button);
 
 // 通用UI模块
 // import JX3BOX_UI from '@jx3box/jx3box-common-ui'

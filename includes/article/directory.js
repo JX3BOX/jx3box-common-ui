@@ -13,7 +13,7 @@ function directory(from, to) {
 
         $box.html(
             `<div class="c-article-directory" id="c-article-directory">
-                <div class="c-article-directory-title" id="c-article-directory-title">📒 导读</div>
+                <div class="c-article-directory-title" id="c-article-directory-title">导读</div>
                 <div class="c-article-directory-content" id="c-article-directory-content"></div>
             </div>`
         );

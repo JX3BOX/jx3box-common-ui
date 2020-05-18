@@ -13,7 +13,7 @@
             left nav
         </LeftSidebar>
 
-        <Main :withoutRight="false" style="position:relative;height:1800px">
+        <Main :withoutRight="false" style="position:relative;">
 
             <Article :content="content" directorybox="#directory" style="padding:20px;" @contentRendered="test1" @directoryRendered="test2"/>
 

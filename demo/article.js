@@ -9,6 +9,7 @@ export default `<h1>一级标题·字体111111111111111111111111111</h1>
 <p style="text-align: center;">居中对齐</p>
 <p style="text-align: left; padding-left: 40px;">缩进内容</p>
 <p style="text-align: left; padding-left: 40px;">&nbsp;</p>
+<!--nextpage-->
 <ul>
 <li style="text-align: left;">无序列表</li>
 <li style="text-align: left;">无序列表</li>
@@ -21,6 +22,7 @@ export default `<h1>一级标题·字体111111111111111111111111111</h1>
 <li>checklist新版</li>
 <li class="tox-checklist--checked">checklist新版</li>
 </ul>
+<!--nextpage-->
 <div class="e-checklist">
 <div class="on">111</div>
 <div>222</div>
@@ -90,10 +92,18 @@ export default `<h1>一级标题·字体111111111111111111111111111</h1>
 /cast 蝎心
 /cast 蟾啸</pre>
 <hr/>
-旧版奇穴
-<input class="e-jx3qixue-area" type="text" value="{&quot;version&quot;:&quot;v20200309&quot;,&quot;xf&quot;:&quot;凌海诀&quot;,&quot;sq&quot;:&quot;1,1,1,1,1,1,1,1,1,1,1,1&quot;}" />
-新版ID版
-【Pending】
+<p>旧版奇穴</p>
+<p><input class="e-jx3qixue-area" type="text" value="{&quot;version&quot;:&quot;v20200113&quot;,&quot;xf&quot;:&quot;焚影圣诀&quot;,&quot;sq&quot;:&quot;2,2,3,1,1,1,1,1,1,3,4,1&quot;}" /></p>
+<p>新版奇穴</p>
+<div class="e-jx3qixue-area">{"version":"v20200309","xf":"凌海诀","sq":"1,1,1,1,1,1,1,1,1,1,1,1"}</div>
+旧版资源插入
+<p><img class="e-jx3-icon" title="IconID:2588" src="https://console.cnyixun.com/icon/2588.png" /></p>
+<pre class="e-jx3-resource"><span class="u-id">ID:551</span> <img class="u-pic" title="IconID:898" src="https://console.cnyixun.com/icon/898.png" /> <span class="u-name">心鼓弦</span> <span class="u-desc">救治一个重伤的友方目标，可在战斗中使用。</span></pre>
+<pre class="e-jx3-resource"><span class="u-id">ID:2712</span> <img class="u-pic" title="IconID:414" src="https://console.cnyixun.com/icon/414.png" /> <span class="u-name">清心静气</span> <span class="u-desc">气血最大值提高点</span></pre>
+<pre class="e-jx3-resource"><span class="u-id">ID:28610</span> <img class="u-pic" title="IconID:3116" src="https://console.cnyixun.com/icon/3116.png" /> <span class="u-name">幽月・乱花</span> <span class="u-desc">长两尺六寸，重五十二两
+刃宽两寸，两边锋利，刚硬沉静，挥动起来杀气逼人。
+当初唐太宗李世民赠与相知山庄的一双剑。据说出自汉朝工匠张蹇之手，后被太宗所得。据说惟有心意相通的有情人才能互相配合使二剑威力发挥到极致，不过又传说七秀坊的心法同样可以将此双剑的威力发挥出来。  </span></pre>
+<pre class="e-jx3-resource"><span class="u-id">ID:131</span> <img class="u-pic" title="IconID:1835" src="https://console.cnyixun.com/icon/1835.png" /> <span class="u-name">《猿公剑法・剑灵寰宇》穴位图残页</span> <span class="u-desc">调息时间减少2秒。</span></pre>
 
 <h6>六级标题·站外合作定制功能·配装方案插入、</h6>
 <p>&nbsp;</p>

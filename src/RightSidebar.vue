@@ -21,7 +21,7 @@
 <style lang="less">
 .c-sidebar-right{
     // .pa;.lt(100%,0);
-    .pf;.rt(0,@header-height + @bread-height);
+    .pf;.rt(0,@header-height + @bread-height);.z(500);
     .w(@aside-right);
     background-color:#fff;
     border-left:1px solid #eee;
