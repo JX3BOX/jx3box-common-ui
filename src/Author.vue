@@ -31,7 +31,7 @@
 <script>
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 export default {
-    name: "Postauthor",
+    name: "Author",
     props: ["author"],
     data: function() {
         return {};
@@ -80,6 +80,9 @@ export default {
             .db;
             margin: 10px;
             .fz(13px, 20px);
+            &:hover{
+                color:#f39;
+            }
         }
         svg {
             .size(20px);

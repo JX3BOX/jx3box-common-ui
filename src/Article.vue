@@ -95,6 +95,7 @@ export default {
         },
         changePage: function(i) {
             this.page = i
+            window.scrollTo(0,0)
             this.$nextTick(() => {
                 this.doDir()
             })

@@ -21,10 +21,16 @@
 
             <RightSidebar>
                 <div style="height:1200px;">
-                right extend
-                <RightSideMsg>Test</RightSideMsg>
-                <Postauthor :author="author"/>
-                <Github_REPO REPO="jx3box-common" coder="8,1"></Github_REPO>
+                    right extend
+                    <RightSideMsg>Test</RightSideMsg>
+
+                    <Author :author="author"/>
+                    <Authorposts uid="2"/>
+
+                    <Github_REPO REPO="jx3box-common" coder="8,1"></Github_REPO>
+
+
+
                 </div>
             </RightSidebar>
 
@@ -46,8 +52,9 @@ import Bottom from "./Bottom.vue";
 import RightSideMsg from "./RightSideMsg.vue";
 import Github_REPO from "./Github_REPO.vue";
 import Mark from "./Mark.vue";
-import Postauthor from "./Postauthor.vue";
+import Author from "./Author.vue";
 import Article from "./Article.vue";
+import Authorposts from "./Authorposts.vue";
 
 import axios from 'axios'
 import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
@@ -67,8 +74,9 @@ export default {
         RightSideMsg,
         Github_REPO,
         Mark,
-        Postauthor,
-        Article
+        Author,
+        Article,
+        Authorposts
     },
     data : function (){
         return {
