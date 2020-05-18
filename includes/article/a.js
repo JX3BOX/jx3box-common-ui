@@ -20,7 +20,6 @@ function formatLink(str){
             let attrs_suffix = result[3] || ''
             let text = result[4]
 
-            // TODO:  no-referrer ?
             return `<a ${skip} ${attrs_prefix} href="${href}" ${attrs_suffix}>${text}</a>`
         }
         return item

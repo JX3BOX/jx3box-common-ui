@@ -19,7 +19,7 @@
 <script>
 import { __server, __v2 } from "@jx3box/jx3box-common/js/jx3box.json";
 import axios from "axios";
-const API = __server + '/post/list'
+const API = __server + 'post/list'
 // const API = "http://localhost:5160/" + "post/list";
 export default {
     name: "Authorposts",

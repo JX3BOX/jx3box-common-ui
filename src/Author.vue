@@ -1,26 +1,29 @@
 <template>
-    <div class="c-author" v-if="author">
-        <a class="u-author" :href="link">
-            <img
-                class="u-avatar"
-                :src="author.avatar | avatar"
-                :alt="author.name"
-            />
-            <span class="u-name">{{ author.name }}</span>
-        </a>
-        <div class="u-bio">{{ author.bio }}</div>
-        <div class="u-link" v-if="author.weibo_name || author.github_name">
-            <a v-if="author.weibo_name" class="u-weibo" :href="author.weibo_url"
+    <div class="c-author" v-if="data">
+        <div class="u-author">
+            <a :href="link"
+                ><img
+                    class="u-avatar"
+                    :src="data.avatar | avatar"
+                    :alt="data.name"
+            /></a>
+            <a class="u-name" :href="link"
+                ><span>{{ data.name }}</span></a
+            >
+        </div>
+        <div class="u-bio">{{ data.bio }}</div>
+        <div class="u-link" v-if="data.weibo_name || data.github_name">
+            <a v-if="data.weibo_name" class="u-weibo" :href="data.weibo_url"
                 ><img svg-inline src="../assets/img/author/weibo.svg" />{{
-                    author.weibo_name
+                    data.weibo_name
                 }}</a
             >
             <a
-                v-if="author.github_name"
+                v-if="data.github_name"
                 class="u-github"
-                :href="author.github_url"
+                :href="data.github_url"
                 ><img svg-inline src="../assets/img/author/github.svg" />{{
-                    author.github_name
+                    data.github_name
                 }}</a
             >
         </div>
@@ -30,11 +33,16 @@
 
 <script>
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
+import { __server } from "@jx3box/jx3box-common/js/jx3box.json";
+import axios from "axios";
+const API = __server + "user/info";
 export default {
     name: "Author",
-    props: ["author"],
+    props: ["author","uid"],
     data: function() {
-        return {};
+        return {
+            data : ''
+        };
     },
     computed: {
         link: function() {
@@ -47,7 +55,20 @@ export default {
             return showAvatar(val);
         },
     },
-    mounted: function() {},
+    mounted: function() {
+        if(!this.uid){
+            this.data = this.author
+        }else{
+            axios.get(API,{
+                params : {
+                    uid : this.uid
+                }
+            }).then((res) => {
+                console.log(res.data.data)
+                this.data = res.data.data
+            })
+        }
+    },
 };
 </script>
 
@@ -67,21 +88,24 @@ export default {
     .u-name {
         .bold;
         .lh(2);
+        &:hover {
+            color: #f39;
+        }
     }
     .u-bio {
         padding: 10px;
         .fz(13px, 2);
-        border-bottom: 1px dashed #eee;
         .break(3);
     }
     .u-link {
+        border-top: 1px dashed #eee;
         border-bottom: 1px solid #eee;
         a {
             .db;
             margin: 10px;
             .fz(13px, 20px);
-            &:hover{
-                color:#f39;
+            &:hover {
+                color: #f39;
             }
         }
         svg {

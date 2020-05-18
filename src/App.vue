@@ -24,7 +24,7 @@
                     right extend
                     <RightSideMsg>Test</RightSideMsg>
 
-                    <Author :author="author"/>
+                    <Author :author="author" uid="8"/>
                     <Authorposts uid="2"/>
 
                     <Github_REPO REPO="jx3box-common" coder="8,1"></Github_REPO>
