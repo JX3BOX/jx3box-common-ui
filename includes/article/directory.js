@@ -13,7 +13,10 @@ function directory(from, to) {
 
         $box.html(
             `<div class="c-article-directory" id="c-article-directory">
-                <div class="c-article-directory-title" id="c-article-directory-title">导读</div>
+                <div class="c-article-directory-title" id="c-article-directory-title">
+                    <span class="c-article-directory-title-label">导读</span>
+                    <span class="c-article-directory-title-skip" id="goTop">↑ 顶部</span>
+                </div>
                 <div class="c-article-directory-content" id="c-article-directory-content"></div>
             </div>`
         );
@@ -58,6 +61,9 @@ function directory(from, to) {
             setTimeout(()=>{
                 $(this).data('raw').removeClass('isScrollFocus')
             },3500)
+        })
+        $('#goTop').on('click',function (){
+            $(document).scrollTop(0)
         })
 
         return true

@@ -5,8 +5,9 @@
                 class="c-article-chunk"
                 v-for="(text, i) in result"
                 :key="i"
-                v-html="text"
+                v-html="text" 
                 :class="{ on: i == page - 1 || all == true }"
+                :id="'c-article-part' + ~~(i + 1) "
             ></div>
         </div>
         <el-button
@@ -42,6 +43,7 @@ import fold from "../includes/article/fold";
 import directory from "../includes/article/directory";
 import macro from "../includes/article/macro";
 import qixue from "../includes/article/qixue";
+import '@jx3box/jx3box-article-ui/dist/css/article.css'
 
 export default {
     name: "Article",
@@ -79,16 +81,29 @@ export default {
             macro(); //旧版
             qixue(); //旧版
         },
-        doTask: function($root, data) {
-            // 构建目录
-            let dir = directory($root, this.directorybox);
+        doDir: function() {
+            // 显示局部
+            let target= ''
+            if(this.hasPages && !this.all){
+                target = '#c-article-part' + this.page
+            // 全部
+            }else{
+                target = '#c-article'
+            }
+            let dir = directory(target, this.directorybox);
             if (dir) this.$emit("directoryRendered");
         },
         changePage: function(i) {
             this.page = i
+            this.$nextTick(() => {
+                this.doDir()
+            })
         },
         showAll: function() {
             this.all = true;
+            this.$nextTick(() => {
+                this.doDir()
+            })
         },
     },
     mounted: function() {
@@ -102,12 +117,18 @@ export default {
             // 正则过滤
             let _chunk = this.doReg(chunk);
             this.result.push(_chunk);
-            this.$emit("contentLoaded");
         }
 
-        // 统一DOM处理
-        this.doDOM($root);
-        this.$emit("contentRendered");
+        // 等待html加载完毕后
+        this.$nextTick(() => {
+            this.$emit("contentLoaded");
+            // 统一DOM处理
+            this.doDOM($root);
+            this.$emit("contentRendered");
+            // 目录处理
+            this.doDir()
+        })
+        
     },
 };
 </script>

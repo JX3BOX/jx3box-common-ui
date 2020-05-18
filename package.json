@@ -27,6 +27,7 @@
         "last 2 versions"
     ],
     "dependencies": {
+        "@jx3box/jx3box-article-ui": "0.0.6",
         "@jx3box/jx3box-common": "^4.2.0",
         "axios": "^0.19.2",
         "element-ui": "^2.13.2",
