@@ -22,6 +22,7 @@ function directory(from, to) {
         );
 
         const $directory = $('#c-article-directory-content')
+        const $skip = $('#c-article-directory-title')
 
         // 遍历捕获的目录项
         directories.each(function(i, item) {
@@ -62,7 +63,7 @@ function directory(from, to) {
                 $(this).data('raw').removeClass('isScrollFocus')
             },3500)
         })
-        $('.c-go-top').on('click',function (){
+        $skip.on('click','span',function (){
             $(document).scrollTop(0)
         })
 

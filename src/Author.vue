@@ -64,7 +64,6 @@ export default {
                     uid : this.uid
                 }
             }).then((res) => {
-                console.log(res.data.data)
                 this.data = res.data.data
             })
         }
