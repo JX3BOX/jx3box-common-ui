@@ -99,7 +99,7 @@ export default {
     }
     .u-link {
         border-top: 1px dashed #eee;
-        border-bottom: 1px solid #eee;
+        // border-bottom: 1px solid #eee;
         a {
             .db;
             margin: 10px;

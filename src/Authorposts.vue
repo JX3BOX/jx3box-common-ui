@@ -1,6 +1,6 @@
 <template>
     <div class="c-authorposts">
-        <div class="u-label">📋 最新作品</div>
+        <el-divider class="u-label" content-position="left">作者最新作品</el-divider>
         <ul v-if="data.length">
             <li v-for="(item, i) in data" :key="i">
                 <a :href="url(item.post.ID, item.post.post_type)" target="_blank">
@@ -36,6 +36,7 @@ export default {
         },
     },
     mounted: function() {
+        if(!this.uid) return
         axios
             .get(API, {
                 params: {
@@ -51,10 +52,11 @@ export default {
 
 <style lang="less">
 .c-authorposts {
+    margin:0 10px;
     ul {
         list-style: none;
-        padding: 0 10px;
         margin: 0;
+        padding:0;
     }
     li {
         padding:2px 10px;
@@ -73,10 +75,11 @@ export default {
         .y;
         .mr(2px);
     }
-    .u-label{
+    .u-label .el-divider__text{
         padding:5px 10px;
         .fz(14px);
-        .bold;
+        color: #888;
+        font-weight: 300;
         // color:#888;
         
     }
