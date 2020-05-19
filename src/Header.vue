@@ -214,9 +214,8 @@ export default {
         this.isPhone = window.innerWidth < 720 ? true : false;
         this.closeExpandList();
 
-        // TODO:临时新域名下
-        let isNew = location.host != 'v2.jx3box.com'
-        if(isNew){
+        // let isNew = location.host != 'v2.jx3box.com'
+        // if(isNew){
             axios.get(JX3BOX.__server + 'user/me',{
                 withCredentials : true
             }).then((res) => {
@@ -226,12 +225,12 @@ export default {
             }).catch((err) => {
                 this.logged_in = false;
             })
-        }else{
-            this.user = User.getInfo();
-            if (this.logged_in) {
-                this.checkMSG();
-            }
-        }
+        // }else{
+        //     this.user = User.getInfo();
+        //     if (this.logged_in) {
+        //         this.checkMSG();
+        //     }
+        // }
 
     },
 };
