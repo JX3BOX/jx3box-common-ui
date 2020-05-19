@@ -82,10 +82,10 @@
                 <!-- user info -->
                 <div class="c-header-info">
                     <div
-                        v-if="logged_in == true"
+                        v-show="logged_in == true"
                         class="c-header-profile"
                         id="c-header-profile"
-                        @click="expandList($event, 'info')"
+                        @click="showmenu"
                     >
                         <img
                             class="u-avatar"
@@ -95,7 +95,6 @@
                         <span class="u-dropdown"></span>
                         <ul
                             class="u-menu"
-                            style="display: none;"
                             v-show="!fold"
                         >
                             <li>
@@ -114,7 +113,7 @@
                         </ul>
                     </div>
 
-                    <div v-if="logged_in == false" class="c-header-login">
+                    <div v-show="logged_in == false" class="c-header-login">
                         <a class="u-register u-default" :href="register_url"
                             >注册</a
                         >
@@ -168,7 +167,7 @@ export default {
             return location.pathname.includes(type);
         },
         // 菜单
-        expandList: function(e) {
+        showmenu: function(e) {
             e.stopPropagation();
             this.fold = !this.fold;
         },
@@ -215,12 +214,25 @@ export default {
         this.isPhone = window.innerWidth < 720 ? true : false;
         this.closeExpandList();
 
-        this.logged_in = User.isLogin();
-        this.user = User.getInfo();
-
-        if (this.logged_in) {
-            this.checkMSG();
+        // TODO:临时新域名下
+        let isNew = location.host != 'v2.jx3box.com'
+        if(isNew){
+            axios.get(JX3BOX.__server + 'user/me',{
+                withCredentials : true
+            }).then((res) => {
+                this.user = res.data.data
+                this.logged_in = true;
+                this.checkMSG();
+            }).catch((err) => {
+                this.logged_in = false;
+            })
+        }else{
+            this.user = User.getInfo();
+            if (this.logged_in) {
+                this.checkMSG();
+            }
         }
+
     },
 };
 </script>
