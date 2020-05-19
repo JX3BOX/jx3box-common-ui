@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common-ui",
-    "version": "0.9.6",
+    "version": "1.0.0",
     "description": "JX3BOX UI",
     "main": "index.js",
     "scripts": {
@@ -8,7 +8,8 @@
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
         "inspect": "vue inspect > output.js",
-        "update": "npm --registry https://registry.npmjs.org install @jx3box/jx3box-article-ui@latest @jx3box/jx3box-common@latest "
+        "update": "npm --registry https://registry.npmjs.org install @jx3box/jx3box-article-ui@latest @jx3box/jx3box-common@latest",
+        "header":"vue-cli-service build --target lib --name newheader src/Header.vue && cp public/index.html dist/newheader.html"
     },
     "eslintConfig": {
         "root": true,

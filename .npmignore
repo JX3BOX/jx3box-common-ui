@@ -2,3 +2,5 @@
 .gitignore
 .npmignore
 node_modules
+demo
+dist

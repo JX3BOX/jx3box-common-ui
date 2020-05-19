@@ -3,7 +3,7 @@
         <div id="c-article" class="c-article" ref="article">
             <div
                 class="c-article-chunk"
-                v-for="(text, i) in result"
+                v-for="(text, i) in data"
                 :key="i"
                 v-html="text" 
                 :class="{ on: i == page - 1 || all == true }"
@@ -50,11 +50,9 @@ export default {
     props: ["content", "directorybox"],
     data: function() {
         return {
-            origin: "",
-            chunks: [],
-            result: [],
             all: false,
             page: 1,
+            data: []
         };
     },
     computed: {
@@ -63,6 +61,12 @@ export default {
         },
         hasPages: function() {
             return this.chunks.length > 1;
+        },
+        origin : function (){
+            return this.content
+        },
+        chunks : function (){
+            return splitPages(this.origin);
         },
     },
     methods: {
@@ -106,30 +110,35 @@ export default {
                 this.doDir()
             })
         },
+        render : function (){
+            let result = []
+            for (let chunk of this.chunks) {
+                let _chunk = this.doReg(chunk);
+                result.push(_chunk);
+            }
+            this.data = result
+        },
+        run : function (){
+            this.render()
+            // 等待html加载完毕后
+            this.$nextTick(() => {
+                this.$emit("contentLoaded");
+                // 统一DOM处理
+                const $root = this.$refs.article
+                this.doDOM($root);
+                this.$emit("contentRendered");
+                // 目录处理
+                this.doDir()
+            })
+        }
+    },
+    watch : {
+        content : function (){
+            this.run()
+        }
     },
     mounted: function() {
-        // 指定根节点
-        const $root = this.$refs.article;
-        this.origin = this.content;
-
-        // 分页划分
-        this.chunks = splitPages(this.origin);
-        for (let chunk of this.chunks) {
-            // 正则过滤
-            let _chunk = this.doReg(chunk);
-            this.result.push(_chunk);
-        }
-
-        // 等待html加载完毕后
-        this.$nextTick(() => {
-            this.$emit("contentLoaded");
-            // 统一DOM处理
-            this.doDOM($root);
-            this.$emit("contentRendered");
-            // 目录处理
-            this.doDir()
-        })
-        
+        this.run()
     },
 };
 </script>

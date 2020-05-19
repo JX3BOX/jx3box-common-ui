@@ -7,15 +7,24 @@ on: [push]
 #     types: [created]
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 12
-  #     - run: npm ci
-  #     - run: npm test
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm run header
+      # - run: npm test
+
+      - name: OSS
+        uses: manyuanrong/setup-ossutil@v1.0
+        with:
+          endpoint: "oss-cn-hangzhou.aliyuncs.com"
+          access-key-id: ${{secrets.AccessKey_ID}}
+          access-key-secret: ${{secrets.Access_Key_Secret}}
+      - run: ossutil cp -rf dist oss://jx3box-www/jx3box-common-ui
+      - run: ossutil cp -rf dist oss://jx3box/static/jx3box-common-ui
 
   publish-npm:
     # needs: build
