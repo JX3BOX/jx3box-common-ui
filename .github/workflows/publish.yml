@@ -14,8 +14,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm run header
-      # - run: npm test
+
+      - name: Install && Build
+        run: |
+          npm install
+          npm run header
 
       - name: OSS
         uses: manyuanrong/setup-ossutil@v1.0
