@@ -61,7 +61,7 @@ export default {
     methods: {},
     filters : {
         resolveAvatarPath : function (val){
-            return val.replace(JX3BOX.__ossRoot,JX3BOX.__ossMirror)
+            return val ? val.replace(JX3BOX.__ossRoot,JX3BOX.__ossMirror) : ''
         }
     },
     mounted: function() {

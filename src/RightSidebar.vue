@@ -46,6 +46,7 @@
     &::-webkit-resizer {
         display: none;
     }
+    
 }
 
 // 笔记本<1440 缩小双边栏

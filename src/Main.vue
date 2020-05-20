@@ -41,6 +41,10 @@ a{
 }
 .c-main.without-right{
     .mr(0) !important;
+
+    .c-sidebar-right{
+        .none;
+    }
 }
 .c-main.without-left{
     .ml(0) !important;
