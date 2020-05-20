@@ -89,7 +89,7 @@
                     >
                         <img
                             class="u-avatar"
-                            :src="user.avatar"
+                            :src="avatar(user.avatar)"
                             :alt="user.name"
                         />
                         <span class="u-dropdown"></span>
@@ -127,7 +127,7 @@
 </template>
 
 <script>
-const { JX3BOX, User } = require("@jx3box/jx3box-common");
+const { JX3BOX, User,Utils } = require("@jx3box/jx3box-common");
 const nav = require("../data/nav");
 
 const axios = require("axios");
@@ -208,29 +208,25 @@ export default {
                 }
             });
         },
+        // 头像
+        avatar : function (url){
+            return Utils.showAvatar(url)
+        }
     },
     filters: {},
     mounted: function() {
         this.isPhone = window.innerWidth < 720 ? true : false;
         this.closeExpandList();
 
-        // let isNew = location.host != 'v2.jx3box.com'
-        // if(isNew){
-            axios.get(JX3BOX.__server + 'user/me',{
-                withCredentials : true
-            }).then((res) => {
-                this.user = res.data.data
-                this.logged_in = true;
-                this.checkMSG();
-            }).catch((err) => {
-                this.logged_in = false;
-            })
-        // }else{
-        //     this.user = User.getInfo();
-        //     if (this.logged_in) {
-        //         this.checkMSG();
-        //     }
-        // }
+        axios.get(JX3BOX.__server + 'user/me',{
+            withCredentials : true
+        }).then((res) => {
+            this.user = res.data.data
+            this.logged_in = true;
+            this.checkMSG();
+        }).catch((err) => {
+            this.logged_in = false;
+        })
 
     },
 };
