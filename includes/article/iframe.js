@@ -6,7 +6,8 @@ function iframeFilter(str){
     const REG = /<iframe(.*?)src=[\'"]([^\'"]+)[\'"](.*?)>.*?<\/iframe>/gi
     const white_list = ['player.bilibili.com','docs.qq.com']
     
-    for(let item of str.matchAll(REG)){
+    let item;
+    while ((item = REG.exec(str))) {
         let origin = item[0]
         let prefix = item[1]
 

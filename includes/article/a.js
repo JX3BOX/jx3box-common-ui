@@ -4,7 +4,8 @@ function formatLink(str){
     if(!str) return
     
     const REG = /<a(.*?)href=[\'"]([^\'"]+)[\'"](.*?)>(.*?)<\/a>/gi
-    for(let item of str.matchAll(REG)){
+    let item;
+    while ((item = REG.exec(str))) {
         let origin = item[0]
         let prefix = item[1]
 

@@ -44,7 +44,6 @@ import directory from "../includes/article/directory";
 import macro from "../includes/article/macro";
 import qixue from "../includes/article/qixue";
 import '@jx3box/jx3box-article-ui/dist/css/article.css'
-import "@babel/polyfill";
 
 export default {
     name: "Article",

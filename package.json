@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common-ui",
-    "version": "1.0.6",
+    "version": "1.0.8",
     "description": "JX3BOX UI",
     "main": "index.js",
     "scripts": {
@@ -25,13 +25,10 @@
         }
     },
     "browserslist": [
-        "> 40%",
+        "> 1%",
         "last 2 versions"
     ],
     "dependencies": {
-        "@babel/plugin-transform-runtime": "^7.9.6",
-        "@babel/polyfill": "^7.8.7",
-        "@babel/preset-env": "^7.9.6",
         "@jx3box/jx3box-article-ui": "^0.1.2",
         "@jx3box/jx3box-common": "^4.2.3",
         "axios": "^0.19.2",
