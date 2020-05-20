@@ -9,7 +9,7 @@
         "lint": "vue-cli-service lint",
         "inspect": "vue inspect > output.js",
         "update": "npm --registry https://registry.npmjs.org install @jx3box/jx3box-article-ui@latest @jx3box/jx3box-common@latest",
-        "header":"vue-cli-service build --target lib --name newheader src/Header.vue && cp public/index.html dist/newheader.html"
+        "header": "vue-cli-service build --target lib --name newheader src/Header.vue && cp public/index.html dist/newheader.html"
     },
     "eslintConfig": {
         "root": true,
@@ -25,10 +25,13 @@
         }
     },
     "browserslist": [
-        "> 1%",
+        "> 40%",
         "last 2 versions"
     ],
     "dependencies": {
+        "@babel/plugin-transform-runtime": "^7.9.6",
+        "@babel/polyfill": "^7.8.7",
+        "@babel/preset-env": "^7.9.6",
         "@jx3box/jx3box-article-ui": "^0.1.2",
         "@jx3box/jx3box-common": "^4.2.3",
         "axios": "^0.19.2",
