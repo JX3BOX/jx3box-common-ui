@@ -56,9 +56,13 @@
                     class="c-header-msg"
                     id="c-header-msg"
                 >
-                    <i class="u-pop" style="display: none;" v-show="pop"></i>
                     <a class="u-msg" :href="JX3BOX.__Links.dashboard.msg"
                         ><i class="u-icon u-icon-msg">
+                            <i
+                                class="u-pop"
+                                style="display: none;"
+                                v-show="pop"
+                            ></i>
                             <img
                                 svg-inline
                                 src="../assets/img/header/msg.svg"/></i
@@ -93,10 +97,7 @@
                             :alt="user.name"
                         />
                         <span class="u-dropdown"></span>
-                        <ul
-                            class="u-menu"
-                            v-show="!fold"
-                        >
+                        <ul class="u-menu" v-show="!fold">
                             <li>
                                 <a :href="JX3BOX.__Links.dashboard.home"
                                     >个人中心</a
@@ -127,7 +128,7 @@
 </template>
 
 <script>
-const { JX3BOX, User,Utils } = require("@jx3box/jx3box-common");
+const { JX3BOX, User, Utils } = require("@jx3box/jx3box-common");
 const nav = require("../data/nav");
 
 const axios = require("axios");
@@ -209,25 +210,27 @@ export default {
             });
         },
         // 头像
-        avatar : function (url){
-            return Utils.showAvatar(url)
-        }
+        avatar: function(url) {
+            return Utils.showAvatar(url);
+        },
     },
     filters: {},
     mounted: function() {
         this.isPhone = window.innerWidth < 720 ? true : false;
         this.closeExpandList();
 
-        axios.get(JX3BOX.__server + 'user/me',{
-            withCredentials : true
-        }).then((res) => {
-            this.user = res.data.data
-            this.logged_in = true;
-            this.checkMSG();
-        }).catch((err) => {
-            this.logged_in = false;
-        })
-
+        axios
+            .get(JX3BOX.__server + "user/me", {
+                withCredentials: true,
+            })
+            .then((res) => {
+                this.user = res.data.data;
+                this.logged_in = true;
+                this.checkMSG();
+            })
+            .catch((err) => {
+                this.logged_in = false;
+            });
     },
 };
 </script>
