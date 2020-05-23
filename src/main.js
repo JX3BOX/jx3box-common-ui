@@ -1,9 +1,10 @@
 // 第三方UI组件
 import Vue from "vue";
-import {Pagination,Button,Divider}from 'element-ui';
+import {Pagination,Button,Divider,Message}from 'element-ui';
 Vue.use(Pagination);
 Vue.use(Button);
 Vue.use(Divider);
+Vue.prototype.$message = Message;
 
 // 通用UI模块
 // import JX3BOX_UI from '@jx3box/jx3box-common-ui'

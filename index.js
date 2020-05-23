@@ -15,6 +15,7 @@ import Author from './src/Author.vue'
 import Article from './src/Article.vue'
 import Authorposts from './src/Authorposts.vue'
 
+import Fav from './src/Fav.vue'
 
 const components = {
     Header,
@@ -33,7 +34,9 @@ const components = {
     Mark,
 
     Author,
-    Authorposts
+    Authorposts,
+
+    Fav
 
 }
 
