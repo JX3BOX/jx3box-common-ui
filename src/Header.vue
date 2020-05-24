@@ -55,6 +55,7 @@
                     v-if="logged_in == true"
                     class="c-header-msg"
                     id="c-header-msg"
+                    title="我的消息"
                 >
                     <a class="u-msg" :href="JX3BOX.__Links.dashboard.msg"
                         ><i class="u-icon u-icon-msg">
@@ -74,6 +75,7 @@
                     v-if="logged_in == true"
                     class="c-header-panel"
                     id="c-header-panel"
+                    title="发布中心"
                 >
                     <a class="u-post" :href="JX3BOX.__Links.dashboard.publish"
                         ><img

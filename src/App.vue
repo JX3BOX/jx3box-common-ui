@@ -15,6 +15,8 @@
 
         <Main :withoutRight="false" style="position:relative;">
 
+            <Fav />
+
             <Article :content="content" directorybox="#directory" style="padding:20px;" @contentRendered="test1" @directoryRendered="test2"/>
 
             <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39"/>
@@ -55,6 +57,7 @@ import Mark from "./Mark.vue";
 import Author from "./Author.vue";
 import Article from "./Article.vue";
 import Authorposts from "./Authorposts.vue";
+import Fav from "./Fav.vue";
 
 import axios from 'axios'
 import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
@@ -76,7 +79,8 @@ export default {
         Mark,
         Author,
         Article,
-        Authorposts
+        Authorposts,
+        Fav
     },
     data : function (){
         return {

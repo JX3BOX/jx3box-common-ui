@@ -17,6 +17,7 @@ import Authorposts from './src/Authorposts.vue'
 
 import Admin from './src/Admin.vue'
 
+import Fav from './src/Fav.vue'
 
 const components = {
     Header,
@@ -38,7 +39,9 @@ const components = {
     Authorposts,
     
     
-    Admin
+    Admin,
+
+    Fav
 
 }
 
