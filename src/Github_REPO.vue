@@ -34,8 +34,8 @@
 </template>
 
 <script>
-const axios = require("axios");
-const { JX3BOX } = require("@jx3box/jx3box-common");
+import axios from 'axios'
+import {__server,__proxy,__ossRoot,__ossMirror,__Links} from '@jx3box/jx3box-common/js/jx3box.json'
 export default {
     name: "Github_REPO",
     props: ["REPO","MINI","coder"],
@@ -44,7 +44,7 @@ export default {
             updated_at: "",
             contributors: [],
             coders : [],
-            author_link : JX3BOX.__Links.author
+            author_link : __Links.author
         };
     },
     computed: {
@@ -61,21 +61,21 @@ export default {
     methods: {},
     filters : {
         resolveAvatarPath : function (val){
-            return val ? val.replace(JX3BOX.__ossRoot,JX3BOX.__ossMirror) : ''
+            return val ? val.replace(__ossRoot,__ossMirror) : ''
         }
     },
     mounted: function() {
         axios
-            .get(`https://api.github.com/repos/JX3BOX/${this.REPO}`)
+            .get(`${__proxy}github?repo=${this.REPO}`)
             .then((res) => {
-                let data = res.data.data;
+                let data = res.data;
                 if(data) this.updated_at = data.updated_at;
             });
         // 指定了贡献人员
         if(this.coder){
             axios
             .get(
-                `${JX3BOX.__server}user/list?uid=${this.coder}`
+                `${__server}user/list?uid=${this.coder}`
             )
             .then((res) => {
                 let data = res.data.data.list;
@@ -99,8 +99,6 @@ export default {
                 this.contributors = data;
             });
         }
-
-        
     },
 };
 </script>
