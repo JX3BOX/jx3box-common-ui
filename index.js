@@ -15,6 +15,8 @@ import Author from './src/Author.vue'
 import Article from './src/Article.vue'
 import Authorposts from './src/Authorposts.vue'
 
+import Admin from './src/Admin.vue'
+
 import Fav from './src/Fav.vue'
 
 const components = {
@@ -35,6 +37,9 @@ const components = {
 
     Author,
     Authorposts,
+    
+    
+    Admin,
 
     Fav
 

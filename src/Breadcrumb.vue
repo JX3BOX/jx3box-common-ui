@@ -19,18 +19,25 @@
             class="u-publish el-button el-button--primary"
             ><i class="el-icon-edit-outline"></i><span>发布</span></a
         >
+        <Admin v-if="showAdmin"></Admin>
+        
     </div>
 </template>
 
 <script>
 import Bus from './bus';
 const { JX3BOX } = require("@jx3box/jx3box-common");
+import Admin from "./Admin.vue";
 export default {
     name: "Breadcrumb",
-    props: ["name", "slug", "root","publishEnable"],
+    components: {
+        Admin
+    },
+    props: ["name", "slug", "root","publishEnable","showAdmin"],
     data: function () {
         return {
             isOpen: true,
+            drawer: true
         };
     },
     computed: {},
