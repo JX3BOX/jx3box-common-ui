@@ -1,4 +1,3 @@
-//折叠文本区
 import $ from "jquery";
 function directory(from, to) {
     // 装载容器设置
@@ -28,13 +27,15 @@ function directory(from, to) {
         directories.each(function(i, item) {
             // 进行克隆
             let _item = $(item).clone();
+            // 解决懒加载跳转位置问题
+            $(item).append(`<a id="directory-${i}"></a>`)
 
             // 过滤行内样式
             _item.attr("style", "");
-            _item.html($(item).text());
+            _item.html(`<a href="#directory-${i}">${$(item).text()}</a>`)
 
             // 设置原始元素所在的位置
-            _item.attr("data-skip", ~~$(this).offset().top - 112);
+            // _item.attr("data-skip", ~~$(this).offset().top - 112);
             _item.data("raw", $(item));
 
             // 排除最后一个
@@ -57,8 +58,11 @@ function directory(from, to) {
 
         //进行事件委托
         $directory.on('click','h1,h2,h3',function (){
-            $(document).scrollTop($(this).attr('data-skip'))
-            $(this).data('raw').addClass('isScrollFocus')
+            setTimeout(()=>{
+                let origin_position = $(document).scrollTop()
+                $(document).scrollTop(origin_position - 112)
+                $(this).data('raw').addClass('isScrollFocus')
+            },200)
             setTimeout(()=>{
                 $(this).data('raw').removeClass('isScrollFocus')
             },3500)
