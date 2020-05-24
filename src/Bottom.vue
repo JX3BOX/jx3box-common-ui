@@ -19,25 +19,5 @@ export default {
 </script>
 
 <style lang="less">
-@gray: #888;
-@space: 20px;
-@pink: #f39;
-
-.m-bottom {
-    font-size: 12px;
-    color: @gray;
-    margin-top: @space;
-    font-family: verdana,'Trebuchet MS',Tahoma;
-
-    a {
-        color: @gray;
-        &:hover {
-            color: @pink;
-        }
-    }
-
-    .u-feedback {
-        float: right;
-    }
-}
+@import "../assets/css/bottom.less";
 </style>

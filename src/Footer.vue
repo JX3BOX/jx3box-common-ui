@@ -37,49 +37,5 @@ export default {
 </script>
 
 <style lang="less">
-@pink: #f39;
-.c-footer {
-    padding: 10px;
-    margin: 10px;
-    .fz(13px);
-    .clearfix;
-    // background-color: @bg-light;
-    // border: 1px solid #eee;
-    .r(4px);
-    color: #999;
-    a {
-        color: #999;
-    }
-}
-.c-footer-left {
-    .fl;
-    .u-flag {
-        .size(18px);
-        .y(-3px);
-        .mr(5px);
-    }
-    .u-beian {
-        .italic;
-        &:hover {
-            color: @pink;
-            box-shadow: 0 1px @pink;
-        }
-    }
-}
-.c-footer-right {
-    .fr;
-
-    em {
-        margin: 0 10px;
-    }
-    a {
-        &:hover {
-            color: @pink;
-            box-shadow: 0 1px @pink;
-        }
-    }
-}
-@media screen and (max-width:@phone){
-.c-footer-left{.none;}
-}
+@import "../assets/css/footer.less";
 </style>

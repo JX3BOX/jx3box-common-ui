@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Bus from './bus';
+import Bus from '../service/bus';
 export default {
     name: "LeftSidebar",
     props: [],
@@ -57,96 +57,5 @@ export default {
 </script>
 
 <style lang="less">
-.c-sidebar-left {
-    .w(@aside-left);
-    box-sizing: border-box;
-    padding: 10px;
-    .pf;
-    .z(500);
-    left: 0;
-    top: @header-height + @bread-height;
-    bottom: 0;
-    background-color: @bg-light;
-    border-right: 1px solid #eee;
-}
-.c-sidebar-left-inner{
-    .size(100%);
-    overflow-y: auto;
-    &::-webkit-scrollbar {
-        width: 4px;
-    }
-    &::-webkit-scrollbar-track,
-    &::-webkit-scrollbar-track-piece {
-        background-color: #fafafa;
-        border-radius: 6px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: #eee;
-        border-radius: 6px;
-    }
-    &::-webkit-scrollbar-button,
-    &::-webkit-scrollbar-corner,
-    &::-webkit-resizer {
-        display: none;
-    }
-}
-
-// 笔记本<1440 缩小双边栏
-@media screen and (max-width: @notebook) {
-    .c-sidebar-left {
-        .w(@aside-left - 40px);
-    }
-}
-
-// 平板横屏
-@media screen and (max-width: @mininote) {
-    .c-sidebar-left {
-        .w(@aside-left - 60px);
-    }
-}
-
-// 折叠相关逻辑
-.c-sidebar-left-toggle {
-    .pa;
-    .rb(0);
-    .size(20px);
-    .pointer;
-    padding: 10px;
-    svg {
-        fill: @color;
-    }
-}
-.closeLeftSidebar() {
-    transition: 0.2s ease-in-out;
-    transform: translateX(-100%);
-}
-.openLeftSidebar() {
-    transition: 0.2s ease-in-out;
-    transform: translateX(0);
-}
-.c-sidebar-left.isclose {
-    .closeLeftSidebar();
-
-    .c-sidebar-left-toggle {
-        transition: 0.2s ease-in-out;
-        transform: translateX(100%);
-    }
-}
-.c-sidebar-left.isopen {
-    .openLeftSidebar();
-
-    .c-sidebar-left-toggle {
-        transition: 0.2s ease-in-out;
-        transform: translateX(0);
-    }
-}
-
-@media screen and (max-width: @ipad-y) {
-    .c-sidebar-left-toggle {
-        .none;
-    }
-    .c-sidebar-left.isopen{
-        box-shadow:2px 0 3px rgba(0,0,0,.1);
-    }
-}
+@import '../assets/css/left-sidebar.less';
 </style>

@@ -1,76 +1,32 @@
 <template>
-    <main class="c-main" :class="{'without-right':withoutRight,'without-left':expanding}">
+    <main
+        class="c-main"
+        :class="{ 'without-right': withoutRight, 'without-left': expanding }"
+    >
         <slot></slot>
     </main>
 </template>
 
 <script>
-import Bus from './bus';
-    export default {
-        name : 'Main',
-        props:['withoutRight'],
-        data : function(){
-            return {
-                expanding : false
-            }
-        },
-        computed:{},
-        methods:{},
-        mounted:function(){
-            Bus.$on('toggleLeftSide',(data)=>{
-                this.expanding = !data
-            })
-        },
-    }
+import Bus from "../service/bus";
+export default {
+    name: "Main",
+    props: ["withoutRight"],
+    data: function() {
+        return {
+            expanding: false,
+        };
+    },
+    computed: {},
+    methods: {},
+    mounted: function() {
+        Bus.$on("toggleLeftSide", (data) => {
+            this.expanding = !data;
+        });
+    },
+};
 </script>
 
 <style lang="less">
-
-a{
-    color:@color-link;
-}
-
-// 主体
-.c-main{
-    .ml(@aside-left);
-    .mr(@aside-right);
-    .pr;
-    min-height: calc(100vh - @header-height - @bread-height);
-    margin-top:@header-height + @bread-height;
-    transition:0.2s ease-in;
-}
-.c-main.without-right{
-    .mr(0) !important;
-
-    .c-sidebar-right{
-        .none;
-    }
-}
-.c-main.without-left{
-    .ml(0) !important;
-}
-
-
-// 笔记本<1440 缩小双边栏
-@media screen and (max-width:@notebook){
-    .c-main{
-        .ml(@aside-left - 40px);
-        .mr(@aside-right - 20px);
-    }
-}
-
-// 平板横屏
-@media screen and (max-width:@mininote){
-    .c-main{
-        .ml(@aside-left - 60px);
-        .mr(0);
-    }
-}
-
-//平板横屏与手机
-@media screen and (max-width:@ipad-y){
-    .c-main{
-        .ml(0);
-    }
-}
+@import "../assets/css/main.less";
 </style>

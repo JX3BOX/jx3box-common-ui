@@ -144,5 +144,4 @@ export default {
 </script>
 
 <style lang="less">
-// @import '../node_modules/@jx3box/jx3box-article-ui/src/css/article.less';
 </style>

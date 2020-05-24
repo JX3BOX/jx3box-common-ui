@@ -1,0 +1,50 @@
+div:focus{
+    outline: none;
+}
+.c-admin{
+    top:@header-height + @bread-height !important;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    margin: 0;
+}
+
+.c-admin-wrapper{
+    padding:20px;
+    box-sizing: border-box;
+    .size(100%);
+    overflow-y:auto;
+}
+
+.c-admin-highlight-checkbox{
+    .mr(10px) !important;
+}
+.c-admin-highlight-preview{
+    .fz(14px);.bold;
+    .ml(10px);
+}
+
+.c-admin-upload{
+    .el-upload--picture-card{
+        .w(100%);
+    }
+}
+
+.c-admin-info{
+    display: flex;
+}
+.c-admin-type{
+    .w(200px);
+    .mr(10px);
+}
+.c-admin-author{
+    flex:1;
+}
+
+.c-admin-buttons{
+    .mt(20px);
+    .x;
+}

@@ -32,7 +32,7 @@ function directory(from, to) {
 
             // 过滤行内样式
             _item.attr("style", "");
-            _item.html(`<a href="#directory-${i}">${$(item).text()}</a>`)
+            _item.html($(item).text())
 
             // 设置原始元素所在的位置
             // _item.attr("data-skip", ~~$(this).offset().top - 112);
@@ -58,11 +58,9 @@ function directory(from, to) {
 
         //进行事件委托
         $directory.on('click','h1,h2,h3',function (){
-            setTimeout(()=>{
-                let origin_position = $(document).scrollTop()
-                $(document).scrollTop(origin_position - 112)
-                $(this).data('raw').addClass('isScrollFocus')
-            },200)
+            let target = $(this).data('raw').offset().top
+            $(document).scrollTop(target - 112)
+            $(this).data('raw').addClass('isScrollFocus')
             setTimeout(()=>{
                 $(this).data('raw').removeClass('isScrollFocus')
             },3500)

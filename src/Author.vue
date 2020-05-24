@@ -72,46 +72,5 @@ export default {
 </script>
 
 <style lang="less">
-.c-author {
-    margin: 10px;
-
-    .u-author {
-        .clearfix;
-        .db;
-    }
-    .u-avatar {
-        .r(4px);
-        .fl;
-        .mr(10px);
-    }
-    .u-name {
-        .bold;
-        .lh(2);
-        &:hover {
-            color: #f39;
-        }
-    }
-    .u-bio {
-        padding: 10px;
-        .fz(13px, 2);
-        .break(3);
-    }
-    .u-link {
-        border-top: 1px dashed #eee;
-        // border-bottom: 1px solid #eee;
-        a {
-            .db;
-            margin: 10px;
-            .fz(13px, 20px);
-            &:hover {
-                color: #f39;
-            }
-        }
-        svg {
-            .size(20px);
-            .mr(10px);
-            .fl;
-        }
-    }
-}
+@import "../assets/css/author.less";
 </style>

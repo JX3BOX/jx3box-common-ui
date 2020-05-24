@@ -1,4 +1,8 @@
 {
+    "index": {
+        "name": "首页",
+        "path": "https://www.jx3box.com"
+    },
     "macro": {
         "name": "宏库",
         "path": "https://www.jx3box.com/macro"
@@ -17,7 +21,7 @@
     },
     "cj": {
         "name": "成就",
-        "path": "https://v2.jx3box.com/cj"
+        "path": "https://www.jx3box.com/cj"
     },
     "tool": {
         "name": "教程",

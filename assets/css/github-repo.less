@@ -1,0 +1,82 @@
+.c-github-repo {
+    background-color: @bg-light;
+    border: 1px solid #eee;
+    .r(4px);
+    margin: 10px;
+
+    &.mini{
+        .u-repo,.u-detail,.u-more .u-join{
+            .none;
+        }
+    }
+
+    .u-repo {
+        .db;
+        border-bottom: 1px solid #eee;
+        padding:5px;
+        .h(32px);
+        &:hover{
+            .i-github{
+                fill:#555;
+            }
+        }
+        .nobreak;
+    }
+    .i-github {
+        .dbi;
+        .y(top);
+        .mr(10px);
+    }
+    .u-name {
+        .fz(1em, 32px);
+        font-weight: 600;
+    }
+    .u-detail{
+        padding:3px 10px 0 10px;
+    }
+    .u-update {
+        .fz(12px, 2);
+        color: #555;
+    }
+    .u-contributors {
+        padding: 0;
+        margin: 0 0 10px 0;
+    }
+    .u-list {
+        list-style: none;
+        .clearfix;
+        padding: 0;
+        margin: 0;
+        li {
+            .mr(10px);
+            .mb(10px);
+            .fl;
+        }
+        a {
+            .db;
+            .size(32px);
+            img {
+                .db;
+                .size(100%);
+            }
+            span {
+                .none;
+            }
+        }
+    }
+    .u-more{
+        .fz(12px,32px);
+        padding:0 5px;
+        color:#999;
+        .clearfix;
+        a:hover{
+            text-decoration:underline;
+        }
+    }
+    .u-join{
+        .fr;
+    }
+    .u-report{
+        .fl;
+    }
+}

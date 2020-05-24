@@ -3,7 +3,7 @@
 
         <Header></Header>
 
-        <Breadcrumb name="频道名称" slug="slug" root="/slug" :publishEnable="true" :showAdmin="true">
+        <Breadcrumb name="频道名称" slug="slug" root="/slug" :publishEnable="true" :adminEnable="true">
             <img slot="logo" svg-inline src="../assets/img/jx3.svg" />
             bread info
         </Breadcrumb>
@@ -30,8 +30,6 @@
                     <Authorposts uid="2"/>
 
                     <Github_REPO REPO="jx3box-common" coder="8,1"></Github_REPO>
-
-
 
                 </div>
             </RightSidebar>
