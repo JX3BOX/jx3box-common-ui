@@ -15,6 +15,8 @@ import Author from './src/Author.vue'
 import Article from './src/Article.vue'
 import Authorposts from './src/Authorposts.vue'
 
+import Admin from './src/Admin.vue'
+
 
 const components = {
     Header,
@@ -33,7 +35,10 @@ const components = {
     Mark,
 
     Author,
-    Authorposts
+    Authorposts,
+    
+    
+    Admin
 
 }
 
