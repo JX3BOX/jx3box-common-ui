@@ -292,7 +292,7 @@ export default {
         });
 
         // 文章类型的加载
-        if (this.pid && !this.pulled) {
+        if (this.pid && !this.pulled && this.hasRight) {
             this.pull();
         }
     },
