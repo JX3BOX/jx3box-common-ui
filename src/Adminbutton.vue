@@ -28,7 +28,6 @@ export default {
     },
     mounted: function() {
         this.show = User.getInfo().group > 60 ? true : false;
-        this.show = true    //TODO:
     },
     components: {},
 };

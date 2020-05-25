@@ -131,7 +131,7 @@
 
 <script>
 const { JX3BOX, User, Utils } = require("@jx3box/jx3box-common");
-const nav = require("../data/nav");
+const nav = require("../assets/data/nav");
 
 const axios = require("axios");
 const MSG_API = JX3BOX.__helperUrl + "api/messages";

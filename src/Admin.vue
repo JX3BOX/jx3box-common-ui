@@ -3,34 +3,36 @@
         class="c-admin"
         title="管理面板"
         :visible.sync="visible"
-        :before-close="handleClose"
+        :before-close="close"
         :append-to-body="true"
-        v-loading="loading"
         :modal="false"
         :withHeader="false"
+        v-if="hasRight"
     >
         <div class="c-admin-wrapper">
             <el-divider content-position="left">状态变更</el-divider>
             <el-radio-group
-                v-model="statusRadioValue"
+                v-model="post_status"
                 size="small"
                 class="c-admin-status"
             >
-                <el-radio-button label="publish">默认</el-radio-button>
-                <el-radio-button label="draft">草稿</el-radio-button>
-                <el-radio-button label="pending">待审核</el-radio-button>
-                <el-radio-button label="dustbin">删除</el-radio-button>
+                <el-radio-button
+                    v-for="(option, key) in status_options"
+                    :label="key"
+                    :key="key"
+                    >{{ option }}</el-radio-button
+                >
             </el-radio-group>
 
             <el-divider content-position="left">推荐角标</el-divider>
-            <el-checkbox-group v-model="markCheckboxValue">
-                <el-checkbox
-                    v-for="option of markCheckboxOptions"
-                    :key="option.label"
-                    :label="option.label"
-                    >{{ option.name }}</el-checkbox
+            <el-radio-group v-model="mark" class="c-admin-mark">
+                <el-radio
+                    v-for="(option, key) in mark_options"
+                    :label="key"
+                    :key="key"
+                    >{{ option }}</el-radio
                 >
-            </el-checkbox-group>
+            </el-radio-group>
 
             <el-divider content-position="left">加粗高亮</el-divider>
             <el-checkbox
@@ -40,61 +42,47 @@
             >
             <template v-if="isHighlight">
                 <el-color-picker
-                    v-model="highlightColorValue"
-                    show-alpha
-                    :predefine="predefineColors"
+                    class="c-admin-highlight-block"
+                    v-model="color"
+                    :predefine="color_options"
                     size="mini"
                 ></el-color-picker>
                 <span
                     class="c-admin-highlight-preview"
-                    :style="{ color: highlightColorValue }"
+                    :style="{ color: color }"
                     >预览标题效果</span
                 >
             </template>
 
             <el-divider content-position="left">是否置顶</el-divider>
             <el-switch
-                v-model="isPostPinned"
+                v-model="sticky"
                 active-text="置顶"
                 class="switch-post-pinned drawer-item-content"
             ></el-switch>
 
             <el-divider content-position="left">封面海报</el-divider>
             <el-upload
-                class="c-admin-upload upload-cover drawer-item-content"
-                :action="coverUploadUrl"
-                list-type="picture-card"
-                :on-remove="handleRemove"
-                :before-remove="beforeRemove"
-                :limit="1"
-                :on-exceed="handleExceed"
-                :file-list="fileList"
-                :auto-upload="true"
-                :with-credentials="true"
-                :before-upload="handleUploadBefore"
-                :on-success="handleUploadSuccess"
-                :on-error="handleUploadError"
-                :class="{
-                    'upload-plus-hide':
-                        coverUploadProgress === 'uploading' ||
-                        coverUploadProgress === 'success' ||
-                        fileList.length >= 1,
-                }"
+                class="c-admin-upload el-upload--picture-card"
+                :action="uploadurl"
+                :show-file-list="false"
+                :on-success="uploadSuccess"
+                :on-error="uploadFail"
             >
-                <i slot="default" class="el-icon-plus"></i>
-                <!-- <el-button size="small" type="primary">点击上传</el-button> -->
+                <img v-if="post_banner" :src="post_banner" />
+                <i class="el-icon-plus"></i>
             </el-upload>
 
             <el-divider content-position="left">元信息</el-divider>
             <div class="c-admin-info">
                 <div class="c-admin-type">
                     <el-select
-                        v-model="typeSelectValue"
+                        v-model="post_type"
                         placeholder="请选择类型"
                         class="drawer-item-content"
                     >
                         <el-option
-                            v-for="type in typeOptions"
+                            v-for="type in type_options"
                             :key="type.value"
                             :label="type.label"
                             :value="type.value"
@@ -103,7 +91,7 @@
                 </div>
                 <div class="c-admin-author">
                     <el-input
-                        v-model="authorInputValue"
+                        v-model="post_author"
                         placeholder="请输入作者uid"
                         class="input-author drawer-item-content"
                     ></el-input>
@@ -111,12 +99,7 @@
             </div>
 
             <div class="c-admin-buttons">
-                <el-button
-                    type="primary"
-                    @click="submitChange"
-                    :loading="
-                        coverUploadProgress === 'uploading' || dataUploading
-                    "
+                <el-button type="primary" @click="submit" :loading="pushing"
                     >提交</el-button
                 >
                 <el-button type="plain" @click="close">取消</el-button>
@@ -129,28 +112,47 @@
 import Bus from "../service/bus";
 import { getRewrite } from "@jx3box/jx3box-common/js/utils";
 import { __server, __postType } from "@jx3box/jx3box-common/js/jx3box.json";
-import { User } from "@jx3box/jx3box-common";
-import { axios } from "../service/api.js";
+import { getSetting, postSetting } from "../service/admin";
+import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "Admin",
     data() {
         return {
-            loading: false,
+            // 可视
             visible: true,
 
+            // 数据
+            pulled: false,
+            pushing: false,
+
+            // 权限
+            hasRight: false,
+            pid: 0,
+            channel: "",
+
+            // 状态
+            post_status: "publish",
+            status_options: {
+                publish: "默认",
+                draft: "草稿",
+                pending: "待审核",
+                dustbin: "删除",
+            },
+
             // 角标
-            markCheckboxValue: [],
-            markCheckboxOptions: [
-                { label: "newbie", name: "新手易用" },
-                { label: "advanced", name: "进阶推荐" },
-                { label: "recommended", name: "编辑精选" },
-                { label: "geek", name: "骨灰必备" },
-            ],
+            mark: "none",
+            mark_options: {
+                none: "无",
+                newbie: "新手易用",
+                advanced: "进阶推荐",
+                recommended: "编辑精选",
+                geek: "骨灰必备",
+            },
 
             // 高亮
             isHighlight: false,
-            highlightColorValue: "rgb(255,0,1)",
-            predefineColors: [
+            color: "rgb(255,0,1)",
+            color_options: [
                 "rgb(255,0,1)",
                 "rgb(2,209,248)",
                 "rgb(147,217,25)",
@@ -160,203 +162,50 @@ export default {
             ],
 
             // 置顶
-            isPostPinned: false,
+            sticky: 0,
 
             // 海报
-            coverUploadUrl: `${__server}upload`,
-            coverUploadProgress: "none",
-            fileList: [],
+            uploadurl: __server + "upload",
+            banner_preview: "",
+            post_banner: "",
 
             // 类型
-            typeSelectValue: "",
-            typeOptions: [],
+            post_type: "",
+            type_options: [],
 
             // 作者
-            authorInputValue: "",
-
-            // 状态
-            statusRadioValue: "publish",
-
-            // 提交
-            dataUploading: false,
+            post_author: "",
         };
     },
     computed: {
-        isName() {
-            return false;
+        data: function() {
+            return {
+                ID: this.pid,
+                post_status: this.post_status || "publish",
+                post_author: this.post_author || 1,
+                post_type: this.post_type || "post",
+                post_banner: this.post_banner || "",
+                color: this.color || "",
+                mark: (this.mark == "none" ? "" : this.mark) || "",
+                sticky: this.sticky ? Date.now() : 0,
+            };
         },
     },
     methods: {
-        openDrawer() {
-            // 如果没有作者id，说明是第一次加载，需要先从服务器获取数据
-            if (this.authorInputValue === "") {
-                this.loadingPostData = true;
-                this.fetchServerData();
-            }
-            // 打开抽屉
-            this.drawerVisible = true;
+        // 是否有权限
+        checkHasRight: function() {
+            this.hasRight = User.getInfo().group > 60 ? true : false;
         },
-        handleUploadBefore() {
-            this.coverUploadProgress = "uploading";
+        // 获取pid
+        checkPostID: function() {
+            this.pid = getRewrite("pid");
         },
-        handleUploadSuccess(response, file, fileList) {
-            if (response.code === 10026) {
-                this.coverUploadProgress = "success";
-                this.coverRealUrl = response.data.list[0];
-                this.$message.success("上传图片成功");
-            }
+        // 获取type
+        checkChannel: function() {
+            this.channel = location.pathname.split("/")[1];
         },
-        handleUploadError(err, file, fileList) {
-            this.$message.error("上传图片出错");
-            this.coverUploadProgress = "failed";
-            console.log(file);
-        },
-        fetchServerData() {
-            // 获取文章pid
-            // this.pid = parseInt(getRewrite('pid'))
-            this.pid = 28;
-            if (User.isLogin()) {
-                this.userid = User.getInfo().uid;
-            } else {
-                User.toLogin();
-                return;
-            }
-            console.log(this.userid);
-            axios(`${__server}post/query?id=${this.pid}`, "GET", true)
-                .then((res) => {
-                    if (res.code == 10064) {
-                        let data = res.data.post;
-                        console.log(data);
-                        this.pid = data.ID;
-                        if (data.color === null) {
-                            this.isHighlight = false;
-                        } else {
-                            this.isHighlight = true;
-                            this.highlightColorValue = data.color;
-                        }
-                        this.markCheckboxValue = data.mark ? data.mark : [];
-                        this.authorInputValue = data.post_author.toString();
-                        if (data.post_banner) {
-                            this.fileList = [
-                                {
-                                    name: data.post_banner,
-                                    url: data.post_banner,
-                                },
-                            ];
-                        } else {
-                            this.fileList = [];
-                        }
-                        this.statusRadioValue = data.post_status;
-                        this.typeSelectValue = data.post_type;
-                        if (data.sticky && data.sticky != 0) {
-                            this.isPostPinned = true;
-                        } else {
-                            this.isPostPinned = false;
-                        }
-                    }
-                })
-                .catch((e) => {
-                    switch (e.code) {
-                        case -1:
-                            // 网络异常
-                            this.$message.error(e.msg);
-                            break;
-                        case 9999:
-                            this.$message.error("登录失效, 请重新登录");
-                            //1.注销
-                            User.destroy();
-                            setTimeout(() => {
-                                User.toLogin();
-                            }, 2000);
-                            //不指定url时则自动跳回当前所在页面
-                            break;
-                        default:
-                            // 服务器错误
-                            this.$message.error(`[${e.code}]${e.msg}`);
-                    }
-                    this.drawerVisible = false;
-                })
-                .then(() => {
-                    this.loadingPostData = false;
-                });
-        },
-        submitChange() {
-            if (this.authorInputValue.replace(/\ /g, "") === "") {
-                this.$confirm("请输入作者uid", "提交失败", {
-                    confirmButtonText: "确定",
-                    type: "error",
-                    showCancelButton: false,
-                    showClose: false,
-                }).catch(() => {});
-                return;
-            }
-            this.dataUploading = true;
-            let url = `${__server}post/setting`;
-            if (this.fileList.length >= 1) {
-                this.coverRealUrl = this.fileList[0].url;
-            }
-            axios(url, "POST", true, {
-                ID: this.pid,
-                color: this.isHighlight ? this.highlightColorValue : null,
-                mark: this.markCheckboxValue,
-                post_author: this.authorInputValue,
-                post_banner: this.coverRealUrl ? this.coverRealUrl : null,
-                post_status: this.statusRadioValue,
-                post_type: this.typeSelectValue,
-                sticky: this.isPostPinned ? Date.now() : 0,
-            })
-                .then((res) => {
-                    if (res.code === 10070) {
-                        this.drawerVisible = false;
-                        this.$message.success("设置成功！");
-                    } else {
-                        this.$message.error("设置出错！");
-                    }
-                })
-                .catch((e) => {
-                    switch (e.code) {
-                        case -1:
-                            // 网络异常
-                            this.$message.error(e.msg);
-                            break;
-                        case 9999:
-                            this.$message.error("登录失效, 请重新登录");
-                            //1.注销
-                            User.destroy();
-                            setTimeout(() => {
-                                User.toLogin();
-                            }, 2000);
-                            //不指定url时则自动跳回当前所在页面
-                            break;
-                        default:
-                            // 服务器错误
-                            this.$message.error(`[${e.code}]${e.msg}`);
-                    }
-                })
-                .then(() => {
-                    this.dataUploading = false;
-                });
-        },
-        handleClose(done) {
-            done();
-        },
-        handleRemove(file, fileList) {
-            this.coverUploadProgress = "none";
-            this.fileList = [];
-            this.coverRealUrl = null;
-        },
-        handlePreview(file) {
-            console.log(file);
-        },
-        handleExceed(files, fileList) {
-            this.$message.warning(`只能选择一个文件！`);
-        },
-        beforeRemove(file, fileList) {
-            return this.$confirm(`确定移除 ${file.name}？`);
-        },
-        drawer: function() {},
-        close: function() {},
-        initTypeOptions : function (){
+        // 加载类型选项
+        initTypeOptions: function() {
             let types = [];
             for (let key in __postType) {
                 types.push({
@@ -364,18 +213,86 @@ export default {
                     label: __postType[key],
                 });
             }
-            this.typeOptions = types
-        }
+            this.type_options = types;
+        },
+        // 上传
+        uploadSuccess: function(res, file, list) {
+            this.banner_preview = URL.createObjectURL(file.raw);
+            this.post_banner = res.data.list[1];
+        },
+        uploadFail: function(err, file, fileList) {
+            this.$message.error("上传失败");
+            console.log(err);
+        },
+        // 关闭
+        close(done) {
+            this.visible = false;
+        },
+        // 拉
+        pull: function() {
+            getSetting(this.pid, this).then((res) => {
+                // console.log(res.data);
+                let {
+                    ID,
+                    color,
+                    mark,
+                    post_status,
+                    post_author,
+                    sticky,
+                    post_banner,
+                    post_type,
+                } = res.data.data;
+                this.pid = ID;
+                this.post_status = post_status;
+                this.post_author = post_author;
+                this.post_type = post_type;
+                this.post_banner = post_banner;
+                this.color = color;
+                this.mark = mark || "none";
+                this.sticky = sticky || 0;
+
+                // 设置加载完成标识
+                this.pulled = true;
+            });
+        },
+        // 提交
+        submit: function() {
+            this.pushing = true;
+            // console.log(this.data)
+            this.push();
+        },
+        // 推
+        push: function() {
+            postSetting(this.pid, this.data, this).then((res) => {
+                this.pushing = false;
+                this.$message({
+                    message: "设置成功",
+                    type: "success",
+                });
+                this.close();
+            });
+        },
     },
     created: function() {
-        // 加载类型选项
-        this.initTypeOptions()
+        // 是否mount
+        this.checkHasRight();
+        // 预设信息
+        this.initTypeOptions();
     },
     mounted: function() {
-        // 监听跨模块开关事件
-        Bus.$on('toggleAdminPanel',(data)=>{
-            this.visible = !this.visible
-        })
+        // 基本信息
+        this.checkPostID();
+        this.checkChannel();
+
+        // 绑定监听
+        Bus.$on("toggleAdminPanel", (data) => {
+            this.visible = !this.visible;
+        });
+
+        // 文章类型的加载
+        if (this.pid && !this.pulled) {
+            this.pull();
+        }
     },
 };
 </script>

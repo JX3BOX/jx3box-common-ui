@@ -17,7 +17,7 @@
 
             <Fav />
 
-            <Article :content="content" directorybox="#directory" style="padding:20px;" @contentRendered="test1" @directoryRendered="test2"/>
+            <!-- <Article :content="content" directorybox="#directory" style="padding:20px;" @contentRendered="test1" @directoryRendered="test2"/> -->
 
             <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39"/>
 
@@ -76,7 +76,7 @@ export default {
         Github_REPO,
         Mark,
         Author,
-        Article,
+        // Article,
         Authorposts,
         Fav
     },

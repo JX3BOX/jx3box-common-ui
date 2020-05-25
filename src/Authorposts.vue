@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { __server, __v2 } from "@jx3box/jx3box-common/js/jx3box.json";
+import { __server, __v2 ,__Root} from "@jx3box/jx3box-common/js/jx3box.json";
 import axios from "axios";
 const API = __server + 'post/list'
 // const API = "http://localhost:5160/" + "post/list";
@@ -31,8 +31,7 @@ export default {
     },
     methods: {
         url: function(id, type) {
-            // TODO:修改地址
-            return __v2 + type + "/" + "?pid=" + id;
+            return __Root + type + "/" + id;
         },
     },
     mounted: function() {
