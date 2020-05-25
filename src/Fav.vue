@@ -43,7 +43,8 @@ export default {
                 },
             })
             .then((res) => {
-                this.favs = res.data.data.value.split(',')
+                let favs = res.data.data.value
+                this.favs = favs && favs.split(',') || []
             })
             .catch((err) => {
                 this.fail(err)
@@ -85,6 +86,7 @@ export default {
             } else {
                 this.$message.error("网络请求异常");
             }
+            console.log(err)
         }
     },
     mounted: function() {
