@@ -130,12 +130,13 @@
 </template>
 
 <script>
-const { JX3BOX, User, Utils } = require("@jx3box/jx3box-common");
-const nav = require("../assets/data/nav");
 
-const axios = require("axios");
-const MSG_API = JX3BOX.__helperUrl + "api/messages";
-const Logout_API = JX3BOX.__server + "account/logout";
+import JX3BOX from '@jx3box/jx3box-common/js/jx3box.json'
+import User from '@jx3box/jx3box-common/js/user'
+import nav from "../assets/data/nav";
+import { __Links, __Root } from "@jx3box/jx3box-common/js/jx3box.json";
+import { getMsg, doLogout, checkStatus } from "../service/header";
+import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 
 export default {
     name: "Header",
@@ -156,12 +157,10 @@ export default {
     },
     computed: {
         login_url: function() {
-            return JX3BOX.__Links.account.login + "?redirect=" + location.href;
+            return __Links.account.login + "?redirect=" + location.href;
         },
         register_url: function() {
-            return (
-                JX3BOX.__Links.account.register + "?redirect=" + location.href
-            );
+            return __Links.account.register + "?redirect=" + location.href;
         },
     },
     methods: {
@@ -182,65 +181,50 @@ export default {
         },
         // 消息
         checkMSG: function() {
-            let condition = encodeURIComponent("where[user_id]");
-            if (Number(this.user.uid)) {
-                axios({
-                    method: "get",
-                    url:
-                        MSG_API +
-                        "?" +
-                        condition +
-                        "=" +
-                        this.user.uid +
-                        "&length=3",
-                }).then((res) => {
-                    if (res.data.data.unread_count) {
-                        this.pop = true;
-                    }
-                });
-            }
+            getMsg(this.user.uid).then((res) => {
+                if (res.data.data.unread_count) {
+                    this.pop = true;
+                }
+            });
         },
         // 注销
         logout: function() {
-            axios
-                .post(Logout_API, {
-                    withCredentials: true,
-                })
-                .then((res) => {
-                    User.destroy();
-                    this.logged_in = false;
-                    this.user = User.getInfo();
-                    if (location.href.indexOf("dashboard") > 0) {
-                        location.href = JX3BOX.__Root;
-                    }
-                });
+            doLogout().then((res) => {
+                User.destroy();
+                this.logged_in = false;
+                this.user = User.getInfo();
+                if (location.href.indexOf("dashboard") > 0) {
+                    location.href = __Root;
+                }
+            });
         },
         // 头像
         avatar: function(url) {
-            return Utils.showAvatar(url);
+            return showAvatar(url);
+        },
+        // 检查
+        init: function() {
+            checkStatus()
+                .then((res) => {
+                    this.user = res.data.data;
+                    if (this.user.uid) {
+                        this.logged_in = true;
+                        this.checkMSG();
+                    } else {
+                        this.logged_in = false;
+                    }
+                })
+                .catch((err) => {
+                    this.logged_in = false;
+                    console.log(err)
+                });
         },
     },
     filters: {},
     mounted: function() {
         this.isPhone = window.innerWidth < 720 ? true : false;
         this.closeExpandList();
-
-        axios
-            .get(JX3BOX.__server + "user/me", {
-                withCredentials: true,
-            })
-            .then((res) => {
-                this.user = res.data.data;
-                if(this.user.uid){
-                    this.logged_in = true;
-                    this.checkMSG();
-                }else{
-                    this.logged_in = false;
-                }
-            })
-            .catch((err) => {
-                this.logged_in = false;
-            });
+        this.init()
     },
 };
 </script>
