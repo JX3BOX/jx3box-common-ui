@@ -3,6 +3,7 @@
         v-if="show"
         class="c-admin-button"
         type="primary"
+        size="medium"
         icon="el-icon-setting"
         @click="toggleAdminPanel()"
         >管理</el-button
@@ -27,6 +28,7 @@ export default {
         },
     },
     mounted: function() {
+        console.log(User.getInfo())
         this.show = User.getInfo().group > 60 ? true : false;
     },
     components: {},

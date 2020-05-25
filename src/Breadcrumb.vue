@@ -16,7 +16,7 @@
         <a
             v-if="publishEnable"
             :href="slug | publish_url(slug)"
-            class="u-publish el-button el-button--primary"
+            class="u-publish el-button el-button--primary el-button--medium"
             ><i class="el-icon-edit-outline"></i><span>发布</span></a
         >
         <Adminbutton v-if="adminEnable == undefined || adminEnable" class="u-admin"/>
