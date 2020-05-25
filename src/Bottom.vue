@@ -6,13 +6,13 @@
 </template>
 
 <script>
-const { JX3BOX } = require('@jx3box/jx3box-common');
+import { __Root, feedback } from "@jx3box/jx3box-common/js/jx3box.json";
 export default {
     name: "Bottom",
     data: function() {
         return {
-            homepage: JX3BOX.__Root,
-            feedback: JX3BOX.feedback,
+            homepage: __Root,
+            feedback: feedback,
         };
     },
 };

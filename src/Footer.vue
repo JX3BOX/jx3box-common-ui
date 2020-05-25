@@ -24,13 +24,13 @@
 </template>
 
 <script>
-const { JX3BOX } = require("@jx3box/jx3box-common");
+import { __Links, feedback } from "@jx3box/jx3box-common/js/jx3box.json";
 export default {
     name: "Footer",
     data: function () {
         return {
-            about: JX3BOX.__Links.about,
-            feedback: JX3BOX.feedback,
+            about: __Links.about,
+            feedback: feedback,
         };
     },
 };

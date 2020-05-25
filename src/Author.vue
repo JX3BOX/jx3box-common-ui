@@ -18,10 +18,7 @@
                     data.weibo_name
                 }}</a
             >
-            <a
-                v-if="data.github_name"
-                class="u-github"
-                :href="data.github_url"
+            <a v-if="data.github_name" class="u-github" :href="data.github_url"
                 ><img svg-inline src="../assets/img/author/github.svg" />{{
                     data.github_name
                 }}</a
@@ -34,14 +31,13 @@
 <script>
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import { __server } from "@jx3box/jx3box-common/js/jx3box.json";
-import axios from "axios";
-const API = __server + "user/info";
+import { getUserInfo } from "../service/author";
 export default {
     name: "Author",
-    props: ["author","uid"],
+    props: ["author", "uid"],
     data: function() {
         return {
-            data : ''
+            data: "",
         };
     },
     computed: {
@@ -56,16 +52,12 @@ export default {
         },
     },
     mounted: function() {
-        if(!this.uid){
-            this.data = this.author
-        }else{
-            axios.get(API,{
-                params : {
-                    uid : this.uid
-                }
-            }).then((res) => {
-                this.data = res.data.data
-            })
+        if (!this.uid) {
+            this.data = this.author;
+        } else {
+            getUserInfo(this.uid).then((res) => {
+                this.data = res.data.data;
+            });
         }
     },
 };

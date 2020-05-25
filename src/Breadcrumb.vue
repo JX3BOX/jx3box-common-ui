@@ -19,16 +19,16 @@
             class="u-publish el-button el-button--primary el-button--medium"
             ><i class="el-icon-edit-outline"></i><span>发布</span></a
         >
-        <Adminbutton v-if="adminEnable" class="u-admin"/>
+        <Adminbutton v-if="adminEnable" class="u-admin" />
         <Admin v-if="adminEnable" />
     </div>
 </template>
 
 <script>
 import Bus from "../service/bus";
-import {__Links} from '@jx3box/jx3box-common/js/jx3box.json'
-import Admin from './Admin'
-import Adminbutton from './Adminbutton'
+import { __Links } from "@jx3box/jx3box-common/js/jx3box.json";
+import Admin from "./Admin";
+import Adminbutton from "./Adminbutton";
 export default {
     name: "Breadcrumb",
     props: ["name", "slug", "root", "publishEnable", "adminEnable"],
@@ -37,8 +37,7 @@ export default {
             isOpen: true,
         };
     },
-    computed: {
-    },
+    computed: {},
     filters: {
         publish_url: function(val) {
             return __Links.dashboard.publish + "#/" + val;
@@ -59,10 +58,10 @@ export default {
             this.isOpen = false;
         }
     },
-    components : {
+    components: {
         Admin,
-        Adminbutton
-    }
+        Adminbutton,
+    },
 };
 </script>
 

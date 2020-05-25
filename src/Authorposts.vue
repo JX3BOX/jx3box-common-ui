@@ -1,9 +1,14 @@
 <template>
     <div class="c-authorposts">
-        <el-divider class="u-label" content-position="left">作者最新作品</el-divider>
+        <el-divider class="u-label" content-position="left"
+            >作者最新作品</el-divider
+        >
         <ul v-if="data.length">
             <li v-for="(item, i) in data" :key="i">
-                <a :href="url(item.post.ID, item.post.post_type)" target="_blank">
+                <a
+                    :href="url(item.post.ID, item.post.post_type)"
+                    target="_blank"
+                >
                     <img
                         class="u-icon"
                         svg-inline
@@ -17,10 +22,8 @@
 </template>
 
 <script>
-import { __server, __v2 ,__Root} from "@jx3box/jx3box-common/js/jx3box.json";
-import axios from "axios";
-const API = __server + 'post/list'
-// const API = "http://localhost:5160/" + "post/list";
+import { __Root } from "@jx3box/jx3box-common/js/jx3box.json";
+import { getUserPosts } from "../service/author";
 export default {
     name: "Authorposts",
     props: ["uid"],
@@ -35,16 +38,10 @@ export default {
         },
     },
     mounted: function() {
-        if(!this.uid) return
-        axios
-            .get(API, {
-                params: {
-                    author: this.uid,
-                },
-            })
-            .then((res) => {
-                this.data = res.data.data.list.slice(0,6);
-            });
+        if (!this.uid) return;
+        getUserPosts(this.uid).then((res) => {
+            this.data = res.data.data.list.slice(0, 6);
+        });
     },
 };
 </script>
