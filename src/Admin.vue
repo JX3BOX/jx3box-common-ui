@@ -55,7 +55,7 @@
 
             <el-divider content-position="left">是否置顶</el-divider>
             <el-switch
-                v-model="sticky"
+                v-model="isSticky"
                 active-text="置顶"
                 class="switch-post-pinned drawer-item-content"
             ></el-switch>
@@ -161,6 +161,7 @@ export default {
             ],
 
             // 置顶
+            isSticky : false,
             sticky: 0,
 
             // 海报
@@ -186,7 +187,7 @@ export default {
                 post_banner: this.post_banner || "",
                 color: this.color || "",
                 mark: this.mark || [],
-                sticky: this.sticky ? Date.now() : 0,
+                sticky: this.isSticky ? Date.now() : 0,
             };
         },
     },
@@ -247,8 +248,10 @@ export default {
                 this.post_type = post_type;
                 this.post_banner = post_banner;
                 this.color = color;
+                if(this.color) this.isHighlight = true
                 this.mark = mark;
                 this.sticky = sticky || 0;
+                if(this.sticky) this.isSticky = true
 
                 // 设置加载完成标识
                 this.pulled = true;
