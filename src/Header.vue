@@ -202,14 +202,18 @@ export default {
         },
         // 注销
         logout: function() {
-            axios.post(Logout_API).then((res) => {
-                User.destroy();
-                this.logged_in = false;
-                this.user = User.getInfo();
-                if (location.href.indexOf("dashboard") > 0) {
-                    location.href = JX3BOX.__Root;
-                }
-            });
+            axios
+                .post(Logout_API, {
+                    withCredentials: true,
+                })
+                .then((res) => {
+                    User.destroy();
+                    this.logged_in = false;
+                    this.user = User.getInfo();
+                    if (location.href.indexOf("dashboard") > 0) {
+                        location.href = JX3BOX.__Root;
+                    }
+                });
         },
         // 头像
         avatar: function(url) {
@@ -227,8 +231,12 @@ export default {
             })
             .then((res) => {
                 this.user = res.data.data;
-                this.logged_in = true;
-                this.checkMSG();
+                if(this.user.uid){
+                    this.logged_in = true;
+                    this.checkMSG();
+                }else{
+                    this.logged_in = false;
+                }
             })
             .catch((err) => {
                 this.logged_in = false;
