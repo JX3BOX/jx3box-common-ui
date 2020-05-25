@@ -25,14 +25,13 @@
             </el-radio-group>
 
             <el-divider content-position="left">推荐角标</el-divider>
-            <el-radio-group v-model="mark" class="c-admin-mark">
-                <el-radio
+            <el-checkbox-group v-model="mark" class="c-admin-mark">
+                <el-checkbox
                     v-for="(option, key) in mark_options"
                     :label="key"
                     :key="key"
-                    >{{ option }}</el-radio
-                >
-            </el-radio-group>
+                >{{option}}</el-checkbox>
+            </el-checkbox-group>
 
             <el-divider content-position="left">加粗高亮</el-divider>
             <el-checkbox
@@ -65,6 +64,7 @@
             <el-upload
                 class="c-admin-upload el-upload--picture-card"
                 :action="uploadurl"
+                :with-credentials="true"
                 :show-file-list="false"
                 :on-success="uploadSuccess"
                 :on-error="uploadFail"
@@ -140,9 +140,8 @@ export default {
             },
 
             // 角标
-            mark: "none",
+            mark: [],
             mark_options: {
-                none: "无",
                 newbie: "新手易用",
                 advanced: "进阶推荐",
                 recommended: "编辑精选",
@@ -186,7 +185,7 @@ export default {
                 post_type: this.post_type || "post",
                 post_banner: this.post_banner || "",
                 color: this.color || "",
-                mark: (this.mark == "none" ? "" : this.mark) || "",
+                mark: this.mark || [],
                 sticky: this.sticky ? Date.now() : 0,
             };
         },
@@ -218,7 +217,7 @@ export default {
         // 上传
         uploadSuccess: function(res, file, list) {
             this.banner_preview = URL.createObjectURL(file.raw);
-            this.post_banner = res.data.list[1];
+            this.post_banner = res.data.list[0];
         },
         uploadFail: function(err, file, fileList) {
             this.$message.error("上传失败");
@@ -248,7 +247,7 @@ export default {
                 this.post_type = post_type;
                 this.post_banner = post_banner;
                 this.color = color;
-                this.mark = mark || "none";
+                this.mark = mark;
                 this.sticky = sticky || 0;
 
                 // 设置加载完成标识
@@ -258,7 +257,7 @@ export default {
         // 提交
         submit: function() {
             this.pushing = true;
-            // console.log(this.data)
+            console.log(this.data)
             this.push();
         },
         // 推
