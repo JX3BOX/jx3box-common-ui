@@ -119,7 +119,7 @@ export default {
     data() {
         return {
             // 可视
-            visible: true,
+            visible: false,
 
             // 数据
             pulled: false,

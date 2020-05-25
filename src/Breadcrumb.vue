@@ -19,8 +19,8 @@
             class="u-publish el-button el-button--primary el-button--medium"
             ><i class="el-icon-edit-outline"></i><span>发布</span></a
         >
-        <Adminbutton v-if="adminEnable == undefined || adminEnable" class="u-admin"/>
-        <Admin v-if="adminEnable == undefined || adminEnable" />
+        <Adminbutton v-if="adminEnable" class="u-admin"/>
+        <Admin v-if="adminEnable" />
     </div>
 </template>
 
