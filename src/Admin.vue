@@ -185,7 +185,7 @@ export default {
                 post_author: this.post_author || 1,
                 post_type: this.post_type || "post",
                 post_banner: this.post_banner || "",
-                color: this.color || "",
+                color: this.isHighlight ? this.color : "",
                 mark: this.mark || [],
                 sticky: this.isSticky ? Date.now() : 0,
             };
