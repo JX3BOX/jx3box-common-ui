@@ -49,7 +49,7 @@
                 <span
                     class="c-admin-highlight-preview"
                     :style="{ color: color }"
-                    >预览标题效果</span
+                    >预览高亮效果</span
                 >
             </template>
 
@@ -249,7 +249,7 @@ export default {
                 this.post_banner = post_banner;
                 this.color = color;
                 if(this.color) this.isHighlight = true
-                this.mark = mark;
+                this.mark = mark || [];
                 this.sticky = sticky || 0;
                 if(this.sticky) this.isSticky = true
 

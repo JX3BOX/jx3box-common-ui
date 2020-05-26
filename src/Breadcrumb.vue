@@ -19,6 +19,14 @@
             class="u-publish el-button el-button--primary el-button--medium"
             ><i class="el-icon-edit-outline"></i><span>发布</span></a
         >
+        <a
+            v-if="feedbackEnable"
+            v-show="isNotAdmin"
+            :href="feedback"
+            class="u-feedback el-button el-button--primary el-button--medium"
+            target="_blank"
+            ><i class="el-icon-info"></i><span>反馈</span></a
+        >
         <Adminbutton v-if="adminEnable" class="u-admin" />
         <Admin v-if="adminEnable" />
     </div>
@@ -26,15 +34,25 @@
 
 <script>
 import Bus from "../service/bus";
-import { __Links } from "@jx3box/jx3box-common/js/jx3box.json";
+import { __Links, feedback } from "@jx3box/jx3box-common/js/jx3box.json";
 import Admin from "./Admin";
 import Adminbutton from "./Adminbutton";
+import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "Breadcrumb",
-    props: ["name", "slug", "root", "publishEnable", "adminEnable"],
+    props: [
+        "name",
+        "slug",
+        "root",
+        "publishEnable",
+        "adminEnable",
+        "feedbackEnable",
+    ],
     data: function() {
         return {
             isOpen: true,
+            feedback,
+            isNotAdmin: User.getInfo().group < 60,
         };
     },
     computed: {},
