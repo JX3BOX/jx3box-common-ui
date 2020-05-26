@@ -25,7 +25,60 @@
     &::-webkit-resizer {
         display: none;
     }
-    
+}
+
+.c-sidebar-right-title{
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 300;
+    margin: 0 0 10px 0;
+    padding: 0 0 5px 0;
+    border-bottom: 1px solid #ebeef5;
+
+    .u-icon{
+        width: 18px;
+        height: 18px;
+        margin-right: 10px;
+        vertical-align: -3px;
+    }
+}
+
+.c-sidebar-right-list{
+
+    .u-item{
+        .db;
+        height: 48px;
+        line-height: 48px;
+        background-color: #fff;
+        color: #303133;
+        cursor: pointer;
+        border-bottom: 1px solid #ebeef5;
+        font-size: 13px;
+        font-weight: 500;
+        transition: border-bottom-color .3s;
+        outline: none;
+        .pr;
+
+        &:hover{
+            color:@primary;
+        }
+
+        &:after{
+            content: "\e6e0";
+            .pa;.rt(0,50%);
+            transform: translateY(-50%);
+            font-family: element-icons!important;
+            speak: none;
+            font-style: normal;
+            font-weight: 400;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            vertical-align: baseline;
+            display: inline-block;
+            -webkit-font-smoothing: antialiased;
+        }
+    }
 }
 
 // 笔记本<1440 缩小双边栏
