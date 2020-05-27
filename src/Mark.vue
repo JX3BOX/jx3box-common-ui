@@ -1,11 +1,10 @@
 <template>
     <span class="w-mark">
-        <i class="w-mark-key" :style="{'background-color':BGL}"
-            ><img
-                svg-inline
-                src="../assets/img/header/logo.svg"
-            />{{mark_key}}</i
-        >
+        <i class="w-mark-key" :style="{'background-color':BGL}">
+            <img v-if="!$slots.default" svg-inline src="../assets/img/header/logo.svg" />
+            <slot></slot>
+            {{mark_key}}
+        </i>
         <span v-if="mark_value" class="w-mark-value" :style="{'background-color':BGR}">{{mark_value}}</span>
     </span>
 </template>
@@ -20,6 +19,8 @@ export default {
             mark_value: this.value,
         };
     },
+    mounted : function (){
+    }
 };
 </script>
 
