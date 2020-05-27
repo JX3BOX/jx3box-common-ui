@@ -187,7 +187,7 @@ export default {
                 post_banner: this.post_banner || "",
                 color: this.isHighlight ? this.color : "",
                 mark: this.mark || [],
-                sticky: this.isSticky ? Date.now() : 0,
+                sticky: this.isSticky ? Date.now() : null,
             };
         },
     },
