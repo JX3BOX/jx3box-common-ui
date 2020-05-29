@@ -71,12 +71,16 @@ export default {
     },
     methods: {
         doReg: function(data) {
-            // 过滤内容
-            data = lazyload(data);
-            data = iframeFilter(data);
-            data = fixXSS(data);
-            data = formatLink(data);
-            return data;
+            if(data){
+                // 过滤内容
+                data = lazyload(data);
+                data = iframeFilter(data);
+                data = fixXSS(data);
+                data = formatLink(data);
+                return data;
+            }else{
+                return ''
+            }
         },
         doDOM: function($root) {
             // DOM操作
