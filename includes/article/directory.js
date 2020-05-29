@@ -31,7 +31,9 @@ function directory(from, to) {
             $(item).append(`<a id="directory-${i}"></a>`)
 
             // 过滤行内样式
-            _item.attr("style", "");
+            _item.removeAttr('style');
+            _item.removeAttr('align');
+            _item.removeAttr('color');
             _item.html($(item).text())
 
             // 设置原始元素所在的位置
