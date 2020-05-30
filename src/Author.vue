@@ -13,12 +13,12 @@
         </div>
         <div class="u-bio">{{ data.bio }}</div>
         <div class="u-link" v-if="data.weibo_name || data.github_name">
-            <a v-if="data.weibo_name" class="u-weibo" :href="data.weibo_url"
+            <a v-if="data.weibo_name" class="u-weibo" :href="data.weibo_url" target="_blank"
                 ><img svg-inline src="../assets/img/author/weibo.svg" />{{
                     data.weibo_name
                 }}</a
             >
-            <a v-if="data.github_name" class="u-github" :href="data.github_url"
+            <a v-if="data.github_name" class="u-github" :href="data.github_url" target="_blank"
                 ><img svg-inline src="../assets/img/author/github.svg" />{{
                     data.github_name
                 }}</a
