@@ -1,4 +1,4 @@
 function splitPages(str){
-    return str.split('<!--nextpage-->')
+    return str && str.split('<!--nextpage-->') || ''
 }
 export default splitPages

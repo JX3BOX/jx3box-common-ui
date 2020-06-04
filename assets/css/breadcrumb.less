@@ -17,6 +17,7 @@
             color: @color;
         }
         .mr(30px);
+        // padding:10px;
     }
     .u-channel-logo {
         .fl;
@@ -36,6 +37,22 @@
         }
         .u-channel-logo svg {
             fill: @color-link;
+        }
+    }
+
+    .el-tabs{
+        position: absolute;
+        left: 140px;
+        top: 0;
+        right: 220px;
+        bottom: 0;
+
+        .el-tabs__header{margin:0;}
+
+        .el-tabs__item{.h(48px);.lh(48px);}
+
+        .el-tabs__nav-wrap::after{
+            .none;
         }
     }
 
@@ -71,19 +88,18 @@
 }
 @media screen and (max-width: @ipad) {
     .c-breadcrumb {
-        .u-publish,.u-admin,.u-feedback {
-            .none;
-        }
-    }
-}
-@media screen and (max-width: @ipad-y) {
-    .c-breadcrumb {
+        padding-left: 40px;
         .u-menu {
             .db;
         }
         .u-channel-logo {
             .none;
         }
-        padding-left: 40px;
+        .u-publish,.u-admin,.u-feedback {
+            .none;
+        }
+        .el-tabs{
+            right:0;
+        }
     }
 }

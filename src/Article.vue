@@ -84,7 +84,7 @@ export default {
         },
         doDOM: function($root) {
             // DOM操作
-            Prism.highlightAllUnder($root);
+            $root && Prism.highlightAllUnder($root);
             fold($root);
             macro(); //旧版
             qixue(); //旧版
