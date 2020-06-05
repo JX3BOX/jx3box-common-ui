@@ -12,7 +12,7 @@ export default {
     data: function() {
         return {
             homepage: __Root,
-            feedback: feedback,
+            feedback: feedback + '&subject=' + location.href,
         };
     },
 };
