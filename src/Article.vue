@@ -5,9 +5,9 @@
                 class="c-article-chunk"
                 v-for="(text, i) in data"
                 :key="i"
-                v-html="text" 
+                v-html="text"
                 :class="{ on: i == page - 1 || all == true }"
-                :id="'c-article-part' + ~~(i + 1) "
+                :id="'c-article-part' + ~~(i + 1)"
             ></div>
         </div>
         <el-button
@@ -43,8 +43,8 @@ import fold from "../includes/article/fold";
 import directory from "../includes/article/directory";
 import macro from "../includes/article/macro";
 import qixue from "../includes/article/qixue";
-import '@jx3box/jx3box-article-ui/dist/css/article.css'
-
+import "@jx3box/jx3box-article-ui/dist/css/article.css";
+const MathJax = require('../includes/article/tex-mml-chtml.js');
 export default {
     name: "Article",
     props: ["content", "directorybox"],
@@ -52,7 +52,7 @@ export default {
         return {
             all: false,
             page: 1,
-            data: []
+            data: [],
         };
     },
     computed: {
@@ -62,24 +62,24 @@ export default {
         hasPages: function() {
             return this.chunks.length > 1;
         },
-        origin : function (){
-            return this.content
+        origin: function() {
+            return this.content;
         },
-        chunks : function (){
+        chunks: function() {
             return splitPages(this.origin);
         },
     },
     methods: {
         doReg: function(data) {
-            if(data){
+            if (data) {
                 // 过滤内容
                 data = lazyload(data);
                 data = iframeFilter(data);
                 data = fixXSS(data);
                 data = formatLink(data);
                 return data;
-            }else{
-                return ''
+            } else {
+                return "";
             }
         },
         doDOM: function($root) {
@@ -88,64 +88,73 @@ export default {
             fold($root);
             macro(); //旧版
             qixue(); //旧版
+            window.MathJax && window.MathJax.typesetPromise();
         },
         doDir: function() {
             // 显示局部
-            let target= ''
-            if(this.hasPages && !this.all){
-                target = '#c-article-part' + this.page
-            // 全部
-            }else{
-                target = '#c-article'
+            let target = "";
+            if (this.hasPages && !this.all) {
+                target = "#c-article-part" + this.page;
+                // 全部
+            } else {
+                target = "#c-article";
             }
             let dir = directory(target, this.directorybox);
             if (dir) this.$emit("directoryRendered");
         },
         changePage: function(i) {
-            this.page = i
-            window.scrollTo(0,0)
+            this.page = i;
+            window.scrollTo(0, 0);
             this.$nextTick(() => {
-                this.doDir()
-            })
+                this.doDir();
+            });
         },
         showAll: function() {
             this.all = true;
             this.$nextTick(() => {
-                this.doDir()
-            })
+                this.doDir();
+            });
         },
-        render : function (){
-            let result = []
+        render: function() {
+            let result = [];
             for (let chunk of this.chunks) {
                 let _chunk = this.doReg(chunk);
                 result.push(_chunk);
             }
-            this.data = result
+            this.data = result;
         },
-        run : function (){
-            this.render()
+        run: function() {
+            this.render();
             // 等待html加载完毕后
             this.$nextTick(() => {
                 this.$emit("contentLoaded");
                 // 统一DOM处理
-                const $root = this.$refs.article
+                const $root = this.$refs.article;
                 this.doDOM($root);
                 this.$emit("contentRendered");
                 // 目录处理
-                this.doDir()
-            })
-        }
+                this.doDir();
+            });
+        },
     },
-    watch : {
-        content : function (){
-            this.run()
-        }
+    watch: {
+        content: function() {
+            this.run();
+        },
     },
     mounted: function() {
-        this.run()
+        this.run();
+    },
+    created: function() {
+        // window.MathJax = {
+        //     options: {
+        //         processHtmlClass: "math-tex",
+        //         ignoreHtmlClass: ".*",
+        //     },
+        // };
+        // console.log(MathJax)
     },
 };
 </script>
 
-<style lang="less">
-</style>
+<style lang="less"></style>
