@@ -2,7 +2,7 @@
     <header class="c-header" id="c-header">
         <div class="c-header-inner">
             <!-- logo -->
-            <a class="c-header-logo" id="c-header-logo" :href="JX3BOX.__Root">
+            <a class="c-header-logo" id="c-header-logo" :href="url.home">
                 <img
                     class="u-pic"
                     svg-inline
@@ -16,7 +16,7 @@
                 <div class="c-search">
                     <form
                         class="u-form"
-                        :action="JX3BOX.__Links.search"
+                        :action="url.search"
                         :target="isPhone ? '_self' : '_blank'"
                     >
                         <input
@@ -57,7 +57,7 @@
                     id="c-header-msg"
                     title="我的消息"
                 >
-                    <a class="u-msg" :href="JX3BOX.__Links.dashboard.msg"
+                    <a class="u-msg" :href="url.msg"
                         ><i class="u-icon u-icon-msg">
                             <i
                                 class="u-pop"
@@ -77,7 +77,7 @@
                     id="c-header-panel"
                     title="发布中心"
                 >
-                    <a class="u-post" :href="JX3BOX.__Links.dashboard.publish"
+                    <a class="u-post" :href="url.publish"
                         ><img
                             class="u-add"
                             svg-inline
@@ -101,12 +101,12 @@
                         <span class="u-dropdown"></span>
                         <ul class="u-menu" v-show="!fold">
                             <li>
-                                <a :href="JX3BOX.__Links.dashboard.home"
+                                <a :href="url.dashboard"
                                     >个人中心</a
                                 >
                             </li>
                             <li>
-                                <a :href="JX3BOX.__Links.dashboard.profile"
+                                <a :href="url.profile"
                                     >设置</a
                                 >
                             </li>
@@ -153,6 +153,15 @@ export default {
             // 登录信息
             logged_in: false,
             user: {},
+            // links
+            url : {
+                home : __Root,
+                search : __Links.search,
+                msg : __Links.dashboard.msg,
+                publish : __Links.dashboard.publish,
+                dashboard : __Links.dashboard.home,
+                profile : __Links.dashboard.profile
+            }
         };
     },
     computed: {
@@ -204,7 +213,8 @@ export default {
         },
         // 检查
         init: function() {
-            checkStatus()
+            // TODO:统一为一个域名后更改为优先读取localstorage
+            window.__userdata = checkStatus()
                 .then((res) => {
                     this.user = res.data.data;
                     if (this.user.uid) {
@@ -213,6 +223,7 @@ export default {
                     } else {
                         this.logged_in = false;
                     }
+                    return this.user
                 })
                 .catch((err) => {
                     this.logged_in = false;

@@ -13,7 +13,7 @@ function doLogout() {
 }
 
 function checkStatus() {
-    return $.get("user/me");
+    return $.get("user/me")
 }
 
 export { getMsg, doLogout, checkStatus };
