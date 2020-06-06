@@ -16,7 +16,7 @@
         <Main :withoutRight="false" style="position:relative;">
 
             <Fav />
-            <Like />
+            <Like mode="heart" :count="100" :showCount="true"/>
             <Down :count="100" :showCount="true" />
 
             <Article :content="content" directorybox="#directory" style="padding:20px;" @contentRendered="test1" @directoryRendered="test2"/>

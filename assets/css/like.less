@@ -10,42 +10,69 @@
     }
 }
 
-// .w-heart {
-//     background: url("../img/widget/web_heart_animation.png");
-//     background-position: left;
-//     background-repeat: no-repeat;
-//     height: 50px;
-//     width: 50px;
-//     cursor: pointer;
-//     background-size: 1450px; //实际背景图片尺寸2900px
-// }
-// .w-heart:hover {
-//     background-position: right; //显示最后一个红心帧
-// }
-// @-webkit-keyframes heartBlast {
-//     0% {
-//         background-position: left;
-//     }
-//     100% {
-//         background-position: right;
-//     }
-// }
-// @keyframes heartBlast {
-//     0% {
-//         background-position: left;
-//     }
-//     100% {
-//         background-position: right;
-//     }
-// }
-// .w-heart-animation {
-//     -webkit-animation-name: heartBlast; //webkit内核浏览器
-//     animation-name: heartBlast;
-//     -webkit-animation-duration: 0.8s;
-//     animation-duration: 0.8s;
-//     -webkit-animation-iteration-count: 1;
-//     animation-iteration-count: 1;
-//     -webkit-animation-timing-function: steps(28); //共28个背景图片帧
-//     animation-timing-function: steps(28);
-//     background-position: right;
-// }
+.w-like-heart{
+    user-select: none;
+
+    .w-heart{
+        .dbi;
+        .y(top);
+    }
+    .u-text{
+        .lh(50px);
+        padding-right:15px;
+    }
+    // border:1px solid #eee;
+    .r(4px);
+    .dbi;
+    .pointer;
+
+    &:hover{
+        .w-heart{
+            background-position: right; //显示最后一个红心帧
+        }
+        .u-text{
+            color:#e2264d;
+        }
+    }
+
+    .u-count{
+        color:#aaa;
+    }
+}
+
+.w-heart {
+    background: url("../img/widget/web_heart_animation.png");
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    background-size: 1450px; //实际背景图片尺寸2900px
+}
+@-webkit-keyframes heartBlast {
+    0% {
+        background-position: left;
+    }
+    100% {
+        background-position: right;
+    }
+}
+@keyframes heartBlast {
+    0% {
+        background-position: left;
+    }
+    100% {
+        background-position: right;
+    }
+}
+.w-heart-animation {
+    -webkit-animation-name: heartBlast; //webkit内核浏览器
+    animation-name: heartBlast;
+    -webkit-animation-duration: 0.8s;
+    animation-duration: 0.8s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-timing-function: steps(28); //共28个背景图片帧
+    animation-timing-function: steps(28);
+    background-position: right;
+}

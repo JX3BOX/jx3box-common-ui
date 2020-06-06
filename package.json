@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common-ui",
-    "version": "1.4.9",
+    "version": "1.5.0",
     "description": "JX3BOX UI",
     "main": "index.js",
     "scripts": {
@@ -34,6 +34,7 @@
         "axios": "^0.19.2",
         "element-ui": "^2.13.2",
         "jquery": "^3.5.1",
+        "lodash": "^4.17.15",
         "prismjs": "^1.20.0",
         "url": "^0.11.0",
         "vue": "^2.6.11"
