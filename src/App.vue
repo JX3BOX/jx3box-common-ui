@@ -16,6 +16,8 @@
         <Main :withoutRight="false" style="position:relative;">
 
             <Fav />
+            <Like />
+            <Down :count="100" :showCount="true" />
 
             <Article :content="content" directorybox="#directory" style="padding:20px;" @contentRendered="test1" @directoryRendered="test2"/>
 
@@ -56,6 +58,8 @@ import Author from "./Author.vue";
 import Article from "./Article.vue";
 import Authorposts from "./Authorposts.vue";
 import Fav from "./Fav.vue";
+import Like from "./Like.vue";
+import Down from "./Down.vue";
 
 import axios from 'axios'
 import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
@@ -78,7 +82,9 @@ export default {
         Author,
         Article,
         Authorposts,
-        Fav
+        Fav,
+        Like,
+        Down
     },
     data : function (){
         return {
