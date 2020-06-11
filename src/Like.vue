@@ -27,7 +27,7 @@ export default {
         return {
             pid: getRewrite("pid"),
             status: false,
-            total: this.count,
+            total: this.count || 0,
             clicks: 0,
         };
     },
