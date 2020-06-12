@@ -10,7 +10,8 @@
 
         <LeftSidebar>
             <div id="directory"></div>
-            left nav
+            <Author :author="author" uid="8"/>
+            <Authorposts uid="2"/>
         </LeftSidebar>
 
         <Main :withoutRight="false" style="position:relative;">

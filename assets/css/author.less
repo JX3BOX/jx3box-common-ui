@@ -1,10 +1,7 @@
 .c-author {
-    // margin: 10px;
-
     .u-author {
         .clearfix;
         .db;
-        padding:0 10px
     }
     .u-avatar {
         .r(4px);
@@ -13,32 +10,55 @@
         .size(68px);
     }
     .u-name {
-        .bold;
         .lh(2);
+        .bold;
         &:hover {
             color: #f39;
         }
     }
     .u-bio {
-        padding: 10px;
-        .fz(13px, 2);
+        padding: 10px 0;
+        .fz(12px, 2);
         .break(3);
+        color:#888;
     }
     .u-link {
         border-top: 1px dashed #eee;
-        // border-bottom: 1px solid #eee;
+        border-bottom: 1px dashed #eee;
         a {
             .db;
-            margin: 10px;
-            .fz(13px, 20px);
+            margin: 10px 7px;
+            .fz(12px, 20px);
+            color:#555;
             &:hover {
                 color: #f39;
             }
         }
         svg {
-            .size(20px);
-            .mr(10px);
-            .fl;
+            .size(16px);
+            .mr(6px);
+            .y(-3px);
         }
     }
+
+    .u-label{
+        margin:15px 0 10px 0;
+        padding:0 5px 10px 5px;
+        i{
+            .mr(5px);
+        }
+        span{
+            .fz(13px);
+        }
+        border-bottom:1px solid @border;
+    }
 }
+
+.c-sidebar-left .c-author{
+    margin:10px;
+}
+
+.c-sidebar-right .c-author{
+    margin:15px;
+}
+

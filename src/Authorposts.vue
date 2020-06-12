@@ -1,20 +1,19 @@
 <template>
     <div class="c-authorposts">
-        <el-divider class="u-label" content-position="left"
-            >作者最新作品</el-divider
-        >
+        <div class="u-label"><i class="el-icon-s-management"></i><span>作者最新作品</span></div>
+        
         <ul v-if="data.length">
             <li v-for="(item, i) in data" :key="i">
                 <a
                     :href="url(item.post.ID, item.post.post_type)"
                     target="_blank"
                 >
-                    <img
+                    <!-- <img
                         class="u-icon"
                         svg-inline
                         src="../assets/img/rightsidebar/repo.svg"
-                    />
-                    <span>{{ item.post.post_title }}</span>
+                    /> -->
+                    <span>&raquo; {{ item.post.post_title }}</span>
                 </a>
             </li>
         </ul>
