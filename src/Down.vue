@@ -25,6 +25,11 @@ export default {
             return this.classes || 'el-button el-button--primary el-button--small is-plain'
         }
     },
+    watch : {
+        count : function (){
+            this.total = this.count || 0
+        }
+    },
     methods: {
         doDown: function() {
             this.status && this.pid && addDown(this.pid) && ~~this.total++

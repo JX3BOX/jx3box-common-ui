@@ -32,6 +32,11 @@ export default {
         };
     },
     computed: {},
+    watch : {
+        count : function (){
+            this.total = this.count || 0
+        }
+    },
     methods: {
         doLike: function() {
             this.status = !this.status;
