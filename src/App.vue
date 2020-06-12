@@ -26,7 +26,7 @@
 
             <RightSidebar>
                 <div style="height:1200px;">
-                    right extend
+                    
                     <RightSideMsg>Test</RightSideMsg>
 
                     <Author :author="author" uid="8"/>

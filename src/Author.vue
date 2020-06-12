@@ -26,7 +26,6 @@
         </div>
         <div class="u-trophy">
             <div class="u-label"><i class="el-icon-trophy"></i><span>作者荣誉</span></div>
-
         </div>
         
         <slot></slot>

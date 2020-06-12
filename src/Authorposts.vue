@@ -1,10 +1,15 @@
 <template>
     <div class="c-authorposts">
-        <div class="u-label"><i class="el-icon-s-management"></i><span>作者最新作品</span></div>
+        <div class="u-label">
+            <i class="el-icon-s-management"></i>
+            <span>作者最新作品</span>
+            <a :href="author_link" class="u-more">全部 &raquo;</a>
+        </div>
         
         <ul v-if="data.length">
             <li v-for="(item, i) in data" :key="i">
                 <a
+                    class="u-item"
                     :href="url(item.post.ID, item.post.post_type)"
                     target="_blank"
                 >
@@ -32,6 +37,9 @@ export default {
         };
     },
     methods: {
+        author_link : function (){
+            return __Root + 'author/?uid=' + this.uid  
+        },
         url: function(id, type) {
             return __Root + type + "/" + id;
         },
