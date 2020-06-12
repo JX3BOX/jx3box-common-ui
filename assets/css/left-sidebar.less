@@ -1,5 +1,5 @@
 .c-sidebar-left {
-    .w(@aside-left);
+    .w(@aside-left - 40px);
     box-sizing: border-box;
     padding: 10px;
     .pf;
@@ -33,14 +33,14 @@
 }
 
 // 笔记本<1440 缩小双边栏
-@media screen and (max-width: @notebook) {
+@media screen and (max-width: @smallpc) {
     .c-sidebar-left {
         .w(@aside-left - 40px);
     }
 }
 
 // 平板横屏
-@media screen and (max-width: @mininote) {
+@media screen and (max-width: @notebook) {
     .c-sidebar-left {
         .w(@aside-left - 60px);
     }
