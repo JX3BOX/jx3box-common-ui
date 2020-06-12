@@ -23,13 +23,13 @@
         "name": "成就",
         "path": "https://www.jx3box.com/cj"
     },
-    "house": {
-        "name": "家园",
-        "path": "https://www.jx3box.com/house"
-    },
     "tool": {
         "name": "教程",
         "path": "https://www.jx3box.com/tool"
+    },
+    "house": {
+        "name": "家园",
+        "path": "https://www.jx3box.com/house"
     },
     "pvx": {
         "name": "捏脸",
