@@ -1,4 +1,4 @@
-import JX3_QIXUE from '../qixue.js'
+import JX3_QIXUE from '@jx3box/jx3box-talent'
 import $ from 'jquery'
 function qixue(selector=".e-jx3qixue-area"){
     try {

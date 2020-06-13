@@ -1,4 +1,4 @@
-import JX3_MACRO from '../macro.js'
+import JX3_MACRO from '@jx3box/jx3box-macro'
 import $ from 'jquery'
 function macro(selector=".e-jx3macro-area"){
     try {

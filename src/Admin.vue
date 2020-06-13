@@ -72,6 +72,8 @@
                 <img v-if="post_banner" :src="post_banner" />
                 <i class="el-icon-plus"></i>
             </el-upload>
+            <el-button class="c-admin-banner-btn" icon="el-icon-circle-close" size="mini" plain @click="removeBanner">移除海报</el-button>
+
 
             <el-divider content-position="left">元信息</el-divider>
             <div class="c-admin-info">
@@ -223,6 +225,9 @@ export default {
         uploadFail: function(err, file, fileList) {
             this.$message.error("上传失败");
             console.log(err);
+        },
+        removeBanner : function (){
+            this.post_banner = ''  
         },
         // 关闭
         close(done) {
