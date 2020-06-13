@@ -51,7 +51,7 @@ export default {
     data: function() {
         return {
             isOpen: true,
-            feedback,
+            feedback: feedback + "&subject=" + location.href,
             isNotAdmin: User.getInfo().group < 60,
         };
     },
