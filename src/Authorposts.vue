@@ -34,21 +34,34 @@ export default {
     data: function() {
         return {
             data: [],
+            id : 0
         };
     },
-    methods: {
+    computed : {
         author_link : function (){
-            return __Root + 'author/?uid=' + this.uid  
-        },
-        url: function(id, type) {
-            return __Root + type + "/" + id;
+            console.log(this.id)
+            return __Root + 'author/?uid=' + this.id
         },
     },
+    watch : {
+        uid : function (newid){
+            this.id = newid
+            this.init()
+        }
+    },
+    methods: {
+        url: function(pid, type) {
+            return __Root + type + "/?pid=" + pid;
+        },
+        init : function (){
+            if (!this.id) return;
+            getUserPosts(this.id).then((res) => {
+                this.data = res.data.data.list.slice(0, 6);
+            });
+        }
+    },
     mounted: function() {
-        if (!this.uid) return;
-        getUserPosts(this.uid).then((res) => {
-            this.data = res.data.data.list.slice(0, 6);
-        });
+        this.init()
     },
 };
 </script>
