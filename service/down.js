@@ -6,4 +6,8 @@ function addDown(id) {
     });
 }
 
-export { addDown };
+function getDown(id){
+    
+}
+
+export { addDown,getDown };

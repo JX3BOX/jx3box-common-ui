@@ -1,10 +1,12 @@
 import { $ } from "./axios";
 
 function getSetting(pid, vm) {
-    return $.get("post/setting", {
+    return $.get("post/find", {
         params: {
-            pid
+            id:pid
         },
+    }).then((res) => {
+        return res.data.data.post
     }).catch((err) => {
         if (err.response && err.response.data && err.response.data.code) {
             vm.$message.error(

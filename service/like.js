@@ -6,4 +6,7 @@ function addLike(id) {
     });
 }
 
-export { addLike };
+function getLike(id) {
+}
+
+export { addLike,getLike };

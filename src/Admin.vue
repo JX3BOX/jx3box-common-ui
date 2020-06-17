@@ -77,7 +77,7 @@
 
             <el-divider content-position="left">元信息</el-divider>
             <div class="c-admin-info">
-                <div class="c-admin-type">
+                <!-- <div class="c-admin-type">
                     <el-select
                         v-model="post_type"
                         placeholder="请选择类型"
@@ -90,7 +90,7 @@
                             :value="type.value"
                         ></el-option>
                     </el-select>
-                </div>
+                </div> -->
                 <div class="c-admin-author">
                     <el-input
                         v-model="post_author"
@@ -235,8 +235,8 @@ export default {
         },
         // 拉
         pull: function() {
-            getSetting(this.pid, this).then((res) => {
-                // console.log(res.data);
+            getSetting(this.pid, this).then((data) => {
+                
                 let {
                     ID,
                     color,
@@ -246,7 +246,7 @@ export default {
                     sticky,
                     post_banner,
                     post_type,
-                } = res.data.data;
+                } = data;
                 this.pid = ID;
                 this.post_status = post_status;
                 this.post_author = post_author;
@@ -260,6 +260,7 @@ export default {
 
                 // 设置加载完成标识
                 this.pulled = true;
+
             });
         },
         // 提交
