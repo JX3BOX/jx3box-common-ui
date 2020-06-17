@@ -3,7 +3,7 @@
         <div class="u-label">
             <i class="el-icon-s-management"></i>
             <span>作者最新作品</span>
-            <a :href="author_link" class="u-more">全部 &raquo;</a>
+            <a :href="author_link" class="u-more" target="_blank">全部 &raquo;</a>
         </div>
         
         <ul v-if="data.length">
