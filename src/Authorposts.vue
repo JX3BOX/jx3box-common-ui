@@ -34,12 +34,11 @@ export default {
     data: function() {
         return {
             data: [],
-            id : 0
+            id : this.uid || 1
         };
     },
     computed : {
         author_link : function (){
-            console.log(this.id)
             return __Root + 'author/?uid=' + this.id
         },
     },
@@ -57,7 +56,9 @@ export default {
             if (!this.id) return;
             getUserPosts(this.id).then((res) => {
                 this.data = res.data.data.list.slice(0, 6);
-            });
+            }).catch((err) => {
+                console.log(err)
+            })
         }
     },
     mounted: function() {
