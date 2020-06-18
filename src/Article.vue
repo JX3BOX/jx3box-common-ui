@@ -1,6 +1,6 @@
 <template>
     <div class="c-article-box">
-        <div id="c-article" class="c-article" ref="article">
+        <div id="c-article" class="c-article" ref="article" @click="onclick">
             <div
                 class="c-article-chunk"
                 v-for="(text, i) in data"
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import $ from "jquery";
 import lazyload from "../includes/article/img";
 import iframeFilter from "../includes/article/iframe";
 import fixXSS from "../includes/article/script";
@@ -70,6 +71,19 @@ export default {
         },
     },
     methods: {
+        onclick(e) {
+            if (e.target instanceof HTMLImageElement) {
+                const items = [];
+                let index = 0;
+                $(this.$refs.article).find("img:visible").each((_, $el) => {
+                    if ($el === e.target) {
+                        index = items.length;
+                    }
+                    items.push({ $el, src: $el.src });
+                });
+                this.$photoswipe.open(items, { index, zoomEl: true, shareEl: false });
+            }
+        },
         doReg: function(data) {
             if (data) {
                 // 过滤内容
