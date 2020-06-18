@@ -13,9 +13,9 @@
         <div class="c-footer-right">
             <a class="u-about" :href="about" target="_blank">关于我们</a>
             <em>|</em>
-            <a class="u-doc" href="https://www.jx3box.com/help" target="_blank">帮助文档</a>
+            <a class="u-doc" href="https://www.jx3box.com/tool/?subtype=5" target="_blank">帮助文档</a>
             <em>|</em>
-            <a class="u-log" href="https://github.com/JX3BOX/jx3box.github.io/wiki" target="_blank">更新日志</a>
+            <a class="u-log" href="https://github.com/JX3BOX" target="_blank">代码仓库</a>
             <em>|</em>
             <a class="u-feedback" :href="feedback" target="_blank">反馈建议</a>
         </div>
