@@ -77,7 +77,7 @@
 
             <el-divider content-position="left">元信息</el-divider>
             <div class="c-admin-info">
-                <!-- <div class="c-admin-type">
+                <div class="c-admin-type">
                     <el-select
                         v-model="post_type"
                         placeholder="请选择类型"
@@ -90,7 +90,7 @@
                             :value="type.value"
                         ></el-option>
                     </el-select>
-                </div> -->
+                </div>
                 <div class="c-admin-author">
                     <el-input
                         v-model="post_author"
