@@ -124,16 +124,21 @@ export default {
             this.data = result;
         },
         run: function() {
+
             this.render();
             // 等待html加载完毕后
             this.$nextTick(() => {
+
                 this.$emit("contentLoaded");
+
                 // 统一DOM处理
                 const $root = this.$refs.article;
                 this.doDOM($root);
                 this.$emit("contentRendered");
+
                 // 目录处理
                 this.doDir();
+                
             });
         },
     },
@@ -146,13 +151,6 @@ export default {
         this.run();
     },
     created: function() {
-        // window.MathJax = {
-        //     options: {
-        //         processHtmlClass: "math-tex",
-        //         ignoreHtmlClass: ".*",
-        //     },
-        // };
-        // console.log(MathJax)
     },
 };
 </script>
