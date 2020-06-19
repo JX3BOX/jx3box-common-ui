@@ -19,13 +19,13 @@
         "name": "职业",
         "path": "https://www.jx3box.com/bps"
     },
+    "tool": {
+        "name": "工具",
+        "path": "https://www.jx3box.com/tool"
+    },
     "cj": {
         "name": "成就",
         "path": "https://www.jx3box.com/cj"
-    },
-    "tool": {
-        "name": "教程",
-        "path": "https://www.jx3box.com/tool"
     },
     "house": {
         "name": "家园",
