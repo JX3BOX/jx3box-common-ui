@@ -30,7 +30,7 @@
     ],
     "dependencies": {
         "@jx3box/jx3box-article-ui": "^0.2.7",
-        "@jx3box/jx3box-common": "^4.5.4",
+        "@jx3box/jx3box-common": "^4.5.5",
         "@jx3box/jx3box-macro": "^1.0.0",
         "@jx3box/jx3box-talent": "^1.0.0",
         "axios": "^0.19.2",
