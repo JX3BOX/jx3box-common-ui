@@ -34,6 +34,7 @@
 
 <script>
 import $ from "jquery";
+import Vue from 'vue';
 import lazyload from "../includes/article/img";
 import iframeFilter from "../includes/article/iframe";
 import fixXSS from "../includes/article/script";
@@ -45,6 +46,10 @@ import directory from "../includes/article/directory";
 import macro from "../includes/article/macro";
 import qixue from "../includes/article/qixue";
 import "@jx3box/jx3box-article-ui/dist/css/article.css";
+import PhotoSwipePlugin from "vue-photoswipe.js";
+import 'vue-photoswipe.js/dist/static/css/photoswipe.css';
+Vue.use(PhotoSwipePlugin);
+
 const MathJax = require('../includes/article/tex-mml-chtml.js');
 export default {
     name: "Article",
@@ -152,7 +157,7 @@ export default {
 
                 // 目录处理
                 this.doDir();
-                
+
             });
         },
     },
