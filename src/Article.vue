@@ -109,7 +109,7 @@ export default {
             let target = "";
             if (this.hasPages && !this.all) {
                 target = "#c-article-part" + this.page;
-                // 全部
+            // 全部
             } else {
                 target = "#c-article";
             }
@@ -169,4 +169,9 @@ export default {
 };
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+// 灯箱效果
+.pswp__bg{
+    background: rgba(0,0,0,.8);
+}
+</style>

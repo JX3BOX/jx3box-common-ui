@@ -1,5 +1,6 @@
 // 链接标签
 import url from 'url'
+import { resolveImagePath } from "@jx3box/jx3box-common/js/utils";
 function formatLink(str){
     if(!str) return
     
@@ -12,6 +13,10 @@ function formatLink(str){
         let href = item[2]
         let to = url.parse(href)
         const whiteHost = /https?:\/\/.*\.jx3box\.com/
+
+        if(to.host == 'oss.jx3box.com'){
+            href = resolveImagePath(href)
+        }
 
         let skip = ''
         if(!whiteHost.test(to.hostname)){
