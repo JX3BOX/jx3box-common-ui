@@ -6,6 +6,7 @@
                 class="c-header-logo"
                 id="c-header-logo"
                 @click="toggleBox($event)"
+                title="点击展开魔盒矩阵"
             >
                 <i class="u-pic"
                     ><img svg-inline src="../assets/img/header/logo.svg"
@@ -92,6 +93,13 @@
                                 >捏脸分享</a
                             ></el-dropdown-item
                         >
+                    </el-dropdown-menu>
+                </el-dropdown>
+                <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
+                    <span class="u-item el-dropdown-link">
+                        话题<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown" class="c-header-menu">
                         <el-dropdown-item
                             ><a class="u-menu-item" href="/bbs"
                                 >茶馆交流</a
