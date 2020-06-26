@@ -40,7 +40,7 @@
 
             <!-- nav -->
             <nav class="c-header-nav">
-                <a class="u-item" href="/">首页</a>
+                <!-- <a class="u-item" href="/">首页</a> -->
                 <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
                     <span class="u-item el-dropdown-link">
                         干货<i class="el-icon-arrow-down el-icon--right"></i>
@@ -48,7 +48,7 @@
                     <el-dropdown-menu slot="dropdown" class="c-header-menu">
                         <el-dropdown-item
                             ><a class="u-menu-item" href="/macro"
-                                >云端宏</a
+                                >云端宏库</a
                             ></el-dropdown-item
                         >
                         <el-dropdown-item
@@ -97,12 +97,12 @@
                 </el-dropdown>
                 <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
                     <span class="u-item el-dropdown-link">
-                        话题<i class="el-icon-arrow-down el-icon--right"></i>
+                        哔哔<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown" class="c-header-menu">
                         <el-dropdown-item
                             ><a class="u-menu-item" href="/bbs"
-                                >茶馆交流</a
+                                >茶馆碎话</a
                             ></el-dropdown-item
                         >
                     </el-dropdown-menu>
