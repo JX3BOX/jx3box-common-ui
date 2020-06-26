@@ -20,10 +20,12 @@ import Admin from './src/Admin.vue'
 import Fav from './src/Fav.vue'
 import Like from './src/Like.vue'
 import Down from './src/Down.vue'
+import Box from './src/Box.vue'
 
 const components = {
     Header,
     Breadcrumb,
+    Box,
 
     LeftSidebar,
     Main,

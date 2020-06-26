@@ -63,6 +63,16 @@
                 </a>
             </li>
             <li>
+                <a class="u-item u-doing" :target="target" title="即将上线">
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/item.svg"
+                    />
+                    <span class="u-txt">物品百科</span>
+                </a>
+            </li>
+            <li>
                 <a class="u-item" href="/house" :target="target">
                     <img
                         class="u-pic"
@@ -100,6 +110,16 @@
                         src="../assets/img/box/bbs.svg"
                     />
                     <span class="u-txt">茶馆交流</span>
+                </a>
+            </li>
+            <li>
+                <a class="u-item u-doing" :target="target" title="即将上线">
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/wiki.svg"
+                    />
+                    <span class="u-txt">剑三百科</span>
                 </a>
             </li>
 
@@ -161,6 +181,16 @@
                         src="../assets/img/box/translator.svg"
                     />
                     <span class="u-txt">繁体转换</span>
+                </a>
+            </li>
+            <li>
+                <a class="u-item" href="/share/#/parse" :target="target">
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/mirror.svg"
+                    />
+                    <span class="u-txt">妆容解析</span>
                 </a>
             </li>
             <li>
@@ -257,26 +287,6 @@
                         src="../assets/img/box/flog.svg"
                     />
                     <span class="u-txt">战斗分析</span>
-                </a>
-            </li>
-            <li>
-                <a class="u-item u-doing" :target="target" title="即将上线">
-                    <img
-                        class="u-pic"
-                        svg-inline
-                        src="../assets/img/box/item.svg"
-                    />
-                    <span class="u-txt">物品百科</span>
-                </a>
-            </li>
-            <li>
-                <a class="u-item u-doing" :target="target" title="即将上线">
-                    <img
-                        class="u-pic"
-                        svg-inline
-                        src="../assets/img/box/wiki.svg"
-                    />
-                    <span class="u-txt">剑三百科</span>
                 </a>
             </li>
             <li>
