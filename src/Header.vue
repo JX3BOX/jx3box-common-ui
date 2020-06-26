@@ -2,14 +2,16 @@
     <header class="c-header" id="c-header">
         <div class="c-header-inner">
             <!-- logo -->
-            <a class="c-header-logo" id="c-header-logo" :href="url.home">
-                <img
-                    class="u-pic"
-                    svg-inline
-                    src="../assets/img/header/logo.svg"
-                />
+            <div
+                class="c-header-logo"
+                id="c-header-logo"
+                @click="toggleBox($event)"
+            >
+                <i class="u-pic"
+                    ><img svg-inline src="../assets/img/header/logo.svg"
+                /></i>
                 <span class="u-txt">JX3BOX</span>
-            </a>
+            </div>
 
             <!-- search -->
             <div class="c-header-search" id="c-header-search">
@@ -37,13 +39,67 @@
 
             <!-- nav -->
             <nav class="c-header-nav">
-                <ul>
-                    <li v-for="(item, type) in nav" :key="'nav-' + type">
-                        <a :href="item.path" :class="{ on: isFocus(type) }">{{
-                            item.name
-                        }}</a>
-                    </li>
-                </ul>
+                <a class="u-item" href="/">首页</a>
+                <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
+                    <span class="u-item el-dropdown-link">
+                        干货<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown" class="c-header-menu">
+                        <el-dropdown-item
+                            ><a class="u-menu-item" href="/macro"
+                                >云端宏</a
+                            ></el-dropdown-item
+                        >
+                        <el-dropdown-item
+                            ><a class="u-menu-item" href="/jx3dat"
+                                >插件数据</a
+                            ></el-dropdown-item
+                        >
+                        <el-dropdown-item
+                            ><a class="u-menu-item" href="/fb"
+                                >副本专栏</a
+                            ></el-dropdown-item
+                        >
+                        <el-dropdown-item
+                            ><a class="u-menu-item" href="/bps"
+                                >职业专栏</a
+                            ></el-dropdown-item
+                        >
+                        <el-dropdown-item
+                            ><a class="u-menu-item" href="/tool"
+                                >工具教程</a
+                            ></el-dropdown-item
+                        >
+                    </el-dropdown-menu>
+                </el-dropdown>
+                <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
+                    <span class="u-item el-dropdown-link">
+                        休闲<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown" class="c-header-menu">
+                        <el-dropdown-item
+                            ><a class="u-menu-item" href="/cj"
+                                >成就百科</a
+                            ></el-dropdown-item
+                        >
+                        <el-dropdown-item
+                            ><a class="u-menu-item" href="/house"
+                                >家园分享</a
+                            ></el-dropdown-item
+                        >
+                        <el-dropdown-item
+                            ><a class="u-menu-item" href="/share"
+                                >捏脸分享</a
+                            ></el-dropdown-item
+                        >
+                        <el-dropdown-item
+                            ><a class="u-menu-item" href="/bbs"
+                                >茶馆交流</a
+                            ></el-dropdown-item
+                        >
+                    </el-dropdown-menu>
+                </el-dropdown>
+                <a class="u-item" href="/app">应用</a>
             </nav>
 
             <slot></slot>
@@ -95,20 +151,16 @@
                     >
                         <img
                             class="u-avatar"
-                            :src="avatar(user.avatar)"
+                            :src="user.avatar"
                             :alt="user.name"
                         />
                         <span class="u-dropdown"></span>
                         <ul class="u-menu" v-show="!fold">
                             <li>
-                                <a :href="url.dashboard"
-                                    >个人中心</a
-                                >
+                                <a :href="url.dashboard">个人中心</a>
                             </li>
                             <li>
-                                <a :href="url.profile"
-                                    >设置</a
-                                >
+                                <a :href="url.profile">设置</a>
                             </li>
                             <li>
                                 <a @click="logout()">登出</a>
@@ -126,26 +178,25 @@
                 </div>
             </div>
         </div>
+        <Box class="c-header-jx3box" />
     </header>
 </template>
 
 <script>
-
-import JX3BOX from '@jx3box/jx3box-common/js/jx3box.json'
-import User from '@jx3box/jx3box-common/js/user'
-import nav from "../assets/data/nav";
+import JX3BOX from "@jx3box/jx3box-common/js/jx3box.json";
+import User from "@jx3box/jx3box-common/js/user";
+// import nav from "../assets/data/nav";
 import { __Links, __Root } from "@jx3box/jx3box-common/js/jx3box.json";
 import { getMsg, doLogout, checkStatus } from "../service/header";
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
+import Box from "../src/Box.vue";
+import Bus from "../service/bus";
 
 export default {
     name: "Header",
     data: function() {
         return {
             isPhone: false,
-            // 导航菜单
-            JX3BOX,
-            nav,
             // 是否有消息
             pop: false,
             // 是否折叠
@@ -154,14 +205,14 @@ export default {
             logged_in: false,
             user: {},
             // links
-            url : {
-                home : __Root,
-                search : __Links.search,
-                msg : __Links.dashboard.msg,
-                publish : __Links.dashboard.publish,
-                dashboard : __Links.dashboard.home,
-                profile : __Links.dashboard.profile
-            }
+            url: {
+                home: __Root,
+                search: __Links.search,
+                msg: __Links.dashboard.msg,
+                publish: __Links.dashboard.publish,
+                dashboard: __Links.dashboard.home,
+                profile: __Links.dashboard.profile,
+            },
         };
     },
     computed: {
@@ -173,6 +224,11 @@ export default {
         },
     },
     methods: {
+        // 展开盒子
+        toggleBox: function(e) {
+            e.stopPropagation();
+            Bus.$emit("toggleBox");
+        },
         // 导航焦点
         isFocus: function(type) {
             return location.pathname.includes(type);
@@ -207,35 +263,44 @@ export default {
                 }
             });
         },
-        // 头像
-        avatar: function(url) {
-            return showAvatar(url);
-        },
+        // // 头像
+        // avatar: function(url) {
+        //     return showAvatar(url);
+        // },
         // 检查
         init: function() {
-            // TODO:统一为一个域名后更改为优先读取localstorage
-            window.__userdata = checkStatus()
-                .then((res) => {
-                    this.user = res.data.data;
-                    if (this.user.uid) {
-                        this.logged_in = true;
-                        this.checkMSG();
-                    } else {
-                        this.logged_in = false;
-                    }
-                    return this.user
-                })
-                .catch((err) => {
-                    this.logged_in = false;
-                    console.log(err)
-                });
+            // window.__userdata = checkStatus()
+            //     .then((res) => {
+            //         this.user = res.data.data;
+            
+            this.logged_in = User.isLogin()
+            this.user = User.getInfo()
+            if(this.logged_in){
+                this.checkMSG();
+            }
+            
+            // if (this.user.uid) {
+            //     this.logged_in = true;
+            //     this.checkMSG();
+            // } else {
+            //     this.logged_in = false;
+            // }
+            //     return this.user;
+            // })
+            // .catch((err) => {
+            //     this.logged_in = false;
+            //     console.log(err);
+            // });
         },
     },
     filters: {},
-    mounted: function() {
+    created: function() {
         this.isPhone = window.innerWidth < 720 ? true : false;
         this.closeExpandList();
-        this.init()
+        this.init();
+    },
+    components: {
+        Box,
     },
 };
 </script>

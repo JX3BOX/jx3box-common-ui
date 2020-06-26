@@ -1,0 +1,125 @@
+.c-header-jx3box {
+    background-color: @bg-black;
+    .z(800);
+    overflow-y:auto;
+    .w(100%);
+    box-shadow: 0 5px 5px rgba(0,0,0,.2);
+
+    .none;
+    &.on{
+        .db;
+    }
+
+    // transition:0.5s ease-in-out;
+    // transform: translateY(-100%);
+    // .pr;top:-@header-height;
+    // &.on{
+    //     transform: translateY(0);
+    //     top:0;
+    // }
+
+    ul {
+        margin: 0;
+        padding: 10px 0 10px 20px;
+        list-style: none;
+        .clearfix;
+        .pr;
+    }
+
+    li {
+        .fl;
+        .db;
+        .mr(20px);
+        .mb(20px);
+    }
+    .u-item {
+        .db;
+        .size(74px);
+        box-sizing: border-box;
+        .x;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #eee;
+        background-color: #fff;
+        transition: all 0.1s ease-in;
+        background-color: @bg-light;
+        .pr;
+        overflow: hidden;
+    }
+    .u-item:not(.u-doing) {
+        &:hover {
+            border-color: #111;
+            .u-pic {
+                fill: @bg-black;
+            }
+        }
+    }
+    .u-pic {
+        .size(32px);
+        .db;
+        .auto(x);
+        fill: @color;
+    }
+    .u-txt {
+        .fz(12px, 2);
+        color: #666;
+        .db;
+        white-space: nowrap;
+    }
+    .u-mark {
+        color: #fff;
+        font-size: 12px;
+        line-height: 16px;
+        transform: rotate(45deg) scale(0.8);
+        position: absolute;
+        right: -20px;
+        top: 0;
+        padding: 0 15px 0 25px;
+        font-style: normal;
+
+        &.ishot {
+            background-color: #c00;
+        }
+        &.isnew {
+            background-color: #2fcb53;
+        }
+    }
+    .u-app-start {
+        .clear(left);
+    }
+    .u-doing {
+        .tm(0.5);
+        cursor: default;
+    }
+
+    .pr;
+    .u-close{
+        .pa;.rb(0);
+        background-color:@color;
+        .fz(13px);
+        padding:5px 10px;
+        i{.mr(3px);}
+        .pointer;
+    }
+}
+@media screen and (max-width: @ipad) {
+    .c-jx3box{
+        .u-app-start {
+            clear: none;
+        }
+        height: calc(100vh - @header-height);
+    }
+}
+@media screen and (max-width:375px){
+    .c-jx3box{
+        .u-item{
+            .size(64px);
+            .u-txt{
+                .fz(10px);
+            }
+            .u-pic{
+                .size(28px);
+            }
+        }
+    }
+}
