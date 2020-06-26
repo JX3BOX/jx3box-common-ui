@@ -107,7 +107,7 @@
                         >
                     </el-dropdown-menu>
                 </el-dropdown>
-                <a class="u-item" href="/app">应用</a>
+                <!-- <a class="u-item" href="/app">应用</a> -->
             </nav>
 
             <slot></slot>
