@@ -189,7 +189,7 @@
                     <img
                         class="u-pic"
                         svg-inline
-                        src="../assets/img/box/trophy.svg"
+                        src="../assets/img/box/trophy2.svg"
                     />
                     <span class="u-txt">百强排行</span>
                 </a>
