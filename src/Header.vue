@@ -40,8 +40,17 @@
 
             <!-- nav -->
             <nav class="c-header-nav">
-                <!-- <a class="u-item" href="/">首页</a> -->
-                <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
+                <a class="u-item" href="/">首页</a>
+                <a class="u-item" href="/macro">宏库</a>
+                <a class="u-item" href="/jx3dat">插件</a>
+                <a class="u-item" href="/fb">副本</a>
+                <a class="u-item" href="/bps">职业</a>
+                <a class="u-item" href="/cj">成就</a>
+                <a class="u-item" href="/house">家园</a>
+                <a class="u-item" href="/share">捏脸</a>
+                <a class="u-item" href="/tool">工具</a>
+                <a class="u-item" href="/bbs">茶馆</a>
+                <!-- <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
                     <span class="u-item el-dropdown-link">
                         干货<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
@@ -106,8 +115,7 @@
                             ></el-dropdown-item
                         >
                     </el-dropdown-menu>
-                </el-dropdown>
-                <!-- <a class="u-item" href="/app">应用</a> -->
+                </el-dropdown> -->
             </nav>
 
             <slot></slot>

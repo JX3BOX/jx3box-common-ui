@@ -391,7 +391,7 @@
 
 <script>
 import Bus from "../service/bus";
-import { buildTarget } from "@jx3box/jx3box-common/js/utils";
+// import { buildTarget } from "@jx3box/jx3box-common/js/utils";
 export default {
     name: "Box",
     props: [],
@@ -402,7 +402,8 @@ export default {
     },
     computed: {
         target: function() {
-            return buildTarget();
+            return '_self'
+            // return buildTarget();
         },
     },
     methods: {
