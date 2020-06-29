@@ -50,6 +50,7 @@
                 <a class="u-item" href="/share">捏脸</a>
                 <a class="u-item" href="/tool">工具</a>
                 <a class="u-item" href="/bbs">茶馆</a>
+                <a class="u-item" href="/app">应用</a>
                 <!-- <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
                     <span class="u-item el-dropdown-link">
                         干货<i class="el-icon-arrow-down el-icon--right"></i>

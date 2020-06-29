@@ -154,6 +154,16 @@
                 </a>
             </li>
             <li>
+                <a class="u-item" href="/app/macroeditor" :target="target">
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/macroeditor.svg"
+                    />
+                    <span class="u-txt">宏编辑器</span>
+                </a>
+            </li>
+            <li>
                 <a class="u-item" href="/app/servers" :target="target">
                     <img
                         class="u-pic"
@@ -215,7 +225,7 @@
             </li>
 
             <li class="u-app-start">
-                <a class="u-item" href="/app/fbrank" :target="target">
+                <a class="u-item" href="/fb/#/rank" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -235,6 +245,16 @@
                 </a>
             </li>
             <li>
+                <a class="u-item u-doing" href="/bps/#/lua" :target="target" title="即将上线">
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/role.svg"
+                    />
+                    <span class="u-txt">职业源码</span>
+                </a>
+            </li>
+            <li>
                 <a
                     class="u-item u-doing"
                     href="/fb/#/drop"
@@ -247,26 +267,6 @@
                         src="../assets/img/box/drop.svg"
                     />
                     <span class="u-txt">副本掉落</span>
-                </a>
-            </li>
-            <li>
-                <a class="u-item u-doing" href="/bps/#/lua" :target="target" title="即将上线">
-                    <img
-                        class="u-pic"
-                        svg-inline
-                        src="../assets/img/box/role.svg"
-                    />
-                    <span class="u-txt">职业源码</span>
-                </a>
-            </li>
-            <li>
-                <a class="u-item" href="/app/macroeditor" :target="target">
-                    <img
-                        class="u-pic"
-                        svg-inline
-                        src="../assets/img/box/macroeditor.svg"
-                    />
-                    <span class="u-txt">宏编辑器</span>
                 </a>
             </li>
             <li>
@@ -341,10 +341,9 @@
             <li>
                 <a
                     class="u-item"
-                    href="https://www.jx3pzcx.cn/exam/"
+                    href="https://j3cx.com/exam/"
                     :target="target"
                 >
-                    <!-- TODO:https://j3cx.com/exam/ -->
                     <img
                         class="u-pic"
                         svg-inline
@@ -355,7 +354,7 @@
             </li>
             <li>
                 <a
-                    class="u-item u-doing"
+                    class="u-item"
                     href="https://j3cx.com/serendipity"
                     :target="target"
                 >
