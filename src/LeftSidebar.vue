@@ -27,10 +27,10 @@
 import Bus from '../service/bus';
 export default {
     name: "LeftSidebar",
-    props: [],
+    props: ['open'],
     data: function() {
         return {
-            isOpen: true,
+            isOpen: this.open == undefined ? true : this.open,
         };
     },
     computed: {},

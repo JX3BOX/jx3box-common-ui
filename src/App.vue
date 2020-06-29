@@ -8,13 +8,13 @@
             bread info
         </Breadcrumb>
 
-        <LeftSidebar>
+        <LeftSidebar :open="false">
             <div id="directory"></div>
             <Author :author="author" uid="8"/>
             <Authorposts uid="2"/>
         </LeftSidebar>
 
-        <Main :withoutRight="false" style="position:relative;">
+        <Main :withoutLeft="true" :withoutRight="false" style="position:relative;">
 
             <Fav />
             <Like mode="heart" :count="100" :showCount="true"/>

@@ -11,10 +11,10 @@
 import Bus from "../service/bus";
 export default {
     name: "Main",
-    props: ["withoutRight"],
+    props: ["withoutRight","withoutLeft"],
     data: function() {
         return {
-            expanding: false,
+            expanding: this.withoutLeft == undefined ? false : this.withoutLeft,
         };
     },
     computed: {},

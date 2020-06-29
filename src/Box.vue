@@ -63,7 +63,7 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" :target="target" title="即将上线">
+                <a class="u-item u-doing" href="/item" :target="target" title="即将上线">
                     <img
                         class="u-pic"
                         svg-inline
@@ -113,7 +113,7 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" :target="target" title="即将上线">
+                <a class="u-item u-doing" href="/wiki" :target="target" title="即将上线">
                     <img
                         class="u-pic"
                         svg-inline
@@ -184,7 +184,7 @@
                 </a>
             </li>
             <li>
-                <a class="u-item" href="/share/#/parse" :target="target">
+                <a class="u-item" href="/app/facedata" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -194,7 +194,7 @@
                 </a>
             </li>
             <li>
-                <a class="u-item" href="/house/#/furniture" :target="target">
+                <a class="u-item" href="/app/furniture" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -204,7 +204,7 @@
                 </a>
             </li>
             <li>
-                <a class="u-item" href="/house/#/flower" :target="target">
+                <a class="u-item" href="/app/flower" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -215,13 +215,13 @@
             </li>
 
             <li class="u-app-start">
-                <a class="u-item" href="/fb/#/rank" :target="target">
+                <a class="u-item" href="/app/fbrank" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
                         src="../assets/img/box/trophy2.svg"
                     />
-                    <span class="u-txt">百强排行</span>
+                    <span class="u-txt">副本百强</span>
                 </a>
             </li>
             <li>
@@ -231,7 +231,7 @@
                         svg-inline
                         src="../assets/img/box/skull.svg"
                     />
-                    <span class="u-txt">副本数据</span>
+                    <span class="u-txt">副本解包</span>
                 </a>
             </li>
             <li>
@@ -250,7 +250,7 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" :target="target" title="即将上线">
+                <a class="u-item u-doing" href="/bps/#/lua" :target="target" title="即将上线">
                     <img
                         class="u-pic"
                         svg-inline
@@ -260,7 +260,7 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" :target="target" title="即将上线">
+                <a class="u-item" href="/app/macroeditor" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -270,7 +270,7 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" :target="target" title="即将上线">
+                <a class="u-item u-doing" href="/app/dbm" :target="target" title="即将上线">
                     <img
                         class="u-pic"
                         svg-inline
@@ -280,7 +280,7 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" :target="target" title="即将上线">
+                <a class="u-item u-doing" href="/app/flog" :target="target" title="即将上线">
                     <img
                         class="u-pic"
                         svg-inline
@@ -290,7 +290,7 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" :target="target" title="即将上线">
+                <a class="u-item u-doing" href="/app/team" :target="target" title="即将上线">
                     <img
                         class="u-pic"
                         svg-inline
@@ -356,7 +356,7 @@
             <li>
                 <a
                     class="u-item u-doing"
-                    href="https://www.j3cx.com/serendipity/"
+                    href="https://j3cx.com/serendipity"
                     :target="target"
                 >
                     <img
