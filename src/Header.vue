@@ -40,17 +40,14 @@
 
             <!-- nav -->
             <nav class="c-header-nav">
-                <a class="u-item" href="/">首页</a>
-                <a class="u-item" href="/macro">宏库</a>
-                <a class="u-item" href="/jx3dat">插件</a>
-                <a class="u-item" href="/fb">副本</a>
-                <a class="u-item" href="/bps">职业</a>
-                <a class="u-item" href="/cj">成就</a>
-                <a class="u-item" href="/house">家园</a>
-                <a class="u-item" href="/share">捏脸</a>
-                <a class="u-item" href="/tool">工具</a>
-                <a class="u-item" href="/bbs">茶馆</a>
-                <a class="u-item" href="/app">应用</a>
+                <a
+                    class="u-item"
+                    v-for="(item, type) in nav"
+                    :key="type"
+                    :class="{ on: isFocus(type) }"
+                    :href="item.path"
+                    >{{ item.name }}</a
+                >
                 <!-- <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
                     <span class="u-item el-dropdown-link">
                         干货<i class="el-icon-arrow-down el-icon--right"></i>
@@ -202,7 +199,7 @@
 <script>
 import JX3BOX from "@jx3box/jx3box-common/js/jx3box.json";
 import User from "@jx3box/jx3box-common/js/user";
-// import nav from "../assets/data/nav";
+import nav from "../assets/data/nav";
 import { __Links, __Root } from "@jx3box/jx3box-common/js/jx3box.json";
 import { getMsg, doLogout, checkStatus } from "../service/header";
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
@@ -213,6 +210,7 @@ export default {
     name: "Header",
     data: function() {
         return {
+            nav,
             isPhone: false,
             // 是否有消息
             pop: false,
@@ -289,13 +287,13 @@ export default {
             // window.__userdata = checkStatus()
             //     .then((res) => {
             //         this.user = res.data.data;
-            
-            this.logged_in = User.isLogin()
-            this.user = User.getInfo()
-            if(this.logged_in){
+
+            this.logged_in = User.isLogin();
+            this.user = User.getInfo();
+            if (this.logged_in) {
                 this.checkMSG();
             }
-            
+
             // if (this.user.uid) {
             //     this.logged_in = true;
             //     this.checkMSG();

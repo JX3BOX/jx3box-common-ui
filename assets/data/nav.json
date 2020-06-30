@@ -1,46 +1,46 @@
 {
     "index": {
         "name": "首页",
-        "path": "https://www.jx3box.com"
+        "path": "/index"
     },
     "macro": {
         "name": "宏库",
-        "path": "https://www.jx3box.com/macro"
+        "path": "/macro"
     },
     "jx3dat": {
         "name": "插件",
-        "path": "https://www.jx3box.com/jx3dat"
+        "path": "/jx3dat"
     },
     "fb": {
         "name": "副本",
-        "path": "https://www.jx3box.com/fb"
+        "path": "/fb"
     },
     "bps": {
         "name": "职业",
-        "path": "https://www.jx3box.com/bps"
-    },
-    "tool": {
-        "name": "工具",
-        "path": "https://www.jx3box.com/tool"
+        "path": "/bps"
     },
     "cj": {
         "name": "成就",
-        "path": "https://www.jx3box.com/cj"
+        "path": "/cj"
     },
     "house": {
         "name": "家园",
-        "path": "https://www.jx3box.com/house"
+        "path": "/house"
     },
     "share": {
         "name": "捏脸",
-        "path": "https://www.jx3box.com/share"
+        "path": "/share"
+    },
+    "tool": {
+        "name": "工具",
+        "path": "/tool"
     },
     "bbs": {
         "name": "茶馆",
-        "path": "https://www.jx3box.com/bbs"
+        "path": "/bbs"
     },
     "app": {
         "name": "应用",
-        "path": "https://www.jx3box.com/app"
+        "path": "/app"
     }
 }

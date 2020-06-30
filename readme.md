@@ -18,7 +18,3 @@ Vue.use(JX3BOX_UI);
 import xx from "@jx3box/jx3box-common-ui/src/xx.vue"
 Vue.component(xx.name, xx)
 ```
-
-# Todo
-1. 修改data/nav为相对路径
-2. 修改各个模块为相对路径
