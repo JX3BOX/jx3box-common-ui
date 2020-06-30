@@ -184,16 +184,6 @@
                 </a>
             </li>
             <li>
-                <a class="u-item" href="/app/translator" :target="target">
-                    <img
-                        class="u-pic"
-                        svg-inline
-                        src="../assets/img/box/translator.svg"
-                    />
-                    <span class="u-txt">繁体转换</span>
-                </a>
-            </li>
-            <li>
                 <a class="u-item" href="/app/facedata" :target="target">
                     <img
                         class="u-pic"
@@ -297,6 +287,16 @@
                         src="../assets/img/box/team.svg"
                     />
                     <span class="u-txt">团队OA</span>
+                </a>
+            </li>
+            <li>
+                <a class="u-item" href="/app/translator" :target="target">
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/translator.svg"
+                    />
+                    <span class="u-txt">繁体转换</span>
                 </a>
             </li>
 
