@@ -1,4 +1,4 @@
-import { $ } from "./axios";
+import { $,axios } from "./axios";
 
 function getFav() {
     return $.get("user/meta", {
@@ -9,8 +9,9 @@ function getFav() {
 }
 
 function addFav(pid) {
-    return $.post("post/fav", { pid: pid, action: 1 });
+    return $.post("post/fav", { pid: pid, action: 1 })
 }
+
 
 function delFav(pid) {
     return $.post("post/fav", { pid: pid, action: 0 });

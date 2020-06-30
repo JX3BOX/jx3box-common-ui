@@ -16,8 +16,9 @@ export default {
     data: function() {
         return {
             pid: getRewrite("pid"),
+            type : location.pathname.split('/')[1],
             status : true,
-            total : this.count || 0
+            total : this.count || 0,
         };
     },
     computed: {
@@ -32,7 +33,9 @@ export default {
     },
     methods: {
         doDown: function() {
-            this.status && this.pid && addDown(this.pid) && ~~this.total++
+            console.log(11)
+            // this.status && 
+            this.pid && addDown(this.pid,this.type) && ~~this.total++
             this.status = false
         },
     },

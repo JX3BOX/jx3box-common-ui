@@ -246,7 +246,7 @@ export default {
         },
         // 导航焦点
         isFocus: function(type) {
-            return location.pathname.includes(type);
+            return location.pathname.split('/')[1] == type;
         },
         // 菜单
         showmenu: function(e) {

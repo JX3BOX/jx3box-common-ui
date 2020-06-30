@@ -26,6 +26,7 @@ export default {
     data: function() {
         return {
             pid: getRewrite("pid"),
+            type : location.pathname.split('/')[1],
             status: false,
             total: this.count || 0,
             clicks: 0,
@@ -40,11 +41,11 @@ export default {
     methods: {
         doLike: function() {
             this.status = !this.status;
-            this.status && this.pid && addLike(this.pid);
+            this.status && this.pid && addLike(this.pid,this.type);
         },
 
         doLikes: _.throttle(function() {
-            addLike(this.pid);
+            addLike(this.pid,this.type);
         }, 2000),
 
         blast: function() {
