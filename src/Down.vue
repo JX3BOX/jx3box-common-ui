@@ -23,7 +23,7 @@ export default {
     },
     computed: {
         cls : function (){
-            return this.classes || 'el-button el-button--primary el-button--small is-plain'
+            return this.classes || 'el-button el-button--primary el-button--small'
         }
     },
     watch : {
@@ -33,9 +33,7 @@ export default {
     },
     methods: {
         doDown: function() {
-            console.log(11)
-            // this.status && 
-            this.pid && addDown(this.pid,this.type) && ~~this.total++
+            this.status && this.pid && addDown(this.pid,this.type) && ~~this.total++
             this.status = false
         },
     },

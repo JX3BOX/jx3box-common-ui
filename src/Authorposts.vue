@@ -18,7 +18,7 @@
                         svg-inline
                         src="../assets/img/rightsidebar/repo.svg"
                     /> -->
-                    <span>&raquo; {{ item.post.post_title }}</span>
+                    <span>&raquo; {{ item.post.post_title || item.post.post_type + '/无标题' }}</span>
                 </a>
             </li>
         </ul>

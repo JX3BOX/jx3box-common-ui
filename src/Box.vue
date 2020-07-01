@@ -63,7 +63,11 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" href="/item" :target="target" title="即将上线">
+                <a
+                    class="u-item"
+                    href="/item"
+                    :target="target"
+                >
                     <img
                         class="u-pic"
                         svg-inline
@@ -113,7 +117,12 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" href="/wiki" :target="target" title="即将上线">
+                <a
+                    class="u-item u-doing"
+                    href="/wiki"
+                    :target="target"
+                    title="即将上线"
+                >
                     <img
                         class="u-pic"
                         svg-inline
@@ -235,7 +244,7 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" href="/bps/#/lua" :target="target" title="即将上线">
+                <a class="u-item" href="/bps/#/lua" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -245,12 +254,7 @@
                 </a>
             </li>
             <li>
-                <a
-                    class="u-item u-doing"
-                    href="/fb/#/drop"
-                    :target="target"
-                    title="即将上线"
-                >
+                <a class="u-item" href="/fb/#/drop" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -260,7 +264,12 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" href="/app/dbm" :target="target" title="即将上线">
+                <a
+                    class="u-item u-doing"
+                    href="/app/dbm"
+                    :target="target"
+                    title="即将上线"
+                >
                     <img
                         class="u-pic"
                         svg-inline
@@ -270,7 +279,12 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" href="/app/flog" :target="target" title="即将上线">
+                <a
+                    class="u-item u-doing"
+                    href="/app/flog"
+                    :target="target"
+                    title="即将上线"
+                >
                     <img
                         class="u-pic"
                         svg-inline
@@ -280,7 +294,12 @@
                 </a>
             </li>
             <li>
-                <a class="u-item u-doing" href="/app/team" :target="target" title="即将上线">
+                <a
+                    class="u-item u-doing"
+                    href="/app/team"
+                    :target="target"
+                    title="即将上线"
+                >
                     <img
                         class="u-pic"
                         svg-inline
@@ -401,7 +420,7 @@ export default {
     },
     computed: {
         target: function() {
-            return '_self'
+            return "_self";
             // return buildTarget();
         },
     },
