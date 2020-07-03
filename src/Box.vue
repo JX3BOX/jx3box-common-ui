@@ -243,7 +243,7 @@
                     <span class="u-txt">副本解包</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a class="u-item" href="/bps/#/lua" :target="target">
                     <img
                         class="u-pic"
@@ -252,7 +252,7 @@
                     />
                     <span class="u-txt">职业源码</span>
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a class="u-item" href="/fb/#/drop" :target="target">
                     <img
