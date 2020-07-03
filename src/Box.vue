@@ -91,7 +91,7 @@
                     <img
                         class="u-pic"
                         svg-inline
-                        src="../assets/img/box/share.svg"
+                        src="../assets/img/box/face.svg"
                     />
                     <span class="u-txt">捏脸分享</span>
                 </a>
