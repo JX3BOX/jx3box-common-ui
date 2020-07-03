@@ -118,6 +118,20 @@
             </li>
             <li>
                 <a
+                    class="u-item"
+                    href="/emotion"
+                    :target="target"
+                >
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/pig.svg"
+                    />
+                    <span class="u-txt">沙雕表情</span>
+                </a>
+            </li>
+            <li>
+                <a
                     class="u-item u-doing"
                     href="/wiki"
                     :target="target"
@@ -306,6 +320,20 @@
                         src="../assets/img/box/team.svg"
                     />
                     <span class="u-txt">团队OA</span>
+                </a>
+            </li>
+            <li>
+                <a
+                    class="u-item"
+                    href="/exam"
+                    :target="target"
+                >
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/100.svg"
+                    />
+                    <span class="u-txt">趣味题库</span>
                 </a>
             </li>
             <li>
