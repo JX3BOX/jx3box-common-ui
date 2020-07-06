@@ -20,12 +20,16 @@ import Admin from './src/Admin.vue'
 import Fav from './src/Fav.vue'
 import Like from './src/Like.vue'
 import Down from './src/Down.vue'
+
 import Box from './src/Box.vue'
+// import Tinymce from './src/Tinymce.vue'
 
 const components = {
     Header,
     Breadcrumb,
+    
     Box,
+    // Tinymce,
 
     LeftSidebar,
     Main,
