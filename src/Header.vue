@@ -125,19 +125,24 @@
                     v-if="logged_in == true"
                     class="c-header-msg"
                     id="c-header-msg"
-                    title="我的消息"
                 >
-                    <a class="u-msg" :href="url.msg"
-                        ><i class="u-icon u-icon-msg">
-                            <i
-                                class="u-pop"
-                                style="display: none;"
-                                v-show="pop"
-                            ></i>
-                            <img
-                                svg-inline
-                                src="../assets/img/header/msg.svg"/></i
-                    ></a>
+                    <el-tooltip
+                        effect="dark"
+                        content="我的消息"
+                        placement="bottom"
+                    >
+                        <a class="u-msg" :href="url.msg"
+                            ><i class="u-icon u-icon-msg">
+                                <i
+                                    class="u-pop"
+                                    style="display: none;"
+                                    v-show="pop"
+                                ></i>
+                                <img
+                                    svg-inline
+                                    src="../assets/img/header/msg.svg"/></i
+                        ></a>
+                    </el-tooltip>
                 </div>
 
                 <!-- user panel -->
@@ -145,14 +150,18 @@
                     v-if="logged_in == true"
                     class="c-header-panel"
                     id="c-header-panel"
-                    title="发布中心"
                 >
-                    <a class="u-post" :href="url.publish"
-                        ><img
-                            class="u-add"
-                            svg-inline
-                            src="../assets/img/header/add.svg"
-                    /></a>
+                    <el-tooltip
+                        effect="dark"
+                        content="发布中心"
+                        placement="bottom"
+                    >
+                        <a class="u-post" :href="url.publish"
+                            ><img
+                                class="u-add"
+                                svg-inline
+                                src="../assets/img/header/add.svg"/></a
+                    ></el-tooltip>
                 </div>
 
                 <!-- user info -->
@@ -246,7 +255,7 @@ export default {
         },
         // 导航焦点
         isFocus: function(type) {
-            return location.pathname.split('/')[1] == type;
+            return location.pathname.split("/")[1] == type;
         },
         // 菜单
         showmenu: function(e) {

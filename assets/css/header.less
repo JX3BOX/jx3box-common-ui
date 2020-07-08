@@ -300,20 +300,19 @@ body {
 .c-header-msg {
     float: left;
     position: relative;
-    height: 32px;
-    padding: 16px 0;
+    height: 100%;
 
     .u-msg {
         display: block;
-        height: 100%;
-        margin-top: 4px;
-        padding: 6px 10px;
+        height: 32px;
+        padding: 16px 10px;
         &:hover {
             opacity: 0.7;
         }
         cursor: pointer;
     }
     .u-icon-msg {
+        .mt(10px);
         width: 15px;
         height: 16px;
         display: block;
@@ -504,10 +503,15 @@ body {
 .c-header-panel {
     float: left;
     position: relative;
-    height: 32px;
-    padding: 16px+6px 10px 10px 10px;
+    height:100%;
     user-select: none;
     cursor: pointer;
+
+    .u-post{
+        .db;
+        height: 32px;
+        padding: 16px+6px 10px 10px 10px;
+    }
 
     .u-add {
         fill: #fff;
