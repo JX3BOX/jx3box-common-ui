@@ -20,9 +20,12 @@ import Admin from './src/Admin.vue'
 import Fav from './src/Fav.vue'
 import Like from './src/Like.vue'
 import Down from './src/Down.vue'
+import Print from './src/Print.vue'
+import QRcode from './src/QRcode.vue'
+import Sharing from './src/Sharing.vue'
 
 import Box from './src/Box.vue'
-// import Tinymce from './src/Tinymce.vue'
+
 
 const components = {
     Header,
@@ -52,6 +55,10 @@ const components = {
     Fav,
     Like,
     Down,
+
+    QRcode,
+    Print,
+    Sharing
 
 }
 

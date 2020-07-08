@@ -1,0 +1,69 @@
+.w-print{
+    .dbi;
+    .u-icon{
+        .mr(5px);
+    }
+    .u-text{
+        .fz(13px);
+    }
+    .pointer;
+    transition:0.1s ease-in-out;
+    &:hover{
+        color:@pink;
+    }
+}
+
+@media print{
+
+    // 全局
+    .c-header,.c-breadcrumb,.c-sidebar,.c-footer{.none;}
+    .c-main{margin:0;.w(100%);}
+
+    // 单页
+    .m-single-panel{.none;}
+    .m-single-title{.x;}
+    .m-single-prepend{.none;}
+    .m-single-content{padding:0;}
+    .m-single-post .el-divider {.none;}
+    .m-single-append,.m-single-comment{.none;}
+    .m-single-info{
+        .u-meta,.u-views{.none;}
+        .x;
+        .u-sub-block{float:none;}
+        .u-name{color:@color;}
+    }
+
+    // 分页
+    .w-print-pagebreak {
+        page-break-after: always;
+    }
+    .w-jx3macro,.w-qixue-box{
+        -webkit-print-color-adjust: exact;
+        page-break-inside: avoid;
+    }
+
+    // 宏与奇穴
+    .w-jx3macro{
+        ol{
+            padding-left:0;
+        }
+        li {
+            list-style:none;
+            border-left:none;
+        }
+    }
+    .w-qixue-box{
+        .db;
+        .w-qixue-clist-item{
+            padding-left:5px;
+            padding-right:0;
+            transform: scale(0.85);
+        }
+    }
+
+    // 边距
+    @page {
+        margin: 5mm;
+    }
+    
+}

@@ -16,6 +16,10 @@
 
         <Main :withoutLeft="true" :withoutRight="false" style="position:relative;">
 
+            <Print title="传入标题" />
+            <QRcode />
+            <Sharing  />
+
             <Fav />
             <Like mode="heart" :count="100" :showCount="true"/>
             <Down :count="100" :showCount="true" />
@@ -61,6 +65,9 @@ import Authorposts from "./Authorposts.vue";
 import Fav from "./Fav.vue";
 import Like from "./Like.vue";
 import Down from "./Down.vue";
+import Print from "./Print.vue";
+import QRcode from "./QRcode.vue";
+import Sharing from "./Sharing.vue";
 
 import axios from 'axios'
 import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
@@ -85,7 +92,10 @@ export default {
         Authorposts,
         Fav,
         Like,
-        Down
+        Down,
+        Print,
+        Sharing,
+        QRcode
     },
     data : function (){
         return {
