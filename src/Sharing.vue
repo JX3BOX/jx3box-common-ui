@@ -10,22 +10,22 @@
 import { __imgPath } from "@jx3box/jx3box-common/js/jx3box.json";
 export default {
     name: "Sharing",
-    props: ["title", "pic"],
+    props: ["title", "pic","url"],
     data: function() {
         return {
             api: "https://service.weibo.com/share/share.php?",
-            url: location.href,
-            til: this.title || document.title,
-            img: this.pic || __imgPath + `image/common/logo.png`,
+            url_: this.url || (location.origin + location.pathname + location.search),
+            title_: this.title || document.title,
+            pic_: this.pic || __imgPath + `image/common/logo.png`,
         };
     },
     computed: {
         sharelink: function() {
             return (
                 this.api +
-                `url=${this.url}` +
-                `&title=${this.til}` +
-                `&pic=${this.img}`
+                `url=${this.url_}` +
+                `&title=${this.title_}` +
+                `&pic=${this.pic_}`
             );
         },
     },
