@@ -21,17 +21,24 @@
 
     // 单页
     .m-single-panel{.none;}
-    .m-single-title{.x;}
-    .m-single-prepend{.none;}
-    .m-single-content{padding:0;}
-    .m-single-post .el-divider {.none;}
-    .m-single-append,.m-single-comment{.none;}
-    .m-single-info{
+    .m-single-header .m-single-info{
         .u-meta,.u-views{.none;}
         .x;
         .u-sub-block{float:none;}
         .u-name{color:@color;}
     }
+    .m-single-title{.x;}
+    .m-single-prepend{.none;}
+    .m-single-content{
+        padding:0;
+        table{
+            width: 100% !important;
+            height: auto !important;
+        }
+    }
+    .m-single-post .el-divider {.none;}
+    .m-single-append,.m-single-comment{.none;}
+    
 
     // 分页
     .w-print-pagebreak {
