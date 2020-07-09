@@ -21,16 +21,19 @@
 
     // 单页
     .m-single-panel{.none;}
-    .m-single-header .m-single-info{
-        .u-meta,.u-views{.none;}
-        .x;
-        .u-sub-block{float:none;}
-        .u-name{color:@color;}
+    .m-single-header{
+        padding:24px !important;
+        .m-single-info{
+            .u-meta,.u-views,.u-edit{.none;}
+            .x;
+            .u-sub-block{float:none;}
+            .u-name{color:@color;}
+        }
+        .m-single-title{.x;}
     }
-    .m-single-title{.x;}
     .m-single-prepend{.none;}
     .m-single-content{
-        padding:0;
+        padding:0 !important;
         table{
             width: 100% !important;
             height: auto !important;
@@ -39,38 +42,41 @@
     .m-single-post .el-divider {.none;}
     .m-single-append,.m-single-comment{.none;}
     
+    // 背景渲染
+    // .c-article{
+    //     -webkit-print-color-adjust: exact;
+    // }
 
     // 分页
-    .w-print-pagebreak {
-        page-break-after: always;
-    }
-    .w-jx3macro,.w-qixue-box{
-        -webkit-print-color-adjust: exact;
-        page-break-inside: avoid;
-    }
+    // .w-print-pagebreak {
+    //     page-break-after: always;
+    // }
+    // .w-jx3macro,.w-qixue-box,.e-jx3-resource,table{
+    //     page-break-inside: avoid;
+    // }
 
     // 宏与奇穴
-    .w-jx3macro{
-        ol{
-            padding-left:0;
-        }
-        li {
-            list-style:none;
-            border-left:none;
-        }
-    }
-    .w-qixue-box{
-        .db;
-        .w-qixue-clist-item{
-            padding-left:5px;
-            padding-right:0;
-            transform: scale(0.85);
-        }
-    }
+    // .w-jx3macro{
+    //     ol{
+    //         padding-left:0;
+    //     }
+    //     li {
+    //         list-style:none;
+    //         border-left:none;
+    //     }
+    // }
+    // .w-qixue-box{
+    //     padding-right:40px;
+    //     .w-qixue-clist-item{
+    //         padding-left:5px;
+    //         padding-right:0;
+    //         transform: scale(0.85);
+    //     }
+    // }
 
     // 边距
     @page {
-        margin: 5mm;
+        margin: 1cm 5mm;
     }
     
 }

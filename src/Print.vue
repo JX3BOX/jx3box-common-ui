@@ -6,32 +6,62 @@
 </template>
 
 <script>
-    export default {
-        name : 'Print',
-        props:["title"],
-        data : function(){
-            return {
-                lazyload : false
+import jquery from "jquery";
+export default {
+    name: "Print",
+    props: ["title"],
+    data: function() {
+        return {
+            lazyload: false,
+            status: false,
+        };
+    },
+    computed: {},
+    methods: {
+        doPrint: function() {
+            if (!this.lazyload) {
+                this.loadImages();
             }
-        },
-        computed:{},
-        methods:{
-            doPrint : function (){
-                if(!this.lazyload){
-                    window.scrollTo(0, document.documentElement.clientHeight);  //激活懒加载的图片
-                    this.lazyload = true
+            if (this.status) {
+                window.print();
+            } else {
+                this.status = this.checkLoaded();
+                if (this.status) {
+                    window.print();
+                } else {
+                    this.$notify.error({
+                        title: "错误",
+                        message: "请先阅读完全文以加载所有图片",
+                    });
+                    window.scrollTo(0, document.body.clientHeight);
                 }
-                window.print()
             }
         },
-        mounted:function(){
-            if(this.title) document.title = this.title  //为了打印时页眉的标题正确
+        checkLoaded: function() {
+            const $ = jquery;
+            let imgs = $(".c-article img");
+            for (let i = 0; i < imgs.length; i++) {
+                if (!imgs[i].complete) {
+                    return false;
+                }
+            }
+            return true
         },
-        components : {
-        }
-    }
+        loadImages: function() {
+            const $ = jquery;
+            $(".c-article img").each((i, ele) => {
+                $(ele).attr("loading", "auto");
+            });
+            this.lazyload = true;
+        },
+    },
+    mounted: function() {
+        if (this.title) document.title = this.title; //为了打印时页眉的标题正确
+    },
+    components: {},
+};
 </script>
 
 <style lang="less">
-    @import '../assets/css/print.less';
+@import "../assets/css/print.less";
 </style>
