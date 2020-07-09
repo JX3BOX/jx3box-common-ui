@@ -8,25 +8,34 @@
             bread info
         </Breadcrumb>
 
-        <LeftSidebar :open="false">
+        <LeftSidebar :open="true">
             <div id="directory"></div>
             <Author :author="author" uid="8"/>
             <Authorposts uid="2"/>
         </LeftSidebar>
 
-        <Main :withoutLeft="true" :withoutRight="false" style="position:relative;">
+        <Main :withoutLeft="false" :withoutRight="false" style="position:relative;">
 
             <Print title="传入标题" />
+            <hr>
+
             <QRcode />
+            <hr>
+
             <Sharing  />
+            <hr>
 
             <Fav />
-            <Like mode="heart" :count="100" :showCount="true"/>
-            <Down :count="100" :showCount="true" />
+            <hr>
 
-            <Article :content="content" directorybox="#directory" style="padding:20px;" @contentRendered="test1" @directoryRendered="test2"/>
+            <Like mode="heart" :count="100" :showCount="true"/>
+            <hr>
+
+            <Down :count="100" :showCount="true" />
+            <hr>
 
             <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39"/>
+            <hr>
 
             <RightSidebar>
                 <div style="height:1200px;">
@@ -60,7 +69,6 @@ import RightSideMsg from "./RightSideMsg.vue";
 import Github_REPO from "./Github_REPO.vue";
 import Mark from "./Mark.vue";
 import Author from "./Author.vue";
-import Article from "./Article.vue";
 import Authorposts from "./Authorposts.vue";
 import Fav from "./Fav.vue";
 import Like from "./Like.vue";
@@ -71,8 +79,6 @@ import Sharing from "./Sharing.vue";
 
 import axios from 'axios'
 import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
-
-import demohtml from '../demo/article'
 
 export default {
     name : 'App',
@@ -88,7 +94,6 @@ export default {
         Github_REPO,
         Mark,
         Author,
-        Article,
         Authorposts,
         Fav,
         Like,
@@ -100,7 +105,6 @@ export default {
     data : function (){
         return {
             author : {},
-            content : demohtml
         }
     },
     created : function (){
@@ -109,12 +113,7 @@ export default {
         })
     },
     methods : {
-        test1 : function(){
-            console.log('文章已渲染')
-        },
-        test2 :function (){
-            console.log('目录已渲染')
-        }
+        
     }
 };
 </script>

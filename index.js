@@ -12,7 +12,6 @@ import RightSideMsg from './src/RightSideMsg.vue'
 import Github_REPO from './src/Github_REPO.vue'
 import Mark from './src/Mark.vue'
 import Author from './src/Author.vue'
-import Article from './src/Article.vue'
 import Authorposts from './src/Authorposts.vue'
 
 import Admin from './src/Admin.vue'
@@ -32,11 +31,9 @@ const components = {
     Breadcrumb,
     
     Box,
-    // Tinymce,
 
     LeftSidebar,
     Main,
-    Article,
     RightSidebar,
 
     Footer,
@@ -63,7 +60,7 @@ const components = {
 }
 
 const install = function (Vue, Option) {
-     Object.keys(components).forEach((key) => {
+    Object.keys(components).forEach((key) => {
         Vue.component(components[key].name, components[key])
     })
 }

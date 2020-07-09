@@ -1,5 +1,5 @@
 <template>
-    <div class="w-print" @click="doPrint">
+    <div class="w-print" @click="doPrint" v-if="cansee">
         <i class="u-icon el-icon-printer"></i>
         <span class="u-text">打印 | 保存PDF</span>
     </div>
@@ -7,16 +7,26 @@
 
 <script>
 import jquery from "jquery";
+import User from '@jx3box/jx3box-common/js/user'
 export default {
     name: "Print",
-    props: ["title"],
+    props: ["title",'enable','authorID'],
     data: function() {
         return {
             lazyload: false,
             status: false,
         };
     },
-    computed: {},
+    computed: {
+        cansee : function (){
+            if(this.enable != undefined){
+                return this.enable
+            }else{
+                if(User.getInfo().group >= 64) return true
+                return User.getInfo().uid == this.authorID
+            }
+        }
+    },
     methods: {
         doPrint: function() {
             if (!this.lazyload) {
