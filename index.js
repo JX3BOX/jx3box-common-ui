@@ -15,6 +15,7 @@ import Author from './src/Author.vue'
 import Authorposts from './src/Authorposts.vue'
 
 import Admin from './src/Admin.vue'
+import Adminbutton from './src/Adminbutton.vue'
 
 import Fav from './src/Fav.vue'
 import Like from './src/Like.vue'
@@ -48,6 +49,7 @@ const components = {
     
     
     Admin,
+    Adminbutton,
 
     Fav,
     Like,
