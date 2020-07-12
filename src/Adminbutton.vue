@@ -3,7 +3,7 @@
         v-if="show"
         class="c-admin-button"
         type="primary"
-        size="medium"
+        :size="button_size"
         icon="el-icon-setting"
         @click="toggleAdminPanel()"
         >管理</el-button
@@ -15,10 +15,11 @@ import Bus from "../service/bus";
 import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "Adminbutton",
-    props: [],
+    props: ['size'],
     data: function() {
         return {
             show: false,
+            button_size : this.size || 'medium'
         };
     },
     computed: {},
