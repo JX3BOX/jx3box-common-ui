@@ -42,3 +42,4 @@ components: {
 
 3. 在src/下新建$module.vue
 参考其他模块
+?actions?
