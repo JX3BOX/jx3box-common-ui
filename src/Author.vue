@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { showAvatar } from "@jx3box/jx3box-common/js/utils";
+import { showAvatar,authorLink } from "@jx3box/jx3box-common/js/utils";
 import { __server } from "@jx3box/jx3box-common/js/jx3box.json";
 import { getUserInfo } from "../service/author";
 export default {
@@ -45,23 +45,39 @@ export default {
         };
     },
     computed: {
+        id : function (){
+            return this.uid || this.author.uid  
+        },
         link: function() {
-            return "/author/?uid=" + this.author.uid;
+            return authorLink(this.id);
         },
     },
-    methods: {},
     filters: {
         avatar: function(val) {
             return showAvatar(val);
         },
     },
-    mounted: function() {
-        if (!this.uid) {
-            this.data = this.author;
-        } else {
-            getUserInfo(this.uid).then((res) => {
+    methods: {
+        loadData : function (){
+            getUserInfo(this.id).then((res) => {
                 this.data = res.data.data;
             });
+        }
+    },
+    watch : {
+        author : function (newdata){
+            this.data = newdata
+            this.$forceUpdate()
+        },
+        uid : function (){
+            this.loadData()
+        }
+    },
+    mounted: function() {
+        if(this.author){
+            this.data = this.author;
+        }else if(this.uid){
+            this.loadData()
         }
     },
 };
