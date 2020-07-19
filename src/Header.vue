@@ -231,7 +231,7 @@ export default {
             // links
             url: {
                 home: __Root,
-                search: __Links.search,
+                search: __Root + 'search',
                 msg: __Links.dashboard.msg,
                 publish: __Links.dashboard.publish,
                 dashboard: __Links.dashboard.home,
