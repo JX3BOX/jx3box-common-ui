@@ -14,12 +14,18 @@ export default {
     data: function() {
         return {
             api: "https://service.weibo.com/share/share.php?",
-            url_: this.url || (location.origin + location.pathname + location.search),
-            title_: this.title || document.title,
-            pic_: this.pic || __imgPath + `image/common/logo.png`,
         };
     },
     computed: {
+        url_ : function (){
+            return this.url || (location.origin + location.pathname + location.search)
+        },
+        title_ : function (){
+            return this.title || document.title
+        },
+        pic_ : function (){
+            return this.pic || __imgPath + `image/common/logo.png`  
+        },
         sharelink: function() {
             return (
                 this.api +

@@ -23,8 +23,11 @@ export default {
                 return this.enable
             }else{
                 if(User.getInfo().group >= 64) return true
-                return User.getInfo().uid == this.authorID
+                return User.getInfo().uid == this.aid
             }
+        },
+        aid : function (){
+            return this.authorID
         }
     },
     methods: {
@@ -64,9 +67,17 @@ export default {
             });
             this.lazyload = true;
         },
+        fixPrintTitle : function (){
+            if (this.title) document.title = this.title; //为了打印时页眉的标题正确
+        }
+    },
+    watch : {
+        title : function (){
+            this.fixPrintTitle()
+        }
     },
     mounted: function() {
-        if (this.title) document.title = this.title; //为了打印时页眉的标题正确
+        
     },
     components: {},
 };
