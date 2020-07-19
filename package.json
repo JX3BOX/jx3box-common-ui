@@ -34,13 +34,12 @@
         "element-ui": "^2.13.2",
         "jquery": "^3.5.1",
         "lodash": "^4.17.15",
-        "prismjs": "^1.20.0",
         "qrcode.vue": "^1.7.0",
         "url": "^0.11.0",
-        "vue": "^2.6.11",
-        "vue-photoswipe.js": "^2.0.23"
+        "vue": "^2.6.11"
     },
     "devDependencies": {
+        "core-js": "^3.6.5",
         "@vue/cli-plugin-babel": "~4.3.0",
         "@vue/cli-plugin-eslint": "~4.3.0",
         "@vue/cli-service": "~4.3.0",
