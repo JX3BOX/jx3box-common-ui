@@ -24,6 +24,10 @@ import Print from './src/Print.vue'
 import QRcode from './src/QRcode.vue'
 import Sharing from './src/Sharing.vue'
 
+import markBy from './src/markBy.vue'
+import tagBy from "./src/tagBy.vue";
+import orderBy from "./src/orderBy.vue";
+
 import Box from './src/Box.vue'
 
 
@@ -57,7 +61,11 @@ const components = {
 
     QRcode,
     Print,
-    Sharing
+    Sharing,
+
+    markBy,
+    tagBy,
+    orderBy
 
 }
 
