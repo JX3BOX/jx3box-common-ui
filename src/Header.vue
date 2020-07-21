@@ -180,8 +180,9 @@
                         <span class="u-dropdown"></span>
                         <ul class="u-menu" v-show="!fold">
                             <li>
-                                <a :href="url.dashboard">个人中心</a>
+                                <a class="u-current" :href="url.dashboard">{{user.name}} <em>(uid:{{user.uid}})</em></a>
                             </li>
+                            <hr>
                             <li>
                                 <a :href="url.profile">设置</a>
                             </li>
