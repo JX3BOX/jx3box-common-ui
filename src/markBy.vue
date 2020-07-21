@@ -47,7 +47,7 @@
 <script>
 import { cms as mark_map } from "@jx3box/jx3box-common/js/mark.json";
 export default {
-    name: "tagBy",
+    name: "markBy",
     props: [],
     data: function() {
         return {

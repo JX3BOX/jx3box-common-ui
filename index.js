@@ -62,9 +62,9 @@ const components = {
     Print,
     Sharing,
 
-    markBy,
     tagBy,
-    orderBy
+    orderBy,
+    markBy,
 
 }
 
