@@ -25,8 +25,8 @@
                 @click="filter(key)"
                 ><i class="el-icon-collection-tag"></i> {{ item }}</span
             >
+            <slot></slot>
         </span>
-        <slot></slot>
     </div>
 </template>
 

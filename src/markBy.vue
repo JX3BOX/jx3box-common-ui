@@ -39,8 +39,8 @@
                 @click="filter('geek')"
                 ><i class="el-icon-medal-1"></i> 骨灰必备</span
             >
+            <slot></slot>
         </span>
-        <slot></slot>
     </div>
 </template>
 
@@ -48,7 +48,7 @@
 import { cms as mark_map } from "@jx3box/jx3box-common/js/mark.json";
 export default {
     name: "tagBy",
-    props: ["data"],
+    props: [],
     data: function() {
         return {
             visible: false,

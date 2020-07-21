@@ -30,7 +30,6 @@ import orderBy from "./src/orderBy.vue";
 
 import Box from './src/Box.vue'
 
-
 const components = {
     Header,
     Breadcrumb,
