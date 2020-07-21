@@ -52,11 +52,7 @@ export default {
 
 <style lang="less">
 .w-filter-menu {
-    .mt(6px);
     .pointer;
-    .mr(15px);
-    .fl;
-
     .u-menu-label {
         i {
             .mr(5px);
