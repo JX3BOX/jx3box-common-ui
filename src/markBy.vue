@@ -1,5 +1,26 @@
 <template>
-    <div class="w-filter-mark" :class="{ on: visible }">
+    <span class="w-filter-menu" v-if="mode == 'menu'">
+        <el-dropdown>
+            <span class="el-dropdown-link">
+                <span class="u-menu-label"
+                    ><i class="el-icon-medal-1"></i
+                    >{{ current ? current : deftext }}</span
+                ><i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item @click.native="filter('')">{{
+                    "全部"
+                }}</el-dropdown-item>
+                <el-dropdown-item
+                    v-for="(item, key) in marks"
+                    :key="key"
+                    @click.native="filter(key)"
+                    >{{ item }}</el-dropdown-item
+                >
+            </el-dropdown-menu>
+        </el-dropdown>
+    </span>
+    <div class="w-filter-mark" :class="{ on: visible }" v-else>
         <span class="u-label" @click="toggleFilter">
             <span class="u-current-filter">筛选 : {{ current || "全部" }}</span>
             <span class="u-toggle">
@@ -11,7 +32,7 @@
             <span
                 class="u-mode u-all"
                 :class="{ on: mark == '' }"
-                @click="filter('', '')"
+                @click="filter('')"
                 ><i class="el-icon-s-operation"></i> 全部</span
             >
             <span
@@ -48,17 +69,21 @@
 import { cms as mark_map } from "@jx3box/jx3box-common/js/mark.json";
 export default {
     name: "markBy",
-    props: [],
+    props: ['mode','placeholder'],
     data: function() {
         return {
             visible: false,
             mark: "",
+            marks : mark_map
         };
     },
     computed: {
         current: function() {
             return mark_map[this.mark];
         },
+        deftext : function (){
+            return this.placeholder || '难度'
+        }
     },
     methods: {
         toggleFilter: function() {
@@ -76,6 +101,17 @@ export default {
 </script>
 
 <style lang="less">
+.w-filter-menu{
+    .mt(6px);
+    .pointer;
+    .mr(15px);
+    .fl;
+
+    .u-menu-label{
+        i{.mr(5px);}
+        .fz(12px);
+    }
+}
 .w-filter-mark {
     .fz(12px);
 
