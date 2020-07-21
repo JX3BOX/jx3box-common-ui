@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import { __Links, feedback } from "@jx3box/jx3box-common/js/jx3box.json";
+import { __Root, feedback } from "@jx3box/jx3box-common/js/jx3box.json";
 export default {
     name: "Footer",
     data: function () {
         return {
-            about: __Links.about,
+            about: __Root + 'about',
             feedback: feedback + '&subject=' + location.href,
         };
     },
