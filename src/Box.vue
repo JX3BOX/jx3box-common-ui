@@ -132,10 +132,9 @@
             </li>
             <li>
                 <a
-                    class="u-item u-doing"
+                    class="u-item"
                     href="/wiki"
                     :target="target"
-                    title="即将上线"
                 >
                     <img
                         class="u-pic"
@@ -306,7 +305,7 @@
                     <span class="u-txt">数据构建</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a
                     class="u-item u-doing"
                     href="/app/flog"
@@ -320,7 +319,7 @@
                     />
                     <span class="u-txt">战斗分析</span>
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a
                     class="u-item u-doing"
@@ -397,6 +396,20 @@
                         src="../assets/img/box/minami.svg"
                     />
                     <span class="u-txt">DPS模拟</span>
+                </a>
+            </li>
+            <li>
+                <a
+                    class="u-item"
+                    href="http://j3dps.com/fightlog"
+                    :target="target"
+                >
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/flog.svg"
+                    />
+                    <span class="u-txt">战斗复盘</span>
                 </a>
             </li>
             <li>
