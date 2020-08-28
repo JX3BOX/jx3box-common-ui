@@ -329,7 +329,7 @@
                     <img
                         class="u-pic"
                         svg-inline
-                        src="../assets/img/box/team.svg"
+                        src="../assets/img/box/oa.svg"
                     />
                     <span class="u-txt">团队OA</span>
                 </a>
