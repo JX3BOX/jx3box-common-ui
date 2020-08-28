@@ -292,10 +292,9 @@
             </li>
             <li>
                 <a
-                    class="u-item u-doing"
-                    href="/app/dbm"
+                    class="u-item"
+                    href="/dbm"
                     :target="target"
-                    title="即将上线"
                 >
                     <img
                         class="u-pic"
@@ -323,8 +322,8 @@
             <li>
                 <a
                     class="u-item u-doing"
-                    href="/app/team"
-                    :target="target"
+                    href="https://www.2kog.com"
+                    target="_blank"
                     title="即将上线"
                 >
                     <img
