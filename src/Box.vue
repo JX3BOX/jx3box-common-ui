@@ -206,6 +206,16 @@
                 </a>
             </li>
             <li>
+                <a class="u-item u-doing" href="/shop" :target="target">
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/shop.svg"
+                    />
+                    <span class="u-txt">交易行</span>
+                </a>
+            </li>
+            <li>
                 <a class="u-item" href="/app/facedata" :target="target">
                     <img
                         class="u-pic"
