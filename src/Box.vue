@@ -247,13 +247,13 @@
             </li>
 
             <li class="u-app-start">
-                <a class="u-item" href="/fb/#/rank" :target="target">
+                <a class="u-item" href="/rank" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
                         src="../assets/img/box/trophy2.svg"
                     />
-                    <span class="u-txt">副本百强</span>
+                    <span class="u-txt">百强排行</span>
                 </a>
             </li>
             <li>
@@ -331,17 +331,16 @@
             </li> -->
             <li>
                 <a
-                    class="u-item u-doing"
-                    href="https://www.2kog.com"
+                    class="u-item"
+                    href="/team"
                     target="_blank"
-                    title="即将上线"
                 >
                     <img
                         class="u-pic"
                         svg-inline
                         src="../assets/img/box/oa.svg"
                     />
-                    <span class="u-txt">团队OA</span>
+                    <span class="u-txt">团队管理</span>
                 </a>
             </li>
             <li>

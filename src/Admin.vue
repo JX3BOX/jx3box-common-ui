@@ -116,6 +116,7 @@ import { getRewrite } from "@jx3box/jx3box-common/js/utils";
 import { __server, __postType } from "@jx3box/jx3box-common/js/jx3box.json";
 import { getSetting, postSetting } from "../service/admin";
 import User from "@jx3box/jx3box-common/js/user";
+import {cms as marks} from '@jx3box/jx3box-common/js/mark.json'
 export default {
     name: "Admin",
     data() {
@@ -143,12 +144,7 @@ export default {
 
             // 角标
             mark: [],
-            mark_options: {
-                newbie: "新手易用",
-                advanced: "进阶推荐",
-                recommended: "编辑精选",
-                geek: "骨灰必备",
-            },
+            mark_options: marks,
 
             // 高亮
             isHighlight: false,

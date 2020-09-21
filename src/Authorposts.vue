@@ -13,11 +13,6 @@
                     :href="url(item.post.ID, item.post.post_type)"
                     target="_blank"
                 >
-                    <!-- <img
-                        class="u-icon"
-                        svg-inline
-                        src="../assets/img/rightsidebar/repo.svg"
-                    /> -->
                     <span>&raquo; {{ item.post.post_title || item.post.post_type + '/无标题' }}</span>
                 </a>
             </li>
