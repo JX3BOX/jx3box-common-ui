@@ -267,7 +267,7 @@ export default {
         },
         // 推
         push: function() {
-            postSetting(this.pid, this.data, this).then((res) => {
+            postSetting(this.data, this).then((res) => {
                 this.pushing = false;
                 this.$message({
                     message: "设置成功",

@@ -19,8 +19,8 @@ function getSetting(pid, vm) {
     });
 }
 
-function postSetting(id, data, vm) {
-    return $.post("post/setting", data).catch((err) => {
+function postSetting(data, vm) {
+    return $.post("post/manage", data).catch((err) => {
         if (err.response && err.response.data && err.response.data.code) {
             vm.$message.error(
                 `[${err.response.data.code}] ${err.response.data.msg}`

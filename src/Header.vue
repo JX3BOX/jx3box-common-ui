@@ -271,9 +271,9 @@ export default {
         },
         // 消息
         checkMSG: function() {
-            getMsg(this.user.uid).then((res) => {
-                if (res.data.data.unread_count) {
-                    this.pop = true;
+            getMsg().then((res) => {
+                if (res.data && res.data.unread_count) {
+                    this.pop = !!res.data.unread_count;
                 }
             });
         },
