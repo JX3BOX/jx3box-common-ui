@@ -19,7 +19,6 @@ export default {
     },
     watch: {
         withoutLeft : function (){
-            console.log(this.withoutLeft)
             this.expanding = this.withoutLeft === undefined ? false : !!this.withoutLeft
         }
     },
