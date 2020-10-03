@@ -14,11 +14,13 @@ export default {
     props: ["withoutRight","withoutLeft"],
     data: function() {
         return {
+            expanding : false
         };
     },
-    computed: {
-        expanding : function (){
-            return this.withoutLeft == undefined ? false : this.withoutLeft
+    watch: {
+        withoutLeft : function (){
+            console.log(this.withoutLeft)
+            this.expanding = this.withoutLeft === undefined ? false : !!this.withoutLeft
         }
     },
     methods: {},

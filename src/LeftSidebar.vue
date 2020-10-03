@@ -30,11 +30,12 @@ export default {
     props: ['open'],
     data: function() {
         return {
+            isOpen : true
         };
     },
-    computed: {
-        isOpen : function (){
-            return this.open == undefined ? true : this.open
+    watch : {
+        open : function (newval){
+            this.isOpen = newval === undefined ? true : !!newval
         }
     },
     methods: {
