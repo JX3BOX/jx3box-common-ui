@@ -30,10 +30,13 @@ export default {
     props: ['open'],
     data: function() {
         return {
-            isOpen: this.open == undefined ? true : this.open,
         };
     },
-    computed: {},
+    computed: {
+        isOpen : function (){
+            return this.open == undefined ? true : this.open
+        }
+    },
     methods: {
         toggleLeftSide: function() {
             let status = !this.isOpen

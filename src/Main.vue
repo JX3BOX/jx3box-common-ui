@@ -14,10 +14,13 @@ export default {
     props: ["withoutRight","withoutLeft"],
     data: function() {
         return {
-            expanding: this.withoutLeft == undefined ? false : this.withoutLeft,
         };
     },
-    computed: {},
+    computed: {
+        expanding : function (){
+            return this.withoutLeft == undefined ? false : this.withoutLeft
+        }
+    },
     methods: {},
     mounted: function() {
         Bus.$on("toggleLeftSide", (data) => {
