@@ -1,7 +1,7 @@
 <template>
     <aside
         class="c-sidebar-left c-sidebar"
-        :class="{ isclose: !isOpen, isopen: isOpen }"
+        :class="{ isclose: !isOpen, isopen: isOpen,'without-bread': withoutBread }"
     >
         <div class="c-sidebar-left-inner"><slot></slot></div>
         <span
@@ -27,16 +27,21 @@
 import Bus from '../service/bus';
 export default {
     name: "LeftSidebar",
-    props: ['open'],
+    props: ['open',"withoutBread"],
     data: function() {
         return {
             isOpen : true
         };
     },
+    computed : {
+        stickyHeader:function (){
+            return this.withoutBread
+        }
+    },
     watch : {
         open : function (newval){
             this.isOpen = newval === undefined ? true : !!newval
-        }
+        },
     },
     methods: {
         toggleLeftSide: function() {

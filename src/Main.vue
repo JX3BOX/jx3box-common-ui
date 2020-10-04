@@ -1,7 +1,7 @@
 <template>
     <main
         class="c-main"
-        :class="{ 'without-right': withoutRight, 'without-left': expanding }"
+        :class="{ 'without-right': withoutRight, 'without-left': expanding ,'without-bread': withoutBread}"
     >
         <slot></slot>
     </main>
@@ -11,11 +11,16 @@
 import Bus from "../service/bus";
 export default {
     name: "Main",
-    props: ["withoutRight","withoutLeft"],
+    props: ["withoutRight","withoutLeft","withoutBread"],
     data: function() {
         return {
             expanding : false
         };
+    },
+    computed : {
+        stickyHeader:function (){
+            return this.withoutBread
+        }
     },
     watch: {
         withoutLeft : function (){
