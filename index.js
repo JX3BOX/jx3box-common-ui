@@ -2,6 +2,7 @@ import Header from './src/Header.vue'
 import Breadcrumb from './src/Breadcrumb.vue'
 
 import LeftSidebar from './src/LeftSidebar.vue'
+import LeftSideToggle from './src/LeftSideToggle.vue'
 import Main from './src/Main.vue'
 import RightSidebar from './src/RightSidebar.vue'
 
@@ -38,6 +39,7 @@ const components = {
     Box,
 
     LeftSidebar,
+    LeftSideToggle,
     Main,
     RightSidebar,
 

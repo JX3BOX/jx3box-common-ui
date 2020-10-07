@@ -16,6 +16,8 @@
 
         <Main :withoutLeft="false" :withoutRight="false" style="position:relative;">
 
+            <LeftSideToggle :mobileOnly="true"/>
+
             <Print title="传入标题" />
             <hr>
 
@@ -76,6 +78,7 @@ import Down from "./Down.vue";
 import Print from "./Print.vue";
 import QRcode from "./QRcode.vue";
 import Sharing from "./Sharing.vue";
+import LeftSideToggle from "./LeftSideToggle.vue";
 
 import axios from 'axios'
 import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
@@ -100,7 +103,8 @@ export default {
         Down,
         Print,
         Sharing,
-        QRcode
+        QRcode,
+        LeftSideToggle
     },
     data : function (){
         return {

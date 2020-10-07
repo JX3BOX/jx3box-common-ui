@@ -288,34 +288,13 @@ export default {
                 }
             });
         },
-        // // 头像
-        // avatar: function(url) {
-        //     return showAvatar(url);
-        // },
         // 检查
         init: function() {
-            // window.__userdata = checkStatus()
-            //     .then((res) => {
-            //         this.user = res.data.data;
-
             this.logged_in = User.isLogin();
             this.user = User.getInfo();
             if (this.logged_in) {
                 this.checkMSG();
             }
-
-            // if (this.user.uid) {
-            //     this.logged_in = true;
-            //     this.checkMSG();
-            // } else {
-            //     this.logged_in = false;
-            // }
-            //     return this.user;
-            // })
-            // .catch((err) => {
-            //     this.logged_in = false;
-            //     console.log(err);
-            // });
         },
     },
     filters: {},
