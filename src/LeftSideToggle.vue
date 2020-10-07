@@ -11,6 +11,7 @@
 <script>
 import Bus from "../service/bus";
 export default {
+    name : "LeftSideToggle",
     props: ["mobileOnly"],
     data: function() {
         return {
