@@ -1,5 +1,5 @@
 <template>
-    <div class="c-breadcrumb">
+    <div class="c-breadcrumb" :class="{ isOverlay: isOverlay }">
         <div class="u-menu" @click.stop="toggleLeftSide">
             <img
                 class="u-toggle"
@@ -38,6 +38,7 @@ import { __Links, feedback } from "@jx3box/jx3box-common/js/jx3box.json";
 import Admin from "./Admin";
 import Adminbutton from "./Adminbutton";
 import User from "@jx3box/jx3box-common/js/user";
+import _ from "lodash";
 export default {
     name: "Breadcrumb",
     props: [
@@ -53,6 +54,7 @@ export default {
             isOpen: true,
             feedback: feedback + "&subject=" + location.href,
             isNotAdmin: User.getInfo().group < 60,
+            isOverlay: false,
         };
     },
     computed: {},
@@ -75,6 +77,12 @@ export default {
         if (window.innerWidth < 1024) {
             this.isOpen = false;
         }
+
+        const vm = this;
+        window.addEventListener('scroll',_.throttle(() => {
+            vm.isOverlay = window.scrollY > 200 ? true : false;
+        }, 200))
+
     },
     components: {
         Admin,

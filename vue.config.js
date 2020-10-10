@@ -41,7 +41,8 @@ module.exports = {
                     request.setHeader("origin", "");
                 }
             }
-        }
+        },
+        disableHostCheck: true
     },
 
     chainWebpack: config => {

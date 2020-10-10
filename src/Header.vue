@@ -1,5 +1,5 @@
 <template>
-    <header class="c-header" id="c-header">
+    <header class="c-header" id="c-header" :class="{ isOverlay: isOverlay }">
         <div class="c-header-inner">
             <!-- logo -->
             <div
@@ -180,9 +180,12 @@
                         <span class="u-dropdown"></span>
                         <ul class="u-menu" v-show="!fold">
                             <li>
-                                <a class="u-current" :href="url.dashboard">{{user.name}} <em>(uid:{{user.uid}})</em></a>
+                                <a class="u-current" :href="url.dashboard"
+                                    >{{ user.name }}
+                                    <em>(uid:{{ user.uid }})</em></a
+                                >
                             </li>
-                            <hr>
+                            <hr />
                             <li>
                                 <a :href="url.profile">设置</a>
                             </li>
@@ -215,6 +218,7 @@ import { getMsg, doLogout, checkStatus } from "../service/header";
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import Box from "../src/Box.vue";
 import Bus from "../service/bus";
+import _ from "lodash";
 
 export default {
     name: "Header",
@@ -232,12 +236,13 @@ export default {
             // links
             url: {
                 home: __Root,
-                search: __Root + 'search',
+                search: __Root + "search",
                 msg: __Links.dashboard.msg,
                 publish: __Links.dashboard.publish,
                 dashboard: __Links.dashboard.home,
                 profile: __Links.dashboard.profile,
             },
+            isOverlay: false,
         };
     },
     computed: {
@@ -279,8 +284,7 @@ export default {
         },
         // 注销
         logout: function() {
-            doLogout().then((res) => {
-                User.destroy();
+            User.destroy().then((res) => {
                 this.logged_in = false;
                 this.user = User.getInfo();
                 if (location.href.indexOf("dashboard") > 0) {
@@ -302,6 +306,13 @@ export default {
         this.isPhone = window.innerWidth < 720 ? true : false;
         this.closeExpandList();
         this.init();
+
+        const vm = this;
+        window.addEventListener('scroll',_.throttle(() => {
+            vm.isOverlay = window.scrollY > 200 ? true : false;
+        }, 200))
+    },
+    mounted: function() {
     },
     components: {
         Box,

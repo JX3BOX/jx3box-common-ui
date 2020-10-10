@@ -1,5 +1,5 @@
 <template>
-    <div class="c-jx3box" :class="{ on: status }">
+    <div class="c-jx3box" :class="{ on: status, isOverlay: isOverlay }">
         <ul class="u-list">
             <!-- 栏目 -->
             <li>
@@ -63,11 +63,7 @@
                 </a>
             </li>
             <li>
-                <a
-                    class="u-item"
-                    href="/item"
-                    :target="target"
-                >
+                <a class="u-item" href="/item" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -117,11 +113,7 @@
                 </a>
             </li>
             <li>
-                <a
-                    class="u-item"
-                    href="/emotion"
-                    :target="target"
-                >
+                <a class="u-item" href="/emotion" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -131,11 +123,7 @@
                 </a>
             </li>
             <li>
-                <a
-                    class="u-item"
-                    href="/wiki"
-                    :target="target"
-                >
+                <a class="u-item" href="/wiki" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -287,11 +275,7 @@
                 </a>
             </li>
             <li>
-                <a
-                    class="u-item"
-                    href="/fb/#/gem"
-                    :target="target"
-                >
+                <a class="u-item" href="/fb/#/gem" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -301,11 +285,7 @@
                 </a>
             </li>
             <li>
-                <a
-                    class="u-item"
-                    href="/dbm"
-                    :target="target"
-                >
+                <a class="u-item" href="/dbm" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -330,11 +310,7 @@
                 </a>
             </li> -->
             <li>
-                <a
-                    class="u-item"
-                    href="/team"
-                    target="_blank"
-                >
+                <a class="u-item" href="/team" target="_blank">
                     <img
                         class="u-pic"
                         svg-inline
@@ -344,11 +320,7 @@
                 </a>
             </li>
             <li>
-                <a
-                    class="u-item"
-                    href="/exam"
-                    :target="target"
-                >
+                <a class="u-item" href="/exam" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
@@ -459,12 +431,14 @@
 <script>
 import Bus from "../service/bus";
 // import { buildTarget } from "@jx3box/jx3box-common/js/utils";
+import _ from "lodash";
 export default {
     name: "Box",
     props: [],
     data: function() {
         return {
             status: false,
+            isOverlay: false,
         };
     },
     computed: {
@@ -477,6 +451,12 @@ export default {
         closeBox: function() {
             Bus.$emit("toggleBox", false);
         },
+    },
+    created : function (){
+        const vm = this;
+        window.addEventListener('scroll',_.throttle(() => {
+            vm.isOverlay = window.scrollY > 200 ? true : false;
+        }, 200))
     },
     mounted: function() {
         Bus.$on("toggleBox", (status) => {

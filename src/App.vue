@@ -14,7 +14,7 @@
             <Authorposts uid="2"/>
         </LeftSidebar>
 
-        <Main :withoutLeft="false" :withoutRight="false" style="position:relative;">
+        <Main :withoutLeft="false" :withoutRight="false" style="position:relative;height:5000px">
 
             <LeftSideToggle :mobileOnly="true"/>
 
