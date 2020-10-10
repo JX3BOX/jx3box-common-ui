@@ -1,5 +1,8 @@
 <template>
-    <div class="c-breadcrumb" :class="{ isOverlay: isOverlay }">
+    <div
+        class="c-breadcrumb"
+        :class="{ isOverlay: overlayEnable && isOverlay }"
+    >
         <div class="u-menu" @click.stop="toggleLeftSide">
             <img
                 class="u-toggle"
@@ -48,6 +51,7 @@ export default {
         "publishEnable",
         "adminEnable",
         "feedbackEnable",
+        "overlayEnable",
     ],
     data: function() {
         return {
@@ -78,11 +82,15 @@ export default {
             this.isOpen = false;
         }
 
-        const vm = this;
-        window.addEventListener('scroll',_.throttle(() => {
-            vm.isOverlay = window.scrollY > 200 ? true : false;
-        }, 200))
-
+        if (this.overlayEnable) {
+            const vm = this;
+            window.addEventListener(
+                "scroll",
+                _.throttle(() => {
+                    vm.isOverlay = window.scrollY > 200 ? true : false;
+                }, 200)
+            );
+        }
     },
     components: {
         Admin,

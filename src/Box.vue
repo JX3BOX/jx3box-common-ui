@@ -1,5 +1,8 @@
 <template>
-    <div class="c-jx3box" :class="{ on: status, isOverlay: isOverlay }">
+    <div
+        class="c-jx3box"
+        :class="{ on: status, isOverlay: overlayEnable && isOverlay }"
+    >
         <ul class="u-list">
             <!-- 栏目 -->
             <li>
@@ -434,7 +437,7 @@ import Bus from "../service/bus";
 import _ from "lodash";
 export default {
     name: "Box",
-    props: [],
+    props: ["overlayEnable"],
     data: function() {
         return {
             status: false,
@@ -452,11 +455,16 @@ export default {
             Bus.$emit("toggleBox", false);
         },
     },
-    created : function (){
-        const vm = this;
-        window.addEventListener('scroll',_.throttle(() => {
-            vm.isOverlay = window.scrollY > 200 ? true : false;
-        }, 200))
+    created: function() {
+        if (this.overlayEnable) {
+            const vm = this;
+            window.addEventListener(
+                "scroll",
+                _.throttle(() => {
+                    vm.isOverlay = window.scrollY > 200 ? true : false;
+                }, 200)
+            );
+        }
     },
     mounted: function() {
         Bus.$on("toggleBox", (status) => {

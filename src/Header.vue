@@ -1,5 +1,9 @@
 <template>
-    <header class="c-header" id="c-header" :class="{ isOverlay: isOverlay }">
+    <header
+        class="c-header"
+        id="c-header"
+        :class="{ isOverlay: overlayEnable && isOverlay }"
+    >
         <div class="c-header-inner">
             <!-- logo -->
             <div
@@ -222,6 +226,7 @@ import _ from "lodash";
 
 export default {
     name: "Header",
+    props: ["overlayEnable"],
     data: function() {
         return {
             nav,
@@ -307,13 +312,17 @@ export default {
         this.closeExpandList();
         this.init();
 
-        const vm = this;
-        window.addEventListener('scroll',_.throttle(() => {
-            vm.isOverlay = window.scrollY > 200 ? true : false;
-        }, 200))
+        if (this.overlayEnable) {
+            const vm = this;
+            window.addEventListener(
+                "scroll",
+                _.throttle(() => {
+                    vm.isOverlay = window.scrollY > 200 ? true : false;
+                }, 200)
+            );
+        }
     },
-    mounted: function() {
-    },
+    mounted: function() {},
     components: {
         Box,
     },
