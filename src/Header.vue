@@ -209,7 +209,7 @@
                 </div>
             </div>
         </div>
-        <Box class="c-header-jx3box" />
+        <Box class="c-header-jx3box" :overlayEnable="overlayEnable"/>
     </header>
 </template>
 
