@@ -63,7 +63,7 @@ export default {
         }
     },
     created : function (){
-        this.isOpen = this.open === undefined ? true : false
+        this.isOpen = this.open === undefined ? true : this.open
     },
 };
 </script>

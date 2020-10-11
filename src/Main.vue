@@ -23,8 +23,8 @@ export default {
         }
     },
     watch: {
-        withoutLeft : function (){
-            this.expanding = this.withoutLeft === undefined ? false : !!this.withoutLeft
+        withoutLeft : function (newval){
+            this.expanding = this.withoutLeft === undefined ? false : newval
         }
     },
     methods: {},
@@ -32,6 +32,9 @@ export default {
         Bus.$on("toggleLeftSide", (data) => {
             this.expanding = !data;
         });
+    },
+    created : function (){
+        this.expanding = this.withoutLeft === undefined ? false : !!this.withoutLeft
     },
 };
 </script>
