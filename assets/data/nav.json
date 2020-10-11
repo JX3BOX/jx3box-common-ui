@@ -23,17 +23,13 @@
         "name": "成就",
         "path": "/cj"
     },
+    "item": {
+        "name": "物品",
+        "path": "/item"
+    },
     "house": {
-        "name": "家园",
-        "path": "/house"
-    },
-    "share": {
-        "name": "捏脸",
-        "path": "/share"
-    },
-    "tool": {
-        "name": "工具",
-        "path": "/tool"
+        "name": "休闲",
+        "path": "/pvx"
     },
     "bbs": {
         "name": "茶馆",

@@ -106,23 +106,13 @@
                 </a>
             </li>
             <li>
-                <a class="u-item" href="/bbs" :target="target">
+                <a class="u-item" href="/exam" :target="target">
                     <img
                         class="u-pic"
                         svg-inline
-                        src="../assets/img/box/bbs.svg"
+                        src="../assets/img/box/100.svg"
                     />
-                    <span class="u-txt">茶馆交流</span>
-                </a>
-            </li>
-            <li>
-                <a class="u-item" href="/emotion" :target="target">
-                    <img
-                        class="u-pic"
-                        svg-inline
-                        src="../assets/img/box/pig.svg"
-                    />
-                    <span class="u-txt">沙雕表情</span>
+                    <span class="u-txt">趣味题库</span>
                 </a>
             </li>
             <li>
@@ -133,6 +123,16 @@
                         src="../assets/img/box/wiki.svg"
                     />
                     <span class="u-txt">剑三百科</span>
+                </a>
+            </li>
+            <li>
+                <a class="u-item" href="/bbs" :target="target">
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/bbs.svg"
+                    />
+                    <span class="u-txt">茶馆交流</span>
                 </a>
             </li>
 
@@ -177,6 +177,16 @@
                 </a>
             </li>
             <li>
+                <a class="u-item" href="/app/translator" :target="target">
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/translator.svg"
+                    />
+                    <span class="u-txt">繁体转换</span>
+                </a>
+            </li>
+            <li>
                 <a class="u-item" href="/app/servers" :target="target">
                     <img
                         class="u-pic"
@@ -196,7 +206,7 @@
                     <span class="u-txt">金价走势</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a class="u-item u-doing" href="/shop" :target="target">
                     <img
                         class="u-pic"
@@ -205,7 +215,7 @@
                     />
                     <span class="u-txt">交易行</span>
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a class="u-item" href="/app/facedata" :target="target">
                     <img
@@ -288,6 +298,16 @@
                 </a>
             </li>
             <li>
+                <a class="u-item" href="/team" target="_blank">
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/oa.svg"
+                    />
+                    <span class="u-txt">团队管理</span>
+                </a>
+            </li>
+            <li>
                 <a class="u-item" href="/dbm" :target="target">
                     <img
                         class="u-pic"
@@ -295,6 +315,16 @@
                         src="../assets/img/box/jx3datbuilder.svg"
                     />
                     <span class="u-txt">数据构建</span>
+                </a>
+            </li>
+            <li>
+                <a class="u-item" href="/emotion" :target="target">
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        src="../assets/img/box/pig.svg"
+                    />
+                    <span class="u-txt">沙雕表情</span>
                 </a>
             </li>
             <!-- <li>
@@ -312,36 +342,6 @@
                     <span class="u-txt">战斗分析</span>
                 </a>
             </li> -->
-            <li>
-                <a class="u-item" href="/team" target="_blank">
-                    <img
-                        class="u-pic"
-                        svg-inline
-                        src="../assets/img/box/oa.svg"
-                    />
-                    <span class="u-txt">团队管理</span>
-                </a>
-            </li>
-            <li>
-                <a class="u-item" href="/exam" :target="target">
-                    <img
-                        class="u-pic"
-                        svg-inline
-                        src="../assets/img/box/100.svg"
-                    />
-                    <span class="u-txt">趣味题库</span>
-                </a>
-            </li>
-            <li>
-                <a class="u-item" href="/app/translator" :target="target">
-                    <img
-                        class="u-pic"
-                        svg-inline
-                        src="../assets/img/box/translator.svg"
-                    />
-                    <span class="u-txt">繁体转换</span>
-                </a>
-            </li>
 
             <li class="u-app-start">
                 <a class="u-item" href="https://www.j3pz.com/" :target="target">

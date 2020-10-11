@@ -1,5 +1,6 @@
 // @import '../../node_modules/@jx3box/jx3box-common/css/var.less';
 // @import '../../node_modules/csslab/base.less';
+@import './icon.less';
 
 body {
     padding-top: @header-height;
@@ -625,12 +626,20 @@ body {
         .u-menu {
             margin-top: 8px;
         }
-        .u-current{
+        .u-me{
             .nobreak;
             em{
                 font-style: normal;
                 color: #999;
                 font-size: 13px;
+            }
+            b{
+                .mr(5px);
+            }
+        }
+        .u-vip{
+            .u-icon-vip{
+                .y(-2px);
             }
         }
         .u-name {

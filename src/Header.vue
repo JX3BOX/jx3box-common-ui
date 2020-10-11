@@ -184,10 +184,20 @@
                         <span class="u-dropdown"></span>
                         <ul class="u-menu" v-show="!fold">
                             <li>
-                                <a class="u-current" :href="url.dashboard"
-                                    >{{ user.name }}
-                                    <em>(uid:{{ user.uid }})</em></a
+                                <a class="u-me" :href="url.dashboard"
+                                    ><b>{{ user.name | showUserName }}</b>
+                                    <em>(UID : {{ user.uid }})</em></a
                                 >
+                            </li>
+                            <li>
+                                <a class="u-vip" href="/vip"><i class="u-icon-vip"></i> 会员中心</a>
+                            </li>
+                            <hr />
+                            <li>
+                                <a href="/dashboard/#/work">作品管理</a>
+                            </li>
+                            <li>
+                                <a href="/team">团队管理</a>
                             </li>
                             <hr />
                             <li>
@@ -237,7 +247,8 @@ export default {
             fold: true,
             // 登录信息
             logged_in: false,
-            user: {},
+            user: {
+            },
             // links
             url: {
                 home: __Root,
@@ -306,7 +317,19 @@ export default {
             }
         },
     },
-    filters: {},
+    filters: {
+        showUserName : function (val){
+            if(val){
+                if(val.length < 5){
+                    return val
+                }else{
+                    return val.slice(0,4) + '..'
+                }
+            }else{ 
+                return '匿名'
+            }
+        }
+    },
     created: function() {
         this.isPhone = window.innerWidth < 720 ? true : false;
         this.closeExpandList();
