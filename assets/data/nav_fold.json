@@ -1,0 +1,22 @@
+{
+    "house": {
+        "name": "家园蓝图",
+        "path": "/house"
+    },
+    "share": {
+        "name": "捏脸数据",
+        "path": "/share"
+    },
+    "tool": {
+        "name": "工具资源",
+        "path": "/tool"
+    },
+    "wiki": {
+        "name": "剑三百科",
+        "path": "/wiki"
+    },
+    "app": {
+        "name": "全部应用",
+        "path": "/app"
+    }
+}

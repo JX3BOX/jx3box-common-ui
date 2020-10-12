@@ -27,16 +27,8 @@
         "name": "物品",
         "path": "/item"
     },
-    "house": {
-        "name": "休闲",
-        "path": "/pvx"
-    },
     "bbs": {
         "name": "茶馆",
         "path": "/bbs"
-    },
-    "app": {
-        "name": "应用",
-        "path": "/app"
     }
 }

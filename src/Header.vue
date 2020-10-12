@@ -52,72 +52,18 @@
                     :href="item.path"
                     >{{ item.name }}</a
                 >
-                <!-- <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
+                <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
                     <span class="u-item el-dropdown-link">
-                        干货<i class="el-icon-arrow-down el-icon--right"></i>
+                        更多<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown" class="c-header-menu">
-                        <el-dropdown-item
-                            ><a class="u-menu-item" href="/macro"
-                                >云端宏库</a
-                            ></el-dropdown-item
-                        >
-                        <el-dropdown-item
-                            ><a class="u-menu-item" href="/jx3dat"
-                                >插件数据</a
-                            ></el-dropdown-item
-                        >
-                        <el-dropdown-item
-                            ><a class="u-menu-item" href="/fb"
-                                >副本专栏</a
-                            ></el-dropdown-item
-                        >
-                        <el-dropdown-item
-                            ><a class="u-menu-item" href="/bps"
-                                >职业专栏</a
-                            ></el-dropdown-item
-                        >
-                        <el-dropdown-item
-                            ><a class="u-menu-item" href="/tool"
-                                >工具教程</a
+                        <el-dropdown-item v-for="(item,type) in nav_fold" :key="type"
+                            ><a class="u-menu-item" :href="item.path"
+                                >{{item.name}}</a
                             ></el-dropdown-item
                         >
                     </el-dropdown-menu>
                 </el-dropdown>
-                <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
-                    <span class="u-item el-dropdown-link">
-                        休闲<i class="el-icon-arrow-down el-icon--right"></i>
-                    </span>
-                    <el-dropdown-menu slot="dropdown" class="c-header-menu">
-                        <el-dropdown-item
-                            ><a class="u-menu-item" href="/cj"
-                                >成就百科</a
-                            ></el-dropdown-item
-                        >
-                        <el-dropdown-item
-                            ><a class="u-menu-item" href="/house"
-                                >家园分享</a
-                            ></el-dropdown-item
-                        >
-                        <el-dropdown-item
-                            ><a class="u-menu-item" href="/share"
-                                >捏脸分享</a
-                            ></el-dropdown-item
-                        >
-                    </el-dropdown-menu>
-                </el-dropdown>
-                <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
-                    <span class="u-item el-dropdown-link">
-                        哔哔<i class="el-icon-arrow-down el-icon--right"></i>
-                    </span>
-                    <el-dropdown-menu slot="dropdown" class="c-header-menu">
-                        <el-dropdown-item
-                            ><a class="u-menu-item" href="/bbs"
-                                >茶馆碎话</a
-                            ></el-dropdown-item
-                        >
-                    </el-dropdown-menu>
-                </el-dropdown> -->
             </nav>
 
             <slot></slot>
@@ -227,6 +173,7 @@
 import JX3BOX from "@jx3box/jx3box-common/js/jx3box.json";
 import User from "@jx3box/jx3box-common/js/user";
 import nav from "../assets/data/nav";
+import nav_fold from "../assets/data/nav_fold";
 import { __Links, __Root } from "@jx3box/jx3box-common/js/jx3box.json";
 import { getMsg, doLogout, checkStatus } from "../service/header";
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
@@ -240,6 +187,7 @@ export default {
     data: function() {
         return {
             nav,
+            nav_fold,
             isPhone: false,
             // 是否有消息
             pop: false,
