@@ -27,6 +27,10 @@
         "name": "物品",
         "path": "/item"
     },
+    "tool": {
+        "name": "工具",
+        "path": "/tool"
+    },
     "bbs": {
         "name": "茶馆",
         "path": "/bbs"
