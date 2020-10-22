@@ -46,7 +46,7 @@ export default {
                         title: "错误",
                         message: "请先阅读完全文以加载所有图片",
                     });
-                    window.scrollTo(0, document.body.clientHeight);
+                    // window.scrollTo(0, document.body.clientHeight);
                 }
             }
         },

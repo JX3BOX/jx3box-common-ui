@@ -256,6 +256,12 @@ export default {
                 }
             });
         },
+        // webView检测
+        checkIsWebView : function (){
+            if(window.navigator.userAgent.includes('jx3boxApp')){
+                document.documentElement.classList.add('env-app')
+            }
+        },
         // 检查
         init: function() {
             this.logged_in = User.isLogin();
@@ -263,6 +269,7 @@ export default {
             if (this.logged_in) {
                 this.checkMSG();
             }
+            this.checkIsWebView()
         },
     },
     filters: {
