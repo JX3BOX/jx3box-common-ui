@@ -27,7 +27,7 @@ import Bus from "../service/bus";
 import { __imgPath } from "@jx3box/jx3box-common/js/jx3box.json";
 import origin from "@jx3box/jx3box-common/data/box.json";
 import _ from "lodash";
-const breakIcons = ['database','fbrank','j3pz']
+const breakIcons = ['database','fbdata','j3pz']
 export default {
     name: "Box",
     props: ["overlayEnable"],
