@@ -4,8 +4,18 @@
         :class="{ on: status, isOverlay: overlayEnable && isOverlay }"
     >
         <ul class="u-list">
+            <li>
+                <a class="u-item" href="https://www.jx3box.com">
+                    <img
+                        class="u-pic"
+                        svg-inline
+                        :src="homeicon"
+                    />
+                    <span class="u-txt">首页</span>
+                </a>
+            </li>
             <li v-for="(item,i) in data" :key="i" :class="{'u-app-start':isLF(item.uuid)}">
-                <a class="u-item" :href="item.href" :target="target">
+                <a class="u-item" :href="item.href" :target="item.href | getTarget">
                     <img
                         class="u-pic"
                         svg-inline
@@ -39,10 +49,9 @@ export default {
         };
     },
     computed: {
-        target: function() {
-            return "_self";
-            // return buildTarget();
-        },
+        homeicon : function (){
+            return __imgPath + 'image/box/home.svg'
+        }
     },
     methods: {
         closeBox: function() {
@@ -78,6 +87,13 @@ export default {
     filters : {
         getBoxIcon : function (val){
             return __imgPath + 'image' + val
+        },
+        getTarget : function (val){
+            if(val.startsWith('/')){
+                return '_self'
+            }else{
+                return '_blank'
+            }
         }
     },
     components: {},
