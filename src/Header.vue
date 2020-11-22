@@ -135,6 +135,9 @@
                                     <em>(UID : {{ user.uid }})</em></a
                                 >
                             </li>
+                            <li>
+                                <a href="/dashboard/">个人中心</a>
+                            </li>
                             <!-- <li>
                                 <a class="u-vip" href="/vip"><i class="u-icon-vip"></i> 会员中心</a>
                             </li> -->
