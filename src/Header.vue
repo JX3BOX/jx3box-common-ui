@@ -143,7 +143,7 @@
                                 <a href="/dashboard/#/work">作品管理</a>
                             </li>
                             <li>
-                                <a href="/team">团队管理</a>
+                                <a href="/team/#/role/list">角色管理</a>
                             </li>
                             <hr />
                             <li>
