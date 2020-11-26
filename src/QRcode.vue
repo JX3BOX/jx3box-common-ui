@@ -19,10 +19,10 @@
 import QrcodeVue from 'qrcode.vue'
 export default {
     name: "QRcode",
-    props: ['v','s'],
+    props: ['href','v','s'],
     data: function() {
         return {
-            value: location.href,
+            value: this.href || location.href,
             size: this.s || 100,
             active : false,
             mode : this.v || 'cms'
