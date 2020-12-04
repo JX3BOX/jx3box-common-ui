@@ -27,7 +27,7 @@
             <Sharing  />
             <hr>
 
-            <Fav />
+            <Fav post-id="90" post-type="jx3dat"/>
             <hr>
 
             <Like mode="heart" :count="100" :showCount="true"/>

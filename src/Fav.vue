@@ -1,65 +1,66 @@
 <template>
     <el-button class="w-fav" size="mini" type="primary" @click="doFav">
-        <i v-if="!status" class="el-icon-star-off"></i>
+        <i v-if="!favorited" class="el-icon-star-off"></i>
         <i v-else class="el-icon-star-on"></i>
-        <span v-if="!status">收藏</span>
+        <span v-if="!favorited">收藏</span>
         <span v-else>取消收藏</span>
     </el-button>
 </template>
 
 <script>
 import User from "@jx3box/jx3box-common/js/user";
-import { getRewrite } from "@jx3box/jx3box-common/js/utils";
-import { getFav, addFav, delFav } from "../service/fav";
+import { hasFav, addFav, delFav } from "../service/fav";
 export default {
     name: "Fav",
+    props: ["postType", "postId"],
     data: function() {
         return {
             login: User.isLogin(),
-            pid: getRewrite("pid"),
-            favs: [],
+            favorited: false,
         };
-    },
-    computed: {
-        status: function() {
-            return this.favs.includes(this.pid);
-        },
     },
     methods: {
         doFav: function() {
             if (this.login) {
-                this.status ? this.delFav() : this.addFav();
+                this.favorited ? this.delFav() : this.addFav();
             } else {
                 User.toLogin();
             }
         },
-        getUserFav: function() {
-            getFav()
-                .then((res) => {
-                    let favs = res.data.data.value;
-                    this.favs = (favs && favs.split(",")) || [];
-                })
-                .catch((err) => {
+        hasFav: function() {
+            hasFav(this.postType, this.postId).then(
+                (data) => {
+                    data = data.data;
+                    this.favorited = data.code === 200 && data.data.favorited > 0;
+                },
+                (err) => {
                     this.fail(err);
-                });
+                }
+            );
         },
         addFav: function() {
-            addFav(this.pid)
-                .then((res) => {
-                    this.favs.push(this.pid);
-                })
-                .catch((err) => {
+            addFav(this.postType, this.postId).then(
+                (data) => {
+                    if (data.data.code === 200) {
+                        this.favorited = true;
+                    } else this.fail(data.data.message);
+                },
+                (err) => {
                     this.fail(err);
-                });
+                }
+            );
         },
         delFav: function() {
-            delFav(this.pid)
-                .then((res) => {
-                    this.favs.splice(this.favs.indexOf(this.pid), 1);
-                })
-                .catch((err) => {
+            delFav(this.postType, this.postId).then(
+                (data) => {
+                    if (data.data.code === 200) {
+                        this.favorited = false;
+                    } else this.fail(data.data.message);
+                },
+                (err) => {
                     this.fail(err);
-                });
+                }
+            );
         },
         fail: function(err) {
             if (err.response && err.response.data && err.response.data.code) {
@@ -67,13 +68,13 @@ export default {
                     `[${err.response.data.code}] ${err.response.data.msg}`
                 );
             } else {
-                this.$message.error("网络请求异常");
+                this.$message.error(typeof err === 'string' ? err : "网络请求异常");
             }
             console.log(err);
         },
     },
     mounted: function() {
-        if (this.login) this.getUserFav();
+        if (this.login) this.hasFav();
     },
 };
 </script>
