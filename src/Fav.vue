@@ -73,8 +73,13 @@ export default {
             console.log(err);
         },
     },
-    mounted: function() {
-        if (this.login) this.hasFav();
+    watch: {
+        postId: {
+            immediate: true,
+            handler() {
+                if (this.login && this.postType && this.postId) this.hasFav();
+            }
+        }
     },
 };
 </script>
