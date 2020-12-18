@@ -1,7 +1,5 @@
 <template>
-  <div class="c-crumb">
-    <div class="m-crumb" v-html="html"></div>
-  </div>
+  <div class="c-crumb" v-html="html"></div>
 </template>
 
 <script>
