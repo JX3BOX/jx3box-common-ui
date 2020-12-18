@@ -3,7 +3,7 @@
 
         <Header></Header>
 
-        <Breadcrumb name="频道名称" slug="slug" root="/slug" :publishEnable="true" :feedbackEnable="true" :adminEnable="true">
+        <Breadcrumb name="频道名称" slug="slug11" root="/slug" :publishEnable="true" :feedbackEnable="true" :adminEnable="true">
             <img slot="logo" svg-inline src="../assets/img/jx3.svg" />
             bread info
         </Breadcrumb>
