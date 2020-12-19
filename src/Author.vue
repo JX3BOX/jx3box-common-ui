@@ -32,7 +32,7 @@
                 }}</a
             >
             <span v-if="data.tuilan_id" class="u-tuilan" title="推栏ID">
-                <img src="../assets/img/author/tuilan.png" />{{
+                <img src="../assets/img/author/tuilan.png" />推栏ID：{{
                     data.tuilan_id
                 }}
             </span>
@@ -41,7 +41,7 @@
                 class="u-tv"
                 :href="tv_link"
                 target="_blank"
-                ><img :src="tv_img" />{{ data.tv_id }}</a
+                ><img :src="tv_img" />直播间：{{ data.tv_id }}</a
             >
         </div>
         <div class="u-trophy">
