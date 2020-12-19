@@ -31,17 +31,17 @@
                     data.github_name
                 }}</a
             >
-            <span v-if="data.tuilan_id" class="u-tuilan" title="推栏ID">
+            <!-- <span v-if="data.tuilan_id" class="u-tuilan" title="推栏ID">
                 <img src="../assets/img/author/tuilan.png" />推栏ID：{{
                     data.tuilan_id
                 }}
-            </span>
+            </span> -->
             <a
                 v-if="data.tv_type && data.tv_id"
                 class="u-tv"
                 :href="tv_link"
                 target="_blank"
-                ><img :src="tv_img" />直播间：{{ data.tv_id }}</a
+                ><img :src="tv_img" /><span class="u-tv-num">{{ data.tv_id }}</span><span class="u-tv-status"></span> </a
             >
         </div>
         <div class="u-trophy">
@@ -61,13 +61,16 @@ import {
     getTVlink,
 } from "@jx3box/jx3box-common/js/utils";
 import { __server,__imgPath } from "@jx3box/jx3box-common/js/jx3box.json";
-import { getUserInfo } from "../service/author";
+import { getUserInfo,getDouyu } from "../service/author";
 export default {
     name: "Author",
     props: ["author", "uid"],
     data: function() {
         return {
             data: "",
+            tv : {
+
+            }
         };
     },
     computed: {
@@ -91,10 +94,15 @@ export default {
     },
     methods: {
         loadData: function() {
-            getUserInfo(this.id).then((res) => {
+            return getUserInfo(this.id).then((res) => {
                 this.data = res.data.data;
             });
         },
+        loadTV : function (){
+            getDouyu(this.id).then((res) => {
+                this.tv = res.data.data
+            })
+        }
     },
     watch: {
         author: function(newdata) {
@@ -104,12 +112,18 @@ export default {
         uid: function() {
             this.loadData();
         },
+        id : function (val){
+            this.loadTV()
+        }
     },
     mounted: function() {
         if (this.author) {
             this.data = this.author;
+            this.loadTV()
         } else if (this.uid) {
-            this.loadData();
+            this.loadData().then(() => {
+                this.loadTV()
+            })
         }
     },
 };

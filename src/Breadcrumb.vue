@@ -16,24 +16,26 @@
             <span class="u-title">{{ name }}</span>
         </a>
         <!-- 面包屑内容 -->
-        <Crumb :name="slug" />
+        <Crumb :name="slug" v-if="crumbEnable" />
         <slot></slot>
-        <a
-            v-if="publishEnable"
-            :href="slug | publish_url(slug)"
-            class="u-publish el-button el-button--primary el-button--medium"
-            ><i class="el-icon-edit-outline"></i><span>发布</span></a
-        >
-        <a
-            v-if="feedbackEnable"
-            v-show="isNotAdmin"
-            :href="feedback"
-            class="u-feedback el-button el-button--primary el-button--medium"
-            target="_blank"
-            ><i class="el-icon-info"></i><span>反馈</span></a
-        >
-        <Adminbutton v-if="adminEnable" class="u-admin" />
-        <Admin v-if="adminEnable" />
+        <div class="u-op">
+            <a
+                v-if="publishEnable"
+                :href="slug | publish_url(slug)"
+                class="u-publish el-button el-button--primary el-button--medium"
+                ><i class="el-icon-edit-outline"></i><span>发布</span></a
+            >
+            <a
+                v-if="feedbackEnable"
+                v-show="isNotAdmin"
+                :href="feedback"
+                class="u-feedback el-button el-button--primary el-button--medium"
+                target="_blank"
+                ><i class="el-icon-info"></i><span>反馈</span></a
+            >
+            <Adminbutton v-if="adminEnable" class="u-admin" />
+            <Admin v-if="adminEnable" />
+        </div>
     </div>
 </template>
 
@@ -55,11 +57,12 @@ export default {
         "adminEnable",
         "feedbackEnable",
         "overlayEnable",
+        "crumbEnable"
     ],
     data: function() {
         return {
             isOpen: true,
-            feedback: feedback + "&subject=" + location.href,
+            feedback: feedback + "&subject=" + location.href + '?uid=' + User.getInfo().uid,
             isNotAdmin: User.getInfo().group < 60,
             isOverlay: false,
         };
