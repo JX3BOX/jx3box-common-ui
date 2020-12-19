@@ -12,7 +12,7 @@
             >
         </div>
         <div class="u-bio">{{ data.bio }}</div>
-        <div class="u-link" v-if="data.weibo_name || data.github_name">
+        <div class="u-link">
             <a
                 v-if="data.weibo_name"
                 class="u-weibo"
@@ -57,7 +57,7 @@
                 <i class="el-icon-trophy"></i><span>作者荣誉</span>
             </div>
             <div class="u-medals" v-if="medals && medals.length">
-                <span class="u-medal" v-for="(item,i) in medals" :key="i"><img :src="item.medal | showTeamMedal" :alt="medal_map[item.medal]"></span>
+                <span class="u-medal" v-for="(item,i) in medals" :key="i"><img :src="item.medal | showTeamMedal" :title="medal_map[item.medal]"></span>
             </div>
         </div>
 
