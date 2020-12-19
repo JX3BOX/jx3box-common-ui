@@ -15,6 +15,8 @@
             <i class="u-channel-logo"><slot name="logo"></slot></i>
             <span class="u-title">{{ name }}</span>
         </a>
+        <!-- 面包屑内容 -->
+        <Crumb :name="slug" />
         <slot></slot>
         <a
             v-if="publishEnable"
@@ -39,6 +41,7 @@
 import Bus from "../service/bus";
 import { __Links, feedback } from "@jx3box/jx3box-common/js/jx3box.json";
 import Admin from "./Admin";
+import Crumb from "./Crumb";
 import Adminbutton from "./Adminbutton";
 import User from "@jx3box/jx3box-common/js/user";
 import _ from "lodash";
@@ -94,6 +97,7 @@ export default {
     },
     components: {
         Admin,
+        Crumb,
         Adminbutton,
     },
 };
