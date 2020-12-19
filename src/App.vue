@@ -10,7 +10,7 @@
 
         <LeftSidebar :open="true">
             <div id="directory"></div>
-            <Author :author="author" uid="8"/>
+            <Author :author="author" uid="5507"/>
             <Authorposts uid="2"/>
         </LeftSidebar>
 
@@ -108,13 +108,13 @@ export default {
     },
     data : function (){
         return {
-            author : {},
+            author : '',
         }
     },
     created : function (){
-        axios.get(__server + 'user/info?uid=8').then((res) => {
-            this.author = res.data.data
-        })
+        // axios.get(__server + 'user/info?uid=8').then((res) => {
+        //     this.author = res.data.data
+        // })
     },
     methods : {
         

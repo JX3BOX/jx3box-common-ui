@@ -12,7 +12,7 @@
     .u-name {
         .lh(2);
         .bold;
-        color:@darkblue;
+        color: @darkblue;
         &:hover {
             color: #f39;
         }
@@ -21,7 +21,7 @@
         margin: 10px 0;
         .fz(12px, 2);
         .break(3);
-        color:#888;
+        color: #888;
         .break(3);
     }
     .u-link {
@@ -31,39 +31,79 @@
             .db;
             margin: 10px 7px;
             .fz(12px, 20px);
-            color:#555;
-            
+            color: #555;
         }
-        a{
+        a {
             &:hover {
                 color: #f39;
             }
         }
-        svg,img{
+        svg,
+        img {
             .size(16px);
             .mr(6px);
             .y(-3px);
         }
     }
 
-    .u-label{
-        margin:15px 0 10px 0;
-        padding:0 5px 10px 5px;
-        i{
+    .u-label {
+        margin: 15px 0 10px 0;
+        padding: 0 5px 10px 5px;
+        i {
             .mr(5px);
         }
-        span{
+        span {
             .fz(13px);
         }
-        border-bottom:1px solid @border;
+        border-bottom: 1px solid @border;
+    }
+
+    @keyframes living-icon-ani {
+        0% {
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+        }
+        50% {
+            -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+        }
+        to {
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+        }
+    }
+
+    .u-tv-living{
+        .dbi;
+        .ml(10px);
+    }
+
+    .u-tv-living-icon{
+        .h(10px);
+    }
+
+    .u-tv-living-icon-col {
+        .dbi;
+        transform-origin: bottom;
+        width: 2px;
+        height:100%;
+        margin: 0 1px;
+        background-color: #fb7299;
+        border-radius: 2px;
+        animation: living-icon-ani 0.6s linear infinite;
+    }
+    .u-tv-living-icon-col.first{
+        animation-delay: -.2s;
+    }
+    .u-tv-living-icon-col.last{
+        animation-delay: .2s;
     }
 }
 
-.c-sidebar-left .c-author{
-    margin:10px;
+.c-sidebar-left .c-author {
+    margin: 10px;
 }
 
-.c-sidebar-right .c-author{
-    margin:15px;
+.c-sidebar-right .c-author {
+    margin: 15px;
 }
-

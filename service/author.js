@@ -1,5 +1,5 @@
 import { $ } from "./axios";
-import {$next} from '@jx3box/jx3box-common/js/axios'
+import { $next } from "@jx3box/jx3box-common/js/axios";
 
 function getUserInfo(uid) {
     return $.get("user/info", {
@@ -17,12 +17,16 @@ function getUserPosts(uid) {
     });
 }
 
-function getDouyu(ids){
-    return $next.get('/team/douyou',{
-        params : {
-            tv_id : ids
-        }
-    })
+function getDouyu(ids) {
+    return $next.get("/team/douyu", {
+        params: {
+            tv_id: ids,
+        },
+    });
 }
 
-export { getUserInfo, getUserPosts,getDouyu };
+function getUserMedals(uid) {
+    return $next.get("/api/user/" + uid + "/medals");
+}
+
+export { getUserInfo, getUserPosts, getDouyu, getUserMedals };
