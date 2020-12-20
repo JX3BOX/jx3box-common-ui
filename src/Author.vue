@@ -103,7 +103,7 @@ export default {
             return this.data.tv_id || 0;
         },
         tv_status: function() {
-            return this.tv.show_status == 1;
+            return this.tv && (this.tv.show_status == 1) || false;
         },
     },
     filters: {
