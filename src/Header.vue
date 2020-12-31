@@ -46,24 +46,26 @@
             <nav class="c-header-nav">
                 <a
                     class="u-item"
-                    v-for="(item, type) in nav"
-                    :key="type"
-                    :class="{ on: isFocus(type) }"
-                    :href="item.path"
-                    >{{ item.name }}</a
+                    v-for="(item, i) in nav"
+                    :key="i"
+                    :class="{ on: isFocus(item.label) }"
+                    :href="item.link"
+                    >{{ item.label }}</a
                 >
-                <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
+                <!-- <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
                     <span class="u-item el-dropdown-link">
                         更多<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown" class="c-header-menu">
-                        <el-dropdown-item v-for="(item,type) in nav_fold" :key="type"
-                            ><a class="u-menu-item" :href="item.path"
-                                >{{item.name}}</a
-                            ></el-dropdown-item
+                        <el-dropdown-item
+                            v-for="(item, type) in nav_fold"
+                            :key="type"
+                            ><a class="u-menu-item" :href="item.path">{{
+                                item.name
+                            }}</a></el-dropdown-item
                         >
                     </el-dropdown-menu>
-                </el-dropdown>
+                </el-dropdown> -->
             </nav>
 
             <slot></slot>
@@ -125,7 +127,6 @@
                         <img
                             class="u-avatar"
                             :src="user.avatar"
-                            :alt="user.name"
                         />
                         <span class="u-dropdown"></span>
                         <ul class="u-menu" v-show="!fold">
@@ -135,18 +136,9 @@
                                     <em>(UID : {{ user.uid }})</em></a
                                 >
                             </li>
-                            <li>
-                                <a href="/dashboard/">个人中心</a>
-                            </li>
-                            <!-- <li>
-                                <a class="u-vip" href="/vip"><i class="u-icon-vip"></i> 会员中心</a>
-                            </li> -->
                             <hr />
-                            <li>
-                                <a href="/dashboard/#/work">作品管理</a>
-                            </li>
-                            <li>
-                                <a href="/team/#/role/list">角色管理</a>
+                            <li v-for="(item,i) in panel" :key="i">
+                                <a :href="item.link">{{item.label}}</a>
                             </li>
                             <hr />
                             <li>
@@ -168,7 +160,7 @@
                 </div>
             </div>
         </div>
-        <Box class="c-header-jx3box" :overlayEnable="overlayEnable"/>
+        <Box class="c-header-jx3box" :overlayEnable="overlayEnable" />
     </header>
 </template>
 
@@ -176,9 +168,10 @@
 import JX3BOX from "@jx3box/jx3box-common/js/jx3box.json";
 import User from "@jx3box/jx3box-common/js/user";
 import nav from "../assets/data/nav";
+import panel from "../assets/data/panel";
 import nav_fold from "../assets/data/nav_fold";
 import { __Links, __Root } from "@jx3box/jx3box-common/js/jx3box.json";
-import { getMsg, doLogout, checkStatus } from "../service/header";
+import { getMsg, doLogout, checkStatus, getNav,getPanel } from "../service/header";
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import Box from "../src/Box.vue";
 import Bus from "../service/bus";
@@ -190,6 +183,7 @@ export default {
     data: function() {
         return {
             nav,
+            panel,
             nav_fold,
             isPhone: false,
             // 是否有消息
@@ -198,8 +192,7 @@ export default {
             fold: true,
             // 登录信息
             logged_in: false,
-            user: {
-            },
+            user: {},
             // links
             url: {
                 home: __Root,
@@ -260,33 +253,43 @@ export default {
             });
         },
         // webView检测
-        checkIsWebView : function (){
-            if(window.navigator.userAgent.includes('jx3boxApp')){
-                document.documentElement.classList.add('env-app')
+        checkIsWebView: function() {
+            if (window.navigator.userAgent.includes("jx3boxApp")) {
+                document.documentElement.classList.add("env-app");
             }
         },
         // 检查
         init: function() {
+            this.loadNav();
             this.logged_in = User.isLogin();
             this.user = User.getInfo();
             if (this.logged_in) {
                 this.checkMSG();
             }
-            this.checkIsWebView()
+            this.checkIsWebView();
+        },
+        // 菜单
+        loadNav: function() {
+            return getNav().then((data) => {
+                this.nav = data || nav
+            });
+            return getPanel().then((data) => {
+                this.panel = data || panel
+            })
         },
     },
     filters: {
-        showUserName : function (val){
-            if(val){
-                if(val.length < 5){
-                    return val
-                }else{
-                    return val.slice(0,4) + '..'
+        showUserName: function(val) {
+            if (val) {
+                if (val.length < 5) {
+                    return val;
+                } else {
+                    return val.slice(0, 4) + "..";
                 }
-            }else{ 
-                return '匿名'
+            } else {
+                return "匿名";
             }
-        }
+        },
     },
     created: function() {
         this.isPhone = window.innerWidth < 720 ? true : false;
