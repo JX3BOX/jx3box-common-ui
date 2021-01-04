@@ -48,7 +48,7 @@
                     class="u-item"
                     v-for="(item, i) in nav"
                     :key="i"
-                    :class="{ on: isFocus(item.label) }"
+                    :class="{ on: isFocus(item.link) }"
                     :href="item.link"
                     >{{ item.label }}</a
                 >
@@ -221,7 +221,7 @@ export default {
         },
         // 导航焦点
         isFocus: function(type) {
-            return location.pathname.split("/")[1] == type;
+            return location.href.includes(type);
         },
         // 菜单
         showmenu: function(e) {
