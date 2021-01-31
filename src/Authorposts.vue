@@ -3,10 +3,10 @@
         <div class="u-label">
             <i class="el-icon-s-management"></i>
             <span>作者最新作品</span>
-            <a :href="author_link" class="u-more" target="_blank">全部 &raquo;</a>
+            <a :href="id | authorLink" class="u-more" target="_blank">全部 &raquo;</a>
         </div>
         
-        <ul v-if="data.length">
+        <ul v-if="data && data.length">
             <li v-for="(item, i) in data" :key="i">
                 <a
                     class="u-item"
@@ -23,19 +23,17 @@
 <script>
 import { __Root } from "@jx3box/jx3box-common/js/jx3box.json";
 import { getUserPosts } from "../service/author";
+import {authorLink,getLink} from '@jx3box/jx3box-common/js/utils'
 export default {
     name: "Authorposts",
     props: ["uid"],
     data: function() {
         return {
             data: [],
-            id : this.uid || 1
+            id : this.uid || 0,
         };
     },
     computed : {
-        author_link : function (){
-            return __Root + 'author/?uid=' + this.id
-        },
     },
     watch : {
         uid : function (newid){
@@ -45,7 +43,7 @@ export default {
     },
     methods: {
         url: function(pid, type) {
-            return __Root + type + "/?pid=" + pid;
+            return getLink(type,pid)
         },
         init : function (){
             if (!this.id) return;
@@ -55,6 +53,9 @@ export default {
                 console.log(err)
             })
         }
+    },
+    filters : {
+        authorLink
     },
     mounted: function() {
         this.init()

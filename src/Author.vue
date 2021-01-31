@@ -1,18 +1,15 @@
 <template>
     <div class="c-author" v-if="data">
         <div class="u-author">
-            <a :href="link"
-                ><img
-                    class="u-avatar"
-                    :src="data.avatar | avatar"
-                    :alt="data.name"
+            <a :href="link" class="u-avatar"
+                ><img :src="data.avatar | avatar" :alt="data.name"
             /></a>
             <a class="u-name" :href="link"
                 ><span>{{ data.name }}</span></a
             >
         </div>
         <div class="u-bio">{{ data.bio }}</div>
-        <div class="u-link">
+        <div class="u-link" v-if="hasLink">
             <a
                 v-if="data.weibo_name"
                 class="u-weibo"
@@ -31,11 +28,11 @@
                     data.github_name
                 }}</a
             >
-            <!-- <span v-if="data.tuilan_id" class="u-tuilan" title="推栏ID">
-                <img src="../assets/img/author/tuilan.png" />推栏ID：{{
+            <div v-if="data.tuilan_id" class="u-tuilan" title="推栏ID">
+                <img src="../assets/img/author/tuilan.png" />{{
                     data.tuilan_id
                 }}
-            </span> -->
+            </div>
             <a
                 v-if="data.tv_type && data.tv_id"
                 class="u-tv"
@@ -52,15 +49,18 @@
                     </div> </span
             ></a>
         </div>
-        <div class="u-trophy">
+        <div class="u-trophy" v-if="hasTrophy">
             <div class="u-label">
                 <i class="el-icon-trophy"></i><span>作者荣誉</span>
             </div>
             <div class="u-medals" v-if="medals && medals.length">
-                <span class="u-medal" v-for="(item,i) in medals" :key="i"><img :src="item.medal | showTeamMedal" :title="medal_map[item.medal]"></span>
+                <span class="u-medal" v-for="(item, i) in medals" :key="i"
+                    ><img
+                        :src="item.medal | showTeamMedal"
+                        :title="medal_map[item.medal]"
+                /></span>
             </div>
         </div>
-
         <slot></slot>
     </div>
 </template>
@@ -73,8 +73,8 @@ import {
     getTVlink,
 } from "@jx3box/jx3box-common/js/utils";
 import { __server, __imgPath } from "@jx3box/jx3box-common/js/jx3box.json";
-import { getUserInfo, getDouyu,getUserMedals } from "../service/author";
-import {user as medal_map} from '@jx3box/jx3box-common/data/medals.json'
+import { getUserInfo, getDouyu, getUserMedals } from "../service/author";
+import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
 export default {
     name: "Author",
     props: ["author", "uid"],
@@ -82,8 +82,8 @@ export default {
         return {
             data: "",
             tv: "",
-            medals : [],
-            medal_map
+            medals: [],
+            medal_map,
         };
     },
     computed: {
@@ -103,16 +103,22 @@ export default {
             return this.data.tv_id || 0;
         },
         tv_status: function() {
-            return this.tv && (this.tv.show_status == 1) || false;
+            return (this.tv && this.tv.show_status == 1) || false;
         },
+        hasLink : function (){
+            return this.data.weibo_name || this.data.github_name || this.data.tuilan_id || this.data.tv_id
+        },
+        hasTrophy : function (){
+            return this.medals.length
+        }
     },
     filters: {
         avatar: function(val) {
             return showAvatar(val);
         },
-        showTeamMedal : function (val){
-            return __imgPath + 'image/medals/team/' + val + '-20.gif'
-        }
+        showTeamMedal: function(val) {
+            return __imgPath + "image/medals/team/" + val + "-20.gif";
+        },
     },
     methods: {
         loadData: function() {
@@ -125,15 +131,15 @@ export default {
                 if (!this.tv_id || isNaN(this.tv_id)) return;
                 getDouyu(this.tv_id).then((res) => {
                     this.tv = res.data.data;
-                }); 
+                });
             }
         },
-        loadMedals : function (){
-            if(!this.id) return
+        loadMedals: function() {
+            if (!this.id) return;
             getUserMedals(this.id).then((res) => {
-                this.medals = res.data.data
-            })
-        }
+                this.medals = res.data.data;
+            });
+        },
     },
     watch: {
         author: function(newdata) {
@@ -146,19 +152,19 @@ export default {
         tv_id: function(val) {
             this.loadTV();
         },
-        id : function (){
-            this.loadMedals()
+        id: function() {
+            this.loadMedals();
         },
     },
     mounted: function() {
         if (this.author) {
             this.data = this.author;
             this.loadTV();
-            this.loadMedals()
+            this.loadMedals();
         } else if (this.uid) {
             this.loadData().then(() => {
                 this.loadTV();
-                this.loadMedals()
+                this.loadMedals();
             });
         }
     },
