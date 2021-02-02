@@ -9,7 +9,7 @@
     <div class="m-panel-head">
       <slot name="head-before"></slot>
       <div class="m-panel-actions">
-        <QRcode class="u-qr"/>
+        <QRcode v-if="wikiPost" class="u-qr"/>
         <slot name="head-actions"></slot>
       </div>
       <div class="m-panel-title">

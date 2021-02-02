@@ -55,6 +55,9 @@
             </WikiPanel>
             <hr>
 
+            <WikiRevisions type="achievement" source-id="9096" />
+            <hr>
+
             <RightSidebar>
                 <div style="height:1200px;">
                     
@@ -96,6 +99,7 @@ import QRcode from "./QRcode.vue";
 import Sharing from "./Sharing.vue";
 import LeftSideToggle from "./LeftSideToggle.vue";
 import WikiPanel from "./WikiPanel.vue";
+import WikiRevisions from "./WikiRevisions.vue";
 
 import axios from 'axios'
 import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
@@ -124,6 +128,7 @@ export default {
         QRcode,
         LeftSideToggle,
         WikiPanel,
+        WikiRevisions,
     },
     data : function (){
         return {
