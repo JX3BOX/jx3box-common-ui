@@ -1,38 +1,42 @@
-{
-    "index": {
-        "name": "首页",
-        "path": "/index"
+[
+    {
+        "label": "首页",
+        "link": "/index"
     },
-    "macro": {
-        "name": "宏库",
-        "path": "/macro"
+    {
+        "label": "宏库",
+        "link": "/macro"
     },
-    "jx3dat": {
-        "name": "插件",
-        "path": "/jx3dat"
+    {
+        "label": "插件",
+        "link": "/jx3dat"
     },
-    "fb": {
-        "name": "副本",
-        "path": "/fb"
+    {
+        "label": "副本",
+        "link": "/fb"
     },
-    "bps": {
-        "name": "职业",
-        "path": "/bps"
+    {
+        "label": "职业",
+        "link": "/bps"
     },
-    "cj": {
-        "name": "成就",
-        "path": "/cj"
+    {
+        "label": "成就",
+        "link": "/cj"
     },
-    "item": {
-        "name": "物品",
-        "path": "/item"
+    {
+        "label": "物品",
+        "link": "/item"
     },
-    "tool": {
-        "name": "工具",
-        "path": "/tool"
+    {
+        "label": "百科",
+        "link": "/wiki"
     },
-    "bbs": {
-        "name": "茶馆",
-        "path": "/bbs"
+    {
+        "label": "工具",
+        "link": "/tool"
+    },
+    {
+        "label": "茶馆",
+        "link": "/bbs"
     }
-}
+]

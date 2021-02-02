@@ -17,7 +17,7 @@
             .bold;
             color: @color;
         }
-        .mr(30px);
+        .mr(22px);
         // padding:10px;
     }
     .u-channel-logo {
@@ -43,7 +43,7 @@
 
     .c-crumb {
         .fl;
-        .mr(30px);
+        .mr(20px);
     }
 
     .el-tabs{
@@ -91,6 +91,10 @@
             fill: @primary;
         }
     }
+
+    .u-op{
+        .pa;.rt(10px);
+    }
 }
 .c-breadcrumb.isOverlay{
     background-color:rgba(255,255,255,.85);
@@ -105,11 +109,16 @@
         .u-channel-logo {
             .none;
         }
-        .u-publish,.u-admin,.u-feedback {
+        .u-op {
             .none;
         }
         .el-tabs{
             right:0;
+        }
+        .c-crumb{
+            float: none;
+            white-space: nowrap;
+            overflow: hidden;
         }
     }
 }
