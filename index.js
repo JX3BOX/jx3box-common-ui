@@ -31,6 +31,7 @@ import orderBy from "./src/orderBy.vue";
 import menuBy from "./src/menuBy.vue";
 
 import Box from './src/Box.vue'
+import WikiPanel from './src/WikiPanel.vue'
 
 const components = {
     Header,
@@ -70,6 +71,7 @@ const components = {
     markBy,
     menuBy,
 
+    WikiPanel,
 }
 
 const install = function (Vue, Option) {

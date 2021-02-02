@@ -39,6 +39,22 @@
             <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39"/>
             <hr>
 
+            <WikiPanel :wiki-post="wiki_post">
+              <template slot="head-title">
+                <i class="el-icon-location-information"></i>
+                <span class="u-title">通识正文</span>
+              </template>
+              <template slot="head-actions">
+                <a class="el-button el-button--primary u-publish">
+                  <i class="el-icon-edit"></i>
+                  <span>完善百科通识</span>
+                </a>
+                <span class="u-more">查看更多</span>
+              </template>
+              <template slot="body">正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容</template>
+            </WikiPanel>
+            <hr>
+
             <RightSidebar>
                 <div style="height:1200px;">
                     
@@ -79,9 +95,11 @@ import Print from "./Print.vue";
 import QRcode from "./QRcode.vue";
 import Sharing from "./Sharing.vue";
 import LeftSideToggle from "./LeftSideToggle.vue";
+import WikiPanel from "./WikiPanel.vue";
 
 import axios from 'axios'
 import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
+import {wiki_post} from '@jx3box/jx3box-common/js/helper'
 
 export default {
     name : 'App',
@@ -104,17 +122,26 @@ export default {
         Print,
         Sharing,
         QRcode,
-        LeftSideToggle
+        LeftSideToggle,
+        WikiPanel,
     },
     data : function (){
         return {
             author : {},
+            wiki_post : null,
         }
     },
     created : function (){
         axios.get(__server + 'user/info?uid=8').then((res) => {
             this.author = res.data.data
         })
+
+        wiki_post.view(11042).then(
+            (res) => {
+                res = res.data;
+                if (res.code === 200) this.wiki_post = res.data;
+            }
+        );
     },
     methods : {
         
