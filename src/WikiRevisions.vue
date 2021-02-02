@@ -5,7 +5,7 @@
       <span>历史版本</span>
     </template>
     <template slot="body">
-      <div class="m-revisions">
+      <div class="m-revisions-panel">
         <div class="u-empty" v-if="!versions || !versions.length">
           <span v-if="versions === null">🎉 数据加载中...</span>
           <span v-if="versions === false">⚠️ 数据加载异常</span>
@@ -36,7 +36,7 @@
 
 <script>
 import WikiPanel from "./WikiPanel";
-import {wiki_post} from "@jx3box/jx3box-common/js/helper";
+import {WikiPost} from "@jx3box/jx3box-common/js/helper";
 import {getLink, authorLink, ts2str} from "@jx3box/jx3box-common/js/utils";
 
 export default {
@@ -60,7 +60,7 @@ export default {
       immediate: true,
       handler() {
         if (this.sourceId) {
-          wiki_post.versions(this.type, this.sourceId).then(
+          WikiPost.versions(this.type, this.sourceId).then(
               (res) => {
                 res = res.data;
                 this.versions = res.code === 200 ? res.data.versions : false;

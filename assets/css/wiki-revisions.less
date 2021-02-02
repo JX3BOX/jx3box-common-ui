@@ -18,9 +18,20 @@
       min-width: 100px;
       padding: 8px 10px;
       font-weight: normal;
+      line-height: 1.6;
 
       &:first-child{
         min-width: 35px;
+      }
+
+      @media screen and (max-width: @phone) {
+        min-width: 35px;
+        padding: 3px;
+        font-size: 12px;
+
+        &:first-child{
+          min-width: 15px;
+        }
       }
     }
 

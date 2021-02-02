@@ -39,7 +39,7 @@
             <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39"/>
             <hr>
 
-            <WikiPanel :wiki-post="wiki_post">
+            <WikiPanel :wiki-post="wikiPost">
               <template slot="head-title">
                 <i class="el-icon-location-information"></i>
                 <span class="u-title">通识正文</span>
@@ -56,6 +56,9 @@
             <hr>
 
             <WikiRevisions type="achievement" source-id="9096" />
+            <hr>
+
+            <WikiComments type="achievement" source-id="9096" />
             <hr>
 
             <RightSidebar>
@@ -100,10 +103,11 @@ import Sharing from "./Sharing.vue";
 import LeftSideToggle from "./LeftSideToggle.vue";
 import WikiPanel from "./WikiPanel.vue";
 import WikiRevisions from "./WikiRevisions.vue";
+import WikiComments from "./WikiComments.vue";
 
 import axios from 'axios'
 import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
-import {wiki_post} from '@jx3box/jx3box-common/js/helper'
+import {WikiPost} from '@jx3box/jx3box-common/js/helper'
 
 export default {
     name : 'App',
@@ -129,11 +133,12 @@ export default {
         LeftSideToggle,
         WikiPanel,
         WikiRevisions,
+        WikiComments,
     },
     data : function (){
         return {
             author : '',
-            wiki_post : null,
+            wikiPost : null,
         }
     },
     created : function (){
@@ -141,10 +146,10 @@ export default {
         //     this.author = res.data.data
         // })
 
-        wiki_post.view(11042).then(
+        WikiPost.view(11042).then(
             (res) => {
                 res = res.data;
-                if (res.code === 200) this.wiki_post = res.data;
+                if (res.code === 200) this.wikiPost = res.data;
             }
         );
     },

@@ -49,8 +49,12 @@
         }
       }
 
+      .u-more {
+        color: blueviolet;
+      }
+
       .el-button {
-        padding: 8px 10px;
+        padding: 7px 10px 9px;
         font-size: 12px;
       }
     }
@@ -81,8 +85,18 @@
     .u-meta {
       .mr(15px);
 
-      &:last-child{
+      &:last-child {
         .mr(0);
+      }
+
+      @media screen and (max-width: @phone) {
+        .db;
+        .mr(0);
+        .mb(5px);
+
+        &:last-child {
+          .mb(0);
+        }
       }
     }
 
@@ -112,6 +126,12 @@
         .h(auto)
       }
     }
+
+    @media screen and (max-width: @phone) {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   // 详情场景
@@ -127,11 +147,12 @@
         height: 28px;
         font-size: 22px;
         line-height: 28px;
+        color: blueviolet;
         fill: #555;
       }
 
       span {
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 300;
       }
     }
