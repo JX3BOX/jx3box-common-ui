@@ -137,18 +137,22 @@
   // 详情场景
   &.m-detail-scene {
     .m-panel-title {
-      i, span {
+      img, svg, i, span {
         .dbi;
         vertical-align: middle;
       }
 
-      i {
+      img, svg, i {
         width: 28px;
         height: 28px;
-        font-size: 22px;
         line-height: 28px;
         color: blueviolet;
-        fill: #555;
+        fill: blueviolet;
+        font-size: 22px;
+      }
+
+      img, svg {
+        .mr(7px);
       }
 
       span {
