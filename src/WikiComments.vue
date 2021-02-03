@@ -110,11 +110,11 @@ export default {
             res = res.data;
             if (res.code === 200) {
               form.content = "";
-              this.$message({message: '✔️ 提交成功，请等待审核', type: "success"});
-            } else this.$message({message: `⚠️ ${res.message}`, type: "warning"});
+              this.$message({message: '提交成功，请等待审核', type: "success"});
+            } else this.$message({message: `${res.message}`, type: "warning"});
           },
           () => {
-            this.$message({message: "⚠️ 网络异常，提交失败", type: "warning"});
+            this.$message({message: "网络异常，提交失败", type: "warning"});
           }
       ).finally(() => {
         form.show = false;

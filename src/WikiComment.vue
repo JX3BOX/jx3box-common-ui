@@ -61,7 +61,13 @@ export default {
     author_url: authorLink,
     ts2str,
     create_comment(form, parent_id) {
-      this.$parent.create_comment(form, parent_id);
+      let app = this.$parent;
+      if (!app.create_comment) app = app.$parent;
+      if (!app.create_comment) {
+        this.$message({message: '发布评论异常，请联系管理员', type: "warning"})
+        return;
+      }
+      app.create_comment(form, parent_id);
     },
   },
 };
