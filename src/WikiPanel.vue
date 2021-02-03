@@ -82,21 +82,25 @@ export default {
     },
   },
   watch: {
-    wikiPost() {
-      if (!this.wikiPost) return;
-
-      // 获取热度信息
-      if (this.type && this.source_id) {
-        getStat(this.type, this.source_id).then((data) => {
-          if (data.status === 200) this.stat = data.data;
-        });
-      }
+    type() {
+      this.getStat();
+    },
+    source_id() {
+      this.getStat();
     }
   },
   methods: {
     thumbnail_url: getThumbnail,
     author_url: authorLink,
     ts2str,
+    getStat() {
+      // 获取热度信息
+      if (this.type && this.source_id) {
+        getStat(this.type, this.source_id).then((data) => {
+          if (data.status === 200) this.stat = data.data;
+        });
+      }
+    },
   },
   components: {
     QRcode,
