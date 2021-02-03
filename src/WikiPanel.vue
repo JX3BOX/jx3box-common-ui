@@ -110,7 +110,7 @@ export default {
     },
     filters: {
         thumbnail_url: function(val) {
-            getThumbnail(val, 24, true);
+            return getThumbnail(val, 24, true);
         },
     },
     components: {
