@@ -28,7 +28,7 @@ function getPanel() {
 }
 
 function getBox() {
-    return $.get(__ossRoot + "data/global/box.json");
+    return axios.get(__ossMirror + "data/global/box.json");
 }
 
 export { getMsg, doLogout, checkStatus, getNav, getPanel, getBox };
