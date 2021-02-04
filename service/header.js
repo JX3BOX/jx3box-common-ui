@@ -1,5 +1,5 @@
 import { axios, $ } from "./axios";
-import { __helperUrl } from "@jx3box/jx3box-common/js/jx3box.json";
+import { __helperUrl, __ossMirror,__ossRoot } from "@jx3box/jx3box-common/js/jx3box.json";
 
 function getMsg() {
     return $.get(__helperUrl + "api/messages/unread_total", {
@@ -17,14 +17,18 @@ function checkStatus() {
 
 function getNav() {
     return $.get(__helperUrl + "api/menu_group/header").then((res) => {
-        return res.data.data.menu_group.menus
-    })
+        return res.data.data.menu_group.menus;
+    });
 }
 
-function getPanel(){
+function getPanel() {
     return $.get(__helperUrl + "api/menu_group/panel").then((res) => {
-        return res.data.data.menu_group.menus
-    })
+        return res.data.data.menu_group.menus;
+    });
 }
 
-export { getMsg, doLogout, checkStatus, getNav,getPanel };
+function getBox() {
+    return $.get(__ossRoot + "data/global/box.json");
+}
+
+export { getMsg, doLogout, checkStatus, getNav, getPanel, getBox };

@@ -11,6 +11,11 @@
                         svg-inline
                         :src="homeicon"
                     />
+                    <img
+                        class="u-pic-hover"
+                        svg-inline
+                        :src="homeicon"
+                    />
                     <span class="u-txt">首页</span>
                 </a>
             </li>
@@ -20,6 +25,11 @@
                         class="u-pic"
                         svg-inline
                         :src="item.img | getBoxIcon"
+                    />
+                    <img
+                        class="u-pic-hover"
+                        svg-inline
+                        :src="item.hover | getBoxIcon"
                     />
                     <span class="u-txt">{{item.name}}</span>
                 </a>
@@ -33,11 +43,14 @@
 </template>
 
 <script>
-import Bus from "../service/bus";
-import { __imgPath } from "@jx3box/jx3box-common/js/jx3box.json";
-import origin from "@jx3box/jx3box-common/data/box.json";
 import _ from "lodash";
-const breakIcons = ['database','fbdata','j3pz']
+import Bus from "../service/bus";
+import {getBox} from '../service/header.js'
+import { __imgPath } from "@jx3box/jx3box-common/js/jx3box.json";
+// const __imgPath = './'
+import origin from "@jx3box/jx3box-common/data/box.json";
+const breakIcons = ['database','team','j3pz']
+
 export default {
     name: "Box",
     props: ["overlayEnable"],
@@ -51,6 +64,9 @@ export default {
     computed: {
         homeicon : function (){
             return __imgPath + 'image/box/home.svg'
+        },
+        homeicon_hover : function (){
+            return __imgPath + 'image/box/home_on.svg'
         }
     },
     methods: {
@@ -73,6 +89,9 @@ export default {
         }
     },
     mounted: function() {
+        getBox().then((res) => {
+            this.data = res.data
+        })
         Bus.$on("toggleBox", (status) => {
             if (status == undefined) {
                 this.status = !this.status;

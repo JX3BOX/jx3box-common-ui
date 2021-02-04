@@ -46,17 +46,24 @@
         background-color: @bg-light;
         .pr;
         overflow: hidden;
+        .u-pic-hover{
+            .none;
+        }
     }
     .u-item:not(.u-doing) {
         &:hover {
             border-color: #111;
             .u-pic {
-                fill: @bg-black;
-                .tm(0.9);
+                // fill: @bg-black;
+                // .tm(0.9);
+                .none;
+            }
+            .u-pic-hover{
+                .db;
             }
         }
     }
-    .u-pic {
+    .u-pic,.u-pic-hover {
         .size(32px);
         .db;
         .auto(x);
