@@ -1,5 +1,5 @@
 import { axios, $ } from "./axios";
-import { __helperUrl, __ossMirror,__ossRoot } from "@jx3box/jx3box-common/js/jx3box.json";
+import { __helperUrl, __dataPath,__ossRoot,__ossMirror } from "@jx3box/jx3box-common/js/jx3box.json";
 
 function getMsg() {
     return $.get(__helperUrl + "api/messages/unread_total", {
@@ -28,7 +28,7 @@ function getPanel() {
 }
 
 function getBox() {
-    return axios.get(__ossMirror + "data/global/box.json");
+    return axios.get(__dataPath + "data/common/box.json");
 }
 
 export { getMsg, doLogout, checkStatus, getNav, getPanel, getBox };
