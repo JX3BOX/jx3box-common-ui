@@ -19,7 +19,7 @@
         </div>
         <div class="m-panel-body">
             <slot name="body-before"></slot>
-            <div class="m-wiki-metas" v-if="wikiPost.post">
+            <div class="m-wiki-metas" v-if="wikiPost && wikiPost.post">
                 <!-- 参与贡献 -->
                 <div class="u-meta" v-if="wikiPost.users && wikiPost.users.length">
                     <em class="u-label">参与贡献</em>
