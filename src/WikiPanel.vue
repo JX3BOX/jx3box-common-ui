@@ -21,7 +21,7 @@
             <slot name="body-before"></slot>
             <div class="m-wiki-metas" v-if="wikiPost">
                 <!-- 参与贡献 -->
-                <div class="u-meta">
+                <div class="u-meta" v-if="wikiPost.users && wikiPost.users.length">
                     <em class="u-label">参与贡献</em>
                     <a
                         class="u-value u-creator"
@@ -38,7 +38,7 @@
                     </a>
                 </div>
                 <!-- 综合难度 -->
-                <div class="u-meta" v-if="wikiPost.post.level">
+                <div class="u-meta" v-if="wikiPost.post && wikiPost.post.level">
                   <em class="u-label">综合难度</em>
                   <span class="u-value">
                     <i class="el-icon-star-on" v-for="i in wikiPost.post.level" :key="i"></i>
@@ -50,7 +50,7 @@
                   <span class="u-value" v-text="stat.views"></span>
                 </div>
                 <!-- 更新时间 -->
-                <div class="u-meta">
+                <div class="u-meta" v-if="wikiPost.post && wikiPost.post.updated">
                     <em class="u-label">更新时间</em>
                     <span
                         class="u-value"
