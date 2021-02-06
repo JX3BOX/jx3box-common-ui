@@ -1,142 +1,146 @@
 .c-wiki-comments {
-  .u-empty {
-    padding: 5px 0;
-    text-align: center
-  }
-
-  .el-button {
-    user-select: none;
-
-    &.el-button--default:focus, &.el-button--default:active {
-      background: white;
-      border: 1px solid #DCDFE6;
+    .u-empty {
+        padding: 5px 0;
+        text-align: center;
     }
 
-    &.el-button--primary:focus, &.el-button--primary:active {
-      background-color: #0366D6;
-      border-color: #0366D6;
-    }
-  }
+    .el-button {
+        user-select: none;
 
-  .m-comments-panel {
-    font-size: 14px;
+        &.el-button--default:focus,
+        &.el-button--default:active {
+            background: white;
+            border: 1px solid #dcdfe6;
+        }
 
-    .u-comments {
-      padding-left: 0;
-      list-style: none;
-    }
-
-    .u-nickname-panel {
-      .u-nickname {
-        font-weight: 600;
-        color: #666666;
-      }
-
-      .u-nickname[href] {
-        color: blueviolet;
-      }
-
-      span + .u-nickname {
-        opacity: .7;
-      }
+        &.el-button--primary:focus,
+        &.el-button--primary:active {
+            background-color: #0366d6;
+            border-color: #0366d6;
+        }
     }
 
-    .u-comment {
-      padding: 5px 0;
-      border-bottom: 1px solid #eeeeee;
-      overflow: hidden;
+    .m-comments-panel {
+        font-size: 14px;
+
+        .u-comments {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .u-nickname-panel {
+            .u-nickname {
+                font-weight: 600;
+                color: #666666;
+            }
+
+            .u-nickname[href] {
+                color: blueviolet;
+            }
+
+            span + .u-nickname {
+                opacity: 0.7;
+            }
+        }
+
+        .u-comment {
+            padding: 5px 0;
+            border-bottom: 1px solid #eeeeee;
+            overflow: hidden;
+        }
+
+        .u-content {
+            margin: 10px 0;
+            opacity: 0.8;
+        }
+
+        .m-reply {
+            padding-bottom: 10px;
+
+            .u-reply {
+                font-size: 13px;
+                padding: 6px 10px;
+            }
+
+            .u-time {
+                float: right;
+                margin-top: 5px;
+                font-size: 12px;
+                opacity: 0.5;
+            }
+        }
+
+        & > .u-comments {
+            margin: 0;
+            padding: 0;
+        }
+
+        & > .u-comments > .u-comment-panel > .u-comments {
+            padding-left: 15px;
+        }
     }
 
-    .u-content {
-      margin: 10px 0;
-      opacity: 0.8;
-    }
-
-    .m-reply {
-      padding-bottom: 10px;
-
-      .u-reply {
-        font-size: 13px;
-        padding: 6px 10px;
-      }
-
-      .u-time {
-        float: right;
-        margin-top: 5px;
-        font-size: 12px;
-        opacity: 0.5;
-      }
-    }
-
-    & > .u-comments {
-      margin: 0;
-      padding: 0;
-    }
-
-    & > .u-comments > .u-comment-panel > .u-comments {
-      padding-left: 15px;
-    }
-  }
-
-  // 回复表单样式
-  .m-reply-form {
-    overflow: hidden;
-
-    @border-style: 1px solid #CCCCCC;
-
-    .u-title {
-      .mt(15px);
-      .mb(10px);
-      .pb(10px);
-      color: #666666;
-      border-bottom: @border-style;
-
-      i, span {
-        .dbi;
-        .mr(5px);
-        vertical-align: middle;
-        font-size: 16px;
-      }
-    }
-
-    .u-reply-content {
-      width: 100%;
-      height: 4em;
-      padding: 5px;
-      line-height: 1.5em;
-      box-sizing: border-box;
-      border: @border-style;
-      resize: vertical;
-      .r(3px);
-    }
-
-    .u-author {
-      .fl;
-
-      input {
-        .fz(14px, 28px);
-        .h(28px);
-        border: @border-style;
-        .r(3px);
-        padding: 0 5px;
-      }
-    }
-
-    .u-submit {
-      .fr;
-      padding: 7px 16px;
-    }
-  }
-
-  @media screen and (max-width: 360px) {
+    // 回复表单样式
     .m-reply-form {
-      .u-author, .u-submit {
-        float: none;
-      }
+        overflow: hidden;
 
-      .u-submit {
-        .mt(5px);
-      }
+        @border-style: 1px solid #cccccc;
+
+        .u-title {
+            .mt(15px);
+            .mb(10px);
+            .pb(10px);
+            color: #666666;
+            border-bottom: @border-style;
+
+            i,
+            span {
+                .dbi;
+                .mr(5px);
+                vertical-align: middle;
+                font-size: 16px;
+            }
+        }
+
+        .u-reply-content {
+            width: 100%;
+            height: 4em;
+            padding: 5px;
+            line-height: 1.5em;
+            box-sizing: border-box;
+            border: @border-style;
+            resize: vertical;
+            .r(3px);
+        }
+
+        .u-author {
+            .fl;
+
+            input {
+                .fz(14px, 28px);
+                .h(28px);
+                border: @border-style;
+                .r(3px);
+                padding: 0 5px;
+            }
+        }
+
+        .u-submit {
+            .fr;
+            padding: 7px 16px;
+        }
     }
-  }
+
+    @media screen and (max-width: 360px) {
+        .m-reply-form {
+            .u-author,
+            .u-submit {
+                float: none;
+            }
+
+            .u-submit {
+                .mt(5px);
+            }
+        }
+    }
 }
