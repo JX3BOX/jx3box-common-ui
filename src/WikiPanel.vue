@@ -73,7 +73,6 @@ import {
     ts2str,
 } from "@jx3box/jx3box-common/js/utils";
 import { getStat } from "@jx3box/jx3box-common/js/stat";
-
 export default {
     name: "WikiPost",
     props: ["scene", "wikiPost", "borderNone"],
@@ -87,7 +86,6 @@ export default {
             immediate: true,
             handler() {
               if (!this.wikiPost) return;
-
               // 获取热度信息
               if (this.wikiPost.type && this.wikiPost.source_id) {
                 let type = this.wikiPost.type;
