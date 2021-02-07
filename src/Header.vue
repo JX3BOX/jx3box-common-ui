@@ -15,7 +15,7 @@
                 <i class="u-pic"
                     ><img svg-inline src="../assets/img/header/logo.svg"
                 /></i>
-                <span class="u-txt">JX3BOX</span>
+                <span class="u-txt">魔盒</span>
             </div>
 
             <!-- search -->
