@@ -7,7 +7,7 @@
                 src="../assets/img/footer/china.svg"
             />
             <a href="http://beian.miit.gov.cn/" class="u-beian" target="_blank"
-                >湘ICP备13012123号</a
+                >湘ICP备2021002288号</a
             >
         </div>
         <div class="c-footer-right">
