@@ -1,5 +1,5 @@
 <template>
-    <footer class="c-footer" id="c-footer">
+    <footer class="c-footer" id="c-footer" v-if="!isApp">
         <div class="c-footer-left">
             <img
                 class="u-flag"
@@ -25,12 +25,14 @@
 
 <script>
 import { __Root, feedback } from "@jx3box/jx3box-common/js/jx3box.json";
+import {isApp} from '../assets/js/app.js'
 export default {
     name: "Footer",
     data: function () {
         return {
             about: __Root + 'about',
             feedback: feedback + '&subject=' + location.href,
+            isApp : isApp()
         };
     },
 };

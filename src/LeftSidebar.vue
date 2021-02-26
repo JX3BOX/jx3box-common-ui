@@ -2,6 +2,7 @@
     <aside
         class="c-sidebar-left c-sidebar"
         :class="{ isclose: !isOpen, isopen: isOpen,'without-bread': withoutBread }"
+        v-if="!isApp"
     >
         <div class="c-sidebar-left-inner"><slot></slot></div>
         <span
@@ -25,12 +26,14 @@
 
 <script>
 import Bus from '../service/bus';
+import {isApp} from '../assets/js/app.js'
 export default {
     name: "LeftSidebar",
     props: ['open',"withoutBread"],
     data: function() {
         return {
-            isOpen : true
+            isOpen : true,
+            isApp : isApp()
         };
     },
     computed : {

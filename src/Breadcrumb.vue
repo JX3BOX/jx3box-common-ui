@@ -2,6 +2,7 @@
     <div
         class="c-breadcrumb"
         :class="{ isOverlay: overlayEnable && isOverlay }"
+        v-if="!isApp"
     >
         <div class="u-menu" @click.stop="toggleLeftSide">
             <img
@@ -47,6 +48,8 @@ import Crumb from "./Crumb";
 import Adminbutton from "./Adminbutton";
 import User from "@jx3box/jx3box-common/js/user";
 import _ from "lodash";
+import {isApp} from '../assets/js/app.js'
+
 export default {
     name: "Breadcrumb",
     props: [
@@ -65,6 +68,7 @@ export default {
             feedback: feedback + "&subject=" + location.href + '?uid=' + User.getInfo().uid,
             isNotAdmin: User.getInfo().group < 60,
             isOverlay: false,
+            isApp : isApp()
         };
     },
     computed: {},

@@ -3,6 +3,7 @@
         class="c-header"
         id="c-header"
         :class="{ isOverlay: overlayEnable && isOverlay }"
+        v-if="!isApp"
     >
         <div class="c-header-inner">
             <!-- logo -->
@@ -176,6 +177,7 @@ import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import Box from "../src/Box.vue";
 import Bus from "../service/bus";
 import _ from "lodash";
+import {isApp} from '../assets/js/app.js'
 
 export default {
     name: "Header",
@@ -203,6 +205,7 @@ export default {
                 profile: __Links.dashboard.profile,
             },
             isOverlay: false,
+            isApp : isApp()
         };
     },
     computed: {
