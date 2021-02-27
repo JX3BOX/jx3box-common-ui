@@ -37,28 +37,11 @@
             >
             <span
                 class="u-mode"
-                :class="{ on: mark == 'newbie' }"
-                @click="filter('newbie')"
-                ><i class="el-icon-user"></i> 新手易用</span
-            >
-            <span
-                class="u-mode u-advanced"
-                :class="{ on: mark == 'advanced' }"
-                @click="filter('advanced')"
-                ><i class="el-icon-data-line"></i> 进阶推荐</span
-            >
-            <span
-                class="u-mode u-recommended"
-                :class="{ on: mark == 'recommended' }"
-                @click="filter('recommended')"
-                ><i class="el-icon-star-off"></i> 编辑精选</span
-            >
-            <span
-                class="u-mode u-geek"
-                :class="{ on: mark == 'geek' }"
-                plain
-                @click="filter('geek')"
-                ><i class="el-icon-medal-1"></i> 骨灰必备</span
+                :class="{ on: mark == key }"
+                v-for="(label, key) in marks"
+                :key="key"
+                @click="filter(key)"
+                ><i class="el-icon-user"></i> {{ label }}</span
             >
             <slot></slot>
         </span>
@@ -66,24 +49,29 @@
 </template>
 
 <script>
-import { cms as mark_map } from "@jx3box/jx3box-common/js/mark.json";
+const marks = {
+    newbie: "新手易用",
+    advanced: "进阶推荐",
+    recommended: "编辑精选",
+    geek: "骨灰必备",
+};
 export default {
     name: "markBy",
-    props: ['mode','placeholder'],
+    props: ["mode", "placeholder"],
     data: function() {
         return {
             visible: false,
             mark: "",
-            marks : mark_map
+            marks,
         };
     },
     computed: {
         current: function() {
-            return mark_map[this.mark];
+            return marks[this.mark];
         },
-        deftext : function (){
-            return this.placeholder || '难度'
-        }
+        deftext: function() {
+            return this.placeholder || "难度";
+        },
     },
     methods: {
         toggleFilter: function() {
@@ -101,10 +89,12 @@ export default {
 </script>
 
 <style lang="less">
-.w-filter-menu{
+.w-filter-menu {
     .pointer;
-    .u-menu-label{
-        i{.mr(5px);}
+    .u-menu-label {
+        i {
+            .mr(5px);
+        }
         .fz(12px);
     }
 }
@@ -155,7 +145,7 @@ export default {
         .r(4px);
         user-select: none;
         padding: 6px 0;
-        padding-right:20px;
+        padding-right: 20px;
         .w(124px);
         box-sizing: border-box;
 
