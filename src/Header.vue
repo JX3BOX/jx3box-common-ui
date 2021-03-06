@@ -137,6 +137,15 @@
                                     <em>(UID : {{ user.uid }})</em></a
                                 >
                             </li>
+                            <li><a class="u-vip" href="/vip/premium?from=header_usermenu" target="_blank">
+                            <i
+                            class="i-icon-vip"
+                            :class="{ on: isVIP || isPRO }"
+                            >{{vipType}}</i
+                        >
+                        <span class="u-vip-type"><template v-if="isVIP || isPRO">{{isRPO ? '专业版' : '高级版'}}账号</template><template v-else>升级账号类型</template></span>
+                        <!-- <span class="u-expire" v-if="expire_date">(有效期至:{{expire_date}})</span> -->
+                        </a></li>
                             <hr />
                             <li v-for="(item,i) in panel" :key="i">
                                 <a :href="item.link">{{item.label}}</a>
@@ -178,6 +187,8 @@ import Box from "../src/Box.vue";
 import Bus from "../service/bus";
 import _ from "lodash";
 import {isApp} from '../assets/js/app.js'
+import { getAsset, hasPRO, hasVIP } from "@jx3box/jx3box-common/js/pay";
+import { showDate } from "@jx3box/jx3box-common/js/moment";
 
 export default {
     name: "Header",
@@ -205,7 +216,17 @@ export default {
                 profile: __Links.dashboard.profile,
             },
             isOverlay: false,
-            isApp : isApp()
+            isApp : isApp(),
+            // VIP
+            asset: {
+                expire_date: "2022-03-07T00:00:00+08:00",
+                total_day: 395,
+                was_vip: 0,
+
+                pro_expire_date: "2022-03-07T00:00:00+08:00",
+                pro_total_day: 366,
+                was_pro: 0,
+            },
         };
     },
     computed: {
@@ -214,6 +235,24 @@ export default {
         },
         register_url: function() {
             return __Links.account.register + "?redirect=" + location.href;
+        },
+        isVIP : function (){
+            return hasVIP(this.asset) || false
+        },
+        isPRO : function (){
+            return hasPRO(this.asset) || false
+        },
+        vipType : function (){
+            return this.isPRO ? 'PRO' : 'PRE'
+        },
+        expire_date: function() {
+            if(this.isPRO){
+                return showDate(this.asset.pro_expire_date)
+            }else if(this.isVIP){
+                return showDate(this.asset.expire_date);
+            }else{
+                return ''
+            }
         },
     },
     methods: {
@@ -280,6 +319,12 @@ export default {
                 this.panel = data || panel
             })
         },
+        // 资产
+        loadAsset: function() {
+            getAsset().then((data) => {
+                this.asset = data;
+            });
+        },
     },
     filters: {
         showUserName: function(val) {
@@ -309,7 +354,9 @@ export default {
             );
         }
     },
-    mounted: function() {},
+    mounted: function() {
+        this.logged_in && this.loadAsset();
+    },
     components: {
         Box,
     },
