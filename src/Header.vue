@@ -324,10 +324,10 @@ export default {
         },
         // 菜单
         loadNav: function() {
-            return getNav().then((data) => {
+            getNav().then((data) => {
                 this.nav = data || nav
             });
-            return getPanel().then((data) => {
+            getPanel().then((data) => {
                 this.panel = data || panel
             })
         },

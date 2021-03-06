@@ -20,16 +20,12 @@
         "link": "/bps"
     },
     {
-        "label": "成就",
-        "link": "/cj"
-    },
-    {
-        "label": "物品",
-        "link": "/item"
-    },
-    {
         "label": "百科",
         "link": "/wiki"
+    },
+    {
+        "label": "团队",
+        "link": "/team"
     },
     {
         "label": "工具",

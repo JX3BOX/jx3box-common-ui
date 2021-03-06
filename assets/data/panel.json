@@ -9,6 +9,10 @@
     },
     {
         "label": "角色管理",
-        "link": "/team/#/role/list"
+        "link": "/team/role/manage"
+    },
+    {
+        "label": "团队管理",
+        "link": "/team/org/manage/"
     }
 ]
