@@ -143,7 +143,7 @@
                             :class="{ on: isVIP || isPRO }"
                             >{{vipType}}</i
                         >
-                        <span class="u-vip-type"><template v-if="isVIP || isPRO">{{isRPO ? '专业版' : '高级版'}}账号</template><template v-else>升级账号类型</template></span>
+                        <span class="u-vip-type"><template v-if="isVIP || isPRO">{{vipTypeTxt}}<span class="u-vip-left">({{vipLeftDays}}天)</span></template><template v-else>升级账号类型</template></span>
                         <!-- <span class="u-expire" v-if="expire_date">(有效期至:{{expire_date}})</span> -->
                         </a></li>
                             <hr />
@@ -245,6 +245,9 @@ export default {
         vipType : function (){
             return this.isPRO ? 'PRO' : 'PRE'
         },
+        vipTypeTxt : function (){
+            return this.isPRO ? '专业版' : '高级版'
+        },
         expire_date: function() {
             if(this.isPRO){
                 return showDate(this.asset.pro_expire_date)
@@ -254,6 +257,15 @@ export default {
                 return ''
             }
         },
+        vipLeftDays : function (){
+            if(this.isPRO){
+                return parseInt((new Date(this.asset.pro_expire_date) - new Date()) / 86400000)
+            }else if(this.isVIP){
+                return parseInt((new Date(this.asset.expire_date) - new Date()) / 86400000)
+            }else{
+                return ''
+            }
+        }
     },
     methods: {
         // 展开盒子
