@@ -1,3 +1,5 @@
+import axios from 'axios'
+import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
 import { $ } from "./axios";
 import { $next } from "@jx3box/jx3box-common/js/axios";
 
@@ -7,6 +9,10 @@ function getUserInfo(uid) {
             uid: uid,
         },
     });
+}
+
+function getUserOverview(uid) {
+    return axios.get(__server + `user/overview/${uid}`);
 }
 
 function getUserPosts(uid) {
@@ -29,4 +35,4 @@ function getUserMedals(uid) {
     return $next.get("/api/user/" + uid + "/medals");
 }
 
-export { getUserInfo, getUserPosts, getDouyu, getUserMedals };
+export { getUserInfo, getUserPosts, getDouyu, getUserMedals, getUserOverview };
