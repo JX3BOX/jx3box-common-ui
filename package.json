@@ -29,8 +29,8 @@
         "last 2 versions"
     ],
     "dependencies": {
-        "@jx3box/jx3box-common": "^5.9.4",
-        "@jx3box/jx3box-data": "^0.6.4",
+        "@jx3box/jx3box-common": "^5.9.8",
+        "@jx3box/jx3box-data": "^0.6.5",
         "axios": "^0.19.2",
         "element-ui": "^2.13.2",
         "jquery": "^3.5.1",

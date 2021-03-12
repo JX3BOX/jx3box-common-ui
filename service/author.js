@@ -1,5 +1,5 @@
-import axios from 'axios'
-import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
+import axios from "axios";
+import { __server, __imgPath } from "@jx3box/jx3box-common/js/jx3box.json";
 import { $ } from "./axios";
 import { $next } from "@jx3box/jx3box-common/js/axios";
 
@@ -35,4 +35,15 @@ function getUserMedals(uid) {
     return $next.get("/api/user/" + uid + "/medals");
 }
 
-export { getUserInfo, getUserPosts, getDouyu, getUserMedals, getUserOverview };
+function getFrames() {
+    return axios.get(__imgPath + "data/user_avatar_frame.json");
+}
+
+export {
+    getUserInfo,
+    getUserPosts,
+    getDouyu,
+    getUserMedals,
+    getUserOverview,
+    getFrames,
+};

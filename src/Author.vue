@@ -2,8 +2,15 @@
     <div class="c-author" v-if="data">
         <div class="u-author">
             <a :href="link" class="u-avatar">
-                <img class="u-avatar-pic" :src="data.avatar | avatar" :alt="data.name" />
-                <i class="u-avatar-frame" v-if="data.avatar_frame"><img :src="data.avatar_frame | showFrame"></i>
+                <img
+                    class="u-avatar-pic"
+                    :src="data.avatar | avatar"
+                    :alt="data.name"
+                    :class="{ isCircle }"
+                />
+                <i class="u-avatar-frame" v-if="frameName"
+                    ><img :src="frameUrl"
+                /></i>
             </a>
             <a class="u-name" :href="link">
                 <span>{{ data.name }}</span>
@@ -76,11 +83,12 @@ import {
     showAvatar,
     authorLink,
     getTVlink,
+    getFrames,
 } from "@jx3box/jx3box-common/js/utils";
 import { __server, __imgPath } from "@jx3box/jx3box-common/js/jx3box.json";
 import { getUserOverview, getDouyu, getUserMedals } from "../service/author";
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
-import frames from "@jx3box/jx3box-data/data/box/user_avatar_frame.json";
+import frames from "@jx3box/jx3box-common/data/user_avatar_frame.json";
 export default {
     name: "Author",
     props: ["uid"],
@@ -90,7 +98,7 @@ export default {
             tv: "",
             medals: [],
             medal_map,
-            frames
+            frames,
         };
     },
     computed: {
@@ -123,6 +131,19 @@ export default {
         hasTrophy: function() {
             return this.medals.length;
         },
+        frameName : function (){
+            return (this.avatar_frame && this.frames[this.avatar_frame]) ? this.avatar_frame : ''
+        },
+        frameUrl : function (){
+            if(this.frameName){
+                let fileName = this.frames[this.frameName].files.s.file
+                return __imgPath + `image/avatar/${this.frameName}/${fileName}`
+            }
+            return ''
+        },
+        isCircle: function() {
+            return this.frameName && this.frames[this.frameName].style == "circle";
+        },
     },
     filters: {
         avatar: function(val) {
@@ -130,11 +151,6 @@ export default {
         },
         showTeamMedal: function(val) {
             return __imgPath + "image/medals/team/" + val + "-20.gif";
-        },
-        showFrame: function(name) {
-            // name = name || 'default'
-            let filename = frames[name].files.s.file
-            return __imgPath + `image/avatar/${name}/${filename}`;
         },
     },
     methods: {
@@ -155,6 +171,13 @@ export default {
             if (!this.id) return;
             getUserMedals(this.id).then((res) => {
                 this.medals = res.data.data;
+            });
+        },
+        loadFrames: function() {
+            getFrames().then((res) => {
+                if (res.data) {
+                    this.frames = res.data;
+                }
             });
         },
     },
