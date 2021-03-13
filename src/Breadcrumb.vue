@@ -20,6 +20,7 @@
         <Crumb :name="slug" v-if="crumbEnable" />
         <slot></slot>
         <div class="u-op">
+            <slot name="op-append"></slot>
             <a
                 v-if="publishEnable"
                 :href="slug | publish_url(slug)"
@@ -36,7 +37,7 @@
             >
             <Adminbutton v-if="adminEnable" class="u-admin" />
             <Admin v-if="adminEnable" />
-            <slot name="op"></slot>
+            <slot name="op-prepend"></slot>
         </div>
     </div>
 </template>
