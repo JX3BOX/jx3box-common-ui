@@ -36,6 +36,7 @@
             >
             <Adminbutton v-if="adminEnable" class="u-admin" />
             <Admin v-if="adminEnable" />
+            <slot name="op"></slot>
         </div>
     </div>
 </template>
