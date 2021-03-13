@@ -83,10 +83,9 @@ import {
     showAvatar,
     authorLink,
     getTVlink,
-    getFrames,
 } from "@jx3box/jx3box-common/js/utils";
 import { __server, __imgPath } from "@jx3box/jx3box-common/js/jx3box.json";
-import { getUserOverview, getDouyu, getUserMedals } from "../service/author";
+import { getUserOverview, getDouyu, getUserMedals,getFrames } from "../service/author";
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
 import frames from "@jx3box/jx3box-common/data/user_avatar_frame.json";
 export default {
@@ -108,14 +107,17 @@ export default {
         link: function() {
             return authorLink(this.id);
         },
-        tv_link: function() {
-            return getTVlink(this.data.tv_type, this.data.tv_id) || "";
-        },
-        tv_img: function() {
-            return __imgPath + "image/tv/" + this.data.tv_type + ".png";
+        tv_type : function (){
+            return this.data && this.data.tv_type
         },
         tv_id: function() {
-            return this.data.tv_id || 0;
+            return this.data && this.data.tv_id || 0;
+        },
+        tv_img: function() {
+            return __imgPath + "image/tv/" + this.tv_type + ".png";
+        },
+        tv_link: function() {
+            return getTVlink(this.tv_type, this.tv_id) || "";
         },
         tv_status: function() {
             return (this.tv && this.tv.show_status == 1) || false;
@@ -132,7 +134,7 @@ export default {
             return this.medals.length;
         },
         frameName : function (){
-            return (this.avatar_frame && this.frames[this.avatar_frame]) ? this.avatar_frame : ''
+            return (this.data.avatar_frame && this.frames[this.data.avatar_frame]) ? this.data.avatar_frame : ''
         },
         frameUrl : function (){
             if(this.frameName){
@@ -160,7 +162,7 @@ export default {
             });
         },
         loadTV: function() {
-            if (this.data.tv_type == "douyu") {
+            if (this.tv_type == "douyu") {
                 if (!this.tv_id || isNaN(this.tv_id)) return;
                 getDouyu(this.tv_id).then((res) => {
                     this.tv = res.data.data;
@@ -182,31 +184,16 @@ export default {
         },
     },
     watch: {
-        author: function(newdata) {
-            this.data = newdata;
-            this.$forceUpdate();
-        },
         uid: function() {
             this.loadData();
         },
-        tv_id: function(val) {
-            this.loadTV();
-        },
-        id: function() {
-            this.loadMedals();
-        },
     },
     mounted: function() {
-        if (this.author) {
-            this.data = this.author;
-            this.loadTV();
+        this.loadData().then(() => {
+            // this.loadTV();
             this.loadMedals();
-        } else if (this.uid) {
-            this.loadData().then(() => {
-                this.loadTV();
-                this.loadMedals();
-            });
-        }
+            this.loadFrames()
+        });
     },
 };
 </script>
