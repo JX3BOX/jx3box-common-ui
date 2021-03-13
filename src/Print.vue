@@ -35,6 +35,8 @@ export default {
             if (!this.lazyload) {
                 this.loadImages();
             }
+
+            this.fixPrintTitle()
             if (this.status) {
                 window.print();
             } else {
@@ -69,11 +71,6 @@ export default {
         },
         fixPrintTitle : function (){
             if (this.title) document.title = this.title; //为了打印时页眉的标题正确
-        }
-    },
-    watch : {
-        title : function (){
-            this.fixPrintTitle()
         }
     },
     mounted: function() {
