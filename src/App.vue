@@ -44,7 +44,7 @@
             <markBy />
             <menuBy :data="['test1', 'test2']" />
             <orderBy />
-            <tagBy :data="['PVE', 'PVX']" />
+            <tagBy :data="['PVE', 'PVX']" :type="tag"/>
 
             <hr />
 
@@ -156,6 +156,7 @@ export default {
         return {
             author: "",
             wikiPost: null,
+            tag : ''
         };
     },
     created: function() {

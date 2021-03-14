@@ -13,7 +13,7 @@
         <span class="u-options">
             <span
                 class="u-mode u-all"
-                :class="{ on: value == '' }"
+                :class="{ on: value === '' }"
                 @click="filter('', '')"
                 ><i class="el-icon-collection-tag"></i> 全部</span
             >
@@ -21,7 +21,7 @@
                 v-for="(item, key) in data"
                 :key="key"
                 class="u-mode"
-                :class="{ on: value == key }"
+                :class="{ on: item == current }"
                 @click="filter(key)"
                 ><i class="el-icon-collection-tag"></i> {{ item }}</span
             >
