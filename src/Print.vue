@@ -7,10 +7,10 @@
 
 <script>
 import jquery from "jquery";
-import User from '@jx3box/jx3box-common/js/user'
+import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "Print",
-    props: ["title",'enable','authorID'],
+    props: ["title", "enable", "authorID"],
     data: function() {
         return {
             lazyload: false,
@@ -18,17 +18,17 @@ export default {
         };
     },
     computed: {
-        cansee : function (){
-            if(this.enable != undefined){
-                return this.enable
-            }else{
-                if(User.getInfo().group >= 64) return true
-                return User.getInfo().uid == this.aid
+        cansee: function() {
+            if (this.enable != undefined) {
+                return this.enable;
+            } else {
+                if (User.getInfo().group >= 64) return true;
+                return User.getInfo().uid == this.aid;
             }
         },
-        aid : function (){
-            return this.authorID
-        }
+        aid: function() {
+            return this.authorID;
+        },
     },
     methods: {
         doPrint: function() {
@@ -36,7 +36,7 @@ export default {
                 this.loadImages();
             }
 
-            this.fixPrintTitle()
+            this.fixPrintTitle();
             if (this.status) {
                 window.print();
             } else {
@@ -60,7 +60,7 @@ export default {
                     return false;
                 }
             }
-            return true
+            return true;
         },
         loadImages: function() {
             const $ = jquery;
@@ -69,13 +69,11 @@ export default {
             });
             this.lazyload = true;
         },
-        fixPrintTitle : function (){
+        fixPrintTitle: function() {
             if (this.title) document.title = this.title; //为了打印时页眉的标题正确
-        }
+        },
     },
-    mounted: function() {
-        
-    },
+    mounted: function() {},
     components: {},
 };
 </script>

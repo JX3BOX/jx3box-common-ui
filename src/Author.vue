@@ -79,13 +79,14 @@
 
 <script>
 const liveStatusMap = ["等待开播", "直播中", "直播结束"];
+import { showAvatar, authorLink, tvLink } from "@jx3box/jx3box-common/js/utils";
+import { __server, __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import {
-    showAvatar,
-    authorLink,
-    getTVlink,
-} from "@jx3box/jx3box-common/js/utils";
-import { __server, __imgPath } from "@jx3box/jx3box-common/js/jx3box.json";
-import { getUserOverview, getDouyu, getUserMedals,getFrames } from "../service/author";
+    getUserOverview,
+    getDouyu,
+    getUserMedals,
+    getFrames,
+} from "../service/author";
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
 import frames from "@jx3box/jx3box-common/data/user_avatar_frame.json";
 export default {
@@ -107,17 +108,17 @@ export default {
         link: function() {
             return authorLink(this.id);
         },
-        tv_type : function (){
-            return this.data && this.data.tv_type
+        tv_type: function() {
+            return this.data && this.data.tv_type;
         },
         tv_id: function() {
-            return this.data && this.data.tv_id || 0;
+            return (this.data && this.data.tv_id) || 0;
         },
         tv_img: function() {
             return __imgPath + "image/tv/" + this.tv_type + ".png";
         },
         tv_link: function() {
-            return getTVlink(this.tv_type, this.tv_id) || "";
+            return tvLink(this.tv_type, this.tv_id) || "";
         },
         tv_status: function() {
             return (this.tv && this.tv.show_status == 1) || false;
@@ -133,18 +134,22 @@ export default {
         hasTrophy: function() {
             return this.medals.length;
         },
-        frameName : function (){
-            return (this.data.avatar_frame && this.frames[this.data.avatar_frame]) ? this.data.avatar_frame : ''
+        frameName: function() {
+            return this.data.avatar_frame && this.frames[this.data.avatar_frame]
+                ? this.data.avatar_frame
+                : "";
         },
-        frameUrl : function (){
-            if(this.frameName){
-                let fileName = this.frames[this.frameName].files.s.file
-                return __imgPath + `image/avatar/${this.frameName}/${fileName}`
+        frameUrl: function() {
+            if (this.frameName) {
+                let fileName = this.frames[this.frameName].files.s.file;
+                return __imgPath + `image/avatar/${this.frameName}/${fileName}`;
             }
-            return ''
+            return "";
         },
         isCircle: function() {
-            return this.frameName && this.frames[this.frameName].style == "circle";
+            return (
+                this.frameName && this.frames[this.frameName].style == "circle"
+            );
         },
     },
     filters: {
@@ -192,7 +197,7 @@ export default {
         this.loadData().then(() => {
             // this.loadTV();
             this.loadMedals();
-            this.loadFrames()
+            this.loadFrames();
         });
     },
 };

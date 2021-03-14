@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import {isApp} from '../assets/js/app.js'
+import { isApp } from "../assets/js/app.js";
 export default {
     name: "RightSidebar",
     props: [],
     data: function() {
         return {
-            isApp : isApp()
+            isApp: isApp(),
         };
     },
     computed: {},

@@ -1,28 +1,27 @@
-import { axios, $ } from "./axios";
-import { __helperUrl, __dataPath,__ossRoot,__ossMirror } from "@jx3box/jx3box-common/js/jx3box.json";
+import axios from "axios";
+import { $_server, $helper, $_helper } from "./axios";
+import { __dataPath } from "@jx3box/jx3box-common/data/jx3box.json";
 
 function getMsg() {
-    return $.get(__helperUrl + "api/messages/unread_total", {
-        withCredentials: true,
-    });
+    return $_helper.get("api/messages/unread_total");
 }
 
 function doLogout() {
-    return $.post("account/logout");
+    return $_server.post("account/logout");
 }
 
 function checkStatus() {
-    return $.get("user/me");
+    return $_server.get("user/me");
 }
 
 function getNav() {
-    return $.get(__helperUrl + "api/menu_group/header").then((res) => {
+    return $helper.get("api/menu_group/header").then((res) => {
         return res.data.data.menu_group.menus;
     });
 }
 
 function getPanel() {
-    return $.get(__helperUrl + "api/menu_group/panel").then((res) => {
+    return $helper.get("api/menu_group/panel").then((res) => {
         return res.data.data.menu_group.menus;
     });
 }

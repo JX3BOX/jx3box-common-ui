@@ -113,10 +113,10 @@
 <script>
 import Bus from "../service/bus";
 import { getRewrite } from "@jx3box/jx3box-common/js/utils";
-import { __server, __postType } from "@jx3box/jx3box-common/js/jx3box.json";
+import { __server, __postType } from "@jx3box/jx3box-common/data/jx3box.json";
 import { getSetting, postSetting } from "../service/admin";
 import User from "@jx3box/jx3box-common/js/user";
-import {cms as marks} from '@jx3box/jx3box-common/js/mark.json'
+import {cms as marks} from '@jx3box/jx3box-common/data/mark.json'
 export default {
     name: "Admin",
     data() {

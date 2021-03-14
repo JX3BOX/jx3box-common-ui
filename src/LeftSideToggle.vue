@@ -11,7 +11,7 @@
 <script>
 import Bus from "../service/bus";
 export default {
-    name : "LeftSideToggle",
+    name: "LeftSideToggle",
     props: ["mobileOnly"],
     data: function() {
         return {
@@ -45,8 +45,8 @@ export default {
 <style lang="less">
 .c-side-toggle {
     .pointer;
-    .size(20px,28px);
-    padding:0 5px;
+    .size(20px, 28px);
+    padding: 0 5px;
     .u-toggle {
         .h(29px);
         fill: @color;

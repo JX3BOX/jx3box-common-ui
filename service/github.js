@@ -1,12 +1,11 @@
-import { axios } from "./axios";
-import { __server, __proxy } from "@jx3box/jx3box-common/js/jx3box.json";
+import { $server } from "./axios";
 
 function getRepoInfo(repo) {
-    return axios.get(`${__proxy}github?repo=${repo}`);
+    return axios.get(`https://api.github.com/github?repo=${repo}`);
 }
 
 function getBuilders(coders) {
-    return axios.get(`${__server}user/list?uid=${coders}`);
+    return $server.get(`user/list?uid=${coders}`);
 }
 
 function getRepoCoders(repo) {

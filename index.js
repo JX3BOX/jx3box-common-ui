@@ -1,22 +1,20 @@
 import Header from './src/Header.vue'
 import Breadcrumb from './src/Breadcrumb.vue'
+import Admin from './src/Admin.vue'
+import Adminbutton from './src/Adminbutton.vue'
+import Box from './src/Box.vue'
 
 import LeftSidebar from './src/LeftSidebar.vue'
 import LeftSideToggle from './src/LeftSideToggle.vue'
 import Main from './src/Main.vue'
 import RightSidebar from './src/RightSidebar.vue'
-
 import Footer from './src/Footer.vue'
-
 import Bottom from './src/Bottom.vue'
+
 import RightSideMsg from './src/RightSideMsg.vue'
-import Github_REPO from './src/Github_REPO.vue'
 import Mark from './src/Mark.vue'
 import Author from './src/Author.vue'
 import Authorposts from './src/Authorposts.vue'
-
-import Admin from './src/Admin.vue'
-import Adminbutton from './src/Adminbutton.vue'
 
 import Fav from './src/Fav.vue'
 import Like from './src/Like.vue'
@@ -30,33 +28,26 @@ import tagBy from "./src/tagBy.vue";
 import orderBy from "./src/orderBy.vue";
 import menuBy from "./src/menuBy.vue";
 
-import Box from './src/Box.vue'
 import WikiPanel from './src/WikiPanel.vue'
 
 const components = {
     Header,
     Breadcrumb,
-    
+    Admin,
+    Adminbutton,
     Box,
 
     LeftSidebar,
     LeftSideToggle,
     Main,
     RightSidebar,
-
     Footer,
-
     Bottom,
-    RightSideMsg,
-    Github_REPO,
-    Mark,
 
+    RightSideMsg,
+    Mark,
     Author,
     Authorposts,
-    
-    
-    Admin,
-    Adminbutton,
 
     Fav,
     Like,

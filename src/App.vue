@@ -18,7 +18,7 @@
 
             <LeftSideToggle :mobileOnly="true"/>
 
-            <Print title="传入标题" />
+            <!-- <Print title="传入标题" />
             <hr>
 
             <QRcode />
@@ -37,9 +37,9 @@
             <hr>
 
             <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39"/>
-            <hr>
+            <hr> -->
 
-            <WikiPanel :wiki-post="wikiPost">
+            <!-- <WikiPanel :wiki-post="wikiPost">
               <template slot="head-title">
                 <i class="el-icon-location-information"></i>
                 <span class="u-title">通识正文</span>
@@ -59,7 +59,7 @@
             <hr>
 
             <WikiComments type="achievement" source-id="9096" />
-            <hr>
+            <hr> -->
 
             <RightSidebar>
                 <div style="height:1200px;">
@@ -68,8 +68,6 @@
 
                     <Author :author="author" uid="8"/>
                     <Authorposts uid="2"/>
-
-                    <Github_REPO REPO="jx3box-common" coder="8,1"></Github_REPO>
 
                 </div>
             </RightSidebar>
@@ -106,7 +104,7 @@ import WikiRevisions from "./WikiRevisions.vue";
 import WikiComments from "./WikiComments.vue";
 
 import axios from 'axios'
-import {__server} from '@jx3box/jx3box-common/js/jx3box.json'
+import {__server} from '@jx3box/jx3box-common/data/jx3box.json'
 import {WikiPost} from '@jx3box/jx3box-common/js/helper'
 
 export default {
@@ -115,25 +113,26 @@ export default {
         Header,
         Breadcrumb,
         LeftSidebar,
+        LeftSideToggle,
         Main,
-        RightSidebar,
         Footer,
         Bottom,
+        RightSidebar,
+
         RightSideMsg,
-        Github_REPO,
-        Mark,
         Author,
         Authorposts,
-        Fav,
-        Like,
-        Down,
-        Print,
-        Sharing,
-        QRcode,
-        LeftSideToggle,
-        WikiPanel,
-        WikiRevisions,
-        WikiComments,
+
+        // Mark,
+        // Fav,
+        // Like,
+        // Down,
+        // Print,
+        // Sharing,
+        // QRcode,
+        // WikiPanel,
+        // WikiRevisions,
+        // WikiComments,
     },
     data : function (){
         return {
@@ -146,12 +145,12 @@ export default {
         //     this.author = res.data.data
         // })
 
-        WikiPost.view(11042).then(
-            (res) => {
-                res = res.data;
-                if (res.code === 200) this.wikiPost = res.data;
-            }
-        );
+        // WikiPost.view(11042).then(
+        //     (res) => {
+        //         res = res.data;
+        //         if (res.code === 200) this.wikiPost = res.data;
+        //     }
+        // );
     },
     methods : {
         

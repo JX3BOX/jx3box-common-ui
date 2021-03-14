@@ -1,15 +1,11 @@
-import { $,axios } from "./axios";
-import {__helperUrl} from "@jx3box/jx3box-common/js/jx3box.json";
+import { $helper } from "./axios";
 
 function getBreadcrumb(name) {
-    return $.get(`${__helperUrl}api/breadcrumb/${name}`, {
-        headers: {Accept: "application/prs.helper.v2+json"},
-    });
+    return $helper.get(`api/breadcrumb/${name}`);
 }
 
 function getBreadcrumbs(params) {
-    return $.get(`${__helperUrl}api/breadcrumbs`, {
-        headers: {Accept: "application/prs.helper.v2+json"},
+    return $helper.get(`api/breadcrumbs`, {
         params: params,
     });
 }

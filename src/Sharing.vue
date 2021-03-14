@@ -7,24 +7,27 @@
 </template>
 
 <script>
-import { __imgPath } from "@jx3box/jx3box-common/js/jx3box.json";
+import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "Sharing",
-    props: ["title", "pic","url"],
+    props: ["title", "pic", "url"],
     data: function() {
         return {
             api: "https://service.weibo.com/share/share.php?",
         };
     },
     computed: {
-        url_ : function (){
-            return this.url || (location.origin + location.pathname + location.search)
+        url_: function() {
+            return (
+                this.url ||
+                location.origin + location.pathname + location.search
+            );
         },
-        title_ : function (){
-            return this.title || document.title
+        title_: function() {
+            return this.title || document.title;
         },
-        pic_ : function (){
-            return this.pic || __imgPath + `image/common/logo.png`  
+        pic_: function() {
+            return this.pic || __imgPath + `image/common/logo.png`;
         },
         sharelink: function() {
             return (

@@ -16,9 +16,8 @@
 </template>
 
 <script>
+import { postStat } from "@jx3box/jx3box-common/js/stat";
 import { getRewrite } from "@jx3box/jx3box-common/js/utils";
-import { addLike } from "../service/like";
-import { __server } from "@jx3box/jx3box-common/js/jx3box.json";
 import _ from "lodash";
 export default {
     name: "Like",
@@ -39,15 +38,16 @@ export default {
         }
     },
     methods: {
+        addLike : function (){
+            return postStat(this.type,this.pid,'likes')  
+        },
         doLike: function() {
             this.status = !this.status;
-            this.status && this.pid && addLike(this.pid,this.type);
+            this.status && this.pid && this.addLike();
         },
-
         doLikes: _.throttle(function() {
-            addLike(this.pid,this.type);
+            this.addLike();
         }, 2000),
-
         blast: function() {
             
             this.$refs.likeheart.classList.add("w-heart-animation");

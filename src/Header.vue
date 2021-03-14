@@ -125,10 +125,7 @@
                         id="c-header-profile"
                         @click="showmenu"
                     >
-                        <img
-                            class="u-avatar"
-                            :src="user.avatar"
-                        />
+                        <img class="u-avatar" :src="user.avatar" />
                         <span class="u-dropdown"></span>
                         <ul class="u-menu" v-show="!fold">
                             <li>
@@ -137,18 +134,33 @@
                                     <em>(UID : {{ user.uid }})</em></a
                                 >
                             </li>
-                            <li><a class="u-vip" href="/vip/premium?from=header_usermenu" target="_blank">
-                            <i
-                            class="i-icon-vip"
-                            :class="{ on: isVIP || isPRO }"
-                            >{{vipType}}</i
-                        >
-                        <span class="u-vip-type"><template v-if="isVIP || isPRO">{{vipTypeTxt}}<span class="u-vip-left">({{vipLeftDays}}天)</span></template><template v-else>升级账号类型</template></span>
-                        <!-- <span class="u-expire" v-if="expire_date">(有效期至:{{expire_date}})</span> -->
-                        </a></li>
+                            <li>
+                                <a
+                                    class="u-vip"
+                                    href="/vip/premium?from=header_usermenu"
+                                    target="_blank"
+                                >
+                                    <i
+                                        class="i-icon-vip"
+                                        :class="{ on: isVIP || isPRO }"
+                                        >{{ vipType }}</i
+                                    >
+                                    <span class="u-vip-type"
+                                        ><template v-if="isVIP || isPRO"
+                                            >{{ vipTypeTxt
+                                            }}<span class="u-vip-left"
+                                                >({{ vipLeftDays }}天)</span
+                                            ></template
+                                        ><template v-else
+                                            >升级账号类型</template
+                                        ></span
+                                    >
+                                    <!-- <span class="u-expire" v-if="expire_date">(有效期至:{{expire_date}})</span> -->
+                                </a>
+                            </li>
                             <hr />
-                            <li v-for="(item,i) in panel" :key="i">
-                                <a :href="item.link">{{item.label}}</a>
+                            <li v-for="(item, i) in panel" :key="i">
+                                <a :href="item.link">{{ item.label }}</a>
                             </li>
                             <hr />
                             <li>
@@ -175,19 +187,23 @@
 </template>
 
 <script>
-import JX3BOX from "@jx3box/jx3box-common/js/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import User from "@jx3box/jx3box-common/js/user";
 import nav from "../assets/data/nav";
 import panel from "../assets/data/panel";
 import nav_fold from "../assets/data/nav_fold";
-import { __Links, __Root } from "@jx3box/jx3box-common/js/jx3box.json";
-import { getMsg, doLogout, checkStatus, getNav,getPanel } from "../service/header";
-import { showAvatar } from "@jx3box/jx3box-common/js/utils";
+import { __Links, __Root } from "@jx3box/jx3box-common/data/jx3box.json";
+import {
+    getMsg,
+    doLogout,
+    checkStatus,
+    getNav,
+    getPanel,
+} from "../service/header";
 import Box from "../src/Box.vue";
 import Bus from "../service/bus";
 import _ from "lodash";
-import {isApp} from '../assets/js/app.js'
-import { getAsset, hasPRO, hasVIP } from "@jx3box/jx3box-common/js/pay";
+import { isApp } from "../assets/js/app.js";
 import { showDate } from "@jx3box/jx3box-common/js/moment";
 
 export default {
@@ -216,7 +232,7 @@ export default {
                 profile: __Links.dashboard.profile,
             },
             isOverlay: false,
-            isApp : isApp(),
+            isApp: isApp(),
             // VIP
             asset: {
                 expire_date: "2022-03-07T00:00:00+08:00",
@@ -236,36 +252,41 @@ export default {
         register_url: function() {
             return __Links.account.register + "?redirect=" + location.href;
         },
-        isVIP : function (){
-            return hasVIP(this.asset) || false
+        isVIP: function() {
+            return User._isVIP(this.asset) || false;
         },
-        isPRO : function (){
-            return hasPRO(this.asset) || false
+        isPRO: function() {
+            return User._isPRO(this.asset) || false;
         },
-        vipType : function (){
-            return this.isPRO ? 'PRO' : 'PRE'
+        vipType: function() {
+            return this.isPRO ? "PRO" : "PRE";
         },
-        vipTypeTxt : function (){
-            return this.isPRO ? '专业版' : '高级版'
+        vipTypeTxt: function() {
+            return this.isPRO ? "专业版" : "高级版";
         },
         expire_date: function() {
-            if(this.isPRO){
-                return showDate(this.asset.pro_expire_date)
-            }else if(this.isVIP){
+            if (this.isPRO) {
+                return showDate(this.asset.pro_expire_date);
+            } else if (this.isVIP) {
                 return showDate(this.asset.expire_date);
-            }else{
-                return ''
+            } else {
+                return "";
             }
         },
-        vipLeftDays : function (){
-            if(this.isPRO){
-                return parseInt((new Date(this.asset.pro_expire_date) - new Date()) / 86400000)
-            }else if(this.isVIP){
-                return parseInt((new Date(this.asset.expire_date) - new Date()) / 86400000)
-            }else{
-                return ''
+        vipLeftDays: function() {
+            if (this.isPRO) {
+                return parseInt(
+                    (new Date(this.asset.pro_expire_date) - new Date()) /
+                        86400000
+                );
+            } else if (this.isVIP) {
+                return parseInt(
+                    (new Date(this.asset.expire_date) - new Date()) / 86400000
+                );
+            } else {
+                return "";
             }
-        }
+        },
     },
     methods: {
         // 展开盒子
@@ -325,15 +346,15 @@ export default {
         // 菜单
         loadNav: function() {
             getNav().then((data) => {
-                this.nav = data || nav
+                this.nav = data || nav;
             });
             getPanel().then((data) => {
-                this.panel = data || panel
-            })
+                this.panel = data || panel;
+            });
         },
         // 资产
         loadAsset: function() {
-            getAsset().then((data) => {
+            User.getAsset().then((data) => {
                 this.asset = data;
             });
         },

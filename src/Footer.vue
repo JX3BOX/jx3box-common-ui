@@ -13,9 +13,16 @@
         <div class="c-footer-right">
             <a class="u-about" :href="about" target="_blank">关于我们</a>
             <em>|</em>
-            <a class="u-doc" href="https://www.jx3box.com/tool/?subtype=4" target="_blank">帮助文档</a>
+            <a
+                class="u-doc"
+                href="https://www.jx3box.com/tool/?subtype=4"
+                target="_blank"
+                >帮助文档</a
+            >
             <em>|</em>
-            <a class="u-log" href="https://github.com/JX3BOX" target="_blank">代码仓库</a>
+            <a class="u-log" href="https://github.com/JX3BOX" target="_blank"
+                >代码仓库</a
+            >
             <em>|</em>
             <a class="u-feedback" :href="feedback" target="_blank">反馈建议</a>
         </div>
@@ -24,15 +31,15 @@
 </template>
 
 <script>
-import { __Root, feedback } from "@jx3box/jx3box-common/js/jx3box.json";
-import {isApp} from '../assets/js/app.js'
+import { __Root, feedback } from "@jx3box/jx3box-common/data/jx3box.json";
+import { isApp } from "../assets/js/app.js";
 export default {
     name: "Footer",
-    data: function () {
+    data: function() {
         return {
-            about: __Root + 'about',
-            feedback: feedback + '&subject=' + location.href,
-            isApp : isApp()
+            about: __Root + "about",
+            feedback: feedback + "&subject=" + location.href,
+            isApp: isApp(),
         };
     },
 };

@@ -44,7 +44,7 @@
 
 <script>
 import Bus from "../service/bus";
-import { __Links, feedback } from "@jx3box/jx3box-common/js/jx3box.json";
+import { __Links, feedback } from "@jx3box/jx3box-common/data/jx3box.json";
 import Admin from "./Admin";
 import Crumb from "./Crumb";
 import Adminbutton from "./Adminbutton";

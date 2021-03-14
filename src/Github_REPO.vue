@@ -47,7 +47,7 @@ import {
     __ossRoot,
     __ossMirror,
     __Links,
-} from "@jx3box/jx3box-common/js/jx3box.json";
+} from "@jx3box/jx3box-common/data/jx3box.json";
 import { getRepoInfo, getBuilders, getRepoCoders } from "../service/github";
 export default {
     name: "Github_REPO",

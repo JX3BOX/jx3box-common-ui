@@ -1,7 +1,11 @@
 <template>
     <aside
         class="c-sidebar-left c-sidebar"
-        :class="{ isclose: !isOpen, isopen: isOpen,'without-bread': withoutBread }"
+        :class="{
+            isclose: !isOpen,
+            isopen: isOpen,
+            'without-bread': withoutBread,
+        }"
         v-if="!isApp"
     >
         <div class="c-sidebar-left-inner"><slot></slot></div>
@@ -25,52 +29,52 @@
 </template>
 
 <script>
-import Bus from '../service/bus';
-import {isApp} from '../assets/js/app.js'
+import Bus from "../service/bus";
+import { isApp } from "../assets/js/app.js";
 export default {
     name: "LeftSidebar",
-    props: ['open',"withoutBread"],
+    props: ["open", "withoutBread"],
     data: function() {
         return {
-            isOpen : true,
-            isApp : isApp()
+            isOpen: true,
+            isApp: isApp(),
         };
     },
-    computed : {
-        stickyHeader:function (){
-            return this.withoutBread
-        }
+    computed: {
+        stickyHeader: function() {
+            return this.withoutBread;
+        },
     },
-    watch : {
-        open : function (newval){
-            this.isOpen = newval === undefined ? true : !!newval
+    watch: {
+        open: function(newval) {
+            this.isOpen = newval === undefined ? true : !!newval;
         },
     },
     methods: {
         toggleLeftSide: function() {
-            let status = !this.isOpen
-            Bus.$emit('toggleLeftSide',status);
+            let status = !this.isOpen;
+            Bus.$emit("toggleLeftSide", status);
         },
     },
     mounted: function() {
-        Bus.$on('toggleLeftSide',(data)=>{
-            this.isOpen = data
-        })
+        Bus.$on("toggleLeftSide", (data) => {
+            this.isOpen = data;
+        });
 
         if (window.innerWidth < 1024) {
             this.isOpen = false;
 
             document.addEventListener("click", function() {
-                Bus.$emit('toggleLeftSide',false);
+                Bus.$emit("toggleLeftSide", false);
             });
         }
     },
-    created : function (){
-        this.isOpen = this.open === undefined ? true : this.open
+    created: function() {
+        this.isOpen = this.open === undefined ? true : this.open;
     },
 };
 </script>
 
 <style lang="less">
-@import '../assets/css/left-sidebar.less';
+@import "../assets/css/left-sidebar.less";
 </style>

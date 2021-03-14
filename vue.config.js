@@ -35,14 +35,20 @@ module.exports = {
     //❤️ Porxy ~
     devServer: {
         proxy: {
-            "/api": {
-                "target": process.env["DEV_SERVER"] == "true" ? "http://localhost:51818" : "https://next.jx3box.com",
+            "/api/vip": {
+                "target": "https://pay.jx3box.com",
                 "onProxyReq": function (request) {
                     request.setHeader("origin", "");
                 }
             },
-            "/team": {
-                "target": process.env["DEV_SERVER"] == "true" ? "http://localhost:51818" : "https://next.jx3box.com",
+            "/api/messages": {
+                "target": "https://helper.jx3box.com",
+                "onProxyReq": function (request) {
+                    request.setHeader("origin", "");
+                }
+            },
+            "/api": {
+                "target": "https://next.jx3box.com",
                 "onProxyReq": function (request) {
                     request.setHeader("origin", "");
                 }

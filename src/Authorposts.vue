@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { __Root } from "@jx3box/jx3box-common/js/jx3box.json";
+import { __Root } from "@jx3box/jx3box-common/data/jx3box.json";
 import { getUserPosts } from "../service/author";
 import {authorLink,getLink} from '@jx3box/jx3box-common/js/utils'
 export default {

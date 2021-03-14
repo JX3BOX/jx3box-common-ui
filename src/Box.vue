@@ -46,8 +46,7 @@
 import _ from "lodash";
 import Bus from "../service/bus";
 import {getBox} from '../service/header.js'
-import { __imgPath } from "@jx3box/jx3box-common/js/jx3box.json";
-// const __imgPath = './'
+import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import origin from "@jx3box/jx3box-common/data/box.json";
 const breakIcons = ['database','team','j3pz']
 
