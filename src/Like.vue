@@ -25,21 +25,21 @@ export default {
     data: function() {
         return {
             pid: getRewrite("pid"),
-            type : location.pathname.split('/')[1],
+            type: location.pathname.split("/")[1],
             status: false,
             total: this.count || 0,
             clicks: 0,
         };
     },
     computed: {},
-    watch : {
-        count : function (){
-            this.total = this.count || 0
-        }
+    watch: {
+        count: function() {
+            this.total = this.count || 0;
+        },
     },
     methods: {
-        addLike : function (){
-            return postStat(this.type,this.pid,'likes')  
+        addLike: function() {
+            return this.type && this.pid && postStat(this.type, this.pid, "likes");
         },
         doLike: function() {
             this.status = !this.status;
@@ -49,7 +49,6 @@ export default {
             this.addLike();
         }, 2000),
         blast: function() {
-            
             this.$refs.likeheart.classList.add("w-heart-animation");
             setTimeout(() => {
                 this.$refs.likeheart.classList.remove("w-heart-animation");

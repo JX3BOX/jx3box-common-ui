@@ -12,13 +12,14 @@ import Footer from './src/Footer.vue'
 import Bottom from './src/Bottom.vue'
 
 import RightSideMsg from './src/RightSideMsg.vue'
-import Mark from './src/Mark.vue'
 import Author from './src/Author.vue'
 import Authorposts from './src/Authorposts.vue'
 
-import Fav from './src/Fav.vue'
+import Mark from './src/Mark.vue'
 import Like from './src/Like.vue'
 import Down from './src/Down.vue'
+
+import Fav from './src/Fav.vue'
 import Print from './src/Print.vue'
 import QRcode from './src/QRcode.vue'
 import Sharing from './src/Sharing.vue'
@@ -45,14 +46,14 @@ const components = {
     Bottom,
 
     RightSideMsg,
-    Mark,
     Author,
     Authorposts,
 
-    Fav,
     Like,
     Down,
+    Mark,
 
+    Fav,
     QRcode,
     Print,
     Sharing,

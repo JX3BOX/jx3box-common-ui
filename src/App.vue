@@ -18,6 +18,14 @@
 
             <LeftSideToggle :mobileOnly="true"/>
 
+            <Like mode="heart" :count="100" :showCount="true"/>
+
+            <Down :count="100" :showCount="true" />
+
+            <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39"/>
+
+            <hr>
+
             <!-- <Print title="传入标题" />
             <hr>
 
@@ -30,13 +38,6 @@
             <Fav post-id="90" post-type="jx3dat"/>
             <hr>
 
-            <Like mode="heart" :count="100" :showCount="true"/>
-            <hr>
-
-            <Down :count="100" :showCount="true" />
-            <hr>
-
-            <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39"/>
             <hr> -->
 
             <!-- <WikiPanel :wiki-post="wikiPost">
@@ -88,7 +89,6 @@ import RightSidebar from "./RightSidebar.vue";
 import Footer from "./Footer.vue";
 import Bottom from "./Bottom.vue";
 import RightSideMsg from "./RightSideMsg.vue";
-import Github_REPO from "./Github_REPO.vue";
 import Mark from "./Mark.vue";
 import Author from "./Author.vue";
 import Authorposts from "./Authorposts.vue";
@@ -123,10 +123,11 @@ export default {
         Author,
         Authorposts,
 
-        // Mark,
+        Mark,
+        Like,
+        Down,
+
         // Fav,
-        // Like,
-        // Down,
         // Print,
         // Sharing,
         // QRcode,
