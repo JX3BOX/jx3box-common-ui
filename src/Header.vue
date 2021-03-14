@@ -129,7 +129,7 @@
                         <span class="u-dropdown"></span>
                         <ul class="u-menu" v-show="!fold">
                             <li>
-                                <a class="u-me" :href="url.dashboard"
+                                <a class="u-me" :href="url.homepage"
                                     ><b>{{ user.name | showUserName }}</b>
                                     <em>(UID : {{ user.uid }})</em></a
                                 >
@@ -230,6 +230,7 @@ export default {
                 publish: __Links.dashboard.publish,
                 dashboard: __Links.dashboard.home,
                 profile: __Links.dashboard.profile,
+                homepage : __Root + 'author/' + User.getInfo().uid
             },
             isOverlay: false,
             isApp: isApp(),
