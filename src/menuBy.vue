@@ -1,5 +1,5 @@
 <template>
-    <span class="w-filter-menu">
+    <span class="w-filter-menu" v-if="data">
         <el-dropdown>
             <span class="el-dropdown-link">
                 <span class="u-menu-label"
@@ -51,13 +51,5 @@ export default {
 </script>
 
 <style lang="less">
-.w-filter-menu {
-    .pointer;
-    .u-menu-label {
-        i {
-            .mr(5px);
-        }
-        .fz(12px);
-    }
-}
+    @import '../assets/css/menu-by.less';
 </style>

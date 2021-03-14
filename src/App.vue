@@ -1,44 +1,56 @@
 <template>
-    <div class="c-container-page">
-
+    <div class="container-page">
         <Header></Header>
-
-        <Breadcrumb name="频道名称" slug="slug" root="/slug" :publishEnable="true" :feedbackEnable="true" :adminEnable="true">
+        <Breadcrumb
+            name="频道名称"
+            slug="slug"
+            root="/slug"
+            :publishEnable="true"
+            :feedbackEnable="true"
+            :adminEnable="true"
+        >
             <img slot="logo" svg-inline src="../assets/img/jx3.svg" />
             bread info
         </Breadcrumb>
 
         <LeftSidebar :open="true">
             <div id="directory"></div>
-            <Author :author="author" uid="5507"/>
-            <Authorposts uid="2"/>
+            <Author :author="author" uid="5507" />
+            <Authorposts uid="2" />
         </LeftSidebar>
 
-        <Main :withoutLeft="false" :withoutRight="false" style="position:relative;height:5000px">
+        <Main
+            :withoutLeft="false"
+            :withoutRight="false"
+        >
 
-            <LeftSideToggle :mobileOnly="true"/>
+            <h1>简易交互组件</h1>
+            <LeftSideToggle :mobileOnly="true" />
 
-            <Like mode="heart" :count="100" :showCount="true"/>
+            <Like mode="heart" :count="100" :showCount="true" />
 
             <Down :count="100" :showCount="true" />
 
-            <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39"/>
-
-            <hr>
-
-            <!-- <Print title="传入标题" />
-            <hr>
-
-            <QRcode />
-            <hr>
-
-            <Sharing  />
-            <hr>
+            <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39" />
 
             <Fav post-id="90" post-type="jx3dat"/>
-            <hr>
 
-            <hr> -->
+            <hr />
+
+            <Print title="传入标题" />
+
+            <QRcode />
+
+            <Sharing />
+
+            <hr />
+
+            <markBy />
+            <menuBy :data="['test1', 'test2']" />
+            <orderBy />
+            <tagBy :data="['PVE','PVX']"/>
+
+            <hr>
 
             <!-- <WikiPanel :wiki-post="wikiPost">
               <template slot="head-title">
@@ -64,15 +76,12 @@
 
             <RightSidebar>
                 <div style="height:1200px;">
-                    
                     <RightSideMsg>Test</RightSideMsg>
 
-                    <Author :author="author" uid="8"/>
-                    <Authorposts uid="2"/>
-
+                    <Author :author="author" uid="8" />
+                    <Authorposts uid="2" />
                 </div>
             </RightSidebar>
-
 
             <Footer></Footer>
             <Bottom></Bottom>
@@ -98,17 +107,21 @@ import Down from "./Down.vue";
 import Print from "./Print.vue";
 import QRcode from "./QRcode.vue";
 import Sharing from "./Sharing.vue";
+import markBy from "./markBy.vue";
+import menuBy from "./menuBy.vue";
+import orderBy from "./orderBy.vue";
+import tagBy from "./tagBy.vue";
 import LeftSideToggle from "./LeftSideToggle.vue";
 import WikiPanel from "./WikiPanel.vue";
 import WikiRevisions from "./WikiRevisions.vue";
 import WikiComments from "./WikiComments.vue";
 
-import axios from 'axios'
-import {__server} from '@jx3box/jx3box-common/data/jx3box.json'
-import {WikiPost} from '@jx3box/jx3box-common/js/helper'
+import axios from "axios";
+import { __server } from "@jx3box/jx3box-common/data/jx3box.json";
+import { WikiPost } from "@jx3box/jx3box-common/js/helper";
 
 export default {
-    name : 'App',
+    name: "App",
     components: {
         Header,
         Breadcrumb,
@@ -126,26 +139,31 @@ export default {
         Mark,
         Like,
         Down,
+        Fav,
 
-        // Fav,
-        // Print,
-        // Sharing,
-        // QRcode,
+        Print,
+        Sharing,
+        QRcode,
+
+        markBy,
+        menuBy,
+        orderBy,
+        tagBy,
+
         // WikiPanel,
         // WikiRevisions,
         // WikiComments,
     },
-    data : function (){
+    data: function() {
         return {
-            author : '',
-            wikiPost : null,
-        }
+            author: "",
+            wikiPost: null,
+        };
     },
-    created : function (){
+    created: function() {
         // axios.get(__server + 'user/info?uid=8').then((res) => {
         //     this.author = res.data.data
         // })
-
         // WikiPost.view(11042).then(
         //     (res) => {
         //         res = res.data;
@@ -153,8 +171,6 @@ export default {
         //     }
         // );
     },
-    methods : {
-        
-    }
+    methods: {},
 };
 </script>

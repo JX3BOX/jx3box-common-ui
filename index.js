@@ -19,7 +19,6 @@ import Mark from './src/Mark.vue'
 import Like from './src/Like.vue'
 import Down from './src/Down.vue'
 
-import Fav from './src/Fav.vue'
 import Print from './src/Print.vue'
 import QRcode from './src/QRcode.vue'
 import Sharing from './src/Sharing.vue'
@@ -29,6 +28,7 @@ import tagBy from "./src/tagBy.vue";
 import orderBy from "./src/orderBy.vue";
 import menuBy from "./src/menuBy.vue";
 
+import Fav from './src/Fav.vue'
 import WikiPanel from './src/WikiPanel.vue'
 
 const components = {
@@ -53,7 +53,6 @@ const components = {
     Down,
     Mark,
 
-    Fav,
     QRcode,
     Print,
     Sharing,
@@ -63,6 +62,7 @@ const components = {
     markBy,
     menuBy,
 
+    Fav,
     WikiPanel,
 }
 
