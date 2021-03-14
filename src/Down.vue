@@ -35,10 +35,12 @@ export default {
     },
     methods: {
         addDown: function() {
-            return postStat(this.type, this.pid, "downs");
+            return (
+                this.type && this.pid && postStat(this.type, this.pid, "downs")
+            );
         },
         doDown: function() {
-            this.status && this.pid && this.addDown() && ~~this.total++;
+            this.status && this.pid && ~~this.total++ && this.addDown();
             this.status = false;
         },
     },
