@@ -19,11 +19,7 @@
             <Authorposts uid="2" />
         </LeftSidebar>
 
-        <Main
-            :withoutLeft="false"
-            :withoutRight="false"
-        >
-
+        <Main :withoutLeft="false" :withoutRight="false">
             <h1>简易交互组件</h1>
             <LeftSideToggle :mobileOnly="true" />
 
@@ -33,7 +29,7 @@
 
             <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39" />
 
-            <Fav post-id="90" post-type="jx3dat"/>
+            <Fav post-id="90" post-type="jx3dat" />
 
             <hr />
 
@@ -48,31 +44,33 @@
             <markBy />
             <menuBy :data="['test1', 'test2']" />
             <orderBy />
-            <tagBy :data="['PVE','PVX']"/>
+            <tagBy :data="['PVE', 'PVX']" />
 
-            <hr>
+            <hr />
 
-            <!-- <WikiPanel :wiki-post="wikiPost">
-              <template slot="head-title">
-                <i class="el-icon-location-information"></i>
-                <span class="u-title">通识正文</span>
-              </template>
-              <template slot="head-actions">
-                <a class="el-button el-button--primary u-publish">
-                  <i class="el-icon-edit"></i>
-                  <span>完善百科通识</span>
-                </a>
-                <span class="u-more">查看更多</span>
-              </template>
-              <template slot="body">正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容</template>
+            <WikiPanel :wiki-post="wikiPost">
+                <template slot="head-title">
+                    <i class="el-icon-location-information"></i>
+                    <span class="u-title">通识正文</span>
+                </template>
+                <template slot="head-actions">
+                    <a class="el-button el-button--primary u-publish">
+                        <i class="el-icon-edit"></i>
+                        <span>完善百科通识</span>
+                    </a>
+                    <span class="u-more">查看更多</span>
+                </template>
+                <template slot="body"
+                    >正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容</template
+                >
             </WikiPanel>
-            <hr>
+            <hr />
 
             <WikiRevisions type="achievement" source-id="9096" />
             <hr>
 
             <WikiComments type="achievement" source-id="9096" />
-            <hr> -->
+            <hr>
 
             <RightSidebar>
                 <div style="height:1200px;">
@@ -150,9 +148,9 @@ export default {
         orderBy,
         tagBy,
 
-        // WikiPanel,
-        // WikiRevisions,
-        // WikiComments,
+        WikiPanel,
+        WikiRevisions,
+        WikiComments,
     },
     data: function() {
         return {
@@ -161,15 +159,12 @@ export default {
         };
     },
     created: function() {
-        // axios.get(__server + 'user/info?uid=8').then((res) => {
-        //     this.author = res.data.data
-        // })
-        // WikiPost.view(11042).then(
-        //     (res) => {
-        //         res = res.data;
-        //         if (res.code === 200) this.wikiPost = res.data;
-        //     }
-        // );
+        WikiPost.view(11042).then(
+            (res) => {
+                res = res.data;
+                if (res.code === 200) this.wikiPost = res.data;
+            }
+        );
     },
     methods: {},
 };
