@@ -18,13 +18,16 @@ const $next$ = $https("next", {
 });
 const $_next = $_https("next", {
     interceptor: "next",
+    mute: true,
 });
 
 const $helper = $https("helper", {
     proxy: false,
     interceptor: "helper",
+    mute: true,
 });
 const $_helper = $_https("helper", {
     interceptor: "helper",
+    mute: true,
 });
 export { $server, $next, $next$, $helper, $_server, $_next, $_helper };
