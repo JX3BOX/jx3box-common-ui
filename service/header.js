@@ -15,19 +15,27 @@ function checkStatus() {
 }
 
 function getNav() {
-    return $helper.get("api/menu_group/header").then((res) => {
-        return res.data.data.menu_group.menus;
+    return axios.get(__dataPath + "data/box/header_nav.json").then((res) => {
+        return res.data;
     });
+    // return $helper.get("api/menu_group/header").then((res) => {
+    //     return res.data.data.menu_group.menus;
+    // });
 }
 
 function getPanel() {
-    return $helper.get("api/menu_group/panel").then((res) => {
-        return res.data.data.menu_group.menus;
+    return axios.get(__dataPath + "data/box/header_panel.json").then((res) => {
+        return res.data;
     });
+    // return $helper.get("api/menu_group/panel").then((res) => {
+    //     return res.data.data.menu_group.menus;
+    // });
 }
 
 function getBox() {
-    return axios.get(__dataPath + "data/common/box.json");
+    return axios.get(__dataPath + "data/box/box.json").then((res) => {
+        return res.data;
+    });
 }
 
 export { getMsg, doLogout, checkStatus, getNav, getPanel, getBox };

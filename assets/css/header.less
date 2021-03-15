@@ -75,7 +75,7 @@ body {
 
     margin-right: 5px;
 }
-@media screen and (max-width: @ipad) {
+@media screen and (max-width: @ipad-y) {
     .c-header-logo {
         padding-right: 0;
         .u-pic {
@@ -91,7 +91,7 @@ body {
 //搜索
 .c-header-search {
     float: left;
-    width: 200px;
+    width: 260px;
     padding: 16px 0;
 
     .u-form {
@@ -133,7 +133,7 @@ body {
 
     margin-right: 10px;
 }
-@media screen and (max-width: @ipad) {
+@media screen and (max-width: @ipad-y) {
     .c-header-search {
         float: none;
         width: auto;
@@ -146,24 +146,12 @@ body {
 //菜单
 .c-header-nav {
     .fl;
-
     font-family: Montserrat, "Helvetica Neue", sans-serif;
-
-    // ul {
-    //     .clearfix;
-    //     margin: 0;
-    //     padding: 0;
-    // }
-    // ul li {
-    //     line-height: @logo-size;
-    //     float: left;
-    //     padding: 0;
-    //     margin: 0;
-    // }
-
     .clearfix;
-    .u-item {
+    .u-item-box{
         .fl;
+    }
+    .u-item {
         .pointer;
         display: block;
         font-size: 14px;
@@ -190,6 +178,9 @@ body {
         }
         padding: 16px 15px;
         transition: 0.1s ease-in;
+        i{
+            .none;
+        }
     }
     .u-menu {
         .fl;
@@ -200,17 +191,22 @@ body {
     }
 }
 .c-header-menu {
-    .el-dropdown-menu__item {
+    .u-menu-item {
         padding: 0;
         a {
             color: @color;
             line-height: 16px;
             padding: 10px 30px;
+            .db;
+            span{
+                .fz(12px);
+                color:#999;
+            }
         }
     }
     .mt(0px) !important;
 }
-@media screen and (max-width: @ipad) {
+@media screen and (max-width: @ipad-y) {
     .c-header-nav {
         display: none;
     }

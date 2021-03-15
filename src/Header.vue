@@ -44,29 +44,53 @@
             </div>
 
             <!-- nav -->
-            <nav class="c-header-nav">
-                <a
-                    class="u-item"
-                    v-for="(item, i) in nav"
-                    :key="i"
-                    :class="{ on: isFocus(item.link) }"
-                    :href="item.link"
-                    >{{ item.label }}</a
-                >
-                <!-- <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
-                    <span class="u-item el-dropdown-link">
-                        更多<i class="el-icon-arrow-down el-icon--right"></i>
-                    </span>
-                    <el-dropdown-menu slot="dropdown" class="c-header-menu">
-                        <el-dropdown-item
-                            v-for="(item, type) in nav_fold"
-                            :key="type"
-                            ><a class="u-menu-item" :href="item.path">{{
-                                item.name
-                            }}</a></el-dropdown-item
+            <nav class="c-header-nav" v-if="nav">
+                <div class="u-item-box" v-for="item in nav" :key="item.key">
+                    <template v-if="item.children && item.children.length">
+                        <template v-if="item.status">
+                            <el-dropdown
+                                class="u-menu"
+                                :show-timeout="0"
+                                trigger="hover"
+                            >
+                                <a
+                                    class="u-item el-dropdown-link"
+                                    :class="{ on: isFocus(item.link) }"
+                                    :href="item.link"
+                                    >{{ item.label
+                                    }}<i
+                                        class="el-icon-arrow-down el-icon--right"
+                                    ></i
+                                ></a>
+                                <el-dropdown-menu
+                                    slot="dropdown"
+                                    class="c-header-menu"
+                                >
+                                    <el-dropdown-item
+                                        v-for="subitem in item.children"
+                                        :key="subitem.key"
+                                        class="u-menu-item"
+                                    >
+                                        <a
+                                            :href="subitem.link"
+                                            v-if="subitem.status"
+                                            >{{ subitem.label }} <span v-if="subitem.desc">{{subitem.desc}}</span></a
+                                        ></el-dropdown-item
+                                    >
+                                </el-dropdown-menu>
+                            </el-dropdown>
+                        </template>
+                    </template>
+                    <template v-else>
+                        <a
+                            class="u-item"
+                            :class="{ on: isFocus(item.link) }"
+                            :href="item.link"
+                            v-if="item.status"
+                            >{{ item.label }}</a
                         >
-                    </el-dropdown-menu>
-                </el-dropdown> -->
+                    </template>
+                </div>
             </nav>
 
             <slot></slot>
@@ -191,7 +215,6 @@ import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import User from "@jx3box/jx3box-common/js/user";
 import nav from "../assets/data/nav";
 import panel from "../assets/data/panel";
-import nav_fold from "../assets/data/nav_fold";
 import { __Links, __Root } from "@jx3box/jx3box-common/data/jx3box.json";
 import {
     getMsg,
@@ -213,7 +236,6 @@ export default {
         return {
             nav,
             panel,
-            nav_fold,
             isPhone: false,
             // 是否有消息
             pop: false,
@@ -230,7 +252,7 @@ export default {
                 publish: __Links.dashboard.publish,
                 dashboard: __Links.dashboard.home,
                 profile: __Links.dashboard.profile,
-                homepage : __Root + 'author/' + User.getInfo().uid
+                homepage: __Root + "author/" + User.getInfo().uid,
             },
             isOverlay: false,
             isApp: isApp(),
