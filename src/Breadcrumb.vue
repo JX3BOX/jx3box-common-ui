@@ -1,10 +1,10 @@
 <template>
     <div
         class="c-breadcrumb"
-        :class="{ isOverlay: overlayEnable && isOverlay }"
+        :class="{ isOverlay: overlayEnable && isOverlay,withoutLeft }"
         v-if="!isApp"
     >
-        <div class="u-menu" @click.stop="toggleLeftSide">
+        <div class="u-menu" @click.stop="toggleLeftSide" v-if="!withoutLeft">
             <img
                 class="u-toggle"
                 :class="{ on: isOpen }"
@@ -12,7 +12,7 @@
                 src="../assets/img/bread/menu.svg"
             />
         </div>
-        <a class="u-channel" :href="root">
+        <a class="u-channel" :href="root" :class={on:withoutLeft}>
             <i class="u-channel-logo"><slot name="logo"></slot></i>
             <span class="u-title">{{ name }}</span>
         </a>
@@ -62,7 +62,8 @@ export default {
         "adminEnable",
         "feedbackEnable",
         "overlayEnable",
-        "crumbEnable"
+        "crumbEnable",
+        "withoutLeft"
     ],
     data: function() {
         return {
