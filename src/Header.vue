@@ -74,7 +74,10 @@
                                         <a
                                             :href="subitem.link"
                                             v-if="subitem.status"
-                                            >{{ subitem.label }} <span v-if="subitem.desc">{{subitem.desc}}</span></a
+                                            >{{ subitem.label }}
+                                            <span v-if="subitem.desc">{{
+                                                subitem.desc
+                                            }}</span></a
                                         ></el-dropdown-item
                                     >
                                 </el-dropdown-menu>
@@ -99,7 +102,7 @@
             <div class="c-header-user" id="c-header-user">
                 <!-- user msg -->
                 <div
-                    v-if="logged_in == true"
+                    v-if="isLogin == true"
                     class="c-header-msg"
                     id="c-header-msg"
                 >
@@ -124,7 +127,7 @@
 
                 <!-- user panel -->
                 <div
-                    v-if="logged_in == true"
+                    v-if="isLogin == true"
                     class="c-header-panel"
                     id="c-header-panel"
                 >
@@ -144,7 +147,7 @@
                 <!-- user info -->
                 <div class="c-header-info">
                     <div
-                        v-show="logged_in == true"
+                        v-show="isLogin == true"
                         class="c-header-profile"
                         id="c-header-profile"
                         @click="showmenu"
@@ -196,7 +199,7 @@
                         </ul>
                     </div>
 
-                    <div v-show="logged_in == false" class="c-header-login">
+                    <div v-show="isLogin == false" class="c-header-login">
                         <a class="u-register u-default" :href="register_url"
                             >注册</a
                         >
@@ -216,13 +219,7 @@ import User from "@jx3box/jx3box-common/js/user";
 import nav from "../assets/data/nav";
 import panel from "../assets/data/panel";
 import { __Links, __Root } from "@jx3box/jx3box-common/data/jx3box.json";
-import {
-    getMsg,
-    doLogout,
-    checkStatus,
-    getNav,
-    getPanel,
-} from "../service/header";
+import { getMsg, checkStatus, getNav, getPanel } from "../service/header";
 import Box from "../src/Box.vue";
 import Bus from "../service/bus";
 import _ from "lodash";
@@ -242,7 +239,7 @@ export default {
             // 是否折叠
             fold: true,
             // 登录信息
-            logged_in: false,
+            isLogin: false,
             user: {},
             // links
             url: {
@@ -312,14 +309,28 @@ export default {
         },
     },
     methods: {
-        // 展开盒子
+        // webView检测
+        checkIsWebView: function() {
+            if (window.navigator.userAgent.includes("jx3boxApp")) {
+                document.documentElement.classList.add("env-app");
+            }
+        },
+        // 盒子
         toggleBox: function(e) {
             e.stopPropagation();
             Bus.$emit("toggleBox");
         },
-        // 导航焦点
+        // 导航
         isFocus: function(type) {
             return location.href.includes(type);
+        },
+        loadNav: function() {
+            getNav().then((res) => {
+                this.nav = res.data || nav;
+            });
+            getPanel().then((res) => {
+                this.panel = res.data || panel;
+            });
         },
         // 菜单
         showmenu: function(e) {
@@ -332,6 +343,25 @@ export default {
                 vm.fold = true;
             });
         },
+        // 注销
+        logout: function() {
+            User.destroy()
+                .then((res) => {
+                    this.isLogin = false;
+                    this.user = User.getInfo();
+                    if (location.href.indexOf("dashboard") > 0) {
+                        location.href = __Root;
+                    }
+                })
+                .then(() => {
+                    this.$notify({
+                        title: "成功",
+                        message: "登出成功",
+                        type: "success",
+                        duration:1500,
+                    });
+                });
+        },
         // 消息
         checkMSG: function() {
             getMsg().then((res) => {
@@ -340,46 +370,22 @@ export default {
                 }
             });
         },
-        // 注销
-        logout: function() {
-            User.destroy().then((res) => {
-                this.logged_in = false;
-                this.user = User.getInfo();
-                if (location.href.indexOf("dashboard") > 0) {
-                    location.href = __Root;
-                }
-            });
-        },
-        // webView检测
-        checkIsWebView: function() {
-            if (window.navigator.userAgent.includes("jx3boxApp")) {
-                document.documentElement.classList.add("env-app");
-            }
-        },
-        // 检查
-        init: function() {
-            this.loadNav();
-            this.logged_in = User.isLogin();
-            this.user = User.getInfo();
-            if (this.logged_in) {
-                this.checkMSG();
-            }
-            this.checkIsWebView();
-        },
-        // 菜单
-        loadNav: function() {
-            getNav().then((data) => {
-                this.nav = data || nav;
-            });
-            getPanel().then((data) => {
-                this.panel = data || panel;
-            });
-        },
         // 资产
         loadAsset: function() {
             User.getAsset().then((data) => {
                 this.asset = data;
-            });
+            })
+        },
+        // 检查
+        init: function() {
+            this.checkIsWebView();
+            this.loadNav();
+            this.isLogin = User.isLogin();
+            this.user = User.getInfo();
+            if (this.isLogin) {
+                this.checkMSG();
+                this.loadAsset();
+            }
         },
     },
     filters: {
@@ -410,9 +416,7 @@ export default {
             );
         }
     },
-    mounted: function() {
-        this.logged_in && this.loadAsset();
-    },
+    mounted: function() {},
     components: {
         Box,
     },

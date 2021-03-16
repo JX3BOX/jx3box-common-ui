@@ -29,7 +29,7 @@
 
             <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39" />
 
-            <Fav post-id="90" post-type="jx3dat" />
+            <!-- <Fav post-id="90" post-type="jx3dat" /> -->
 
             <hr />
 
@@ -137,7 +137,7 @@ export default {
         Mark,
         Like,
         Down,
-        Fav,
+        // Fav,
 
         Print,
         Sharing,

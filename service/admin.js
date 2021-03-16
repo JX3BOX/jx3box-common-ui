@@ -1,8 +1,10 @@
-import { $_server } from "./axios";
+import { $_https } from "@jx3box/jx3box-common/js/https.js";
 
 function getSetting(pid) {
-    return $_server
-        .get("post/find", {
+    return $_https("server", {
+        proxy: false,
+    })
+        .get("/post/find", {
             params: {
                 id: pid,
             },
@@ -13,7 +15,9 @@ function getSetting(pid) {
 }
 
 function postSetting(data) {
-    return $_server.post("post/manage", data);
+    return $_https("server", {
+        proxy: false,
+    }).post("/post/manage", data);
 }
 
 export { getSetting, postSetting };

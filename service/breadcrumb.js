@@ -1,11 +1,12 @@
-import { $helper } from "./axios";
+import axios from "axios";
+import { __helperUrl } from "@jx3box/jx3box-common/data/jx3box.json";
 
 function getBreadcrumb(name) {
-    return $helper.get(`api/breadcrumb/${name}`);
+    return axios.get(__helperUrl + `api/breadcrumb/${name}`);
 }
 
 function getBreadcrumbs(params) {
-    return $helper.get(`api/breadcrumbs`, {
+    return axios.get(__helperUrl + `api/breadcrumbs`, {
         params: params,
     });
 }

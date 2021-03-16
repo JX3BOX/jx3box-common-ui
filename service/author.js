@@ -1,9 +1,9 @@
 import axios from "axios";
-import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import { $next$, $server } from "./axios";
+import { __imgPath, __server } from "@jx3box/jx3box-common/data/jx3box.json";
+import { $https } from "@jx3box/jx3box-common/js/https.js";
 
 function getUserInfo(uid) {
-    return $server.get("user/info", {
+    return axios.get(__server + "user/info", {
         params: {
             uid: uid,
         },
@@ -11,11 +11,11 @@ function getUserInfo(uid) {
 }
 
 function getUserOverview(uid) {
-    return $server.get(`user/overview/${uid}`);
+    return axios.get(__server + `user/overview/${uid}`);
 }
 
 function getUserPosts(uid) {
-    return $server.get("post/list", {
+    return axios.get(__server + "post/list", {
         params: {
             author: uid,
         },
@@ -23,7 +23,10 @@ function getUserPosts(uid) {
 }
 
 function getDouyu(ids) {
-    return $next$.get("/team/douyu", {
+    return $https("next", {
+        proxy: true,
+        mute: true,
+    }).get("/team/douyu", {
         params: {
             tv_id: ids,
         },
@@ -31,7 +34,10 @@ function getDouyu(ids) {
 }
 
 function getUserMedals(uid) {
-    return $next$.get("/api/user/" + uid + "/medals");
+    return $https("next", {
+        proxy: true,
+        mute: true,
+    }).get("/api/user/" + uid + "/medals");
 }
 
 function getFrames() {
