@@ -385,7 +385,7 @@ export default {
         // 检查
         init: function() {
             this.checkIsWebView();
-            // this.loadNav();
+            this.loadNav();
             this.isLogin = User.isLogin();
             this.user = User.getInfo();
             if (this.isLogin) {
