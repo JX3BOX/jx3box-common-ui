@@ -19,6 +19,11 @@
                 <span class="u-txt">魔盒</span>
             </div>
 
+            <!-- origin -->
+            <div class="c-header-origin">
+                <a class="u-txt" href="https://origin.jx3box.com" target="_blank"><i class="el-icon-s-home"></i> 怀旧服</a>
+            </div>
+
             <!-- search -->
             <div class="c-header-search" id="c-header-search">
                 <div class="c-search">
@@ -65,6 +70,7 @@
                                 <el-dropdown-menu
                                     slot="dropdown"
                                     class="c-header-menu"
+                                    v-if="item.hasChildren"
                                 >
                                     <el-dropdown-item
                                         v-for="subitem in item.children"
@@ -379,7 +385,7 @@ export default {
         // 检查
         init: function() {
             this.checkIsWebView();
-            this.loadNav();
+            // this.loadNav();
             this.isLogin = User.isLogin();
             this.user = User.getInfo();
             if (this.isLogin) {

@@ -55,15 +55,15 @@ body {
     }
     &:hover {
         // background-color:@primary;
-        .u-pic {
-            // transform: rotateZ(180deg);
-            svg {
-                fill: #0cf;
-            }
-        }
-        .u-txt {
-            color: #0cf;
-        }
+        // .u-pic {
+        //     // transform: rotateZ(180deg);
+        //     svg {
+        //         fill: #0cf;
+        //     }
+        // }
+        // .u-txt {
+        //     color: #0cf;
+        // }
     }
     .u-txt {
         color: #fff;
@@ -85,6 +85,31 @@ body {
             display: none;
         }
         margin-right: 0;
+    }
+}
+
+//怀旧服
+.c-header-origin{
+    .fl;
+    padding:16px 0;
+    .mr(10px);
+    .u-txt{
+        font-size: 14px;
+        display: block;
+        border: 2px solid #303133;
+        border-radius: 4px;
+        padding: 4px 10px;
+        background: @color-link;
+        color: #fff;
+        &:hover{
+            background-color:#3590f7;
+            // border-color:#303133;
+        }
+    }
+}
+@media screen and (max-width:@ipad-y){
+    .c-header-origin{
+        .none;
     }
 }
 
