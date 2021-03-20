@@ -1,18 +1,15 @@
 import axios from "axios";
-import { $_https } from "@jx3box/jx3box-common/js/https.js";
+import { $helper } from "@jx3box/jx3box-common/js/https.js";
 import { __dataPath } from "@jx3box/jx3box-common/data/jx3box.json";
 
 function getMsg() {
-    return $_https("helper", {
-        popType: "notify",
-        proxy : false,
-    }).get("/api/messages/unread_total");
+    return $helper({proxy:true}).get("/api/messages/unread_total");
 }
 
 function checkStatus() {
     return $_https("server", {
         popType: "notify",
-        proxy : false
+        proxy: false,
     }).get("/user/me");
 }
 

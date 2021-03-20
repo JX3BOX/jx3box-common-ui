@@ -1,12 +1,9 @@
 import qs from "qs";
-import { $_https } from "@jx3box/jx3box-common/js/https.js";
+import { $next } from "@jx3box/jx3box-common/js/https.js";
 
 function hasFav(post_type, post_id) {
     if (post_type && post_id) {
-        return $_https("helper", {
-            popType: "notify",
-            proxy : false
-        }).get(`/api/post/favorite/favorited`, {
+        return $next().get(`/api/post/favorite/favorited`, {
             params: {
                 post_type: post_type,
                 post_id: post_id,
@@ -17,10 +14,7 @@ function hasFav(post_type, post_id) {
 
 function addFav(post_type, post_id) {
     if (post_type && post_id) {
-        return $_https("helper", {
-            popType: "notify",
-            proxy : false
-        }).post(
+        return $next().post(
             `/api/post/favorite`,
             qs.stringify({
                 post_type: post_type,
@@ -33,10 +27,7 @@ function addFav(post_type, post_id) {
 
 function delFav(post_type, post_id) {
     if (post_type && post_id) {
-        return $_https("helper", {
-            popType: "notify",
-            proxy : false
-        }).post(
+        return $next().post(
             `/api/post/favorite`,
             qs.stringify({
                 post_type: post_type,

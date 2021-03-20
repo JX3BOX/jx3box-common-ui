@@ -371,9 +371,7 @@ export default {
         // 消息
         checkMSG: function() {
             getMsg().then((res) => {
-                if (res.data && res.data.unread) {
-                    this.pop = !!res.data.unread;
-                }
+                this.pop = !!res.data.data.unread; 
             });
         },
         // 资产

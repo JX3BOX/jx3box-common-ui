@@ -1,6 +1,6 @@
 import axios from "axios";
 import { __imgPath, __server } from "@jx3box/jx3box-common/data/jx3box.json";
-import { $https } from "@jx3box/jx3box-common/js/https.js";
+import { $next } from "@jx3box/jx3box-common/js/https.js";
 
 function getUserInfo(uid) {
     return axios.get(__server + "user/info", {
@@ -23,10 +23,7 @@ function getUserPosts(uid) {
 }
 
 function getDouyu(ids) {
-    return $https("next", {
-        proxy: true,
-        mute: true,
-    }).get("/team/douyu", {
+    return $next().get("/team/douyu", {
         params: {
             tv_id: ids,
         },
@@ -34,10 +31,7 @@ function getDouyu(ids) {
 }
 
 function getUserMedals(uid) {
-    return $https("next", {
-        proxy: true,
-        mute: true,
-    }).get("/api/user/" + uid + "/medals");
+    return $next().get("/api/user/" + uid + "/medals");
 }
 
 function getFrames() {
