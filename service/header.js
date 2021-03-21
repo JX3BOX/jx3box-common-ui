@@ -3,7 +3,7 @@ import { $helper } from "@jx3box/jx3box-common/js/https.js";
 import { __dataPath } from "@jx3box/jx3box-common/data/jx3box.json";
 
 function getMsg() {
-    return $helper({ proxy: true, mute: true }).get(
+    return $helper({ mute: true }).get(
         "/api/messages/unread_total"
     );
 }
