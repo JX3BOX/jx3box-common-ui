@@ -20,9 +20,7 @@
             </div>
 
             <!-- origin -->
-            <div class="c-header-origin">
-                <a class="u-txt" href="https://origin.jx3box.com" target="_blank"><i class="el-icon-s-home"></i> 怀旧服</a>
-            </div>
+            <clientSwitch/>
 
             <!-- search -->
             <div class="c-header-search" id="c-header-search">
@@ -231,7 +229,7 @@ import Bus from "../service/bus";
 import _ from "lodash";
 import { isApp } from "../assets/js/app.js";
 import { showDate } from "@jx3box/jx3box-common/js/moment";
-
+import clientSwitch from './header/clientSwitch.vue'
 export default {
     name: "Header",
     props: ["overlayEnable"],
@@ -423,6 +421,7 @@ export default {
     mounted: function() {},
     components: {
         Box,
+        clientSwitch
     },
 };
 </script>

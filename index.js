@@ -1,4 +1,5 @@
 import Header from './src/Header.vue'
+import clientSwitch from './src/header/clientSwitch.vue'
 import Breadcrumb from './src/Breadcrumb.vue'
 import Admin from './src/Admin.vue'
 import Adminbutton from './src/Adminbutton.vue'
@@ -34,6 +35,7 @@ import WikiPanel from './src/WikiPanel.vue'
 
 const components = {
     Header,
+    clientSwitch,
     Breadcrumb,
     Admin,
     Adminbutton,

@@ -18,7 +18,7 @@
         "link": "/jx3dat",
         "status": 1,
         "key": "jx3dat",
-        "hasChildren": true,
+        "hasChildren": false,
         "children": [
             {
                 "label": "插件数据",
@@ -89,7 +89,7 @@
             {
                 "label": "DPS排行榜",
                 "link": "/dps",
-                "status": 1,
+                "status":1,
                 "key": "dps_rank"
             },
             {
@@ -122,7 +122,7 @@
             {
                 "label": "任务百科",
                 "link": "/quest",
-                "status": 1,
+                "status":1,
                 "key": "quest"
             },
             {
@@ -149,7 +149,7 @@
             {
                 "label": "魔盒助手",
                 "link": "/assistant",
-                "status": 1,
+                "status":1,
                 "key": "assistant"
             },
             {
@@ -182,20 +182,20 @@
             {
                 "label": "铭牌",
                 "desc": "（剑网3.com）",
-                "link": "/bbs/#namespace",
+                "link": "/bbs/#/namespace",
                 "status": 1,
                 "key": "namespace"
             },
             {
                 "label": "剑三骚话",
-                "link": "/bbs/#joke",
-                "status": 1,
+                "link": "/bbs/#/joke",
+                "status":1,
                 "key": "joke"
             },
             {
                 "label": "剑三表情",
-                "link": "/bbs/#emotion",
-                "status": 1,
+                "link": "/bbs/#/emotion",
+                "status":1,
                 "key": "emotion"
             },
             {
@@ -215,7 +215,7 @@
     {
         "label": "交易",
         "link": "/trade",
-        "status": 1,
+        "status":1,
         "key": "trade",
         "hasChildren": true,
         "children": [
@@ -242,7 +242,7 @@
     {
         "label": "商城",
         "link": "/mall",
-        "status": 1,
+        "status":1,
         "key": "mall",
         "hasChildren": false
     }
