@@ -3,10 +3,10 @@
         <ul>
             <li
                 class="u-client"
+                :class="{ on: client == value }"
                 v-for="(label, value) in clients"
                 :key="value"
                 @click="filter(value)"
-                :class="{ on: client == value }"
             >
                 {{ label }}
             </li>
@@ -25,7 +25,7 @@ export default {
     props: ["type"],
     data: function() {
         return {
-            client: this.type || "std",
+            client: this.type || "all",
             clients,
         };
     },
@@ -33,15 +33,18 @@ export default {
     methods: {
         filter: function(key) {
             this.client = key;
-            this.$emit("filter", { type: "client", val: key });
+            this.$emit("filter", { type: "client", val: key == 'all' ? '' : key });
         },
     },
     mounted: function() {
         let query = new URLSearchParams(location.search);
-        this.client =
-            (this.$route && this.$route.query.client) || query.get("client");
+        let client = (this.$route && this.$route.query.client) || query.get("client");
+        if(client){
+            this.client = client
+        }else{
+            this.client = this.type || 'all'
+        }
     },
-    components: {},
 };
 </script>
 
