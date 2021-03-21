@@ -225,7 +225,7 @@ import User from "@jx3box/jx3box-common/js/user";
 import nav from "../assets/data/nav";
 import panel from "../assets/data/panel";
 import { __Links, __Root } from "@jx3box/jx3box-common/data/jx3box.json";
-import { getMsg, checkStatus, getNav, getPanel } from "../service/header";
+import { getMsg, getNav, getPanel } from "../service/header";
 import Box from "../src/Box.vue";
 import Bus from "../service/bus";
 import _ from "lodash";

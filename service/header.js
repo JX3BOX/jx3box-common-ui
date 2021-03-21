@@ -3,14 +3,9 @@ import { $helper } from "@jx3box/jx3box-common/js/https.js";
 import { __dataPath } from "@jx3box/jx3box-common/data/jx3box.json";
 
 function getMsg() {
-    return $helper({proxy:true}).get("/api/messages/unread_total");
-}
-
-function checkStatus() {
-    return $_https("server", {
-        popType: "notify",
-        proxy: false,
-    }).get("/user/me");
+    return $helper({ proxy: true, mute: true }).get(
+        "/api/messages/unread_total"
+    );
 }
 
 function getNav() {
@@ -31,4 +26,4 @@ function getBox() {
     return axios.get(__dataPath + "data/box/box.json");
 }
 
-export { getMsg, checkStatus, getNav, getPanel, getBox };
+export { getMsg, getNav, getPanel, getBox };

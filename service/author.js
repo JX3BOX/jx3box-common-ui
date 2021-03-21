@@ -23,7 +23,7 @@ function getUserPosts(uid) {
 }
 
 function getDouyu(ids) {
-    return $next().get("/team/douyu", {
+    return $next({mute:true}).get("/team/douyu", {
         params: {
             tv_id: ids,
         },
@@ -31,7 +31,7 @@ function getDouyu(ids) {
 }
 
 function getUserMedals(uid) {
-    return $next().get("/api/user/" + uid + "/medals");
+    return $next({mute:true}).get("/api/user/" + uid + "/medals");
 }
 
 function getFrames() {
