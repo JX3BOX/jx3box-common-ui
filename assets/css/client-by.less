@@ -1,0 +1,31 @@
+.w-filter-client{
+    ul,li{
+        list-style: none;
+        padding:0;
+        margin:0;
+    }
+    ul{
+        .clearfix;
+        .dbi;
+        background-color:@bg-gray;
+        border:1px solid #eee;
+        .r(3px);
+        overflow: hidden;
+    }
+    li{
+        padding:5px 10px;
+        .fl;
+        .fz(12px);
+        border-right:1px solid #eee;
+        &:last-child{
+            border-right: none;
+        }
+        .pointer;
+
+        &.on{
+            background-color:@color-link;
+            color:#fff;
+            border-color:darken(@color-link,5%);
+        }
+    }
+}

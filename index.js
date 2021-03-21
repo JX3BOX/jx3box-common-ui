@@ -27,6 +27,7 @@ import markBy from './src/markBy.vue'
 import tagBy from "./src/tagBy.vue";
 import orderBy from "./src/orderBy.vue";
 import menuBy from "./src/menuBy.vue";
+import clientBy from "./src/clientBy.vue";
 
 import Fav from './src/Fav.vue'
 import WikiPanel from './src/WikiPanel.vue'
@@ -61,6 +62,7 @@ const components = {
     orderBy,
     markBy,
     menuBy,
+    clientBy,
 
     Fav,
     WikiPanel,

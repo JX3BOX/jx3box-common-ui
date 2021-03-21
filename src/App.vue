@@ -45,6 +45,7 @@
             <menuBy :data="['test1', 'test2']" />
             <orderBy />
             <tagBy :data="['PVE', 'PVX']" :type="tag"/>
+            <clientBy type=""/>
 
             <hr />
 
@@ -109,6 +110,7 @@ import markBy from "./markBy.vue";
 import menuBy from "./menuBy.vue";
 import orderBy from "./orderBy.vue";
 import tagBy from "./tagBy.vue";
+import clientBy from "./clientBy.vue";
 import LeftSideToggle from "./LeftSideToggle.vue";
 import WikiPanel from "./WikiPanel.vue";
 import WikiRevisions from "./WikiRevisions.vue";
@@ -147,6 +149,7 @@ export default {
         menuBy,
         orderBy,
         tagBy,
+        clientBy,
 
         WikiPanel,
         WikiRevisions,
