@@ -9,7 +9,6 @@
             v-for="(item, i) in clients"
             :key="i"
             :href="item.link"
-            :target="i ? '_blank' : '_self'"
             v-show="!i || clientThink"
             ><i class="el-icon-s-home"></i> {{ item.name }}</a
         >
