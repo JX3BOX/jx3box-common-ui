@@ -8,18 +8,13 @@ function getMsg() {
     );
 }
 
-function getNav() {
-    return axios.get(__dataPath + "data/box/header_nav.json");
-    // return $helper.get("api/menu_group/header").then((res) => {
-    //     return res.data.data.menu_group.menus;
-    // });
+function getNav(client) {
+    let file = client == 'origin' ? 'header_nav_origin.json' : 'header_nav.json'
+    return axios.get(__dataPath + `data/box/${file}`);
 }
 
 function getPanel() {
     return axios.get(__dataPath + "data/box/header_panel.json");
-    // return $helper.get("api/menu_group/panel").then((res) => {
-    //     return res.data.data.menu_group.menus;
-    // });
 }
 
 function getBox() {

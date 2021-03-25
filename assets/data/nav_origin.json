@@ -1,0 +1,58 @@
+[
+    {
+        "label": "首页",
+        "link": "/origin",
+        "status": 1,
+        "key": "origin",
+        "hasChildren": false
+    },
+    {
+        "label": "宏库",
+        "link": "/macro",
+        "status": 1,
+        "key": "macro",
+        "hasChildren": false
+    },
+    {
+        "label": "插件",
+        "link": "/jx3dat",
+        "status": 1,
+        "key": "jx3dat",
+        "hasChildren": false
+    },
+    {
+        "label": "副本",
+        "link": "/fb",
+        "status": 1,
+        "key": "fb",
+        "hasChildren": false
+    },
+    {
+        "label": "职业",
+        "link": "/bps",
+        "status": 1,
+        "key": "bps",
+        "hasChildren": false
+    },
+    {
+        "label": "百科",
+        "link": "/wiki",
+        "status": 1,
+        "key": "wiki",
+        "hasChildren": false
+    },
+    {
+        "label": "工具",
+        "link": "/tool",
+        "status": 1,
+        "key": "tool",
+        "hasChildren": false
+    },
+    {
+        "label": "休闲",
+        "link": "/bbs",
+        "status": 1,
+        "key": "bbs",
+        "hasChildren": false
+    }
+]

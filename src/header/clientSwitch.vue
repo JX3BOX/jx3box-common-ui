@@ -51,6 +51,7 @@ export default {
             for (let i = 0; i < this.clients.length; i++) {
                 if (this.clients[i].client == this.client) {
                     this.clients.unshift(...this.clients.splice(i, 1));
+                    break;
                 }
             }
         }

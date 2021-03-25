@@ -4,4 +4,4 @@ function isApp() {
     return window.navigator.userAgent.indexOf(KW) >= 0;
 }
 
-export { isApp };
+export { KW,isApp };

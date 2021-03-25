@@ -1,6 +1,6 @@
 <template>
     <div class="container-page">
-        <Header></Header>
+        <Header client="origin"></Header>
         <Breadcrumb
             name="频道名称"
             slug="slug"

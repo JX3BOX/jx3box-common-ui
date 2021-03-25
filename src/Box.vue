@@ -47,17 +47,18 @@ import _ from "lodash";
 import Bus from "../service/bus";
 import {getBox} from '../service/header.js'
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import origin from "@jx3box/jx3box-data/data/box/box.json";
+import box_data from "@jx3box/jx3box-data/data/box/box.json";
+import box_data_origin from "@jx3box/jx3box-data/data/box/box_origin.json";
 const breakIcons = ['database','team','j3pz']
 
 export default {
     name: "Box",
-    props: ["overlayEnable"],
+    props: ["overlayEnable",'client'],
     data: function() {
         return {
             status: false,
             isOverlay: false,
-            data : origin,
+            data : this.client == 'origin' ? box_data_origin : box_data,
         };
     },
     computed: {
