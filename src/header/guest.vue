@@ -1,4 +1,5 @@
 <template>
+<div class="c-header-user" id="c-header-user">
     <div class="c-header-login">
         <a class="u-register u-default" :href="register_url"
             >注册</a
@@ -6,6 +7,7 @@
         <em>|</em>
         <a class="u-login u-default" :href="login_url">登录</a>
     </div>
+</div>
 </template>
 
 <script>

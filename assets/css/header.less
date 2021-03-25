@@ -587,160 +587,163 @@ body {
     }
 }
 
-//登录、用户信息
-.c-header-info {
-    float: left;
-    padding: 16px 0;
+//登录、注册
+.c-header-login {
+    margin: 16px 5px 16px 0;
 
-    .c-header-login {
-        transition: 0.4s;
-        *zoom: 1;
-        &:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-        border: 1px solid @border-hr;
-        border-radius: 3px;
+    transition: 0.4s;
+    *zoom: 1;
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    border: 1px solid @border-hr;
+    border-radius: 3px;
 
-        .u-default,
-        .u-extend {
-            float: left;
-        }
+    .u-default,
+    .u-extend {
+        float: left;
+    }
 
-        // .u-default{
-        //     border-right:1px solid #eee;
-        // }
-        .u-default {
-            display: block;
-            line-height: @logo-size - 2px;
-            padding: 0 8px;
-            color: #fff;
+    // .u-default{
+    //     border-right:1px solid #eee;
+    // }
+    .u-default {
+        display: block;
+        line-height: @logo-size - 2px;
+        padding: 0 8px;
+        color: #fff;
 
-            &:hover {
-                color: hsla(0, 0%, 100%, 0.75);
-            }
-        }
-
-        em {
-            color: #a4acb5;
-            .fl;
-            font-style: normal;
-            .lh(30px);
-        }
-
-        .u-extend {
-            //background-color: hsla(0,0%,100%,.125);
-            background-color: #fafafa;
-            height: @logo-size - 2px;
-            padding-left: 5px;
-
-            .c-passport {
-                *zoom: 1;
-                &:after {
-                    content: "";
-                    display: table;
-                    clear: both;
-                }
-                padding: (@logo-size - 24px - 2px) / 2 0;
-            }
-
-            a {
-                float: left;
-                display: block;
-                margin-right: 5px;
-            }
-
-            img {
-                vertical-align: middle;
-                width: 24px !important;
-                height: auto;
-            }
-
-            display: none;
-        }
-
-        .u-register {
-            // background-color: @primary;
-            // .mr(10px);
+        &:hover {
+            color: hsla(0, 0%, 100%, 0.75);
         }
     }
 
-    .c-header-profile {
-        cursor: pointer;
-        position: relative;
-        padding: 6px 5px 2px 6px;
+    em {
+        color: #a4acb5;
+        .fl;
+        font-style: normal;
+        .lh(30px);
+    }
 
-        .u-menu {
-            margin-top: 8px;
-        }
-        .u-me {
-            .nobreak;
-            em {
-                font-style: normal;
-                color: #999;
-                font-size: 13px;
+    .u-extend {
+        //background-color: hsla(0,0%,100%,.125);
+        background-color: #fafafa;
+        height: @logo-size - 2px;
+        padding-left: 5px;
+
+        .c-passport {
+            *zoom: 1;
+            &:after {
+                content: "";
+                display: table;
+                clear: both;
             }
-            b {
-                .mr(5px);
-            }
+            padding: (@logo-size - 24px - 2px) / 2 0;
         }
-        .u-vip {
-            .u-icon-vip {
-                .y(-2px);
-            }
+
+        a {
+            float: left;
+            display: block;
+            margin-right: 5px;
         }
-        .u-name {
-            line-height: 30px;
-            padding: 0 16px;
+
+        img {
+            vertical-align: middle;
+            width: 24px !important;
+            height: auto;
+        }
+
+        display: none;
+    }
+
+    .u-register {
+        // background-color: @primary;
+        // .mr(10px);
+    }
+}
+
+
+// 用户信息
+.c-header-info {
+    float: left;
+    padding: 16px 0;
+}
+.c-header-profile {
+    cursor: pointer;
+    position: relative;
+    padding: 6px 5px 2px 6px;
+
+    .u-menu {
+        margin-top: 8px;
+    }
+    .u-me {
+        .nobreak;
+        em {
+            font-style: normal;
+            color: #999;
+            font-size: 13px;
+        }
+        b {
+            .mr(5px);
+        }
+    }
+    .u-vip {
+        .u-icon-vip {
+            .y(-2px);
+        }
+    }
+    .u-name {
+        line-height: 30px;
+        padding: 0 16px;
+        white-space: nowrap;
+        word-wrap: normal;
+        word-break: keep-all;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        b {
+            font-weight: bold;
+            display: block;
+            float: left;
+
             white-space: nowrap;
             word-wrap: normal;
             word-break: keep-all;
             text-overflow: ellipsis;
             overflow: hidden;
-            b {
-                font-weight: bold;
-                display: block;
-                float: left;
 
-                white-space: nowrap;
-                word-wrap: normal;
-                word-break: keep-all;
-                text-overflow: ellipsis;
-                overflow: hidden;
+            max-width: 60px;
+        }
+        span {
+            color: #666;
+            letter-spacing: 0.5px;
+            margin-left: 3px;
+        }
+        cursor: default;
+    }
+    .u-avatar {
+        vertical-align: middle;
+        margin-right: 2px;
+    }
 
-                max-width: 60px;
-            }
-            span {
-                color: #666;
-                letter-spacing: 0.5px;
-                margin-left: 3px;
-            }
-            cursor: default;
-        }
-        .u-avatar {
-            vertical-align: middle;
-            margin-right: 2px;
-        }
+    hr {
+        margin: 8px 0;
+        border-top: 1px solid @border-hr;
+    }
 
-        hr {
-            margin: 8px 0;
-            border-top: 1px solid @border-hr;
+    &.on {
+        .u-menu {
+            display: block;
         }
+    }
+    .u-hr {
+        border-top: 1px solid @border-hr;
+    }
 
-        &.on {
-            .u-menu {
-                display: block;
-            }
-        }
-        .u-hr {
-            border-top: 1px solid @border-hr;
-        }
-
-        &:hover {
-            .u-dropdown {
-                opacity: 0.7;
-            }
+    &:hover {
+        .u-dropdown {
+            opacity: 0.7;
         }
     }
 }
