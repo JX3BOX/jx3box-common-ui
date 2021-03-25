@@ -121,12 +121,11 @@ export default {
             user: User.getInfo(),
             // links
             url: {
-                home: __Root,
                 msg: __Links.dashboard.msg,
                 publish: __Links.dashboard.publish,
                 dashboard: __Links.dashboard.home,
                 profile: __Links.dashboard.profile,
-                homepage: __Root + "author/" + User.getInfo().uid,
+                homepage: "/author/" + User.getInfo().uid,
             },
 
             // VIP
