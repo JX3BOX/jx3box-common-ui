@@ -29,7 +29,7 @@
         "last 2 versions"
     ],
     "dependencies": {
-        "@jx3box/jx3box-common": "^6.2.7",
+        "@jx3box/jx3box-common": "^6.3.0",
         "@jx3box/jx3box-data": "^0.7.6",
         "axios": "^0.19.2",
         "element-ui": "^2.13.2",

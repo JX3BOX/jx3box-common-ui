@@ -13,16 +13,12 @@
 <script>
 import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
-    name : '',
+    name : 'guest',
     props:[],
     data : function(){
         return {
-            login_url: function() {
-                return __Links.account.login + "?redirect=" + location.href;
-            },
-            register_url: function() {
-                return __Links.account.register + "?redirect=" + location.href;
-            },
+            login_url: __Links.account.login + "?redirect=" + location.href,
+            register_url: __Links.account.register + "?redirect=" + location.href,
         }
     },
     computed:{},
