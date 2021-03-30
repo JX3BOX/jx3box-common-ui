@@ -5,7 +5,7 @@
     >
         <ul class="u-list">
             <li>
-                <a class="u-item" href="https://www.jx3box.com">
+                <a class="u-item" href="/">
                     <img
                         class="u-pic"
                         svg-inline

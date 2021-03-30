@@ -64,7 +64,7 @@ export default {
     },
     methods: {
         isFocus: function(type) {
-            return location.href.includes(type);
+            return location.pathname.includes(type);
         },
     },
     created: function() {
