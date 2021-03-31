@@ -15,7 +15,7 @@
 
         <LeftSidebar :open="true">
             <div id="directory"></div>
-            <Author :author="author" uid="7" />
+            <Author :author="author" uid="5" />
             <Authorposts uid="2" />
         </LeftSidebar>
 
@@ -78,7 +78,7 @@
                     <RightSideMsg>Test</RightSideMsg>
 
                     <Author :author="author" uid="8" />
-                    <Authorposts uid="2" />
+                    <Authorposts uid="15" />
                 </div>
             </RightSidebar>
 

@@ -10,10 +10,10 @@
             <li v-for="(item, i) in data" :key="i">
                 <a
                     class="u-item"
-                    :href="url(item.post.ID, item.post.post_type)"
+                    :href="url(item.ID, item.post_type)"
                     target="_blank"
                 >
-                    <span>&raquo; {{ item.post.post_title || item.post.post_type + '/无标题' }}</span>
+                    <span>&raquo; {{ item.post_title || item.post_type + '/无标题' }}</span>
                 </a>
             </li>
         </ul>
@@ -46,8 +46,8 @@ export default {
         },
         init : function (){
             if (!this.id) return;
-            getUserPosts(this.id).then((res) => {
-                this.data = res.data.data.list.slice(0, 6);
+            getUserPosts(this.id).then((data) => {
+                this.data = data.slice(0, 6);
             }).catch((err) => {
                 console.log(err)
             })
