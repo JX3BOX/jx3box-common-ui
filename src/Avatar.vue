@@ -49,12 +49,12 @@ export default {
         },
         style: function () {
             let style = ~~this.size;
-            this.style_map.forEach((item,i) => {
-                if(style < item){
-                    return this.style_cls[i]
+            this.style_map.forEach((item, i) => {
+                if (style < item) {
+                    return this.style_cls[i];
                 }
-            })
-            return 's'
+            });
+            return "s";
         },
     },
     methods: {

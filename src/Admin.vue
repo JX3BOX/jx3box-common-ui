@@ -11,17 +11,12 @@
     >
         <div class="c-admin-wrapper">
             <el-divider content-position="left">状态变更</el-divider>
-            <el-radio-group
-                v-model="post_status"
-                size="small"
-                class="c-admin-status"
-            >
+            <el-radio-group v-model="post_status" size="small" class="c-admin-status">
                 <el-radio-button
                     v-for="(option, key) in status_options"
                     :label="key"
                     :key="key"
-                    >{{ option }}</el-radio-button
-                >
+                >{{ option }}</el-radio-button>
             </el-radio-group>
 
             <el-divider content-position="left">推荐角标</el-divider>
@@ -34,11 +29,7 @@
             </el-checkbox-group>
 
             <el-divider content-position="left">加粗高亮</el-divider>
-            <el-checkbox
-                class="c-admin-highlight-checkbox"
-                v-model="isHighlight"
-                >开启高亮</el-checkbox
-            >
+            <el-checkbox class="c-admin-highlight-checkbox" v-model="isHighlight">开启高亮</el-checkbox>
             <template v-if="isHighlight">
                 <el-color-picker
                     class="c-admin-highlight-block"
@@ -46,11 +37,7 @@
                     :predefine="color_options"
                     size="mini"
                 ></el-color-picker>
-                <span
-                    class="c-admin-highlight-preview"
-                    :style="{ color: color }"
-                    >预览高亮效果</span
-                >
+                <span class="c-admin-highlight-preview" :style="{ color: color }">预览高亮效果</span>
             </template>
 
             <el-divider content-position="left">是否置顶</el-divider>
@@ -72,17 +59,18 @@
                 <img v-if="post_banner" :src="post_banner" />
                 <i class="el-icon-plus"></i>
             </el-upload>
-            <el-button class="c-admin-banner-btn" icon="el-icon-circle-close" size="mini" plain @click="removeBanner">移除海报</el-button>
-
+            <el-button
+                class="c-admin-banner-btn"
+                icon="el-icon-circle-close"
+                size="mini"
+                plain
+                @click="removeBanner"
+            >移除海报</el-button>
 
             <el-divider content-position="left">元信息</el-divider>
             <div class="c-admin-info">
                 <div class="c-admin-type">
-                    <el-select
-                        v-model="post_type"
-                        placeholder="请选择类型"
-                        class="drawer-item-content"
-                    >
+                    <el-select v-model="post_type" placeholder="请选择类型" class="drawer-item-content">
                         <el-option
                             v-for="type in type_options"
                             :key="type.value"
@@ -101,9 +89,7 @@
             </div>
 
             <div class="c-admin-buttons">
-                <el-button type="primary" @click="submit" :loading="pushing"
-                    >提交</el-button
-                >
+                <el-button type="primary" @click="submit" :loading="pushing">提交</el-button>
                 <el-button type="plain" @click="close">取消</el-button>
             </div>
         </div>
@@ -113,10 +99,10 @@
 <script>
 import Bus from "../service/bus";
 import { getRewrite } from "@jx3box/jx3box-common/js/utils";
-import { __server, __postType } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __cms, __postType } from "@jx3box/jx3box-common/data/jx3box.json";
 import { getSetting, postSetting } from "../service/admin";
 import User from "@jx3box/jx3box-common/js/user";
-import {cms as marks} from '@jx3box/jx3box-common/data/mark.json'
+import { cms as marks } from "@jx3box/jx3box-common/data/mark.json";
 export default {
     name: "Admin",
     data() {
@@ -138,7 +124,6 @@ export default {
             status_options: {
                 publish: "默认",
                 draft: "草稿",
-                pending: "待审核",
                 dustbin: "删除",
             },
 
@@ -159,11 +144,11 @@ export default {
             ],
 
             // 置顶
-            isSticky : false,
+            isSticky: false,
             sticky: 0,
 
             // 海报
-            uploadurl: __server + "upload",
+            uploadurl: __cms + "api/cms/upload",
             banner_preview: "",
             post_banner: "",
 
@@ -176,12 +161,12 @@ export default {
         };
     },
     computed: {
-        data: function() {
+        data: function () {
             return {
                 ID: this.pid,
                 post_status: this.post_status || "publish",
                 post_author: this.post_author || 1,
-                post_type: this.post_type || "post",
+                post_type: this.post_type || "bbs",
                 post_banner: this.post_banner || "",
                 color: this.isHighlight ? this.color : "",
                 mark: this.mark || [],
@@ -191,19 +176,19 @@ export default {
     },
     methods: {
         // 是否有权限
-        checkHasRight: function() {
-            this.hasRight = User.getInfo().group > 60 ? true : false;
+        checkHasRight: function () {
+            this.hasRight = User.isEditor();
         },
         // 获取pid
-        checkPostID: function() {
+        checkPostID: function () {
             this.pid = getRewrite("pid");
         },
         // 获取type
-        checkChannel: function() {
+        checkChannel: function () {
             this.channel = location.pathname.split("/")[1];
         },
         // 加载类型选项
-        initTypeOptions: function() {
+        initTypeOptions: function () {
             let types = [];
             for (let key in __postType) {
                 types.push({
@@ -214,25 +199,24 @@ export default {
             this.type_options = types;
         },
         // 上传
-        uploadSuccess: function(res, file, list) {
+        uploadSuccess: function (res, file, list) {
             this.banner_preview = URL.createObjectURL(file.raw);
             this.post_banner = res.data.list[0];
         },
-        uploadFail: function(err, file, fileList) {
+        uploadFail: function (err, file, fileList) {
             this.$message.error("上传失败");
             console.log(err);
         },
-        removeBanner : function (){
-            this.post_banner = ''  
+        removeBanner: function () {
+            this.post_banner = "";
         },
         // 关闭
         close(done) {
             this.visible = false;
         },
         // 拉
-        pull: function() {
-            getSetting(this.pid, this).then((data) => {
-                
+        pull: function () {
+            getSetting(this.pid).then((data) => {
                 let {
                     ID,
                     color,
@@ -249,25 +233,24 @@ export default {
                 this.post_type = post_type;
                 this.post_banner = post_banner;
                 this.color = color;
-                if(this.color) this.isHighlight = true
+                if (this.color) this.isHighlight = true;
                 this.mark = mark || [];
                 this.sticky = sticky || 0;
-                if(this.sticky) this.isSticky = true
+                if (this.sticky) this.isSticky = true;
 
                 // 设置加载完成标识
                 this.pulled = true;
-
             });
         },
         // 提交
-        submit: function() {
+        submit: function () {
             this.pushing = true;
-            console.log(this.data)
+            console.log(this.data);
             this.push();
         },
         // 推
-        push: function() {
-            postSetting(this.data, this).then((res) => {
+        push: function () {
+            postSetting(this.data).then((res) => {
                 this.pushing = false;
                 this.$message({
                     message: "设置成功",
@@ -277,13 +260,13 @@ export default {
             });
         },
     },
-    created: function() {
+    created: function () {
         // 是否mount
         this.checkHasRight();
         // 预设信息
         this.initTypeOptions();
     },
-    mounted: function() {
+    mounted: function () {
         // 基本信息
         this.checkPostID();
         this.checkChannel();
@@ -291,12 +274,12 @@ export default {
         // 绑定监听
         Bus.$on("toggleAdminPanel", (data) => {
             this.visible = !this.visible;
-        });
 
-        // 文章类型的加载
-        if (this.pid && !this.pulled && this.hasRight) {
-            this.pull();
-        }
+            // 文章类型的加载
+            if (this.pid && !this.pulled && this.hasRight) {
+                this.pull();
+            }
+        });
     },
 };
 </script>

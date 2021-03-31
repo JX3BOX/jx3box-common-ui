@@ -4,6 +4,7 @@
     "description": "JX3BOX UI",
     "main": "index.js",
     "scripts": {
+        "dev": "env DEV_SERVER=true vue-cli-service serve",
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
