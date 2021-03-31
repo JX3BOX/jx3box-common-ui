@@ -12,8 +12,10 @@
                 src="../assets/img/bread/menu.svg"
             />
         </div>
-        <a class="u-channel" :href="root" :class={on:withoutLeft}>
-            <i class="u-channel-logo"><slot name="logo"></slot></i>
+        <a class="u-channel" :href="root" :class="{on:withoutLeft}">
+            <i class="u-channel-logo">
+                <slot name="logo"></slot>
+            </i>
             <span class="u-title">{{ name }}</span>
         </a>
         <!-- 面包屑内容 -->
@@ -23,18 +25,22 @@
             <slot name="op-append"></slot>
             <a
                 v-if="publishEnable"
-                :href="slug | publish_url(slug)"
+                :href="slug | publishLink"
                 class="u-publish el-button el-button--primary el-button--medium"
-                ><i class="el-icon-edit-outline"></i><span>发布</span></a
             >
+                <i class="el-icon-edit-outline"></i>
+                <span>发布</span>
+            </a>
             <a
                 v-if="feedbackEnable"
                 v-show="isNotAdmin"
                 :href="feedback"
                 class="u-feedback el-button el-button--primary el-button--medium"
                 target="_blank"
-                ><i class="el-icon-info"></i><span>反馈</span></a
             >
+                <i class="el-icon-info"></i>
+                <span>反馈</span>
+            </a>
             <Adminbutton v-if="adminEnable" class="u-admin" />
             <Admin v-if="adminEnable" />
             <slot name="op-prepend"></slot>
@@ -43,14 +49,16 @@
 </template>
 
 <script>
-import Bus from "../service/bus";
+import _ from "lodash";
+import { publishLink } from "@jx3box/jx3box-common/js/utils";
 import { __Links, feedback } from "@jx3box/jx3box-common/data/jx3box.json";
+import User from "@jx3box/jx3box-common/js/user";
 import Admin from "./Admin";
 import Crumb from "./Crumb";
 import Adminbutton from "./Adminbutton";
-import User from "@jx3box/jx3box-common/js/user";
-import _ from "lodash";
-import {isApp} from '../assets/js/app.js'
+
+import { isApp } from "../assets/js/app.js";
+import Bus from "../service/bus";
 
 export default {
     name: "Breadcrumb",
@@ -63,30 +71,33 @@ export default {
         "feedbackEnable",
         "overlayEnable",
         "crumbEnable",
-        "withoutLeft"
+        "withoutLeft",
     ],
-    data: function() {
+    data: function () {
         return {
             isOpen: true,
-            feedback: feedback + "&subject=" + location.href + '?uid=' + User.getInfo().uid,
+            feedback:
+                feedback +
+                "&subject=" +
+                location.href +
+                "?uid=" +
+                User.getInfo().uid,
             isNotAdmin: User.getInfo().group < 60,
             isOverlay: false,
-            isApp : isApp()
+            isApp: isApp(),
         };
     },
     computed: {},
     filters: {
-        publish_url: function(val) {
-            return __Links.dashboard.publish + "#/" + val;
-        },
+        publishLink,
     },
     methods: {
-        toggleLeftSide: function() {
+        toggleLeftSide: function () {
             let status = !this.isOpen;
             Bus.$emit("toggleLeftSide", status);
         },
     },
-    mounted: function() {
+    mounted: function () {
         Bus.$on("toggleLeftSide", (data) => {
             this.isOpen = data;
         });
