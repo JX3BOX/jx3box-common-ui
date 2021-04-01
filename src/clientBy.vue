@@ -33,7 +33,7 @@ export default {
     methods: {
         filter: function(key) {
             this.client = key;
-            this.$emit("filter", { type: "client", val: key == 'all' ? '' : key });
+            this.$emit("filter", { type: "client", val: key });
         },
     },
     mounted: function() {
