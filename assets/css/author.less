@@ -22,12 +22,13 @@
         .fz(12px, 2);
         .break(3);
         color: #888;
-        padding:0 5px;
+        padding: 0 5px;
     }
     .u-link {
         border-top: 1px dashed #eee;
         border-bottom: 1px dashed #eee;
-        a,div {
+        a,
+        div {
             .db;
             margin: 10px 5px;
             .fz(12px, 20px);
@@ -45,8 +46,8 @@
             .y(-3px);
         }
     }
-    .u-medals{
-        padding:0 2px;
+    .u-medals {
+        padding: 0 2px;
     }
 
     .u-label {
@@ -76,12 +77,12 @@
         }
     }
 
-    .u-tv-living{
+    .u-tv-living {
         .dbi;
         .ml(10px);
     }
 
-    .u-tv-living-icon{
+    .u-tv-living-icon {
         .h(10px);
     }
 
@@ -89,17 +90,38 @@
         .dbi;
         transform-origin: bottom;
         width: 2px;
-        height:100%;
+        height: 100%;
         margin: 0 1px;
         background-color: #fb7299;
         border-radius: 2px;
         animation: living-icon-ani 0.6s linear infinite;
     }
-    .u-tv-living-icon-col.first{
-        animation-delay: -.2s;
+    .u-tv-living-icon-col.first {
+        animation-delay: -0.2s;
     }
-    .u-tv-living-icon-col.last{
-        animation-delay: .2s;
+    .u-tv-living-icon-col.last {
+        animation-delay: 0.2s;
+    }
+
+    .u-teams {
+        .mt(10px);
+        .u-team {
+            .db;
+            background-color: #f2f6fc;
+            .mb(5px);
+            &:hover span {
+                color: @color-link;
+            }
+        }
+        .u-teamlogo {
+            .size(32px);
+            .y;
+            .mr(10px);
+        }
+        .u-teamname {
+            .fz(12px);
+            color: #555;
+        }
     }
 }
 

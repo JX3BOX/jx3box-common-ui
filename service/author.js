@@ -1,6 +1,6 @@
 import axios from "axios";
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import { $next, $cms } from "@jx3box/jx3box-common/js/https.js";
+import { $next, $cms, $team } from "@jx3box/jx3box-common/js/https.js";
 
 function getUserInfo(uid) {
     return $cms({ proxy: true, mute: true })
@@ -42,4 +42,21 @@ function getFrames() {
     return axios.get(__imgPath + "data/user_avatar_frame.json");
 }
 
-export { getUserInfo, getUserPosts, getDouyu, getUserMedals, getFrames };
+function getUserPublicTeams(uid) {
+    return $team({ mute: true }).get(`/api/team/relation/public`, {
+        params: {
+            uid: uid,
+        },
+    }).then((res) => {
+        return res.data.data;
+    });
+}
+
+export {
+    getUserInfo,
+    getUserPosts,
+    getDouyu,
+    getUserMedals,
+    getFrames,
+    getUserPublicTeams,
+};

@@ -14,11 +14,21 @@
         </div>
         <div class="u-bio">{{ data.user_bio }}</div>
         <div class="u-link" v-if="hasLink">
-            <a v-if="data.weibo_name" class="u-weibo" :href="data.weibo_id | weiboLink" target="_blank">
+            <a
+                v-if="data.weibo_name"
+                class="u-weibo"
+                :href="data.weibo_id | weiboLink"
+                target="_blank"
+            >
                 <img svg-inline src="../assets/img/author/weibo.svg" />
                 {{ data.weibo_name }}
             </a>
-            <a v-if="data.github_name" class="u-github" :href="data.github_name | githubLink" target="_blank">
+            <a
+                v-if="data.github_name"
+                class="u-github"
+                :href="data.github_name | githubLink"
+                target="_blank"
+            >
                 <img svg-inline src="../assets/img/author/github.svg" />
                 {{ data.github_name }}
             </a>
@@ -49,6 +59,16 @@
                 </span>
             </div>
         </div>
+        <div class="u-teams" v-if="teams && teams.length">
+            <div class="u-label">
+                <i class="el-icon-school"></i>
+                <span>所属团队</span>
+            </div>
+            <a class="u-team" v-for="(item,i) in teams" :key="i" :href="item.team_id | teamLink">
+                <img class="u-teamlogo" :src="item.team_logo | showTeamLogo" />
+                <span class="u-teamname">{{item.team_name}}</span>
+            </a>
+        </div>
         <slot></slot>
     </div>
 </template>
@@ -56,9 +76,19 @@
 <script>
 const liveStatusMap = ["等待开播", "直播中", "直播结束"];
 import Avatar from "./Avatar.vue";
-import { authorLink, tvLink } from "@jx3box/jx3box-common/js/utils";
+import {
+    authorLink,
+    tvLink,
+    getLink,
+    getThumbnail,
+} from "@jx3box/jx3box-common/js/utils";
 import { __server, __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import { getUserInfo, getDouyu, getUserMedals } from "../service/author";
+import {
+    getUserInfo,
+    getDouyu,
+    getUserMedals,
+    getUserPublicTeams,
+} from "../service/author";
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
 export default {
     name: "Author",
@@ -69,6 +99,7 @@ export default {
             tv: "",
             medals: [],
             medal_map,
+            teams: [],
         };
     },
     computed: {
@@ -107,12 +138,18 @@ export default {
             return __imgPath + "image/medals/team/" + val + "-20.gif";
         },
         authorLink,
-        weiboLink : function (val){
-            return 'https://weibo.com/' + val
+        weiboLink: function (val) {
+            return "https://weibo.com/" + val;
         },
-        githubLink : function (val){
-            return 'https://github.com/' + val
-        }
+        githubLink: function (val) {
+            return "https://github.com/" + val;
+        },
+        teamLink: function (id) {
+            return getLink("org", id);
+        },
+        showTeamLogo: function (val) {
+            return getThumbnail(val, 32);
+        },
     },
     methods: {
         loadData: function () {
@@ -129,9 +166,13 @@ export default {
             }
         },
         loadMedals: function () {
-            if (!this.id) return;
             getUserMedals(this.id).then((data) => {
                 this.medals = data;
+            });
+        },
+        loadTeams: function () {
+            getUserPublicTeams(this.id).then((data) => {
+                this.teams = data && data.slice(0,5);
             });
         },
     },
@@ -141,10 +182,12 @@ export default {
         },
     },
     mounted: function () {
-        this.loadData().then(() => {
-            // this.loadTV();
-            this.loadMedals();
-        });
+        this.id &&
+            this.loadData().then(() => {
+                // this.loadTV();
+                this.loadMedals();
+                this.loadTeams();
+            });
     },
     components: {
         Avatar,
