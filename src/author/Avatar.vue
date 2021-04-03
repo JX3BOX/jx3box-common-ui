@@ -11,7 +11,7 @@
 <script>
 import frames from "@jx3box/jx3box-common/data/user_avatar_frame.json";
 import { __server, __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import { getFrames } from "../service/author";
+import { getFrames } from "../../service/author";
 import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
 export default {
     name: "",

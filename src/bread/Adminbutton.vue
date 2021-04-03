@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Bus from "../service/bus";
+import Bus from "../../service/bus";
 import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "Adminbutton",

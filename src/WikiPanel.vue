@@ -76,7 +76,7 @@
 
 <script>
 import _ from "lodash";
-import QRcode from "./QRcode";
+import QRcode from "./interact/QRcode";
 import {
     getThumbnail,
     authorLink,

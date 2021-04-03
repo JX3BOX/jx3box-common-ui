@@ -76,8 +76,8 @@
 
 <script>
 const liveStatusMap = ["等待开播", "直播中", "直播结束"];
-import Avatar from "./Avatar.vue";
-import Authorposts from "./Authorposts.vue";
+import Avatar from "./author/Avatar.vue";
+import Authorposts from "./author/Authorposts.vue";
 import {
     authorLink,
     tvLink,

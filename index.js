@@ -1,9 +1,6 @@
 import Header from './src/Header.vue'
-import clientSwitch from './src/header/clientSwitch.vue'
-import Breadcrumb from './src/Breadcrumb.vue'
-import Admin from './src/Admin.vue'
-import Adminbutton from './src/Adminbutton.vue'
 import Box from './src/Box.vue'
+import Breadcrumb from './src/Breadcrumb.vue'
 
 import LeftSidebar from './src/LeftSidebar.vue'
 import LeftSideToggle from './src/LeftSideToggle.vue'
@@ -14,31 +11,27 @@ import Bottom from './src/Bottom.vue'
 
 import RightSideMsg from './src/RightSideMsg.vue'
 import Author from './src/Author.vue'
-import Authorposts from './src/Authorposts.vue'
 
-import Mark from './src/Mark.vue'
-import Like from './src/Like.vue'
-import Down from './src/Down.vue'
+import Mark from './src/interact/Mark.vue'
+import Like from './src/interact/Like.vue'
+import Down from './src/interact/Down.vue'
+import Fav from './src/interact/Fav.vue'
+import Print from './src/interact/Print.vue'
+import QRcode from './src/interact/QRcode.vue'
+import Sharing from './src/interact/Sharing.vue'
 
-import Print from './src/Print.vue'
-import QRcode from './src/QRcode.vue'
-import Sharing from './src/Sharing.vue'
+import markBy from './src/filters/markBy.vue'
+import tagBy from "./src/filters/tagBy.vue";
+import orderBy from "./src/filters/orderBy.vue";
+import menuBy from "./src/filters/menuBy.vue";
+import clientBy from "./src/filters/clientBy.vue";
+import zlpBy from "./src/filters/zlpBy.vue";
 
-import markBy from './src/markBy.vue'
-import tagBy from "./src/tagBy.vue";
-import orderBy from "./src/orderBy.vue";
-import menuBy from "./src/menuBy.vue";
-import clientBy from "./src/clientBy.vue";
-
-import Fav from './src/Fav.vue'
 import WikiPanel from './src/WikiPanel.vue'
 
 const components = {
     Header,
-    clientSwitch,
     Breadcrumb,
-    Admin,
-    Adminbutton,
     Box,
 
     LeftSidebar,
@@ -50,12 +43,11 @@ const components = {
 
     RightSideMsg,
     Author,
-    Authorposts,
 
     Like,
     Down,
     Mark,
-
+    Fav,
     QRcode,
     Print,
     Sharing,
@@ -65,8 +57,8 @@ const components = {
     markBy,
     menuBy,
     clientBy,
+    zlpBy,
 
-    Fav,
     WikiPanel,
 }
 

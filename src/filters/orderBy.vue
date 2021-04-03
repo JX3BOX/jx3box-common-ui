@@ -66,5 +66,5 @@ export default {
 </script>
 
 <style lang="less">
-    @import '../assets/css/order-by.less';
+    @import '../../assets/css/order-by.less';
 </style>

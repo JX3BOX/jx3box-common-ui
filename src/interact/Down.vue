@@ -49,5 +49,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/down.less";
+@import "../../assets/css/down.less";
 </style>

@@ -6,10 +6,10 @@
     </div>
     <el-button v-else class="w-like" size="mini" type="primary" @click="doLike">
         <i v-if="!status" class="u-heart"
-            ><img svg-inline src="../assets/img/widget/heart.svg"
+            ><img svg-inline src="../../assets/img/widget/heart.svg"
         /></i>
         <i v-else class="u-heart"
-            ><img svg-inline src="../assets/img/widget/heart2.svg"
+            ><img svg-inline src="../../assets/img/widget/heart2.svg"
         /></i>
         <span>喜欢</span>
     </el-button>
@@ -64,5 +64,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/like.less";
+@import "../../assets/css/like.less";
 </style>

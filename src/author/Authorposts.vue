@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { getUserPosts } from "../service/author";
+import { getUserPosts } from "../../service/author";
 import {authorLink,getLink} from '@jx3box/jx3box-common/js/utils'
 export default {
     name: "Authorposts",
@@ -63,5 +63,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/authorposts.less";
+@import "../../assets/css/authorposts.less";
 </style>

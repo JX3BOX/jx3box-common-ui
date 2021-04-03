@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { getBreadcrumb } from "../service/breadcrumb";
+import { getBreadcrumb } from "../../service/breadcrumb";
 
 export default {
     name: "Crumb",
@@ -26,5 +26,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/crumb.less";
+@import "../../assets/css/crumb.less";
 </style>

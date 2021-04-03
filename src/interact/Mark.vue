@@ -4,7 +4,7 @@
             <img
                 v-if="!$slots.default"
                 svg-inline
-                src="../assets/img/header/logo.svg"
+                src="../../assets/img/header/logo.svg"
             />
             <slot></slot>
             {{ mark_key }}
@@ -33,5 +33,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/mark.less";
+@import "../../assets/css/mark.less";
 </style>

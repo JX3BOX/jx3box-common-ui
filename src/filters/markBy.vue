@@ -89,5 +89,5 @@ export default {
 </script>
 
 <style lang="less">
-    @import '../assets/css/mark-by.less';
+    @import '../../assets/css/mark-by.less';
 </style>

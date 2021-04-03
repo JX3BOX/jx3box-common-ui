@@ -53,9 +53,9 @@ import _ from "lodash";
 import { publishLink } from "@jx3box/jx3box-common/js/utils";
 import { __Links, feedback } from "@jx3box/jx3box-common/data/jx3box.json";
 import User from "@jx3box/jx3box-common/js/user";
-import Admin from "./Admin";
-import Crumb from "./Crumb";
-import Adminbutton from "./Adminbutton";
+import Admin from "./bread/Admin";
+import Crumb from "./bread/Crumb";
+import Adminbutton from "./bread/Adminbutton";
 
 import { isApp } from "../assets/js/app.js";
 import Bus from "../service/bus";

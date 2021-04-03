@@ -1,6 +1,6 @@
 <template>
     <a class="w-sharing" :href="sharelink" target="_blank">
-        <img class="u-icon" svg-inline src="../assets/img/widget/share.svg" />
+        <img class="u-icon" svg-inline src="../../assets/img/widget/share.svg" />
         <!-- <i class="el-icon-position"></i> -->
         <span class="u-text">分享</span>
     </a>
@@ -45,5 +45,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/sharing.less";
+@import "../../assets/css/sharing.less";
 </style>

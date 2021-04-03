@@ -79,5 +79,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/print.less";
+@import "../../assets/css/print.less";
 </style>

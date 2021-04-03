@@ -5,7 +5,7 @@
         :class="{ on: active }"
         v-if="mode == 'cms'"
     >
-        <img class="u-icon" svg-inline src="../assets/img/widget/qr-code.svg" />
+        <img class="u-icon" svg-inline src="../../assets/img/widget/qr-code.svg" />
         <span class="u-text">二维码</span>
         <div class="u-qrcode">
             <qrcode-vue
@@ -29,7 +29,7 @@
                 ><img
                     class="u-icon"
                     svg-inline
-                    src="../assets/img/widget/qr-code.svg"
+                    src="../../assets/img/widget/qr-code.svg"
                 />扫一扫手机访问</span
             >
         </div>
@@ -69,5 +69,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/qrcode.less";
+@import "../../assets/css/qrcode.less";
 </style>

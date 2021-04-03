@@ -1,10 +1,10 @@
 <template>
-    <span class="w-filter-menu" v-if="data">
+    <span class="w-filter-menu">
         <el-dropdown>
             <span class="el-dropdown-link">
                 <span class="u-menu-label"
                     ><i class="el-icon-s-operation"></i
-                    >{{ current ? current : deftext }}</span
+                    >{{ value ? value : '资料片' }}</span
                 ><i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
@@ -12,9 +12,9 @@
                     "全部"
                 }}</el-dropdown-item>
                 <el-dropdown-item
-                    v-for="(item, key) in data"
-                    :key="key"
-                    @click.native="filter(key)"
+                    v-for="item in data"
+                    :key="item"
+                    @click.native="filter(item)"
                     >{{ item }}</el-dropdown-item
                 >
             </el-dropdown-menu>
@@ -23,26 +23,25 @@
 </template>
 
 <script>
+import zlps from '@jx3box/jx3box-data/data/box/zlp.json'
 export default {
     name: "menuBy",
-    props: ["data", "type", "placeholder"],
+    props: ['client'],
     data: function() {
         return {
             value: "",
         };
     },
     computed: {
-        current: function() {
-            return this.data[this.value];
-        },
-        deftext: function() {
-            return this.placeholder || "筛选";
-        },
+        data : function (){
+            let client = this.client || 'all'
+            return zlps[client]
+        }
     },
     methods: {
         filter: function(key) {
             this.value = key;
-            this.$emit("filter", { type: this.type, val: key });
+            this.$emit("filter", { type: 'zlp', val: key });
         },
     },
     mounted: function() {},
@@ -51,5 +50,5 @@ export default {
 </script>
 
 <style lang="less">
-    @import '../assets/css/menu-by.less';
+    @import '../../assets/css/menu-by.less';
 </style>

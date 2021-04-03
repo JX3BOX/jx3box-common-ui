@@ -61,5 +61,5 @@ export default {
 </script>
 
 <style lang="less">
-    @import '../assets/css/tag-by.less';
+    @import '../../assets/css/tag-by.less';
 </style>

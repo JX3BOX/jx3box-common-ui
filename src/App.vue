@@ -22,20 +22,14 @@
             <h1>简易交互组件</h1>
             <LeftSideToggle :mobileOnly="true" />
 
-            <Like mode="heart" :count="100" :showCount="true" />
-
-            <Down :count="100" :showCount="true" />
-
-            <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39" />
-
-            <!-- <Fav post-id="90" post-type="jx3dat" /> -->
-
             <hr />
 
+            <Like mode="heart" :count="100" :showCount="true" />
+            <Down :count="100" :showCount="true" />
+            <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39" />
+            <Fav post-id="90" post-type="jx3dat" />
             <Print title="传入标题" />
-
             <QRcode />
-
             <Sharing />
 
             <hr />
@@ -45,6 +39,7 @@
             <orderBy />
             <tagBy :data="['PVE', 'PVX']" :type="tag"/>
             <clientBy type=""/>
+            <zlpBy/>
 
             <hr />
 
@@ -89,27 +84,33 @@
 <script>
 import Header from "./Header.vue";
 import Breadcrumb from "./Breadcrumb.vue";
+
 import LeftSidebar from "./LeftSidebar.vue";
+import LeftSideToggle from "./LeftSideToggle.vue";
+import Author from "./Author.vue";
+
 import Main from "./Main.vue";
 import RightSidebar from "./RightSidebar.vue";
+import RightSideMsg from "./RightSideMsg.vue";
+
 import Footer from "./Footer.vue";
 import Bottom from "./Bottom.vue";
-import RightSideMsg from "./RightSideMsg.vue";
-import Mark from "./Mark.vue";
-import Author from "./Author.vue";
-// import Authorposts from "./Authorposts.vue";
-import Fav from "./Fav.vue";
-import Like from "./Like.vue";
-import Down from "./Down.vue";
-import Print from "./Print.vue";
-import QRcode from "./QRcode.vue";
-import Sharing from "./Sharing.vue";
-import markBy from "./markBy.vue";
-import menuBy from "./menuBy.vue";
-import orderBy from "./orderBy.vue";
-import tagBy from "./tagBy.vue";
-import clientBy from "./clientBy.vue";
-import LeftSideToggle from "./LeftSideToggle.vue";
+
+import Mark from "./interact/Mark.vue";
+import Fav from "./interact/Fav.vue";
+import Like from "./interact/Like.vue";
+import Down from "./interact/Down.vue";
+import Print from "./interact/Print.vue";
+import QRcode from "./interact/QRcode.vue";
+import Sharing from "./interact/Sharing.vue";
+
+import markBy from "./filters/markBy.vue";
+import menuBy from "./filters/menuBy.vue";
+import orderBy from "./filters/orderBy.vue";
+import tagBy from "./filters/tagBy.vue";
+import clientBy from "./filters/clientBy.vue";
+import zlpBy from "./filters/zlpBy.vue";
+
 import WikiPanel from "./WikiPanel.vue";
 import WikiRevisions from "./WikiRevisions.vue";
 import WikiComments from "./WikiComments.vue";
@@ -137,7 +138,7 @@ export default {
         Mark,
         Like,
         Down,
-        // Fav,
+        Fav,
 
         Print,
         Sharing,
@@ -148,6 +149,7 @@ export default {
         orderBy,
         tagBy,
         clientBy,
+        zlpBy,
 
         WikiPanel,
         WikiRevisions,
