@@ -223,5 +223,39 @@
                 "key": "namespace"
             }
         ]
+    },
+    {
+        "label": "交易",
+        "link": "/trade",
+        "status": 1,
+        "key": "trade",
+        "hasChildren": true,
+        "children": [
+            {
+                "label": "全服交易行",
+                "link": "/trade/#item",
+                "status": 1,
+                "key": "bourse"
+            },
+            {
+                "label": "不绑定交易",
+                "link": "/trade/#jewelry",
+                "status": 1,
+                "key": "jewelry"
+            },
+            {
+                "label": "角色交易",
+                "link": "/trade/#role",
+                "status": 1,
+                "key": "role"
+            }
+        ]
+    },
+    {
+        "label": "商城",
+        "link": "/mall",
+        "status": 1,
+        "key": "mall",
+        "hasChildren": false
     }
 ]
