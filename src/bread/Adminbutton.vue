@@ -18,7 +18,7 @@ export default {
     props: ['size'],
     data: function() {
         return {
-            show: false,
+            show: User.isEditor(),
             button_size : this.size || 'medium'
         };
     },
@@ -29,7 +29,6 @@ export default {
         },
     },
     mounted: function() {
-        this.show = User.getInfo().group > 60 ? true : false;
     },
     components: {},
 };

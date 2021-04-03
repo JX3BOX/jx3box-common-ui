@@ -22,7 +22,7 @@ export default {
             if (this.enable != undefined) {
                 return this.enable;
             } else {
-                if (User.getInfo().group >= 64) return true;
+                if (User.isEditor()) return true;
                 return User.getInfo().uid == this.aid;
             }
         },

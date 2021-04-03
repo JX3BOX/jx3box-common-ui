@@ -82,7 +82,7 @@ export default {
                 location.href +
                 "?uid=" +
                 User.getInfo().uid,
-            isNotAdmin: User.getInfo().group < 60,
+            isNotAdmin: !User.isEditor(),
             isOverlay: false,
             isApp: isApp(),
         };
