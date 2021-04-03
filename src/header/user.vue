@@ -95,6 +95,7 @@ export default {
             fold: true,
             // 登录信息
             user: User.getInfo(),
+            isLogin : User.isLogin(),
             // links
             url: {
                 msg: __Links.dashboard.msg,

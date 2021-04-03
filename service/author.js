@@ -3,7 +3,7 @@ import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import { $next, $cms, $team } from "@jx3box/jx3box-common/js/https.js";
 
 function getUserInfo(uid) {
-    return $cms({ proxy: true, mute: true })
+    return $cms({ mute: true })
         .get(`api/cms/user/${uid}/info`)
         .then((res) => {
             return res.data.data;
@@ -11,7 +11,7 @@ function getUserInfo(uid) {
 }
 
 function getUserPosts(uid) {
-    return $cms({ proxy: true, mute: true })
+    return $cms({ mute: true })
         .get(`/api/cms/posts/user/${uid}/latest`)
         .then((res) => {
             return res.data.data;

@@ -48,6 +48,7 @@
                 </span>
             </a>
         </div>
+        <slot></slot>
         <div class="u-trophy" v-if="hasTrophy">
             <div class="u-label">
                 <i class="el-icon-trophy"></i>
@@ -69,13 +70,14 @@
                 <span class="u-teamname">{{item.team_name}}@{{item.server || item.team_server}}</span>
             </a>
         </div>
-        <slot></slot>
+        <Authorposts :uid="uid" />
     </div>
 </template>
 
 <script>
 const liveStatusMap = ["等待开播", "直播中", "直播结束"];
 import Avatar from "./Avatar.vue";
+import Authorposts from "./Authorposts.vue";
 import {
     authorLink,
     tvLink,
@@ -99,7 +101,13 @@ export default {
             tv: "",
             medals: [],
             medal_map,
-            teams: [],
+            teams: [
+                // {
+                //     team_name : '诗画印象',
+                //     team_logo : 'https://oss.jx3box.com/2019/09/logo.png',
+                //     team_server : "蝶恋花"
+                // }
+            ],
         };
     },
     computed: {
@@ -191,6 +199,7 @@ export default {
     },
     components: {
         Avatar,
+        Authorposts
     },
 };
 </script>

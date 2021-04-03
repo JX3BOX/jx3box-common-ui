@@ -15,8 +15,7 @@
 
         <LeftSidebar :open="true">
             <div id="directory"></div>
-            <Author :author="author" uid="8" />
-            <Authorposts uid="2" style="margin-top:30px;"/>
+            <Author :author="author" uid="15" />
         </LeftSidebar>
 
         <Main :withoutLeft="false" :withoutRight="false">
@@ -78,7 +77,6 @@
                     <RightSideMsg>Test</RightSideMsg>
 
                     <Author :author="author" uid="5" />
-                    <Authorposts uid="15" />
                 </div>
             </RightSidebar>
 
@@ -99,7 +97,7 @@ import Bottom from "./Bottom.vue";
 import RightSideMsg from "./RightSideMsg.vue";
 import Mark from "./Mark.vue";
 import Author from "./Author.vue";
-import Authorposts from "./Authorposts.vue";
+// import Authorposts from "./Authorposts.vue";
 import Fav from "./Fav.vue";
 import Like from "./Like.vue";
 import Down from "./Down.vue";
@@ -134,7 +132,7 @@ export default {
 
         RightSideMsg,
         Author,
-        Authorposts,
+        // Authorposts,
 
         Mark,
         Like,
