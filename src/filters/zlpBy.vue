@@ -25,7 +25,7 @@
 <script>
 import zlps from '@jx3box/jx3box-data/data/box/zlp.json'
 export default {
-    name: "menuBy",
+    name: "zlpBy",
     props: ['client'],
     data: function() {
         return {
