@@ -1,101 +1,79 @@
 <template>
     <div class="c-header-user" id="c-header-user">
-        <!-- user msg -->
-        <div
-            class="c-header-msg"
-            id="c-header-msg"
-        >
-            <el-tooltip
-                effect="dark"
-                content="我的消息"
-                placement="bottom"
-            >
-                <a class="u-msg" :href="url.msg"
-                    ><i class="u-icon u-icon-msg">
-                        <i
-                            class="u-pop"
-                            style="display: none;"
-                            v-show="pop"
-                        ></i>
-                        <img
-                            svg-inline
-                            src="../../assets/img/header/msg.svg"/></i
-                ></a>
-            </el-tooltip>
-        </div>
-
-        <!-- user panel -->
-        <div
-            class="c-header-panel"
-            id="c-header-panel"
-        >
-            <el-tooltip
-                effect="dark"
-                content="发布中心"
-                placement="bottom"
-            >
-                <a class="u-post" :href="url.publish"
-                    ><img
-                        class="u-add"
-                        svg-inline
-                        src="../../assets/img/header/add.svg"/></a
-            ></el-tooltip>
-        </div>
-
-        <!-- user info -->
-        <div class="c-header-info">
-            <div
-                class="c-header-profile"
-                id="c-header-profile"
-                @click="showmenu"
-            >
-                <img class="u-avatar" :src="user.avatar" />
-                <span class="u-dropdown"></span>
-                <ul class="u-menu" v-show="!fold">
-                    <li>
-                        <a class="u-me" :href="url.homepage"
-                            ><b>{{ user.name | showUserName }}</b>
-                            <em>(UID : {{ user.uid }})</em></a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            class="u-vip"
-                            href="/vip/premium?from=header_usermenu"
-                            target="_blank"
-                        >
-                            <i
-                                class="i-icon-vip"
-                                :class="{ on: isVIP || isPRO }"
-                                >{{ vipType }}</i
-                            >
-                            <span class="u-vip-type"
-                                ><template v-if="isVIP || isPRO"
-                                    >{{ vipTypeTxt
-                                    }}<span class="u-vip-left"
-                                        >({{ vipLeftDays }}天)</span
-                                    ></template
-                                ><template v-else
-                                    >升级账号类型</template
-                                ></span
-                            >
-                            <!-- <span class="u-expire" v-if="expire_date">(有效期至:{{expire_date}})</span> -->
-                        </a>
-                    </li>
-                    <hr />
-                    <li v-for="(item, i) in panel" :key="i">
-                        <a :href="item.link">{{ item.label }}</a>
-                    </li>
-                    <hr />
-                    <li>
-                        <a :href="url.profile">设置</a>
-                    </li>
-                    <li>
-                        <a @click="logout()">登出</a>
-                    </li>
-                </ul>
+        <template v-if="isLogin">
+            <!-- user msg -->
+            <div class="c-header-msg" id="c-header-msg">
+                <el-tooltip effect="dark" content="我的消息" placement="bottom">
+                    <a class="u-msg" :href="url.msg">
+                        <i class="u-icon u-icon-msg">
+                            <i class="u-pop" style="display: none;" v-show="pop"></i>
+                            <img svg-inline src="../../assets/img/header/msg.svg" />
+                        </i>
+                    </a>
+                </el-tooltip>
             </div>
-        </div>
+
+            <!-- user panel -->
+            <div class="c-header-panel" id="c-header-panel">
+                <el-tooltip effect="dark" content="发布中心" placement="bottom">
+                    <a class="u-post" :href="url.publish">
+                        <img class="u-add" svg-inline src="../../assets/img/header/add.svg" />
+                    </a>
+                </el-tooltip>
+            </div>
+
+            <!-- user info -->
+            <div class="c-header-info">
+                <div class="c-header-profile" id="c-header-profile" @click="showmenu">
+                    <img class="u-avatar" :src="user.avatar" />
+                    <span class="u-dropdown"></span>
+                    <ul class="u-menu" v-show="!fold">
+                        <li>
+                            <a class="u-me" :href="url.homepage">
+                                <b>{{ user.name | showUserName }}</b>
+                                <em>(UID : {{ user.uid }})</em>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                class="u-vip"
+                                href="/vip/premium?from=header_usermenu"
+                                target="_blank"
+                            >
+                                <i class="i-icon-vip" :class="{ on: isVIP || isPRO }">{{ vipType }}</i>
+                                <span class="u-vip-type">
+                                    <template v-if="isVIP || isPRO">
+                                        {{ vipTypeTxt
+                                        }}
+                                        <span class="u-vip-left">({{ vipLeftDays }}天)</span>
+                                    </template>
+                                    <template v-else>升级账号类型</template>
+                                </span>
+                                <!-- <span class="u-expire" v-if="expire_date">(有效期至:{{expire_date}})</span> -->
+                            </a>
+                        </li>
+                        <hr />
+                        <li v-for="(item, i) in panel" :key="i">
+                            <a :href="item.link">{{ item.label }}</a>
+                        </li>
+                        <hr />
+                        <li>
+                            <a :href="url.profile">设置</a>
+                        </li>
+                        <li>
+                            <a @click="logout()">登出</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </template>
+        <template v-else>
+            <div class="c-header-login">
+                <a class="u-register u-default" :href="register_url">注册</a>
+                <em>|</em>
+                <a class="u-login u-default" :href="login_url">登录</a>
+            </div>
+        </template>
     </div>
 </template>
 
@@ -106,11 +84,11 @@ import { __Links, __Root } from "@jx3box/jx3box-common/data/jx3box.json";
 import panel from "../../assets/data/panel";
 import { getMsg, getPanel } from "../../service/header";
 export default {
-    props:[],
-    data : function(){
+    props: [],
+    data: function () {
         return {
             panel,
-        
+
             // 是否有消息
             pop: false,
             // 是否折叠
@@ -136,22 +114,26 @@ export default {
                 pro_total_day: 366,
                 was_pro: 0,
             },
-        }
+
+            // 链接
+            login_url: __Links.account.login + "?redirect=" + location.href,
+            register_url: __Links.account.register + "?redirect=" + location.href,
+        };
     },
-    computed:{
-        isVIP: function() {
+    computed: {
+        isVIP: function () {
             return User._isVIP(this.asset) || false;
         },
-        isPRO: function() {
+        isPRO: function () {
             return User._isPRO(this.asset) || false;
         },
-        vipType: function() {
+        vipType: function () {
             return this.isPRO ? "PRO" : "PRE";
         },
-        vipTypeTxt: function() {
+        vipTypeTxt: function () {
             return this.isPRO ? "专业版" : "高级版";
         },
-        expire_date: function() {
+        expire_date: function () {
             if (this.isPRO) {
                 return showDate(this.asset.pro_expire_date);
             } else if (this.isVIP) {
@@ -160,7 +142,7 @@ export default {
                 return "";
             }
         },
-        vipLeftDays: function() {
+        vipLeftDays: function () {
             if (this.isPRO) {
                 return parseInt(
                     (new Date(this.asset.pro_expire_date) - new Date()) /
@@ -175,35 +157,34 @@ export default {
             }
         },
     },
-    methods:{
+    methods: {
         // 消息
-        checkMSG: function() {
+        checkMSG: function () {
             getMsg().then((res) => {
-                this.pop = !!res.data.data.unread; 
+                this.pop = !!res.data.data.unread;
             });
         },
 
         // 面板
-        showmenu: function(e) {
+        showmenu: function (e) {
             e.stopPropagation();
             this.fold = !this.fold;
         },
-        closeExpandList: function() {
+        closeExpandList: function () {
             const vm = this;
-            document.addEventListener("click", function() {
+            document.addEventListener("click", function () {
                 vm.fold = true;
             });
         },
-        loadPanel : function (){
+        loadPanel: function () {
             getPanel().then((res) => {
-            this.panel = res.data || panel;
-        });
+                this.panel = res.data || panel;
+            });
         },
-        logout: function() {
+        logout: function () {
             User.destroy()
                 .then((res) => {
                     this.isLogin = false;
-                    this.user = User.getInfo();
                     if (location.href.indexOf("dashboard") > 0) {
                         location.href = __Root;
                     }
@@ -213,31 +194,31 @@ export default {
                         title: "成功",
                         message: "登出成功",
                         type: "success",
-                        duration:1000,
+                        duration: 1000,
                     });
                 });
         },
 
         // 资产
-        loadAsset: function() {
+        loadAsset: function () {
             User.getAsset().then((data) => {
                 this.asset = data;
-            })
+            });
         },
-        
+
         // 初始化
-        init : function (){
+        init: function () {
             this.checkMSG();
             this.loadPanel();
             this.loadAsset();
-        }
+        },
     },
-    created:function(){
+    created: function () {
         this.closeExpandList();
-        this.init()
+        this.init();
     },
     filters: {
-        showUserName: function(val) {
+        showUserName: function (val) {
             if (val) {
                 if (val.length < 5) {
                     return val;
@@ -249,7 +230,6 @@ export default {
             }
         },
     },
-    components : {
-    }
-}
+    components: {},
+};
 </script>

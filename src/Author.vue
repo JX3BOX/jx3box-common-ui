@@ -66,7 +66,7 @@
             </div>
             <a class="u-team" v-for="(item,i) in teams" :key="i" :href="item.team_id | teamLink">
                 <img class="u-teamlogo" :src="item.team_logo | showTeamLogo" />
-                <span class="u-teamname">{{item.team_name}}</span>
+                <span class="u-teamname">{{item.team_name}}@{{item.server || item.team_server}}</span>
             </a>
         </div>
         <slot></slot>

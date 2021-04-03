@@ -15,7 +15,7 @@
 
         <LeftSidebar :open="true">
             <div id="directory"></div>
-            <Author :author="author" uid="15" />
+            <Author :author="author" uid="8" />
             <Authorposts uid="2" style="margin-top:30px;"/>
         </LeftSidebar>
 
