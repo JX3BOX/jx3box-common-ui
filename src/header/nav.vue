@@ -1,7 +1,7 @@
 <template>
     <nav class="c-header-nav" v-if="nav">
         <div class="u-item-box" v-for="item in nav" :key="item.key">
-            <template v-if="item.children && item.children.length">
+            <template v-if="item.status && item.children && item.children.length">
                 <template v-if="item.status">
                     <el-dropdown
                         class="u-menu"

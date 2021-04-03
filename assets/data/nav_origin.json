@@ -14,13 +14,6 @@
         "hasChildren": false
     },
     {
-        "label": "插件",
-        "link": "/plugin",
-        "status": 1,
-        "key": "plugin",
-        "hasChildren": false
-    },
-    {
         "label": "副本",
         "link": "/fb",
         "status": 1,
@@ -96,6 +89,12 @@
                 "link": "/knowledge",
                 "status": 1,
                 "key": "knowledge"
+            },
+            {
+                "label": "宠物百科",
+                "link": "/knowledge/#/pet",
+                "status": 1,
+                "key": "pet"
             }
         ]
     },
@@ -146,22 +145,15 @@
         "hasChildren": true,
         "children": [
             {
-                "label": "铭牌",
-                "desc": "（剑网3.com）",
-                "link": "/bbs/#/namespace",
-                "status": 1,
-                "key": "namespace"
-            },
-            {
                 "label": "剑三骚话",
                 "link": "/bbs/#/joke",
-                "status": 0,
+                "status": 1,
                 "key": "joke"
             },
             {
                 "label": "剑三表情",
                 "link": "/bbs/#/emotion",
-                "status": 0,
+                "status": 1,
                 "key": "emotion"
             },
             {
@@ -175,6 +167,13 @@
                 "link": "/share",
                 "status": 1,
                 "key": "share"
+            },
+            {
+                "label": "铭牌",
+                "desc": "（剑网3.com）",
+                "link": "/bbs/#/namespace",
+                "status": 1,
+                "key": "namespace"
             }
         ]
     }

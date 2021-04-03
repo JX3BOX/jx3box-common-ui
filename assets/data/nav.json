@@ -48,6 +48,12 @@
                 "key": "fb_post"
             },
             {
+                "label": "秘境百强",
+                "link": "/rank",
+                "status": 1,
+                "key": "fb_rank"
+            },
+            {
                 "label": "首领数据",
                 "link": "/fb/#/npc",
                 "status": 1,
@@ -130,6 +136,12 @@
                 "link": "/knowledge",
                 "status": 1,
                 "key": "knowledge"
+            },
+            {
+                "label": "宠物百科",
+                "link": "/knowledge/#/pet",
+                "status": 1,
+                "key": "pet"
             }
         ]
     },
@@ -180,13 +192,6 @@
         "hasChildren": true,
         "children": [
             {
-                "label": "铭牌",
-                "desc": "（剑网3.com）",
-                "link": "/bbs/#/namespace",
-                "status": 1,
-                "key": "namespace"
-            },
-            {
                 "label": "剑三骚话",
                 "link": "/bbs/#/joke",
                 "status":1,
@@ -209,41 +214,14 @@
                 "link": "/share",
                 "status": 1,
                 "key": "share"
-            }
-        ]
-    },
-    {
-        "label": "交易",
-        "link": "/trade",
-        "status":1,
-        "key": "trade",
-        "hasChildren": true,
-        "children": [
-            {
-                "label": "全服交易行",
-                "link": "/trade/#item",
-                "status": 1,
-                "key": "bourse"
             },
             {
-                "label": "不绑定交易",
-                "link": "/trade/#jewelry",
+                "label": "铭牌",
+                "desc": "（剑网3.com）",
+                "link": "/bbs/#/namespace",
                 "status": 1,
-                "key": "jewelry"
-            },
-            {
-                "label": "角色交易",
-                "link": "/trade/#cosrole",
-                "status": 1,
-                "key": "cosrole"
+                "key": "namespace"
             }
         ]
-    },
-    {
-        "label": "商城",
-        "link": "/mall",
-        "status":1,
-        "key": "mall",
-        "hasChildren": false
     }
 ]
