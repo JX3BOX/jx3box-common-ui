@@ -15,7 +15,7 @@
 
         <LeftSidebar :open="true">
             <div id="directory"></div>
-            <Author :author="author" uid="15" />
+            <Author :author="author" uid="8" />
         </LeftSidebar>
 
         <Main :withoutLeft="false" :withoutRight="false">
