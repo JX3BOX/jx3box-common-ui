@@ -18,7 +18,7 @@
 <script>
 export default {
     name: "clientSwitch",
-    props: ["client"],
+    props: [],
     data: function() {
         return {
             clientThink: false,
@@ -34,6 +34,7 @@ export default {
                     client: "origin",
                 },
             ],
+            client : ''
         };
     },
     computed: {},
@@ -46,12 +47,11 @@ export default {
         },
     },
     mounted: function() {
-        if (this.client) {
-            for (let i = 0; i < this.clients.length; i++) {
-                if (this.clients[i].client == this.client) {
-                    this.clients.unshift(...this.clients.splice(i, 1));
-                    break;
-                }
+        this.client = location.href.includes('origin') ? 'origin' : 'std'
+        for (let i = 0; i < this.clients.length; i++) {
+            if (this.clients[i].client == this.client) {
+                this.clients.unshift(...this.clients.splice(i, 1));
+                break;
             }
         }
     },
