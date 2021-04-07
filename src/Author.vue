@@ -161,9 +161,15 @@ export default {
     },
     methods: {
         loadData: function () {
-            return getUserInfo(this.id).then((data) => {
-                this.data = data;
-            });
+            return getUserInfo(this.id)
+                .then((data) => {
+                    this.data = data;
+                })
+                .then(() => {
+                    // this.loadTV();
+                    this.loadMedals();
+                    this.loadTeams();
+                });
         },
         loadTV: function () {
             if (this.tv_type == "douyu") {
@@ -180,6 +186,7 @@ export default {
         },
         loadTeams: function () {
             getUserPublicTeams(this.id).then((data) => {
+                console.log(11);
                 this.teams = data && data.slice(0, 5);
             });
         },
@@ -190,12 +197,7 @@ export default {
         },
     },
     mounted: function () {
-        this.id &&
-            this.loadData().then(() => {
-                // this.loadTV();
-                this.loadMedals();
-                this.loadTeams();
-            });
+        this.id && this.loadData();
     },
     components: {
         Avatar,
