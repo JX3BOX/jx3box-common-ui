@@ -19,6 +19,15 @@
                 >{{ option }}</el-radio-button>
             </el-radio-group>
 
+            <el-divider content-position="left">可见性变更</el-divider>
+            <el-radio-group v-model="visible" size="small" class="c-admin-status">
+                <el-radio-button
+                    v-for="(option, key) in visible_options"
+                    :label="key"
+                    :key="key"
+                >{{ option }}</el-radio-button>
+            </el-radio-group>
+
             <el-divider content-position="left">推荐角标</el-divider>
             <el-checkbox-group v-model="mark" class="c-admin-mark">
                 <el-checkbox
@@ -99,7 +108,7 @@
 <script>
 import Bus from "../../service/bus";
 import { getRewrite } from "@jx3box/jx3box-common/js/utils";
-import { __cms, __postType } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __cms, __postType,__visibleMap } from "@jx3box/jx3box-common/data/jx3box.json";
 import { getSetting, postSetting } from "../../service/admin";
 import User from "@jx3box/jx3box-common/js/user";
 import { cms as marks } from "@jx3box/jx3box-common/data/mark.json";
@@ -126,6 +135,8 @@ export default {
                 draft: "草稿",
                 dustbin: "删除",
             },
+            visible : '0',
+            visible_options:__visibleMap,
 
             // 角标
             mark: [],
@@ -165,6 +176,7 @@ export default {
             return {
                 ID: this.pid,
                 post_status: this.post_status || "publish",
+                visible: this.visible || "0",
                 post_author: this.post_author || 1,
                 post_type: this.post_type || "bbs",
                 post_banner: this.post_banner || "",
@@ -226,9 +238,11 @@ export default {
                     sticky,
                     post_banner,
                     post_type,
+                    visible
                 } = data;
                 this.pid = ID;
                 this.post_status = post_status;
+                this.visible = visible;
                 this.post_author = post_author;
                 this.post_type = post_type;
                 this.post_banner = post_banner;
@@ -245,7 +259,6 @@ export default {
         // 提交
         submit: function () {
             this.pushing = true;
-            console.log(this.data);
             this.push();
         },
         // 推
