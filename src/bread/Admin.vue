@@ -2,7 +2,7 @@
     <el-drawer
         class="c-admin"
         title="管理面板"
-        :visible.sync="visible"
+        :visible.sync="dialog_visible"
         :before-close="close"
         :append-to-body="true"
         :modal="false"
@@ -117,7 +117,7 @@ export default {
     data() {
         return {
             // 可视
-            visible: false,
+            dialog_visible: false,
 
             // 数据
             pulled: false,
@@ -224,7 +224,7 @@ export default {
         },
         // 关闭
         close(done) {
-            this.visible = false;
+            this.dialog_visible = false;
         },
         // 拉
         pull: function () {
@@ -264,13 +264,14 @@ export default {
         // 推
         push: function () {
             postSetting(this.data).then((res) => {
-                this.pushing = false;
                 this.$message({
                     message: "设置成功",
                     type: "success",
                 });
+            }).finally(() => {
+                this.pushing = false;
                 this.close();
-            });
+            })
         },
     },
     created: function () {
@@ -286,7 +287,7 @@ export default {
 
         // 绑定监听
         Bus.$on("toggleAdminPanel", (data) => {
-            this.visible = !this.visible;
+            this.dialog_visible = !this.dialog_visible;
 
             // 文章类型的加载
             if (this.pid && !this.pulled && this.hasRight) {
