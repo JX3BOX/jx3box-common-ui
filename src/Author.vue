@@ -186,7 +186,6 @@ export default {
         },
         loadTeams: function () {
             getUserPublicTeams(this.id).then((data) => {
-                console.log(11);
                 this.teams = data && data.slice(0, 5);
             });
         },
