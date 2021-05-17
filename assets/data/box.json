@@ -81,7 +81,7 @@
         "hasMark": false,
         "markcls": "isnew",
         "mark": "NEW",
-        "status": false
+        "status": true
     },
     "knowledge": {
         "uuid": "knowledge",
@@ -263,6 +263,30 @@
         "mark": "HOT",
         "status": true
     },
+    "meridians": {
+        "uuid": "meridians",
+        "href": "/app/meridians",
+        "img": "/box/meridians.svg",
+        "hover": "/box/meridians.svg",
+        "name": "经脉模拟",
+        "abbr": "经脉",
+        "hasMark": true,
+        "markcls": "isnew",
+        "mark": "NEW",
+        "status": true
+    },
+    "sandbox": {
+        "uuid": "sandbox",
+        "href": "/app/sandbox",
+        "img": "/box/sandbox.svg",
+        "hover": "/box/sandbox.svg",
+        "name": "阵营沙盘",
+        "abbr": "沙盘",
+        "hasMark": true,
+        "markcls": "isnew",
+        "mark": "NEW",
+        "status": true
+    },
     "team": {
         "uuid": "team",
         "href": "/team",
@@ -287,6 +311,18 @@
         "mark": "HOT",
         "status": true
     },
+    "battle": {
+        "uuid": "battle",
+        "href": "/battle",
+        "img": "/box/battle.svg",
+        "hover": "/box/battle.svg",
+        "name": "战斗分析",
+        "abbr": "复盘",
+        "hasMark": true,
+        "markcls": "isnew",
+        "mark": "NEW",
+        "status": true
+    },
     "dbm": {
         "uuid": "dbm",
         "href": "/dbm",
@@ -301,14 +337,14 @@
     },
     "fbdata": {
         "uuid": "fbdata",
-        "href": "/fb/#/skill",
+        "href": "/fb/#/attr",
         "img": "/box/fbdata.svg",
         "hover": "/box/fbdata.svg",
-        "name": "副本数据",
-        "abbr": "解包",
-        "hasMark": false,
-        "markcls": "ishot",
-        "mark": "HOT",
+        "name": "特殊机制",
+        "abbr": "机制",
+        "hasMark": true,
+        "markcls": "isnew",
+        "mark": "NEW",
         "status": true
     },
     "fbdrop": {
@@ -366,7 +402,7 @@
         "hover": "/box/namespace.svg",
         "name": "剑三铭牌",
         "abbr": "铭牌",
-        "hasMark": true,
+        "hasMark": false,
         "markcls": "isnew",
         "mark": "NEW",
         "status": true
@@ -403,18 +439,6 @@
         "hover": "/box/xls.svg",
         "name": "DPS模拟",
         "abbr": "DPS",
-        "hasMark": false,
-        "markcls": "isnew",
-        "mark": "NEW",
-        "status": true
-    },
-    "j3dps": {
-        "uuid": "j3dps",
-        "href": "https://j3dps.com/fightlog",
-        "img": "/box/j3dps.svg",
-        "hover": "/box/j3dps.svg",
-        "name": "战斗复盘",
-        "abbr": "复盘",
         "hasMark": false,
         "markcls": "isnew",
         "mark": "NEW",

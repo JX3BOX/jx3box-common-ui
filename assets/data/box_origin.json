@@ -11,6 +11,18 @@
         "mark": "HOT",
         "status": true
     },
+    "jx3dat": {
+        "uuid": "jx3dat",
+        "href": "/jx3dat",
+        "img": "/box/jx3dat.svg",
+        "hover": "/box/jx3dat.svg",
+        "name": "插件数据",
+        "abbr": "插件",
+        "hasMark": true,
+        "markcls": "ishot",
+        "mark": "HOT",
+        "status": true
+    },
     "fb": {
         "uuid": "fb",
         "href": "/fb",
@@ -69,7 +81,7 @@
         "hasMark": false,
         "markcls": "isnew",
         "mark": "NEW",
-        "status": false
+        "status": true
     },
     "knowledge": {
         "uuid": "knowledge",
@@ -93,7 +105,7 @@
         "hasMark": false,
         "markcls": "isnew",
         "mark": "NEW",
-        "status": false
+        "status": true
     },
     "tool": {
         "uuid": "tool",
@@ -153,6 +165,18 @@
         "hasMark": false,
         "markcls": "ishot",
         "mark": "HOT",
+        "status": true
+    },
+    "meridians": {
+        "uuid": "meridians",
+        "href": "/app/meridians",
+        "img": "/box/meridians.svg",
+        "hover": "/box/meridians.svg",
+        "name": "经脉模拟",
+        "abbr": "经脉",
+        "hasMark": true,
+        "markcls": "isnew",
+        "mark": "NEW",
         "status": true
     },
     "macroeditor": {
@@ -239,16 +263,16 @@
         "mark": "HOT",
         "status": true
     },
-    "fbdata": {
-        "uuid": "fbdata",
-        "href": "/fb/#/skill",
-        "img": "/box/fbdata.svg",
-        "hover": "/box/fbdata.svg",
-        "name": "副本数据",
-        "abbr": "解包",
-        "hasMark": false,
-        "markcls": "ishot",
-        "mark": "HOT",
+    "battle": {
+        "uuid": "battle",
+        "href": "/battle",
+        "img": "/box/battle.svg",
+        "hover": "/box/battle.svg",
+        "name": "战斗分析",
+        "abbr": "复盘",
+        "hasMark": true,
+        "markcls": "isnew",
+        "mark": "NEW",
         "status": true
     },
     "fbdrop": {

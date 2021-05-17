@@ -43,7 +43,7 @@
         "children": [
             {
                 "label": "副本攻略",
-                "link": "/fb/#/",
+                "link": "/fb",
                 "status": 1,
                 "key": "fb_post"
             },
@@ -52,18 +52,6 @@
                 "link": "/rank",
                 "status": 1,
                 "key": "fb_rank"
-            },
-            {
-                "label": "首领数据",
-                "link": "/fb/#/npc",
-                "status": 1,
-                "key": "fb_npc"
-            },
-            {
-                "label": "机制数据",
-                "link": "/fb/#/skill",
-                "status": 1,
-                "key": "fb_skill"
             },
             {
                 "label": "掉落奖励",
@@ -88,15 +76,16 @@
         "children": [
             {
                 "label": "门派攻略",
-                "link": "/bps/#/",
+                "link": "/bps",
                 "status": 1,
                 "key": "bps_post"
             },
             {
-                "label": "DPS排行榜",
-                "link": "/dps",
-                "status":1,
-                "key": "dps_rank"
+                "label": "战斗分析",
+                "desc": "（JCL）",
+                "link": "/battle",
+                "status": 1,
+                "key": "battle"
             },
             {
                 "label": "DPS模拟器",
@@ -128,7 +117,7 @@
             {
                 "label": "任务百科",
                 "link": "/quest",
-                "status":1,
+                "status": 1,
                 "key": "quest"
             },
             {
@@ -159,10 +148,10 @@
                 "key": "team"
             },
             {
-                "label": "魔盒助手",
-                "link": "/assistant",
-                "status":1,
-                "key": "assistant"
+                "label": "阵营沙盘",
+                "link": "/app/sandbox",
+                "status": 1,
+                "key": "sandbox"
             },
             {
                 "label": "剑三数据库",
@@ -171,14 +160,8 @@
                 "key": "database"
             },
             {
-                "label": "教程指南",
-                "link": "/tool/?subtype=3",
-                "status": 1,
-                "key": "docs"
-            },
-            {
-                "label": "更多工具",
-                "link": "/tool/?subtype=1",
+                "label": "教程工具",
+                "link": "/tool",
                 "status": 1,
                 "key": "helper"
             }
@@ -194,13 +177,13 @@
             {
                 "label": "剑三骚话",
                 "link": "/bbs/#/joke",
-                "status":1,
+                "status": 1,
                 "key": "joke"
             },
             {
                 "label": "剑三表情",
                 "link": "/bbs/#/emotion",
-                "status":1,
+                "status": 1,
                 "key": "emotion"
             },
             {
@@ -223,39 +206,5 @@
                 "key": "namespace"
             }
         ]
-    },
-    {
-        "label": "交易",
-        "link": "/trade",
-        "status": 1,
-        "key": "trade",
-        "hasChildren": true,
-        "children": [
-            {
-                "label": "全服交易行",
-                "link": "/trade/#item",
-                "status": 1,
-                "key": "bourse"
-            },
-            {
-                "label": "不绑定交易",
-                "link": "/trade/#jewelry",
-                "status": 1,
-                "key": "jewelry"
-            },
-            {
-                "label": "角色交易",
-                "link": "/trade/#role",
-                "status": 1,
-                "key": "role"
-            }
-        ]
-    },
-    {
-        "label": "商城",
-        "link": "/mall",
-        "status": 1,
-        "key": "mall",
-        "hasChildren": false
     }
 ]
