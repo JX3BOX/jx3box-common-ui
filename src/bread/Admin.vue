@@ -274,6 +274,11 @@ export default {
             })
         },
     },
+    watch : {
+        '$route.params.id' : function (id){
+            this.checkPostID()
+        }
+    },
     created: function () {
         // 是否mount
         this.checkHasRight();
