@@ -293,7 +293,7 @@ export default {
         // 绑定监听
         Bus.$on("toggleAdminPanel", (data) => {
             this.dialog_visible = !this.dialog_visible;
-
+            this.checkPostID()
             // 文章类型的加载
             if (this.pid && !this.pulled && this.hasRight) {
                 this.pull();
