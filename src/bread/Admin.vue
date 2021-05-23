@@ -193,7 +193,7 @@ export default {
         },
         // 获取pid
         checkPostID: function () {
-            this.pid = getRewrite("pid");
+            this.pid = getRewrite("pid") || this.$route.params.id;
         },
         // 获取type
         checkChannel: function () {
