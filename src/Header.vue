@@ -10,7 +10,7 @@
             <header-logo/>
 
             <!-- origin -->
-            <clientSwitch :client="client"/>
+            <clientSwitch :defaultValue="client"/>
 
             <!-- search -->
             <header-search :client="client"/>

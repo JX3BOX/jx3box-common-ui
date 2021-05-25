@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li>
-                <a class="u-item" href="https://origin.jx3box.com">
+                <a class="u-item" href="/origin">
                     <img
                         class="u-pic"
                         svg-inline

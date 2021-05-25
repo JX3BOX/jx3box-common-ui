@@ -1,60 +1,95 @@
 <template>
-    <div
-        class="c-header-origin"
-        @mouseenter="openClient"
-        @mouseleave="closeClient"
-    >
-        <a
+    <div class="c-header-origin" @mouseenter="openClient" @mouseleave="closeClient">
+        <div
             class="u-item"
             v-for="(item, i) in clients"
             :key="i"
             :href="item.link"
             v-show="!i || clientThink"
-            ><i class="el-icon-s-home"></i> {{ item.name }}</a
+            @click="changeClient(item.client)"
         >
+            <i class="el-icon-s-home"></i>
+            {{ item.name }}
+        </div>
     </div>
 </template>
 
 <script>
 export default {
     name: "clientSwitch",
-    props: [],
-    data: function() {
+    props: ['defaultValue'],
+    data: function () {
         return {
             clientThink: false,
             clients: [
                 {
-                    link: "https://www.jx3box.com",
                     name: "正式服",
                     client: "std",
                 },
                 {
-                    link: "https://origin.jx3box.com",
                     name: "怀旧服",
                     client: "origin",
                 },
             ],
-            client : ''
+            client: this.defaultValue || 'std',
         };
     },
-    computed: {},
-    methods: {
-        openClient: function() {
-            this.clientThink = true;
-        },
-        closeClient: function() {
-            this.clientThink = false;
+    computed: {
+        isIndex: function () {
+            return (
+                location.pathname == "/index" || location.pathname == "/origin"
+            );
         },
     },
-    mounted: function() {
-        this.client = location.href.includes('origin') ? 'origin' : 'std'
-        for (let i = 0; i < this.clients.length; i++) {
-            if (this.clients[i].client == this.client) {
-                this.clients.unshift(...this.clients.splice(i, 1));
-                break;
+    methods: {
+        openClient: function () {
+            this.clientThink = true;
+        },
+        closeClient: function () {
+            this.clientThink = false;
+        },
+        init: function () {
+            this.client = location.href.includes("origin") ? "origin" : "std";
+            for (let i = 0; i < this.clients.length; i++) {
+                if (this.clients[i].client == this.client) {
+                    this.clients.unshift(...this.clients.splice(i, 1));
+                    break;
+                }
             }
-        }
+        },
+        changeClient: function (client) {
+            this.clientThink = false;
+            if (this.client != client) {
+                if (this.isIndex) {
+                    if (client == "origin") {
+                        location.href = "/origin";
+                    } else {
+                        location.href = "/index";
+                    }
+                } else {
+                    // 修改ui
+                    this.client = client
+                    this.clients.unshift(...this.clients.splice(1, 1));
+
+                    // 修改store
+                    if (this.$store && this.$store.client) {
+                        this.$store.client = client;
+                    }
+                }
+            }
+        },
+    },
+    mounted: function () {
+        this.init();
     },
     components: {},
 };
 </script>
+
+<style scoped lang="less">
+.c-header-origin {
+    .u-item {
+        .pointer;
+    }
+}
+</style>
