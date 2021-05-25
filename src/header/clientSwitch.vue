@@ -37,7 +37,7 @@ export default {
     computed: {
         isIndex: function () {
             return (
-                location.pathname == "/index" || location.pathname == "/origin"
+                location.pathname.startsWith('/index') || location.pathname.startsWith('/origin')
             );
         },
     },
