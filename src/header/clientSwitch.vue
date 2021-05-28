@@ -17,7 +17,7 @@
 <script>
 export default {
     name: "clientSwitch",
-    props: ['defaultValue'],
+    props: ["defaultValue"],
     data: function () {
         return {
             clientThink: false,
@@ -31,13 +31,14 @@ export default {
                     client: "origin",
                 },
             ],
-            client: this.defaultValue || 'std',
+            client: this.defaultValue || "std",
         };
     },
     computed: {
         isIndex: function () {
             return (
-                location.pathname.startsWith('/index') || location.pathname.startsWith('/origin')
+                location.pathname.startsWith("/index") ||
+                location.pathname.startsWith("/origin")
             );
         },
     },
@@ -68,12 +69,21 @@ export default {
                     }
                 } else {
                     // 修改ui
-                    this.client = client
+                    this.client = client;
                     this.clients.unshift(...this.clients.splice(1, 1));
 
                     // 修改store
-                    if (this.$store && this.$store.client) {
-                        this.$store.client = client;
+                    if (this.$store && this.$store.state) {
+                        this.$store.state.client = client;
+                    }
+
+                    // 修改route
+                    if (this.$route) {
+                        this.$router.push({
+                            query: {
+                                client,
+                            },
+                        });
                     }
                 }
             }

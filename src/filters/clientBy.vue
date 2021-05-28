@@ -7,9 +7,7 @@
                 v-for="(label, value) in clients"
                 :key="value"
                 @click="filter(value)"
-            >
-                {{ label }}
-            </li>
+            >{{ label }}</li>
         </ul>
     </div>
 </template>
@@ -23,7 +21,7 @@ const clients = {
 export default {
     name: "clientBy",
     props: ["type"],
-    data: function() {
+    data: function () {
         return {
             client: this.type || "all",
             clients,
@@ -31,19 +29,28 @@ export default {
     },
     computed: {},
     methods: {
-        filter: function(key) {
+        filter: function (key) {
             this.client = key;
             this.$emit("filter", { type: "client", val: key });
         },
     },
-    mounted: function() {
+    mounted: function () {
         let query = new URLSearchParams(location.search);
-        let client = (this.$route && this.$route.query.client) || query.get("client");
-        if(client){
-            this.client = client
-        }else{
-            this.client = this.type || 'all'
+        let client =
+            (this.$route && this.$route.query.client) || query.get("client");
+        if (client) {
+            this.client = client;
+        } else {
+            this.client = this.type || "all";
         }
+    },
+    watch: {
+        "$store.state.client": {
+            immediate: true,
+            handler: function (val) {
+                this.client = val;
+            },
+        },
     },
 };
 </script>
