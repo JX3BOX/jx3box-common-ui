@@ -72,11 +72,6 @@ export default {
                     this.client = client;
                     this.clients.unshift(...this.clients.splice(1, 1));
 
-                    // 修改store
-                    if (this.$store && this.$store.state) {
-                        this.$store.state.client = client;
-                    }
-
                     // 修改route
                     if (this.$route) {
                         this.$router.push({
@@ -84,6 +79,17 @@ export default {
                                 client,
                             },
                         });
+                    }
+
+                    // 修改store
+                    if (
+                        this.$store &&
+                        this.$store.state &&
+                        this.$store.state.client
+                    ) {
+                        if (client != this.$store.state.client) {
+                            this.$store.commit("switchClient", client);
+                        }
                     }
                 }
             }

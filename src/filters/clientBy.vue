@@ -29,29 +29,18 @@ export default {
     },
     computed: {},
     methods: {
-        filter: function (key) {
-            this.client = key;
-            this.$emit("filter", { type: "client", val: key });
+        filter: function (val) {
+            this.client = val;
+            this.$emit("filter", { type: "client", val: val });
+            this.$forceUpdate();
         },
     },
-    mounted: function () {
-        let query = new URLSearchParams(location.search);
-        let client =
-            (this.$route && this.$route.query.client) || query.get("client");
-        if (client) {
-            this.client = client;
-        } else {
-            this.client = this.type || "all";
+    mounted : function (){
+        if(this.$store && this.$store.state && this.$store.state.client){
+            this.client = this.$store.state.client
+            this.filter(this.client)
         }
-    },
-    watch: {
-        "$store.state.client": {
-            immediate: true,
-            handler: function (val) {
-                this.client = val;
-            },
-        },
-    },
+    }
 };
 </script>
 
