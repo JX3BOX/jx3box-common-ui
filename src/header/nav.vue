@@ -10,7 +10,7 @@
                     <a
                         class="u-item el-dropdown-link"
                         :class="{ on: isFocus(item.link) }"
-                        :href="item.link"
+                        :href="getClientLink(item.link)"
                         >{{ item.label
                         }}<i class="el-icon-arrow-down el-icon--right"></i
                     ></a>
@@ -23,7 +23,7 @@
                             :key="subitem.key"
                             class="u-menu-item"
                         >
-                            <a :href="subitem.link" v-if="subitem.status"
+                            <a :href="getClientLink(subitem.link)" v-if="subitem.status"
                                 >{{ subitem.label }}
                                 <span v-if="subitem.desc">{{
                                     subitem.desc
@@ -37,7 +37,7 @@
                 <a
                     class="u-item"
                     :class="{ on: isFocus(item.link) }"
-                    :href="item.link"
+                    :href="getClientLink(item.link)"
                     v-if="item.status"
                     >{{ item.label }}</a
                 >
@@ -63,6 +63,12 @@ export default {
         isFocus: function(type) {
             return location.pathname.includes(type);
         },
+        getClientLink : function (val){
+            if(this.$store && this.$store.state && this.$store.state.client){
+                val = val + '?client=' + this.$store.state.client
+            }
+            return val
+        }
     },
     created: function() {
         getNav(this.client).then((res) => {

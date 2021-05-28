@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li v-for="(item,i) in data" :key="i" :class="{'u-app-start':isLF(item.uuid)}">
-                <a class="u-item" :href="item.href" :target="item.href | getTarget">
+                <a class="u-item" :href="getClientLink(item.href)" :target="item.href | getTarget">
                     <img
                         class="u-pic"
                         svg-inline
@@ -93,6 +93,12 @@ export default {
         },
         isLF : function (name){
             return breakIcons.includes(name)
+        },
+        getClientLink : function (val){
+            if(this.$store && this.$store.state && this.$store.state.client){
+                val = val + '?client=' + this.$store.state.client
+            }
+            return val
         }
     },
     created: function() {
@@ -131,7 +137,7 @@ export default {
             }else{
                 return '_blank'
             }
-        }
+        },
     },
     components: {},
 };
