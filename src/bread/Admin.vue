@@ -295,7 +295,7 @@ export default {
             this.dialog_visible = !this.dialog_visible;
             this.checkPostID()
             // 文章类型的加载
-            if (this.pid && !this.pulled && this.hasRight) {
+            if (this.pid && this.hasRight) {
                 this.pull();
             }
         });
