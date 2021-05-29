@@ -40,6 +40,12 @@ export default {
             this.client = this.$store.state.client
             this.filter(this.client)
         }
+    },
+    watch : {
+        '$store.state.client' : function (val){
+            this.client = val
+            this.filter(val)
+        }
     }
 };
 </script>
