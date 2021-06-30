@@ -64,12 +64,18 @@ export default {
             return location.pathname.includes(type);
         },
         getClientLink : function (val){
+            let client = 'std'
             if(this.$store && this.$store.state && this.$store.state.client){
-                val = val + '?client=' + this.$store.state.client
+                client = this.$store.state.client
+            }else if(this.$route && this.$route.query && this.$route.query.client){
+                client = this.$route.query.client
             }else{
-                val = val + '?client=' + this.client
+                client = this.client
             }
-            return val
+            if(val.includes('client')){
+                return val
+            }
+            return val + '?client=' + client
         }
     },
     created: function() {
