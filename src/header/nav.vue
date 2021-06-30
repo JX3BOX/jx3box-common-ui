@@ -66,6 +66,8 @@ export default {
         getClientLink : function (val){
             if(this.$store && this.$store.state && this.$store.state.client){
                 val = val + '?client=' + this.$store.state.client
+            }else{
+                val = val + '?client=' + this.client
             }
             return val
         }
