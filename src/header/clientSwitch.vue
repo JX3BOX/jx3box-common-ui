@@ -61,37 +61,37 @@ export default {
         changeClient: function (client) {
             this.clientThink = false;
             if (this.client != client) {
-                if (this.isIndex) {
+                // if (this.isIndex) {
                     if (client == "origin") {
-                        location.href = "/origin";
+                        location.href = "https://origin.jx3box.com";
                     } else {
-                        location.href = "/index";
+                        location.href = "https://www.jx3box.com";
                     }
-                } else {
-                    // 修改ui
-                    this.client = client;
-                    this.clients.unshift(...this.clients.splice(1, 1));
+                // } else {
+                //     // 修改ui
+                //     this.client = client;
+                //     this.clients.unshift(...this.clients.splice(1, 1));
 
-                    // 修改route
-                    if (this.$route) {
-                        this.$router.push({
-                            query: {
-                                client,
-                            },
-                        });
-                    }
+                //     // 修改route
+                //     if (this.$route) {
+                //         this.$router.push({
+                //             query: {
+                //                 client,
+                //             },
+                //         });
+                //     }
 
-                    // 修改store
-                    if (
-                        this.$store &&
-                        this.$store.state &&
-                        this.$store.state.client
-                    ) {
-                        if (client != this.$store.state.client) {
-                            this.$store.commit("switchClient", client);
-                        }
-                    }
-                }
+                //     // 修改store
+                //     if (
+                //         this.$store &&
+                //         this.$store.state &&
+                //         this.$store.state.client
+                //     ) {
+                //         if (client != this.$store.state.client) {
+                //             this.$store.commit("switchClient", client);
+                //         }
+                //     }
+                // }
             }
         },
     },

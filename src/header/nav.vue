@@ -10,7 +10,7 @@
                     <a
                         class="u-item el-dropdown-link"
                         :class="{ on: isFocus(item.link) }"
-                        :href="getClientLink(item.link)"
+                        :href="item.link"
                         >{{ item.label
                         }}<i class="el-icon-arrow-down el-icon--right"></i
                     ></a>
@@ -23,7 +23,7 @@
                             :key="subitem.key"
                             class="u-menu-item"
                         >
-                            <a :href="getClientLink(subitem.link)" v-if="subitem.status"
+                            <a :href="subitem.link" v-if="subitem.status"
                                 >{{ subitem.label }}
                                 <span v-if="subitem.desc">{{
                                     subitem.desc
@@ -37,7 +37,7 @@
                 <a
                     class="u-item"
                     :class="{ on: isFocus(item.link) }"
-                    :href="getClientLink(item.link)"
+                    :href="item.link"
                     v-if="item.status"
                     >{{ item.label }}</a
                 >
