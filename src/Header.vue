@@ -42,7 +42,7 @@ import Box from "../src/Box.vue";
 
 export default {
     name: "Header",
-    props: ["client","overlayEnable"],
+    props: ["overlayEnable"],
     data: function() {
         return {
             
@@ -52,6 +52,9 @@ export default {
         };
     },
     computed: {
+        client : function (){
+            return location.href.includes('origin') ? 'origin' : 'std'
+        }
     },
     methods: {
         // webView检测
