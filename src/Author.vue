@@ -9,8 +9,16 @@
                 :frame="data.user_avatar_frame"
             />
             <a class="u-name" :href="id | authorLink">
-                <span>{{ data.display_name }}</span>
+                <span>
+                    {{ data.display_name }}
+                </span>
             </a>
+            <span class="u-superauthor" title="签约作者" v-if="isSuperAuthor">
+                <img :src="super_author_icon" alt="superauthor">
+            </span>
+            <span class="u-vip" v-if="isPRO || isVIP" :title="vipTypeTitle">
+                <i class="i-icon-vip on">{{ vipType }}</i>
+            </span>
         </div>
         <div class="u-bio">{{ data.user_bio }}</div>
         <div class="u-link" v-if="hasLink">
@@ -90,8 +98,11 @@ import {
     getDouyu,
     getUserMedals,
     getUserPublicTeams,
+    getSuperAuthor,
+    getIdentity
 } from "../service/author";
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
+import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "Author",
     props: ["uid"],
@@ -108,6 +119,9 @@ export default {
                 //     team_server : "蝶恋花"
                 // }
             ],
+            isSuperAuthor: false,
+            isPRO: false,
+            isVIP: false
         };
     },
     computed: {
@@ -129,6 +143,9 @@ export default {
         tv_status: function () {
             return (this.tv && this.tv.show_status == 1) || false;
         },
+        super_author_icon: function() {
+            return __imgPath + 'image/user/' + 'superauthor.svg';
+        },
         hasLink: function () {
             return (
                 this.data.weibo_name ||
@@ -139,6 +156,12 @@ export default {
         },
         hasTrophy: function () {
             return this.medals.length;
+        },
+        vipType: function () {
+            return this.isPRO ? "PRO" : "PRE";
+        },
+        vipTypeTitle: function () {
+            return this.isPRO ? "专业版会员用户" : "高级版会员用户";
         },
     },
     filters: {
@@ -166,9 +189,10 @@ export default {
                     this.data = data;
                 })
                 .then(() => {
-                    // this.loadTV();
                     this.loadMedals();
                     this.loadTeams();
+                    this.checkSuperAuthor();
+                    this.loadIdentity()
                 });
         },
         loadTV: function () {
@@ -189,6 +213,21 @@ export default {
                 this.teams = data && data.slice(0, 5);
             });
         },
+        async checkVIP() {
+            this.isPRO = await User.isPRO();
+            this.isVIP = await User.isVIP();
+        },
+        checkSuperAuthor: function() {
+            getSuperAuthor(this.id).then(res => {
+                this.isSuperAuthor = res.data.data
+            })
+        },
+        loadIdentity: function() {
+            getIdentity(this.id).then(res => {
+                this.isPRO = res.data.data.isPRO;
+                this.isVIP = res.data.data.isPRE;
+            })
+        }
     },
     watch: {
         uid: function () {

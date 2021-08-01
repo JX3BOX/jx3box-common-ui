@@ -52,6 +52,14 @@ function getUserPublicTeams(uid) {
     });
 }
 
+function getSuperAuthor(uid) {
+    return $cms().get('/api/cms/user/is_super_author/' + uid)
+}
+
+function getIdentity(uid) {
+    return $cms().get(`/api/cms/user/${uid}/identity`)
+}
+
 export {
     getUserInfo,
     getUserPosts,
@@ -59,4 +67,6 @@ export {
     getUserMedals,
     getFrames,
     getUserPublicTeams,
+    getSuperAuthor,
+    getIdentity
 };

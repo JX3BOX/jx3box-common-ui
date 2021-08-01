@@ -31,6 +31,13 @@
                         <li>
                             <a class="u-me" :href="url.homepage">
                                 <b>{{ user.name | showUserName }}</b>
+                                <img
+                                    v-if="isSuperAuthor"
+                                    :src="super_author_icon"
+                                    class="u-superauthor-profile"
+                                    alt="superauthor"
+                                    title="签约作者"
+                                >
                                 <em>(UID : {{ user.uid }})</em>
                             </a>
                         </li>
@@ -80,9 +87,10 @@
 <script>
 import User from "@jx3box/jx3box-common/js/user";
 import { showDate } from "@jx3box/jx3box-common/js/moment";
-import { __Links, __Root } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __Links, __Root, __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import panel from "../../assets/data/panel";
 import { getMsg, getPanel } from "../../service/header";
+import { getSuperAuthor } from "../../service/author"
 export default {
     props: [],
     data: function () {
@@ -119,6 +127,7 @@ export default {
             // 链接
             login_url: __Links.account.login + "?redirect=" + location.href,
             register_url: __Links.account.register + "?redirect=" + location.href,
+            isSuperAuthor: false
         };
     },
     computed: {
@@ -156,6 +165,9 @@ export default {
             } else {
                 return "";
             }
+        },
+        super_author_icon: function() {
+            return __imgPath + 'image/user/' + 'superauthor.svg';
         },
     },
     methods: {
@@ -206,12 +218,18 @@ export default {
                 this.asset = data;
             });
         },
+        checkSuperAuthor: function() {
+            getSuperAuthor(this.user?.uid).then(res => {
+                this.isSuperAuthor = res.data.data
+            })
+        },
 
         // 初始化
         init: function () {
             this.checkMSG();
             this.loadPanel();
             this.loadAsset();
+            this.checkSuperAuthor();
         },
     },
     created: function () {
