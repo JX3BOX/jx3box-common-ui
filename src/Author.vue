@@ -13,12 +13,12 @@
                     {{ data.display_name }}
                 </span>
             </a>
-            <span class="u-superauthor" title="签约作者" v-if="isSuperAuthor">
+            <a class="u-superauthor" title="签约作者" v-if="isSuperAuthor" href="/dashboard/#/cooperation">
                 <img :src="super_author_icon" alt="superauthor">
-            </span>
-            <span class="u-vip" v-if="isPRO || isVIP" :title="vipTypeTitle">
+            </a>
+            <a class="u-vip" v-if="isPRO || isVIP" :title="vipTypeTitle" href="/vip/premium/?from=author_sidebar">
                 <i class="i-icon-vip on">{{ vipType }}</i>
-            </span>
+            </a>
         </div>
         <div class="u-bio">{{ data.user_bio }}</div>
         <div class="u-link" v-if="hasLink">
