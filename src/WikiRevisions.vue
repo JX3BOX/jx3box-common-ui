@@ -50,6 +50,7 @@
 import WikiPanel from "./WikiPanel";
 import { WikiPost } from "@jx3box/jx3box-common/js/helper";
 import { getLink, authorLink, ts2str } from "@jx3box/jx3box-common/js/utils";
+import {__Root} from '@jx3box/jx3box-common/data/jx3box.json'
 
 export default {
     name: "WikiRevisions",
@@ -60,8 +61,12 @@ export default {
         };
     },
     methods: {
-        link: getLink,
-        author_url: authorLink,
+        link: function (type,id){
+            return __Root + getLink(type,id).slice(1)
+        },
+        author_url: function (uid){
+            return __Root + authorLink(uid).slice(1)
+        },
         ts2str,
     },
     components: {
