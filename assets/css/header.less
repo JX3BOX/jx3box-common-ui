@@ -91,25 +91,37 @@ body {
 //怀旧服
 .c-header-origin{
     .fl;
-    padding:16px 0;
+    margin:15px 0;
     .mr(10px);
-    .u-item{
-        font-size: 14px;
-        display: block;
-        border: 2px solid #303133;
-        border-radius: 4px;
-        padding: 4px 10px;
+    .pr;
+    background-color:#7d7d7d;
+    border: 2px solid #303133;
+    border-radius: 4px;
+    overflow: hidden;
+    .u-active{
+        .db;
+        .size(50%,100%);
         background: @color-link;
-        color: #fff;
         &:hover{
             background-color:#3590f7;
-            // border-color:#303133;
+        }
+        .pa;.lt(0);
+
+        transition: all 0.2s ease-in-out;
+        &.isOffset{
+            transform: translateX(100%);
         }
     }
-}
-@media screen and (max-width:@ipad-y){
-    .c-header-origin{
-        .none;
+    .u-item{
+        .dbi;.y(top);
+        font-size: 14px;
+        color: #fff;
+        .pointer;
+        padding: 5px 10px;
+        .pr;.z(1);
+    }
+    .on{
+        cursor: default;
     }
 }
 

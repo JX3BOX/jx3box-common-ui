@@ -1,16 +1,10 @@
 <template>
-    <div class="c-header-origin" @mouseenter="openClient" @mouseleave="closeClient">
-        <div
-            class="u-item"
-            v-for="(item, i) in clients"
-            :key="i"
-            :href="item.link"
-            v-show="!i || clientThink"
-            @click="changeClient(item.client)"
-        >
-            <i class="el-icon-s-home"></i>
+    <div class="c-header-origin">
+        <i class="u-active" :class="{isOffset}"></i>
+        <i class="u-div"></i>
+        <span class="u-item" v-for="(item, i) in clients" :key="i" :class="[clientCls(item),isActive(item)]" @click="go(item)" @mouseenter="changeClient(item)" @mouseleave="resetClient">
             {{ item.name }}
-        </div>
+        </span>
     </div>
 </template>
 
@@ -25,87 +19,47 @@ export default {
                 {
                     name: "正式服",
                     client: "std",
+                    from : 'origin.jx3box.com',
+                    to : 'www.jx3box.com'
                 },
                 {
                     name: "怀旧服",
                     client: "origin",
+                    to : 'origin.jx3box.com',
+                    from : 'www.jx3box.com'
                 },
             ],
-            client: this.defaultValue || "std",
+            client: this.defaultValue,
+            tempClient : this.defaultValue
         };
     },
     computed: {
-        isIndex: function () {
-            return (
-                location.pathname.startsWith("/index") ||
-                location.pathname.startsWith("/origin")
-            );
-        },
+        isOffset : function (){
+            return this.tempClient == 'origin'
+        }
     },
     methods: {
-        openClient: function () {
-            this.clientThink = true;
+        isActive : function (item){
+            return this.client == item.client ? 'on' : ''
         },
-        closeClient: function () {
-            this.clientThink = false;
+        clientCls : function (item){
+            return 'u-' + item.client
         },
-        init: function () {
-            this.client = location.href.includes("origin") ? "origin" : "std";
-            for (let i = 0; i < this.clients.length; i++) {
-                if (this.clients[i].client == this.client) {
-                    this.clients.unshift(...this.clients.splice(i, 1));
-                    break;
-                }
-            }
+        changeClient : function (item){
+            this.tempClient = item.client
         },
-        changeClient: function (client) {
-            this.clientThink = false;
-            if (this.client != client) {
-                // if (this.isIndex) {
-                    if (client == "origin") {
-                        location.href = "https://origin.jx3box.com";
-                    } else {
-                        location.href = "https://www.jx3box.com";
-                    }
-                // } else {
-                //     // 修改ui
-                //     this.client = client;
-                //     this.clients.unshift(...this.clients.splice(1, 1));
-
-                //     // 修改route
-                //     if (this.$route) {
-                //         this.$router.push({
-                //             query: {
-                //                 client,
-                //             },
-                //         });
-                //     }
-
-                //     // 修改store
-                //     if (
-                //         this.$store &&
-                //         this.$store.state &&
-                //         this.$store.state.client
-                //     ) {
-                //         if (client != this.$store.state.client) {
-                //             this.$store.commit("switchClient", client);
-                //         }
-                //     }
-                // }
-            }
+        resetClient : function (){
+            this.tempClient = this.defaultValue
+        },
+        go : function (item){
+            location.href = location.href.replace(item.from,item.to)
         },
     },
     mounted: function () {
-        this.init();
     },
     components: {},
 };
 </script>
 
 <style scoped lang="less">
-.c-header-origin {
-    .u-item {
-        .pointer;
-    }
-}
 </style>
