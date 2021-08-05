@@ -1,7 +1,7 @@
 <template>
     <div class="c-jx3box" :class="{ on: status, isOverlay: overlayEnable && isOverlay }">
         <!-- search -->
-        <header-search :client="client" />
+        <header-search :client="client" @click.native.stop/>
 
         <!-- list -->
         <ul class="u-list">
