@@ -7,69 +7,66 @@
     >
         <div class="c-header-inner">
             <!-- logo -->
-            <header-logo/>
+            <header-logo />
 
             <!-- origin -->
-            <clientSwitch :defaultValue="client"/>
+            <clientSwitch :defaultValue="client" />
 
             <!-- search -->
-            <header-search :client="client"/>
-   
+            <header-search :client="client" />
+
             <!-- nav -->
-            <header-nav :client="client"/>
+            <header-nav :client="client" />
 
             <slot></slot>
 
             <!-- user -->
-            <header-user :client="client"/>
-            
+            <header-user :client="client" />
         </div>
-        <Box class="c-header-jx3box" :overlayEnable="overlayEnable" :client="client"/>
+        <Box class="c-header-jx3box" :overlayEnable="overlayEnable" :client="client" />
     </header>
 </template>
 
 <script>
 import _ from "lodash";
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
-import { isApp,KW } from "../assets/js/app.js";
+import { isApp, KW } from "../assets/js/app.js";
 
-import logo from './header/logo.vue'
-import clientSwitch from './header/clientSwitch.vue'
-import search from './header/search.vue'
-import nav from './header/nav.vue'
-import user from './header/user.vue'
+import logo from "./header/logo.vue";
+import clientSwitch from "./header/clientSwitch.vue";
+import search from "./header/search.vue";
+import nav from "./header/nav.vue";
+import user from "./header/user.vue";
 import Box from "../src/Box.vue";
 
 export default {
     name: "Header",
     props: ["overlayEnable"],
-    data: function() {
+    data: function () {
         return {
-            
             isOverlay: false,
             isApp: isApp(),
-            
         };
     },
     computed: {
-        client : function (){
-            return location.href.includes('origin') ? 'origin' : 'std'
-        }
+        client: function () {
+            return location.href.includes("origin") ? "origin" : "std";
+        },
     },
     methods: {
         // webView检测
-        checkIsWebView: function() {
+        checkIsWebView: function () {
             if (window.navigator.userAgent.includes(KW)) {
                 document.documentElement.classList.add("env-app");
             }
         },
-        
+
         // 检查
-        init: function() {
+        init: function () {
             this.checkIsWebView();
         },
     },
-    created: function() {
+    created: function () {
         this.init();
 
         if (this.overlayEnable) {
@@ -82,13 +79,13 @@ export default {
             );
         }
     },
-    mounted: function() {},
+    mounted: function () {},
     components: {
-        'header-logo':logo,
+        "header-logo": logo,
         clientSwitch,
-        'header-search':search,
-        'header-nav':nav,
-        'header-user':user,
+        "header-search": search,
+        "header-nav": nav,
+        "header-user": user,
         Box,
     },
 };
@@ -96,4 +93,12 @@ export default {
 
 <style lang="less">
 @import "../assets/css/header.less";
+</style>
+
+<style scoped lang="less">
+@media screen and (max-width: @ipad-y) {
+    .c-header-search {
+        .none;
+    }
+}
 </style>

@@ -124,6 +124,12 @@ body {
         cursor: default;
     }
 }
+@media screen and (max-width:@ipad-y){
+    .c-header-origin{
+        .ml(10px);
+        .mt(16px);
+    }
+}
 
 //搜索
 .c-header-search {
@@ -171,13 +177,13 @@ body {
     margin-right: 10px;
 }
 @media screen and (max-width: @ipad-y) {
-    .c-header-search {
-        float: none;
-        width: auto;
+    // .c-header-search {
+    //     float: none;
+    //     width: auto;
 
-        margin-left: @logo-size + 20px;
-        margin-right: 140px;
-    }
+    //     margin-left: @logo-size + 20px;
+    //     margin-right: 140px;
+    // }
 }
 
 //菜单
@@ -379,7 +385,7 @@ body {
     .u-msg {
         display: block;
         height: 32px;
-        padding: 16px 10px;
+        padding: 13px 10px;
         &:hover {
             opacity: 0.7;
         }
@@ -584,7 +590,7 @@ body {
     .u-post {
         .db;
         height: 32px;
-        padding: 16px+6px 10px 10px 10px;
+        padding: 20px 10px 10px 10px;
     }
 
     .u-add {
@@ -693,7 +699,7 @@ body {
 .c-header-profile {
     cursor: pointer;
     position: relative;
-    padding: 6px 5px 2px 6px;
+    padding: 4px 5px 2px 6px;
 
     .u-menu {
         margin-top: 8px;
