@@ -9,16 +9,30 @@
                 :frame="data.user_avatar_frame"
             />
             <a class="u-name" :href="id | authorLink">
-                <span>
-                    {{ data.display_name }}
-                </span>
+                <span>{{ data.display_name }}</span>
             </a>
-            <a class="u-superauthor" title="签约作者" v-if="isSuperAuthor" href="/dashboard/#/cooperation">
-                <img :src="super_author_icon" alt="superauthor">
-            </a>
-            <a class="u-vip" v-if="isPRO || isVIP" :title="vipTypeTitle" href="/vip/premium/?from=author_sidebar">
-                <i class="i-icon-vip on">{{ vipType }}</i>
-            </a>
+            <el-tooltip
+                class="item"
+                effect="dark"
+                content="签约作者"
+                placement="top"
+                v-if="isSuperAuthor"
+            >
+                <a class="u-superauthor" href="/dashboard/#/cooperation" target="_blank">
+                    <img :src="super_author_icon" alt="superauthor" />
+                </a>
+            </el-tooltip>
+            <el-tooltip
+                class="item"
+                effect="dark"
+                :content="vipTypeTitle"
+                placement="top"
+                v-if="isPRO || isVIP"
+            >
+                <a class="u-vip" href="/vip/premium?from=sidebar_author" target="_blank">
+                    <i class="i-icon-vip on">{{ vipType }}</i>
+                </a>
+            </el-tooltip>
         </div>
         <div class="u-bio">{{ data.user_bio }}</div>
         <div class="u-link" v-if="hasLink">
@@ -99,7 +113,7 @@ import {
     getUserMedals,
     getUserPublicTeams,
     getSuperAuthor,
-    getIdentity
+    getIdentity,
 } from "../service/author";
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
 import User from "@jx3box/jx3box-common/js/user";
@@ -121,7 +135,7 @@ export default {
             ],
             isSuperAuthor: false,
             isPRO: false,
-            isVIP: false
+            isVIP: false,
         };
     },
     computed: {
@@ -143,8 +157,8 @@ export default {
         tv_status: function () {
             return (this.tv && this.tv.show_status == 1) || false;
         },
-        super_author_icon: function() {
-            return __imgPath + 'image/user/' + 'superauthor.svg';
+        super_author_icon: function () {
+            return __imgPath + "image/user/" + "superauthor.svg";
         },
         hasLink: function () {
             return (
@@ -161,7 +175,7 @@ export default {
             return this.isPRO ? "PRO" : "PRE";
         },
         vipTypeTitle: function () {
-            return this.isPRO ? "专业版会员用户" : "高级版会员用户";
+            return this.isPRO ? "专业版会员" : "高级版会员";
         },
     },
     filters: {
@@ -192,7 +206,7 @@ export default {
                     this.loadMedals();
                     this.loadTeams();
                     this.checkSuperAuthor();
-                    this.loadIdentity()
+                    this.loadIdentity();
                 });
         },
         loadTV: function () {
@@ -217,17 +231,17 @@ export default {
             this.isPRO = await User.isPRO();
             this.isVIP = await User.isVIP();
         },
-        checkSuperAuthor: function() {
-            getSuperAuthor(this.id).then(res => {
-                this.isSuperAuthor = res.data.data
-            })
+        checkSuperAuthor: function () {
+            getSuperAuthor(this.id).then((res) => {
+                this.isSuperAuthor = res.data.data;
+            });
         },
-        loadIdentity: function() {
-            getIdentity(this.id).then(res => {
+        loadIdentity: function () {
+            getIdentity(this.id).then((res) => {
                 this.isPRO = res.data.data.isPRO;
                 this.isVIP = res.data.data.isPRE;
-            })
-        }
+            });
+        },
     },
     watch: {
         uid: function () {
