@@ -50,7 +50,7 @@
 import WikiPanel from "./WikiPanel";
 import { WikiPost } from "@jx3box/jx3box-common/js/helper";
 import { getLink, authorLink, ts2str } from "@jx3box/jx3box-common/js/utils";
-import {__Root} from '@jx3box/jx3box-common/data/jx3box.json'
+import {__Root,__Origin} from '@jx3box/jx3box-common/data/jx3box.json'
 
 export default {
     name: "WikiRevisions",
@@ -58,14 +58,15 @@ export default {
     data: function() {
         return {
             versions: null,
+            baseUrl : location.hostname.includes('origin') ? __Origin : __Root
         };
     },
     methods: {
         link: function (type,id){
-            return __Root + getLink(type,id).slice(1)
+            return this.baseUrl + getLink(type,id).slice(1)
         },
         author_url: function (uid){
-            return __Root + authorLink(uid).slice(1)
+            return this.baseUrl + authorLink(uid).slice(1)
         },
         ts2str,
     },
