@@ -52,7 +52,11 @@ export default {
             this.tempClient = this.defaultValue
         },
         go : function (item){
-            location.href = location.href.replace(item.from,item.to)
+            if(location.pathname.startsWith('/index') || location.pathname.startsWith('/origin')){
+                location.href = 'https://' + item.to
+            }else{
+                location.href = location.href.replace(item.from,item.to)
+            }
         },
     },
     mounted: function () {
