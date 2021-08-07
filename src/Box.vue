@@ -51,6 +51,7 @@ export default {
         return {
             status: false,
             isOverlay: false,
+            data : this.client == "origin" ? box_data_origin : box_data
         };
     },
     computed: {
@@ -66,9 +67,6 @@ export default {
         indexLink : function (){
             return location.hostname.includes('origin') ? '/origin' : 'index'
         },
-        data : function (){
-            return this.client == "origin" ? box_data_origin : box_data
-        }
     },
     methods: {
         closeBox: function () {
