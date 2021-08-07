@@ -6,19 +6,19 @@
         <!-- list -->
         <ul class="u-list">
             <li>
-                <a class="u-item" href="/index">
+                <a class="u-item" :href="indexLink">
                     <img class="u-pic" svg-inline :src="homeicon" />
                     <img class="u-pic-hover" svg-inline :src="homeicon" />
                     <span class="u-txt">首页</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a class="u-item" href="/origin">
                     <img class="u-pic" svg-inline :src="originicon" />
                     <img class="u-pic-hover" svg-inline :src="originicon" />
                     <span class="u-txt">怀旧服</span>
                 </a>
-            </li>
+            </li> -->
             <li v-for="(item,i) in data" :key="i" :class="{'u-app-start':isLF(item.uuid)}">
                 <a class="u-item" :href="getClientLink(item.href)" :target="item.href | getTarget">
                     <img class="u-pic" svg-inline :src="item.img | getBoxIcon" />
@@ -64,6 +64,9 @@ export default {
         originicon: function () {
             return __imgPath + "image/box/origin.svg";
         },
+        indexLink : function (){
+            return location.hostname.includes('origin') ? '/origin' : 'index'
+        }
     },
     methods: {
         closeBox: function () {
