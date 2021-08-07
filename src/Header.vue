@@ -50,7 +50,7 @@ export default {
     },
     computed: {
         client: function () {
-            return location.href.includes("origin") ? "origin" : "std";
+            return location.hostname.includes("origin") ? "origin" : "std";
         },
     },
     methods: {
