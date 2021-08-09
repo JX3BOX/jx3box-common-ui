@@ -87,7 +87,7 @@ export default {
         }
     },
     mounted: function () {
-        getBox().then((res) => {
+        getBox(this.client).then((res) => {
             this.data = res.data;
         });
         Bus.$on("toggleBox", (status) => {

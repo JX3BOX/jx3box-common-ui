@@ -16,8 +16,9 @@ function getPanel() {
     return axios.get(__dataPath + "data/box/header_panel.json");
 }
 
-function getBox() {
-    return axios.get(__dataPath + "data/box/box.json");
+function getBox(client = 'std') {
+    let filename = client == 'origin' ? 'box_origin.json' : 'box.json'
+    return axios.get(__dataPath + "data/box/" + filename);
 }
 
 export { getMsg, getNav, getPanel, getBox };
