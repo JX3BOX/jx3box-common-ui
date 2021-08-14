@@ -1,5 +1,5 @@
 <template>
-    <div class="w-print" @click="doPrint" v-if="cansee">
+    <div class="w-print" @click="doPrint">
         <i class="u-icon el-icon-printer"></i>
         <span class="u-text">打印 | 保存PDF</span>
     </div>
@@ -18,14 +18,14 @@ export default {
         };
     },
     computed: {
-        cansee: function() {
-            if (this.enable != undefined) {
-                return this.enable;
-            } else {
-                if (User.isEditor()) return true;
-                return User.getInfo().uid == this.aid;
-            }
-        },
+        // cansee: function() {
+        //     if (this.enable != undefined) {
+        //         return this.enable;
+        //     } else {
+        //         if (User.isEditor()) return true;
+        //         return User.getInfo().uid == this.aid;
+        //     }
+        // },
         aid: function() {
             return this.authorID;
         },

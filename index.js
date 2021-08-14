@@ -19,6 +19,7 @@ import Fav from './src/interact/Fav.vue'
 import Print from './src/interact/Print.vue'
 import QRcode from './src/interact/QRcode.vue'
 import Sharing from './src/interact/Sharing.vue'
+import Feed from './src/interact/Feed.vue'
 
 import markBy from './src/filters/markBy.vue'
 import tagBy from "./src/filters/tagBy.vue";
@@ -51,6 +52,7 @@ const components = {
     QRcode,
     Print,
     Sharing,
+    Feed,
 
     tagBy,
     orderBy,

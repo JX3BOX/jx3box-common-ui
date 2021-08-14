@@ -6,7 +6,7 @@ function getMsg() {
     return $helper({ mute: true }).get("/api/messages/unread_total");
 }
 
-function getNav(client) {
+function getNav(client = 'std') {
     let file =
         client == "origin" ? "header_nav_origin.json" : "header_nav.json";
     return axios.get(__dataPath + `data/box/${file}`);

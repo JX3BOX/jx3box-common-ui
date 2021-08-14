@@ -28,6 +28,7 @@
             <Down :count="100" :showCount="true" />
             <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39" />
             <Fav post-id="90" post-type="jx3dat" />
+            <Feed post-id="90" post-type="jx3dat" />
             <Print title="传入标题" />
             <QRcode />
             <Sharing />
@@ -103,6 +104,7 @@ import Down from "./interact/Down.vue";
 import Print from "./interact/Print.vue";
 import QRcode from "./interact/QRcode.vue";
 import Sharing from "./interact/Sharing.vue";
+import Feed from "./interact/Feed.vue";
 
 import markBy from "./filters/markBy.vue";
 import menuBy from "./filters/menuBy.vue";
@@ -139,6 +141,7 @@ export default {
         Like,
         Down,
         Fav,
+        Feed,
 
         Print,
         Sharing,
