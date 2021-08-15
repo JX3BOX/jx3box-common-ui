@@ -9,4 +9,64 @@
         .pr;
         top:-3px;
     }
+    .u-simple-icon {
+        .size(20px);
+    }
+}
+.u-share2-pop {
+    .u-share2-content {
+        display: flex;
+        padding: 8px;
+        justify-content: space-between;
+        align-items: center;
+        
+        .w(400px);
+        .u-share2-content-main {
+            // display: flex;
+            &::after {
+                content: '';
+                height: 100%;
+                width: 1px;
+                color: #ececec;
+                .pa;
+                top: 0;
+                right: 0;
+            }
+
+            .u-share2-item {
+                .dbi;
+                cursor: pointer;
+                text-align: center;
+                width: 55px;
+                white-space: nowrap;
+                text-align: center;
+                .mr(10px);
+                overflow: hidden;
+
+                &:hover {
+                    color: #00a1d6;
+                    // .u-share-icon {
+                    //     // 利用shadow来改变 icon 颜色，注意overflow应为hidden
+                    //     position: relative;
+                    //     left: -80px;
+                    //     filter: drop-shadow(80px 0 #00a1d6);
+                    // }
+                }
+            }
+        }
+        .u-share2-wechat {
+            text-align: center;
+            padding: 0 0 0 20px;
+            border-left: 1px solid #e5e9ef;
+            margin-left: 10px;
+
+            .u-pic {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .u-share-icon {
+        .size(28px);
+    }
 }
