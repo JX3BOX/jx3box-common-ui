@@ -50,7 +50,6 @@ components: {
    参考其他模块
 
 # 在页面远程引入公共头
-## TODO:补充normalize样式
 1. 头部引入文件
 
 ```html

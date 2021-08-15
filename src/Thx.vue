@@ -1,10 +1,10 @@
 <template>
     <div class="w-thx">
         <div class="w-thx-panel">
-            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight"/>
+            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight" :userId="userId"/>
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType"></fav>
-            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin"/>
+            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId"/>
             <Share :postId="postId" :postType="postType" />
         </div>
         <div class="w-thx-records">
@@ -27,7 +27,7 @@ import BoxcoinUser from './interact/boxcoin_user.vue';
 import User from '@jx3box/jx3box-common/js/user'
 export default {
     name: "Thx",
-    props: ["postId", "postType"],
+    props: ["postId", "postType","userId"],
     components: {
         Like,
         Share,
