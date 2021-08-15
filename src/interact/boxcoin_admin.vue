@@ -16,7 +16,7 @@
                     <em class="u-label">本月剩余额度</em>
                     <b>{{left}}</b>
                 </div>
-                <div class="u-count">
+                <div class="u-list">
                     <em class="u-label">❤️ 评分</em>
                     <div class="u-points">
                         <el-radio-group v-model="count">
@@ -57,11 +57,12 @@ export default {
     data: function () {
         return {
             visible: false,
+
             left: 1000,
             points: [10, 20, 30, 50, 100, 200, 500, 1000],
 
             count: 0,
-            remark: "谢谢大大",
+            remark: "辛苦，感谢！",
         };
     },
     computed: {
