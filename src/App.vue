@@ -24,6 +24,10 @@
 
             <hr />
 
+            <Thx />
+
+            <hr />
+
             <Like mode="heart" :count="100" :showCount="true" />
             <Down :count="100" :showCount="true" />
             <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39" />
@@ -96,6 +100,7 @@ import RightSideMsg from "./RightSideMsg.vue";
 
 import Footer from "./Footer.vue";
 import Bottom from "./Bottom.vue";
+import Thx from "./Thx.vue";
 
 import Mark from "./interact/Mark.vue";
 import Fav from "./interact/Fav.vue";
@@ -132,6 +137,8 @@ export default {
         Footer,
         Bottom,
         RightSidebar,
+
+        Thx,
 
         RightSideMsg,
         Author,

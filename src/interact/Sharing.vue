@@ -10,7 +10,7 @@
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "Sharing",
-    props: ["title", "pic", "url"],
+    props: ["title", "pic", "url", "simple"],
     data: function() {
         return {
             api: "https://service.weibo.com/share/share.php?",

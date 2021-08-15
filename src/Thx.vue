@@ -1,7 +1,7 @@
 <template>
     <div class="w-thx">
-        
-        点赞
+        <Like :post-id="54" post-type="paper"></Like>
+        <!-- 点赞
         投币(带回调redirect)[规则]
         评分 >=32[规则]
         分享《细则》
@@ -9,16 +9,19 @@
 
         投币/评分记录
 
-        （原创声明）创作版权声明、转载要求
+        （原创声明）创作版权声明、转载要求 -->
     </div>
 </template>
 
 <script>
+import Like from './interact/Like2.vue'
 export default {
    name : 'Thx',
    props:[],
    inject: [],
-   components : {},
+   components : {
+       Like
+   },
    data : function(){
        return {
            
