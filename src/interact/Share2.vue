@@ -17,7 +17,7 @@ import { postStat, getStat } from "@jx3box/jx3box-common/js/stat";
 import { getRewrite } from "@jx3box/jx3box-common/js/utils";
 import _ from "lodash";
 export default {
-    name: "Like2",
+    name: "Share2",
     props: ["postType", "postId"],
     data: function () {
         return {

@@ -1,9 +1,9 @@
 <template>
-    <div class="w-fav2" :class="{ disabled:!favorited }" @click="doFav">
-        <el-tooltip class="item" effect="dark" :content="favContent" placement="top">
+    <div class="w-fav2" :class="{ disabled:favorited }" @click="doFav">
+        <el-tooltip effect="dark" :content="favContent" placement="top-start">
             <div>
                 <img class="u-icon" svg-inline src="../../assets/img/widget/star.svg" />
-                <span class="u-count" v-if="showCount && total">{{ total }}</span>
+                <span class="u-count" v-if="total">{{ total }}</span>
             </div>
         </el-tooltip>
     </div>
@@ -14,7 +14,7 @@ import User from "@jx3box/jx3box-common/js/user";
 import { hasFav, addFav, delFav } from "../../service/fav";
 export default {
     name: "Fav",
-    props: ["postType", "postId", "showCount"],
+    props: ["postType", "postId"],
     data: function () {
         return {
             login: User.isLogin(),
@@ -108,7 +108,9 @@ export default {
     .dbi;
     .u-icon {
         .size(32px);
-        .y(-5px);
+        .y;
+        .pr;
+        top: -2px;
     }
     .u-count {
         color: #888;
@@ -116,7 +118,7 @@ export default {
     }
 
     &.disabled {
-        svg {
+        svg * {
             fill: #aaa;
         }
     }

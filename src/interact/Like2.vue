@@ -1,6 +1,6 @@
 <template>
     <div class="w-like2" :class="{ disabled:!status }">
-        <el-tooltip class="item" effect="dark" content="点赞" placement="top">
+        <el-tooltip effect="dark" content="点赞" placement="top-start">
             <div>
                 <img
                     @click="addLike"
