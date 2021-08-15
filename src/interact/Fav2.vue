@@ -13,7 +13,7 @@
 import User from "@jx3box/jx3box-common/js/user";
 import { hasFav, addFav, delFav } from "../../service/fav";
 export default {
-    name: "Fav",
+    name: "Fav2",
     props: ["postType", "postId"],
     data: function () {
         return {
@@ -110,7 +110,7 @@ export default {
         .size(32px);
         .y;
         .pr;
-        top: -2px;
+        top: -1px;
     }
     .u-count {
         color: #888;
