@@ -24,7 +24,7 @@
 
             <hr />
 
-            <Thx :postId="54" postType="paper"/>
+            <Thx :postId="23865" postType="macro" :userId="8"/>
 
             <hr />
 

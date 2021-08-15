@@ -3,9 +3,11 @@
     .dbi;
     .u-icon {
         .size(32px);
-        .y(-5px);
-        padding:2px;
+        .y;
+        padding:4px;
         box-sizing: border-box;
+        .pr;
+        top:-3px;
     }
 }
 .u-share2-pop {
@@ -40,7 +42,7 @@
                 &:hover {
                     color: #00a1d6;
                     .u-share-icon {
-                        // transform: translateX(-100%);
+                        // 利用shadow来改变 icon 颜色，注意overflow应为hidden
                         position: relative;
                         left: -80px;
                         filter: drop-shadow(80px 0 #00a1d6);

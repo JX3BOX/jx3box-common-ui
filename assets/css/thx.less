@@ -1,5 +1,82 @@
 .w-thx{
-    .w-like2{
+    .w-like2,.w-fav2,.w-boxcoin-user,.w-boxcoin-admin{
         .mr(20px);
+    }
+    .w-share2,.w-like2,.w-fav2,.w-boxcoin-user,.w-boxcoin-admin{
+    }
+    .x;
+}
+.w-thx-copyright{
+    .fz(12px,2);
+    color:#888;
+    border:1px dashed #eee;
+    max-width: 800px;
+    .auto(x);
+    padding:10px;
+    .mt(20px);
+}
+
+.w-boxcoin-block{
+    .pointer;
+}
+.w-boxcoin-admin {
+    .x(left);
+    .dbi;
+    .u-icon {
+        .size(26px);
+        .y;
+        .pr;
+        top: -1px;
+    }
+}
+.w-boxcoin-pop{
+    width: 800px;
+    max-width: 100%;
+
+    .el-dialog__body{
+        padding:10px 20px;
+
+        .fz(14px,2);
+
+        .u-left{
+            .fz(14px,24px);
+            .u-label{
+                .mr(10px);
+            }
+            b{
+                color:#49c10f;
+                .fz(24px,1);
+                .dbi;.y;
+            }
+        }
+        .u-count{
+            .mt(10px);
+        }
+        .u-points{
+            padding:10px;
+            .el-radio{
+                .ml(0) !important;
+                .mb(10px);
+                .w(140px);
+                b{
+                    color:#e81224;
+                    .mr(5px);
+                }
+            }
+        }
+
+        .u-label{
+            font-style: normal;
+            background-color:@bg-gray;
+                padding:5px 10px;
+        }
+        .u-input{
+            padding:10px 0 10px 10px;
+        }
+    }
+}
+@media screen and (max-width:@phone){
+    .w-boxcoin-pop{
+        margin-top:0 !important;
     }
 }
