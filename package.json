@@ -56,7 +56,8 @@
         "style-resources-loader": "^1.3.3",
         "vue-cli-plugin-element": "~1.0.1",
         "vue-svg-inline-loader": "^1.4.6",
-        "vue-template-compiler": "^2.6.11"
+        "vue-template-compiler": "^2.6.11",
+        "weixin-js-sdk": "^1.6.0"
     },
     "repository": {
         "type": "git",
