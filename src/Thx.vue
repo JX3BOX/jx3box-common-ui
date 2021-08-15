@@ -1,7 +1,8 @@
 <template>
     <div class="w-thx">
         <Like :post-id="54" post-type="paper"></Like>
-        <!-- 点赞
+        <fav :post-id="54" post-type="paper" :showCount="true"></fav>
+        <!-- 
         投币(带回调redirect)[规则]
         评分 >=32[规则]
         分享《细则》
@@ -15,12 +16,14 @@
 
 <script>
 import Like from './interact/Like2.vue'
+import Fav from './interact/Fav2.vue'
 export default {
    name : 'Thx',
    props:[],
    inject: [],
    components : {
-       Like
+       Like,
+       Fav
    },
    data : function(){
        return {
