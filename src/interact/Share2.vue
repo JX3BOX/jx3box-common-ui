@@ -128,6 +128,7 @@ export default {
                 + `&title=${this.title}`
                 + '&sharesource=qzone'
                 + `&summary=${this.meta?.summary || ''}`
+                + `&desc=${this.meta?.desc || ''}`
                 + `&pics=${this.pic}`;
         },
         shareToQQ: function (){
