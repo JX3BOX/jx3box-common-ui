@@ -1,7 +1,54 @@
 <template>
     <div class="w-boxcoin-records" v-loading="loading">
         <div class="w-boxcoin-records-list">
-
+            <ul class="u-list">
+                <li class="u-item u-head">
+                    <span class="u-meta u-action">
+                        <i class="el-icon-trophy"></i>
+                    </span>
+                    <span class="u-meta u-user">参与打赏</span>
+                    <span class="u-meta u-count">盒币</span>
+                    <span class="u-meta u-remark">寄语</span>
+                    <time class="u-meta u-time"></time>
+                </li>
+                <li v-for="(item,i) in list" :key="i" class="u-item u-body">
+                    <span class="u-meta u-action">
+                        <template v-if="item.is_user_gift">
+                            <img class svg-inline src="../../assets/img/widget/gift.svg" />
+                        </template>
+                        <template v-else>
+                            <img class svg-inline src="../../assets/img/widget/admin_gift.svg" />
+                        </template>
+                    </span>
+                    <a
+                        class="u-meta u-user"
+                        v-if="item.is_user_gift"
+                        :href="item.user_id | authorLink"
+                        target="_blank"
+                    >
+                        <img class="u-user-avatar" :src="item.avatar | showAvatar" alt />
+                        <span>用户昵称</span>
+                    </a>
+                    <a
+                        v-else
+                        class="u-meta u-user u-admin"
+                        :href="item.operate_user_id | authorLink"
+                        target="_blank"
+                    >
+                        <img class="u-user-avatar" :src="item.avatar | showAvatar" alt />
+                        <span>管理员昵称</span>
+                    </a>
+                    <span class="u-meta u-count">
+                        +
+                        <b>{{item.count}}</b>
+                    </span>
+                    <span class="u-meta u-remark">{{item.remark}}</span>
+                    <time class="u-meta u-time">{{item.created_at | showTime}}</time>
+                    <span class="u-delete" v-if="isSuperAdmin" @click="recovery(item,i)">
+                        <i class="el-icon-delete"></i>撤销
+                    </span>
+                </li>
+            </ul>
         </div>
         <el-pagination
             class="w-boxcoin-records-pages"
@@ -16,7 +63,10 @@
 </template>
 
 <script>
-import { getPostBoxcoinRecords } from "../../service/thx";
+import { getPostBoxcoinRecords, recoveryBoxcoin } from "../../service/thx";
+import User from "@jx3box/jx3box-common/js/user";
+import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
+import { showTime } from "@jx3box/jx3box-common/js/moment";
 export default {
     name: "BoxcoinRecords",
     props: ["postType", "postId"],
@@ -24,11 +74,12 @@ export default {
     data: function () {
         return {
             list: [],
-            per: 10,
+            per: 12,
             page: 1,
             total: 1,
             loading: false,
-            boxcoin : 0
+            boxcoin: 0,
+            isSuperAdmin: User.isSuperAdmin(),
         };
     },
     computed: {
@@ -52,15 +103,41 @@ export default {
             this.loadData();
         },
         loadData: function () {
-            getPostBoxcoinRecords(this.postType,this.postId,this.params).then((res) => {
-                this.list = res.data.data.list;
-                this.total = res.data.data.page.total;
-                this.boxcoin = res.data.data.fromManager + res.data.data.fromUser
-                this.$parent.boxcoin = this.boxcoin
+            getPostBoxcoinRecords(this.postType, this.postId, this.params).then(
+                (res) => {
+                    this.list = res.data.data.list;
+                    this.total = res.data.data.page.total;
+                    this.boxcoin =
+                        res.data.data.fromManager + res.data.data.fromUser;
+                    this.$parent.boxcoin = this.boxcoin;
+                }
+            );
+        },
+        recovery: function (item,i) {
+            this.$alert("是否确定撤销该评分？", "确认", {
+                confirmButtonText: "确定",
+                callback: (action) => {
+                    if (action == "confirm") {
+                        recoveryBoxcoin(item.id).then((res) => {
+                            this.$message({
+                                message: "撤销成功",
+                                type: "success",
+                            });
+                            this.list.splice(i,1)
+                        })
+                        
+                    }
+                },
             });
         },
     },
-    filters: {},
+    filters: {
+        authorLink,
+        showTime,
+        showAvatar: function (val) {
+            return showAvatar(val, 24);
+        },
+    },
     created: function () {},
     mounted: function () {
         this.init();

@@ -6,6 +6,9 @@
     }
     .x;
 }
+.w-thx-panel{
+    .mb(20px);
+}
 .w-thx-copyright{
     .fz(12px,2);
     color:#888;
@@ -14,6 +17,7 @@
     .auto(x);
     padding:10px;
     .mt(20px);
+    background-color:@bg-light;
 }
 
 .w-boxcoin-block{
@@ -44,12 +48,14 @@
                 .mr(10px);
             }
             b{
-                color:#49c10f;
+                // color:#49c10f;
+                // color:@color-link;
+                color:#fba524;
                 .fz(24px,1);
                 .dbi;.y;
             }
         }
-        .u-count{
+        .u-list{
             .mt(10px);
         }
         .u-points{
@@ -78,5 +84,82 @@
 @media screen and (max-width:@phone){
     .w-boxcoin-pop{
         margin-top:0 !important;
+    }
+}
+
+.w-boxcoin-records-list{
+    .u-list{
+        list-style: none;
+        max-width: 960px;
+        .x(left);
+        margin:0 auto;
+        border:1px solid #eee;
+        padding:0;
+    }
+    .u-item{
+        border-bottom: 1px dashed #eee;
+        .fz(13px,2.5);
+       .clearfix;
+       padding:4px 10px;
+       &:last-child{border:none;}
+    }
+    .u-meta{
+        .db;
+        .fl;
+    }
+    .u-action{
+        .w(40px);
+        .db;
+        padding-right:10px;
+        svg{
+            .size(24px);
+            .mt(4px);
+            .db;
+            .auto(x);
+        }
+        .x;
+    }
+    .u-user{
+        .w(160px);
+        .nobreak;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+    .u-user-avatar{
+        .y;
+        .size(24px);
+        .mr(5px);
+        .r(2px);
+    }
+    .u-count {
+        .w(100px);
+    }
+    .u-head{
+        background-color:@bg-light;
+    }
+    .u-body{
+        .u-count{
+            color:#fe7e91;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+    }
+    .u-remark{
+        .nobreak;
+        .w(400px);
+    }
+    .u-time{
+        color:#999;
+    }
+    .u-delete{
+        .ml(20px);
+        color:#c00;
+        i{
+            .mr(3px);
+        }
+        .pointer;
+        &:hover{
+            color:#f00;
+        }
     }
 }
