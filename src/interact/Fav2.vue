@@ -1,8 +1,15 @@
 <template>
-    <div class="w-fav" size="mini" type="primary" @click="doFav">
-        <i v-if="!favorited" class="el-icon-star-off"></i>
-        <i v-else class="el-icon-star-on"></i>
-        <span class="u-count" v-if="showCount">{{ total }}</span>
+    <div class="w-fav2" :class="{ disabled:!favorited }" @click="doFav">
+        <el-tooltip class="item" effect="dark" :content="favContent" placement="top">
+            <div>
+                <img
+                    class="u-icon"
+                    svg-inline
+                    src="../../assets/img/widget/star.svg"
+                />
+                <span class="u-count" v-if="showCount && total">{{ total }}</span>
+            </div>
+        </el-tooltip>
     </div>
 </template>
 
@@ -18,6 +25,11 @@ export default {
             favorited: false,
             total: 0
         };
+    },
+    computed: {
+        favContent() {
+            return this.favorited ? '取消收藏' : '收藏'
+        }
     },
     methods: {
         doFav: function() {
@@ -44,7 +56,10 @@ export default {
                 (data) => {
                     if (data.data.code === 200) {
                         this.favorited = true;
-                    } else this.fail(data.data.message);
+                        this.total++;
+                    } else {
+                        this.fail(data.data.message);
+                    }
                 },
                 (err) => {
                     this.fail(err);
@@ -56,7 +71,10 @@ export default {
                 (data) => {
                     if (data.data.code === 200) {
                         this.favorited = false;
-                    } else this.fail(data.data.message);
+                        this.total--;
+                    } else {
+                        this.fail(data.data.message);
+                    }
                 },
                 (err) => {
                     this.fail(err);
@@ -86,7 +104,21 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.w-fav {
-  cursor: pointer;
+.w-fav2 {
+    .pointer;
+    .dbi;
+    .u-icon {
+        .size(32px);
+        .y(-5px);
+    }
+    .u-count {
+        color: #888;
+        .ml(10px);
+    }
+
+    &.disabled{
+      .tm(0.5);
+    }
 }
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="w-like2" :class="{disabled:!status}">
+    <div class="w-like2" :class="{ disabled:!status }">
         <el-tooltip class="item" effect="dark" content="点赞" placement="top">
             <div>
                 <img
@@ -46,8 +46,10 @@ export default {
         addLike: function () {
             if (!this.ready) return;
             this.count++;
+            if (this.status) {
+                postStat(this.postType, this.postId, "likes");
+            }
             this.status = false;
-            postStat(this.postType, this.postId, "likes");
         },
     },
     mounted: function () {
