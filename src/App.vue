@@ -24,7 +24,7 @@
 
             <hr />
 
-            <Thx />
+            <Thx :postId="54" postType="paper"/>
 
             <hr />
 
