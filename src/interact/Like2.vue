@@ -1,7 +1,16 @@
 <template>
-    <div class="w-like2">
-      <img @click="addLike" class="u-icon" svg-inline src="../../assets/img/widget/like.svg" />
-      <span>{{ count }}</span>
+    <div class="w-like2" :class="{disabled:!status}">
+        <el-tooltip class="item" effect="dark" content="点赞" placement="top">
+            <div>
+                <img
+                    @click="addLike"
+                    class="u-icon"
+                    svg-inline
+                    src="../../assets/img/widget/like2.svg"
+                />
+                <span class="u-count" v-if="count">{{ count }}</span>
+            </div>
+        </el-tooltip>
     </div>
 </template>
 
@@ -11,51 +20,38 @@ import { getRewrite } from "@jx3box/jx3box-common/js/utils";
 import _ from "lodash";
 export default {
     name: "Like2",
-    props: [
-        "postType",
-        "postId",
-    ],
+    props: ["postType", "postId"],
     data: function () {
         return {
-            status: false,
+            status: true,
             count: 0,
         };
     },
     computed: {
         ready() {
             return !!(this.postType && this.postId);
-        }
-    },
-    watch: {
-        ready(val) {
-            if (val) {
-                // 传入 type 和 id 改变时触发
-                this.loadStat()
-            }
-        }
+        },
     },
     methods: {
         init: function () {
             this.loadStat();
         },
-
-        loadStat: function (){
-            // if (!ready) return
-            getStat(this.postType, this.postId).then(res => {
-                this.count = res.likes || 0;
-            });
+        loadStat: function () {
+            this.ready &&
+                getStat(this.postType, this.postId).then((res) => {
+                    this.count = res.data?.likes || 0;
+                });
         },
         // 点赞
         addLike: function () {
-            if (!this.ready) return
+            if (!this.ready) return;
             this.count++;
-            this.status = !this.status;
-            
-            this.postType && this.postId && postStat(this.postType, this.postId, "likes")
+            this.status = false;
+            postStat(this.postType, this.postId, "likes");
         },
     },
     mounted: function () {
-        this.init()
+        this.init();
     },
 };
 </script>
