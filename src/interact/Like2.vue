@@ -1,9 +1,8 @@
 <template>
-    <div class="w-like2" :class="{ disabled:!status }">
+    <div class="w-like2" :class="{ disabled:!status }" @click="addLike">
         <el-tooltip effect="dark" content="点赞" placement="top-start">
             <div>
                 <img
-                    @click="addLike"
                     class="u-icon"
                     svg-inline
                     src="../../assets/img/widget/like2.svg"

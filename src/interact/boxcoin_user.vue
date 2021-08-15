@@ -1,9 +1,8 @@
 <template>
     <div class="w-boxcoin-user">
         <el-tooltip effect="dark" content="投币" placement="top-start">
-            <div class="w-boxcoin-block">
+            <div class="w-boxcoin-block" @click="openBoxcoinPop">
                 <img
-                    @click="openBoxcoinPop"
                     class="u-icon"
                     svg-inline
                     src="../../assets/img/widget/heart1.svg"
