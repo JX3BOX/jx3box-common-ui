@@ -14,10 +14,10 @@
                 <li v-for="(item,i) in list" :key="i" class="u-item u-body">
                     <span class="u-meta u-action">
                         <template v-if="item.is_user_gift">
-                            <img class svg-inline src="../../assets/img/widget/gift.svg" />
+                            <i title="打赏"><img class svg-inline src="../../assets/img/widget/gift.svg"/></i>
                         </template>
                         <template v-else>
-                            <img class svg-inline src="../../assets/img/widget/admin_gift.svg" />
+                            <i title="品鉴"><img class svg-inline src="../../assets/img/widget/admin_gift.svg"/></i>
                         </template>
                     </span>
                     <a
@@ -26,8 +26,8 @@
                         :href="item.user_id | authorLink"
                         target="_blank"
                     >
-                        <img class="u-user-avatar" :src="item.ext_user_info.Avatar | showAvatar" alt />
-                        <span>{{item.ext_user_info.DisplayName}}</span>
+                        <img class="u-user-avatar" :src="item.ext_user_info.avatar | showAvatar" alt />
+                        <span>{{item.ext_user_info.display_name}}</span>
                     </a>
                     <a
                         v-else
@@ -35,8 +35,8 @@
                         :href="item.operate_user_id | authorLink"
                         target="_blank"
                     >
-                        <img class="u-user-avatar" :src="item.ext_operate_user_info.Avatar | showAvatar" alt />
-                        <span>{{item.ext_operate_user_info.DisplayName}}</span>
+                        <img class="u-user-avatar" :src="item.ext_operate_user_info.avatar | showAvatar" alt />
+                        <span>{{item.ext_operate_user_info.display_name}}</span>
                     </a>
                     <span class="u-meta u-count">
                         +
