@@ -4,13 +4,16 @@
     .u-icon {
         .size(32px);
         .y;
-        padding:4px;
+        padding: 4px;
         box-sizing: border-box;
         .pr;
-        top:-3px;
+        top: -3px;
     }
     .u-simple-icon {
         .size(20px);
+        position: relative;
+        top: -1px;
+        fill: @color;
     }
 }
 .u-share2-pop {
@@ -18,12 +21,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
+
         .w(400px);
         .u-share2-content-main {
             // display: flex;
             &::after {
-                content: '';
+                content: "";
                 height: 100%;
                 width: 1px;
                 color: #ececec;
