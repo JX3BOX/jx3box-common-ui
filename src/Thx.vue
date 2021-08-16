@@ -1,10 +1,10 @@
 <template>
     <div class="w-thx">
         <div class="w-thx-panel">
-            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight" :userId="userId" :left="admin_left" :points="admin_points"/>
+            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight" :userId="userId" :own="admin_left" :points="admin_points"/>
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType"></fav>
-            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :left="user_left" :points="user_points"/>
+            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left" :points="user_points"/>
             <Share :postId="postId" :postType="postType" />
         </div>
         <div class="w-thx-records">

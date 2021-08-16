@@ -52,7 +52,7 @@ import { grantBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "BoxcoinAdmin",
-    props: ["postType", "postId", "userId", "left", "points"],
+    props: ["postType", "postId", "userId", "own", "points"],
     components: {},
     data: function () {
         return {
@@ -61,7 +61,7 @@ export default {
             count: 0,
             remark: "辛苦，感谢！",
 
-            
+            left : this.own
         };
     },
     computed: {
@@ -75,7 +75,11 @@ export default {
             return this.left && this.left >= this.count;
         },
     },
-    watch: {},
+    watch: {
+        own : function (val){
+            this.left = val
+        }
+    },
     methods: {
         openBoxcoinPop: function () {
             this.visible = true;

@@ -49,7 +49,7 @@ import { rewardBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "BoxcoinUser",
-    props: ["boxcoin", "postType", "postId", "userId", "left", "points"],
+    props: ["boxcoin", "postType", "postId", "userId", "own", "points"],
     components: {},
     data: function () {
         return {
@@ -57,6 +57,8 @@ export default {
 
             count: 0,
             remark: "辛苦了，谢谢大大！",
+
+            left : this.own,
 
             chargeLink: "/vip/boxcoin?redirect=" + location.href,
         };
@@ -72,7 +74,11 @@ export default {
             return this.left && this.left >= this.count;
         },
     },
-    watch: {},
+    watch: {
+        own : function (val){
+            this.left = val
+        }
+    },
     methods: {
         openBoxcoinPop: function () {
             if (User.isLogin()) {
