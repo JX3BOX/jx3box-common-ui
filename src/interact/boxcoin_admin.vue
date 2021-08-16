@@ -60,6 +60,8 @@ export default {
 
             count: 0,
             remark: "辛苦，感谢！",
+
+            
         };
     },
     computed: {

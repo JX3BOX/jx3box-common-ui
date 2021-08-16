@@ -22,16 +22,6 @@
                     </span>
                     <a
                         class="u-meta u-user"
-                        v-if="item.is_user_gift"
-                        :href="item.user_id | authorLink"
-                        target="_blank"
-                    >
-                        <img class="u-user-avatar" :src="item.ext_user_info.avatar | showAvatar" alt />
-                        <span>{{item.ext_user_info.display_name}}</span>
-                    </a>
-                    <a
-                        v-else
-                        class="u-meta u-user u-admin"
                         :href="item.operate_user_id | authorLink"
                         target="_blank"
                     >
