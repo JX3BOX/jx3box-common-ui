@@ -51,7 +51,7 @@ import QrcodeVue from "qrcode.vue";
 import _ from "lodash";
 export default {
     name: "Share2",
-    // meta: { title, summary } 
+    // meta: { title, summary, banner, desc } 
     props: ["postType", "postId", "meta", "simple"],
     data: function () {
         return {
@@ -142,6 +142,7 @@ export default {
                 + `url=${this.url}`
                 + `&title=${this.title}`
                 + `&summary=${this.meta?.summary || ''}`
+                + `&desc=${this.meta?.desc || ''}`
                 + `&pic=${this.pic}`;
         },
         share: function (val){
