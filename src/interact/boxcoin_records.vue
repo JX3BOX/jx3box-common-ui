@@ -76,7 +76,7 @@ export default {
         params: function () {
             return {
                 pageSize: this.per,
-                index: this.page,
+                pageIndex: this.page,
             };
         },
     },

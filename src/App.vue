@@ -21,7 +21,7 @@
 
         <Main :withoutLeft="false" :withoutRight="false">
             
-            <Thx :postId="23865" postType="macro" :userId="7"/>
+            <Thx :postId="23865" postType="bbs" :userId="7"/>
 
             <hr />
 
