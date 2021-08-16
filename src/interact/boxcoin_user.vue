@@ -2,11 +2,7 @@
     <div class="w-boxcoin-user">
         <el-tooltip effect="dark" content="投币" placement="top-start">
             <div class="w-boxcoin-block" @click="openBoxcoinPop">
-                <img
-                    class="u-icon"
-                    svg-inline
-                    src="../../assets/img/widget/heart1.svg"
-                />
+                <img class="u-icon" svg-inline src="../../assets/img/widget/heart1.svg" />
                 <span class="u-count" v-if="boxcoin">{{boxcoin}}</span>
             </div>
         </el-tooltip>
@@ -49,23 +45,20 @@
 </template>
 
 <script>
-import {rewardBoxcoin} from '../../service/thx.js'
+import { rewardBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "BoxcoinUser",
-    props: ["boxcoin", "postType", "postId", "userId"],
+    props: ["boxcoin", "postType", "postId", "userId", "left", "points"],
     components: {},
     data: function () {
         return {
             visible: false,
 
-            left: 1000,
-            points: [10, 20, 30, 50, 100, 200, 500, 1000],
-
             count: 0,
             remark: "辛苦了，谢谢大大！",
 
-            chargeLink : '/vip/boxcoin?redirect=' + location.href
+            chargeLink: "/vip/boxcoin?redirect=" + location.href,
         };
     },
     computed: {
@@ -82,10 +75,10 @@ export default {
     watch: {},
     methods: {
         openBoxcoinPop: function () {
-            if(User.isLogin()){
+            if (User.isLogin()) {
                 this.visible = true;
-            }else{
-                User.toLogin()
+            } else {
+                User.toLogin();
             }
         },
         submit: function () {
@@ -106,9 +99,7 @@ export default {
                     this.visible = false;
                 });
         },
-        init : function (){
-            // TODO:加载额度 + 点数
-        }
+        init: function () {},
     },
     filters: {},
     created: function () {},
@@ -130,7 +121,7 @@ export default {
         color: #888;
         .ml(10px);
     }
-    .u-charge{
+    .u-charge {
         .underline(@color-link);
         .ml(10px);
     }
