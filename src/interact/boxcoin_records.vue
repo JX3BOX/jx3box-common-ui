@@ -26,8 +26,8 @@
                         :href="item.user_id | authorLink"
                         target="_blank"
                     >
-                        <img class="u-user-avatar" :src="item.avatar | showAvatar" alt />
-                        <span>用户昵称</span>
+                        <img class="u-user-avatar" :src="item.ext_user_info.Avatar | showAvatar" alt />
+                        <span>{{item.ext_user_info.DisplayName}}</span>
                     </a>
                     <a
                         v-else
@@ -35,8 +35,8 @@
                         :href="item.operate_user_id | authorLink"
                         target="_blank"
                     >
-                        <img class="u-user-avatar" :src="item.avatar | showAvatar" alt />
-                        <span>管理员昵称</span>
+                        <img class="u-user-avatar" :src="item.ext_operate_user_info.Avatar | showAvatar" alt />
+                        <span>{{item.ext_operate_user_info.DisplayName}}</span>
                     </a>
                     <span class="u-meta u-count">
                         +
@@ -44,7 +44,7 @@
                     </span>
                     <span class="u-meta u-remark">{{item.remark}}</span>
                     <time class="u-meta u-time">{{item.created_at | showTime}}</time>
-                    <span class="u-delete" v-if="isSuperAdmin" @click="recovery(item,i)">
+                    <span class="u-delete" v-if="isSuperAdmin && !item.is_user_gift" @click="recovery(item,i)">
                         <i class="el-icon-delete"></i>撤销
                     </span>
                 </li>
