@@ -1,6 +1,6 @@
 <template>
     <div class="w-boxcoin-records" v-loading="loading">
-        <div class="w-boxcoin-records-list">
+        <div class="w-boxcoin-records-list" v-if="list && list.length">
             <ul class="u-list">
                 <li class="u-item u-head">
                     <span class="u-meta u-action">
