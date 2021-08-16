@@ -14,8 +14,12 @@ function rewardBoxcoin(postType, postId, userId, count, data) {
     return $pay().post(`/api/inspire/posts/${postType}/${postId}/user2creator/${userId}/coins/${count}`, data);
 }
 
-function recoveryBoxcoin(id){
-    return $pay().delete(`/api/inspire/coins/log/${id}/recovery`)
+function recoveryBoxcoin(id) {
+    return $pay().delete(`/api/inspire/coins/log/${id}/recovery`);
 }
 
-export { getPostBoxcoinRecords, grantBoxcoin, rewardBoxcoin ,recoveryBoxcoin};
+function getPostBoxcoinConfig(postType) {
+    return $pay().get(`/api/inspire/posts/${postType}/boxcoin/limit`);
+}
+
+export { getPostBoxcoinRecords, grantBoxcoin, rewardBoxcoin, recoveryBoxcoin, getPostBoxcoinConfig };

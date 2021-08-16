@@ -1,10 +1,10 @@
 <template>
     <div class="w-thx">
         <div class="w-thx-panel">
-            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight" :userId="userId"/>
+            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight" :userId="userId" :left="admin_left" :points="admin_points"/>
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType"></fav>
-            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId"/>
+            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :left="user_left" :points="user_points"/>
             <Share :postId="postId" :postType="postType" />
         </div>
         <div class="w-thx-records">
@@ -25,6 +25,7 @@ import BoxcoinRecords from './interact/boxcoin_records.vue';
 import BoxcoinAdmin from './interact/boxcoin_admin.vue';
 import BoxcoinUser from './interact/boxcoin_user.vue';
 import User from '@jx3box/jx3box-common/js/user'
+import {getPostBoxcoinConfig} from '../service/thx'
 export default {
     name: "Thx",
     props: ["postId", "postType","userId"],
@@ -39,15 +40,34 @@ export default {
     data: function () {
         return {
             boxcoin : 0,
-            hasRight : User.getInfo().group >= 32
+            hasRight : User.getInfo().group >= 32,
+
+            admin_left : 0,
+            admin_points : [100],
+            user_left : 0,
+            user_points : [100]
         };
     },
     computed: {},
     watch: {},
-    methods: {},
+    methods: {
+        loadBoxcoinConfig : function (){
+            getPostBoxcoinConfig().then((res) => {
+                this.admin_points = res.data.data.limit.admin_points || [10, 1000];
+                this.admin_left = res.data.data.asManagerBoxCoinRemain || 0;
+                this.user_points = res.data.data.limit.user_points || [10, 1000];
+                this.user_left = res.data.data.asUserBoxCoinRemain || 0;
+            });
+        },
+        init : function (){
+            this.loadBoxcoinConfig()
+        }
+    },
     filters: {},
     created: function () {},
-    mounted: function () {},
+    mounted: function () {
+        this.init()
+    },
 };
 </script>
 

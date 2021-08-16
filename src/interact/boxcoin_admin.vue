@@ -52,14 +52,11 @@ import { grantBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "BoxcoinAdmin",
-    props: ["postType", "postId", "userId"],
+    props: ["postType", "postId", "userId", "left", "points"],
     components: {},
     data: function () {
         return {
             visible: false,
-
-            left: 1000,
-            points: [10, 20, 30, 50, 100, 200, 500, 1000],
 
             count: 0,
             remark: "辛苦，感谢！",
@@ -99,14 +96,10 @@ export default {
                     this.visible = false;
                 });
         },
-        init : function (){
-            // TODO:加载额度 + 点数
-        }
+        init: function () {},
     },
     filters: {},
     created: function () {},
-    mounted: function () {
-        this.init()
-    },
+    mounted: function () {},
 };
 </script>

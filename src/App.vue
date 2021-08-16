@@ -14,16 +14,13 @@
         </Breadcrumb>
 
         <LeftSidebar :open="true">
+            <LeftSideToggle :mobileOnly="true" />
             <div id="directory"></div>
             <Author :author="author" uid="8" />
         </LeftSidebar>
 
         <Main :withoutLeft="false" :withoutRight="false">
-            <h1>简易交互组件</h1>
-            <LeftSideToggle :mobileOnly="true" />
-
-            <hr />
-
+            
             <Thx :postId="23865" postType="macro" :userId="8"/>
 
             <hr />
