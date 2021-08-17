@@ -1,6 +1,6 @@
 <template>
     <div class="w-boxcoin-records" v-loading="loading">
-        <div class="w-boxcoin-records-list">
+        <div class="w-boxcoin-records-list" v-if="list && list.length">
             <ul class="u-list">
                 <li class="u-item u-head">
                     <span class="u-meta u-action">
@@ -22,16 +22,6 @@
                     </span>
                     <a
                         class="u-meta u-user"
-                        v-if="item.is_user_gift"
-                        :href="item.user_id | authorLink"
-                        target="_blank"
-                    >
-                        <img class="u-user-avatar" :src="item.ext_user_info.avatar | showAvatar" alt />
-                        <span>{{item.ext_user_info.display_name}}</span>
-                    </a>
-                    <a
-                        v-else
-                        class="u-meta u-user u-admin"
                         :href="item.operate_user_id | authorLink"
                         target="_blank"
                     >
@@ -86,7 +76,7 @@ export default {
         params: function () {
             return {
                 pageSize: this.per,
-                index: this.page,
+                pageIndex: this.page,
             };
         },
     },

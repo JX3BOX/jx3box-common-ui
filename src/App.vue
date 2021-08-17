@@ -16,12 +16,12 @@
         <LeftSidebar :open="true">
             <LeftSideToggle :mobileOnly="true" />
             <div id="directory"></div>
-            <Author :author="author" uid="8" />
+            <Author :author="author" :uid="8" />
         </LeftSidebar>
 
         <Main :withoutLeft="false" :withoutRight="false">
             
-            <Thx :postId="23865" postType="macro" :userId="8"/>
+            <Thx :postId="23865" postType="bbs" :userId="7" :adminBoxcoinEnable="true" :userBoxcoinEnable="true"/>
 
             <hr />
 

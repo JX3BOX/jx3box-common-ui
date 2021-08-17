@@ -1,12 +1,12 @@
 <template>
-    <div class="w-boxcoin-user">
+    <div class="w-boxcoin-user" v-if="allowBoxcoin">
         <el-tooltip effect="dark" content="投币" placement="top-start">
             <div class="w-boxcoin-block" @click="openBoxcoinPop">
                 <img class="u-icon" svg-inline src="../../assets/img/widget/heart1.svg" />
                 <span class="u-count" v-if="boxcoin">{{boxcoin}}</span>
             </div>
         </el-tooltip>
-        <el-dialog title="投币打赏" :visible.sync="visible" custom-class="w-boxcoin-pop">
+        <el-dialog title="投币打赏" :visible.sync="visible" custom-class="w-boxcoin-pop" :close-on-click-modal="false">
             <div class="w-boxcoin-user-content">
                 <div class="u-left">
                     <em class="u-label">当前拥有盒币</em>
@@ -49,7 +49,7 @@ import { rewardBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "BoxcoinUser",
-    props: ["boxcoin", "postType", "postId", "userId", "left", "points"],
+    props: ["boxcoin", "postType", "postId", "userId", "own", "points"],
     components: {},
     data: function () {
         return {
@@ -57,6 +57,8 @@ export default {
 
             count: 0,
             remark: "辛苦了，谢谢大大！",
+
+            left : this.own,
 
             chargeLink: "/vip/boxcoin?redirect=" + location.href,
         };
@@ -71,8 +73,15 @@ export default {
         isEnough: function () {
             return this.left && this.left >= this.count;
         },
+        allowBoxcoin : function (){
+            return this.postType && this.postId && this.userId
+        }
     },
-    watch: {},
+    watch: {
+        own : function (val){
+            this.left = val
+        }
+    },
     methods: {
         openBoxcoinPop: function () {
             if (User.isLogin()) {

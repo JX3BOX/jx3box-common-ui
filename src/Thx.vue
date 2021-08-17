@@ -1,10 +1,10 @@
 <template>
     <div class="w-thx">
         <div class="w-thx-panel">
-            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight" :userId="userId" :left="admin_left" :points="admin_points" @updateRecord="updateAdminRecord" />
+            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight && adminBoxcoinEnable" :userId="userId" :own="admin_left" :points="admin_points" @updateRecord="updateAdminRecord" />
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType"></fav>
-            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :left="user_left" :points="user_points" @updateRecord="updateUserRecord" />
+            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left" :points="user_points" v-if="userBoxcoinEnable" @updateRecord="updateUserRecord" />
             <Share :postId="postId" :postType="postType" />
         </div>
         <div class="w-thx-records">
@@ -28,7 +28,7 @@ import User from '@jx3box/jx3box-common/js/user'
 import {getPostBoxcoinConfig} from '../service/thx'
 export default {
     name: "Thx",
-    props: ["postId", "postType","userId"],
+    props: ["postId", "postType","userId","adminBoxcoinEnable","userBoxcoinEnable"],
     components: {
         Like,
         Share,
@@ -55,7 +55,7 @@ export default {
     watch: {},
     methods: {
         loadBoxcoinConfig : function (){
-            getPostBoxcoinConfig().then((res) => {
+            getPostBoxcoinConfig(this.postType).then((res) => {
                 this.admin_points = res.data.data.limit.admin_points || [10, 1000];
                 this.admin_left = res.data.data.asManagerBoxCoinRemain || 0;
                 this.user_points = res.data.data.limit.user_points || [10, 1000];

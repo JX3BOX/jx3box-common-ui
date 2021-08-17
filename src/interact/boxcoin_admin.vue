@@ -1,6 +1,6 @@
 <template>
-    <div class="w-boxcoin-admin">
-        <el-tooltip effect="dark" content="评分" placement="top-start">
+    <div class="w-boxcoin-admin" v-if="allowBoxcoin">
+        <el-tooltip effect="dark" content="品鉴" placement="top-start">
             <div class="w-boxcoin-block">
                 <img
                     @click="openBoxcoinPop"
@@ -10,14 +10,14 @@
                 />
             </div>
         </el-tooltip>
-        <el-dialog title="管理评分" :visible.sync="visible" custom-class="w-boxcoin-pop">
+        <el-dialog title="品鉴评分" :visible.sync="visible" custom-class="w-boxcoin-pop" :close-on-click-modal="false">
             <div class="w-boxcoin-admin-content">
                 <div class="u-left">
                     <em class="u-label">本月剩余额度</em>
                     <b>{{left}}</b>
                 </div>
                 <div class="u-list">
-                    <em class="u-label">❤️ 评分</em>
+                    <em class="u-label">❤️ 品鉴</em>
                     <div class="u-points">
                         <el-radio-group v-model="count">
                             <el-radio :label="item" v-for="item in points" :key="item" border>
@@ -52,7 +52,7 @@ import { grantBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "BoxcoinAdmin",
-    props: ["postType", "postId", "userId", "left", "points"],
+    props: ["postType", "postId", "userId", "own", "points"],
     components: {},
     data: function () {
         return {
@@ -60,6 +60,8 @@ export default {
 
             count: 0,
             remark: "辛苦，感谢！",
+
+            left : this.own
         };
     },
     computed: {
@@ -72,8 +74,15 @@ export default {
         isEnough: function () {
             return this.left && this.left >= this.count;
         },
+        allowBoxcoin : function (){
+            return this.postType && this.postId && this.userId
+        }
     },
-    watch: {},
+    watch: {
+        own : function (val){
+            this.left = val
+        }
+    },
     methods: {
         openBoxcoinPop: function () {
             this.visible = true;
