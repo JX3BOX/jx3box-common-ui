@@ -10,14 +10,14 @@
                 />
             </div>
         </el-tooltip>
-        <el-dialog title="管理评分" :visible.sync="visible" custom-class="w-boxcoin-pop">
+        <el-dialog title="品鉴评分" :visible.sync="visible" custom-class="w-boxcoin-pop">
             <div class="w-boxcoin-admin-content">
                 <div class="u-left">
                     <em class="u-label">本月剩余额度</em>
                     <b>{{left}}</b>
                 </div>
                 <div class="u-list">
-                    <em class="u-label">❤️ 评分</em>
+                    <em class="u-label">❤️ 品鉴</em>
                     <div class="u-points">
                         <el-radio-group v-model="count">
                             <el-radio :label="item" v-for="item in points" :key="item" border>
