@@ -12,6 +12,7 @@ import Bottom from './src/Bottom.vue'
 import RightSideMsg from './src/RightSideMsg.vue'
 import Author from './src/Author.vue'
 
+import Thx from './src/Thx.vue'
 import Mark from './src/interact/Mark.vue'
 import Like from './src/interact/Like.vue'
 import Down from './src/interact/Down.vue'
@@ -45,6 +46,7 @@ const components = {
     RightSideMsg,
     Author,
 
+    Thx,
     Like,
     Down,
     Mark,
