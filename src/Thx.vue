@@ -1,10 +1,10 @@
 <template>
     <div class="w-thx">
         <div class="w-thx-panel">
-            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight && adminBoxcoinEnable" :userId="userId" :own="admin_left" :points="admin_points" @updateRecord="updateAdminRecord" />
+            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight && adminBoxcoinEnable && boxcoin_enable" :userId="userId" :own="admin_left" :points="admin_points" @updateRecord="updateAdminRecord" />
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType"></fav>
-            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left" :points="user_points" v-if="userBoxcoinEnable" @updateRecord="updateUserRecord" />
+            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left" :points="user_points" v-if="userBoxcoinEnable && boxcoin_enable" @updateRecord="updateUserRecord" />
             <Share :postId="postId" :postType="postType" />
         </div>
         <div class="w-thx-records">
@@ -25,7 +25,7 @@ import BoxcoinRecords from './interact/boxcoin_records.vue';
 import BoxcoinAdmin from './interact/boxcoin_admin.vue';
 import BoxcoinUser from './interact/boxcoin_user.vue';
 import User from '@jx3box/jx3box-common/js/user'
-import {getPostBoxcoinConfig} from '../service/thx'
+import {getPostBoxcoinConfig,getBoxcoinStatus} from '../service/thx'
 export default {
     name: "Thx",
     props: ["postId", "postType","userId","adminBoxcoinEnable","userBoxcoinEnable"],
@@ -48,7 +48,8 @@ export default {
             user_left : 0,
             user_points : [100],
 
-            cacheRecord: null
+            cacheRecord: null,
+            boxcoin_enable : 0
         };
     },
     computed: {},
@@ -61,6 +62,9 @@ export default {
                 this.user_points = res.data.data.limit.user_points || [10, 1000];
                 this.user_left = res.data.data.asUserBoxCoinRemain || 0;
             });
+            getBoxcoinStatus().then((res) => {
+                this.boxcoin_enable = !!~~res.data.data.val
+            })
         },
         // 用户打赏
         updateUserRecord: function ({ count, remark }){
