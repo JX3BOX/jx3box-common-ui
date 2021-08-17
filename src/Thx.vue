@@ -74,7 +74,7 @@ export default {
                 is_user_gift: 1,
                 user_id: this.user.uid,
                 created_at: Date.now(),
-                ext_user_info: {
+                ext_operate_user_info: {
                     avatar: this.user.avatar_origin,
                     display_name: this.user.name
                 },
