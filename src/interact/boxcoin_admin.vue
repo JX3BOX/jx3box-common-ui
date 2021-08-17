@@ -1,5 +1,5 @@
 <template>
-    <div class="w-boxcoin-admin">
+    <div class="w-boxcoin-admin" v-if="allowBoxcoin">
         <el-tooltip effect="dark" content="评分" placement="top-start">
             <div class="w-boxcoin-block">
                 <img
@@ -74,6 +74,9 @@ export default {
         isEnough: function () {
             return this.left && this.left >= this.count;
         },
+        allowBoxcoin : function (){
+            return this.postType && this.postId && this.userId
+        }
     },
     watch: {
         own : function (val){

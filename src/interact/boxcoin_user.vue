@@ -1,5 +1,5 @@
 <template>
-    <div class="w-boxcoin-user">
+    <div class="w-boxcoin-user" v-if="allowBoxcoin">
         <el-tooltip effect="dark" content="投币" placement="top-start">
             <div class="w-boxcoin-block" @click="openBoxcoinPop">
                 <img class="u-icon" svg-inline src="../../assets/img/widget/heart1.svg" />
@@ -73,6 +73,9 @@ export default {
         isEnough: function () {
             return this.left && this.left >= this.count;
         },
+        allowBoxcoin : function (){
+            return this.postType && this.postId && this.userId
+        }
     },
     watch: {
         own : function (val){

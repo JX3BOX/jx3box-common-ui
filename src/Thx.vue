@@ -1,10 +1,10 @@
 <template>
     <div class="w-thx">
         <div class="w-thx-panel">
-            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight" :userId="userId" :own="admin_left" :points="admin_points"/>
+            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight && adminBoxcoinEnable" :userId="userId" :own="admin_left" :points="admin_points"/>
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType"></fav>
-            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left" :points="user_points"/>
+            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left" :points="user_points" v-if="userBoxcoinEnable"/>
             <Share :postId="postId" :postType="postType" />
         </div>
         <div class="w-thx-records">
@@ -28,7 +28,7 @@ import User from '@jx3box/jx3box-common/js/user'
 import {getPostBoxcoinConfig} from '../service/thx'
 export default {
     name: "Thx",
-    props: ["postId", "postType","userId"],
+    props: ["postId", "postType","userId","adminBoxcoinEnable","userBoxcoinEnable"],
     components: {
         Like,
         Share,
