@@ -1,10 +1,10 @@
 <template>
     <div class="w-thx">
         <div class="w-thx-panel">
-            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight && adminBoxcoinEnable && boxcoin_enable" :userId="userId" :own="admin_left" :points="admin_points" @updateRecord="updateAdminRecord" />
+            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight && adminBoxcoinEnable && boxcoin_enable" :userId="userId" :own="admin_left" :points="admin_points" @updateRecord="updateRecord" />
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType"></fav>
-            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left" :points="user_points" v-if="userBoxcoinEnable && boxcoin_enable" @updateRecord="updateUserRecord" />
+            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left" :points="user_points" v-if="userBoxcoinEnable && boxcoin_enable" @updateRecord="updateRecord" />
             <Share :postId="postId" :postType="postType" />
         </div>
         <div class="w-thx-records">
@@ -67,25 +67,11 @@ export default {
             })
         },
         // 用户打赏
-        updateUserRecord: function ({ count, remark }){
+        updateRecord: function ({ count, remark, is_user_gift }){
             this.cacheRecord = {
                 count,
                 remark,
-                is_user_gift: 1,
-                user_id: this.user.uid,
-                created_at: Date.now(),
-                ext_user_info: {
-                    avatar: this.user.avatar_origin,
-                    display_name: this.user.name
-                },
-            }
-        },
-        // 管理评分
-        updateAdminRecord: function ({ count, remark }){
-            this.cacheRecord = {
-                count,
-                remark,
-                is_user_gift: 0,
+                is_user_gift,
                 operate_user_id: this.user.uid,
                 created_at: Date.now(),
                 ext_operate_user_info: {

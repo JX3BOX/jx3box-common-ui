@@ -100,12 +100,13 @@ export default {
                 .then(() => {
                     // 1.扣除额度
                     this.left -= this.count;
-
-                    this.$emit('updateRecord', { count: this.count, remark: this.remark });
+                    // 2.将修改emit出去
+                    this.$emit('updateRecord', { count: this.count, remark: this.remark, is_user_gift: 0 });
                 })
                 .finally(() => {
                     this.visible = false;
                 });
+
 
         },
         init: function () {},
