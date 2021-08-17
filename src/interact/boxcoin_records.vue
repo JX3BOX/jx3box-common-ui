@@ -69,7 +69,7 @@ import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
 import { showTime } from "@jx3box/jx3box-common/js/moment";
 export default {
     name: "BoxcoinRecords",
-    props: ["postType", "postId"],
+    props: ["postType", "postId", "cacheRecord"],
     components: {},
     data: function () {
         return {
@@ -97,6 +97,16 @@ export default {
                 this.loadData();
             },
         },
+        cacheRecord: {
+            deep: true,
+            handler: function (val) {
+                if (val) {
+                    this.list = [val, ...this.list];
+                    // 清空父组件的cache
+                    this.$parent.cacheRecord = null;
+                }
+            }
+        }
     },
     methods: {
         init: function () {

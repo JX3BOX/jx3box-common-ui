@@ -1,14 +1,14 @@
 <template>
     <div class="w-thx">
         <div class="w-thx-panel">
-            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight" :userId="userId" :left="admin_left" :points="admin_points"/>
+            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight" :userId="userId" :left="admin_left" :points="admin_points" @updateRecord="updateAdminRecord" />
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType"></fav>
-            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :left="user_left" :points="user_points"/>
+            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :left="user_left" :points="user_points" @updateRecord="updateUserRecord" />
             <Share :postId="postId" :postType="postType" />
         </div>
         <div class="w-thx-records">
-            <boxcoin-records :postId="postId" :postType="postType" />
+            <boxcoin-records :postId="postId" :postType="postType" :cacheRecord="cacheRecord" />
         </div>
         <div class="w-thx-copyright">
             &copy; 所有原创作品，著作权归作者所有，所有未经授权的非署名转载或抄袭将有权追究法律责任，所有法律事务由专聘律师代理。<br>
@@ -41,11 +41,14 @@ export default {
         return {
             boxcoin : 0,
             hasRight : User.getInfo().group >= 32,
+            user: User.getInfo(),
 
             admin_left : 0,
             admin_points : [100],
             user_left : 0,
-            user_points : [100]
+            user_points : [100],
+
+            cacheRecord: null
         };
     },
     computed: {},
@@ -58,6 +61,34 @@ export default {
                 this.user_points = res.data.data.limit.user_points || [10, 1000];
                 this.user_left = res.data.data.asUserBoxCoinRemain || 0;
             });
+        },
+        // 用户打赏
+        updateUserRecord: function ({ count, remark }){
+            this.cacheRecord = {
+                count,
+                remark,
+                is_user_gift: 1,
+                user_id: this.user.uid,
+                created_at: Date.now(),
+                ext_user_info: {
+                    avatar: this.user.avatar_origin,
+                    display_name: this.user.name
+                },
+            }
+        },
+        // 管理评分
+        updateAdminRecord: function ({ count, remark }){
+            this.cacheRecord = {
+                count,
+                remark,
+                is_user_gift: 0,
+                operate_user_id: this.user.uid,
+                created_at: Date.now(),
+                ext_operate_user_info: {
+                    avatar: this.user.avatar_origin,
+                    display_name: this.user.name
+                },
+            }
         },
         init : function (){
             this.loadBoxcoinConfig()

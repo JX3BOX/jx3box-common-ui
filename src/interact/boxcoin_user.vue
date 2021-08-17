@@ -94,6 +94,8 @@ export default {
                 .then(() => {
                     // 1.扣除额度
                     this.left -= this.count;
+                    // 2. 将新增emit出去
+                    this.$emit('updateRecord', { count: this.count, remark: this.remark });
                 })
                 .finally(() => {
                     this.visible = false;

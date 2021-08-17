@@ -91,10 +91,13 @@ export default {
                 .then(() => {
                     // 1.扣除额度
                     this.left -= this.count;
+
+                    this.$emit('updateRecord', { count: this.count, remark: this.remark });
                 })
                 .finally(() => {
                     this.visible = false;
                 });
+
         },
         init: function () {},
     },
