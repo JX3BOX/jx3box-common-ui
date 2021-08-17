@@ -6,7 +6,7 @@
                 <span class="u-count" v-if="boxcoin">{{boxcoin}}</span>
             </div>
         </el-tooltip>
-        <el-dialog title="投币打赏" :visible.sync="visible" custom-class="w-boxcoin-pop">
+        <el-dialog title="投币打赏" :visible.sync="visible" custom-class="w-boxcoin-pop" :close-on-click-modal="false">
             <div class="w-boxcoin-user-content">
                 <div class="u-left">
                     <em class="u-label">当前拥有盒币</em>

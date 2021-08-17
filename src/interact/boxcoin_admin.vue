@@ -1,6 +1,6 @@
 <template>
     <div class="w-boxcoin-admin" v-if="allowBoxcoin">
-        <el-tooltip effect="dark" content="评分" placement="top-start">
+        <el-tooltip effect="dark" content="品鉴" placement="top-start">
             <div class="w-boxcoin-block">
                 <img
                     @click="openBoxcoinPop"
@@ -10,7 +10,7 @@
                 />
             </div>
         </el-tooltip>
-        <el-dialog title="品鉴评分" :visible.sync="visible" custom-class="w-boxcoin-pop">
+        <el-dialog title="品鉴评分" :visible.sync="visible" custom-class="w-boxcoin-pop" :close-on-click-modal="false">
             <div class="w-boxcoin-admin-content">
                 <div class="u-left">
                     <em class="u-label">本月剩余额度</em>
