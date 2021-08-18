@@ -56,7 +56,7 @@ export default {
     watch: {},
     methods: {
         loadBoxcoinConfig : function (){
-            getPostBoxcoinConfig(this.postType).then((res) => {
+            User.isLogin() && getPostBoxcoinConfig(this.postType).then((res) => {
                 this.admin_points = res.data.data.limit.admin_points || [10, 1000];
                 this.admin_left = res.data.data.asManagerBoxCoinRemain || 0;
                 this.user_points = res.data.data.limit.user_points || [10, 1000];
