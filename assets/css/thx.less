@@ -89,12 +89,13 @@
 }
 
 .w-boxcoin-records-list{
+    max-width: 960px;
+    border:1px solid #eee;
+
     .u-list{
         list-style: none;
-        max-width: 960px;
         .x(left);
         margin:0 auto;
-        border:1px solid #eee;
         padding:0;
     }
     .u-item{
@@ -161,6 +162,24 @@
         .pointer;
         &:hover{
             color:#f00;
+        }
+    }
+}
+
+@media screen and (max-width:@phone){
+    .w-boxcoin-records-list{
+        overflow-x: auto;
+        .u-list{
+            .w(100%);
+        }
+        .u-user{
+            .w(100px);
+        }
+        .u-count{
+            .w(80px);
+        }
+        .u-time,.u-remark{
+            .none;
         }
     }
 }
