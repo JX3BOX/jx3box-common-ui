@@ -1,17 +1,17 @@
 import { $pay,$cms } from "@jx3box/jx3box-common/js/https";
 
 function getPostBoxcoinRecords(postType, postId, params) {
-    return $pay().get(`/api/inspire/posts/${postType}/${postId}/history`, {
+    return $pay().get(`/api/inspire/article/${postType}/${postId}/history`, {
         params,
     });
 }
 
 function grantBoxcoin(postType, postId, userId, count, data) {
-    return $pay().post(`/api/inspire/posts/${postType}/${postId}/manager2creator/${userId}/coins/${count}`, data);
+    return $pay().post(`/api/inspire/article/${postType}/${postId}/manager2creator/${userId}/coins/${count}`, data);
 }
 
 function rewardBoxcoin(postType, postId, userId, count, data) {
-    return $pay().post(`/api/inspire/posts/${postType}/${postId}/user2creator/${userId}/coins/${count}`, data);
+    return $pay().post(`/api/inspire/article/${postType}/${postId}/user2creator/${userId}/coins/${count}`, data);
 }
 
 function recoveryBoxcoin(id) {
@@ -19,7 +19,7 @@ function recoveryBoxcoin(id) {
 }
 
 function getPostBoxcoinConfig(postType) {
-    return $pay().get(`/api/inspire/posts/${postType}/boxcoin/limit`);
+    return $pay().get(`/api/inspire/article/${postType}/boxcoin/limit`);
 }
 
 function getBoxcoinStatus(){
