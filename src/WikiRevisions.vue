@@ -50,7 +50,7 @@
 import WikiPanel from "./WikiPanel";
 import { WikiPost } from "@jx3box/jx3box-common/js/helper";
 import { getLink, authorLink, ts2str } from "@jx3box/jx3box-common/js/utils";
-import {__Root,__Origin} from '@jx3box/jx3box-common/data/jx3box.json'
+import {__Root,__OriginRoot} from '@jx3box/jx3box-common/data/jx3box.json'
 
 export default {
     name: "WikiRevisions",
