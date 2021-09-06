@@ -74,10 +74,10 @@ export default {
     },
     methods: {
         link: function (type,id){
-            return this.prefix + getLink(type,id).slice(1)
+            return this.prefix + getLink(type,id)
         },
         author_url: function (uid){
-            return this.prefix + authorLink(uid).slice(1)
+            return this.prefix + authorLink(uid)
         },
         ts2str,
     },
