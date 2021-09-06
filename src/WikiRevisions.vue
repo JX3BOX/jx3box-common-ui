@@ -62,7 +62,7 @@ export default {
     },
     computed : {
         baseUrl : function (){
-            return location.href.includes('classic') ? __Origin : __Root
+            return location.href.includes('classic') ? __OriginRoot : __Root
         },
         prefix : function (){
             if(this.isGame){
