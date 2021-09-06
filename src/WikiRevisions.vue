@@ -54,19 +54,30 @@ import {__Root,__Origin} from '@jx3box/jx3box-common/data/jx3box.json'
 
 export default {
     name: "WikiRevisions",
-    props: ["type", "sourceId"],
+    props: ["type", "sourceId",'isGame'],
     data: function() {
         return {
             versions: null,
-            baseUrl : location.hostname.includes('origin') ? __Origin : __Root
         };
+    },
+    computed : {
+        baseUrl : function (){
+            return location.href.includes('classic') ? __Origin : __Root
+        },
+        prefix : function (){
+            if(this.isGame){
+                return this.baseUrl
+            }else{
+                return ''
+            }
+        }
     },
     methods: {
         link: function (type,id){
-            return this.baseUrl + getLink(type,id).slice(1)
+            return this.prefix + getLink(type,id).slice(1)
         },
         author_url: function (uid){
-            return this.baseUrl + authorLink(uid).slice(1)
+            return this.prefix + authorLink(uid).slice(1)
         },
         ts2str,
     },
