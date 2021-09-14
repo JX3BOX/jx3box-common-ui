@@ -219,7 +219,7 @@ export default {
             });
         },
         checkSuperAuthor: function() {
-            getSuperAuthor(this.user?.uid).then(res => {
+            this.isLogin && getSuperAuthor(this.user?.uid).then(res => {
                 this.isSuperAuthor = res.data.data
             })
         },
