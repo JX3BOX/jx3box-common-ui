@@ -21,8 +21,10 @@
 
         <Main :withoutLeft="false" :withoutRight="false">
             
+            
+            <Creators :postId="28" style="margin-bottom:10px"/>
             <Collection :id="59" :defaultVisible="true"/>
-            <Creators :post-id="28"/>
+
             <Thx :postId="23865" postType="bbs" :userId="7" :adminBoxcoinEnable="true" :userBoxcoinEnable="true"/>
 
             <hr />
