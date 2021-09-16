@@ -22,6 +22,7 @@
         <Main :withoutLeft="false" :withoutRight="false">
             
             <Collection :id="59" :defaultVisible="true"/>
+            <Creators :post-id="28"/>
             <Thx :postId="23865" postType="bbs" :userId="7" :adminBoxcoinEnable="true" :userBoxcoinEnable="true"/>
 
             <hr />
@@ -98,9 +99,10 @@ import RightSideMsg from "./RightSideMsg.vue";
 
 import Footer from "./Footer.vue";
 import Bottom from "./Bottom.vue";
-import Thx from "./Thx.vue";
 
-import Collection from "./Collection.vue";
+import Thx from "./single/Thx.vue";
+import Collection from "./single/Collection.vue";
+import Creators from "./single/Creators.vue";
 
 import Mark from "./interact/Mark.vue";
 import Fav from "./interact/Fav.vue";
@@ -118,9 +120,9 @@ import tagBy from "./filters/tagBy.vue";
 import clientBy from "./filters/clientBy.vue";
 import zlpBy from "./filters/zlpBy.vue";
 
-import WikiPanel from "./WikiPanel.vue";
-import WikiRevisions from "./WikiRevisions.vue";
-import WikiComments from "./WikiComments.vue";
+import WikiPanel from "./wiki/WikiPanel.vue";
+import WikiRevisions from "./wiki/WikiRevisions.vue";
+import WikiComments from "./wiki/WikiComments.vue";
 
 import axios from "axios";
 import { __server } from "@jx3box/jx3box-common/data/jx3box.json";
@@ -140,6 +142,7 @@ export default {
 
         Thx,
         Collection,
+        Creators,
 
         RightSideMsg,
         Author,

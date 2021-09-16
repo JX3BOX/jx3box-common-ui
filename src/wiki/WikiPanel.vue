@@ -76,7 +76,7 @@
 
 <script>
 import _ from "lodash";
-import QRcode from "./interact/QRcode";
+import QRcode from "../interact/QRcode";
 import {
     getThumbnail,
     authorLink,
@@ -123,5 +123,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/wiki-panel.less";
+@import "../../assets/css/wiki-panel.less";
 </style>

@@ -107,5 +107,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/wiki-revisions.less";
+@import "../../assets/css/wiki-revisions.less";
 </style>

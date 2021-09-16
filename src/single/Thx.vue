@@ -18,14 +18,14 @@
 </template>
 
 <script>
-import Like from "./interact/Like2.vue";
-import Share from "./interact/Share2.vue";
-import Fav from "./interact/Fav2.vue";
-import BoxcoinRecords from './interact/boxcoin_records.vue';
-import BoxcoinAdmin from './interact/boxcoin_admin.vue';
-import BoxcoinUser from './interact/boxcoin_user.vue';
+import Like from "../interact/Like2.vue";
+import Share from "../interact/Share2.vue";
+import Fav from "../interact/Fav2.vue";
+import BoxcoinRecords from '../interact/boxcoin_records.vue';
+import BoxcoinAdmin from '../interact/boxcoin_admin.vue';
+import BoxcoinUser from '../interact/boxcoin_user.vue';
 import User from '@jx3box/jx3box-common/js/user'
-import {getPostBoxcoinConfig,getBoxcoinStatus} from '../service/thx'
+import {getPostBoxcoinConfig,getBoxcoinStatus} from '../../service/thx'
 export default {
     name: "Thx",
     props: ["postId", "postType","userId","adminBoxcoinEnable","userBoxcoinEnable"],
@@ -93,5 +93,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/thx.less";
+@import "../../assets/css/thx.less";
 </style>

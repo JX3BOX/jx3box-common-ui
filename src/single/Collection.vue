@@ -27,7 +27,7 @@
 
 <script>
 import { getLink } from "@jx3box/jx3box-common/js/utils";
-import { getCollection } from "../service/helper";
+import { getCollection } from "../../service/helper";
 export default {
     name: "Collection",
     props: ["id",'defaultVisible'],
@@ -38,7 +38,7 @@ export default {
             visible: this.defaultVisible || false,
             data: {
                 title: "",
-                list: [],
+                posts: [],
             },
         };
     },

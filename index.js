@@ -4,15 +4,13 @@ import Breadcrumb from './src/Breadcrumb.vue'
 
 import LeftSidebar from './src/LeftSidebar.vue'
 import LeftSideToggle from './src/LeftSideToggle.vue'
-import Main from './src/Main.vue'
+import Author from './src/Author.vue'
 import RightSidebar from './src/RightSidebar.vue'
+import RightSideMsg from './src/RightSideMsg.vue'
+import Main from './src/Main.vue'
 import Footer from './src/Footer.vue'
 import Bottom from './src/Bottom.vue'
 
-import RightSideMsg from './src/RightSideMsg.vue'
-import Author from './src/Author.vue'
-
-import Thx from './src/Thx.vue'
 import Mark from './src/interact/Mark.vue'
 import Like from './src/interact/Like.vue'
 import Down from './src/interact/Down.vue'
@@ -29,7 +27,8 @@ import menuBy from "./src/filters/menuBy.vue";
 import clientBy from "./src/filters/clientBy.vue";
 import zlpBy from "./src/filters/zlpBy.vue";
 
-import WikiPanel from './src/WikiPanel.vue'
+import Thx from './src/single/Thx.vue'
+import WikiPanel from './src/wiki/WikiPanel.vue'
 
 const components = {
     Header,

@@ -159,5 +159,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/wiki-comments.less";
+@import "../../assets/css/wiki-comments.less";
 </style>
