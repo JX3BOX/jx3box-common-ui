@@ -21,6 +21,7 @@
 
         <Main :withoutLeft="false" :withoutRight="false">
             
+            <Collection :id="59" :defaultVisible="true"/>
             <Thx :postId="23865" postType="bbs" :userId="7" :adminBoxcoinEnable="true" :userBoxcoinEnable="true"/>
 
             <hr />
@@ -99,6 +100,8 @@ import Footer from "./Footer.vue";
 import Bottom from "./Bottom.vue";
 import Thx from "./Thx.vue";
 
+import Collection from "./Collection.vue";
+
 import Mark from "./interact/Mark.vue";
 import Fav from "./interact/Fav.vue";
 import Like from "./interact/Like.vue";
@@ -136,6 +139,7 @@ export default {
         RightSidebar,
 
         Thx,
+        Collection,
 
         RightSideMsg,
         Author,
