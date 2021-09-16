@@ -26,7 +26,7 @@
             <a
                 v-if="publishEnable"
                 :href="slug | publishLink"
-                class="u-publish el-button el-button--primary el-button--medium"
+                class="u-publish el-button el-button--primary el-button--medium u-op-public"
             >
                 <i class="el-icon-edit-outline"></i>
                 <span>发布</span>
@@ -35,7 +35,7 @@
                 v-if="feedbackEnable"
                 v-show="isNotAdmin"
                 :href="feedback"
-                class="u-feedback el-button el-button--primary el-button--medium"
+                class="u-feedback el-button el-button--primary el-button--medium u-op-public"
                 target="_blank"
             >
                 <i class="el-icon-info"></i>
