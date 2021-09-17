@@ -18,10 +18,11 @@
                 :key="i"
                 :href="item.post_author_info.ID | authorLink"
                 target="_blank"
+                v-show="item.status"
             >
                 <img class="u-avatar" :src="item.post_author_info.user_avatar | showAvatar" />
                 <span class="u-name">{{item.post_author_info.display_name}}</span>
-                <i class="u-label">{{item.label}}</i>
+                <i class="u-label">{{item.label | formatLabel}}</i>
             </a>
         </div>
         <a class="w-creators-edit" :href="editLink" v-if="isCreator">
@@ -91,6 +92,9 @@ export default {
             return showAvatar(val, 48);
         },
         authorLink,
+        formatLabel : function (str){
+            return str && str.slice(0,8)
+        }
     },
     created: function () {},
     mounted: function () {},

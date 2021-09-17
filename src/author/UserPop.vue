@@ -76,7 +76,7 @@ export default {
         confirm: function () {
             if (this.status) {
                 this.visible = false;
-                this.$emit("confirm", this.uid);
+                this.$emit("confirm", this.userdata);
             } else {
                 this.$alert("用户不存在 或 UID不正确", "提醒", {
                     confirmButtonText: "确定",

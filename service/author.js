@@ -6,7 +6,7 @@ function getUserInfo(uid) {
     return $cms({ mute: true })
         .get(`/api/cms/user/${uid}/info`)
         .then((res) => {
-            return res.data?.data;
+            return res.data.data;
         });
 }
 
