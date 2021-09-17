@@ -24,6 +24,8 @@
             
             <Creators :postId="28" style="margin-bottom:10px"/>
             <Collection :id="59" :defaultVisible="true"/>
+            <UserPop title="添加用户" v-model="visible" @confirm="addUser"/>
+            <el-button @click="visible = true">用户POP</el-button>
 
             <Thx :postId="23865" postType="bbs" :userId="7" :adminBoxcoinEnable="true" :userBoxcoinEnable="true"/>
 
@@ -94,6 +96,7 @@ import Breadcrumb from "./Breadcrumb.vue";
 import LeftSidebar from "./LeftSidebar.vue";
 import LeftSideToggle from "./LeftSideToggle.vue";
 import Author from "./Author.vue";
+import UserPop from "./author/UserPop.vue";
 
 import Main from "./Main.vue";
 import RightSidebar from "./RightSidebar.vue";
@@ -170,12 +173,15 @@ export default {
         WikiPanel,
         WikiRevisions,
         WikiComments,
+
+        UserPop
     },
     data: function() {
         return {
             author: "",
             wikiPost: null,
-            tag : ''
+            tag : '',
+            visible : false,
         };
     },
     created: function() {
@@ -186,6 +192,10 @@ export default {
             }
         );
     },
-    methods: {},
+    methods: {
+        addUser : function (val){
+            console.log(val)
+        }
+    },
 };
 </script>
