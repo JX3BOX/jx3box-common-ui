@@ -173,7 +173,7 @@ export default {
     methods: {
         // 消息
         checkMSG: function () {
-            getMsg().then((res) => {
+            this.isLogin && getMsg().then((res) => {
                 this.pop = !!res.data.data.unread;
             });
         },
