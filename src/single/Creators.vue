@@ -149,6 +149,7 @@ export default {
         .bold;
         .db;
         color: @color;
+        margin-bottom: 2px;
     }
     &:hover {
         .u-name {
@@ -156,7 +157,7 @@ export default {
         }
     }
     .u-up {
-        .db;
+        // .db;
         .fz(12px,1);
         font-style: normal;
         background-color: @pink;
@@ -166,7 +167,7 @@ export default {
         .mt(5px);
     }
     .u-label {
-        .db;
+        // .db;
         .fz(12px,1);
         font-style: normal;
         background-color: @color-link;
