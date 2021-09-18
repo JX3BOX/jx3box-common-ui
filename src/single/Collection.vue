@@ -57,6 +57,9 @@ export default {
                 !!~~val && this.loadData();
             },
         },
+        defaultVisible : function (val){
+            this.visible = val
+        }
     },
     methods: {
         handleShow: function () {

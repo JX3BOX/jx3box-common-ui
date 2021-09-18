@@ -118,7 +118,7 @@ export default {
     .lt(0);
     writing-mode: vertical-rl;
     .fz(12px);
-    background: #49c10f;
+    background: @primary;
     color: #fff;
     .h(100%);
     .x;
