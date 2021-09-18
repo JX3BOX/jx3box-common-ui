@@ -150,6 +150,8 @@ export default {
         .db;
         color: @color;
         margin-bottom: 2px;
+        .nobreak;
+        max-width:120px;
     }
     &:hover {
         .u-name {
@@ -157,22 +159,24 @@ export default {
         }
     }
     .u-up {
-        // .db;
+        .dbi;
         .fz(12px,1);
         font-style: normal;
         background-color: @pink;
         color: #fff;
-        padding: 3px 10px;
+        padding: 2px 10px;
         .r(2px);
         .mt(5px);
     }
     .u-label {
-        // .db;
+        .nobreak;
+        max-width:120px;
+        .dbi;
         .fz(12px,1);
         font-style: normal;
         background-color: @color-link;
         color: #fff;
-        padding: 3px 10px;
+        padding: 2px 10px;
         .r(2px);
         .mt(5px);
     }
