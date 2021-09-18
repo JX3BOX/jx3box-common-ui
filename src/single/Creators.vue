@@ -164,7 +164,7 @@ export default {
         font-style: normal;
         background-color: @pink;
         color: #fff;
-        padding: 2px 10px;
+        padding: 3px 10px;
         .r(2px);
         .mt(5px);
     }
@@ -176,7 +176,7 @@ export default {
         font-style: normal;
         background-color: @color-link;
         color: #fff;
-        padding: 2px 10px;
+        padding: 3px 10px;
         .r(2px);
         .mt(5px);
     }
