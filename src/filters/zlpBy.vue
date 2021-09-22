@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import zlps from "@jx3box/jx3box-data/data/box/zlp.json";
+import zlps from "../../assets/data/zlp.json";
 export default {
     name: "zlpBy",
     props: ["client"],

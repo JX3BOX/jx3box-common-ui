@@ -1,7 +1,7 @@
 <template>
     <div class="c-jx3box" :class="{ on: status, isOverlay: overlayEnable && isOverlay }">
         <!-- search -->
-        <header-search :client="client" @click.native.stop/>
+        <header-search @click.native.stop/>
 
         <!-- list -->
         <ul class="u-list">
@@ -12,8 +12,8 @@
                     <span class="u-txt">首页</span>
                 </a>
             </li>
-            <li v-for="(item,i) in data" :key="i" :class="{'u-app-start':isLF(item.uuid)}">
-                <a class="u-item" :href="getClientLink(item.href)" :target="item.href | getTarget">
+            <li v-for="(item,i) in data" :key="i" :class="{'u-app-start':item.lf}" v-show="item.status">
+                <a class="u-item" :href="item.href" :target="item.href | getTarget">
                     <img class="u-pic" svg-inline :src="item.img | getBoxIcon" />
                     <img class="u-pic-hover" svg-inline :src="item.hover | getBoxIcon" />
                     <span class="u-txt">{{item.name}}</span>
@@ -31,20 +31,19 @@
 import search from "./header/search.vue";
 import _ from "lodash";
 import Bus from "../service/bus";
-import { getBox } from "../service/header.js";
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import box_data from "../assets/data/box.json";
-import box_data_origin from "../assets/data/box_origin.json";
-const breakIcons = ["database", "team", "j3pz"];
-
+import box_data from "@jx3box/jx3box-data/data/box/box.json";
+import box_data_origin from "@jx3box/jx3box-data/data/box/box_origin.json";
+import { getBox } from "../service/header.js";
+const client = location.href.includes('origin') ? 'origin' : 'std'
 export default {
     name: "Box",
-    props: ["overlayEnable", "client"],
+    props: ["overlayEnable"],
     data: function () {
         return {
             status: false,
             isOverlay: false,
-            data : location.hostname.includes("origin") ? box_data_origin : box_data
+            data : client =='origin' ? box_data_origin : box_data,
         };
     },
     computed: {
@@ -65,15 +64,6 @@ export default {
         closeBox: function () {
             Bus.$emit("toggleBox", false);
         },
-        isLF: function (name) {
-            return breakIcons.includes(name);
-        },
-        getClientLink: function (val) {
-            if (this.$store && this.$store.state && this.$store.state.client) {
-                val = val + "?client=" + this.$store.state.client;
-            }
-            return val;
-        },
     },
     created: function () {
         if (this.overlayEnable) {
@@ -85,11 +75,11 @@ export default {
                 }, 200)
             );
         }
-    },
-    mounted: function () {
         getBox(this.client).then((res) => {
             this.data = res.data;
         });
+    },
+    mounted: function () {
         Bus.$on("toggleBox", (status) => {
             if (status == undefined) {
                 this.status = !this.status;
@@ -106,7 +96,7 @@ export default {
             return __imgPath + "image" + val;
         },
         getTarget: function (val) {
-            if (val.startsWith("/")) {
+            if (window.innerWidth < 768 || val.startsWith("/")) {
                 return "_self";
             } else {
                 return "_blank";

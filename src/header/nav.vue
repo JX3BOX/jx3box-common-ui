@@ -11,6 +11,7 @@
                         class="u-item el-dropdown-link"
                         :class="{ on: isFocus(item.link) }"
                         :href="item.link"
+                        :target="item.target || '_self'"
                         >{{ item.label
                         }}<i class="el-icon-arrow-down el-icon--right"></i
                     ></a>
@@ -47,14 +48,15 @@
 </template>
 
 <script>
-import std_nav from "../../assets/data/nav.json";
-import origin_nav from "../../assets/data/nav_origin.json";
+import std_nav from "@jx3box/jx3box-data/data/box/header_nav.json";
+import origin_nav from "@jx3box/jx3box-data/data/box/header_nav_origin.json";
 import { getNav } from "../../service/header";
+const client = location.href.includes('origin') ? 'origin' : 'std'
 export default {
-    props: ['client'],
+    props: [],
     data: function() {
         return {
-            nav : this.client == 'origin' ? origin_nav : std_nav,
+            nav : client == 'origin' ? origin_nav : std_nav
         };
     },
     computed: {
@@ -63,24 +65,12 @@ export default {
         isFocus: function(type) {
             return location.pathname.includes(type);
         },
-        getClientLink : function (val){
-            let client = 'std'
-            if(this.$store && this.$store.state && this.$store.state.client){
-                client = this.$store.state.client
-            }else if(this.$route && this.$route.query && this.$route.query.client){
-                client = this.$route.query.client
-            }else{
-                client = this.client
-            }
-            if(val.includes('client')){
-                return val
-            }
-            return val + '?client=' + client
-        }
     },
     created: function() {
         getNav(this.client).then((res) => {
-            this.nav = res.data && res.data;
+            if(res.data){
+                this.nav = res.data
+            }
         });
     },
     components: {},

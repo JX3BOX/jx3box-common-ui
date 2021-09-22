@@ -22,7 +22,7 @@
         <Main :withoutLeft="false" :withoutRight="false">
             
             
-            <Creators :postId="28" style="margin-bottom:10px"/>
+            <Creators :postId="30432" style="margin-bottom:10px"/>
             <Collection :id="59" :defaultVisible="true"/>
             <UserPop title="添加用户" v-model="visible" @confirm="addUser"/>
             <el-button @click="visible = true">用户POP</el-button>

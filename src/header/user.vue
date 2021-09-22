@@ -37,7 +37,7 @@
                                     class="u-superauthor-profile"
                                     alt="superauthor"
                                     title="签约作者"
-                                >
+                                />
                                 <em>(UID : {{ user.uid }})</em>
                             </a>
                         </li>
@@ -52,7 +52,9 @@
                                     <template v-if="isVIP || isPRO">
                                         {{ vipTypeTxt
                                         }}
-                                        <span class="u-vip-left">({{ vipLeftDays }}天)</span>
+                                        <span
+                                            class="u-vip-left"
+                                        >({{ vipLeftDays }}天)</span>
                                     </template>
                                     <template v-else>升级账号类型</template>
                                 </span>
@@ -88,7 +90,7 @@
 import User from "@jx3box/jx3box-common/js/user";
 import { showDate } from "@jx3box/jx3box-common/js/moment";
 import { __Links, __Root, __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import panel from "../../assets/data/panel";
+import panel from "@jx3box/jx3box-data/data/box/header_panel.json";
 import { getMsg, getPanel } from "../../service/header";
 import { getSuperAuthor } from "../../service/author"
 export default {
@@ -173,7 +175,7 @@ export default {
     methods: {
         // 消息
         checkMSG: function () {
-            this.isLogin && getMsg().then((res) => {
+            getMsg().then((res) => {
                 this.pop = !!res.data.data.unread;
             });
         },
@@ -219,17 +221,19 @@ export default {
             });
         },
         checkSuperAuthor: function() {
-            this.isLogin && getSuperAuthor(this.user?.uid).then(res => {
+            getSuperAuthor(this.user?.uid).then(res => {
                 this.isSuperAuthor = res.data.data
             })
         },
 
         // 初始化
         init: function () {
-            this.checkMSG();
-            this.loadPanel();
-            this.loadAsset();
-            this.checkSuperAuthor();
+            if(this.isLogin){
+                this.checkMSG();
+                this.loadPanel();
+                this.loadAsset();
+                this.checkSuperAuthor();
+            }
         },
     },
     created: function () {

@@ -143,7 +143,7 @@ export default {
         .r(4px);
     }
     .pl(58px);
-    .mr(30px);
+    .mr(20px);
     .u-name {
         .fz(15px);
         .bold;
@@ -162,8 +162,8 @@ export default {
         .dbi;
         .fz(12px,1);
         font-style: normal;
-        background-color: @pink;
-        color: #fff;
+        border:1px solid @pink;
+        color: @pink;
         padding: 3px 10px;
         .r(2px);
         .mt(5px);
@@ -174,8 +174,8 @@ export default {
         .dbi;
         .fz(12px,1);
         font-style: normal;
-        background-color: @color-link;
-        color: #fff;
+        border:1px solid @color-link;
+        color:@color-link;
         padding: 3px 10px;
         .r(2px);
         .mt(5px);
