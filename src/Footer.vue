@@ -15,7 +15,7 @@
             <em>|</em>
             <a
                 class="u-doc"
-                href="https://www.jx3box.com/tool/?subtype=4"
+                href="https://www.jx3box.com/tool/#/?subtype=4"
                 target="_blank"
                 >帮助文档</a
             >
