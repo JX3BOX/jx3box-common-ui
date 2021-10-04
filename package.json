@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common-ui",
-    "version": "5.2.1",
+    "version": "5.2.2",
     "description": "JX3BOX UI",
     "main": "index.js",
     "scripts": {
@@ -30,8 +30,8 @@
         "last 2 versions"
     ],
     "dependencies": {
-        "@jx3box/jx3box-common": "^6.6.8",
-        "@jx3box/jx3box-data": "^1.6.5",
+        "@jx3box/jx3box-common": "^6.6.9",
+        "@jx3box/jx3box-data": "^1.6.6",
         "axios": "^0.19.2",
         "element-ui": "^2.13.2",
         "jquery": "^3.5.1",
