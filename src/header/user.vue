@@ -65,6 +65,12 @@
                         <li v-for="(item, i) in panel" :key="i">
                             <a :href="item.link">{{ item.label }}</a>
                         </li>
+                        <template v-if="isEditor">
+                            <hr />
+                            <li v-for="(item, i) in panel_admin" :key="i">
+                                <a :href="item.link">{{ item.label }}</a>
+                            </li>
+                        </template>
                         <hr />
                         <li>
                             <a :href="url.profile">设置</a>
@@ -89,15 +95,22 @@
 <script>
 import User from "@jx3box/jx3box-common/js/user";
 import { showDate } from "@jx3box/jx3box-common/js/moment";
-import { __Links, __Root, __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import {
+    __Links,
+    __Root,
+    __imgPath,
+} from "@jx3box/jx3box-common/data/jx3box.json";
 import panel from "@jx3box/jx3box-data/data/box/header_panel.json";
+import panel_admin from "@jx3box/jx3box-data/data/box/header_panel_admin.json";
 import { getMsg, getPanel } from "../../service/header";
-import { getSuperAuthor } from "../../service/author"
+import { getSuperAuthor } from "../../service/author";
 export default {
     props: [],
     data: function () {
         return {
             panel,
+            panel_admin,
+            isEditor : false,
 
             // 是否有消息
             pop: false,
@@ -105,7 +118,7 @@ export default {
             fold: true,
             // 登录信息
             user: User.getInfo(),
-            isLogin : User.isLogin(),
+            isLogin: User.isLogin(),
             // links
             url: {
                 msg: __Links.dashboard.msg,
@@ -128,8 +141,9 @@ export default {
 
             // 链接
             login_url: __Links.account.login + "?redirect=" + location.href,
-            register_url: __Links.account.register + "?redirect=" + location.href,
-            isSuperAuthor: false
+            register_url:
+                __Links.account.register + "?redirect=" + location.href,
+            isSuperAuthor: false,
         };
     },
     computed: {
@@ -168,8 +182,8 @@ export default {
                 return "";
             }
         },
-        super_author_icon: function() {
-            return __imgPath + 'image/user/' + 'superauthor.svg';
+        super_author_icon: function () {
+            return __imgPath + "image/user/" + "superauthor.svg";
         },
     },
     methods: {
@@ -220,15 +234,16 @@ export default {
                 this.asset = data;
             });
         },
-        checkSuperAuthor: function() {
-            getSuperAuthor(this.user?.uid).then(res => {
-                this.isSuperAuthor = res.data.data
-            })
+        checkSuperAuthor: function () {
+            getSuperAuthor(this.user?.uid).then((res) => {
+                this.isSuperAuthor = res.data.data;
+            });
         },
 
         // 初始化
         init: function () {
-            if(this.isLogin){
+            if (this.isLogin) {
+                this.isEditor = User.isEditor()
                 this.checkMSG();
                 this.loadPanel();
                 this.loadAsset();
