@@ -62,12 +62,12 @@
                             </a>
                         </li>
                         <hr />
-                        <li v-for="(item, i) in panel" :key="i">
+                        <li v-for="(item, i) in panel" :key="'panel-' + i">
                             <a :href="item.link">{{ item.label }}</a>
                         </li>
                         <template v-if="isEditor">
                             <hr />
-                            <li v-for="(item, i) in panel_admin" :key="i">
+                            <li v-for="(item, i) in panel_admin" :key="'admin-panel-' + i">
                                 <a :href="item.link">{{ item.label }}</a>
                             </li>
                         </template>
