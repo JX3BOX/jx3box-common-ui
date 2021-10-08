@@ -119,6 +119,8 @@ export default {
 @media screen and (max-width: @phone) {
     .w-userpop .el-dialog {
         .w(100%) !important;
+        min-width: 0;
+        margin-top: 0 !important;
     }
 }
 </style>
