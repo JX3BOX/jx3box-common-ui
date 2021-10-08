@@ -75,7 +75,7 @@ body {
 
     margin-right: 5px;
 }
-@media screen and (max-width: @ipad-y) {
+@media screen and (max-width: @phone) {
     .c-header-logo {
         padding-right: 0;
         .u-pic {
@@ -124,7 +124,7 @@ body {
         cursor: default;
     }
 }
-@media screen and (max-width:@ipad-y){
+@media screen and (max-width:@phone){
     .c-header-origin{
         .ml(10px);
         .mt(16px);
@@ -176,14 +176,15 @@ body {
 
     margin-right: 10px;
 }
-@media screen and (max-width: @ipad-y) {
-    // .c-header-search {
-    //     float: none;
-    //     width: auto;
+@media screen and (max-width: @phone) {
+    .c-header-search {
+        // float: none;
+        // width: auto;
 
-    //     margin-left: @logo-size + 20px;
-    //     margin-right: 140px;
-    // }
+        // margin-left: @logo-size + 20px;
+        // margin-right: 140px;
+        .none;
+    }
 }
 
 //菜单
@@ -250,7 +251,7 @@ body {
     }
     .mt(0px) !important;
 }
-@media screen and (max-width: @ipad-y) {
+@media screen and (max-width: @ipad) {
     .c-header-nav {
         display: none;
     }

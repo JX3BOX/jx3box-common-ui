@@ -94,11 +94,3 @@ export default {
 <style lang="less">
 @import "../assets/css/header.less";
 </style>
-
-<style scoped lang="less">
-@media screen and (max-width: @ipad-y) {
-    .c-header-search {
-        .none;
-    }
-}
-</style>
