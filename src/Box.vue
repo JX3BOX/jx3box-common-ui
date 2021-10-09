@@ -75,7 +75,7 @@ export default {
             );
         }
         getMenu('box').then((res) => {
-            this.data = res.data?.data?.val;
+            this.data = res.data?.data?.val || box;
         });
     },
     mounted: function () {
