@@ -1,0 +1,32 @@
+[
+    {
+        "label": "个人中心",
+        "link": "/dashboard",
+        "onlyAdmin":false
+    },
+    {
+        "label": "创作中心",
+        "link": "/publish",
+        "onlyAdmin":false
+    },
+    {
+        "label": "我的收藏",
+        "link": "/dashboard/#/fav",
+        "onlyAdmin":false
+    },
+    {
+        "label": "我的角色",
+        "link": "/team/role/manage",
+        "onlyAdmin":false
+    },
+    {
+        "label": "海报管理",
+        "link": "/admin",
+        "onlyAdmin":true
+    },
+    {
+        "label": "内容管理",
+        "link": "https://os.jx3box.com/admin",
+        "onlyAdmin":true
+    }
+]

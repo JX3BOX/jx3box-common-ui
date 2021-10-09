@@ -62,12 +62,8 @@
                             </a>
                         </li>
                         <hr />
-                        <li v-for="(item, i) in panel" :key="'panel-' + i">
-                            <a :href="item.link">{{ item.label }}</a>
-                        </li>
-                        <template v-if="isEditor">
-                            <hr />
-                            <li v-for="(item, i) in panel_admin" :key="'admin-panel-' + i">
+                        <template v-for="(item, i) in panel">
+                            <li :key="'panel-' + i" v-if="isEditor || !item.onlyAdmin">
                                 <a :href="item.link">{{ item.label }}</a>
                             </li>
                         </template>
@@ -100,16 +96,14 @@ import {
     __Root,
     __imgPath,
 } from "@jx3box/jx3box-common/data/jx3box.json";
-import panel from "@jx3box/jx3box-data/data/box/header_panel.json";
-import panel_admin from "@jx3box/jx3box-data/data/box/header_panel_admin.json";
-import { getMsg, getPanel } from "../../service/header";
+import panel from "../../assets/data/panel.json";
+import { getMsg, getMenu } from "../../service/header";
 import { getSuperAuthor } from "../../service/author";
 export default {
     props: [],
     data: function () {
         return {
             panel,
-            panel_admin,
             isEditor : false,
 
             // 是否有消息
@@ -206,8 +200,8 @@ export default {
             });
         },
         loadPanel: function () {
-            getPanel().then((res) => {
-                this.panel = res.data || panel;
+            getMenu('panel').then((res) => {
+                this.panel = res.data?.data?.val || panel;
             });
         },
         logout: function () {
