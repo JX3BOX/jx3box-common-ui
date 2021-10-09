@@ -6,13 +6,13 @@
         <!-- list -->
         <ul class="u-list">
             <li>
-                <a class="u-item" :href="indexLink">
+                <a class="u-item" href="/index">
                     <img class="u-pic" svg-inline :src="homeicon" />
                     <img class="u-pic-hover" svg-inline :src="homeicon" />
                     <span class="u-txt">首页</span>
                 </a>
             </li>
-            <li v-for="(item,i) in data" :key="i" :class="{'u-app-start':item.lf}" v-show="item.status">
+            <li v-for="(item,i) in data" :key="i" :class="{'u-app-start':item.lf}" v-show="item.status && matchedClient(item.client)">
                 <a class="u-item" :href="item.href" :target="item.href | getTarget">
                     <img class="u-pic" svg-inline :src="item.img | getBoxIcon" />
                     <img class="u-pic-hover" svg-inline :src="item.hover | getBoxIcon" />
@@ -32,10 +32,8 @@ import search from "./header/search.vue";
 import _ from "lodash";
 import Bus from "../service/bus";
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import box_data from "@jx3box/jx3box-data/data/box/box.json";
-import box_data_origin from "@jx3box/jx3box-data/data/box/box_origin.json";
-import { getBox } from "../service/header.js";
-const client = location.href.includes('origin') ? 'origin' : 'std'
+import box from "../assets/data/box.json";
+import { getMenu } from "../service/header.js";
 export default {
     name: "Box",
     props: ["overlayEnable"],
@@ -43,7 +41,8 @@ export default {
         return {
             status: false,
             isOverlay: false,
-            data : client =='origin' ? box_data_origin : box_data,
+            data : box,
+            client : location.href.includes('origin') ? 'origin' : 'std'
         };
     },
     computed: {
@@ -56,14 +55,14 @@ export default {
         originicon: function () {
             return __imgPath + "image/box/origin.svg";
         },
-        indexLink : function (){
-            return location.hostname.includes('origin') ? '/origin' : '/index'
-        },
     },
     methods: {
         closeBox: function () {
             Bus.$emit("toggleBox", false);
         },
+        matchedClient : function (client){
+            return client == 'all' ? true : client == this.client
+        }
     },
     created: function () {
         if (this.overlayEnable) {
@@ -75,8 +74,8 @@ export default {
                 }, 200)
             );
         }
-        getBox(this.client).then((res) => {
-            this.data = res.data;
+        getMenu('box').then((res) => {
+            this.data = res.data?.data?.val;
         });
     },
     mounted: function () {
@@ -93,7 +92,7 @@ export default {
     },
     filters: {
         getBoxIcon: function (val) {
-            return __imgPath + "image" + val;
+            return __imgPath + "image/box/" + val;
         },
         getTarget: function (val) {
             if (window.innerWidth < 768 || val.startsWith("/")) {

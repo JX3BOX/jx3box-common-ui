@@ -1,5 +1,5 @@
 import axios from "axios";
-import { $helper } from "@jx3box/jx3box-common/js/https.js";
+import { $helper,$cms } from "@jx3box/jx3box-common/js/https.js";
 import { __dataPath } from "@jx3box/jx3box-common/data/jx3box.json";
 
 function getMsg() {
@@ -21,4 +21,8 @@ function getBox(client = 'std') {
     return axios.get(__dataPath + "data/box/" + filename);
 }
 
-export { getMsg, getNav, getPanel, getBox };
+function getMenu(key){
+    return $cms().get(`/api/cms/config/menu/${key}`)
+}
+
+export { getMsg, getNav, getPanel, getBox,getMenu };
