@@ -21,6 +21,7 @@
                         >
                             <a
                                 :href="subitem.link"
+                                :target="isSelf(subitem.link)"
                                 v-if="
                                     subitem.status &&
                                     matchedClient(subitem.client)
