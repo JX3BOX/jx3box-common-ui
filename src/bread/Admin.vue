@@ -57,24 +57,27 @@
             ></el-switch>
 
             <el-divider content-position="left">封面海报</el-divider>
-            <el-upload
-                class="c-admin-upload el-upload--picture-card"
-                :action="uploadurl"
-                :with-credentials="true"
-                :show-file-list="false"
-                :on-success="uploadSuccess"
-                :on-error="uploadFail"
-            >
-                <img v-if="post_banner" :src="post_banner" />
-                <i class="el-icon-plus"></i>
-            </el-upload>
-            <el-button
-                class="c-admin-banner-btn"
-                icon="el-icon-circle-close"
-                size="mini"
-                plain
-                @click="removeBanner"
-            >移除海报</el-button>
+            <div class="c-admin-banner">
+                <el-upload
+                    class="c-admin-upload el-upload--picture-card"
+                    :action="uploadurl"
+                    :with-credentials="true"
+                    :show-file-list="false"
+                    :on-success="uploadSuccess"
+                    :on-error="uploadFail"
+                >
+                    <img v-if="post_banner" :src="post_banner" />
+                    <i class="el-icon-plus"></i>
+                </el-upload>
+                <el-input class="u-banner" v-model="post_banner" size="small">
+                    <span slot="prepend">海报地址</span>
+                    <span slot="append">
+                        <span class="u-btn" @click="removeBanner">
+                            <i class="el-icon-circle-close"></i> 移除海报
+                        </span>
+                    </span>
+                </el-input>
+            </div>
 
             <el-divider content-position="left">元信息</el-divider>
             <div class="c-admin-info">
@@ -108,7 +111,11 @@
 <script>
 import Bus from "../../service/bus";
 import { getRewrite } from "@jx3box/jx3box-common/js/utils";
-import { __cms, __postType,__visibleMap } from "@jx3box/jx3box-common/data/jx3box.json";
+import {
+    __cms,
+    __postType,
+    __visibleMap,
+} from "@jx3box/jx3box-common/data/jx3box.json";
 import { getSetting, postSetting } from "../../service/admin";
 import User from "@jx3box/jx3box-common/js/user";
 import { cms as marks } from "@jx3box/jx3box-common/data/mark.json";
@@ -135,8 +142,8 @@ export default {
                 draft: "草稿",
                 dustbin: "删除",
             },
-            visible : '0',
-            visible_options:__visibleMap,
+            visible: "0",
+            visible_options: __visibleMap,
 
             // 角标
             mark: [],
@@ -193,7 +200,10 @@ export default {
         },
         // 获取pid
         checkPostID: function () {
-            this.pid = getRewrite("pid") || (this.$route && this.$route.params && this.$route.params.id) || 0;
+            this.pid =
+                getRewrite("pid") ||
+                (this.$route && this.$route.params && this.$route.params.id) ||
+                0;
         },
         // 获取type
         checkChannel: function () {
@@ -238,7 +248,7 @@ export default {
                     sticky,
                     post_banner,
                     post_type,
-                    visible
+                    visible,
                 } = data;
                 this.pid = ID;
                 this.post_status = post_status;
@@ -263,21 +273,23 @@ export default {
         },
         // 推
         push: function () {
-            postSetting(this.data).then((res) => {
-                this.$message({
-                    message: "设置成功",
-                    type: "success",
+            postSetting(this.data)
+                .then((res) => {
+                    this.$message({
+                        message: "设置成功",
+                        type: "success",
+                    });
+                })
+                .finally(() => {
+                    this.pushing = false;
+                    this.close();
                 });
-            }).finally(() => {
-                this.pushing = false;
-                this.close();
-            })
         },
     },
-    watch : {
-        '$route.params.id' : function (id){
-            this.checkPostID()
-        }
+    watch: {
+        "$route.params.id": function (id) {
+            this.checkPostID();
+        },
     },
     created: function () {
         // 是否mount
@@ -293,7 +305,7 @@ export default {
         // 绑定监听
         Bus.$on("toggleAdminPanel", (data) => {
             this.dialog_visible = !this.dialog_visible;
-            this.checkPostID()
+            this.checkPostID();
             // 文章类型的加载
             if (this.pid && this.hasRight) {
                 this.pull();
