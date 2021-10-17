@@ -6,7 +6,7 @@
                 svg-inline
                 src="../assets/img/footer/china.svg"
             />
-            <a href="http://beian.miit.gov.cn/" class="u-beian" target="_blank"
+            <a href="https://beian.miit.gov.cn/" class="u-beian" target="_blank"
                 >湘ICP备2021002288号</a
             >
         </div>
@@ -15,7 +15,7 @@
             <em>|</em>
             <a
                 class="u-doc"
-                href="https://www.jx3box.com/tool/#/?subtype=4"
+                href="/tool/#/?subtype=4"
                 target="_blank"
                 >帮助文档</a
             >
