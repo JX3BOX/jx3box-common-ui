@@ -180,7 +180,7 @@ export default {
     },
     filters: {
         showTeamMedal: function (val) {
-            return __imgPath + "image/medals/team/" + val + "-20.gif";
+            return __imgPath + "image/medals/team/" + val + ".gif";
         },
         authorLink,
         weiboLink: function (val) {
