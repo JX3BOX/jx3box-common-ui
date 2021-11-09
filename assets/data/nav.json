@@ -96,9 +96,9 @@
         "parentKey": "fb"
     },
     {
-        "key": "battle_raid",
-        "link": "/battle",
-        "label": "战斗分析",
+        "key": "rank",
+        "link": "/rank",
+        "label": "秘境百强",
         "client": "all",
         "status": true,
         "parentKey": "fb"
