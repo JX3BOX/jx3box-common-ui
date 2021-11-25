@@ -87,7 +87,7 @@
                 <i class="el-icon-school"></i>
                 <span>所属团队</span>
             </div>
-            <a class="u-team" v-for="(item,i) in teams" :key="i" :href="item.team_id | teamLink">
+            <a class="u-team" v-for="(item,i) in teams" :key="i" :href="item.team_id | teamLink" target="_blank">
                 <img class="u-teamlogo" :src="item.team_logo | showTeamLogo" />
                 <span class="u-teamname">{{item.team_name}}@{{item.team_server}}</span>
             </a>
