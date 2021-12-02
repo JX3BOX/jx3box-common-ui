@@ -75,6 +75,9 @@ export default {
         },
         allowBoxcoin : function (){
             return this.postType && this.postId && this.userId
+        },
+        client : function (){
+            return location.href.includes('origin') ? 'origin' : 'std'
         }
     },
     watch: {
@@ -93,6 +96,7 @@ export default {
         submit: function () {
             rewardBoxcoin(this.postType, this.postId, this.userId, this.count, {
                 remark: this.remark,
+                client : this.client
             })
                 .then((res) => {
                     this.$message({
