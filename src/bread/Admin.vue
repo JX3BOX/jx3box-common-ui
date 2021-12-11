@@ -10,14 +10,16 @@
         v-if="hasRight"
     >
         <div class="c-admin-wrapper">
-            <el-divider content-position="left">状态变更</el-divider>
-            <el-radio-group v-model="post_status" size="small" class="c-admin-status">
-                <el-radio-button
-                    v-for="(option, key) in status_options"
-                    :label="key"
-                    :key="key"
-                >{{ option }}</el-radio-button>
-            </el-radio-group>
+            <template v-if="isAdmin">
+                <el-divider content-position="left">状态变更</el-divider>
+                <el-radio-group v-model="post_status" size="small" class="c-admin-status">
+                    <el-radio-button
+                        v-for="(option, key) in status_options"
+                        :label="key"
+                        :key="key"
+                    >{{ option }}</el-radio-button>
+                </el-radio-group>
+            </template>
 
             <el-divider content-position="left">可见性变更</el-divider>
             <el-radio-group v-model="visible" size="small" class="c-admin-status">
@@ -140,6 +142,7 @@ export default {
             status_options: {
                 publish: "默认",
                 draft: "草稿",
+                pending: "待审核",
                 dustbin: "删除",
             },
             visible: "0",
@@ -192,6 +195,9 @@ export default {
                 sticky: this.isSticky ? Date.now() : null,
             };
         },
+        isAdmin : function (){
+            return User.isAdmin()
+        }
     },
     methods: {
         // 是否有权限
