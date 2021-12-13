@@ -78,7 +78,7 @@
             </div>
             <div class="u-medals" v-if="medals && medals.length">
                 <span class="u-medal" v-for="(item, i) in medals" :key="i">
-                    <img :src="item.medal | showTeamMedal" :title="medal_map[item.medal]" />
+                    <img :src="item.medal | showMedalIcon" :title="item | showMedalDesc" />
                 </span>
             </div>
         </div>
@@ -179,8 +179,11 @@ export default {
         },
     },
     filters: {
-        showTeamMedal: function (val) {
-            return __imgPath + "image/medals/team/" + val + ".gif";
+        showMedalIcon: function (val) {
+            return __imgPath + "image/medals/user/" + val + ".gif";
+        },
+        showMedalDesc : function (item){
+            return item.medal_desc || medal_map[item.medal]
         },
         authorLink,
         weiboLink: function (val) {

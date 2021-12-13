@@ -4,7 +4,7 @@
             <span>
                 <i class="el-icon-notebook-1"></i> 该作品已被收录至作者的剑三小册
             </span>
-            <a @click.stop :href="id | collectionLink">《{{ title }}》</a>
+            <a @click.stop :href="id | collectionLink" target="_blank">《{{ title }}》</a>
         </div>
         <transition name="fade">
             <div class="w-collection-list" v-if="visible">
