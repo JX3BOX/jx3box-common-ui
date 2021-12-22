@@ -1,6 +1,6 @@
 <template>
     <nav class="c-header-nav" v-if="finalNav">
-        <div class="u-item-box" v-for="item in finalNav" :key="item.key">
+        <div class="u-item-box" v-for="item in finalNav" :key="'header-nav-' + item.key">
             <template
                 v-if="item.status && item.children && item.children.length"
             >

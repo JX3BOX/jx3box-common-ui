@@ -20,12 +20,12 @@
         "onlyAdmin":false
     },
     {
-        "label": "海报管理",
-        "link": "/admin",
+        "label": "全局设置",
+        "link": "/config",
         "onlyAdmin":true
     },
     {
-        "label": "内容管理",
+        "label": "后台管理",
         "link": "https://os.jx3box.com/admin",
         "onlyAdmin":true
     }

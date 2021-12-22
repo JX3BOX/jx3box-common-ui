@@ -20,7 +20,7 @@
         </LeftSidebar>
 
         <Main :withoutLeft="false" :withoutRight="false">
-            
+            <PostHeader :post="post"/>
             
             <Creators :postId="30432" style="margin-bottom:10px"/>
             <Collection :id="59" :defaultVisible="true"/>
@@ -105,6 +105,8 @@ import RightSideMsg from "./RightSideMsg.vue";
 import Footer from "./Footer.vue";
 import Bottom from "./Bottom.vue";
 
+import PostHeader from "./single/PostHeader.vue";
+
 import Thx from "./single/Thx.vue";
 import Collection from "./single/Collection.vue";
 import Creators from "./single/Creators.vue";
@@ -145,6 +147,8 @@ export default {
         Bottom,
         RightSidebar,
 
+        PostHeader,
+
         Thx,
         Collection,
         Creators,
@@ -182,6 +186,8 @@ export default {
             wikiPost: null,
             tag : '',
             visible : false,
+
+            post : ''
         };
     },
     created: function() {
@@ -191,6 +197,9 @@ export default {
                 if (res.code === 200) this.wikiPost = res.data;
             }
         );
+        axios.get('/api/cms/post/32035').then((res) => {
+            this.post = res.data.data
+        })
     },
     methods: {
         addUser : function (val){
@@ -199,3 +208,9 @@ export default {
     },
 };
 </script>
+
+<style lang="less">
+    body{
+        padding-top:0;
+    }
+</style>

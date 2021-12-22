@@ -6,8 +6,15 @@
                 <el-tooltip effect="dark" content="我的消息" placement="bottom">
                     <a class="u-msg" :href="url.msg">
                         <i class="u-icon u-icon-msg">
-                            <i class="u-pop" style="display: none;" v-show="pop"></i>
-                            <img svg-inline src="../../assets/img/header/msg.svg" />
+                            <i
+                                class="u-pop"
+                                style="display: none"
+                                v-show="pop"
+                            ></i>
+                            <img
+                                svg-inline
+                                src="../../assets/img/header/msg.svg"
+                            />
                         </i>
                     </a>
                 </el-tooltip>
@@ -17,14 +24,22 @@
             <div class="c-header-panel" id="c-header-panel">
                 <el-tooltip effect="dark" content="发布中心" placement="bottom">
                     <a class="u-post" :href="url.publish">
-                        <img class="u-add" svg-inline src="../../assets/img/header/add.svg" />
+                        <img
+                            class="u-add"
+                            svg-inline
+                            src="../../assets/img/header/add.svg"
+                        />
                     </a>
                 </el-tooltip>
             </div>
 
             <!-- user info -->
             <div class="c-header-info">
-                <div class="c-header-profile" id="c-header-profile" @click="showmenu">
+                <div
+                    class="c-header-profile"
+                    id="c-header-profile"
+                    @click="showmenu"
+                >
                     <img class="u-avatar" :src="user.avatar" />
                     <span class="u-dropdown"></span>
                     <ul class="u-menu" v-show="!fold">
@@ -47,14 +62,17 @@
                                 href="/vip/premium?from=header_usermenu"
                                 target="_blank"
                             >
-                                <i class="i-icon-vip" :class="{ on: isVIP || isPRO }">{{ vipType }}</i>
+                                <i
+                                    class="i-icon-vip"
+                                    :class="{ on: isVIP || isPRO }"
+                                    >{{ vipType }}</i
+                                >
                                 <span class="u-vip-type">
                                     <template v-if="isVIP || isPRO">
-                                        {{ vipTypeTxt
-                                        }}
-                                        <span
-                                            class="u-vip-left"
-                                        >({{ vipLeftDays }}天)</span>
+                                        {{ vipTypeTxt }}
+                                        <span class="u-vip-left"
+                                            >({{ vipLeftDays }}天)</span
+                                        >
                                     </template>
                                     <template v-else>升级账号类型</template>
                                 </span>
@@ -63,7 +81,10 @@
                         </li>
                         <hr />
                         <template v-for="(item, i) in panel">
-                            <li :key="'panel-' + i" v-if="isEditor || !item.onlyAdmin">
+                            <li
+                                :key="'panel-' + i"
+                                v-if="isEditor || !item.onlyAdmin"
+                            >
                                 <a :href="item.link">{{ item.label }}</a>
                             </li>
                         </template>
@@ -104,7 +125,7 @@ export default {
     data: function () {
         return {
             panel,
-            isEditor : false,
+            isEditor: false,
 
             // 是否有消息
             pop: false,
@@ -200,7 +221,7 @@ export default {
             });
         },
         loadPanel: function () {
-            getMenu('panel').then((res) => {
+            getMenu("panel").then((res) => {
                 this.panel = res.data?.data?.val || panel;
             });
         },
@@ -237,7 +258,7 @@ export default {
         // 初始化
         init: function () {
             if (this.isLogin) {
-                this.isEditor = User.isEditor()
+                this.isEditor = User.isEditor();
                 this.checkMSG();
                 this.loadPanel();
                 this.loadAsset();
