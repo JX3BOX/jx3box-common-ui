@@ -1,18 +1,12 @@
 <template>
     <div class="w-collection" v-if="list && list.length">
         <div class="w-collection-title" @click="handleShow" :class="{ on: visible }">
-            <span>
-                <i class="el-icon-notebook-1"></i> 该作品已被收录至作者的剑三小册
-            </span>
+            <span> <i class="el-icon-notebook-1"></i> 该作品已被收录至作者的剑三小册 </span>
             <a @click.stop :href="id | collectionLink" target="_blank">《{{ title }}》</a>
         </div>
         <transition name="fade">
             <div class="w-collection-list" v-if="visible">
-                <ol
-                    v-if="list && list.length"
-                    class="u-list"
-                    :style="{ display: visible ? 'block' : 'none' }"
-                >
+                <ol v-if="list && list.length" class="u-list" :style="{ display: visible ? 'block' : 'none' }">
                     <li v-for="(item, i) in list" :key="i" class="u-item">
                         <a v-if="item" :href="item | showLink" target="_blank">
                             <!-- <i class="el-icon-link"></i> -->
@@ -30,10 +24,10 @@ import { getLink } from "@jx3box/jx3box-common/js/utils";
 import { getCollection } from "../../service/helper";
 export default {
     name: "Collection",
-    props: ["id",'defaultVisible'],
+    props: ["id", "defaultVisible"],
     inject: [],
     components: {},
-    data: function () {
+    data: function() {
         return {
             visible: this.defaultVisible || false,
             data: {
@@ -43,39 +37,46 @@ export default {
         };
     },
     computed: {
-        title: function () {
+        title: function() {
             return this.data?.title;
         },
-        list: function () {
+        list: function() {
             return this.data?.posts;
         },
     },
     watch: {
         id: {
             immediate: true,
-            handler: function (val) {
-                !!~~val && this.loadData();
+            handler: function(val) {
+                if (!!~~val) {
+                    this.loadData();
+                } else {
+                    this.data = {
+                        title: "",
+                        posts: [],
+                    };
+                }
             },
         },
-        defaultVisible : function (val){
-            this.visible = val
-        }
+        defaultVisible: function(val) {
+            this.visible = val;
+        },
     },
     methods: {
-        handleShow: function () {
+        handleShow: function() {
             this.visible = !this.visible;
         },
-        loadData: function () {
+        loadData: function() {
             getCollection(this.id).then((res) => {
                 this.data = res.data?.data?.collection;
             });
         },
     },
     filters: {
-        collectionLink: function (id) {
+        collectionLink: function(id) {
             return getLink("collection", id);
         },
-        showLink: function (item) {
+        showLink: function(item) {
             if (item.type == "custom") {
                 return item.url;
             } else {
@@ -83,12 +84,12 @@ export default {
             }
         },
     },
-    created: function () {},
-    mounted: function () {},
+    created: function() {},
+    mounted: function() {},
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .w-collection {
     &-title {
         cursor: pointer;
@@ -126,7 +127,7 @@ export default {
 
     counter-reset: collection;
     .u-item {
-        .fz(13px,32px);
+        .fz(13px, 32px);
         border-bottom: 1px solid #eee;
         transition: 0.15s ease-in-out;
         .nobreak;
@@ -143,8 +144,8 @@ export default {
                 color: @pink;
             }
         }
-        &:last-child{
-            border-bottom:none;
+        &:last-child {
+            border-bottom: none;
         }
     }
 

@@ -1,14 +1,7 @@
 <template>
     <div class="container-page">
         <Header></Header>
-        <Breadcrumb
-            name="频道名称"
-            slug="slug"
-            root="/slug"
-            :publishEnable="true"
-            :feedbackEnable="true"
-            :adminEnable="true"
-        >
+        <Breadcrumb name="频道名称" slug="slug" root="/slug" :publishEnable="true" :feedbackEnable="true" :adminEnable="true">
             <img slot="logo" svg-inline src="../assets/img/jx3.svg" />
             bread info
         </Breadcrumb>
@@ -20,64 +13,74 @@
         </LeftSidebar>
 
         <Main :withoutLeft="false" :withoutRight="false">
-            <PostHeader :post="post"/>
-            
-            <Creators :postId="30432" style="margin-bottom:10px"/>
-            <Collection :id="59" :defaultVisible="true"/>
-            <UserPop title="添加用户" v-model="visible" @confirm="addUser"/>
-            <el-button @click="visible = true">用户POP</el-button>
+            <el-tabs v-model="tab" type="card">
+                <el-tab-pane label="CMS作品" name="post">
+                    <el-radio-group v-model="post_id">
+                        <el-radio label="35605">测试Markdown</el-radio>
+                        <el-radio label="32035">仅小册</el-radio>
+                        <el-radio label="30017">仅联合创作者</el-radio>
+                        <el-radio label="30582">小册和联合创作者</el-radio>
+                        <el-radio label="31129">无小册和联合创作者</el-radio>
+                    </el-radio-group>
+                    <singlebox :post="post" />
+                </el-tab-pane>
+                <el-tab-pane label="通用组件" name="widget">
+                    <PostHeader :post="post" />
+                    <Creators :postId="30432" style="margin-bottom:10px" />
+                    <Collection :id="59" :defaultVisible="true" />
+                    <UserPop title="添加用户" v-model="visible" @confirm="addUser" />
+                    <el-button @click="visible = true">用户POP</el-button>
 
-            <Thx :postId="23865" postType="bbs" :userId="7" :adminBoxcoinEnable="true" :userBoxcoinEnable="true"/>
+                    <Thx :postId="23865" postType="bbs" :userId="7" :adminBoxcoinEnable="true" :userBoxcoinEnable="true" />
 
-            <hr />
+                    <hr />
 
-            <Like mode="heart" :count="100" :showCount="true" />
-            <Down :count="100" :showCount="true" />
-            <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39" />
-            <Fav post-id="90" post-type="jx3dat" />
-            <Feed post-id="90" post-type="jx3dat" />
-            <Print title="传入标题" />
-            <QRcode />
-            <Sharing />
+                    <Like mode="heart" :count="100" :showCount="true" />
+                    <Down :count="100" :showCount="true" />
+                    <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39" />
+                    <Fav post-id="90" post-type="jx3dat" />
+                    <Feed post-id="90" post-type="jx3dat" />
+                    <Print title="传入标题" />
+                    <QRcode />
+                    <Sharing />
 
-            <hr />
+                    <hr />
 
-            <markBy />
-            <menuBy :data="['test1', 'test2']" />
-            <orderBy />
-            <tagBy :data="['PVE', 'PVX']" :type="tag"/>
-            <clientBy type=""/>
-            <zlpBy/>
+                    <markBy />
+                    <menuBy :data="['test1', 'test2']" />
+                    <orderBy />
+                    <tagBy :data="['PVE', 'PVX']" :type="tag" />
+                    <clientBy type="" />
+                    <zlpBy />
+                </el-tab-pane>
+                <el-tab-pane label="百科组件" name="wiki"
+                    ><WikiPanel :wiki-post="wikiPost">
+                        <template slot="head-title">
+                            <i class="el-icon-location-information"></i>
+                            <span class="u-title">通识正文</span>
+                        </template>
+                        <template slot="head-actions">
+                            <a class="el-button el-button--primary u-publish">
+                                <i class="el-icon-edit"></i>
+                                <span>完善百科通识</span>
+                            </a>
+                            <span class="u-more">查看更多</span>
+                        </template>
+                        <template slot="body">正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容</template>
+                    </WikiPanel>
+                    <hr />
 
-            <hr />
+                    <WikiRevisions type="achievement" source-id="9096"/>
+                    <hr />
 
-            <WikiPanel :wiki-post="wikiPost">
-                <template slot="head-title">
-                    <i class="el-icon-location-information"></i>
-                    <span class="u-title">通识正文</span>
-                </template>
-                <template slot="head-actions">
-                    <a class="el-button el-button--primary u-publish">
-                        <i class="el-icon-edit"></i>
-                        <span>完善百科通识</span>
-                    </a>
-                    <span class="u-more">查看更多</span>
-                </template>
-                <template slot="body"
-                    >正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容</template
-                >
-            </WikiPanel>
-            <hr />
-
-            <WikiRevisions type="achievement" source-id="9096" />
-            <hr>
-
-            <WikiComments type="achievement" source-id="9096" />
-            <hr>
+                    <WikiComments type="achievement" source-id="9096"/>
+                    <hr
+                /></el-tab-pane>
+            </el-tabs>
 
             <RightSidebar>
-                <RightSideMsg>Hello</RightSideMsg >
-                <PostCollection :id="59"/>
+                <RightSideMsg>Hello</RightSideMsg>
+                <PostCollection :id="59" />
             </RightSidebar>
 
             <Footer></Footer>
@@ -102,6 +105,7 @@ import RightSideMsg from "./RightSideMsg.vue";
 import Footer from "./Footer.vue";
 import Bottom from "./Bottom.vue";
 
+import singlebox from "./single/cms-single.vue";
 import PostHeader from "./single/PostHeader.vue";
 import PostCollection from "./single/PostCollection.vue";
 
@@ -145,6 +149,7 @@ export default {
         Bottom,
         RightSidebar,
 
+        singlebox,
         PostHeader,
         PostCollection,
 
@@ -177,39 +182,51 @@ export default {
         WikiRevisions,
         WikiComments,
 
-        UserPop
+        UserPop,
     },
     data: function() {
         return {
+            tab: "post",
+
+            post: "",
+            post_id: "35605",
+
             author: "",
             wikiPost: null,
-            tag : '',
-            visible : false,
-
-            post : ''
+            tag: "",
+            visible: false,
         };
     },
     created: function() {
-        WikiPost.view(11042).then(
-            (res) => {
-                res = res.data;
-                if (res.code === 200) this.wikiPost = res.data;
-            }
-        );
-        axios.get('/api/cms/post/32035').then((res) => {
-            this.post = res.data.data
-        })
+        WikiPost.view(11042).then((res) => {
+            res = res.data;
+            if (res.code === 200) this.wikiPost = res.data;
+        });
     },
     methods: {
-        addUser : function (val){
-            console.log(val)
-        }
+        addUser: function(val) {
+            console.log(val);
+        },
+        loadPost: function() {
+            axios.get(`/api/cms/post/${this.post_id}`).then((res) => {
+                this.post = res.data.data;
+                this.$forceUpdate()
+            });
+        },
+    },
+    watch: {
+        post_id: {
+            immediate: true,
+            handler: function(val) {
+                this.loadPost();
+            },
+        },
     },
 };
 </script>
 
 <style lang="less">
-    body{
-        padding-top:0;
-    }
+body {
+    padding-top: 0;
+}
 </style>
