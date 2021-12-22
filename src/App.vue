@@ -76,11 +76,8 @@
             <hr>
 
             <RightSidebar>
-                <div style="height:1200px;">
-                    <RightSideMsg>Test</RightSideMsg>
-
-                    <Author :author="author" uid="5" />
-                </div>
+                <RightSideMsg>Hello</RightSideMsg >
+                <PostCollection :id="59"/>
             </RightSidebar>
 
             <Footer></Footer>
@@ -106,6 +103,7 @@ import Footer from "./Footer.vue";
 import Bottom from "./Bottom.vue";
 
 import PostHeader from "./single/PostHeader.vue";
+import PostCollection from "./single/PostCollection.vue";
 
 import Thx from "./single/Thx.vue";
 import Collection from "./single/Collection.vue";
@@ -148,6 +146,7 @@ export default {
         RightSidebar,
 
         PostHeader,
+        PostCollection,
 
         Thx,
         Collection,
