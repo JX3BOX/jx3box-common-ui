@@ -18,9 +18,9 @@
         <div class="m-single-post" v-if="visible">
             <el-divider content-position="left">JX3BOX</el-divider>
             <div class="m-single-content">
+                <slot></slot>
                 <ArticleMarkdown v-if="isMarkdown" :content="post_content" />
                 <Article v-else :content="post_content" />
-                <slot></slot>
             </div>
         </div>
         <div class="m-single-null" v-else>
@@ -29,10 +29,11 @@
 
         <!-- 文章后 -->
         <div class="m-single-append">
-            <!-- 打赏 -->
-            <Thx class="m-single-thx" :postId="id" :postType="post_type" :userId="author_id" :adminBoxcoinEnable="true" :userBoxcoinEnable="true"/>
 
             <slot name="single-append"></slot>
+
+            <!-- 打赏 -->
+            <Thx class="m-single-thx" :postId="id" :postType="post_type" :userId="author_id" :adminBoxcoinEnable="true" :userBoxcoinEnable="true"/>
 
             <!-- 评论 -->
             <div class="m-single-comment">
