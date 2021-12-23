@@ -15,8 +15,8 @@
                     ></a>
                     <el-dropdown-menu slot="dropdown" class="c-header-menu">
                         <el-dropdown-item
-                            v-for="subitem in item.children"
-                            :key="'header-nav-drop-' + subitem.key"
+                            v-for="(subitem, subIndex) in item.children"
+                            :key="'header-nav-drop-' + subitem.key + subIndex"
                             class="u-menu-item"
                         >
                             <a
