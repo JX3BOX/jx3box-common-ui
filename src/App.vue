@@ -8,7 +8,6 @@
 
         <LeftSidebar :open="true">
             <LeftSideToggle :mobileOnly="true" />
-            <div id="directory"></div>
             <Author :author="author" :uid="8" />
         </LeftSidebar>
 
@@ -16,13 +15,13 @@
             <el-tabs v-model="tab" type="card">
                 <el-tab-pane label="CMS作品" name="post">
                     <el-radio-group v-model="post_id">
-                        <el-radio label="35605">测试Markdown</el-radio>
+                        <el-radio label="35605">Markdown</el-radio>
                         <el-radio label="32035">仅小册</el-radio>
                         <el-radio label="30017">仅联合创作者</el-radio>
                         <el-radio label="30582">小册和联合创作者</el-radio>
                         <el-radio label="31129">无小册和联合创作者</el-radio>
                     </el-radio-group>
-                    <singlebox :post="post" />
+                    <singlebox :post="post" @extendUpdate="updateExtend"/>
                 </el-tab-pane>
                 <el-tab-pane label="通用组件" name="widget">
                     <PostHeader :post="post" />
@@ -80,6 +79,7 @@
 
             <RightSidebar>
                 <RightSideMsg>Hello</RightSideMsg>
+                <div id="directory"></div>
                 <PostCollection :id="59" />
             </RightSidebar>
 
@@ -213,6 +213,9 @@ export default {
                 this.$forceUpdate()
             });
         },
+        updateExtend : function (val){
+            console.log(val)
+        }
     },
     watch: {
         post_id: {

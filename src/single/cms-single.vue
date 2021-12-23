@@ -10,7 +10,7 @@
             <!-- 联合创作者 -->
             <Creators class="m-single-creators" :postId="id" :postType="post_type" />
             <!-- 文集小册 -->
-            <Collection class="m-single-collection" :id="collection_id" :defaultVisible="collection_collapse" />
+            <Collection class="m-single-collection" :id="collection_id" :defaultVisible="collection_collapse" @collectionUpdate="updateCollection"/>
             <slot name="single-prepend"></slot>
         </div>
 
@@ -19,8 +19,8 @@
             <el-divider content-position="left">JX3BOX</el-divider>
             <div class="m-single-content">
                 <slot></slot>
-                <ArticleMarkdown v-if="isMarkdown" :content="post_content" />
-                <Article v-else :content="post_content" />
+                <ArticleMarkdown v-if="isMarkdown" :content="post_content" @directoryRendered="updateDirectory"/>
+                <Article v-else :content="post_content" @directoryRendered="updateDirectory"/>
             </div>
         </div>
         <div class="m-single-null" v-else>
@@ -73,6 +73,8 @@ export default {
     props: ["post", "stat"],
     data: function() {
         return {
+            collection_data : '',
+            directory : false
         };
     },
     computed: {
@@ -111,8 +113,31 @@ export default {
         },
         allow_comment : function (){
             return !this.post?.comment
+        },
+        extend_data : function (){
+            return {
+                collection_data : this.collection_data,
+                directory : this.directory
+            }
         }
     },
+    methods : {
+        updateCollection : function (val){
+            this.collection_data = val
+        },
+        updateDirectory : function (val){
+            this.directory = val
+        }
+    },
+    watch : {
+        extend_data : {
+            deep : true,
+            immediate : true,
+            handler : function (val){
+                this.$emit('extendUpdate',val)
+            }
+        }
+    }
 };
 </script>
 

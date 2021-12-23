@@ -31,7 +31,7 @@ export default {
     },
     computed: {
         list: function() {
-            return this.data?.posts || this.store?.posts;
+            return this.store?.posts || this.data?.posts;
         },
     },
     watch: {

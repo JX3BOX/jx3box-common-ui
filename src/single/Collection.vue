@@ -69,6 +69,7 @@ export default {
         loadData: function() {
             getCollection(this.id).then((res) => {
                 this.data = res.data?.data?.collection;
+                this.$emit('collectionUpdate',this.data)
             });
         },
     },
