@@ -105,6 +105,7 @@ import RightSideMsg from "./RightSideMsg.vue";
 import Footer from "./Footer.vue";
 import Bottom from "./Bottom.vue";
 
+// import cmsList from "./list/cms-list.vue";
 import singlebox from "./single/cms-single.vue";
 import PostHeader from "./single/PostHeader.vue";
 import PostCollection from "./single/PostCollection.vue";
@@ -149,6 +150,7 @@ export default {
         Bottom,
         RightSidebar,
 
+        // cmsList,
         singlebox,
         PostHeader,
         PostCollection,
