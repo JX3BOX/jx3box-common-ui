@@ -12,7 +12,7 @@
                     <span class="u-txt">首页</span>
                 </a>
             </li>
-            <li v-for="(item,i) in data" :key="i" :class="{'u-app-start':item.lf}" v-show="item.status && matchedClient(item.client)">
+            <li v-for="(item,i) in data" :key="i" :class="{'u-app-start':item.lf}">
                 <a class="u-item" :href="item.href" :target="item.href | getTarget">
                     <img class="u-pic" svg-inline :src="item.img | getBoxIcon" />
                     <img class="u-pic-hover" svg-inline :src="item.hover | getBoxIcon" />
@@ -55,6 +55,11 @@ export default {
         originicon: function () {
             return __imgPath + "image/box/origin.svg";
         },
+        list : function (){
+            return this.data.map((item,i) => {
+                return item.status && item.client == this.client
+            })
+        }
     },
     methods: {
         closeBox: function () {
