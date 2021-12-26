@@ -52,8 +52,20 @@ export default {
             boxcoin_enable : 0
         };
     },
-    computed: {},
-    watch: {},
+    computed: {
+        post_keys : function (){
+            return [this.postId,this.postType]
+        }
+    },
+    watch: {
+        post_keys : {
+            immediate : true,
+            deep:true,
+            handler : function (){
+                this.postType && !!~~this.postId && this.loadBoxcoinConfig()
+            }
+        }
+    },
     methods: {
         loadBoxcoinConfig : function (){
             User.isLogin() && getPostBoxcoinConfig(this.postType).then((res) => {
@@ -80,15 +92,9 @@ export default {
                 },
             }
         },
-        init : function (){
-            this.loadBoxcoinConfig()
-        }
     },
     filters: {},
     created: function () {},
-    mounted: function () {
-        this.init()
-    },
 };
 </script>
 

@@ -70,7 +70,7 @@ export default {
         ArticleMarkdown,
         Comment,
     },
-    props: ["post", "stat",'postType'],
+    props: ["post", "stat"],
     data: function() {
         return {
             collection_data : '',
@@ -82,7 +82,7 @@ export default {
             return ~~this.post?.ID || 0;
         },
         post_type: function() {
-            return this.postType || this.post?.post_type;
+            return this.post?.post_type;
         },
         author_id : function (){
             return this.post?.post_author  

@@ -73,6 +73,9 @@ export default {
         };
     },
     computed: {
+        post_keys : function (){
+            return [this.postType,this.postId]
+        },
         params: function () {
             return {
                 pageSize: this.per,
@@ -81,6 +84,13 @@ export default {
         },
     },
     watch: {
+        post_keys : {
+            immediate : true,
+            deep : true,
+            handler : function (){
+                this.postType && !!~~this.postId && this.loadData();
+            }
+        },
         params: {
             deep: true,
             handler: function () {
@@ -99,9 +109,6 @@ export default {
         }
     },
     methods: {
-        init: function () {
-            this.loadData();
-        },
         loadData: function () {
             getPostBoxcoinRecords(this.postType, this.postId, this.params).then(
                 (res) => {
@@ -137,10 +144,6 @@ export default {
         showAvatar: function (val) {
             return showAvatar(val, 24);
         },
-    },
-    created: function () {},
-    mounted: function () {
-        this.init();
     },
 };
 </script>
