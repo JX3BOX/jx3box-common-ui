@@ -12,11 +12,11 @@
                     <span class="u-txt">首页</span>
                 </a>
             </li>
-            <li v-for="(item,i) in data" :key="i" :class="{'u-app-start':item.lf}">
+            <li v-for="(item,i) in list" :key="i" :class="{'u-app-start':item.lf}">
                 <a class="u-item" :href="item.href" :target="item.href | getTarget">
-                    <img class="u-pic" svg-inline :src="item.img | getBoxIcon" />
-                    <img class="u-pic-hover" svg-inline :src="item.hover | getBoxIcon" />
-                    <span class="u-txt">{{item.name}}</span>
+                    <img class="u-pic" :src="item.img | getBoxIcon" />
+                    <!-- <img class="u-pic-hover" svg-inline :src="item.hover | getBoxIcon" /> -->
+                    <span class="u-txt">{{item.abbr}}</span>
                 </a>
             </li>
         </ul>
@@ -56,8 +56,8 @@ export default {
             return __imgPath + "image/box/origin.svg";
         },
         list : function (){
-            return this.data.map((item,i) => {
-                return item.status && item.client == this.client
+            return this.data.filter((item,i) => {
+                return item.status && (item.client == this.client || item.client == 'all')
             })
         }
     },
@@ -100,7 +100,7 @@ export default {
             return __imgPath + "image/box/" + val;
         },
         getTarget: function (val) {
-            if (window.innerWidth < 768 || val.startsWith("/")) {
+            if (window.innerWidth < 768 || val?.startsWith("/")) {
                 return "_self";
             } else {
                 return "_blank";
