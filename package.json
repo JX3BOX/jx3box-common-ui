@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common-ui",
-    "version": "5.5.3",
+    "version": "5.5.4",
     "description": "JX3BOX UI",
     "main": "index.js",
     "scripts": {
@@ -31,9 +31,9 @@
     ],
     "dependencies": {
         "@jx3box/jx3box-comment-ui": "^1.6.6",
-        "@jx3box/jx3box-common": "^6.7.8",
+        "@jx3box/jx3box-common": "^6.8.2",
         "@jx3box/jx3box-data": "^1.8.3",
-        "@jx3box/jx3box-editor": "^1.1.7",
+        "@jx3box/jx3box-editor": "^1.1.9",
         "axios": "^0.19.2",
         "element-ui": "^2.13.2",
         "jquery": "^3.5.1",
