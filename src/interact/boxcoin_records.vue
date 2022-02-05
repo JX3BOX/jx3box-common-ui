@@ -22,10 +22,10 @@
                     </span>
                     <a
                         class="u-meta u-user"
-                        :href="item.operate_user_id | authorLink"
+                        :href="authorLink(item.operate_user_id)"
                         target="_blank"
                     >
-                        <img class="u-user-avatar" :src="item.ext_operate_user_info.avatar | showAvatar" alt />
+                        <img class="u-user-avatar" :src="showAvatar(item.ext_operate_user_info.avatar)" alt />
                         <span>{{item.ext_operate_user_info.display_name}}</span>
                     </a>
                     <span class="u-meta u-count">
@@ -33,7 +33,7 @@
                         <b>{{item.count}}</b>
                     </span>
                     <span class="u-meta u-remark">{{item.remark}}</span>
-                    <time class="u-meta u-time">{{item.created_at | showTime}}</time>
+                    <time class="u-meta u-time">{{showTime(item.created_at)}}</time>
                     <span class="u-delete" v-if="isSuperAdmin && !item.is_user_gift" @click="recovery(item,i)">
                         <i class="el-icon-delete"></i>撤销
                     </span>
@@ -137,8 +137,6 @@ export default {
                 },
             });
         },
-    },
-    filters: {
         authorLink,
         showTime,
         showAvatar: function (val) {

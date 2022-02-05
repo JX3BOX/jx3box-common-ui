@@ -4,10 +4,10 @@
         <a
             class="w-creators-super w-creators-item"
             v-if="super_author"
-            :href="super_author.ID | authorLink"
+            :href="authorLink(super_author.ID)"
             target="_blank"
         >
-            <img class="u-avatar" :src="super_author.user_avatar | showAvatar" />
+            <img class="u-avatar" :src="showAvatar(super_author.user_avatar)" />
             <span class="u-name">{{super_author.display_name}}</span>
             <i class="u-up">UP</i>
         </a>
@@ -16,13 +16,13 @@
                 class="w-creators-author w-creators-item"
                 v-for="(item,i) in other_authors"
                 :key="i"
-                :href="item.post_author_info.ID | authorLink"
+                :href="authorLink(item.post_author_info.ID)"
                 target="_blank"
                 v-show="item.status"
             >
-                <img class="u-avatar" :src="item.post_author_info.user_avatar | showAvatar" />
+                <img class="u-avatar" :src="showAvatar(item.post_author_info.user_avatar)" />
                 <span class="u-name">{{item.post_author_info.display_name}}</span>
-                <i class="u-label">{{item.label | formatLabel}}</i>
+                <i class="u-label">{{formatLabel(item.label)}}</i>
             </a>
         </div>
         <a class="w-creators-edit" :href="editLink" v-if="isCreator">
@@ -86,8 +86,6 @@ export default {
                 this.other_authors = res.data?.data.other_authors;
             });
         },
-    },
-    filters: {
         showAvatar: function (val) {
             return showAvatar(val, 48);
         },

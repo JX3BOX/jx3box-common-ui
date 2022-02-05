@@ -34,7 +34,7 @@
             <!-- 客户端 -->
             <div class="u-meta u-sub-block">
                 <em class="u-label">适用客户端</em>
-                <span class="u-value u-client" :class="client">{{ client | showClientLabel }}</span>
+                <span class="u-value u-client" :class="client">{{ showClientLabel(client) }}</span>
             </div>
 
             <!-- 发布日期 -->
@@ -121,13 +121,12 @@ export default {
             return this.post?.client || "std";
         },
     },
-    methods: {},
-    mounted: function() {},
-    filters: {
+    methods: {
         showClientLabel: function(val) {
             return client_map[val];
         },
     },
+    mounted: function() {},
 };
 </script>
 

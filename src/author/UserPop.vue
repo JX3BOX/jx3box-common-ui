@@ -13,7 +13,7 @@
             <el-input v-model.number="uid" placeholder="请输入UID（数字）"></el-input>
         </div>
         <div class="u-preview">
-            <img class="u-avatar" :src="userdata.user_avatar | showAvatar" />
+            <img class="u-avatar" :src="showAvatar(userdata.user_avatar)" />
             <span class="u-name">{{ userdata.display_name || "-" }}</span>
         </div>
         <span slot="footer" class="dialog-footer">
@@ -66,11 +66,6 @@ export default {
             this.$emit("switchUserPop", newval);
         },
     },
-    filters: {
-        showAvatar: function (val) {
-            return showAvatar(val, "l");
-        },
-    },
     computed: {},
     methods: {
         confirm: function () {
@@ -82,6 +77,9 @@ export default {
                     confirmButtonText: "确定",
                 });
             }
+        },
+        showAvatar: function (val) {
+            return showAvatar(val, "l");
         },
     },
     mounted: function () {},

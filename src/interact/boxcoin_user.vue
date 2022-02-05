@@ -117,7 +117,6 @@ export default {
         },
         init: function () {},
     },
-    filters: {},
     created: function () {},
     mounted: function () {},
 };

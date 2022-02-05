@@ -4,7 +4,7 @@
         <ul class="u-list">
             <li v-for="(item, i) in list" :key="i">
                 <el-tooltip class="item" effect="dark" :content="item.title" placement="left">
-                    <a :href="item | showLink" target="_blank">
+                    <a :href="showLink(item)" target="_blank">
                         <i class="el-icon-link"></i>
                         {{ item.title }}
                     </a>
@@ -48,8 +48,6 @@ export default {
                 this.data = res.data?.data?.collection;
             });
         },
-    },
-    filters: {
         showLink: function(item) {
             if (item.type == "custom") {
                 return item.url;

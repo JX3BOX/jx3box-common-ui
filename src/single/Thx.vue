@@ -93,7 +93,6 @@ export default {
             }
         },
     },
-    filters: {},
     created: function () {},
 };
 </script>

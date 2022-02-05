@@ -2,13 +2,13 @@
     <div class="w-collection" v-if="list && list.length">
         <div class="w-collection-title" @click="handleShow" :class="{ on: visible }">
             <span> <i class="el-icon-notebook-1"></i> 该作品已被收录至作者的剑三小册 </span>
-            <a @click.stop :href="id | collectionLink" target="_blank">《{{ title }}》</a>
+            <a @click.stop :href="collectionLink(id)" target="_blank">《{{ title }}》</a>
         </div>
         <transition name="fade">
             <div class="w-collection-list" v-if="visible">
                 <ol v-if="list && list.length" class="u-list" :style="{ display: visible ? 'block' : 'none' }">
                     <li v-for="(item, i) in list" :key="i" class="u-item">
-                        <a v-if="item" :href="item | showLink" target="_blank">
+                        <a v-if="item" :href="showLink(item)" target="_blank">
                             <!-- <i class="el-icon-link"></i> -->
                             {{ item.title }}
                         </a>
@@ -72,8 +72,6 @@ export default {
                 this.$emit('collectionUpdate',this.data)
             });
         },
-    },
-    filters: {
         collectionLink: function(id) {
             return getLink("collection", id);
         },

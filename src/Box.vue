@@ -13,8 +13,8 @@
                 </a>
             </li>
             <li v-for="(item,i) in list" :key="i" :class="{'u-app-start':item.lf}">
-                <a class="u-item" :href="item.href" :target="item.href | getTarget">
-                    <img class="u-pic" :src="item.img | getBoxIcon" />
+                <a class="u-item" :href="item.href" :target="getTarget(item.href)">
+                    <img class="u-pic" :src="getBoxIcon(item.img)" />
                     <!-- <img class="u-pic-hover" svg-inline :src="item.hover | getBoxIcon" /> -->
                     <span class="u-txt">{{item.abbr}}</span>
                 </a>
@@ -67,7 +67,17 @@ export default {
         },
         matchedClient : function (client){
             return client == 'all' ? true : client == this.client
-        }
+        },
+        getBoxIcon: function (val) {
+            return __imgPath + "image/box/" + val;
+        },
+        getTarget: function (val) {
+            if (window.innerWidth < 768 || val?.startsWith("/")) {
+                return "_self";
+            } else {
+                return "_blank";
+            }
+        },
     },
     created: function () {
         if (this.overlayEnable) {
@@ -94,18 +104,6 @@ export default {
         document.addEventListener("click", function () {
             Bus.$emit("toggleBox", false);
         });
-    },
-    filters: {
-        getBoxIcon: function (val) {
-            return __imgPath + "image/box/" + val;
-        },
-        getTarget: function (val) {
-            if (window.innerWidth < 768 || val?.startsWith("/")) {
-                return "_self";
-            } else {
-                return "_blank";
-            }
-        },
     },
     components: {
         "header-search": search,

@@ -8,7 +8,7 @@
                 :size="68"
                 :frame="data.user_avatar_frame"
             />
-            <a class="u-name" :href="id | authorLink">
+            <a class="u-name" :href="authorLink(id)">
                 <span>{{ data.display_name }}</span>
             </a>
             <el-tooltip
@@ -39,7 +39,7 @@
             <a
                 v-if="data.weibo_name"
                 class="u-weibo"
-                :href="data.weibo_id | weiboLink"
+                :href="weiboLink(data.weibo_id)"
                 target="_blank"
             >
                 <img svg-inline src="../assets/img/author/weibo.svg" />
@@ -48,7 +48,7 @@
             <a
                 v-if="data.github_name"
                 class="u-github"
-                :href="data.github_name | githubLink"
+                :href="githubLink(data.github_name)"
                 target="_blank"
             >
                 <img svg-inline src="../assets/img/author/github.svg" />
@@ -78,7 +78,7 @@
             </div>
             <div class="u-medals" v-if="medals && medals.length">
                 <span class="u-medal" v-for="(item, i) in medals" :key="i">
-                    <img :src="item.medal | showMedalIcon" :title="item | showMedalDesc" />
+                    <img :src="showMedalIcon(item.medal)" :title="showMedalDesc(item)" />
                 </span>
             </div>
         </div>
@@ -87,8 +87,8 @@
                 <i class="el-icon-school"></i>
                 <span>所属团队</span>
             </div>
-            <a class="u-team" v-for="(item,i) in teams" :key="i" :href="item.team_id | teamLink" target="_blank">
-                <img class="u-teamlogo" :src="item.team_logo | showTeamLogo" />
+            <a class="u-team" v-for="(item,i) in teams" :key="i" :href="teamLink(item.team_id)" target="_blank">
+                <img class="u-teamlogo" :src="showTeamLogo(item.team_logo)" />
                 <span class="u-teamname">{{item.team_name}}@{{item.team_server}}</span>
             </a>
         </div>
@@ -178,27 +178,6 @@ export default {
             return this.isPRO ? "专业版会员" : "高级版会员";
         },
     },
-    filters: {
-        showMedalIcon: function (val) {
-            return __imgPath + "image/medals/user/" + val + ".gif";
-        },
-        showMedalDesc : function (item){
-            return item.medal_desc || medal_map[item.medal]
-        },
-        authorLink,
-        weiboLink: function (val) {
-            return "https://weibo.com/" + val;
-        },
-        githubLink: function (val) {
-            return "https://github.com/" + val;
-        },
-        teamLink: function (id) {
-            return getLink("org", id);
-        },
-        showTeamLogo: function (val) {
-            return getThumbnail(val, 32);
-        },
-    },
     methods: {
         loadData: function () {
             return getUserInfo(this.id)
@@ -244,6 +223,27 @@ export default {
                 this.isPRO = res.data.data.isPRO;
                 this.isVIP = res.data.data.isPRE;
             });
+        },
+
+        // filters
+        showMedalIcon: function (val) {
+            return __imgPath + "image/medals/user/" + val + ".gif";
+        },
+        showMedalDesc : function (item){
+            return item.medal_desc || medal_map[item.medal]
+        },
+        authorLink,
+        weiboLink: function (val) {
+            return "https://weibo.com/" + val;
+        },
+        githubLink: function (val) {
+            return "https://github.com/" + val;
+        },
+        teamLink: function (id) {
+            return getLink("org", id);
+        },
+        showTeamLogo: function (val) {
+            return getThumbnail(val, 32);
         },
     },
     watch: {

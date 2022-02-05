@@ -1,5 +1,5 @@
 <template>
-    <a class="c-avatar" :href="uid | authorLink">
+    <a class="c-avatar" :href="authorLink(uid)">
         <img :src="showAvatar(avatar)" class="c-avatar-pic" :class="{ isCircle }" />
         <i class="c-avatar-frame" v-if="frameName" :class="style">
             <img :src="frameUrl" />
@@ -68,8 +68,6 @@ export default {
         showAvatar: function (val) {
             return showAvatar(val, this.size);
         },
-    },
-    filters: {
         authorLink,
     },
     created: function () {

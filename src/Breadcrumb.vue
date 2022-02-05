@@ -25,7 +25,7 @@
             <slot name="op-append"></slot>
             <a
                 v-if="publishEnable"
-                :href="slug | publishLink"
+                :href="publishLink(slug)"
                 class="u-publish el-button el-button--primary el-button--medium u-op-public"
             >
                 <i class="el-icon-edit-outline"></i>
@@ -88,14 +88,12 @@ export default {
         };
     },
     computed: {},
-    filters: {
-        publishLink,
-    },
     methods: {
         toggleLeftSide: function () {
             let status = !this.isOpen;
             Bus.$emit("toggleLeftSide", status);
         },
+        publishLink,
     },
     mounted: function () {
         Bus.$on("toggleLeftSide", (data) => {

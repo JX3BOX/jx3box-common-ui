@@ -15,7 +15,6 @@ export default {
    computed:{},
    watch:{},
    methods:{},
-   filters:{},
    created:function(){},
    mounted:function(){},
 }

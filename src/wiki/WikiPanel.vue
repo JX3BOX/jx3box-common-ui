@@ -34,7 +34,7 @@
                         :href="user.id ? author_url(user.id) : null"
                     >
                         <img
-                            :src="user.avatar | thumbnail_url"
+                            :src="thumbnail_url(user.avatar)"
                             :alt="user.nickname"
                             :title="user.nickname"
                         />
@@ -110,8 +110,6 @@ export default {
     methods: {
         author_url: authorLink,
         ts2str,
-    },
-    filters: {
         thumbnail_url: function(val) {
             return getThumbnail(val, 24, true);
         },

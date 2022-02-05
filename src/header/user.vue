@@ -45,7 +45,7 @@
                     <ul class="u-menu" v-show="!fold">
                         <li>
                             <a class="u-me" :href="url.homepage">
-                                <b>{{ user.name | showUserName }}</b>
+                                <b>{{ showUserName(user.name) }}</b>
                                 <img
                                     v-if="isSuperAuthor"
                                     :src="super_author_icon"
@@ -265,12 +265,7 @@ export default {
                 this.checkSuperAuthor();
             }
         },
-    },
-    created: function () {
-        this.closeExpandList();
-        this.init();
-    },
-    filters: {
+
         showUserName: function (val) {
             if (val) {
                 if (val.length < 5) {
@@ -282,6 +277,10 @@ export default {
                 return "匿名";
             }
         },
+    },
+    created: function () {
+        this.closeExpandList();
+        this.init();
     },
     components: {},
 };

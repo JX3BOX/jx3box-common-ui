@@ -25,7 +25,7 @@
                         target="_blank"
                     >
                         <img
-                            :src="c.user_avatar | resolveAvatarPath"
+                            :src="resolveAvatarPath(c.user_avatar)"
                             :alt="c.display_name"
                         />
                     </a>
@@ -71,12 +71,10 @@ export default {
             return this.html_url + "/issues";
         },
     },
-    filters: {
+    methods: {
         resolveAvatarPath: function(val) {
             return val ? val.replace(__ossRoot, __ossMirror) : "";
         },
-    },
-    methods: {
         getBasicInfo: function() {
             getRepoInfo(this.REPO).then((res) => {
                 let data = res.data;
