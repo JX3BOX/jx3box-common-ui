@@ -20,11 +20,6 @@
         "onlyAdmin":false
     },
     {
-        "label": "全局设置",
-        "link": "/config",
-        "onlyAdmin":true
-    },
-    {
         "label": "后台管理",
         "link": "https://os.jx3box.com/admin",
         "onlyAdmin":true

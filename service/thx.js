@@ -1,4 +1,4 @@
-import { $pay,$cms } from "@jx3box/jx3box-common/js/https";
+import { $pay, $cms } from "@jx3box/jx3box-common/js/https";
 
 function getPostBoxcoinRecords(postType, postId, params) {
     return $pay().get(`/api/inspire/article/${postType}/${postId}/history`, {
@@ -22,12 +22,12 @@ function getPostBoxcoinConfig(postType) {
     return $pay().get(`/api/inspire/article/${postType}/boxcoin/limit`);
 }
 
-function getBoxcoinStatus(){
-    return $cms().get(`/api/cms/config`,{
-        params : {
-            key : 'boxcoin'
-        }
-    })
+function getBoxcoinStatus() {
+    return $cms().get(`/api/cms/config`, {
+        params: {
+            key: "boxcoin",
+        },
+    });
 }
 
-export { getPostBoxcoinRecords, grantBoxcoin, rewardBoxcoin, recoveryBoxcoin, getPostBoxcoinConfig,getBoxcoinStatus };
+export { getPostBoxcoinRecords, grantBoxcoin, rewardBoxcoin, recoveryBoxcoin, getPostBoxcoinConfig, getBoxcoinStatus };
