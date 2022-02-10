@@ -8,7 +8,7 @@
             <Share :postId="postId" :postType="postType" />
         </div>
         <div class="w-thx-records">
-            <boxcoin-records :postId="postId" :postType="postType" :cacheRecord="cacheRecord" />
+            <boxcoin-records :postId="postId" :postType="postType" :cacheRecord="cacheRecord" :mode="mode"/>
         </div>
         <div class="w-thx-copyright">
             &copy; 所有原创作品，著作权归作者所有，所有未经授权的非署名转载或抄袭将有权追究法律责任，所有法律事务由专聘律师代理。<br>
@@ -28,7 +28,7 @@ import User from '@jx3box/jx3box-common/js/user'
 import {getPostBoxcoinConfig,getBoxcoinStatus} from '../../service/thx'
 export default {
     name: "Thx",
-    props: ["postId", "postType","userId","adminBoxcoinEnable","userBoxcoinEnable"],
+    props: ["postId", "postType","userId","adminBoxcoinEnable","userBoxcoinEnable",'mode'],
     components: {
         Like,
         Share,

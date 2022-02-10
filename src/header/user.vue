@@ -229,7 +229,7 @@ export default {
             User.destroy()
                 .then((res) => {
                     this.isLogin = false;
-                    if (location.href.indexOf("dashboard") > 0) {
+                    if (location.pathname.startsWith('/dashboard') || location.pathname.startsWith('/publish')) {
                         location.href = __Root;
                     }
                 })

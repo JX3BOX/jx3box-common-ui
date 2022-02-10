@@ -7,6 +7,7 @@
                         <i class="el-icon-trophy"></i>
                     </span>
                     <span class="u-meta u-user">参与打赏</span>
+                    <span class="u-meta u-user" v-if="mode== 'wiki'">收益作者</span>
                     <span class="u-meta u-count">盒币</span>
                     <span class="u-meta u-remark">寄语</span>
                     <time class="u-meta u-time"></time>
@@ -27,6 +28,15 @@
                     >
                         <img class="u-user-avatar" :src="showAvatar(item.ext_operate_user_info.avatar)" alt />
                         <span>{{item.ext_operate_user_info.display_name}}</span>
+                    </a>
+                    <a  
+                        v-if="mode== 'wiki'"
+                        class="u-meta u-user"
+                        :href="authorLink(item.user_id)"
+                        target="_blank"
+                    >
+                        <img class="u-user-avatar" :src="showAvatar(item.ext_user_info.avatar)" alt />
+                        <span>{{item.ext_user_info.display_name}}</span>
                     </a>
                     <span class="u-meta u-count">
                         +
@@ -59,7 +69,7 @@ import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
 import { showTime } from "@jx3box/jx3box-common/js/moment";
 export default {
     name: "BoxcoinRecords",
-    props: ["postType", "postId", "cacheRecord"],
+    props: ["postType", "postId", "cacheRecord",'mode'],
     components: {},
     data: function () {
         return {
