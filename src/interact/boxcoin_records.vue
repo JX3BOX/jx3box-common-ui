@@ -98,7 +98,7 @@ export default {
             immediate : true,
             deep : true,
             handler : function (){
-                this.postType && !!~~this.postId && this.loadData();
+                this.postType && !!this.postId && this.loadData();
             }
         },
         params: {
