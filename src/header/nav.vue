@@ -55,31 +55,36 @@ export default {
     props: [],
     data: function () {
         return {
-            nav: default_nav,
-            client: location.href.includes("origin") ? "origin" : "std",
+            nav: default_nav
         };
     },
     computed: {
         finalNav: function ({ nav }) {
-            
+            // 父节点
             const finalNav = nav.filter((d) => !d.parentKey);
-
+            // 子节点
             const navChildren = nav.filter((c) => c.parentKey);
 
             navChildren.forEach((child) => {
                 const parentKey = child.parentKey;
-
-                const parent = finalNav.find((n) => n.key === parentKey);
+                // 匹配客户端
+                const parent = finalNav.find((n) => n.key === parentKey && this.client === n.client);
 
                 if (parent) {
                     if (!parent.children) {
                         parent.children = [];
                     }
-                    parent.children.push(child);
+                    // 区分客户端
+                    if (child.client === this.client) {
+                        parent.children.push(child);
+                    }
                 }
             });
 
             return finalNav
+        },
+        client() {
+            return location.href.includes("origin") ? "origin" : "std"
         }
     },
     methods: {
