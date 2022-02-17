@@ -32,7 +32,7 @@ export default {
     methods: {
         formartPrice(price, unit) {
             let result = {
-                zhuan: parseInt(price / 100 / 100 / 10000) || 0,
+                zhuan: parseInt(price / 100 / 100 % 10000) || 0,
                 jin: parseInt((price / 100 / 100) % 10000) || 0,
                 yin: parseInt((price / 100) % 100) || 0,
                 tong: parseInt(price % 100) || 0,
