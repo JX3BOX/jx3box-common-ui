@@ -1,48 +1,49 @@
 <template>
     <nav class="c-header-nav" v-if="finalNav">
         <div class="u-item-box" v-for="item in finalNav" :key="'header-nav-' + item.key">
-            <template
-                v-if="item.status && item.children && item.children.length"
-            >
-                <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
+            <template v-if="item.status && matchedClient(item.client)">
+                <template
+                    v-if="item.children && item.children.length"
+                >
+                    <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
+                        <a
+                            class="u-item el-dropdown-link"
+                            :class="{ on: isFocus(item.link) }"
+                            :href="item.link"
+                            :target="isSelf(item.link)"
+                            >{{ item.label
+                            }}<i class="el-icon-arrow-down el-icon--right"></i
+                        ></a>
+                        <el-dropdown-menu slot="dropdown" class="c-header-menu">
+                            <el-dropdown-item
+                                v-for="(subitem, subIndex) in item.children"
+                                :key="'header-nav-drop-' + subitem.key + subIndex"
+                                class="u-menu-item"
+                            >
+                                <a
+                                    :href="subitem.link"
+                                    :target="isSelf(subitem.link)"
+                                    v-if="
+                                        subitem.status &&
+                                        matchedClient(subitem.client)
+                                    "
+                                    >{{ subitem.label }}
+                                    <span v-if="subitem.desc">{{
+                                        subitem.desc
+                                    }}</span></a
+                                ></el-dropdown-item
+                            >
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </template>
+                <template v-else>
                     <a
-                        class="u-item el-dropdown-link"
+                        class="u-item"
                         :class="{ on: isFocus(item.link) }"
                         :href="item.link"
-                        :target="isSelf(item.link)"
-                        >{{ item.label
-                        }}<i class="el-icon-arrow-down el-icon--right"></i
-                    ></a>
-                    <el-dropdown-menu slot="dropdown" class="c-header-menu">
-                        <el-dropdown-item
-                            v-for="(subitem, subIndex) in item.children"
-                            :key="'header-nav-drop-' + subitem.key + subIndex"
-                            class="u-menu-item"
-                        >
-                            <a
-                                :href="subitem.link"
-                                :target="isSelf(subitem.link)"
-                                v-if="
-                                    subitem.status &&
-                                    matchedClient(subitem.client)
-                                "
-                                >{{ subitem.label }}
-                                <span v-if="subitem.desc">{{
-                                    subitem.desc
-                                }}</span></a
-                            ></el-dropdown-item
-                        >
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </template>
-            <template v-else>
-                <a
-                    class="u-item"
-                    :class="{ on: isFocus(item.link) }"
-                    :href="item.link"
-                    v-if="item.status && matchedClient(item.client)"
-                    >{{ item.label }}</a
-                >
+                        >{{ item.label }}</a
+                    >
+                </template>
             </template>
         </div>
     </nav>
@@ -68,16 +69,13 @@ export default {
             navChildren.forEach((child) => {
                 const parentKey = child.parentKey;
                 // 匹配客户端
-                const parent = finalNav.find((n) => n.key === parentKey && this.client === n.client);
+                const parent = finalNav.find((n) => n.key === parentKey)
 
                 if (parent) {
                     if (!parent.children) {
                         parent.children = [];
                     }
-                    // 区分客户端
-                    if (child.client === this.client) {
-                        parent.children.push(child);
-                    }
+                    parent.children.push(child);
                 }
             });
 
