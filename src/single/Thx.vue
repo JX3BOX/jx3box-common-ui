@@ -62,7 +62,7 @@ export default {
             immediate : true,
             deep:true,
             handler : function (){
-                this.postType && !!~~this.postId && this.loadBoxcoinConfig()
+                this.postType && this.postId && this.loadBoxcoinConfig()
             }
         }
     },

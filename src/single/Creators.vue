@@ -51,7 +51,7 @@ export default {
     },
     computed: {
         id: function () {
-            return ~~this.postId;
+            return this.postId;
         },
         visible: function () {
             return this.other_authors && this.other_authors?.length;
