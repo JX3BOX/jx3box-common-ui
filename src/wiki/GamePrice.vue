@@ -25,17 +25,18 @@ export default {
     props: ["price"],
     components: {},
     data: function () {
-        return {};
+        return {
+        };
     },
     computed: {},
     watch: {},
     methods: {
-        formartPrice(price, unit) {
+        formartPrice(price = 0, unit) {
             let result = {
-                zhuan: parseInt(price / 100 / 100 % 10000) || 0,
-                jin: parseInt((price / 100 / 100) % 10000) || 0,
-                yin: parseInt((price / 100) % 100) || 0,
-                tong: parseInt(price % 100) || 0,
+                zhuan: Math.floor(price * 0.01 * 0.01 * 0.0001) || 0,
+                jin: Math.floor((price * 0.01 * 0.01) % 10000) || 0,
+                yin: Math.floor((price * 0.01) % 100) || 0,
+                tong: Math.floor(price % 100) || 0,
             };
             return result[unit];
         },
