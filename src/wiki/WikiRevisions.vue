@@ -18,25 +18,13 @@
                         <th>贡献者</th>
                         <th>修订说明</th>
                     </tr>
-                    <tr
-                        class="history"
-                        v-for="(ver, key) in versions"
-                        :key="key"
-                    >
+                    <tr class="history" v-for="(ver, key) in versions" :key="key">
                         <td>
-                            <a
-                                :href="link(type, `${ver.source_id}/${ver.id}`)"
-                                v-text="'v' + (versions.length - key)"
-                            ></a>
+                            <a :href="link(type, `${ver.source_id}/${ver.id}`)" v-text="'v' + (versions.length - key)" @click="redirectRevision(ver,$event)"></a>
                         </td>
                         <td v-text="ts2str(ver.updated)"></td>
                         <td>
-                            <a
-                                :href="
-                                    ver.user_id ? author_url(ver.user_id) : null
-                                "
-                                v-text="ver.user_nickname"
-                            ></a>
+                            <a :href="ver.user_id ? author_url(ver.user_id) : null" v-text="ver.user_nickname"></a>
                         </td>
                         <td v-text="ver.remark"></td>
                     </tr>
@@ -50,36 +38,42 @@
 import WikiPanel from "./WikiPanel";
 import { WikiPost } from "@jx3box/jx3box-common/js/helper";
 import { getLink, authorLink, ts2str } from "@jx3box/jx3box-common/js/utils";
-import {__Root,__OriginRoot} from '@jx3box/jx3box-common/data/jx3box.json'
+import { __Root, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
 
 export default {
     name: "WikiRevisions",
-    props: ["type", "sourceId",'isGame'],
+    props: ["type", "sourceId", "isGame"],
     data: function() {
         return {
             versions: null,
         };
     },
-    computed : {
-        baseUrl : function (){
-            return location.href.includes('classic') ? __OriginRoot : __Root
+    computed: {
+        baseUrl: function() {
+            return location.href.includes("classic") ? __OriginRoot : __Root;
         },
-        prefix : function (){
-            if(this.isGame){
-                return this.baseUrl
-            }else{
-                return ''
+        prefix: function() {
+            if (this.isGame) {
+                return this.baseUrl;
+            } else {
+                return "";
             }
-        }
+        },
     },
     methods: {
-        link: function (type,id){
-            return this.prefix + getLink(type,id)
+        link: function(type, id) {
+            return this.prefix + getLink(type, id);
         },
-        author_url: function (uid){
-            return this.prefix + authorLink(uid)
+        author_url: function(uid) {
+            return this.prefix + authorLink(uid);
         },
         ts2str,
+        redirectRevision : function (ver,e){
+            if(!this.isGame && this.$router){
+                e.preventDefault();
+                this.$router.replace({path:`/view/${ver.source_id}/${ver.id}`})
+            }
+        }
     },
     components: {
         WikiPanel,
@@ -92,8 +86,7 @@ export default {
                     WikiPost.versions(this.type, this.sourceId).then(
                         (res) => {
                             res = res.data;
-                            this.versions =
-                                res.code === 200 ? res.data.versions : false;
+                            this.versions = res.code === 200 ? res.data.versions : false;
                         },
                         () => {
                             this.versions = false;
