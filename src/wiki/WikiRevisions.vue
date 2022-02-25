@@ -50,11 +50,11 @@ export default {
     },
     computed: {
         baseUrl: function() {
-            return location.href.includes("classic") ? __OriginRoot : __Root;
+            return (location.href.includes("classic") || location.href.includes("origin")) ? __OriginRoot : __Root;
         },
         prefix: function() {
             if (this.isGame) {
-                return this.baseUrl;
+                return this.baseUrl.slice(0,-1);
             } else {
                 return "";
             }
