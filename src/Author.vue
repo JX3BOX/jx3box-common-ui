@@ -3,12 +3,12 @@
         <div class="u-author">
             <Avatar
                 class="u-avatar"
-                :id="id"
+                :uid="uid"
                 :url="data.user_avatar"
                 :size="68"
                 :frame="data.user_avatar_frame"
             />
-            <a class="u-name" :href="authorLink(id)">
+            <a class="u-name" :href="authorLink(uid)">
                 <span>{{ data.display_name }}</span>
             </a>
             <el-tooltip
@@ -88,8 +88,8 @@
                 <span>所属团队</span>
             </div>
             <a class="u-team" v-for="(item,i) in teams" :key="i" :href="teamLink(item.team_id)" target="_blank">
-                <img class="u-teamlogo" :src="showTeamLogo(item.team_logo)" />
-                <span class="u-teamname">{{item.team_name}}@{{item.team_server}}</span>
+                <img class="u-team-logo" :src="showTeamLogo(item.team_logo)" />
+                <span class="u-team-name">{{item.team_name}}@{{item.team_server}}</span>
             </a>
         </div>
         <Authorposts :uid="uid" />
@@ -139,9 +139,6 @@ export default {
         };
     },
     computed: {
-        id: function () {
-            return this.uid;
-        },
         tv_type: function () {
             return this.data && this.data.tv_type;
         },
@@ -180,7 +177,7 @@ export default {
     },
     methods: {
         loadData: function () {
-            return getUserInfo(this.id)
+            return getUserInfo(this.uid)
                 .then((data) => {
                     this.data = data;
                 })
@@ -200,12 +197,12 @@ export default {
             }
         },
         loadMedals: function () {
-            getUserMedals(this.id).then((data) => {
+            getUserMedals(this.uid).then((data) => {
                 this.medals = data;
             });
         },
         loadTeams: function () {
-            getUserPublicTeams(this.id).then((data) => {
+            getUserPublicTeams(this.uid).then((data) => {
                 this.teams = data && data.slice(0, 5);
             });
         },
@@ -214,12 +211,12 @@ export default {
             this.isVIP = await User.isVIP();
         },
         checkSuperAuthor: function () {
-            getSuperAuthor(this.id).then((res) => {
+            getSuperAuthor(this.uid).then((res) => {
                 this.isSuperAuthor = res.data.data;
             });
         },
         loadIdentity: function () {
-            getIdentity(this.id).then((res) => {
+            getIdentity(this.uid).then((res) => {
                 this.isPRO = res.data.data.isPRO;
                 this.isVIP = res.data.data.isPRE;
             });
@@ -239,8 +236,8 @@ export default {
         githubLink: function (val) {
             return "https://github.com/" + val;
         },
-        teamLink: function (id) {
-            return getLink("org", id);
+        teamLink: function (team_id) {
+            return getLink("org", team_id);
         },
         showTeamLogo: function (val) {
             return getThumbnail(val, 32);
@@ -252,7 +249,7 @@ export default {
         },
     },
     mounted: function () {
-        this.id && this.loadData();
+        this.uid && this.loadData();
     },
     components: {
         Avatar,

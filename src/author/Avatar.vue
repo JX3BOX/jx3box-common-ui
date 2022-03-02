@@ -1,6 +1,6 @@
 <template>
     <a class="c-avatar" :href="authorLink(uid)">
-        <img :src="showAvatar(avatar)" class="c-avatar-pic" :class="{ isCircle }" />
+        <img :src="showAvatar(url)" class="c-avatar-pic" :class="{ isCircle }" />
         <i class="c-avatar-frame" v-if="frameName" :class="style">
             <img :src="frameUrl" />
         </i>
@@ -9,71 +9,87 @@
 </template>
 
 <script>
-import frames from "@jx3box/jx3box-common/data/user_avatar_frame.json";
+import default_frames from "@jx3box/jx3box-common/data/user_avatar_frame.json";
 import { __server, __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import { getFrames } from "../../service/author";
 import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
 export default {
     name: "",
-    props: ["id", "url", "size", "frame"],
+    props: ["uid", "url", "size", "frame"],
     components: {},
-    data: function () {
+    data: function() {
         return {
-            frames,
-            style_map: [60, 84, 136, 224],
-            style_cls: ["xs", "s", "m", "l"],
+            frames: [],
+            styles : [
+                {cls:'xs',size:60},
+                {cls:'s',size:84},
+                {cls:'m',size:136},
+                {cls:'l',size:224},
+            ]
         };
     },
     computed: {
-        uid: function () {
-            return ~~this.id || 0;
-        },
-        avatar: function () {
-            return this.url;
-        },
-        frameName: function () {
+        frameName: function() {
             return this.frame && this.frames[this.frame] ? this.frame : "";
         },
-        frameUrl: function () {
+        frameUrl: function() {
             if (this.frameName) {
-                let fileName = this.frames[this.frameName].files[this.style]
-                    .file;
+                let fileName = this.frames[this.frameName].files[this.style].file;
                 return __imgPath + `image/avatar/${this.frameName}/${fileName}`;
             }
             return "";
         },
-        isCircle: function () {
-            return (
-                this.frameName && this.frames[this.frameName].style == "circle"
-            );
+        isCircle: function() {
+            return this.frameName && this.frames[this.frameName].style == "circle";
         },
-        style: function () {
+        style: function() {
             let style = ~~this.size;
-            this.style_map.forEach((item, i) => {
-                if (style < item) {
-                    return this.style_cls[i];
+            for(let [i,v] of this.styles.entries()){
+                if(style < v){
+                    return this.styles[i]['cls']
                 }
-            });
+            }
             return "s";
+        },
+        data: function() {
+            return [this.uid, this.url, this.size, this.frame];
         },
     },
     methods: {
-        loadFrames: function () {
-            getFrames().then((res) => {
-                if (res.data) {
-                    this.frames = res.data;
+        loadFrames: function() {
+
+            // 无头像框
+            if(!this.frame) return
+
+            let frames = sessionStorage.getItem("avatarFrames");
+
+            // 本地缓存
+            if(frames){
+                try {
+                    frames = JSON.parse(frames);
+                    this.frames = frames;
+                } catch (e) {
+                    this.frames = default_frames
                 }
-            });
+
+            // 线上数据
+            }else{
+                getFrames().then((res) => {
+                    if (res.data) {
+                        this.frames = res.data || {};
+                        sessionStorage.setItem("avatarFrames", JSON.stringify(this.frames));
+                    }
+                });
+            }
         },
-        showAvatar: function (val) {
+        showAvatar: function(val) {
             return showAvatar(val, this.size);
         },
         authorLink,
     },
-    created: function () {
-        this.loadFrames();
-    },
-    mounted: function () {},
+    mounted : function (){
+        this.loadFrames()
+    }
 };
 </script>
 

@@ -5,6 +5,7 @@ import Breadcrumb from './src/Breadcrumb.vue'
 import LeftSidebar from './src/LeftSidebar.vue'
 import LeftSideToggle from './src/LeftSideToggle.vue'
 import Author from './src/Author.vue'
+import Avatar from './src/Avatar.vue'
 import RightSidebar from './src/RightSidebar.vue'
 import RightSideMsg from './src/RightSideMsg.vue'
 import Main from './src/Main.vue'
@@ -44,6 +45,7 @@ const components = {
 
     RightSideMsg,
     Author,
+    Avatar,
 
     Thx,
     Like,

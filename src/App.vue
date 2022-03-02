@@ -13,6 +13,17 @@
 
         <Main :withoutLeft="false" :withoutRight="false">
             <el-tabs v-model="tab" type="card">
+                <el-tab-pane label="头像" name="avatar">
+                    <el-radio-group v-model="avatar_size">
+                        <el-radio :label="60">xs-60</el-radio>
+                        <el-radio :label="84">s-84</el-radio>
+                        <el-radio :label="136">m-136</el-radio>
+                        <el-radio :label="224">l-224</el-radio>
+                    </el-radio-group>
+                    <div>
+                        <Avatar :size="avatar_size" url="" :id="8" frame="" />
+                    </div>
+                </el-tab-pane>
                 <el-tab-pane label="CMS作品" name="post">
                     <el-radio-group v-model="post_id">
                         <el-radio label="35605">Markdown</el-radio>
@@ -96,6 +107,7 @@ import Breadcrumb from "./Breadcrumb.vue";
 import LeftSidebar from "./LeftSidebar.vue";
 import LeftSideToggle from "./LeftSideToggle.vue";
 import Author from "./Author.vue";
+import Avatar from "./author/Avatar.vue";
 import UserPop from "./author/UserPop.vue";
 
 import Main from "./Main.vue";
@@ -161,6 +173,7 @@ export default {
 
         RightSideMsg,
         Author,
+        Avatar,
         // Authorposts,
 
         Mark,
@@ -188,7 +201,7 @@ export default {
     },
     data: function() {
         return {
-            tab: "post",
+            tab: "avatar",
 
             post: "",
             post_id: "35605",
@@ -197,6 +210,8 @@ export default {
             wikiPost: null,
             tag: "",
             visible: false,
+
+            avatar_size : 60,
         };
     },
     created: function() {

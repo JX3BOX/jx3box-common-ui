@@ -111,7 +111,7 @@ export default {
             deep: true,
             handler: function (val) {
                 if (val) {
-                    this.list = [val, ...this.list];
+                    this.list.push(val);
                     // 清空父组件的cache
                     this.$parent.cacheRecord = null;
                 }
