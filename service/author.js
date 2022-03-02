@@ -39,7 +39,7 @@ function getUserMedals(uid) {
 }
 
 function getFrames() {
-    return axios.get(__imgPath + "data/user_avatar_frame.json");
+    return axios.get(__imgPath + "avatar/index.json");
 }
 
 function getUserPublicTeams(uid) {
