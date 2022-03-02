@@ -14,7 +14,7 @@ import { __server, __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import { getFrames } from "../../service/author";
 import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
 export default {
-    name: "",
+    name: "Avatar",
     props: ["uid", "url", "size", "frame"],
     components: {},
     data: function() {
@@ -35,7 +35,7 @@ export default {
         frameUrl: function() {
             if (this.frameName) {
                 let fileName = this.frames[this.frameName].files[this.style].file;
-                return __imgPath + `image/avatar/${this.frameName}/${fileName}`;
+                return __imgPath + `avatar/images/${this.frameName}/${fileName}`;
             }
             return "";
         },
@@ -45,7 +45,7 @@ export default {
         style: function() {
             let style = ~~this.size;
             for(let [i,v] of this.styles.entries()){
-                if(style < v){
+                if(style < v.size){
                     return this.styles[i]['cls']
                 }
             }
