@@ -79,18 +79,8 @@ export default {
             })
         },
         // 用户打赏
-        updateRecord: function ({ count, remark, is_user_gift }){
-            this.cacheRecord = {
-                count,
-                remark,
-                is_user_gift,
-                operate_user_id: this.user.uid,
-                created_at: Date.now(),
-                ext_operate_user_info: {
-                    avatar: this.user.avatar_origin,
-                    display_name: this.user.name
-                },
-            }
+        updateRecord: function (data){
+            this.cacheRecord = data
         },
     },
     created: function () {},

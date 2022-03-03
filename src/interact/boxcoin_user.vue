@@ -103,12 +103,13 @@ export default {
                         message: "操作成功",
                         type: "success",
                     });
+                    return res.data.data
                 })
-                .then(() => {
+                .then((data) => {
                     // 1.扣除额度
                     this.left -= this.count;
                     // 2. 将新增emit出去
-                    this.$emit('updateRecord', { count: this.count, remark: this.remark, is_user_gift: 1 });
+                    this.$emit('updateRecord', data);
                 })
                 .finally(() => {
                     this.visible = false;

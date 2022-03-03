@@ -109,9 +109,9 @@ export default {
         },
         cacheRecord: {
             deep: true,
-            handler: function (val) {
-                if (val) {
-                    this.list.push(val);
+            handler: function (data) {
+                if (data) {
+                    this.list.push(data)
                     // 清空父组件的cache
                     this.$parent.cacheRecord = null;
                 }
