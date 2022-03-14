@@ -12,8 +12,9 @@
                 src="../assets/img/bread/menu.svg"
             />
         </div>
-        <a class="u-channel" :href="root" :class="{on:withoutLeft}">
+        <a class="u-channel" :href="rootLink" :class="{on:withoutLeft}">
             <i class="u-channel-logo">
+                <img :src="getAppIcon(slug)" v-if="!$slots.logo"/>
                 <slot name="logo"></slot>
             </i>
             <span class="u-title">{{ name }}</span>
@@ -50,7 +51,7 @@
 
 <script>
 import _ from "lodash";
-import { publishLink } from "@jx3box/jx3box-common/js/utils";
+import { publishLink,getAppIcon } from "@jx3box/jx3box-common/js/utils";
 import { __Links, feedback } from "@jx3box/jx3box-common/data/jx3box.json";
 import User from "@jx3box/jx3box-common/js/user";
 import Admin from "./bread/Admin";
@@ -87,13 +88,18 @@ export default {
             isApp: isApp(),
         };
     },
-    computed: {},
+    computed: {
+        rootLink : function (){
+            return this.root || `/${this.slug}`
+        }
+    },
     methods: {
         toggleLeftSide: function () {
             let status = !this.isOpen;
             Bus.$emit("toggleLeftSide", status);
         },
         publishLink,
+        getAppIcon,
     },
     mounted: function () {
         Bus.$on("toggleLeftSide", (data) => {
