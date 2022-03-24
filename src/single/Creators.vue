@@ -84,6 +84,23 @@ export default {
             getPostAuthors(this.id).then((res) => {
                 this.super_author = res.data?.data.super_author;
                 this.other_authors = res.data?.data.other_authors;
+
+                const super_author = {
+                    user_id: this.super_author.ID,
+                    display_name: this.super_author.display_name,
+                    user_avatar: this.super_author.user_avatar,
+                }
+
+                const other_authors = this.other_authors?.map(item => {
+                    return {
+                        user_id: item.post_author_info?.ID,
+                        display_name: item.post_author_info?.display_name,
+                        user_avatar: item.post_author_info?.user_avatar,
+                    }
+                })
+
+                // 将联合创作者传出去
+                this.$emit('load-authors', { super_author, other_authors })
             });
         },
         showAvatar: function (val) {

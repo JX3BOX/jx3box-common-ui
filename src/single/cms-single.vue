@@ -8,7 +8,7 @@
         <!-- 文章前 -->
         <div class="m-single-prepend">
             <!-- 联合创作者 -->
-            <Creators class="m-single-creators" :postId="id" :postType="post_type" />
+            <Creators class="m-single-creators" :postId="id" :postType="post_type" @load-authors="loadAuthors" />
             <!-- 文集小册 -->
             <Collection class="m-single-collection" :id="collection_id" :defaultVisible="collection_collapse" @collectionUpdate="updateCollection"/>
             <slot name="single-prepend"></slot>
@@ -33,7 +33,7 @@
             <slot name="single-append"></slot>
 
             <!-- 打赏 -->
-            <Thx class="m-single-thx" :postId="id" :postType="post_type" :userId="author_id" :adminBoxcoinEnable="true" :userBoxcoinEnable="true"/>
+            <Thx class="m-single-thx" :postId="id" :postType="post_type" :userId="author_id" :adminBoxcoinEnable="true" :userBoxcoinEnable="true" :authors="authors" />
 
             <!-- 评论 -->
             <div class="m-single-comment">
@@ -74,7 +74,11 @@ export default {
     data: function() {
         return {
             collection_data : '',
-            directory : false
+            directory : false,
+
+            // 创作者
+            other_authors: [],
+            super_author: "",
         };
     },
     computed: {
@@ -119,6 +123,13 @@ export default {
                 collection_data : this.collection_data,
                 directory : this.directory
             }
+        },
+        authors: function (){
+            if (this.other_authors && this.other_authors.length) {
+                return [this.super_author, ...this.other_authors]
+            }
+
+            return []
         }
     },
     methods : {
@@ -127,6 +138,10 @@ export default {
         },
         updateDirectory : function (val){
             this.directory = val
+        },
+        loadAuthors({super_author, other_authors}) {
+            this.super_author = super_author;
+            this.other_authors = other_authors
         }
     },
     watch : {
