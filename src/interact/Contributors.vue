@@ -68,7 +68,7 @@ export default {
             background-color: @bg-black;
             .r(4px);
             transition: 0.1s ease-in;
-            .tm(0.4);
+            // .tm(0.4);
             box-sizing: border-box;
 
             &:hover {
@@ -78,7 +78,7 @@ export default {
         .u-txt {
             .db;
             .x;
-            .fz(14px, 2);
+            .fz(12px, 2);
             white-space: nowrap;
             overflow: hidden;
             .w(48px);
