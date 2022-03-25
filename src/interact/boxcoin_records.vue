@@ -7,7 +7,7 @@
                         <i class="el-icon-trophy"></i>
                     </span>
                     <span class="u-meta u-user">参与打赏</span>
-                    <span class="u-meta u-user" v-if="mode== 'wiki'">收益作者</span>
+                    <span class="u-meta u-user">收益作者</span>
                     <span class="u-meta u-count">盒币</span>
                     <span class="u-meta u-remark">寄语</span>
                     <time class="u-meta u-time"></time>
@@ -30,7 +30,6 @@
                         <span>{{item.ext_operate_user_info.display_name}}</span>
                     </a>
                     <a  
-                        v-if="mode== 'wiki'"
                         class="u-meta u-user"
                         :href="authorLink(item.user_id)"
                         target="_blank"

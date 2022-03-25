@@ -1,5 +1,4 @@
 # JX3BOX UI
-手动更新cdn `https://oss.jx3box.com/static/`
 
 通用 UI 组件
 
