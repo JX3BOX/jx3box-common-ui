@@ -51,7 +51,7 @@
 <script>
 import { grantBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
-import Contributors from '@/interact/Contributors.vue';
+import Contributors from './Contributors.vue';
 export default {
     name: "BoxcoinAdmin",
     props: ["postType", "postId", "userId", "own", "points", 'authors'],

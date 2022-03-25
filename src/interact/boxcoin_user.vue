@@ -48,7 +48,7 @@
 <script>
 import { rewardBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
-import Contributors from '@/interact/Contributors.vue';
+import Contributors from './Contributors.vue';
 export default {
     name: "BoxcoinUser",
     props: ["boxcoin", "postType", "postId", "userId", "own", "points", "authors"],
