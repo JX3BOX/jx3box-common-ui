@@ -4,7 +4,7 @@
             <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight && adminBoxcoinEnable && boxcoin_enable" :userId="userId" :own="admin_left" :points="admin_points" :authors="authors" @updateRecord="updateRecord" />
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType"></fav>
-            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left" :points="user_points" v-if="userBoxcoinEnable && boxcoin_enable" @updateRecord="updateRecord" />
+            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left" :points="user_points" :authors="authors" v-if="userBoxcoinEnable && boxcoin_enable" @updateRecord="updateRecord" />
             <Share :postId="postId" :postType="postType" />
         </div>
         <div class="w-thx-records">

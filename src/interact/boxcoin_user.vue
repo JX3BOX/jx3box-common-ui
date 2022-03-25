@@ -15,6 +15,7 @@
                 </div>
                 <div class="u-list">
                     <em class="u-label">❤️ 打赏</em>
+                    <Contributors v-if="authors && authors.length" :authors="authors" @chosen="handleChosen" />
                     <div class="u-points">
                         <el-radio-group v-model="count">
                             <el-radio :label="item" v-for="item in points" :key="item" border>
@@ -47,10 +48,13 @@
 <script>
 import { rewardBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
+import Contributors from '@/interact/Contributors.vue';
 export default {
     name: "BoxcoinUser",
-    props: ["boxcoin", "postType", "postId", "userId", "own", "points"],
-    components: {},
+    props: ["boxcoin", "postType", "postId", "userId", "own", "points", "authors"],
+    components: {
+        Contributors
+    },
     data: function () {
         return {
             visible: false,
@@ -61,6 +65,8 @@ export default {
             left : this.own,
 
             chargeLink: "/vip/boxcoin?redirect=" + location.href,
+
+            chosen: '', // 被选中的人
         };
     },
     computed: {
@@ -93,8 +99,12 @@ export default {
                 User.toLogin();
             }
         },
+        // 选择要打赏的对象
+        handleChosen(userId) {
+            this.chosen = userId
+        },
         submit: function () {
-            rewardBoxcoin(this.postType, this.postId, this.userId, this.count, {
+            rewardBoxcoin(this.postType, this.postId, this.chosen || this.userId, this.count, {
                 remark: this.remark,
                 client : this.client
             })
