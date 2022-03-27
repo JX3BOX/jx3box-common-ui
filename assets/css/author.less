@@ -4,24 +4,6 @@
         .db;
         .mb(10px);
         .pr;
-
-        .u-level {
-            display: flex;
-            width: 30px;
-            justify-content: center;
-            font-size: 12px;
-            line-height: 1.5;
-            font-weight: 700;
-            color: #fff;
-            background-color: #FF905A;
-            padding: 0 6px;
-            border-radius: 2px;
-        }
-        .u-tips {
-            .db;
-            color: #555;
-            font-size: 12px;
-        }
     }
     .u-avatar {
         .fl;
@@ -29,12 +11,19 @@
         .size(68px);
     }
     .u-name {
-        .lh(2);
+        .lh(1.6);
         .bold;
         color: @darkblue;
         &:hover {
             color: #f39;
         }
+        .break(2);
+    }
+    .u-info{
+        .h(68px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     .u-bio {
         .mb(10px);
@@ -42,6 +31,46 @@
         .break(3);
         color: #888;
         padding: 0 5px;
+    }
+    .u-extend {
+        display: flex;
+    }
+    .u-level {
+        padding: 2px 15px;
+        .fz(12px, 14px);
+        color: #fff;
+        background-color: #aad2fd;
+        border-radius: 2px;
+    }
+    .u-vip {
+        .ml(5px);
+        .db;
+        .i-icon-vip {
+            .db;
+            vertical-align: baseline;
+            padding: 2px 6px;
+            .fz(12px, 14px);
+            font-style: normal;
+            border-radius: 2px;
+            background-color: #ddd;
+            color: #fff;
+            &.on {
+                background-color: #6f42c1;
+            }
+        }
+    }
+    .u-superauthor {
+        margin-left: 4px;
+        display: inline-block;
+        vertical-align: -2px;
+        img {
+            width: 16px;
+        }
+    }
+    .u-tips {
+        .db;
+        color: #555;
+        font-size: 12px;
     }
     .u-link {
         border-top: 1px dashed #eee;
@@ -128,11 +157,11 @@
             .db;
             background-color: #f2f6fc;
             .mb(6px);
-            &:hover{
+            &:hover {
                 background-color: #e6f0fb;
                 // color:@color-link;
             }
-            padding:2px 0;
+            padding: 2px 0;
         }
         .u-team-logo {
             .size(26px);
@@ -142,30 +171,6 @@
         .u-team-name {
             .fz(12px);
             color: #555;
-        }
-    }
-
-    .u-vip {
-        margin-left: 4px;
-        .i-icon-vip{
-            .dbi;vertical-align: baseline;
-            padding:2px 5px;
-            .fz(12px,14px);
-            font-style: normal;
-            border-radius: 2px;
-            background-color:#ddd;
-            color:#fff;
-            &.on{
-                background-color: #6f42c1;
-            }
-        }
-    }
-    .u-superauthor {
-        margin-left: 4px;
-        display: inline-block;
-        vertical-align: -2px;
-        img {
-            width: 16px;
         }
     }
 }

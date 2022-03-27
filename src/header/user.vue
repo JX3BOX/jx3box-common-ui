@@ -207,7 +207,6 @@ export default {
     watch: {
         fold(val) {
             if (!val) {
-                this.loadMyInfo()
             }
         }
     },
@@ -263,9 +262,9 @@ export default {
                 } else {
                     userSignIn().then(res => {
                         this.$message({
-                            theme: 'success',
+                            type: 'success',
                             message: '签到成功',
-                            customClass: ''
+                            customClass: 'c-header-signin'
                         })
                         localStorage.setItem('user_last_login', JSON.stringify(dayjs()))
                     }).catch(err => {
@@ -297,6 +296,7 @@ export default {
                 this.checkMSG();
                 this.loadPanel();
                 this.loadAsset();
+                this.loadMyInfo()
                 this.signIn()
             }
         },

@@ -1,69 +1,38 @@
 <template>
     <div class="c-author" v-if="data">
         <div class="u-author">
-            <Avatar
-                class="u-avatar"
-                :uid="uid"
-                :url="data.user_avatar"
-                :size="68"
-                :frame="data.user_avatar_frame"
-            />
-            <a class="u-name" :href="authorLink(uid)">
-                <span>{{ data.display_name }}</span>
+            <Avatar class="u-avatar" :uid="uid" :url="data.user_avatar" :size="68" :frame="data.user_avatar_frame" />
+            <div class="u-info">
+                <a class="u-name" :href="authorLink(uid)">
+                <span>{{ data.display_name.slice(0, 12) }}</span>
+                <el-tooltip class="item" effect="dark" content="签约作者" placement="top" v-if="isSuperAuthor">
+                    <a class="u-superauthor" href="/dashboard/#/cooperation" target="_blank">
+                        <img :src="super_author_icon" alt="superauthor" />
+                    </a>
+                </el-tooltip>
             </a>
-            <el-tooltip
-                class="item"
-                effect="dark"
-                content="签约作者"
-                placement="top"
-                v-if="isSuperAuthor"
-            >
-                <a class="u-superauthor" href="/dashboard/#/cooperation" target="_blank">
-                    <img :src="super_author_icon" alt="superauthor" />
-                </a>
-            </el-tooltip>
-            <el-tooltip
-                class="item"
-                effect="dark"
-                :content="vipTypeTitle"
-                placement="top"
-                v-if="isPRO || isVIP"
-            >
-                <a class="u-vip" href="/vip/premium?from=sidebar_author" target="_blank">
-                    <i class="i-icon-vip on">{{ vipType }}</i>
-                </a>
-            </el-tooltip>
-            <el-tooltip
-                class="item u-level"
-                effect="dark"
-                placement="top"
-            >
-                <div slot="content">
-                    <div>用户等级</div>
-                    <span class="u-tips">当前经验{{ this.data.experience }}</span>
-                </div>
-                <div href="">
-                    Lv.{{ level }}
-                </div>
-            </el-tooltip>
+            <div class="u-extend">
+                <el-tooltip class="item u-level" effect="dark" placement="top">
+                    <div slot="content">
+                        <span class="u-tips">经验值：{{ data.experience }}</span>
+                    </div>
+                    <span>Lv.{{ level }}</span>
+                </el-tooltip>
+                <el-tooltip class="item" effect="dark" :content="vipTypeTitle" placement="top" v-if="isVip">
+                    <a class="u-vip" href="/vip/premium?from=sidebar_author" target="_blank">
+                        <i class="i-icon-vip on">{{ vipType }}</i>
+                    </a>
+                </el-tooltip>
+            </div>
+            </div>
         </div>
         <div class="u-bio">{{ data.user_bio }}</div>
         <div class="u-link" v-if="hasLink">
-            <a
-                v-if="data.weibo_name"
-                class="u-weibo"
-                :href="weiboLink(data.weibo_id)"
-                target="_blank"
-            >
+            <a v-if="data.weibo_name" class="u-weibo" :href="weiboLink(data.weibo_id)" target="_blank">
                 <img svg-inline src="../assets/img/author/weibo.svg" />
                 {{ data.weibo_name }}
             </a>
-            <a
-                v-if="data.github_name"
-                class="u-github"
-                :href="githubLink(data.github_name)"
-                target="_blank"
-            >
+            <a v-if="data.github_name" class="u-github" :href="githubLink(data.github_name)" target="_blank">
                 <img svg-inline src="../assets/img/author/github.svg" />
                 {{ data.github_name }}
             </a>
@@ -100,9 +69,9 @@
                 <i class="el-icon-school"></i>
                 <span>所属团队</span>
             </div>
-            <a class="u-team" v-for="(item,i) in teams" :key="i" :href="teamLink(item.team_id)" target="_blank">
+            <a class="u-team" v-for="(item, i) in teams" :key="i" :href="teamLink(item.team_id)" target="_blank">
                 <img class="u-team-logo" :src="showTeamLogo(item.team_logo)" />
-                <span class="u-team-name">{{item.team_name}}@{{item.team_server}}</span>
+                <span class="u-team-name">{{ item.team_name }}@{{ item.team_server }}</span>
             </a>
         </div>
         <Authorposts :uid="uid" />
@@ -113,26 +82,16 @@
 const liveStatusMap = ["等待开播", "直播中", "直播结束"];
 import Avatar from "./author/Avatar.vue";
 import Authorposts from "./author/Authorposts.vue";
-import {
-    authorLink,
-    tvLink,
-    getLink,
-    getThumbnail,
-} from "@jx3box/jx3box-common/js/utils";
+import { authorLink, tvLink, getLink, getThumbnail } from "@jx3box/jx3box-common/js/utils";
 import { __server, __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import {
-    getUserInfo,
-    getDouyu,
-    getUserMedals,
-    getUserPublicTeams,
-} from "../service/author";
+import { getUserInfo, getDouyu, getUserMedals, getUserPublicTeams } from "../service/author";
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
 import User from "@jx3box/jx3box-common/js/user";
-import { __userLevel } from '@jx3box/jx3box-common/data/jx3box.json'
+import { __userLevel } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "Author",
     props: ["uid"],
-    data: function () {
+    data: function() {
         return {
             data: "",
             tv: "",
@@ -149,53 +108,48 @@ export default {
         };
     },
     computed: {
-        tv_type: function () {
+        tv_type: function() {
             return this.data && this.data.tv_type;
         },
-        tv_id: function () {
+        tv_id: function() {
             return (this.data && this.data.tv_id) || 0;
         },
-        tv_img: function () {
+        tv_img: function() {
             return __imgPath + "image/tv/" + this.tv_type + ".png";
         },
-        tv_link: function () {
+        tv_link: function() {
             return tvLink(this.tv_type, this.tv_id) || "";
         },
-        tv_status: function () {
+        tv_status: function() {
             return (this.tv && this.tv.show_status == 1) || false;
         },
-        super_author_icon: function () {
+        super_author_icon: function() {
             return __imgPath + "image/user/" + "superauthor.svg";
         },
-        hasLink: function () {
-            return (
-                this.data.weibo_name ||
-                this.data.github_name ||
-                this.data.tuilan_id ||
-                this.data.tv_id
-            );
+        hasLink: function() {
+            return this.data.weibo_name || this.data.github_name || this.data.tuilan_id || this.data.tv_id;
         },
-        hasTrophy: function () {
+        hasTrophy: function() {
             return this.medals.length;
         },
-        vipType: function () {
-            return this.isPRO ? "PRO" : "PRE";
+        vipType: function() {
+            return this.data?.is_pro ? "PRO" : "PRE";
         },
-        vipTypeTitle: function () {
-            return this.isPRO ? "专业版会员" : "高级版会员";
+        vipTypeTitle: function() {
+            return this.data?.is_pro ? "专业版会员" : "高级版会员";
         },
-        isPRO: function (){
-            return this.data?.is_pro
+        isVip: function() {
+            return this.data?.is_pro || this.data?.is_pre;
         },
-        isSuperAuthor: function (){
-            return this.data?.sign
+        isSuperAuthor: function() {
+            return this.data?.sign;
         },
-        level: function (){
-            return User.getLevel(this.data?.experience)
-        }
+        level: function() {
+            return User.getLevel(this.data?.experience);
+        },
     },
     methods: {
-        loadData: function () {
+        loadData: function() {
             return getUserInfo(this.uid)
                 .then((data) => {
                     this.data = data;
@@ -203,11 +157,9 @@ export default {
                 .then(() => {
                     this.loadMedals();
                     this.loadTeams();
-                    // this.checkSuperAuthor();
-                    // this.loadIdentity();
                 });
         },
-        loadTV: function () {
+        loadTV: function() {
             if (this.tv_type == "douyu") {
                 if (!this.tv_id || isNaN(this.tv_id)) return;
                 getDouyu(this.tv_id).then((data) => {
@@ -215,48 +167,44 @@ export default {
                 });
             }
         },
-        loadMedals: function () {
+        loadMedals: function() {
             getUserMedals(this.uid).then((data) => {
                 this.medals = data;
             });
         },
-        loadTeams: function () {
+        loadTeams: function() {
             getUserPublicTeams(this.uid).then((data) => {
                 this.teams = data && data.slice(0, 5);
             });
         },
-        async checkVIP() {
-            this.isPRO = await User.isPRO();
-            this.isVIP = await User.isVIP();
-        },
 
         // filters
-        showMedalIcon: function (val) {
+        showMedalIcon: function(val) {
             return __imgPath + "image/medals/user/" + val + ".gif";
         },
-        showMedalDesc : function (item){
-            return item.medal_desc || medal_map[item.medal]
+        showMedalDesc: function(item) {
+            return item.medal_desc || medal_map[item.medal];
         },
         authorLink,
-        weiboLink: function (val) {
+        weiboLink: function(val) {
             return "https://weibo.com/" + val;
         },
-        githubLink: function (val) {
+        githubLink: function(val) {
             return "https://github.com/" + val;
         },
-        teamLink: function (team_id) {
+        teamLink: function(team_id) {
             return getLink("org", team_id);
         },
-        showTeamLogo: function (val) {
+        showTeamLogo: function(val) {
             return getThumbnail(val, 32);
         },
     },
     watch: {
-        uid: function () {
+        uid: function() {
             this.loadData();
         },
     },
-    mounted: function () {
+    mounted: function() {
         this.uid && this.loadData();
     },
     components: {
