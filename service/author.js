@@ -1,6 +1,6 @@
 import axios from "axios";
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import { $next, $cms, $team } from "@jx3box/jx3box-common/js/https.js";
+import { $next, $cms, $team, $pay } from "@jx3box/jx3box-common/js/https.js";
 
 function getUserInfo(uid) {
     return $cms({ mute: true })
@@ -8,6 +8,14 @@ function getUserInfo(uid) {
         .then((res) => {
             return res.data.data;
         });
+}
+
+function getMyInfo(){
+    return $cms({ mute: true })
+        .get(`/api/cms/user/my/info`)
+        .then(res => {
+            return res.data.data
+        })
 }
 
 function getUserPosts(uid) {
@@ -56,8 +64,8 @@ function getSuperAuthor(uid) {
     return $cms().get('/api/cms/user/is_super_author/' + uid)
 }
 
-function getIdentity(uid) {
-    return $cms().get(`/api/cms/user/${uid}/identity`)
+function userSignIn(){
+    return $pay({ mute: true }).get(`/api/personal/task/everyday/sign-in`)
 }
 
 export {
@@ -68,5 +76,6 @@ export {
     getFrames,
     getUserPublicTeams,
     getSuperAuthor,
-    getIdentity
+    getMyInfo,
+    userSignIn,
 };

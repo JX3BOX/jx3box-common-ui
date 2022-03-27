@@ -119,7 +119,10 @@ import {
 } from "@jx3box/jx3box-common/data/jx3box.json";
 import panel from "../../assets/data/panel.json";
 import { getMsg, getMenu } from "../../service/header";
-import { getSuperAuthor } from "../../service/author";
+import { getMyInfo, userSignIn } from "../../service/author";
+import dayjs from 'dayjs';
+import isToday from 'dayjs/plugin/isToday';
+dayjs.extend(isToday);
 export default {
     props: [],
     data: function () {
@@ -201,6 +204,13 @@ export default {
             return __imgPath + "image/user/" + "superauthor.svg";
         },
     },
+    watch: {
+        fold(val) {
+            if (!val) {
+                this.loadMyInfo()
+            }
+        }
+    },
     methods: {
         // 消息
         checkMSG: function () {
@@ -242,6 +252,31 @@ export default {
                     });
                 });
         },
+        // 签到
+        signIn: function (){
+            try {
+                let user_last_login = localStorage.getItem('user_last_login');
+                user_last_login = user_last_login && JSON.parse(user_last_login) || ''
+
+                if (user_last_login && dayjs(user_last_login).isToday()) {
+                    console.log('已签到')
+                } else {
+                    userSignIn().then(res => {
+                        this.$message({
+                            theme: 'success',
+                            message: '签到成功',
+                            customClass: ''
+                        })
+                        localStorage.setItem('user_last_login', JSON.stringify(dayjs()))
+                    }).catch(err => {
+                        localStorage.setItem('user_last_login', JSON.stringify(dayjs()))
+                        console.log(dayjs.tz.guess())
+                    }).finally(() => {})
+                }
+            } catch(e) {
+                console.log(e)
+            }
+        },
 
         // 资产
         loadAsset: function () {
@@ -249,10 +284,10 @@ export default {
                 this.asset = data;
             });
         },
-        checkSuperAuthor: function () {
-            getSuperAuthor(this.user?.uid).then((res) => {
-                this.isSuperAuthor = res.data.data;
-            });
+        loadMyInfo: function () {
+            getMyInfo().then(res => {
+                this.isSuperAuthor = !!res.sign
+            })
         },
 
         // 初始化
@@ -262,7 +297,7 @@ export default {
                 this.checkMSG();
                 this.loadPanel();
                 this.loadAsset();
-                this.checkSuperAuthor();
+                this.signIn()
             }
         },
 

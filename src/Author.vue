@@ -33,6 +33,19 @@
                     <i class="i-icon-vip on">{{ vipType }}</i>
                 </a>
             </el-tooltip>
+            <el-tooltip
+                class="item u-level"
+                effect="dark"
+                placement="top"
+            >
+                <div slot="content">
+                    <div>用户等级</div>
+                    <span class="u-tips">当前经验{{ this.data.experience }}</span>
+                </div>
+                <div href="">
+                    Lv.{{ level }}
+                </div>
+            </el-tooltip>
         </div>
         <div class="u-bio">{{ data.user_bio }}</div>
         <div class="u-link" v-if="hasLink">
@@ -112,11 +125,10 @@ import {
     getDouyu,
     getUserMedals,
     getUserPublicTeams,
-    getSuperAuthor,
-    getIdentity,
 } from "../service/author";
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
 import User from "@jx3box/jx3box-common/js/user";
+import { __userLevel } from '@jx3box/jx3box-common/data/jx3box.json'
 export default {
     name: "Author",
     props: ["uid"],
@@ -133,8 +145,6 @@ export default {
                 //     team_server : "蝶恋花"
                 // }
             ],
-            isSuperAuthor: false,
-            isPRO: false,
             isVIP: false,
         };
     },
@@ -174,6 +184,15 @@ export default {
         vipTypeTitle: function () {
             return this.isPRO ? "专业版会员" : "高级版会员";
         },
+        isPRO: function (){
+            return this.data?.is_pro
+        },
+        isSuperAuthor: function (){
+            return this.data?.sign
+        },
+        level: function (){
+            return User.getLevel(this.data?.experience)
+        }
     },
     methods: {
         loadData: function () {
@@ -184,8 +203,8 @@ export default {
                 .then(() => {
                     this.loadMedals();
                     this.loadTeams();
-                    this.checkSuperAuthor();
-                    this.loadIdentity();
+                    // this.checkSuperAuthor();
+                    // this.loadIdentity();
                 });
         },
         loadTV: function () {
@@ -209,17 +228,6 @@ export default {
         async checkVIP() {
             this.isPRO = await User.isPRO();
             this.isVIP = await User.isVIP();
-        },
-        checkSuperAuthor: function () {
-            getSuperAuthor(this.uid).then((res) => {
-                this.isSuperAuthor = res.data.data;
-            });
-        },
-        loadIdentity: function () {
-            getIdentity(this.uid).then((res) => {
-                this.isPRO = res.data.data.isPRO;
-                this.isVIP = res.data.data.isPRE;
-            });
         },
 
         // filters
