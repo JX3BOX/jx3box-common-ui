@@ -41,15 +41,15 @@
                     <UserPop title="添加用户" v-model="visible" @confirm="addUser" />
                     <el-button @click="visible = true">用户POP</el-button>
 
-                    <Thx :postId="23865" postType="bbs" :userId="7" :adminBoxcoinEnable="true" :userBoxcoinEnable="true" />
+                    <Thx :postId="23865" postType="bbs" postTitle="bbs23865的标题" :userId="7" :adminBoxcoinEnable="true" :userBoxcoinEnable="true" />
 
                     <hr />
 
                     <Like mode="heart" :count="100" :showCount="true" />
                     <Down :count="100" :showCount="true" />
                     <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39" />
-                    <Fav post-id="90" post-type="jx3dat" />
-                    <Feed post-id="90" post-type="jx3dat" />
+                    <Fav post-id="90" post-type="jx3dat" post-title="jx3dat测试标题" />
+                    <Feed post-id="90" post-type="jx3dat"/>
                     <Print title="传入标题" />
                     <QRcode />
                     <Sharing />
