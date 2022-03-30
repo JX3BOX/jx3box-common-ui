@@ -39,8 +39,7 @@ module.exports = {
                 },
             },
             "/api/team": {
-                target: "http://gray.team.api.jx3box.com",
-                // "target": "https://team.api.jx3box.com",
+                "target": "https://team.api.jx3box.com",
                 onProxyReq: function(request) {
                     request.setHeader("origin", "");
                 },
@@ -67,7 +66,7 @@ module.exports = {
                 },
             },
             "/api": {
-                target: "https://next.jx3box.com",
+                target: "https://next2.jx3box.com",
                 onProxyReq: function(request) {
                     request.setHeader("origin", "");
                 },

@@ -22,7 +22,7 @@ function getUserPosts(uid) {
     return $cms({ mute: true })
         .get(`/api/cms/posts/user/${uid}/latest`)
         .then((res) => {
-            return res.data.data;
+            return res.data.data.list || [];
         });
 }
 

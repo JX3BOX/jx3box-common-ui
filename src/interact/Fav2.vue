@@ -38,7 +38,7 @@ export default {
         hasFav: function () {
             hasFav(this.postType, this.postId).then((res) => {
                 this.favorite = res.id || false;
-                this.total = res.total || 0;
+                this.total = res.totalFavorites || 0;
             });
         },
         addFav: function () {
@@ -59,7 +59,6 @@ export default {
             } else {
                 this.$message.error(typeof err === "string" ? err : "网络请求异常");
             }
-            console.log(err);
         },
     },
     watch: {
