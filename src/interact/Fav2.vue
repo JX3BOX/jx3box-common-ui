@@ -50,15 +50,8 @@ export default {
         delFav: function () {
             delFav(this.favorite).then(() => {
                 this.favorite = false;
-                this.total--;
+                this.total && this.total--;
             });
-        },
-        fail: function (err) {
-            if (err.response && err.response.data && err.response.data.code) {
-                this.$message.error(`[${err.response.data.code}] ${err.response.data.msg}`);
-            } else {
-                this.$message.error(typeof err === "string" ? err : "网络请求异常");
-            }
         },
     },
     watch: {
