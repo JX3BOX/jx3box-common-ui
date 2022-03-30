@@ -80,7 +80,7 @@ export default {
             return this.left && this.left >= this.count;
         },
         allowBoxcoin : function (){
-            return this.postType && this.postId && this.userId
+            return this.postType && this.postId && (this.userId || (this.authors && this.authors.length))
         },
         client : function (){
             return location.href.includes('origin') ? 'origin' : 'std'
