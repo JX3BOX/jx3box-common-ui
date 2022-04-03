@@ -4,7 +4,7 @@
             <Avatar class="u-avatar" :uid="uid" :url="data.user_avatar" :size="68" :frame="data.user_avatar_frame" />
             <div class="u-info">
                 <a class="u-name" :href="authorLink(uid)">
-                <span>{{ data.display_name.slice(0, 12) }}</span>
+                <span>{{ data.display_name.slice(0, 8) }}</span>
                 <el-tooltip class="item" effect="dark" content="签约作者" placement="top" v-if="isSuperAuthor">
                     <a class="u-superauthor" href="/dashboard/#/cooperation" target="_blank">
                         <img :src="super_author_icon" alt="superauthor" />

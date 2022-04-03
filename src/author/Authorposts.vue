@@ -10,7 +10,7 @@
             <li v-for="(item, i) in data" :key="i">
                 <a class="u-item" :href="url(item.ID, item.post_type)" target="_blank">
                     <span
-                        ><i class="u-icon el-icon-reading"></i>
+                        ><i class="u-icon el-icon-arrow-right"></i>
                         {{ item.post_title || item.post_type + "/无标题" }}</span
                     >
                 </a>
