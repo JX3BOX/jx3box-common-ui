@@ -4,26 +4,26 @@
             <Avatar class="u-avatar" :uid="uid" :url="data.user_avatar" :size="68" :frame="data.user_avatar_frame" />
             <div class="u-info">
                 <a class="u-name" :href="authorLink(uid)">
-                <span>{{ data.display_name.slice(0, 8) }}</span>
-                <el-tooltip class="item" effect="dark" content="签约作者" placement="top" v-if="isSuperAuthor">
-                    <a class="u-superauthor" href="/dashboard/#/cooperation" target="_blank">
-                        <img :src="super_author_icon" alt="superauthor" />
-                    </a>
-                </el-tooltip>
-            </a>
-            <div class="u-extend">
-                <el-tooltip class="item u-level" effect="dark" placement="top">
-                    <div slot="content">
-                        <span class="u-tips">经验值：{{ data.experience }}</span>
-                    </div>
-                    <span>Lv.{{ level }}</span>
-                </el-tooltip>
-                <el-tooltip class="item" effect="dark" :content="vipTypeTitle" placement="top" v-if="isVip">
-                    <a class="u-vip" href="/vip/premium?from=sidebar_author" target="_blank">
-                        <i class="i-icon-vip on">{{ vipType }}</i>
-                    </a>
-                </el-tooltip>
-            </div>
+                    <span>{{ data.display_name.slice(0, 8) }}</span>
+                    <el-tooltip class="item" effect="dark" content="签约作者" placement="top" v-if="isSuperAuthor">
+                        <a class="u-superauthor" href="/dashboard/#/cooperation" target="_blank">
+                            <img :src="super_author_icon" alt="superauthor" />
+                        </a>
+                    </el-tooltip>
+                </a>
+                <div class="u-extend">
+                    <el-tooltip class="item" effect="dark" placement="top">
+                        <div slot="content">
+                            <span class="u-tips">经验值：{{ data.experience }}</span>
+                        </div>
+                        <span class="u-level" :class="'lv-' + level">Lv.{{ level }}</span>
+                    </el-tooltip>
+                    <el-tooltip class="item" effect="dark" :content="vipTypeTitle" placement="top" v-if="isVip">
+                        <a class="u-vip" href="/vip/premium?from=sidebar_author" target="_blank">
+                            <i class="i-icon-vip on">{{ vipType }}</i>
+                        </a>
+                    </el-tooltip>
+                </div>
             </div>
         </div>
         <div class="u-bio">{{ data.user_bio }}</div>
