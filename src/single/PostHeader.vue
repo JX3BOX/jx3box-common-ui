@@ -69,11 +69,10 @@
 </template>
 
 <script>
-import { __Root } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __Root,__clients } from "@jx3box/jx3box-common/data/jx3box.json";
 import { showDate, showTime } from "@jx3box/jx3box-common/js/moment";
 import { editLink, authorLink } from "@jx3box/jx3box-common/js/utils.js";
 import User from "@jx3box/jx3box-common/js/user.js";
-import client_map from "../../assets/data/clients.json";
 export default {
     name: "single-header",
     props: ["post", "stat"],
@@ -123,7 +122,7 @@ export default {
     },
     methods: {
         showClientLabel: function(val) {
-            return client_map[val];
+            return __clients[val];
         },
     },
     mounted: function() {},
