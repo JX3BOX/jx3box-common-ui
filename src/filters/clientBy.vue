@@ -15,8 +15,8 @@
 <script>
 const clients = {
     all: "全部版本",
-    std: "正式服",
-    origin: "怀旧服",
+    std: "重制",
+    origin: "缘起",
 };
 export default {
     name: "clientBy",
