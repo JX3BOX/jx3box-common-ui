@@ -83,7 +83,7 @@ export default {
             }
         },
         showAvatar: function(val) {
-            return showAvatar(val, this.size);
+            return showAvatar(val, this.size*3);
         },
         authorLink,
     },

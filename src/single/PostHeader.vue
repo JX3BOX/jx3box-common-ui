@@ -133,7 +133,7 @@ export default {
 .m-single-header {
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-right: 280px;
+    // padding-right: 280px;
     .pr;
     .u-sub-block {
         .dbi;

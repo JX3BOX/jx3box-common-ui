@@ -104,7 +104,7 @@ export default {
             });
         },
         showAvatar: function (val) {
-            return showAvatar(val, 48);
+            return showAvatar(val, 144);
         },
         authorLink,
         formatLabel : function (str){

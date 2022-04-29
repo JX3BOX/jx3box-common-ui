@@ -29,7 +29,7 @@
                         <img class="u-user-avatar" :src="showAvatar(item.ext_operate_user_info.avatar)" alt />
                         <span>{{item.ext_operate_user_info.display_name}}</span>
                     </a>
-                    <a  
+                    <a
                         class="u-meta u-user"
                         :href="authorLink(item.user_id)"
                         target="_blank"
@@ -141,7 +141,7 @@ export default {
                             });
                             this.list.splice(i,1)
                         })
-                        
+
                     }
                 },
             });
@@ -149,7 +149,7 @@ export default {
         authorLink,
         showTime,
         showAvatar: function (val) {
-            return showAvatar(val, 24);
+            return showAvatar(val, 72);
         },
     },
 };
