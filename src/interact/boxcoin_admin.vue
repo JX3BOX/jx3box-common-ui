@@ -13,17 +13,28 @@
         <el-dialog title="品鉴评分" :visible.sync="visible" custom-class="w-boxcoin-pop" :close-on-click-modal="false">
             <div class="w-boxcoin-admin-content">
                 <div class="u-left">
-                    <em class="u-label">本月剩余额度</em>
-                    <b>{{left}}</b>
+                    <em class="u-label">本月状态</em>
+                    <b>已用 {{this.used}} 剩余 {{this.left}} 总计 {{this.total}}</b>
+                    <el-progress :percentage="100 - (this.used * 100 / this.total)" :stroke-width="15" :text-inside="true"></el-progress>
                 </div>
                 <div class="u-list">
                     <em class="u-label">❤️ 品鉴</em>
                     <Contributors v-if="authors && authors.length" :authors="authors" @chosen="handleChosen" />
                     <div class="u-points">
+                        <!--<el-radio-group v-model="fixedCount">-->
                         <el-radio-group v-model="count">
                             <el-radio :label="item" v-for="item in points" :key="item" border>
                                 <b>{{item}}</b>盒币
                             </el-radio>
+                            <!--<el-radio label="custom" border><b>自定义</b></el-radio>
+                            <el-input-number 
+                                    :disabled="this.fixedCount !== 'custom'"
+                                    v-model="customCount" 
+                                    :min="this.allowedMin" 
+                                    :max="this.allowedMax"
+                                    :controls="false">
+                            </el-input-number>
+                            -->
                         </el-radio-group>
                     </div>
                 </div>
@@ -42,7 +53,7 @@
             </div>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="visible = false">取 消</el-button>
-                <el-button type="primary" @click="submit" :disabled="!ready">确 定</el-button>
+                <el-button type="primary" @click="submit" :disabled="!ready || submitting">确 定</el-button>
             </span>
         </el-dialog>
     </div>
@@ -54,23 +65,37 @@ import User from "@jx3box/jx3box-common/js/user";
 import Contributors from './Contributors.vue';
 export default {
     name: "BoxcoinAdmin",
-    props: ["postType", "postId", "userId", "own", "points", 'authors'],
+    props: ["postType", "postId", "userId", "own", "total", "points", "max", "min", 'authors'],
     components: {
         Contributors
     },
     data: function () {
         return {
             visible: false,
-
             count: 0,
+            //fixedCount: 0,
+            //customCount: 0,
+
             remark: "辛苦，感谢！",
-
             left : this.own,
-
             chosen: '', // 被选中的人
+
+            submitting: false,
         };
     },
     computed: {
+        /*allowedMax: function () {
+            return this.max;
+        },
+        allowedMin: function () {
+            return this.min;
+        },*/
+        used: function () {
+            return this.total - this.left;
+        },
+        /*count: function() {
+            return this.fixedCount === "custom" ? this.customCount : this.fixedCount;
+        },*/
         ready: function () {
             return this.isNotSelf && this.isEnough && this.count && this.remark;
         },
@@ -95,12 +120,14 @@ export default {
     methods: {
         openBoxcoinPop: function () {
             this.visible = true;
+            //this.customCount = this.max / 2;
         },
         // 选择要打赏的对象
         handleChosen(userId) {
             this.chosen = userId
         },
         submit: function () {
+            this.submitting = true;
             grantBoxcoin(this.postType, this.postId, this.chosen || this.userId, this.count, {
                 remark: this.remark,
                 client : this.client
@@ -119,10 +146,9 @@ export default {
                     this.$emit('updateRecord', data);
                 })
                 .finally(() => {
+                    this.submitting = false;
                     this.visible = false;
                 });
-
-
         },
         init: function () {},
     },

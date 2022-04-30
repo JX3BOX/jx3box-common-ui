@@ -1,7 +1,7 @@
 <template>
     <div class="w-thx">
         <div class="w-thx-panel">
-            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight && adminBoxcoinEnable && boxcoin_enable" :userId="userId" :own="admin_left" :points="admin_points" :authors="authors" @updateRecord="updateRecord" />
+            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight && adminBoxcoinEnable && boxcoin_enable" :userId="userId" :max="admin_max" :min="admin_min" :own="admin_left" :total="admin_total" :points="admin_points" :authors="authors" @updateRecord="updateRecord" />
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType" :postTitle="postTitle"></fav>
             <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left" :points="user_points" :authors="authors" v-if="userBoxcoinEnable && boxcoin_enable" @updateRecord="updateRecord" />
@@ -43,8 +43,12 @@ export default {
             hasRight : User.getInfo().group >= 32,
             user: User.getInfo(),
 
+            admin_max : 0,
+            admin_min : 0,
             admin_left : 0,
+            admin_total: 0,
             admin_points : [100],
+
             user_left : 0,
             user_points : [100],
 
@@ -69,8 +73,12 @@ export default {
     methods: {
         loadBoxcoinConfig : function (){
             User.isLogin() && getPostBoxcoinConfig(this.postType).then((res) => {
+                this.admin_max = res.data.data.limit.admin_max || 0;
+                this.admin_min = res.data.data.limit.admin_min || 0;
                 this.admin_points = res.data.data.limit.admin_points || [10, 1000];
                 this.admin_left = res.data.data.asManagerBoxCoinRemain || 0;
+                this.admin_total = res.data.data.asManagerBoxCoinTotal || 0;
+
                 this.user_points = res.data.data.limit.user_points || [10, 1000];
                 this.user_left = res.data.data.asUserBoxCoinRemain || 0;
             });
