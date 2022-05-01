@@ -111,7 +111,7 @@ export default {
         author_url: authorLink,
         ts2str,
         thumbnail_url: function(val) {
-            return getThumbnail(val, 24, true);
+            return getThumbnail(val, 72, true);
         },
     },
     components: {
