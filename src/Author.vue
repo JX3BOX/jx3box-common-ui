@@ -196,7 +196,7 @@ export default {
             return getLink("org", team_id);
         },
         showTeamLogo: function(val) {
-            return getThumbnail(val, 32);
+            return getThumbnail(val, 96);
         },
     },
     watch: {
