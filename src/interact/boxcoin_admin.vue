@@ -21,20 +21,10 @@
                     <em class="u-label">❤️ 品鉴</em>
                     <Contributors v-if="authors && authors.length" :authors="authors" @chosen="handleChosen" />
                     <div class="u-points">
-                        <!--<el-radio-group v-model="fixedCount">-->
                         <el-radio-group v-model="count">
                             <el-radio :label="item" v-for="item in points" :key="item" border>
                                 <b>{{item}}</b>盒币
                             </el-radio>
-                            <!--<el-radio label="custom" border><b>自定义</b></el-radio>
-                            <el-input-number 
-                                    :disabled="this.fixedCount !== 'custom'"
-                                    v-model="customCount" 
-                                    :min="this.allowedMin" 
-                                    :max="this.allowedMax"
-                                    :controls="false">
-                            </el-input-number>
-                            -->
                         </el-radio-group>
                     </div>
                 </div>
@@ -48,6 +38,7 @@
                             :maxlength="30"
                             show-word-limit
                         ></el-input>
+                        <el-button @click="insertCurrentRelease">插入当前版本</el-button>
                     </div>
                 </div>
             </div>
@@ -62,6 +53,7 @@
 <script>
 import { grantBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
+import { getBreadcrumb } from "@jx3box/jx3box-common/js/api_misc";
 import Contributors from './Contributors.vue';
 export default {
     name: "BoxcoinAdmin",
@@ -73,8 +65,6 @@ export default {
         return {
             visible: false,
             count: 0,
-            //fixedCount: 0,
-            //customCount: 0,
 
             remark: "辛苦，感谢！",
             left : this.own,
@@ -84,18 +74,9 @@ export default {
         };
     },
     computed: {
-        /*allowedMax: function () {
-            return this.max;
-        },
-        allowedMin: function () {
-            return this.min;
-        },*/
         used: function () {
             return this.total - this.left;
         },
-        /*count: function() {
-            return this.fixedCount === "custom" ? this.customCount : this.fixedCount;
-        },*/
         ready: function () {
             return this.isNotSelf && this.isEnough && this.count && this.remark;
         },
@@ -120,7 +101,6 @@ export default {
     methods: {
         openBoxcoinPop: function () {
             this.visible = true;
-            //this.customCount = this.max / 2;
         },
         // 选择要打赏的对象
         handleChosen(userId) {
@@ -149,6 +129,16 @@ export default {
                     this.submitting = false;
                     this.visible = false;
                 });
+        },
+        insertCurrentRelease: function() {
+            getBreadcrumb("current-release").then(res => {
+                this.remark += res;
+            }).catch(err => {
+                this.$message({
+                    message: "获取失败",
+                    type: "error",
+                });
+            });
         },
         init: function () {},
     },
