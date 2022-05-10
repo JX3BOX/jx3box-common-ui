@@ -16,7 +16,7 @@
                         <div slot="content">
                             <span class="u-tips">经验值：{{ data.experience }}</span>
                         </div>
-                        <span class="u-level" :class="'lv-' + level">Lv.{{ level }}</span>
+                        <span class="u-level" :class="'lv-' + level" :style={backgroundColor:showLevelColor(level)}>Lv.{{ level }}</span>
                     </el-tooltip>
                     <el-tooltip class="item" effect="dark" :content="vipTypeTitle" placement="top" v-if="isVip">
                         <a class="u-vip" href="/vip/premium?from=sidebar_author" target="_blank">
@@ -83,7 +83,7 @@ const liveStatusMap = ["等待开播", "直播中", "直播结束"];
 import Avatar from "./author/Avatar.vue";
 import Authorposts from "./author/Authorposts.vue";
 import { authorLink, tvLink, getLink, getThumbnail } from "@jx3box/jx3box-common/js/utils";
-import { __server, __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __server, __imgPath,__userLevelColor } from "@jx3box/jx3box-common/data/jx3box.json";
 import { getUserInfo, getDouyu, getUserMedals, getUserPublicTeams } from "../service/author";
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
 import User from "@jx3box/jx3box-common/js/user";
@@ -198,6 +198,9 @@ export default {
         showTeamLogo: function(val) {
             return getThumbnail(val, 96);
         },
+        showLevelColor:function (level){
+            return __userLevelColor[level]
+        }
     },
     watch: {
         uid: function() {
