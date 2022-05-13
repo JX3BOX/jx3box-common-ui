@@ -8,7 +8,7 @@
 
         <LeftSidebar :open="true">
             <LeftSideToggle :mobileOnly="true" />
-            <Author :author="author" :uid="8" />
+            <Author :author="author" :uid="2" />
         </LeftSidebar>
 
         <Main :withoutLeft="false" :withoutRight="false">
@@ -21,7 +21,7 @@
                         <el-radio :label="224">l-224</el-radio>
                     </el-radio-group>
                     <div>
-                        <Avatar :size="avatar_size" url="" :id="8" frame="" />
+                        <Avatar :id="8" url="" :size="avatar_size" frame="" />
                     </div>
                 </el-tab-pane>
                 <el-tab-pane label="CMS作品" name="post">

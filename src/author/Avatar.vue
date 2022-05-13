@@ -1,7 +1,7 @@
 <template>
     <a class="c-avatar" :href="authorLink(uid)">
-        <img :src="showAvatar(url)" class="c-avatar-pic" :class="{ isCircle }" />
-        <i class="c-avatar-frame" v-if="frameName" :class="style">
+        <img :src="showAvatar(url)" class="c-avatar-pic"/>
+        <i class="c-avatar-frame" v-if="frame">
             <img :src="frameUrl" />
         </i>
         <slot></slot>
@@ -9,9 +9,7 @@
 </template>
 
 <script>
-import default_frames from "@jx3box/jx3box-common/data/user_avatar_frame.json";
 import { __server, __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import { getFrames } from "../../service/author";
 import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
 export default {
     name: "Avatar",
@@ -29,66 +27,17 @@ export default {
         };
     },
     computed: {
-        frameName: function() {
-            return this.frame && this.frames[this.frame] ? this.frame : "";
-        },
         frameUrl: function() {
-            if (this.frameName) {
-                let fileName = this.frames[this.frameName].files[this.style].file;
-                return __imgPath + `avatar/images/${this.frameName}/${fileName}`;
-            }
-            return "";
-        },
-        isCircle: function() {
-            return this.frameName && this.frames[this.frameName].style == "circle";
-        },
-        style: function() {
-            let style = ~~this.size;
-            for(let [i,v] of this.styles.entries()){
-                if(style < v.size){
-                    return this.styles[i]['cls']
-                }
-            }
-            return "s";
-        },
-        data: function() {
-            return [this.uid, this.url, this.size, this.frame];
+            return __imgPath + `avatar/images/${this.frame}/${this.frame}.svg`;
         },
     },
     methods: {
-        loadFrames: function() {
-
-            // 无头像框
-            if(!this.frame) return
-
-            let frames = sessionStorage.getItem("avatarFrames");
-
-            // 本地缓存
-            if(frames){
-                try {
-                    frames = JSON.parse(frames);
-                    this.frames = frames;
-                } catch (e) {
-                    this.frames = default_frames
-                }
-
-            // 线上数据
-            }else{
-                getFrames().then((res) => {
-                    if (res.data) {
-                        this.frames = res.data || {};
-                        sessionStorage.setItem("avatarFrames", JSON.stringify(this.frames));
-                    }
-                });
-            }
-        },
         showAvatar: function(val) {
             return showAvatar(val, this.size*3);
         },
         authorLink,
     },
     mounted : function (){
-        this.loadFrames()
     }
 };
 </script>
@@ -101,18 +50,19 @@ export default {
 .c-avatar-pic {
     .db;
     .full;
-    .r(4px);
-    &.isCircle {
-        .r(100%);
-    }
+    .r(100%);
 }
 .c-avatar-frame {
     .pa;
+    .lt(-10px);
+    .size(100%);
+    padding: 10px;
+    box-sizing: content-box;
     img {
         .db;
         .pa;
-        .lt(0);
         .size(100%);
+        .lt(0);
     }
 
     &.xs {
