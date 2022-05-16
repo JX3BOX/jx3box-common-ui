@@ -4,4 +4,8 @@ function getPostAuthors(post_id) {
     return $cms({mute:true}).get(`/api/cms/post/${post_id}/authors`);
 }
 
-export { getPostAuthors };
+function uploadImage(formData){
+    return $cms().post(`/api/cms/upload/avatar`, formData);
+}
+
+export { getPostAuthors, uploadImage };

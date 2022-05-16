@@ -62,6 +62,9 @@
                     <tagBy :data="['PVE', 'PVX']" :type="tag" />
                     <clientBy type="" />
                     <zlpBy />
+
+                    <hr />
+                    <uploadImage v-model="upload" info="非必选。首页海报尺寸1100*300（推荐2200*600支持高分屏），最大20M。"></uploadImage>
                 </el-tab-pane>
                 <el-tab-pane label="百科组件" name="wiki"
                     ><WikiPanel :wiki-post="wikiPost">
@@ -142,6 +145,8 @@ import tagBy from "./filters/tagBy.vue";
 import clientBy from "./filters/clientBy.vue";
 import zlpBy from "./filters/zlpBy.vue";
 
+import uploadImage from './upload/upload_banner.vue'
+
 import WikiPanel from "./wiki/WikiPanel.vue";
 import WikiRevisions from "./wiki/WikiRevisions.vue";
 import WikiComments from "./wiki/WikiComments.vue";
@@ -193,6 +198,8 @@ export default {
         clientBy,
         zlpBy,
 
+        uploadImage,
+
         WikiPanel,
         WikiRevisions,
         WikiComments,
@@ -212,6 +219,8 @@ export default {
             visible: false,
 
             avatar_size : 60,
+
+            upload: '',
         };
     },
     created: function() {
