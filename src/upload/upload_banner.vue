@@ -30,7 +30,11 @@ export default {
         size: {
             type: [Array, Number],
             default: 148,
-        }
+        },
+        maxSize: {
+            type: Number,
+            default: 10,
+        },
     },
     data() {
         return {
@@ -76,6 +80,10 @@ export default {
         upload() {
             const file = this.fileInput.files[0];
             if (!file) return;
+            if (file.size > this.maxSize * 1024 * 1024) {
+                this.$message.error('图片大小不能超过' + this.maxSize + 'M');
+                return;
+            }
             const formData = new FormData();
             formData.append('avatar', file);
             uploadImage(formData).then(res => {
