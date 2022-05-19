@@ -9,23 +9,29 @@
         <div v-else class="u-upload el-upload el-upload--picture-card" @click="select">
             <i class="el-icon-plus"></i>
         </div>
-        <input class="u-upload-input" type="file" @change="upload" ref="uploadInput" accept=".jpg, .jpeg, .png, .gif, .bmp" />
+        <input
+            class="u-upload-input"
+            type="file"
+            @change="upload"
+            ref="uploadInput"
+            accept=".jpg, .jpeg, .png, .gif, .bmp,.webp"
+        />
     </div>
 </template>
 
 <script>
 import { getThumbnail } from "@jx3box/jx3box-common/js/utils";
-import { uploadImage } from '../../service/cms.js';
+import { uploadImage } from "../../service/cms.js";
 export default {
-    name: 'upload-banner',
+    name: "upload-banner",
     props: {
         content: {
             type: String,
-            default: '',
+            default: "",
         },
         info: {
             type: String,
-            default: '用于展示tips',
+            default: "用于展示tips",
         },
         size: {
             type: [Array, Number],
@@ -38,19 +44,19 @@ export default {
     },
     data() {
         return {
-            data: this.content || '',
+            data: this.content || "",
         };
     },
     model: {
-        prop: 'content',
-        event: 'input',
+        prop: "content",
+        event: "input",
     },
     watch: {
         content(val) {
             this.data = val;
         },
         data(val) {
-            this.$emit('input', val);
+            this.$emit("input", val);
         },
     },
     computed: {
@@ -64,29 +70,31 @@ export default {
         uploadStyle() {
             let size = Array.isArray(this.size) ? this.size : [this.size, this.size];
             return {
-                width: size[0] + 'px',
-                height: size[1] + 'px',
+                width: size[0] + "px",
+                height: size[1] + "px",
             };
         },
     },
     methods: {
         select() {
-            this.fileInput.dispatchEvent(new MouseEvent('click', {
-                bubbles: true,
-                cancelable: true,
-                view: window,
-            }));
+            this.fileInput.dispatchEvent(
+                new MouseEvent("click", {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window,
+                })
+            );
         },
         upload() {
             const file = this.fileInput.files[0];
             if (!file) return;
             if (file.size > this.maxSize * 1024 * 1024) {
-                this.$message.error('图片大小不能超过' + this.maxSize + 'M');
+                this.$message.error("图片大小不能超过" + this.maxSize + "M");
                 return;
             }
             const formData = new FormData();
-            formData.append('avatar', file);
-            uploadImage(formData).then(res => {
+            formData.append("avatar", file);
+            uploadImage(formData).then((res) => {
                 this.data = res.data.data[0];
                 this.$message({
                     message: "上传成功",
@@ -95,16 +103,16 @@ export default {
             });
         },
         remove() {
-            this.data = '';
+            this.data = "";
         },
-    }
-}
+    },
+};
 </script>
 
 <style lang="less">
 .c-upload-banner {
-    .u-tip{
-        padding:5px 15px;
+    .u-tip {
+        padding: 5px 15px;
     }
     .u-upload {
         .pr;
