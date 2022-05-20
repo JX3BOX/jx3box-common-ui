@@ -65,7 +65,7 @@ export default {
             });
         },
         userId: function () {
-            return User.getInfo().uid;
+            return ~~User.getInfo().uid;
         },
         isCreator: function ({ creators, userId, super_author }) {
             return creators.includes(userId) || userId == super_author.ID;
