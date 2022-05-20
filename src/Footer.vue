@@ -1,5 +1,6 @@
 <template>
     <footer class="c-footer" id="c-footer" v-if="!isApp">
+        <div class="c-footer-inner">
         <div class="c-footer-left">
             <img
                 class="u-flag"
@@ -27,6 +28,7 @@
             <a class="u-feedback" :href="feedback" target="_blank">反馈建议</a>
         </div>
         <slot></slot>
+        </div>
     </footer>
 </template>
 
