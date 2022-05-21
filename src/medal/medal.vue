@@ -31,15 +31,12 @@ export default {
 
 <style lang="less">
 .m-medal {
-    display: block;
-    margin: 5px 0;
-
+    display: flex;
     .u-medal {
         cursor: pointer;
         .u-medal-img {
             width: 20px;
             height: 20px;
-            margin-right: 5px;
         }
     }
 }
