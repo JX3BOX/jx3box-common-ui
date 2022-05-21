@@ -95,13 +95,27 @@ export default {
         isSelf: function (link) {
             return link.startsWith("/") ? "_self" : "_blank";
         },
+        loadNav() {
+            try {
+                const nav = JSON.parse(sessionStorage.getItem("nav"));
+                if (nav) {
+                    this.nav = nav;
+                } else {
+                    getMenu("nav").then((res) => {
+                        if (res.data) {
+                            this.nav = res?.data?.data?.val
+                            sessionStorage.setItem("nav", JSON.stringify(this.nav));
+                        }
+                    });
+                }
+            } catch (e) {
+                this.nav = default_nav;
+                console.log('loadNav error', e);
+            }
+        }
     },
     created: function () {
-        getMenu("nav").then((res) => {
-            if (res.data) {
-                this.nav = res?.data?.data?.val || default_nav;
-            }
-        });
+
     },
     components: {},
 };

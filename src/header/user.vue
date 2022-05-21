@@ -230,9 +230,20 @@ export default {
             });
         },
         loadPanel: function () {
-            getMenu("panel").then((res) => {
-                this.panel = res.data?.data?.val || panel;
-            });
+            try {
+                const panel = JSON.parse(sessionStorage.getItem("panel"));
+                if (panel) {
+                    this.panel = panel;
+                } else {
+                    getMenu("panel").then((res) => {
+                        this.panel = res.data?.data?.val;
+                        sessionStorage.setItem("panel", JSON.stringify(this.panel));
+                    });
+                }
+            } catch (e) {
+                this.panel = panel;
+                console.log('loadPanel error', e);
+            }
         },
         logout: function () {
             User.destroy()

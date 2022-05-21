@@ -65,6 +65,7 @@
 
                     <hr />
                     <uploadImage v-model="upload" info="非必选。首页海报尺寸1100*300（推荐2200*600支持高分屏），最大20M。"></uploadImage>
+                    <AuthorMedal :author-id="8"></AuthorMedal>
                 </el-tab-pane>
                 <el-tab-pane label="百科组件" name="wiki"
                     ><WikiPanel :wiki-post="wikiPost">
@@ -146,6 +147,7 @@ import clientBy from "./filters/clientBy.vue";
 import zlpBy from "./filters/zlpBy.vue";
 
 import uploadImage from './upload/upload_banner.vue'
+import AuthorMedal from './medal/author_medal.vue'
 
 import WikiPanel from "./wiki/WikiPanel.vue";
 import WikiRevisions from "./wiki/WikiRevisions.vue";
@@ -199,6 +201,7 @@ export default {
         zlpBy,
 
         uploadImage,
+        AuthorMedal,
 
         WikiPanel,
         WikiRevisions,

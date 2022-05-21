@@ -78,6 +78,22 @@ export default {
                 return "_blank";
             }
         },
+        loadMenu() {
+            try {
+                const _box = JSON.parse(sessionStorage.getItem("box"));
+                if (_box) {
+                    this.data = _box;
+                } else {
+                    getMenu('box').then(res => {
+                        this.data = res.data?.data?.val;
+                        sessionStorage.setItem("box", JSON.stringify(this.data));
+                    });
+                }
+            } catch(e) {
+                this.data = box;
+                console.log('loadBox error', e);
+            }
+        }
     },
     created: function () {
         if (this.overlayEnable) {
@@ -89,9 +105,7 @@ export default {
                 }, 200)
             );
         }
-        getMenu('box').then((res) => {
-            this.data = res.data?.data?.val || box;
-        });
+        this.loadMenu();
     },
     mounted: function () {
         Bus.$on("toggleBox", (status) => {
