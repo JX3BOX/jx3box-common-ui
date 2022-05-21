@@ -59,9 +59,10 @@
                 <span>作者荣誉</span>
             </div>
             <div class="u-medals" v-if="medals && medals.length">
-                <span class="u-medal" v-for="(item, i) in medals" :key="i">
+                <!-- <span class="u-medal" v-for="(item, i) in medals" :key="i">
                     <img :src="showMedalIcon(item.medal)" :title="showMedalDesc(item)" />
-                </span>
+                </span> -->
+                <medal :medals="medals" :showIcon="showMedalIcon"></medal>
             </div>
         </div>
         <div class="u-teams" v-if="teams && teams.length">
@@ -88,6 +89,7 @@ import { getUserInfo, getDouyu, getUserMedals, getUserPublicTeams } from "../ser
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
 import User from "@jx3box/jx3box-common/js/user";
 import { __userLevel } from "@jx3box/jx3box-common/data/jx3box.json";
+import medal from './medal/medal.vue'
 export default {
     name: "Author",
     props: ["uid"],
@@ -213,6 +215,7 @@ export default {
     components: {
         Avatar,
         Authorposts,
+        medal
     },
 };
 </script>
