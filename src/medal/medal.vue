@@ -1,7 +1,7 @@
 <template>
     <div class="m-medal">
         <a :href="medalLink(item)" target="_blank" class="u-medal" v-for="item in medals" :key="item.id" :title="item.medal_desc">
-            <img class="u-medal-img" :src="showIcon(item.medal)" alt="">
+            <img class="u-medal-img" :src="showIcon(item.medal)">
         </a>
     </div>
 </template>
@@ -22,8 +22,8 @@ export default {
     },
     methods: {
 
-        medalLink({ rank_id, subtype }) {
-            return getMedalLink(rank_id, subtype)
+        medalLink({ rank_id, medal_type = 'rank' }) {
+            return getMedalLink(rank_id, medal_type)
         }
     }
 }
