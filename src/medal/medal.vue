@@ -1,27 +1,25 @@
 <template>
     <div class="m-medal">
         <a :href="medalLink(item)" class="u-medal" v-for="item in medals" :key="item.id" :title="item.medal_desc">
-            <img class="u-medal-img" :src="medalImagePath(item.medal)" alt="">
+            <img class="u-medal-img" :onerror="`this.src=${errorPath}`" :src="medalImagePath(item.medal)" alt="">
         </a>
     </div>
 </template>
 
 <script>
-import { getMedals } from '../../service/next'
 import { __imgPath } from '@jx3box/jx3box-common/data/jx3box.json'
 import { getMedalLink } from '@jx3box/jx3box-common/js/utils'
 export default {
     name: 'author_medal',
     props: {
-        authorId: {
-            type: Number,
-            default: 0
+        medals: {
+            type: Array,
+            default: () => [], // [{ id, medal_desc, medal }]
         },
-    },
-    data() {
-        return {
-            medals: [],
-        }
+        subtype: {
+            type: String,
+            default: '', // team, user
+        },
     },
     watch: {
         authorId: {
@@ -32,13 +30,11 @@ export default {
         }
     },
     methods: {
-        loadAuthorMedal() {
-            getMedals(this.authorId).then(res => {
-                this.medals = res.data.data
-            })
-        },
         medalImagePath(medal) {
-            return `${__imgPath}image/medals/user/${medal}.gif`
+            return `${__imgPath}image/medals/${this.subtype}/${medal}.gif`
+        },
+        errorPath(medal) {
+            return `${__imgPath}image/medals/${this.subtype}/${medal}.png`
         },
         medalLink({ rank_id, subtype }) {
             return getMedalLink(rank_id, subtype)

@@ -147,7 +147,7 @@ import clientBy from "./filters/clientBy.vue";
 import zlpBy from "./filters/zlpBy.vue";
 
 import uploadImage from './upload/upload_banner.vue'
-import AuthorMedal from './medal/author_medal.vue'
+import AuthorMedal from './medal/medal.vue'
 
 import WikiPanel from "./wiki/WikiPanel.vue";
 import WikiRevisions from "./wiki/WikiRevisions.vue";
