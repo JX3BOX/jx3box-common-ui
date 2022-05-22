@@ -115,7 +115,7 @@ export default {
         }
     },
     created: function () {
-
+        this.loadNav()
     },
     components: {},
 };
