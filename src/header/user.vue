@@ -116,6 +116,7 @@ import {
     __Links,
     __Root,
     __imgPath,
+    __OriginRoot,
 } from "@jx3box/jx3box-common/data/jx3box.json";
 import panel from "../../assets/data/panel.json";
 import { getMsg, getMenu } from "../../service/header";
@@ -203,6 +204,9 @@ export default {
         super_author_icon: function () {
             return __imgPath + "image/user/" + "superauthor.svg";
         },
+        siteRoot : function (){
+            return location.host.includes('origin') ? __OriginRoot : __Root
+        }
     },
     watch: {
         fold(val) {
@@ -250,7 +254,7 @@ export default {
                 .then((res) => {
                     this.isLogin = false;
                     if (location.pathname.startsWith('/dashboard') || location.pathname.startsWith('/publish')) {
-                        location.href = __Root;
+                        location.href = this.siteRoot;
                     }
                 })
                 .then(() => {
