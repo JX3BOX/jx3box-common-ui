@@ -57,7 +57,7 @@ import { getBreadcrumb } from "@jx3box/jx3box-common/js/api_misc";
 import Contributors from './Contributors.vue';
 export default {
     name: "BoxcoinAdmin",
-    props: ["postType", "postId", "userId", "own", "total", "points", "max", "min", 'authors'],
+    props: ["postType", "postId", "userId", "own", "total", "points", "max", "min", 'authors','client'],
     components: {
         Contributors
     },
@@ -89,9 +89,9 @@ export default {
         allowBoxcoin : function (){
             return this.postType && this.postId && (this.userId || (this.authors && this.authors.length))
         },
-        client : function (){
+        hostClient : function (){
             return location.href.includes('origin') ? 'origin' : 'std'
-        }
+        },
     },
     watch: {
         own : function (val){
@@ -110,7 +110,7 @@ export default {
             this.submitting = true;
             grantBoxcoin(this.postType, this.postId, this.chosen || this.userId, this.count, {
                 remark: this.remark,
-                client : this.client
+                client : this.client || this.hostClient
             })
                 .then((res) => {
                     this.$message({

@@ -1,11 +1,11 @@
 <template>
     <div class="w-thx">
         <div class="w-thx-panel">
-            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight && adminBoxcoinEnable && boxcoin_enable" :userId="userId" :max="admin_max" :min="admin_min" :own="admin_left" :total="admin_total" :points="admin_points" :authors="authors" @updateRecord="updateRecord" />
+            <boxcoin-admin :postId="postId" :postType="postType" v-if="hasRight && adminBoxcoinEnable && boxcoin_enable" :userId="userId" :max="admin_max" :min="admin_min" :own="admin_left" :total="admin_total" :points="admin_points" :authors="authors" @updateRecord="updateRecord" :client="client" />
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType" :postTitle="postTitle"></fav>
-            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left" :points="user_points" :authors="authors" v-if="userBoxcoinEnable && boxcoin_enable" @updateRecord="updateRecord" />
-            <Share :postId="postId" :postType="postType" />
+            <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left"  :points="user_points" :authors="authors" v-if="userBoxcoinEnable && boxcoin_enable" @updateRecord="updateRecord" />
+            <Share :postId="postId" :postType="postType" :client="client" />
         </div>
         <div class="w-thx-records">
             <boxcoin-records :postId="postId" :postType="postType" :cacheRecord="cacheRecord" :mode="mode"/>
@@ -28,7 +28,7 @@ import User from '@jx3box/jx3box-common/js/user'
 import {getPostBoxcoinConfig,getBoxcoinStatus} from '../../service/thx'
 export default {
     name: "Thx",
-    props: ["postId", "postType", "postTitle", "userId","adminBoxcoinEnable","userBoxcoinEnable",'mode', 'authors'],
+    props: ["postId", "postType", "postTitle", "userId","adminBoxcoinEnable","userBoxcoinEnable",'mode', 'authors',"client"],
     components: {
         Like,
         Share,

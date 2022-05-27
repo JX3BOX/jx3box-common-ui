@@ -33,7 +33,7 @@
             <slot name="single-append"></slot>
 
             <!-- 打赏 -->
-            <Thx class="m-single-thx" :postId="id" :postType="post_type" :postTitle="post_title" :userId="author_id" :adminBoxcoinEnable="true" :userBoxcoinEnable="true" :authors="authors" />
+            <Thx class="m-single-thx" :postId="id" :postType="post_type" :postTitle="post_title" :userId="author_id" :adminBoxcoinEnable="true" :userBoxcoinEnable="true" :authors="authors" :client="post_client"/>
 
             <!-- 评论 -->
             <div class="m-single-comment">
@@ -133,6 +133,9 @@ export default {
             }
 
             return []
+        },
+        post_client : function (){
+            return this.post?.client || 'all'
         }
     },
     methods : {
