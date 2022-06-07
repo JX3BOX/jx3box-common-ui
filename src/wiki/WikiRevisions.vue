@@ -20,7 +20,11 @@
                     </tr>
                     <tr class="history" v-for="(ver, key) in versions" :key="key">
                         <td>
-                            <a :href="link(type, `${ver.source_id}/${ver.id}`)" v-text="'v' + (versions.length - key)" @click="redirectRevision(ver,$event)"></a>
+                            <a
+                                :href="link(type, `${ver.source_id}/${ver.id}`)"
+                                v-text="'v' + (versions.length - key)"
+                                @click="redirectRevision(ver, $event)"
+                            ></a>
                         </td>
                         <td v-text="ts2str(ver.updated)"></td>
                         <td>
@@ -43,37 +47,40 @@ import { __Root, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "WikiRevisions",
     props: ["type", "sourceId", "isGame"],
-    data: function() {
+    data: function () {
         return {
             versions: null,
         };
     },
     computed: {
-        baseUrl: function() {
-            return (location.href.includes("classic") || location.href.includes("origin")) ? __OriginRoot : __Root;
+        client: function () {
+            return location.href.includes("classic") || location.href.includes("origin") ? "origin" : "std";
         },
-        prefix: function() {
+        baseUrl: function () {
+            return this.client == "origin" ? __OriginRoot : __Root;
+        },
+        prefix: function () {
             if (this.isGame) {
-                return this.baseUrl.slice(0,-1);
+                return this.baseUrl.slice(0, -1);
             } else {
                 return "";
             }
         },
     },
     methods: {
-        link: function(type, id) {
+        link: function (type, id) {
             return this.prefix + getLink(type, id);
         },
-        author_url: function(uid) {
+        author_url: function (uid) {
             return this.prefix + authorLink(uid);
         },
         ts2str,
-        redirectRevision : function (ver,e){
-            if(!this.isGame && this.$router){
+        redirectRevision: function (ver, e) {
+            if (!this.isGame && this.$router) {
                 e.preventDefault();
-                this.$router.replace({path:`/view/${ver.source_id}/${ver.id}`})
+                this.$router.replace({ path: `/view/${ver.source_id}/${ver.id}` });
             }
-        }
+        },
     },
     components: {
         WikiPanel,
@@ -83,7 +90,7 @@ export default {
             immediate: true,
             handler() {
                 if (this.sourceId) {
-                    WikiPost.versions(this.type, this.sourceId).then(
+                    WikiPost.versions(this.type, this.sourceId, this.client).then(
                         (res) => {
                             res = res.data;
                             this.versions = res.code === 200 ? res.data.versions : false;
