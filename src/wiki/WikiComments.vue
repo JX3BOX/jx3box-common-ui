@@ -59,10 +59,15 @@ export default {
             },
         };
     },
+    computed: {
+        client: function () {
+            return location.href.includes("classic") || location.href.includes("origin") ? "origin" : "std";
+        },
+    },
     methods: {
         get_comments() {
             if (!this.type || !this.sourceId) return;
-            WikiComment.list(this.type, this.sourceId).then(
+            WikiComment.list(this.type, this.sourceId, this.client).then(
                 (res) => {
                     res = res.data;
                     if (res.code === 200) {
@@ -115,7 +120,7 @@ export default {
                 parent_id: parent_id,
                 user_nickname: form.user_nickname || User.getInfo().name,
                 content: form.content,
-            })
+            }, this.client)
                 .then(
                     (res) => {
                         res = res.data;
