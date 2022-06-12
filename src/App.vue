@@ -84,10 +84,10 @@
                     </WikiPanel>
                     <hr />
 
-                    <WikiRevisions type="achievement" source-id="9096"/>
+                    <WikiRevisions type="achievement" source-id="2996"/>
                     <hr />
 
-                    <WikiComments type="achievement" source-id="9096"/>
+                    <WikiComments type="achievement" source-id="2996"/>
                     <hr
                 /></el-tab-pane>
             </el-tabs>
@@ -155,7 +155,7 @@ import WikiComments from "./wiki/WikiComments.vue";
 
 import axios from "axios";
 import { __server } from "@jx3box/jx3box-common/data/jx3box.json";
-import { WikiPost } from "@jx3box/jx3box-common/js/helper";
+import { wiki } from "@jx3box/jx3box-common/js/wiki";
 
 export default {
     name: "App",
@@ -227,9 +227,10 @@ export default {
         };
     },
     created: function() {
-        WikiPost.view(11042).then((res) => {
+        wiki.getById(25594)
+        .then((res) => {
             res = res.data;
-            if (res.code === 200) this.wikiPost = res.data;
+            this.wikiPost = res.data;
         });
     },
     methods: {
