@@ -68,7 +68,7 @@ import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
 import { showTime } from "@jx3box/jx3box-common/js/moment";
 export default {
     name: "BoxcoinRecords",
-    props: ["postType", "postId", "cacheRecord",'mode'],
+    props: ["postType", "postId", "cacheRecord",'postClient','mode'],
     components: {},
     data: function () {
         return {
@@ -89,6 +89,7 @@ export default {
             return {
                 pageSize: this.per,
                 pageIndex: this.page,
+                client : this.postClient,
             };
         },
     },
