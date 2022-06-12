@@ -44,7 +44,8 @@
 <script>
 import WikiPanel from "./WikiPanel";
 import Comment from "./WikiComment.vue";
-import { WikiComment } from "@jx3box/jx3box-common/js/helper";
+import { wikiComment } from "@jx3box/jx3box-common/js/wiki";
+import qs from "qs";
 import User from "@jx3box/jx3box-common/js/user";
 
 export default {
@@ -67,7 +68,9 @@ export default {
     methods: {
         get_comments() {
             if (!this.type || !this.sourceId) return;
-            WikiComment.list(this.type, this.sourceId, this.client).then(
+            // WikiComment.list(this.type, this.sourceId, this.client)
+            wikiComment.list({ type: this.type, id: this.sourceId }, { client: this.client })
+            .then(
                 (res) => {
                     res = res.data;
                     if (res.code === 200) {
@@ -113,14 +116,17 @@ export default {
                 });
                 return;
             }
-
-            WikiComment.save({
-                type: this.type,
-                source_id: this.sourceId,
-                parent_id: parent_id,
-                user_nickname: form.user_nickname || User.getInfo().name,
-                content: form.content,
-            }, this.client)
+            const data = {
+                comment: {
+                    type: this.type,
+                    source_id: this.sourceId,
+                    parent_id: parent_id,
+                    user_nickname: form.user_nickname || User.getInfo().name,
+                    content: form.content,
+                },
+                client: this.client
+            }
+            wikiComment.post({ data: qs.stringify(data) }, {})
                 .then(
                     (res) => {
                         res = res.data;

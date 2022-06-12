@@ -40,7 +40,7 @@
 
 <script>
 import WikiPanel from "./WikiPanel";
-import { WikiPost } from "@jx3box/jx3box-common/js/helper";
+import { wiki } from "@jx3box/jx3box-common/js/wiki";
 import { getLink, authorLink, ts2str } from "@jx3box/jx3box-common/js/utils";
 import { __Root, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
 
@@ -90,7 +90,8 @@ export default {
             immediate: true,
             handler() {
                 if (this.sourceId) {
-                    WikiPost.versions(this.type, this.sourceId, this.client).then(
+                    wiki.versions({ type: this.type, id: this.sourceId }, { client: this.client })
+                    .then(
                         (res) => {
                             res = res.data;
                             this.versions = res.code === 200 ? res.data.versions : false;
