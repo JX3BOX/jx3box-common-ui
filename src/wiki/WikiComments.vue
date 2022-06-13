@@ -126,7 +126,7 @@ export default {
                 },
                 client: this.client
             }
-            wikiComment.post({ data: qs.stringify(data) }, {})
+            wikiComment.post({ data }, {})
                 .then(
                     (res) => {
                         res = res.data;
