@@ -8,7 +8,7 @@
             <Share :postId="postId" :postType="postType" :client="client" />
         </div>
         <div class="w-thx-records">
-            <boxcoin-records :postId="postId" :postType="postType" :cacheRecord="cacheRecord" :mode="mode"/>
+            <boxcoin-records :postId="postId" :postType="postType" :postClient="client" :cacheRecord="cacheRecord" :mode="mode"/>
         </div>
         <div class="w-thx-copyright">
             &copy; 所有原创作品，著作权归作者所有，所有未经授权的非署名转载或抄袭将有权追究法律责任，所有法律事务由专聘律师代理。<br>
