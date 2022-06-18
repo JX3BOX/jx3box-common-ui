@@ -18,7 +18,7 @@
                     <Contributors v-if="authors && authors.length" :authors="authors" @chosen="handleChosen" />
                     <div class="u-points">
                         <el-radio-group v-model="count">
-                            <el-radio :label="item" v-for="item in points" :key="item" border>
+                            <el-radio :label="item" v-for="item in fitPoints" :key="item" border>
                                 <b>{{item}}</b>盒币
                             </el-radio>
                         </el-radio-group>
@@ -84,6 +84,9 @@ export default {
         },
         hostClient : function (){
             return location.href.includes('origin') ? 'origin' : 'std'
+        },
+        fitPoints : function (){
+            return this.points.filter(item => item <= this.left)
         }
     },
     watch: {
