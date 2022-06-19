@@ -45,7 +45,6 @@
 import WikiPanel from "./WikiPanel";
 import Comment from "./WikiComment.vue";
 import { wikiComment } from "@jx3box/jx3box-common/js/wiki";
-import qs from "qs";
 import User from "@jx3box/jx3box-common/js/user";
 
 export default {
