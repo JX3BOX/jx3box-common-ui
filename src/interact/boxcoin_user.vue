@@ -86,7 +86,7 @@ export default {
             return location.href.includes('origin') ? 'origin' : 'std'
         },
         fitPoints : function (){
-            return this.points.filter(item => item <= this.left)
+            return this.points//.filter(item => item <= this.left)
         }
     },
     watch: {
