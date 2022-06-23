@@ -27,8 +27,7 @@
 </template>
 
 <script>
-import User from "@jx3box/jx3box-common/js/user";
-import { follow, unfollow, getMyFollowList } from "../../service/follow";
+import { follow, unfollow, getMyFollowList, getFansCount } from "../../service/follow";
 export default {
     name: "AuthorFollow",
     props: {
@@ -66,6 +65,7 @@ export default {
     },
     mounted () {
         this.loadMyFollow();
+        this.loadFans();
     },
     methods: {
         // 格式化粉丝数
@@ -125,6 +125,15 @@ export default {
                 });
         },
         // TODO: 获取粉丝数
+        loadFans() {
+            getFansCount(this.uid)
+                .then((res) => {
+                    this.fansNum = res.data.data.follower_count || 0;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
     },
 };
 </script>

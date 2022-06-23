@@ -44,9 +44,19 @@ function getMyFansList(params) {
     })
 }
 
+/**
+ * 获取某个用户的粉丝数量
+ * @param {*} userId 用户id
+ */
+function getFansCount(userId) {
+    return $next().get(`/api/followers/${userId}/count`)
+}
+
+
 export {
     follow,
     unfollow,
     getMyFollowList,
-    getMyFansList
+    getMyFansList,
+    getFansCount
 }
