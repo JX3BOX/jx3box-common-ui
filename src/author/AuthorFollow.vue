@@ -8,7 +8,7 @@
             :type="btnType"
             v-if="!isFollow"
         >
-            {{ btnText }} {{ formatFansNum(fansNum) }}
+            {{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span>
         </el-button>
         <el-popover
             v-else
@@ -20,9 +20,9 @@
             <div class="u-action-list">
                 <div class="u-action-item" v-for="item in actions" :key="item.label" @click.stop="item.action">{{ item.label }}</div>
             </div>
-            <el-button class="u-unfollow-btn" size="mini" :type="btnType" slot="reference">{{ btnText }} {{ formatFansNum(fansNum) }}</el-button>
+            <el-button class="u-unfollow-btn" size="mini" :type="btnType" slot="reference">{{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span></el-button>
         </el-popover>
-        <el-button size="mini" icon="el-icon-message" disabled>私信</el-button>
+        <el-button size="mini" icon="el-icon-message" disabled title="Lv4+可用">私信</el-button>
     </div>
 </template>
 
@@ -149,5 +149,9 @@ export default {
             }
         }
     }
+}
+.u-follow-count{
+    color:#ffdea8;
+    margin-left:5px;
 }
 </style>
