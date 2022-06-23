@@ -82,6 +82,7 @@ export default {
                 .then((res) => {
                     this.$message.success("关注成功");
                     this.isFollow = true;
+                    this.loadFans();
                 })
                 .catch((err) => {
                     console.log(err);
@@ -98,12 +99,12 @@ export default {
                     .then((res) => {
                         this.$message.success("取关成功");
                         this.isFollow = false;
+                        this.loadFans();
                     })
                     .catch((err) => {
                         console.log(err);
                     });
             });
-            console.log(1)
         },
         // 获取是否已关注
         loadMyFollow() {
@@ -124,7 +125,6 @@ export default {
                     console.log(err);
                 });
         },
-        // TODO: 获取粉丝数
         loadFans() {
             getFansCount(this.uid)
                 .then((res) => {
