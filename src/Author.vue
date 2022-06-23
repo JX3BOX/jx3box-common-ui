@@ -27,6 +27,7 @@
             </div>
         </div>
         <div class="u-bio">{{ data.user_bio }}</div>
+        <AuthorFollow v-if="isLogin" class="u-follow-box" :uid="uid" />
         <div class="u-link" v-if="hasLink">
             <a v-if="data.weibo_name" class="u-weibo" :href="weiboLink(data.weibo_id)" target="_blank">
                 <img svg-inline src="../assets/img/author/weibo.svg" />
@@ -80,16 +81,18 @@
 </template>
 
 <script>
-const liveStatusMap = ["等待开播", "直播中", "直播结束"];
-import Avatar from "./author/Avatar.vue";
-import Authorposts from "./author/Authorposts.vue";
+// const liveStatusMap = ["等待开播", "直播中", "直播结束"];
 import { authorLink, tvLink, getLink, getThumbnail } from "@jx3box/jx3box-common/js/utils";
 import { __server, __imgPath,__userLevelColor } from "@jx3box/jx3box-common/data/jx3box.json";
 import { getUserInfo, getDouyu, getUserMedals, getUserPublicTeams } from "../service/author";
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
 import User from "@jx3box/jx3box-common/js/user";
 import { __userLevel } from "@jx3box/jx3box-common/data/jx3box.json";
+// components
 import medal from './medal/medal.vue'
+import Avatar from "./author/Avatar.vue";
+import Authorposts from "./author/Authorposts.vue";
+import AuthorFollow from "./author/AuthorFollow.vue";
 export default {
     name: "Author",
     props: ["uid"],
@@ -148,6 +151,9 @@ export default {
         },
         level: function() {
             return User.getLevel(this.data?.experience);
+        },
+        isLogin: function() {
+            return User.isLogin();
         },
     },
     methods: {
@@ -215,7 +221,8 @@ export default {
     components: {
         Avatar,
         Authorposts,
-        medal
+        medal,
+        AuthorFollow,
     },
 };
 </script>
