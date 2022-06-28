@@ -125,8 +125,6 @@ export default {
 </script>
 
 <style lang="less">
-.u-follow {
-}
 .u-unfollow-btn {
     margin-right: 10px;
 }
