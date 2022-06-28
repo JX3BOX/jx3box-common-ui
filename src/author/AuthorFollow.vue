@@ -7,6 +7,7 @@
             @click="follow"
             :type="btnType"
             v-if="!isFollow"
+            :loading="loading"
         >
             {{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span>
         </el-button>
@@ -40,6 +41,7 @@ export default {
         return {
             isFollow: false,
             fansNum: 0,
+            loading: false
         };
     },
     computed: {
@@ -64,7 +66,6 @@ export default {
         }
     },
     mounted () {
-        this.loadMyFollow();
         this.loadFans();
     },
     methods: {
@@ -106,32 +107,17 @@ export default {
                     });
             });
         },
-        // 获取是否已关注
-        loadMyFollow() {
-            const params = {
-                pageIndex: 1,
-                pageSize: 10,
-                user_id: this.uid,
-            };
-            getMyFollowList(params)
-                .then((res) => {
-                    if (res.data.data.list.length > 0) {
-                        this.isFollow = true;
-                    } else {
-                        this.isFollow = false;
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        },
         loadFans() {
+            this.loading = true;
             getFansCount(this.uid)
                 .then((res) => {
                     this.fansNum = res.data.data.follower_count || 0;
+                    this.isFollow = res.data.data.is_followed;
                 })
                 .catch((err) => {
                     console.log(err);
+                }).finally(() => {
+                    this.loading = false;
                 });
         }
     },
