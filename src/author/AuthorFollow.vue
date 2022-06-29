@@ -126,25 +126,29 @@ export default {
 
 <style lang="less">
 .u-unfollow-btn {
-    margin-right: 10px;
+    &.el-button {
+        margin-right: 10px;
+    }
 }
 .u-follow-popover {
-    min-width: 100px;
-    padding: 0;
-    margin: 0;
-    .u-action-list {
-        .u-action-item {
-            text-align: center;
-            cursor: pointer;
-            padding: 12px 15px;
-            &:hover {
-                background: rgb(248,248,251);
+    &.el-popover {
+        min-width: 100px;
+        padding: 0;
+        margin: 0;
+        .u-action-list {
+            .u-action-item {
+                text-align: center;
+                cursor: pointer;
+                padding: 12px 15px;
+                &:hover {
+                    background: rgb(248,248,251);
+                }
             }
         }
     }
 }
 .u-follow-count{
-    color:#ffdea8;
+    color:#fff;
     margin-left:5px;
 }
 </style>
