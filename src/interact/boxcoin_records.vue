@@ -43,7 +43,8 @@
                     </span>
                     <span class="u-meta u-remark">{{item.remark}}</span>
                     <time class="u-meta u-time">{{showTime(item.created_at)}}</time>
-                    <span class="u-delete" v-if="isSuperAdmin && !item.is_user_gift" @click="recovery(item,i)">
+                    <span class="u-client" v-if="isSuperAdmin">{{item.client}}</span>
+                    <span class="u-delete" v-if="isSuperAdmin" @click="recovery(item,i)">
                         <i class="el-icon-delete"></i>撤销
                     </span>
                 </li>
@@ -89,7 +90,7 @@ export default {
             return {
                 pageSize: this.per,
                 pageIndex: this.page,
-                client : this.postClient,
+                //client : this.postClient,
             };
         },
     },
