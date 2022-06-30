@@ -1,34 +1,37 @@
 <template>
     <div class="u-follow">
         <el-button
+            v-if="!isFollow"
             :class="{ 'is-follow': isFollow }"
             size="mini"
             :icon="btnIcon"
             @click="follow"
+            :disabled="isSelf"
             :type="btnType"
-            v-if="!isFollow"
             :loading="loading"
         >
             {{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span>
         </el-button>
-        <el-popover
-            v-else
-            placement="bottom"
-            trigger="hover"
-            popper-class="u-follow-popover"
-            :visible-arrow="false"
-        >
-            <div class="u-action-list">
-                <div class="u-action-item" v-for="item in actions" :key="item.label" @click.stop="item.action">{{ item.label }}</div>
-            </div>
-            <el-button class="u-unfollow-btn" size="mini" :type="btnType" slot="reference">{{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span></el-button>
-        </el-popover>
+        <template v-else>
+            <el-popover
+                placement="bottom"
+                trigger="hover"
+                popper-class="u-follow-popover"
+                :visible-arrow="false"
+            >
+                <div class="u-action-list">
+                    <div class="u-action-item" v-for="item in actions" :key="item.label" @click.stop="item.action">{{ item.label }}</div>
+                </div>
+                <el-button class="u-unfollow-btn" size="mini" :type="btnType" slot="reference">{{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span></el-button>
+            </el-popover>
+        </template>
         <el-button size="mini" icon="el-icon-message" disabled title="Lv4+可用">私信</el-button>
     </div>
 </template>
 
 <script>
-import { follow, unfollow, getMyFollowList, getFansCount } from "../../service/follow";
+import { follow, unfollow, getFansCount } from "../../service/follow";
+import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "AuthorFollow",
     props: {
@@ -49,7 +52,7 @@ export default {
             return this.isFollow ? "已关注" : "关注";
         },
         btnIcon() {
-            return this.isFollow ? "" : "el-icon-plus";
+            return this.isSelf ? "" : (this.isFollow ? "" : "el-icon-plus");
         },
         btnType() {
             return this.isFollow ? "info" : "warning"
@@ -63,16 +66,27 @@ export default {
                     },
                 },
             ];
-        }
+        },
+        isSelf() {
+            return this.uid == this.user.uid;
+        },
+        user() {
+            return User.getInfo();
+        },
     },
-    mounted () {
-        this.loadFans();
+    watch: {
+        uid: {
+            immediate: true,
+            handler(val) {
+                val && this.loadFans();
+            },
+        }
     },
     methods: {
         // 格式化粉丝数
         formatFansNum(num) {
             if (num < 10000) {
-                return num;
+                return num === 0 ? "" : num;
             } else {
                 return (num / 10000).toFixed(1) + "万";
             }
