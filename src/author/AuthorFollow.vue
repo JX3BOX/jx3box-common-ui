@@ -1,31 +1,43 @@
 <template>
     <div class="u-follow">
-        <el-button
-            v-if="!isFollow"
-            :class="{ 'is-follow': isFollow }"
-            size="mini"
-            :icon="btnIcon"
-            @click="follow"
-            :disabled="isSelf"
-            :type="btnType"
-            :loading="loading"
-        >
-            {{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span>
-        </el-button>
-        <template v-else>
-            <el-popover
-                placement="bottom"
-                trigger="hover"
-                popper-class="u-follow-popover"
-                :visible-arrow="false"
-            >
-                <div class="u-action-list">
-                    <div class="u-action-item" v-for="item in actions" :key="item.label" @click.stop="item.action">{{ item.label }}</div>
+        <template v-if="isLogin">
+            <template v-if="isSelf">
+                <div class="u-fans-box">
+                    <span class="u-fans-label">粉丝数</span>
+                    <span class="u-fans">{{ formatFansNum(fansNum) }}</span>
                 </div>
-                <el-button class="u-unfollow-btn" size="mini" :type="btnType" slot="reference">{{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span></el-button>
-            </el-popover>
+            </template>
+            <template v-else>
+                <el-button
+                    v-if="!isFollow"
+                    :class="{ 'is-follow': isFollow }"
+                    size="mini"
+                    :icon="btnIcon"
+                    @click="follow"
+                    :type="btnType"
+                    :loading="loading"
+                >
+                    {{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span>
+                </el-button>
+                <el-popover
+                    v-else
+                    placement="bottom"
+                    trigger="hover"
+                    popper-class="u-follow-popover"
+                    :visible-arrow="false"
+                >
+                    <div class="u-action-list">
+                        <div class="u-action-item" v-for="item in actions" :key="item.label" @click.stop="item.action">{{ item.label }}</div>
+                    </div>
+                    <el-button class="u-unfollow-btn" size="mini" :type="btnType" slot="reference">{{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span></el-button>
+                </el-popover>
+                <el-button size="mini" icon="el-icon-message" disabled title="Lv4+可用">私信</el-button>
+            </template>
         </template>
-        <el-button size="mini" icon="el-icon-message" disabled title="Lv4+可用">私信</el-button>
+        <el-button class="u-fans-box" disabled size="mini" v-else>
+            <span class="u-fans-label">粉丝数</span>
+            <span class="u-fans">{{ formatFansNum(fansNum) }}</span>
+        </el-button>
     </div>
 </template>
 
@@ -72,6 +84,9 @@ export default {
         },
         user() {
             return User.getInfo();
+        },
+        isLogin: function() {
+            return User.isLogin();
         },
     },
     watch: {
@@ -164,5 +179,16 @@ export default {
 .u-follow-count{
     color:#fff;
     margin-left:5px;
+}
+
+.u-fans-box {
+    cursor: default !important;
+    .u-fans-label {
+        color: #999;
+        margin-right: 5px;
+    }
+    .u-fans {
+        color: #333;
+    }
 }
 </style>

@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="u-bio">{{ data.user_bio }}</div>
-        <AuthorFollow v-if="isLogin" class="u-follow-box" :uid="uid" />
+        <AuthorFollow class="u-follow-box" :uid="uid" />
         <div class="u-link" v-if="hasLink">
             <a v-if="data.weibo_name" class="u-weibo" :href="weiboLink(data.weibo_id)" target="_blank">
                 <img svg-inline src="../assets/img/author/weibo.svg" />
@@ -151,9 +151,6 @@ export default {
         },
         level: function() {
             return User.getLevel(this.data?.experience);
-        },
-        isLogin: function() {
-            return User.isLogin();
         },
     },
     methods: {
