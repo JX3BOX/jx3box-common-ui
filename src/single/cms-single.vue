@@ -59,6 +59,7 @@ import Article from "@jx3box/jx3box-editor/src/Article.vue";
 import ArticleMarkdown from "@jx3box/jx3box-editor/src/ArticleMarkdown.vue";
 import Comment from "@jx3box/jx3box-comment-ui/src/Comment.vue";
 import { __visibleMap } from "@jx3box/jx3box-common/data/jx3box.json";
+import { getAppType } from '@jx3box/jx3box-common/js/utils'
 export default {
     name: "cms-single",
     components: {
@@ -84,6 +85,9 @@ export default {
     computed: {
         id: function() {
             return ~~this.post?.ID || 0;
+        },
+        app_type: function() {
+            return getAppType();
         },
         post_type: function() {
             return this.post?.post_type;
@@ -156,6 +160,15 @@ export default {
             immediate : true,
             handler : function (val){
                 this.$emit('extendUpdate',val)
+            }
+        },
+        post_type: {
+            deep : true,
+            immediate : true,
+            handler : function (val){
+                if (val && val !== this.app_type) {
+                    location.href = `/${val}/${this.id}`
+                }
             }
         }
     }
