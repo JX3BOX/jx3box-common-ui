@@ -77,12 +77,7 @@ export default {
     data: function () {
         return {
             isOpen: true,
-            feedback:
-                feedback +
-                "&subject=" +
-                location.href +
-                "?uid=" +
-                User.getInfo().uid,
+            feedback: '/feedback?refer=' + encodeURIComponent(window.location.href),
             isNotAdmin: !User.isEditor(),
             isOverlay: false,
             isApp: isApp(),
