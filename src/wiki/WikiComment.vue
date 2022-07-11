@@ -36,7 +36,7 @@
                     <!-- 展开、收起 -->
                     <el-button
                         type="default"
-                        v-if="comment.reply_form.show"
+                        v-if="comment.reply_form && comment.reply_form.show"
                         class="u-reply"
                         @click="
                             comment.reply_form.show = !comment.reply_form.show
@@ -64,7 +64,7 @@
                     ></span>
                 </div>
                 <!-- 评论回复表单 -->
-                <div class="m-reply-form" v-if="comment.reply_form.show">
+                <div class="m-reply-form" v-if="comment.reply_form && comment.reply_form.show">
                     <textarea
                         class="u-reply-content"
                         v-model="comment.reply_form.content"

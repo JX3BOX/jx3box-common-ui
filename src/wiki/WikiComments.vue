@@ -5,7 +5,7 @@
             <span>百科评论</span>
         </template>
         <template slot="body">
-            <div class="m-comments-panel">
+            <div class="m-comments-panel" v-loading="loading">
                 <div class="u-empty" v-if="!comments || !comments.length">
                     <span v-if="comments === null">🎉 数据加载中...</span>
                     <span v-if="comments === false">⚠️ 数据加载异常</span>
@@ -13,6 +13,14 @@
                 </div>
                 <!-- 递归评论组件 -->
                 <Comment :comments="comments" :source-id="sourceId" />
+                <el-pagination
+                    class="u-pagination-box"
+                    background :current-page="page"
+                    :total="total"
+                    :page-size="pageSize"
+                    layout="prev, pager, next, total"
+                    @current-change="handleCurrentChange"
+                ></el-pagination>
                 <!-- 回复表单 -->
                 <div id="m-reply-form" class="m-reply-form">
                     <h4 class="u-title">
@@ -57,6 +65,10 @@ export default {
                 content: "",
                 user_nickname: User.getInfo().name,
             },
+            page: 1,
+            pageSize: 10,
+            total: 0,
+            loading: false,
         };
     },
     computed: {
@@ -68,7 +80,8 @@ export default {
         get_comments() {
             if (!this.type || !this.sourceId) return;
             // WikiComment.list(this.type, this.sourceId, this.client)
-            wikiComment.list({ type: this.type, id: this.sourceId }, { client: this.client })
+            this.loading = true;
+            wikiComment.list({ type: this.type, id: this.sourceId }, { client: this.client, page: this.page })
             .then(
                 (res) => {
                     res = res.data;
@@ -81,11 +94,16 @@ export default {
                                 user_nickname: User.getInfo().name,
                             };
                         }
+                        this.page = res.data.current_page;
+                        this.total = res.data.total
                         this.comments = filter(comments, 0);
+                        // this.comments = comments;
+                        this.loading = false;
                     }
                 },
                 () => {
                     this.comments = false;
+                    this.loading = false;
                 }
             );
 
@@ -95,11 +113,21 @@ export default {
                     let c = comments[index];
                     if (!c) continue;
                     if (c.parent_id === parent) {
-                        // 置空当前元素
-                        comments[index] = null;
-                        // 递归执行
-                        let children = filter(comments, c.id);
-                        c.children = children ? children : [];
+                        // 递归
+                        let children = filter(c.children, c.id);
+                        c.children = children.map((item) => {
+                            item.parent = {
+                                user_id: c.user_id,
+                                user_nickname: c.user_nickname,
+                                id: c.id,
+                            }
+                            item.reply_form = {
+                                show: false,
+                                content: "",
+                                user_nickname: User.getInfo().name,
+                            }
+                            return item
+                        });
                         outputs.push(c);
                     }
                 }
@@ -152,6 +180,10 @@ export default {
                     form.show = false;
                 });
         },
+        handleCurrentChange(page) {
+            this.page = page;
+            this.get_comments();
+        }
     },
     components: {
         WikiPanel,
