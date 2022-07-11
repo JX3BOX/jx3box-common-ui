@@ -15,7 +15,9 @@
                 <Comment :comments="comments" :source-id="sourceId" />
                 <el-pagination
                     class="u-pagination-box"
-                    background :current-page="page"
+                    background
+                    hide-on-single-page
+                    :current-page="page"
                     :total="total"
                     :page-size="pageSize"
                     layout="prev, pager, next, total"
