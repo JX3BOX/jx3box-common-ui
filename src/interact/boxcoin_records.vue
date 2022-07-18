@@ -39,7 +39,7 @@
                     </a>
                     <span class="u-meta u-count">
                         +
-                        <b>{{item.count}}</b>
+                        <b>{{item.count + item.ext_take_off_count + ~~item.ext2_take_off_count}}</b>
                     </span>
                     <span class="u-meta u-remark">{{item.remark}}</span>
                     <time class="u-meta u-time">{{showTime(item.created_at)}}</time>

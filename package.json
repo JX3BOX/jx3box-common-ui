@@ -31,9 +31,9 @@
   ],
   "dependencies": {
     "@jx3box/jx3box-comment-ui": "^1.7.0",
-    "@jx3box/jx3box-common": "^7.3.13",
-    "@jx3box/jx3box-data": "^1.10.6",
-    "@jx3box/jx3box-editor": "^1.4.7",
+    "@jx3box/jx3box-common": "^7.4.0",
+    "@jx3box/jx3box-data": "^1.10.10",
+    "@jx3box/jx3box-editor": "^1.4.8",
     "axios": "^0.26.1",
     "dayjs": "^1.11.0",
     "element-ui": "^2.13.2",
