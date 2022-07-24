@@ -1,5 +1,11 @@
+<!--
+ * @Author: iRuxu
+ * @Date: 2022-04-29 22:34:07
+ * @LastEditTime: 2022-07-24 16:51:43
+ * @Description:
+-->
 <template>
-    <div class="w-like2" :class="{ disabled:!status }" @click="addLike">
+    <div class="w-like2" :class="{ disabled:!status }" @click="addLike" v-if="ready">
         <el-tooltip effect="dark" content="点赞" placement="top-start">
             <div>
                 <img
@@ -28,7 +34,7 @@ export default {
     },
     computed: {
         ready() {
-            return !!(this.postType && this.postId);
+            return this.postType && this.postId;
         },
     },
     methods: {
@@ -36,10 +42,9 @@ export default {
             this.loadStat();
         },
         loadStat: function () {
-            this.ready &&
-                getStat(this.postType, this.postId).then((res) => {
-                    this.count = res.data?.likes || 0;
-                });
+            getStat(this.postType, this.postId).then((res) => {
+                this.count = res.data.likes || 0;
+            });
         },
         // 点赞
         addLike: function () {
@@ -51,9 +56,11 @@ export default {
             this.status = false;
         },
     },
-    mounted: function () {
-        this.init();
-    },
+    watch : {
+        postId : function (val){
+            this.init();
+        }
+    }
 };
 </script>
 
