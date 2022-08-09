@@ -26,6 +26,7 @@
                 </el-tab-pane>
                 <el-tab-pane label="CMS作品" name="post">
                     <el-radio-group v-model="post_id">
+                        <el-radio label="41346">临时测试</el-radio>
                         <el-radio label="35605">Markdown</el-radio>
                         <el-radio label="32035">仅小册</el-radio>
                         <el-radio label="30017">仅联合创作者</el-radio>

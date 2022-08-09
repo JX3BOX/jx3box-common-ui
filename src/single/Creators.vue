@@ -8,21 +8,21 @@
             target="_blank"
         >
             <img class="u-avatar" :src="showAvatar(super_author.user_avatar)" />
-            <span class="u-name">{{super_author.display_name}}</span>
+            <span class="u-name">{{ super_author.display_name }}</span>
             <i class="u-up">UP</i>
         </a>
         <div class="w-creators-authors" v-if="other_authors">
             <a
                 class="w-creators-author w-creators-item"
-                v-for="(item,i) in other_authors"
+                v-for="(item, i) in other_authors"
                 :key="i"
                 :href="authorLink(item.post_author_info.ID)"
                 target="_blank"
                 v-show="item.status"
             >
                 <img class="u-avatar" :src="showAvatar(item.post_author_info.user_avatar)" />
-                <span class="u-name">{{item.post_author_info.display_name}}</span>
-                <i class="u-label">{{formatLabel(item.label)}}</i>
+                <span class="u-name">{{ item.post_author_info.display_name }}</span>
+                <i class="u-label">{{ formatLabel(item.label) }}</i>
             </a>
         </div>
         <a class="w-creators-edit" :href="editLink" v-if="isCreator">
@@ -33,11 +33,7 @@
 
 <script>
 import { getPostAuthors } from "../../service/cms";
-import {
-    showAvatar,
-    authorLink,
-    editLink,
-} from "@jx3box/jx3box-common/js/utils";
+import { showAvatar, authorLink, editLink } from "@jx3box/jx3box-common/js/utils";
 import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "Creators",
@@ -89,27 +85,31 @@ export default {
                     user_id: this.super_author.ID,
                     display_name: this.super_author.display_name,
                     user_avatar: this.super_author.user_avatar,
-                }
+                };
 
-                const other_authors = this.other_authors?.map(item => {
-                    return {
-                        user_id: item.post_author_info?.ID,
-                        display_name: item.post_author_info?.display_name,
-                        user_avatar: item.post_author_info?.user_avatar,
+                const other_authors = this.other_authors?.map((item) => {
+                    if (item.status) {
+                        return {
+                            user_id: item.post_author_info?.ID,
+                            display_name: item.post_author_info?.display_name,
+                            user_avatar: item.post_author_info?.user_avatar,
+                        };
                     }
-                })
+                }).filter((item) => {
+                    return !!item;
+                });
 
                 // 将联合创作者传出去
-                this.$emit('load-authors', { super_author, other_authors })
+                this.$emit("load-authors", { super_author, other_authors });
             });
         },
         showAvatar: function (val) {
             return showAvatar(val, 144);
         },
         authorLink,
-        formatLabel : function (str){
-            return str && str.slice(0,8)
-        }
+        formatLabel: function (str) {
+            return str && str.slice(0, 8);
+        },
     },
     created: function () {},
     mounted: function () {},
@@ -166,7 +166,7 @@ export default {
         color: @color;
         margin-bottom: 2px;
         .nobreak;
-        max-width:120px;
+        max-width: 120px;
     }
     &:hover {
         .u-name {
@@ -177,7 +177,7 @@ export default {
         .dbi;
         .fz(12px,1);
         font-style: normal;
-        border:1px solid @pink;
+        border: 1px solid @pink;
         color: @pink;
         padding: 3px 10px;
         .r(2px);
@@ -185,12 +185,12 @@ export default {
     }
     .u-label {
         .nobreak;
-        max-width:120px;
+        max-width: 120px;
         .dbi;
         .fz(12px,1);
         font-style: normal;
-        border:1px solid @color-link;
-        color:@color-link;
+        border: 1px solid @color-link;
+        color: @color-link;
         padding: 3px 10px;
         .r(2px);
         .mt(5px);
