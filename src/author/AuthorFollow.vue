@@ -1,25 +1,10 @@
 <template>
     <div class="c-author-follow">
-        <!-- <template v-if="isLogin">
-            <template v-if="isSelf">
-                <div class="u-fans-box">
-                    <span class="u-fans-label">关注</span>
-                    <span class="u-fans">{{ formatFansNum(fansNum) }}</span>
-                </div>
-            </template>
-            <template v-else>
-
-            </template>
-        </template>
-        <el-button class="u-fans-box" @click="follow" size="mini" v-else>
-            <span class="u-fans-label">关注</span>
-            <span class="u-fans">{{ formatFansNum(fansNum) }}</span>
-        </el-button> -->
         <el-button
             v-if="!isFollow"
             :class="{ 'is-follow': isFollow, 'u-fans-box': isSelf }"
             size="mini"
-            :icon="!isSelf && btnIcon"
+            :icon="btnIcon"
             @click="follow"
             :type="isSelf ? '' : btnType"
             :loading="loading"
@@ -27,19 +12,16 @@
         >
             {{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span>
         </el-button>
-        <el-popover
-            v-else
-            placement="bottom"
-            trigger="hover"
-            popper-class="u-follow-popover"
-            :visible-arrow="false"
-        >
+        <el-popover v-else placement="bottom" trigger="hover" popper-class="u-follow-popover" :visible-arrow="false">
             <div class="u-action-list">
-                <div class="u-action-item" v-for="item in actions" :key="item.label" @click.stop="item.action">{{ item.label }}</div>
+                <div class="u-action-item" v-for="item in actions" :key="item.label" @click.stop="item.action">
+                    {{ item.label }}
+                </div>
             </div>
-            <el-button class="u-unfollow-btn" size="mini" :type="btnType" slot="reference">{{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span></el-button>
+            <el-button class="u-unfollow-btn" size="mini" :type="btnType" slot="reference"
+                >{{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span></el-button
+            >
         </el-popover>
-        <el-button size="mini" icon="el-icon-message" disabled title="Lv4+可用">私信</el-button>
     </div>
 </template>
 
@@ -58,7 +40,7 @@ export default {
         return {
             isFollow: false,
             fansNum: 0,
-            loading: false
+            loading: false,
         };
     },
     computed: {
@@ -66,10 +48,10 @@ export default {
             return this.isFollow ? "已关注" : "关注";
         },
         btnIcon() {
-            return this.isSelf ? "" : (this.isFollow ? "" : "el-icon-plus");
+            return this.isSelf ? "" : this.isFollow ? "" : "el-icon-plus";
         },
         btnType() {
-            return this.isFollow ? "info" : "warning"
+            return this.isFollow ? "info" : "warning";
         },
         actions() {
             return [
@@ -87,7 +69,7 @@ export default {
         user() {
             return User.getInfo();
         },
-        isLogin: function() {
+        isLogin: function () {
             return User.isLogin();
         },
     },
@@ -97,7 +79,7 @@ export default {
             handler(val) {
                 val && this.loadFans();
             },
-        }
+        },
     },
     methods: {
         // 格式化粉丝数
@@ -126,10 +108,10 @@ export default {
         },
         // 取消关注
         unfollow() {
-            this.$confirm('确定不再关注此人？', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning'
+            this.$confirm("确定不再关注此人？", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning",
             }).then(() => {
                 unfollow(this.uid)
                     .then((res) => {
@@ -151,10 +133,11 @@ export default {
                 })
                 .catch((err) => {
                     console.log(err);
-                }).finally(() => {
+                })
+                .finally(() => {
                     this.loading = false;
                 });
-        }
+        },
     },
 };
 </script>
@@ -176,14 +159,14 @@ export default {
                 cursor: pointer;
                 padding: 8px 10px;
                 &:hover {
-                    background: rgb(248,248,251);
+                    background: rgb(248, 248, 251);
                 }
             }
         }
     }
 }
-.u-follow-count{
-    margin-left:5px;
+.u-follow-count {
+    margin-left: 5px;
 }
 
 .u-fans-box {

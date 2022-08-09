@@ -2,12 +2,12 @@
     <div class="c-author">
         <AuthorInfo :uid="uid" @ready="installModules" />
         <template v-if="data">
-            <!-- <div class="u-fans">
-            <AuthorFollow :uid="uid" />
-            <AuthorMsg :uid="uid" />
-            <AuthorGift :uid="uid" />
-        </div> -->
-            <AuthorLink class="u-links" :uid="uid" :data="data"/>
+            <div class="u-fans">
+                <AuthorFollow :uid="uid" />
+                <!-- <AuthorGift :uid="uid" /> -->
+            </div>
+            <!-- <AuthorMsg :uid="uid" /> -->
+            <AuthorLink class="u-links" :uid="uid" :data="data" />
             <AuthorMedals class="u-trophy" :uid="uid" />
             <AuthorTeams class="u-teams" :uid="uid" />
             <slot></slot>
@@ -19,13 +19,12 @@
 <script>
 import AuthorInfo from "./author/AuthorInfo.vue";
 import AuthorLink from "./author/AuthorLink.vue";
+import AuthorFollow from "./author/AuthorFollow.vue";
+// import AuthorMsg from "./author/AuthorMsg.vue";
+// import AuthorGift from "./author/AuthorGift.vue";
 import AuthorMedals from "./author/AuthorMedals.vue";
 import AuthorTeams from "./author/AuthorTeams.vue";
 import AuthorPosts from "./author/AuthorPosts.vue";
-
-// import AuthorFollow from "./author/AuthorFollow.vue";
-// import AuthorMsg from "./author/AuthorMsg.vue";
-// import AuthorGift from "./author/AuthorGift.vue";
 export default {
     name: "Author",
     props: ["uid"],
@@ -42,6 +41,8 @@ export default {
     components: {
         AuthorInfo,
         AuthorLink,
+        AuthorFollow,
+        // AuthorMsg,
         AuthorMedals,
         AuthorTeams,
         AuthorPosts,

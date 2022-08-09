@@ -131,7 +131,6 @@ export default {
     justify-content: center;
 }
 .u-bio {
-    .mb(10px);
     .fz(12px, 2);
     .break(3);
     color: #888;

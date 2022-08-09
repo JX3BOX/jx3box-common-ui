@@ -71,9 +71,11 @@ export default {
         }
     }
     .u-medals {
+        padding:0 3px;
         display: flex;
         .u-medal {
             cursor: pointer;
+            .mr(2px);
             .u-medal-img {
                 width: 20px;
                 height: 20px;
