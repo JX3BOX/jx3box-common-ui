@@ -14,7 +14,7 @@
             <div class="w-boxcoin-admin-content">
                 <div class="u-left">
                     <em class="u-label">本月状态</em>
-                    <b>已用 {{this.used}} 剩余 {{this.left}} 总计 {{this.total}}</b>
+                    已用<b>{{this.used}}</b> 剩余<b>{{this.left}}</b> 总计<b>{{this.total}}</b>
                     <el-progress :percentage="100 - (this.used * 100 / this.total)" :stroke-width="15" :text-inside="true"></el-progress>
                 </div>
                 <div class="u-list">

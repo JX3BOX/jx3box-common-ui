@@ -3,8 +3,8 @@
         <AuthorInfo :uid="uid" @ready="installModules" />
         <template v-if="data">
             <div class="u-fans">
-                <AuthorFollow :uid="uid" />
-                <!-- <AuthorGift :uid="uid" /> -->
+                <AuthorFollow style="margin-right: 8px;" :uid="uid" />
+                <AuthorGift :uid="uid" />
             </div>
             <!-- <AuthorMsg :uid="uid" /> -->
             <AuthorLink class="u-links" :uid="uid" :data="data" />
@@ -21,7 +21,7 @@ import AuthorInfo from "./author/AuthorInfo.vue";
 import AuthorLink from "./author/AuthorLink.vue";
 import AuthorFollow from "./author/AuthorFollow.vue";
 // import AuthorMsg from "./author/AuthorMsg.vue";
-// import AuthorGift from "./author/AuthorGift.vue";
+import AuthorGift from "./author/AuthorGift.vue";
 import AuthorMedals from "./author/AuthorMedals.vue";
 import AuthorTeams from "./author/AuthorTeams.vue";
 import AuthorPosts from "./author/AuthorPosts.vue";
@@ -43,6 +43,7 @@ export default {
         AuthorLink,
         AuthorFollow,
         // AuthorMsg,
+        AuthorGift,
         AuthorMedals,
         AuthorTeams,
         AuthorPosts,

@@ -2,15 +2,17 @@
     <div class="c-author-follow">
         <el-button
             v-if="!isFollow"
+            class="u-btn"
             :class="{ 'is-follow': isFollow, 'u-fans-box': isSelf }"
             size="mini"
+            plain
             :icon="btnIcon"
             @click="follow"
-            :type="isSelf ? '' : btnType"
             :loading="loading"
             :disabled="isSelf"
         >
-            {{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span>
+            {{ btnText }}
+            <!-- <span class="u-follow-count">{{ formatFansNum(fansNum) }} </span> -->
         </el-button>
         <el-popover v-else placement="bottom" trigger="hover" popper-class="u-follow-popover" :visible-arrow="false">
             <div class="u-action-list">
@@ -19,8 +21,10 @@
                 </div>
             </div>
             <el-button class="u-unfollow-btn" size="mini" :type="btnType" slot="reference"
-                >{{ btnText }}<span class="u-follow-count">{{ formatFansNum(fansNum) }}</span></el-button
-            >
+                >{{ btnText }}
+                <!-- TODO:后续在粉丝榜中展示粉丝数 -->
+                <!-- <span class="u-follow-count">{{ formatFansNum(fansNum) }}</span> -->
+            </el-button>
         </el-popover>
     </div>
 </template>
@@ -143,6 +147,14 @@ export default {
 </script>
 
 <style scoped lang="less">
+.c-author-follow{
+    // .u-btn{
+    //     background-color: #31dee6;
+    //     border-color:lighten(#31dee6,5%);
+    //     color: #fff;
+    // }
+}
+
 .u-unfollow-btn {
     &.el-button {
         margin-right: 10px;
@@ -169,14 +181,4 @@ export default {
     margin-left: 5px;
 }
 
-.u-fans-box {
-    cursor: default !important;
-    .u-fans-label {
-        color: #999;
-        margin-right: 5px;
-    }
-    .u-fans {
-        color: #333;
-    }
-}
 </style>

@@ -8,7 +8,7 @@
 
         <LeftSidebar :open="true">
             <LeftSideToggle :mobileOnly="true" />
-            <Author :author="author" :uid="8" />
+            <Author :author="author" :uid="7" />
         </LeftSidebar>
 
         <Main :withoutLeft="false" :withoutRight="false">
@@ -181,7 +181,6 @@ export default {
         RightSideMsg,
         Author,
         Avatar,
-        // Authorposts,
 
         Mark,
         Like,

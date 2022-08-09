@@ -30,4 +30,21 @@ function getBoxcoinStatus() {
     });
 }
 
-export { getPostBoxcoinRecords, grantBoxcoin, rewardBoxcoin, recoveryBoxcoin, getPostBoxcoinConfig, getBoxcoinStatus };
+function sendCny(payUserId, accessUserId, money, remark) {
+    return $pay().post(`/api/cny/consume/user-charge/${payUserId}/to/${accessUserId}/${money}`, { remark });
+}
+
+function checkCnyStatus(id) {
+    return $pay().get(`/api/cny/consume/check-status/${id}`);
+}
+
+export {
+    getPostBoxcoinRecords,
+    grantBoxcoin,
+    rewardBoxcoin,
+    recoveryBoxcoin,
+    getPostBoxcoinConfig,
+    getBoxcoinStatus,
+    sendCny,
+    checkCnyStatus,
+};
