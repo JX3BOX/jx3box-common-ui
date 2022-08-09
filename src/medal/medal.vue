@@ -21,7 +21,6 @@ export default {
         }
     },
     methods: {
-
         medalLink({ rank_id, medal_type = 'rank' }) {
             return getMedalLink(rank_id, medal_type)
         }

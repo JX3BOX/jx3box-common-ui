@@ -1,5 +1,5 @@
 <template>
-    <div class="u-follow">
+    <div class="c-author-follow">
         <!-- <template v-if="isLogin">
             <template v-if="isSelf">
                 <div class="u-fans-box">
@@ -159,7 +159,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style scoped lang="less">
 .u-unfollow-btn {
     &.el-button {
         margin-right: 10px;
