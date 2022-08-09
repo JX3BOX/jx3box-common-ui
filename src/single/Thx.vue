@@ -80,6 +80,7 @@ export default {
                 this.admin_total = res.data.data.asManagerBoxCoinTotal || 0;
 
                 this.user_points = res.data.data.limit.user_points || [10, 1000];
+                // TODO:根据多端展示剩余币
                 this.user_left = res.data.data.asUserBoxCoinRemain || 0;
             });
             getBoxcoinStatus().then((res) => {

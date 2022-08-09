@@ -13,17 +13,6 @@
 
         <Main :withoutLeft="false" :withoutRight="false">
             <el-tabs v-model="tab" type="card">
-                <el-tab-pane label="头像" name="avatar">
-                    <el-radio-group v-model="avatar_size">
-                        <el-radio :label="60">xs-60</el-radio>
-                        <el-radio :label="84">s-84</el-radio>
-                        <el-radio :label="136">m-136</el-radio>
-                        <el-radio :label="224">l-224</el-radio>
-                    </el-radio-group>
-                    <div>
-                        <Avatar :id="8" url="" :size="avatar_size" frame="" />
-                    </div>
-                </el-tab-pane>
                 <el-tab-pane label="CMS作品" name="post">
                     <el-radio-group v-model="post_id">
                         <el-radio label="41346">临时测试</el-radio>
@@ -91,6 +80,17 @@
                     <WikiComments type="achievement" source-id="2996"/>
                     <hr
                 /></el-tab-pane>
+                <el-tab-pane label="头像" name="avatar">
+                    <el-radio-group v-model="avatar_size">
+                        <el-radio :label="60">xs-60</el-radio>
+                        <el-radio :label="84">s-84</el-radio>
+                        <el-radio :label="136">m-136</el-radio>
+                        <el-radio :label="224">l-224</el-radio>
+                    </el-radio-group>
+                    <div>
+                        <Avatar :id="8" url="" :size="avatar_size" frame="" />
+                    </div>
+                </el-tab-pane>
             </el-tabs>
 
             <RightSidebar>
