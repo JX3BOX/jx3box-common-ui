@@ -1,10 +1,22 @@
 <template>
     <div class="c-author-gift">
-        <el-button class="u-btn" size="mini" icon="el-icon-present" @click="openGiftDialog" :disabled="isSelf"
+        <el-button
+            class="u-btn"
+            size="mini"
+            icon="el-icon-present"
+            @click="openGiftDialog"
+            :disabled="isSelf || !status"
+            :title="btnTitle"
             >赠礼</el-button
         >
 
-        <el-dialog title="赠礼" :visible.sync="visible" :append-to-body="true" class="c-author-gift-dialog">
+        <el-dialog
+            title="赠礼"
+            :visible.sync="visible"
+            :append-to-body="true"
+            class="c-author-gift-dialog"
+            v-if="status"
+        >
             <div class="u-content">
                 <div class="u-left">
                     <em class="u-label">🌟 金箔</em>
@@ -46,7 +58,7 @@
 
 <script>
 import User from "@jx3box/jx3box-common/js/user";
-import { sendCny, checkCnyStatus } from "../../service/thx";
+import { sendCny, checkCnyStatus, checkGiftStatus } from "../../service/thx";
 export default {
     name: "AuthorGift",
     props: ["uid"],
@@ -55,15 +67,12 @@ export default {
         return {
             loading: false,
             visible: false,
-            // TODO:余额替换
-            fitPoints: [1, 100, 250, 520, 666, 888, 1314, 2288, 3344, 6666, 8888, 28888, 36888, 68888],
+            fitPoints: [50,100, 250, 520, 666, 888, 1314, 2288, 3344, 6666, 8888, 28888, 36888, 68888],
 
-            // TODO:余额替换
-            left: 10000, //剩余量
+            left: 0, //剩余量
             status: true, //默认可打赏
 
-            // TODO:默认修改
-            count: 1,
+            count: 0, //打赏数量
             remark: "辛苦，感谢！",
         };
     },
@@ -81,8 +90,23 @@ export default {
             // 必须填写赠言
             return !this.isSelf && this.left && this.left >= this.count && this.count && this.remark;
         },
+        btnTitle: function () {
+            if (this.isSelf) {
+                return "不能给自己赠送礼物";
+            } else if (!this.status) {
+                return "作者没有开启接受礼物";
+            }
+            return "";
+        },
     },
-    watch: {},
+    watch: {
+        uid: {
+            immediate: true,
+            handler: function (val) {
+                val && this.load();
+            },
+        },
+    },
     methods: {
         openGiftDialog: function () {
             if (!User.isLogin()) {
@@ -105,7 +129,7 @@ export default {
                     lock: true,
                     text: "正在处理中",
                     spinner: "el-icon-loading",
-                    background: "rgba(255, 255, 255, 0.7)",
+                    background: "rgba(255, 255, 255, 0.8)",
                 });
 
                 let n = 0;
@@ -134,7 +158,7 @@ export default {
                                 this.left = this.left - this.count;
                                 this.count = 100;
                                 this.remark = "辛苦，感谢！";
-                            }else{
+                            } else {
                                 console.info(`[AUTHOR.CNY]重新轮询`);
                             }
                         })
@@ -144,7 +168,7 @@ export default {
                         });
 
                     // 最多尝试3次
-                    if (n > 2) {
+                    if (n > 5) {
                         console.info(`[AUTHOR.CNY]${n}次轮询未果，退出轮询`);
                         //关闭轮询
                         loading.close();
@@ -154,11 +178,16 @@ export default {
                         this.loading = false;
                         this.$message("交易繁忙，请稍后再试");
                     }
-                }, 2000);
+                }, 1000);
             });
         },
         load: function () {
-            // TODO:加载用户是否接受赠送与当前用户余额，仅当打开时执行一次
+            // 加载用户是否接受赠送与当前用户余额，仅当打开时执行一次
+            User.isLogin() &&
+                checkGiftStatus(this.uid).then((res) => {
+                    this.left = res.data.data.cny || 0; // 当前登录用户的余额
+                    this.status = res.data.data.targetUserCanReceiveCNY; // 目标用户是否接受充电
+                });
         },
     },
     created: function () {},
@@ -178,6 +207,14 @@ export default {
             background-color: #fff;
             color: darken(@color, 10%);
             border-color: darken(@color, 10%);
+        }
+
+        &.is-disabled {
+            color: #c0c4cc;
+            cursor: not-allowed;
+            background-image: none;
+            background-color: #fff;
+            border-color: #ebeef5;
         }
     }
 }

@@ -38,6 +38,10 @@ function checkCnyStatus(id) {
     return $pay().get(`/api/cny/consume/check-status/${id}`);
 }
 
+function checkGiftStatus(accessUserId){
+    return $pay().get(`/api/cny/consume/user-charge/to/${accessUserId}/check-status`)
+}
+
 export {
     getPostBoxcoinRecords,
     grantBoxcoin,
@@ -47,4 +51,5 @@ export {
     getBoxcoinStatus,
     sendCny,
     checkCnyStatus,
+    checkGiftStatus,
 };
