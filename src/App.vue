@@ -1,7 +1,14 @@
 <template>
     <div class="container-page">
         <Header></Header>
-        <Breadcrumb name="频道名称" slug="slug" root="/slug" :publishEnable="true" :feedbackEnable="true" :adminEnable="true">
+        <Breadcrumb
+            name="频道名称"
+            slug="slug"
+            root="/slug"
+            :publishEnable="true"
+            :feedbackEnable="true"
+            :adminEnable="true"
+        >
             <img slot="logo" svg-inline src="../assets/img/jx3.svg" />
             bread info
         </Breadcrumb>
@@ -22,16 +29,23 @@
                         <el-radio label="30582">小册和联合创作者</el-radio>
                         <el-radio label="31129">无小册和联合创作者</el-radio>
                     </el-radio-group>
-                    <singlebox :post="post" @extendUpdate="updateExtend"/>
+                    <singlebox :post="post" @extendUpdate="updateExtend" />
                 </el-tab-pane>
                 <el-tab-pane label="通用组件" name="widget">
                     <PostHeader :post="post" />
-                    <Creators :postId="30432" style="margin-bottom:10px" />
+                    <Creators :postId="30432" style="margin-bottom: 10px" />
                     <Collection :id="59" :defaultVisible="true" />
                     <UserPop title="添加用户" v-model="visible" @confirm="addUser" />
                     <el-button @click="visible = true">用户POP</el-button>
 
-                    <Thx :postId="23865" postType="bbs" postTitle="bbs23865的标题" :userId="7" :adminBoxcoinEnable="true" :userBoxcoinEnable="true" />
+                    <Thx
+                        :postId="23865"
+                        postType="bbs"
+                        postTitle="bbs23865的标题"
+                        :userId="7"
+                        :adminBoxcoinEnable="true"
+                        :userBoxcoinEnable="true"
+                    />
 
                     <hr />
 
@@ -39,7 +53,7 @@
                     <Down :count="100" :showCount="true" />
                     <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39" />
                     <Fav post-id="90" post-type="jx3dat" post-title="jx3dat测试标题" />
-                    <Feed post-id="90" post-type="jx3dat"/>
+                    <Feed post-id="90" post-type="jx3dat" />
                     <Print title="传入标题" />
                     <QRcode />
                     <Sharing />
@@ -54,7 +68,10 @@
                     <zlpBy />
 
                     <hr />
-                    <uploadImage v-model="upload" info="非必选。首页海报尺寸1100*300（推荐2200*600支持高分屏），最大20M。"></uploadImage>
+                    <uploadImage
+                        v-model="upload"
+                        info="非必选。首页海报尺寸1100*300（推荐2200*600支持高分屏），最大20M。"
+                    ></uploadImage>
                     <AuthorMedal :author-id="8"></AuthorMedal>
                 </el-tab-pane>
                 <el-tab-pane label="百科组件" name="wiki"
@@ -70,14 +87,16 @@
                             </a>
                             <span class="u-more">查看更多</span>
                         </template>
-                        <template slot="body">正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容</template>
+                        <template slot="body"
+                            >正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容</template
+                        >
                     </WikiPanel>
                     <hr />
 
-                    <WikiRevisions type="achievement" source-id="2996"/>
+                    <WikiRevisions type="achievement" source-id="2996" />
                     <hr />
 
-                    <WikiComments type="achievement" source-id="2996"/>
+                    <WikiComments type="achievement" source-id="2996" />
                     <hr
                 /></el-tab-pane>
                 <el-tab-pane label="头像" name="avatar">
@@ -89,6 +108,11 @@
                     </el-radio-group>
                     <div>
                         <Avatar :id="8" url="" :size="avatar_size" frame="" />
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="游戏描述" name="GameText">
+                    <div>
+                        <game-text :text="text"></game-text>
                     </div>
                 </el-tab-pane>
             </el-tabs>
@@ -147,12 +171,14 @@ import tagBy from "./filters/tagBy.vue";
 import clientBy from "./filters/clientBy.vue";
 import zlpBy from "./filters/zlpBy.vue";
 
-import uploadImage from './upload/upload_banner.vue'
-import AuthorMedal from './medal/medal.vue'
+import uploadImage from "./upload/upload_banner.vue";
+import AuthorMedal from "./medal/medal.vue";
 
 import WikiPanel from "./wiki/WikiPanel.vue";
 import WikiRevisions from "./wiki/WikiRevisions.vue";
 import WikiComments from "./wiki/WikiComments.vue";
+
+import GameText from "./GameText.vue";
 
 import axios from "axios";
 import { __server } from "@jx3box/jx3box-common/data/jx3box.json";
@@ -208,8 +234,9 @@ export default {
         WikiComments,
 
         UserPop,
+        GameText,
     },
-    data: function() {
+    data: function () {
         return {
             tab: "avatar",
 
@@ -221,36 +248,36 @@ export default {
             tag: "",
             visible: false,
 
-            avatar_size : 60,
+            avatar_size: 60,
 
-            upload: '',
+            upload: "",
+            text: `<Text>text="使用：<BUFF 3222 1 desc>，持续<BUFF 3222 1 time>。\\\n" font=105 </text><Text>text="红豆沙做馅儿，精致细腻的广式月饼。" font=100 </text><Text>text="使用：能在唐门套装供应商处换取如下装备。\\\n" font=105 </text><Text>text="[燕云·重泉靴]" name="iteminfolink" eventid=513 script="this.nVersion=0 this.dwTabType=7 this.dwIndex=35244 this.OnItemLButtonDown=function() OnItemLinkDown(this) end" font=100 r=255 g=40 b=255 </text><Text>text="，" font=105 </text><Text>text="[燕云·铭松靴]" name="iteminfolink" eventid=513 script="this.nVersion=0 this.dwTabType=7 this.dwIndex=35245 this.OnItemLButtonDown=function() OnItemLinkDown(this) end" font=100 r=255 g=40 b=255 </text><Text>text="。" font=100 </text>`,
         };
     },
-    created: function() {
-        wiki.getById(25594)
-        .then((res) => {
+    created: function () {
+        wiki.getById(25594).then((res) => {
             res = res.data;
             this.wikiPost = res.data;
         });
     },
     methods: {
-        addUser: function(val) {
+        addUser: function (val) {
             console.log(val);
         },
-        loadPost: function() {
+        loadPost: function () {
             axios.get(`/api/cms/post/${this.post_id}`).then((res) => {
                 this.post = res.data.data;
-                this.$forceUpdate()
+                this.$forceUpdate();
             });
         },
-        updateExtend : function (val){
-            console.log(val)
-        }
+        updateExtend: function (val) {
+            console.log(val);
+        },
     },
     watch: {
         post_id: {
             immediate: true,
-            handler: function(val) {
+            handler: function (val) {
                 this.loadPost();
             },
         },
