@@ -31,8 +31,6 @@ import zlpBy from "./src/filters/zlpBy.vue";
 import Thx from './src/single/Thx.vue'
 import WikiPanel from './src/wiki/WikiPanel.vue'
 
-import GameText from './src/GameText.vue'
-
 const components = {
     Header,
     Breadcrumb,
@@ -66,9 +64,7 @@ const components = {
     clientBy,
     zlpBy,
 
-    WikiPanel,
-
-    GameText
+    WikiPanel
 }
 
 const install = function (Vue, Option) {

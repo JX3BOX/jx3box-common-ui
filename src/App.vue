@@ -110,11 +110,6 @@
                         <Avatar :id="8" url="" :size="avatar_size" frame="" />
                     </div>
                 </el-tab-pane>
-                <el-tab-pane label="游戏描述" name="GameText">
-                    <div>
-                        <game-text :text="text"></game-text>
-                    </div>
-                </el-tab-pane>
             </el-tabs>
 
             <RightSidebar>
@@ -178,8 +173,6 @@ import WikiPanel from "./wiki/WikiPanel.vue";
 import WikiRevisions from "./wiki/WikiRevisions.vue";
 import WikiComments from "./wiki/WikiComments.vue";
 
-import GameText from "./GameText.vue";
-
 import axios from "axios";
 import { __server } from "@jx3box/jx3box-common/data/jx3box.json";
 import { wiki } from "@jx3box/jx3box-common/js/wiki";
@@ -233,8 +226,7 @@ export default {
         WikiRevisions,
         WikiComments,
 
-        UserPop,
-        GameText,
+        UserPop
     },
     data: function () {
         return {
