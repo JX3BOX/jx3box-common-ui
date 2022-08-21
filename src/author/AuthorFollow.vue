@@ -14,13 +14,19 @@
             {{ btnText }}
             <!-- <span class="u-follow-count">{{ formatFansNum(fansNum) }} </span> -->
         </el-button>
-        <el-popover v-else placement="bottom" trigger="hover" popper-class="u-follow-popover" :visible-arrow="false">
+        <el-popover
+            v-else
+            placement="bottom"
+            trigger="hover"
+            popper-class="c-author-follow-popover"
+            :visible-arrow="false"
+        >
             <div class="u-action-list">
                 <div class="u-action-item" v-for="item in actions" :key="item.label" @click.stop="item.action">
                     {{ item.label }}
                 </div>
             </div>
-            <el-button class="u-unfollow-btn" size="mini" :type="btnType" slot="reference"
+            <el-button class="u-btn" size="mini" :type="btnType" slot="reference"
                 >{{ btnText }}
                 <!-- TODO:后续在粉丝榜中展示粉丝数 -->
                 <!-- <span class="u-follow-count">{{ formatFansNum(fansNum) }}</span> -->
@@ -146,39 +152,33 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
-.c-author-follow{
-    // .u-btn{
-    //     background-color: #31dee6;
-    //     border-color:lighten(#31dee6,5%);
-    //     color: #fff;
-    // }
-}
-
-.u-unfollow-btn {
-    &.el-button {
-        margin-right: 10px;
-    }
-}
-.u-follow-popover {
-    &.el-popover {
-        min-width: 100px;
-        padding: 0;
-        margin: 0;
-        .u-action-list {
-            .u-action-item {
-                text-align: center;
-                cursor: pointer;
-                padding: 8px 10px;
-                &:hover {
-                    background: rgb(248, 248, 251);
+<style lang="less">
+.c-author-follow-popover {
+    .u-follow-popover {
+        &.el-popover {
+            min-width: 100px;
+            padding: 0;
+            margin: 0;
+            .u-action-list {
+                .u-action-item {
+                    text-align: center;
+                    cursor: pointer;
+                    padding: 8px 10px;
+                    &:hover {
+                        background: rgb(248, 248, 251);
+                    }
                 }
             }
         }
     }
-}
-.u-follow-count {
-    margin-left: 5px;
+    .u-follow-count {
+        margin-left: 5px;
+    }
 }
 
+@media screen and (max-width: @phone) {
+    .el-message-box {
+        max-width: 60%;
+    }
+}
 </style>
