@@ -129,10 +129,7 @@ export default {
                     } else if (this.client == "std") {
                         this.user_left = res.data.data.asUserBoxCoinRemainStd + res.data.data.asUserBoxCoinRemainAll;
                     } else {
-                        this.user_left =
-                            res.data.data.asUserBoxCoinRemainAll +
-                            res.data.data.asUserBoxCoinRemainStd +
-                            res.data.data.asUserBoxCoinRemainOrigin;
+                        this.user_left = res.data.data.asUserBoxCoinRemainAll
                     }
                 });
             getBoxcoinStatus().then((res) => {
