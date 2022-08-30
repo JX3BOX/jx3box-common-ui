@@ -123,12 +123,13 @@ export default {
 
                     this.user_points = res.data.data.limit.user_points || [10, 1000];
                     // 根据多端展示剩余币
-                    // 作品是n端，接受n端币+all币，但转化为n端币
+                    // 作品是n端，接受n端币+all币
                     if (this.client == "origin") {
                         this.user_left = res.data.data.asUserBoxCoinRemainOrigin + res.data.data.asUserBoxCoinRemainAll;
                     } else if (this.client == "std") {
                         this.user_left = res.data.data.asUserBoxCoinRemainStd + res.data.data.asUserBoxCoinRemainAll;
                     } else {
+                        // TODO:支持其它端
                         this.user_left = res.data.data.asUserBoxCoinRemainAll
                     }
                 });

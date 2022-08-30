@@ -20,7 +20,8 @@
             <div class="u-content">
                 <div class="u-left">
                     <em class="u-label">🌟 金箔</em>
-                    <b>{{ this.left }}</b>
+                    <b>{{ left }}</b>
+                    <a class="u-charge" :href="chargeLink" target="_blank">[充值]</a>
                 </div>
                 <div class="u-list">
                     <em class="u-label">❤️ 赠送</em>
@@ -71,6 +72,7 @@ export default {
 
             left: 0, //剩余量
             status: true, //默认可打赏
+            chargeLink: "/vip/cny?redirect=" + location.href,
 
             count: 0, //打赏数量
             remark: "辛苦，感谢！",
