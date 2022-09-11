@@ -129,8 +129,10 @@ export default {
                     } else if (this.client == "std") {
                         this.user_left = res.data.data.asUserBoxCoinRemainStd + res.data.data.asUserBoxCoinRemainAll;
                     } else {
-                        // TODO:支持其它端
-                        this.user_left = res.data.data.asUserBoxCoinRemainAll
+                        this.user_left =
+                            res.data.data.asUserBoxCoinRemainAll +
+                            res.data.data.asUserBoxCoinRemainStd +
+                            res.data.data.asUserBoxCoinRemainOrigin;
                     }
                 });
             getBoxcoinStatus().then((res) => {
