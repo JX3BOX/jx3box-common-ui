@@ -229,6 +229,8 @@ export default {
     }
 
     .u-left {
+        display: flex;
+        align-items: center;
         .fz(14px,24px);
         .u-label {
             .mr(10px);
@@ -241,6 +243,9 @@ export default {
             .dbi;
             .y;
             vertical-align: text-bottom;
+        }
+        .u-charge{
+            .ml(8px);
         }
         .el-progress {
             margin: 10px;
