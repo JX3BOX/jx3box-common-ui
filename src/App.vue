@@ -16,6 +16,7 @@
         <LeftSidebar :open="true">
             <LeftSideToggle :mobileOnly="true" />
             <Author :author="author" :uid="7" />
+            <Fans></Fans>
         </LeftSidebar>
 
         <Main :withoutLeft="false" :withoutRight="false">
@@ -172,7 +173,7 @@ import AuthorMedal from "./medal/medal.vue";
 import WikiPanel from "./wiki/WikiPanel.vue";
 import WikiRevisions from "./wiki/WikiRevisions.vue";
 import WikiComments from "./wiki/WikiComments.vue";
-
+import Fans from './fans/fans.vue'
 import axios from "axios";
 import { __server } from "@jx3box/jx3box-common/data/jx3box.json";
 import { wiki } from "@jx3box/jx3box-common/js/wiki";
@@ -226,7 +227,8 @@ export default {
         WikiRevisions,
         WikiComments,
 
-        UserPop
+        UserPop,
+        Fans
     },
     data: function () {
         return {
