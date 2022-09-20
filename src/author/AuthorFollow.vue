@@ -26,7 +26,7 @@
                     {{ item.label }}
                 </div>
             </div>
-            <el-button class="u-btn" size="mini" :type="btnType" slot="reference"
+            <el-button class="u-trigger" size="mini" :type="btnType" slot="reference"
                 >{{ btnText }}
                 <!-- TODO:后续在粉丝榜中展示粉丝数 -->
                 <!-- <span class="u-follow-count">{{ formatFansNum(fansNum) }}</span> -->
@@ -153,8 +153,23 @@ export default {
 </script>
 
 <style lang="less">
+.c-author-follow {
+    .u-btn {
+        cursor: default;
+        &:hover {
+            cursor: pointer;
+            background: #ecf5ff;
+        }
+    }
+    /*.u-trigger {
+        &:hover {
+            cursor: default;
+            background: unset;
+        }
+    }*/
+}
 .c-author-follow-popover {
-    .u-follow-popover {
+    //.u-follow-popover {
         &.el-popover {
             min-width: 100px;
             padding: 0;
@@ -170,7 +185,7 @@ export default {
                 }
             }
         }
-    }
+    //}
     .u-follow-count {
         margin-left: 5px;
     }

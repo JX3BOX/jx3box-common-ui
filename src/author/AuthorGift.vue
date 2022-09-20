@@ -7,6 +7,7 @@
             @click="openGiftDialog"
             :disabled="isSelf || !status"
             :title="btnTitle"
+            plain
             >赠礼</el-button
         >
 
@@ -201,14 +202,15 @@ export default {
 .c-author-gift {
     .u-btn {
         @color: #f9afd4;
-        background-color: @color;
-        color: #fff;
-        border-color: darken(@color, 2%);
+
+        background-color: #fff;
+        color: darken(@color, 10%);
+        border-color: darken(@color, 10%);
 
         &:hover {
-            background-color: #fff;
-            color: darken(@color, 10%);
-            border-color: darken(@color, 10%);
+            background-color: @color;
+            color: #fff;
+            border-color: darken(@color, 2%);
         }
 
         &.is-disabled {
