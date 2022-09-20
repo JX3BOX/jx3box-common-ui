@@ -68,6 +68,9 @@ function userSignIn(){
     return $pay({ mute: true }).get(`/api/personal/task/everyday/sign-in`)
 }
 
+function getFansList(userid,limit) {
+    return $pay().get(`/api/cny/consume/user-charge/rank/of/${userid}?limit=0`,);
+}
 export {
     getUserInfo,
     getUserPosts,
@@ -78,4 +81,5 @@ export {
     getSuperAuthor,
     getMyInfo,
     userSignIn,
+    getFansList
 };

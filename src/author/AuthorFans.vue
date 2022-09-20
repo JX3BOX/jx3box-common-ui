@@ -1,11 +1,11 @@
 <template>
     <div class="c-author-fans">
-        <!-- <div class="f-main-box">
+        <!--       <div class="f-main-box">
             <div class="f-left">
                 <div class="f-l-box"><div class="f-l-title">粉丝团</div></div>
             </div>
             <div class="f-right">
-                <div class="f-r-box"><div class="f-r-num">共199人</div></div>
+                <div class="f-r-box"><div class="f-r-num">共{{list.length}}人</div></div>
                 <div class="f-r-line f-r-w-80 f-r-mb"></div>
                 <div class="f-r-line f-r-w-70 f-r-mb"></div>
                 <div class="f-r-line f-r-w-30 f-r-mb"></div>
@@ -15,60 +15,65 @@
                 <div class="f-r-line f-r-w-80"></div>
             </div>
         </div> -->
-
         <div class="u-label">
             <i class="el-icon-star-off"></i>
             <span>粉丝榜</span>
         </div>
-        <div class="f-avatar">
+        <div class="f-avatar" v-if="list.length > 0">
             <el-row :gutter="10">
-                <el-col :span="4" v-for="(item, index) in 6" :key="index">
-                    <el-avatar
-                        shape="circle"
-                        :size="30"
-                        src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-                        v-if="index < 5"
-                    ></el-avatar>
-                    <el-avatar shape="circle" :size="30" v-else style="background: #d9d9d9"
-                        ><span class="f-avatar-num">···</span></el-avatar
-                    >
+                <el-col :span="4" v-for="(item, index) in list" :key="item.pay_user_id">
+                    <el-tooltip class="item" effect="dark" :content="item.money.toString()" placement="top" v-if="index < 5">
+                        <el-avatar shape="circle" :size="30" style="background: #D9D9D9;"><i class="el-icon-s-custom"></i></el-avatar>
+                    </el-tooltip>
+                </el-col>
+                <el-col :span="4" v-if="list.length>5">
+                    <el-avatar shape="circle" :size="30" style="background: #D9D9D9;">
+                        <span class="f-avatar-num" v-if="list.length > 99">···</span>
+                        <span class="f-avatar-num" v-else>+{{ list.length - 5 }}</span>
+                    </el-avatar>
                 </el-col>
             </el-row>
         </div>
-        <div class="f-bottom">本赛季共199人为TA赠礼</div>
+        <div class="f-bottom">本赛季共 {{ list.length }} 人为TA赠礼</div>
     </div>
 </template>
 
 <script>
+import User from '@jx3box/jx3box-common/js/user';
+import { getFansList } from "../../service/author";
 export default {
-    name: "Fans",
+    name: 'Fans',
     components: {},
     data() {
-        return {}
+        return {
+            list: []
+        };
     },
-    created() {},
-    methods: {},
+    mounted() {
+        this.getData();
+    },
+    methods: {
+        getData() {
+            getFansList(User.getInfo().uid).then(res => {
+                let data = res.data.data.list;
+                if (data) {
+                    this.list=data
+                }
+            });
+        }
+    }
 };
 </script>
 
 <style lang="less" scoped>
-@media screen and (max-width: 1680px) {
-    .fans {
-        width: 250px;
-    }
-}
-@media screen and (max-width: 1440px) {
-    .fans {
-        width: 230px;
-    }
-}
-.fans {
+
+.c-author-fans {
     box-sizing: border-box;
-    padding: 10px;
-    background: #ffffff;
-    font-family: "Microsoft YaHei";
+    // padding: 10px;
+    // background: #ffffff;
+    font-family: 'Microsoft YaHei';
     font-style: normal;
-    .h(133px);
+    // .h(133px);
     .f-main-box {
         display: flex;
         justify-content: center;
@@ -135,21 +140,21 @@ export default {
             }
         }
     }
-}
-.f-avatar {
-    .mt(10px);
-    height: 30px;
-    .f-avatar-num {
-        .fz(10px);
-        color: #000000;
-        font-weight: 700;
+    .f-avatar {
+        .mt(10px);
+        height: 30px;
+        .f-avatar-num {
+            .fz(10px);
+            color: #434343;
+            font-weight: 700;
+        }
     }
-}
-.f-bottom {
-    .h(13px);
-    .mt(10px);
-    .fz(10px, 13px);
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.5);
+    .f-bottom {
+        .h(13px);
+        .mt(10px);
+        .fz(10px, 13px);
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.5);
+    }
 }
 </style>
