@@ -1,6 +1,6 @@
 <template>
-    <div class="fans">
-        <div class="f-main-box">
+    <div class="c-author-fans">
+        <!-- <div class="f-main-box">
             <div class="f-left">
                 <div class="f-l-box"><div class="f-l-title">粉丝团</div></div>
             </div>
@@ -14,13 +14,24 @@
                 <div class="f-r-line f-r-w-70 f-r-mb"></div>
                 <div class="f-r-line f-r-w-80"></div>
             </div>
-        </div>
+        </div> -->
 
+        <div class="u-label">
+            <i class="el-icon-star-off"></i>
+            <span>粉丝·榜</span>
+        </div>
         <div class="f-avatar">
             <el-row :gutter="10">
                 <el-col :span="4" v-for="(item, index) in 6" :key="index">
-                    <el-avatar shape="circle" :size="30" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" v-if="index < 5"></el-avatar>
-                    <el-avatar shape="circle" :size="30" v-else style="background: #D9D9D9;"><span class="f-avatar-num">···</span></el-avatar>
+                    <el-avatar
+                        shape="circle"
+                        :size="30"
+                        src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+                        v-if="index < 5"
+                    ></el-avatar>
+                    <el-avatar shape="circle" :size="30" v-else style="background: #d9d9d9"
+                        ><span class="f-avatar-num">···</span></el-avatar
+                    >
                 </el-col>
             </el-row>
         </div>
@@ -30,13 +41,13 @@
 
 <script>
 export default {
-    name: 'Fans',
+    name: "Fans",
     components: {},
     data() {
-        return {};
+        return {}
     },
     created() {},
-    methods: {}
+    methods: {},
 };
 </script>
 
@@ -55,7 +66,7 @@ export default {
     box-sizing: border-box;
     padding: 10px;
     background: #ffffff;
-    font-family: 'Microsoft YaHei';
+    font-family: "Microsoft YaHei";
     font-style: normal;
     .h(133px);
     .f-main-box {
@@ -124,22 +135,21 @@ export default {
             }
         }
     }
-
-    .f-avatar {
-        .mt(10px);
-        height: 30px;
-        .f-avatar-num {
-            .fz(10px);
-            color: #000000;
-            font-weight: 700;
-        }
+}
+.f-avatar {
+    .mt(10px);
+    height: 30px;
+    .f-avatar-num {
+        .fz(10px);
+        color: #000000;
+        font-weight: 700;
     }
-    .f-bottom {
-        .h(13px);
-        .mt(10px);
-        .fz(10px, 13px);
-        font-weight: 400;
-        color: rgba(0, 0, 0, 0.5);
-    }
+}
+.f-bottom {
+    .h(13px);
+    .mt(10px);
+    .fz(10px, 13px);
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.5);
 }
 </style>

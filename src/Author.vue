@@ -2,7 +2,7 @@
     <div class="c-author">
         <AuthorInfo :uid="uid" @ready="installModules" />
         <template v-if="data">
-            <div class="u-fans">
+            <div class="u-interact">
                 <AuthorFollow style="margin-right: 8px;" :uid="uid" />
                 <AuthorGift :uid="uid" />
             </div>
@@ -10,6 +10,7 @@
             <AuthorLink class="u-links" :uid="uid" :data="data" />
             <AuthorMedals class="u-trophy" :uid="uid" />
             <AuthorTeams class="u-teams" :uid="uid" />
+            <AuthorFans class="u-fans" :uid="uid" />
             <slot></slot>
             <AuthorPosts class="u-posts" :uid="uid" />
         </template>
@@ -22,6 +23,7 @@ import AuthorLink from "./author/AuthorLink.vue";
 import AuthorFollow from "./author/AuthorFollow.vue";
 // import AuthorMsg from "./author/AuthorMsg.vue";
 import AuthorGift from "./author/AuthorGift.vue";
+import AuthorFans from "./author/AuthorFans.vue";
 import AuthorMedals from "./author/AuthorMedals.vue";
 import AuthorTeams from "./author/AuthorTeams.vue";
 import AuthorPosts from "./author/AuthorPosts.vue";
@@ -47,6 +49,7 @@ export default {
         AuthorMedals,
         AuthorTeams,
         AuthorPosts,
+        AuthorFans,
     },
 };
 </script>

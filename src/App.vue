@@ -173,7 +173,6 @@ import AuthorMedal from "./medal/medal.vue";
 import WikiPanel from "./wiki/WikiPanel.vue";
 import WikiRevisions from "./wiki/WikiRevisions.vue";
 import WikiComments from "./wiki/WikiComments.vue";
-import Fans from './fans/fans.vue'
 import axios from "axios";
 import { __server } from "@jx3box/jx3box-common/data/jx3box.json";
 import { wiki } from "@jx3box/jx3box-common/js/wiki";
@@ -228,7 +227,6 @@ export default {
         WikiComments,
 
         UserPop,
-        Fans
     },
     data: function () {
         return {
