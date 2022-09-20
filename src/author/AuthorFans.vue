@@ -25,11 +25,11 @@
                     <el-tooltip
                         class="item"
                         effect="dark"
-                        :content="item.money.toString()"
+                        :content="'累计打赏' + item.money.toString() + '金箔'"
                         placement="top"
                         v-if="index < 5"
                     >
-                        <el-avatar class="u-avatar" shape="circle" :size="30"
+                        <el-avatar class="u-avatar" shape="circle" :size="30" :src="showAvatar(item.pay_user.avatar)"
                             ><i class="el-icon-s-custom"></i
                         ></el-avatar>
                     </el-tooltip>
@@ -47,28 +47,37 @@
 </template>
 
 <script>
-import User from "@jx3box/jx3box-common/js/user";
 import { getFansList } from "../../service/author";
+import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 export default {
-    name: "Fans",
-    components: {},
+    name: "AuthorFans",
+    props: {
+        uid: {
+            type: Number,
+            default: 0,
+        },
+    },
     data() {
         return {
             list: [],
+            total: 0,
         };
-    },
-    mounted() {
-        this.getData();
     },
     methods: {
         getData() {
-            getFansList(User.getInfo().uid).then((res) => {
-                let data = res.data.data.list;
-                console.log(data)
-                if (data) {
-                    this.list = data || [];
-                }
+            getFansList(this.uid).then((res) => {
+                this.list = res.data.data.list || [];
+                this.total = res.data.data.totalUser || 0;
             });
+        },
+        showAvatar,
+    },
+    watch: {
+        uid: {
+            immediate: true,
+            handler: function () {
+                this.getData();
+            },
         },
     },
 };
@@ -157,8 +166,8 @@ export default {
             font-weight: 700;
         }
     }
-    .u-avatar{
-        background-color:#d9d9d9;
+    .u-avatar {
+        background-color: #d9d9d9;
     }
     .f-bottom {
         .mt(10px);
