@@ -1,6 +1,6 @@
 <template>
-    <div class="c-author-fans">
-        <!--       <div class="f-main-box">
+    <div class="c-author-fans" v-if="list && list.length">
+        <!--<div class="f-main-box">
             <div class="f-left">
                 <div class="f-l-box"><div class="f-l-title">粉丝团</div></div>
             </div>
@@ -19,15 +19,23 @@
             <i class="el-icon-star-off"></i>
             <span>粉丝榜</span>
         </div>
-        <div class="f-avatar" v-if="list.length > 0">
+        <div class="f-avatar">
             <el-row :gutter="10">
                 <el-col :span="4" v-for="(item, index) in list" :key="item.pay_user_id">
-                    <el-tooltip class="item" effect="dark" :content="item.money.toString()" placement="top" v-if="index < 5">
-                        <el-avatar shape="circle" :size="30" style="background: #D9D9D9;"><i class="el-icon-s-custom"></i></el-avatar>
+                    <el-tooltip
+                        class="item"
+                        effect="dark"
+                        :content="item.money.toString()"
+                        placement="top"
+                        v-if="index < 5"
+                    >
+                        <el-avatar class="u-avatar" shape="circle" :size="30"
+                            ><i class="el-icon-s-custom"></i
+                        ></el-avatar>
                     </el-tooltip>
                 </el-col>
-                <el-col :span="4" v-if="list.length>5">
-                    <el-avatar shape="circle" :size="30" style="background: #D9D9D9;">
+                <el-col :span="4" v-if="list.length > 5">
+                    <el-avatar class="u-avatar" shape="circle" :size="30">
                         <span class="f-avatar-num" v-if="list.length > 99">···</span>
                         <span class="f-avatar-num" v-else>+{{ list.length - 5 }}</span>
                     </el-avatar>
@@ -39,14 +47,14 @@
 </template>
 
 <script>
-import User from '@jx3box/jx3box-common/js/user';
+import User from "@jx3box/jx3box-common/js/user";
 import { getFansList } from "../../service/author";
 export default {
-    name: 'Fans',
+    name: "Fans",
     components: {},
     data() {
         return {
-            list: []
+            list: [],
         };
     },
     mounted() {
@@ -54,24 +62,24 @@ export default {
     },
     methods: {
         getData() {
-            getFansList(User.getInfo().uid).then(res => {
+            getFansList(User.getInfo().uid).then((res) => {
                 let data = res.data.data.list;
+                console.log(data)
                 if (data) {
-                    this.list=data
+                    this.list = data || [];
                 }
             });
-        }
-    }
+        },
+    },
 };
 </script>
 
 <style lang="less" scoped>
-
 .c-author-fans {
     box-sizing: border-box;
     // padding: 10px;
     // background: #ffffff;
-    font-family: 'Microsoft YaHei';
+    font-family: "Microsoft YaHei";
     font-style: normal;
     // .h(133px);
     .f-main-box {
@@ -149,10 +157,12 @@ export default {
             font-weight: 700;
         }
     }
+    .u-avatar{
+        background-color:#d9d9d9;
+    }
     .f-bottom {
-        .h(13px);
         .mt(10px);
-        .fz(10px, 13px);
+        .fz(12px, 14px);
         font-weight: 400;
         color: rgba(0, 0, 0, 0.5);
     }
