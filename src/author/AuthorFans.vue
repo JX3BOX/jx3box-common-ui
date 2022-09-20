@@ -18,7 +18,7 @@
 
         <div class="u-label">
             <i class="el-icon-star-off"></i>
-            <span>粉丝·榜</span>
+            <span>粉丝榜</span>
         </div>
         <div class="f-avatar">
             <el-row :gutter="10">
