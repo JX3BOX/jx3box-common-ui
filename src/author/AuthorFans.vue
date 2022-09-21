@@ -29,13 +29,13 @@
                         placement="top"
                         v-if="index < 5"
                     >
-                        <el-avatar class="u-avatar" shape="circle" :size="30" :src="showAvatar(item.pay_user.avatar)"
+                        <a class="u-fan" :href="authorLink(item.pay_user_id)"><el-avatar class="u-avatar" shape="circle" :size="30" :src="showAvatar(item.pay_user.avatar)"
                             ><i class="el-icon-s-custom"></i
-                        ></el-avatar>
+                        ></el-avatar></a>
                     </el-tooltip>
                 </el-col>
                 <el-col :span="4" v-if="list.length > 5">
-                    <el-avatar class="u-avatar" shape="circle" :size="30">
+                    <el-avatar class="u-avatar u-more" shape="circle" :size="30">
                         <span class="f-avatar-num" v-if="list.length > 99">···</span>
                         <span class="f-avatar-num" v-else>+{{ list.length - 5 }}</span>
                     </el-avatar>
@@ -48,7 +48,7 @@
 
 <script>
 import { getFansList } from "../../service/author";
-import { showAvatar } from "@jx3box/jx3box-common/js/utils";
+import { showAvatar,authorLink } from "@jx3box/jx3box-common/js/utils";
 export default {
     name: "AuthorFans",
     props: {
@@ -71,6 +71,7 @@ export default {
             });
         },
         showAvatar,
+        authorLink,
     },
     watch: {
         uid: {
@@ -161,13 +162,10 @@ export default {
         .mt(10px);
         height: 30px;
         .f-avatar-num {
-            .fz(10px);
-            color: #434343;
+            .fz(12px);
+            color: #888;
             font-weight: 700;
         }
-    }
-    .u-avatar {
-        background-color: #d9d9d9;
     }
     .f-bottom {
         .mt(10px);
