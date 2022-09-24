@@ -19,7 +19,7 @@
             placement="bottom"
             trigger="hover"
             popper-class="c-author-follow-popover"
-            :visible-arrow="false"
+            :visible-arrow="true"
         >
             <div class="u-action-list">
                 <div class="u-action-item" v-for="item in actions" :key="item.label" @click.stop="item.action">
@@ -58,7 +58,7 @@ export default {
             return this.isFollow ? "已关注" : "关注";
         },
         btnIcon() {
-            return this.isSelf ? "" : this.isFollow ? "" : "el-icon-plus";
+            return this.isSelf ? "el-icon-plus" : this.isFollow ? "" : "el-icon-plus";
         },
         btnType() {
             return this.isFollow ? "info" : "warning";
@@ -161,19 +161,25 @@ export default {
             background: #ecf5ff;
         }
     }
-    /*.u-trigger {
+
+    .u-fans-box {
+        cursor: not-allowed;
+        &:hover {
+            cursor: not-allowed;
+        }
+    }
+    .u-trigger {
         &:hover {
             cursor: default;
-            background: unset;
         }
-    }*/
+    }
 }
 .c-author-follow-popover {
     //.u-follow-popover {
         &.el-popover {
             min-width: 100px;
             padding: 0;
-            margin: 0;
+            margin-top: 5px;
             .u-action-list {
                 .u-action-item {
                     text-align: center;
