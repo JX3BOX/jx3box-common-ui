@@ -23,8 +23,8 @@ export default {
             default: "",
         },
         frame: {
-            type: Boolean,
-            default: false,
+            type: String,
+            default: "",
         },
         size : {
             type : Number,
