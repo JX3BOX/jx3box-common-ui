@@ -57,7 +57,7 @@ export default {
         return {
             list: [],
             total: 0,
-            MAX_LENGTH : 5,
+            MAX_LENGTH : 6,
         };
     },
     methods: {
