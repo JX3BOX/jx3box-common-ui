@@ -280,6 +280,7 @@ body {
     .u-avatar {
         width: 24px;
         height: 24px;
+        border-radius: 50%;
     }
 
     .u-menu {
@@ -434,16 +435,21 @@ body {
         border: 1px solid #ccc;
         padding: 10px;
 
+
         ul {
             padding: 0;
             margin: 0;
             list-style: none;
             *zoom: 1;
-            &:after {
-                content: "";
-                display: table;
-                clear: both;
+            &::after {
+                content: '';
+                flex: 1;
             }
+            // &:after {
+            //     content: "";
+            //     display: table;
+            //     clear: both;
+            // }
         }
 
         // overflow-y:auto;
@@ -466,11 +472,11 @@ body {
             margin-bottom: 5px;
             padding-bottom: 10px;
             *zoom: 1;
-            &:after {
-                content: "";
-                display: table;
-                clear: both;
-            }
+            // &:after {
+            //     content: "";
+            //     display: table;
+            //     clear: both;
+            // }
             border-bottom: 1px solid #eee;
 
             &.isdone {

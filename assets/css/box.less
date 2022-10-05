@@ -25,6 +25,10 @@
         padding: 10px 0 10px 20px;
         list-style: none;
         .clearfix;
+        &::after {
+            content: '';
+            flex: 1;
+        }
     }
 
     li {
@@ -136,7 +140,7 @@
             align-items: flex-start;
             li {
                 // flex: 1;
-                margin-right: 15px;
+                // margin-right: 15px;
                 margin-bottom: 15px;
                 &:nth-child(4n) {
                     .mr(0) !important;
