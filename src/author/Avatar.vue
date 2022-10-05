@@ -13,7 +13,24 @@ import { __server, __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
 export default {
     name: "Avatar",
-    props: ["uid", "url", "size", "frame"],
+    props: {
+        uid: {
+            type: Number,
+            default: 0,
+        },
+        url: {
+            type: String,
+            default: "",
+        },
+        frame: {
+            type: String,
+            default: "",
+        },
+        size : {
+            type : Number,
+            default : 88
+        }
+    },
     components: {},
     data: function() {
         return {
@@ -37,8 +54,6 @@ export default {
         },
         authorLink,
     },
-    mounted : function (){
-    }
 };
 </script>
 
