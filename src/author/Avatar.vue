@@ -15,7 +15,7 @@ export default {
     name: "Avatar",
     props: {
         uid: {
-            type: Number,
+            type: [Number, String],
             default: 0,
         },
         url: {
@@ -27,7 +27,7 @@ export default {
             default: "",
         },
         size : {
-            type : Number,
+            type : [Number, String],
             default : 88
         }
     },
