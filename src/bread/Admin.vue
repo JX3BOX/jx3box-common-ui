@@ -10,7 +10,7 @@
         v-if="hasRight"
     >
         <div class="c-admin-wrapper">
-            <template v-if="isAdmin">
+            <!-- <template v-if="isAdmin"> -->
                 <el-divider content-position="left">状态变更</el-divider>
                 <el-radio-group v-model="post_status" size="small" class="c-admin-status">
                     <el-radio-button
@@ -19,7 +19,7 @@
                         :key="key"
                     >{{ option }}</el-radio-button>
                 </el-radio-group>
-            </template>
+            <!-- </template> -->
 
             <el-divider content-position="left">可见性变更</el-divider>
             <el-radio-group v-model="visible" size="small" class="c-admin-status">
