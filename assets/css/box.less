@@ -130,22 +130,17 @@
 @media screen and (max-width: @phone) {
     .c-jx3box {
         .u-list {
-            margin-right:0;
-            padding-right: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: flex-start;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            justify-content:space-between;
+            .w(100%);
             &::after {
                 flex: 1;
             }
             li {
-                // flex: 1;
-                // margin-right: 15px;
-                margin-bottom: 15px;
-                &:nth-child(4n) {
-                    .mr(0) !important;
-                }
+                padding: 5px;
+                .mr(0);
             }
         }
         .u-item {
