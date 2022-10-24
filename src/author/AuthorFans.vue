@@ -63,7 +63,7 @@ export default {
     methods: {
         getData() {
             getFansList(this.uid).then((res) => {
-                this.list = res.data.data.list.slice(0,this.MAX_LENGTH) || [];
+                this.list = res.data.data.list?.slice(0,this.MAX_LENGTH) || [];
                 this.total = res.data.data.totalUser || 0;
             });
         },
