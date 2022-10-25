@@ -83,7 +83,7 @@
                         <template v-for="(item, i) in panel">
                             <li
                                 :key="'panel-' + i"
-                                v-if="isEditor || !item.onlyAdmin"
+                                v-if="isAdmin || !item.onlyAdmin"
                             >
                                 <a :href="item.link">{{ item.label }}</a>
                             </li>
@@ -130,6 +130,7 @@ export default {
         return {
             panel,
             isEditor: false,
+            isAdmin: false,
 
             // 是否有消息
             pop: false,
@@ -308,6 +309,7 @@ export default {
         init: function () {
             if (this.isLogin) {
                 this.isEditor = User.isEditor();
+                this.isAdmin = User.isAdmin();
                 this.checkMSG();
                 this.loadPanel();
                 this.loadAsset();
