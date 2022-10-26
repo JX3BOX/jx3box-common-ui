@@ -8,4 +8,9 @@ function uploadImage(formData){
     return $cms().post(`/api/cms/upload/avatar`, formData);
 }
 
-export { getPostAuthors, uploadImage };
+// 通用上传
+function upload(formData){
+    return $cms().post(`/api/cms/upload`, formData);
+}
+
+export { getPostAuthors, uploadImage, upload };

@@ -21,7 +21,7 @@
 
 <script>
 import { getThumbnail } from "@jx3box/jx3box-common/js/utils";
-import { uploadImage } from "../../service/cms.js";
+import { upload } from "../../service/cms.js";
 export default {
     name: "upload-banner",
     props: {
@@ -93,8 +93,8 @@ export default {
                 return;
             }
             const formData = new FormData();
-            formData.append("avatar", file);
-            uploadImage(formData).then((res) => {
+            formData.append("file", file);
+            upload(formData).then((res) => {
                 this.data = res.data.data[0];
                 this.$message({
                     message: "上传成功",
