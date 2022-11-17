@@ -6,15 +6,8 @@
                 <el-tooltip effect="dark" content="我的消息" placement="bottom">
                     <a class="u-msg" :href="url.msg">
                         <i class="u-icon u-icon-msg">
-                            <i
-                                class="u-pop"
-                                style="display: none"
-                                v-show="pop"
-                            ></i>
-                            <img
-                                svg-inline
-                                src="../../assets/img/header/msg.svg"
-                            />
+                            <i class="u-pop" style="display: none" v-show="pop"></i>
+                            <img svg-inline src="../../assets/img/header/msg.svg" />
                         </i>
                     </a>
                 </el-tooltip>
@@ -24,22 +17,14 @@
             <div class="c-header-panel" id="c-header-panel">
                 <el-tooltip effect="dark" content="发布中心" placement="bottom">
                     <a class="u-post" :href="url.publish">
-                        <img
-                            class="u-add"
-                            svg-inline
-                            src="../../assets/img/header/add.svg"
-                        />
+                        <img class="u-add" svg-inline src="../../assets/img/header/add.svg" />
                     </a>
                 </el-tooltip>
             </div>
 
             <!-- user info -->
             <div class="c-header-info">
-                <div
-                    class="c-header-profile"
-                    id="c-header-profile"
-                    @click="showmenu"
-                >
+                <div class="c-header-profile" id="c-header-profile" @click="showmenu">
                     <img class="u-avatar" :src="user.avatar" />
                     <span class="u-dropdown"></span>
                     <ul class="u-menu" v-show="!fold">
@@ -57,22 +42,12 @@
                             </a>
                         </li>
                         <li>
-                            <a
-                                class="u-vip"
-                                href="/vip/premium?from=header_usermenu"
-                                target="_blank"
-                            >
-                                <i
-                                    class="i-icon-vip"
-                                    :class="{ on: isVIP || isPRO }"
-                                    >{{ vipType }}</i
-                                >
+                            <a class="u-vip" href="/vip/premium?from=header_usermenu" target="_blank">
+                                <i class="i-icon-vip" :class="{ on: isVIP || isPRO }">{{ vipType }}</i>
                                 <span class="u-vip-type">
                                     <template v-if="isVIP || isPRO">
                                         {{ vipTypeTxt }}
-                                        <span class="u-vip-left"
-                                            >({{ vipLeftDays }}天)</span
-                                        >
+                                        <span class="u-vip-left">({{ vipLeftDays }}天)</span>
                                     </template>
                                     <template v-else>升级账号类型</template>
                                 </span>
@@ -81,10 +56,7 @@
                         </li>
                         <hr />
                         <template v-for="(item, i) in panel">
-                            <li
-                                :key="'panel-' + i"
-                                v-if="isAdmin || !item.onlyAdmin"
-                            >
+                            <li :key="'panel-' + i" v-if="isAdmin || !item.onlyAdmin">
                                 <a :href="item.link">{{ item.label }}</a>
                             </li>
                         </template>
@@ -112,17 +84,12 @@
 <script>
 import User from "@jx3box/jx3box-common/js/user";
 import { showDate } from "@jx3box/jx3box-common/js/moment";
-import {
-    __Links,
-    __Root,
-    __imgPath,
-    __OriginRoot,
-} from "@jx3box/jx3box-common/data/jx3box.json";
+import { __Links, __Root, __imgPath, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
 import panel from "../../assets/data/panel.json";
 import { getMsg, getMenu } from "../../service/header";
 import { getMyInfo, userSignIn } from "../../service/author";
-import dayjs from 'dayjs';
-import isToday from 'dayjs/plugin/isToday';
+import dayjs from "dayjs";
+import isToday from "dayjs/plugin/isToday";
 dayjs.extend(isToday);
 export default {
     props: [],
@@ -161,8 +128,7 @@ export default {
 
             // 链接
             login_url: __Links.account.login + "?redirect=" + location.href,
-            register_url:
-                __Links.account.register + "?redirect=" + location.href,
+            register_url: __Links.account.register + "?redirect=" + location.href,
             isSuperAuthor: false,
         };
     },
@@ -190,14 +156,9 @@ export default {
         },
         vipLeftDays: function () {
             if (this.isPRO) {
-                return parseInt(
-                    (new Date(this.asset.pro_expire_date) - new Date()) /
-                        86400000
-                );
+                return parseInt((new Date(this.asset.pro_expire_date) - new Date()) / 86400000);
             } else if (this.isVIP) {
-                return parseInt(
-                    (new Date(this.asset.expire_date) - new Date()) / 86400000
-                );
+                return parseInt((new Date(this.asset.expire_date) - new Date()) / 86400000);
             } else {
                 return "";
             }
@@ -205,15 +166,15 @@ export default {
         super_author_icon: function () {
             return __imgPath + "image/user/" + "superauthor.svg";
         },
-        siteRoot : function (){
-            return location.host.includes('origin') ? __OriginRoot : __Root
-        }
+        siteRoot: function () {
+            return location.host.includes("origin") ? __OriginRoot : __Root;
+        },
     },
     watch: {
         fold(val) {
             if (!val) {
             }
-        }
+        },
     },
     methods: {
         // 消息
@@ -247,14 +208,14 @@ export default {
                 }
             } catch (e) {
                 this.panel = panel;
-                console.log('loadPanel error', e);
+                console.log("loadPanel error", e);
             }
         },
         logout: function () {
             User.destroy()
                 .then((res) => {
                     this.isLogin = false;
-                    if (location.pathname.startsWith('/dashboard') || location.pathname.startsWith('/publish')) {
+                    if (location.pathname.startsWith("/dashboard") || location.pathname.startsWith("/publish")) {
                         location.href = this.siteRoot;
                     }
                 })
@@ -268,28 +229,35 @@ export default {
                 });
         },
         // 签到
-        signIn: function (){
+        signIn: function () {
             try {
-                let user_last_login = localStorage.getItem('user_last_login');
-                user_last_login = user_last_login && JSON.parse(user_last_login) || ''
+                let user_last_login = localStorage.getItem("user_last_login");
+                user_last_login = (user_last_login && JSON.parse(user_last_login)) || "";
 
                 if (user_last_login && dayjs(user_last_login).isToday()) {
-                    console.log('已签到')
+                    console.log("已签到");
                 } else {
-                    userSignIn().then(res => {
-                        this.$message({
-                            type: 'success',
-                            message: '签到成功',
-                            customClass: 'c-header-signin'
+                    userSignIn()
+                        .then((res) => {
+                            let msg = this.$message({
+                                type: "success",
+                                message: "签到成功",
+                                customClass: "c-header-signin",
+                                duration: 0,
+                            });
+                            // 模拟手动关闭
+                            setTimeout(() => {
+                                msg.close();
+                            }, 3000);
+                            localStorage.setItem("user_last_login", JSON.stringify(dayjs()));
                         })
-                        localStorage.setItem('user_last_login', JSON.stringify(dayjs()))
-                    }).catch(err => {
-                        localStorage.setItem('user_last_login', JSON.stringify(dayjs()))
-                        console.log(dayjs.tz.guess())
-                    }).finally(() => {})
+                        .catch((err) => {
+                            localStorage.setItem("user_last_login", JSON.stringify(dayjs()));
+                            console.log(dayjs.tz.guess());
+                        })
                 }
-            } catch(e) {
-                console.log(e)
+            } catch (e) {
+                console.log(e);
             }
         },
 
@@ -300,9 +268,9 @@ export default {
             });
         },
         loadMyInfo: function () {
-            getMyInfo().then(res => {
-                this.isSuperAuthor = !!res.sign
-            })
+            getMyInfo().then((res) => {
+                this.isSuperAuthor = !!res.sign;
+            });
         },
 
         // 初始化
@@ -313,8 +281,8 @@ export default {
                 this.checkMSG();
                 this.loadPanel();
                 this.loadAsset();
-                this.loadMyInfo()
-                this.signIn()
+                this.loadMyInfo();
+                this.signIn();
             }
         },
 
