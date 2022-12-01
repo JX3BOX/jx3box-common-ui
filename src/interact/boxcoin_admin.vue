@@ -38,7 +38,7 @@
                             :maxlength="30"
                             show-word-limit
                         ></el-input>
-                        <el-button @click="insertCurrentRelease">插入当前版本</el-button>
+                        <el-button :disabled="fetchingCurrentRelease" @click="insertCurrentRelease">插入当前版本</el-button>
                     </div>
                 </div>
             </div>
@@ -71,6 +71,7 @@ export default {
             chosen: '', // 被选中的人
 
             submitting: false,
+            fetchingCurrentRelease: false,
         };
     },
     computed: {
@@ -134,13 +135,16 @@ export default {
                 });
         },
         insertCurrentRelease: function() {
-            getBreadcrumb("current-release").then(res => {
+            this.fetchingCurrentRelease = true;
+            getBreadcrumb(`current-release-${this.hostClient}`).then(res => {
                 this.remark += res;
             }).catch(err => {
                 this.$message({
                     message: "获取失败",
                     type: "error",
                 });
+            }).finally(() => {
+                this.fetchingCurrentRelease = false;
             });
         },
         init: function () {},
