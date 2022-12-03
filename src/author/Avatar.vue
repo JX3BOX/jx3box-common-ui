@@ -1,5 +1,5 @@
 <template>
-    <a class="c-avatar" :href="authorLink(uid)">
+    <a class="c-avatar" :href="authorLink(uid)" :class="size">
         <img :src="showAvatar(url)" class="c-avatar-pic"/>
         <i class="c-avatar-frame" v-if="frame">
             <img :src="frameUrl" />
@@ -28,19 +28,18 @@ export default {
         },
         size : {
             type : [Number, String],
-            default : 88
+            default : 'm'
         }
     },
     components: {},
     data: function() {
         return {
             frames: [],
-            styles : [
-                {cls:'xs',size:60},
-                {cls:'s',size:84},
-                {cls:'m',size:136},
-                {cls:'l',size:224},
-            ]
+            styles : {
+                s : 68,
+                m : 88,
+                l : 120
+            }
         };
     },
     computed: {
@@ -50,7 +49,7 @@ export default {
     },
     methods: {
         showAvatar: function(val) {
-            return showAvatar(val, this.size*3);
+            return showAvatar(val, this.styles[this.size]*3);
         },
         authorLink,
     },
@@ -61,6 +60,42 @@ export default {
 .c-avatar {
     .pr;
     .dbi;
+
+    &.l{
+        @pic:120px;
+        @frame:168px;
+        .c-avatar-pic{.size(@pic);}
+        .c-avatar-frame{
+            .size(@frame);
+            .lt(@pic / 2);
+            margin-left:-@frame / 2;
+            margin-top:-@frame / 2;
+        }
+    }
+
+    &.m{
+        @pic:88px;
+        @frame:123px;
+        .c-avatar-pic{.size(@pic);}
+        .c-avatar-frame{
+            .size(@frame);
+            .lt(@pic / 2);
+            margin-left:-@frame / 2;
+            margin-top:-@frame / 2;
+        }
+    }
+
+    &.s{
+        @pic:68px;
+        @frame:88px;
+        .c-avatar-pic{.size(@pic);}
+        .c-avatar-frame{
+            .size(@frame);
+            .lt(@pic / 2);
+            margin-left:-@frame / 2;
+            margin-top:-@frame / 2;
+        }
+    }
 }
 .c-avatar-pic {
     .db;
@@ -69,41 +104,12 @@ export default {
 }
 .c-avatar-frame {
     .pa;
-    .lt(-10px);
-    .size(100%);
-    padding: 10px;
     box-sizing: content-box;
     img {
         .db;
         .pa;
         .size(100%);
         .lt(0);
-    }
-
-    &.xs {
-        left: -6px;
-        top: -6px;
-        width: 60px;
-        height: 60px;
-    }
-
-    &.s {
-        left: -8px;
-        top: -8px;
-        width: 84px;
-        height: 84px;
-    }
-    &.m {
-        left: -8px;
-        top: -8px;
-        width: 136px;
-        height: 136px;
-    }
-    &.l {
-        width: 224px;
-        height: 224px;
-        left: -22px;
-        top: -22px;
     }
 }
 </style>
