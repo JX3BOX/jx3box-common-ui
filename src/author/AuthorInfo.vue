@@ -1,7 +1,7 @@
 <template>
     <div class="c-author-info">
         <div class="u-author">
-            <Avatar class="u-avatar" :uid="uid" :url="data.user_avatar" :size="68" :frame="data.user_avatar_frame" />
+            <Avatar class="u-avatar" :uid="uid" :url="data.user_avatar" size="s" :frame="data.user_avatar_frame" />
             <div class="u-info">
                 <a class="u-name" :href="authorLink(uid)" target="_blank">
                     <span>{{ (data.display_name && data.display_name.slice(0, 8)) || "未知" }}</span>
