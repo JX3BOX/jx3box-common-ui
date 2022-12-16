@@ -55,7 +55,7 @@ export default {
             return __imgPath + "image/medals/user/" + medal + ".gif";
         },
         getMedalLink(medal) {
-            return getMedalLink(medal.rank_id, (medal.medal_type = "rank"));
+            return getMedalLink(medal.rank_id, medal.medal_type || 'rank');
         },
     },
     created: function () {},
