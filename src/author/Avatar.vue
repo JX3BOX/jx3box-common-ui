@@ -36,9 +36,12 @@ export default {
         return {
             frames: [],
             styles : {
+                xxs : 36,
+                xs : 48,
                 s : 68,
                 m : 88,
-                l : 120
+                l : 120,
+                xl : 150
             }
         };
     },
@@ -60,7 +63,17 @@ export default {
 .c-avatar {
     .pr;
     .dbi;
-
+    &.xl{
+        @pic:150px;
+        @frame:210px;
+        .c-avatar-pic{.size(@pic);}
+        .c-avatar-frame{
+            .size(@frame);
+            .lt(@pic / 2);
+            margin-left:-@frame / 2;
+            margin-top:-@frame / 2;
+        }
+    }
     &.l{
         @pic:120px;
         @frame:168px;
@@ -88,6 +101,28 @@ export default {
     &.s{
         @pic:68px;
         @frame:88px;
+        .c-avatar-pic{.size(@pic);}
+        .c-avatar-frame{
+            .size(@frame);
+            .lt(@pic / 2);
+            margin-left:-@frame / 2;
+            margin-top:-@frame / 2;
+        }
+    }
+    &.xs{
+        @pic:48px;
+        @frame:68px;
+        .c-avatar-pic{.size(@pic);}
+        .c-avatar-frame{
+            .size(@frame);
+            .lt(@pic / 2);
+            margin-left:-@frame / 2;
+            margin-top:-@frame / 2;
+        }
+    }
+    &.xxs{
+        @pic:36px;
+        @frame:48px;
         .c-avatar-pic{.size(@pic);}
         .c-avatar-frame{
             .size(@frame);

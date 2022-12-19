@@ -101,13 +101,15 @@
                 /></el-tab-pane>
                 <el-tab-pane label="头像" name="avatar">
                     <el-radio-group v-model="avatar_size">
-                        <el-radio :label="60">xs-60</el-radio>
-                        <el-radio :label="84">s-84</el-radio>
-                        <el-radio :label="136">m-136</el-radio>
-                        <el-radio :label="224">l-224</el-radio>
+                        <el-radio label="xxs">xxs-36/48</el-radio>
+                        <el-radio label="xs">xs-48/68</el-radio>
+                        <el-radio label="s">s-68/88</el-radio>
+                        <el-radio label="m">m-88/123</el-radio>
+                        <el-radio label="l">l-120/168</el-radio>
+                        <el-radio label="xl">xl-150/210</el-radio>
                     </el-radio-group>
-                    <div>
-                        <Avatar :id="8" url="" :size="avatar_size" frame="" />
+                    <div style="padding:60px">
+                        <Avatar :id="8" url="https://qzapp.qlogo.cn/qzapp/101870778/8384D5764DF76997E566D346B3EE78D6/100?x-oss-process=style/avatar_s" :size="avatar_size" frame="Xmas_2" />
                     </div>
                 </el-tab-pane>
             </el-tabs>
@@ -239,7 +241,7 @@ export default {
             tag: "",
             visible: false,
 
-            avatar_size: 60,
+            avatar_size: 'xl',
 
             upload: "",
             text: `<Text>text="使用：<BUFF 3222 1 desc>，持续<BUFF 3222 1 time>。\\\n" font=105 </text><Text>text="红豆沙做馅儿，精致细腻的广式月饼。" font=100 </text><Text>text="使用：能在唐门套装供应商处换取如下装备。\\\n" font=105 </text><Text>text="[燕云·重泉靴]" name="iteminfolink" eventid=513 script="this.nVersion=0 this.dwTabType=7 this.dwIndex=35244 this.OnItemLButtonDown=function() OnItemLinkDown(this) end" font=100 r=255 g=40 b=255 </text><Text>text="，" font=105 </text><Text>text="[燕云·铭松靴]" name="iteminfolink" eventid=513 script="this.nVersion=0 this.dwTabType=7 this.dwIndex=35245 this.OnItemLButtonDown=function() OnItemLinkDown(this) end" font=100 r=255 g=40 b=255 </text><Text>text="。" font=100 </text>`,
