@@ -1,0 +1,621 @@
+{
+    "门派（职业）": [
+        {
+            "name": "创作",
+            "children": [
+                {
+                    "name": "全门派宏",
+                    "href": "/macro/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "门派攻略",
+                    "href": "/bps/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        },
+        {
+            "name": "数据",
+            "children": [
+                {
+                    "name": "技能原始数据",
+                    "href": "/bps/#/raw",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "技能系数",
+                    "href": "/bps/#/skill",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "源码分析",
+                    "href": "/fb/#/lua",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "秘籍大全",
+                    "href": "/bps/#/recipe",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "技能合集",
+                    "href": "/bps/#/collection",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        },
+        {
+            "name": "工具",
+            "children": [
+                {
+                    "name": "配装器",
+                    "href": "/pz/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "急速阈值",
+                    "href": "/bps/#/haste",
+                    "client": "std",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "奇穴模拟器",
+                    "href": "/app/talent/",
+                    "client": "std",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "镇派模拟器",
+                    "href": "/app/talent2/",
+                    "client": "origin",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "DPS计算器",
+                    "href": "/bps/#/dps",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "宏编辑器",
+                    "href": "/app/macroeditor/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "图标大全",
+                    "href": "/app/icons/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        }
+    ],
+    "秘境（副本）": [
+        {
+            "name": "创作",
+            "children": [
+                {
+                    "name": "秘境攻略",
+                    "href": "/fb/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "副本成就",
+                    "href": "/fb/#/cj",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        },
+        {
+            "name": "数据",
+            "children": [
+                {
+                    "name": "首领数据",
+                    "href": "/fb/#/npc",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "特殊机制",
+                    "href": "/fb/#/attr",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        },
+        {
+            "name": "工具",
+            "children": [
+                {
+                    "name": "团队平台",
+                    "href": "/team/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "战斗分析",
+                    "href": "/battle/#/public",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "秘境掉落",
+                    "href": "/fb/#/drop",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "瑰石查询",
+                    "href": "/fb/#/gem",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "八荒模拟",
+                    "href": "/app/bhhj",
+                    "client": "origin",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        }
+    ],
+    "插件与工具": [
+        {
+            "name": "数据",
+            "children": [
+                {
+                    "name": "插件数据下载",
+                    "href": "/jx3dat/#/plugins",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "剑三数据库",
+                    "href": "/app/database/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        },
+        {
+            "name": "工具",
+            "children": [
+                {
+                    "name": "开服监控",
+                    "href": "/app/servers2/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "科举题库",
+                    "href": "https://j3cx.com/exam/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "其他更多",
+                    "href": "/tool/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        }
+    ],
+    "资历": [
+        {
+            "name": "创作",
+            "children": [
+                {
+                    "name": "成就百科",
+                    "href": "/cj/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "物品百科",
+                    "href": "/item/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        },
+        {
+            "name": "珍奇",
+            "children": [
+                {
+                    "name": "奇遇大全",
+                    "href": "/adventure/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "宠物大全",
+                    "href": "/pet/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "坐骑大全",
+                    "href": "/pet/",
+                    "client": "all",
+                    "status": false,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "声望大全",
+                    "href": "/reputation/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "书籍大全",
+                    "href": "/book/",
+                    "client": "all",
+                    "status": false,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        }
+    ],
+    "外观": [
+        {
+            "name": "创作",
+            "children": [
+                {
+                    "name": "捏脸数据",
+                    "href": "/face/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "家园蓝图",
+                    "href": "https://jx3.xoyo.com/zt/2020/09/24/blueprint/#/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        },
+        {
+            "name": "资源",
+            "children": [
+                {
+                    "name": "家具大全",
+                    "href": "/furniture/",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "外观大全",
+                    "href": "",
+                    "client": "all",
+                    "status": false,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        },
+        {
+            "name": "工具",
+            "children": [
+                {
+                    "name": "妆容解析",
+                    "href": "/share/facedata",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                },
+                {
+                    "name": "剑三编辑器",
+                    "href": "https://movieeditor.jx3.xoyo.com/index.html",
+                    "client": "all",
+                    "status": true,
+                    "hasMark": false,
+                    "markcls": "ishot"
+                }
+            ]
+        }
+    ],
+    "休闲": [
+        {
+            "name": "技艺助手",
+            "href": "/pvg/manufacture",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "物价大全",
+            "href": "/pvg/item_price",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        }
+    ],
+    "竞技": [
+        {
+            "name": "沙盘查询",
+            "href": "/pvp/sandbox",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        }
+    ],
+    "茶馆": [
+        {
+            "name": "随心创作",
+            "href": "/bbs/",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "说点骚话",
+            "href": "/joke",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "搞点骚图",
+            "href": "/emotion",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        }
+    ],
+    "剑三大世界": [
+        {
+            "name": "通识百科",
+            "href": "/knowledge/",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "剑三日历",
+            "href": "/calendar/",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "剑三考试",
+            "href": "/exam",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        }
+    ],
+    "专题与活动": [
+        {
+            "name": "秘境百强榜",
+            "href": "/rank/",
+            "client": "std",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "剑三资料片",
+            "href": "/topic/",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "剑三欢迎你",
+            "href": "/exam",
+            "client": "all",
+            "status": false,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "剑与侠道",
+            "href": "/topic/jianyuxiadao",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        }
+    ],
+    "账号": [
+        {
+            "name": "注册/登录账号",
+            "href": "/account/",
+            "client": "std",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "资料设置",
+            "href": "/dashboard/profile",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "亲友/黑名单",
+            "href": "/dashboard/privacy",
+            "client": "all",
+            "status": true,
+            "hasMark": true,
+            "markcls": "ishot"
+        },
+        {
+            "name": "反馈中心",
+            "href": "/dashboard/feedback",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "申请签约",
+            "href": "/dashboard/cooperation",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "注销账号",
+            "href": "/dashboard/feedback/erase",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        }
+    ],
+    "资产": [
+        {
+            "name": "盒币兑换",
+            "href": "/dashboard/boxcoin",
+            "client": "std",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "金箔提现",
+            "href": "/dashboard/cny",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "银铛兑换",
+            "href": "/dashboard/points",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "卡密/激活码",
+            "href": "/dashboard/card",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        }
+    ],
+    "增值服务": [
+        {
+            "name": "付费版账号",
+            "href": "/vip/premium/?from=header_box",
+            "client": "std",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        },
+        {
+            "name": "积分商城",
+            "href": "/vip/mall/",
+            "client": "all",
+            "status": true,
+            "hasMark": false,
+            "markcls": "ishot"
+        }
+    ]
+}
