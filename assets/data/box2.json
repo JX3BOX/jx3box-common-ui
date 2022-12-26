@@ -307,6 +307,14 @@
                         "status": true,
                         "hasMark": false,
                         "markcls": "ishot"
+                    },
+                    {
+                        "name": "任务百科",
+                        "href": "/quest/",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
                     }
                 ]
             },
@@ -560,7 +568,7 @@
                     {
                         "name": "秘境百强榜",
                         "href": "/rank/",
-                        "client": "std",
+                        "client": "all",
                         "status": true,
                         "hasMark": false,
                         "markcls": "ishot"

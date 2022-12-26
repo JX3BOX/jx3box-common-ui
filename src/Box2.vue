@@ -21,12 +21,13 @@
                                 class="u-link"
                                 :href="child.href"
                                 :target="getTarget(child.href)"
-                                :class="{ 'not-client': !matchedClient(child.client) }"
                             >
                                 <span class="u-txt">{{ child.name }}</span>
                             </a>
+                            <!-- :class="{ 'not-client': !matchedClient(child.client) }" -->
                         </template>
-                        <a v-else class="u-link" :href="item.href" :class="{ 'not-client': !matchedClient(item.client) }" :target="getTarget(item.href)">
+                        <!--  :class="{ 'not-client': !matchedClient(item.client) }" -->
+                        <a v-else class="u-link" :href="item.href" :target="getTarget(item.href)">
                             <span class="u-txt">{{ item.name }}</span>
                         </a>
                     </div>
