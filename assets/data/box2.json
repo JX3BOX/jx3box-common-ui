@@ -29,16 +29,16 @@
                 "name": "数据",
                 "children": [
                     {
-                        "name": "技能原始数据",
-                        "href": "/bps/#/raw",
+                        "name": "技能系数",
+                        "href": "/bps/#/skill",
                         "client": "all",
                         "status": true,
                         "hasMark": false,
                         "markcls": "ishot"
                     },
                     {
-                        "name": "技能系数",
-                        "href": "/bps/#/skill",
+                        "name": "技能数据",
+                        "href": "/bps/#/raw",
                         "client": "all",
                         "status": true,
                         "hasMark": false,
@@ -311,7 +311,7 @@
                 ]
             },
             {
-                "name": "珍奇",
+                "name": "数据",
                 "children": [
                     {
                         "name": "奇遇大全",
@@ -383,7 +383,7 @@
                 ]
             },
             {
-                "name": "资源",
+                "name": "数据",
                 "children": [
                     {
                         "name": "家具大全",
@@ -395,7 +395,7 @@
                     },
                     {
                         "name": "外观大全",
-                        "href": "",
+                        "href": "/exterior",
                         "client": "all",
                         "status": false,
                         "hasMark": false,
@@ -431,20 +431,25 @@
         "icon": "",
         "children": [
             {
-                "name": "技艺助手",
-                "href": "/pvg/manufacture",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "物价大全",
-                "href": "/pvg/item_price",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
+                "name": "工具",
+                "children": [
+                    {
+                        "name": "技艺助手",
+                        "href": "/pvg/manufacture",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "物价大全",
+                        "href": "/pvg/item_price",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    }
+                ]
             }
         ]
     },
@@ -453,12 +458,17 @@
         "icon": "",
         "children": [
             {
-                "name": "沙盘查询",
-                "href": "/pvp/sandbox",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
+                "name": "工具",
+                "children": [
+                    {
+                        "name": "沙盘查询",
+                        "href": "/pvp/sandbox",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    }
+                ]
             }
         ]
     },
@@ -467,28 +477,33 @@
         "icon": "",
         "children": [
             {
-                "name": "随心创作",
-                "href": "/bbs/",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "说点骚话",
-                "href": "/joke",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "搞点骚图",
-                "href": "/emotion",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
+                "name": "创作",
+                "children": [
+                    {
+                        "name": "交流分享",
+                        "href": "/bbs/",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "骚话创作",
+                        "href": "/joke",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "趣图创作",
+                        "href": "/emotion",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    }
+                ]
             }
         ]
     },
@@ -497,28 +512,41 @@
         "icon": "",
         "children": [
             {
-                "name": "通识百科",
-                "href": "/knowledge/",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "剑三日历",
-                "href": "/calendar/",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "剑三考试",
-                "href": "/exam",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
+                "name": "创作",
+                "children": [
+                    {
+                        "name": "通识百科",
+                        "href": "/knowledge/",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "剑三日历",
+                        "href": "/calendar/",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "剑三考试",
+                        "href": "/exam",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "剑三铭牌",
+                        "href": "/namespace",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    }
+                ]
             }
         ]
     },
@@ -527,150 +555,163 @@
         "icon": "",
         "children": [
             {
-                "name": "秘境百强榜",
-                "href": "/rank/",
-                "client": "std",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
+                "name": "活动",
+                "children": [
+                    {
+                        "name": "秘境百强榜",
+                        "href": "/rank/",
+                        "client": "std",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    }
+                ]
             },
             {
-                "name": "剑三资料片",
-                "href": "/topic/",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "剑三欢迎你",
-                "href": "/exam",
-                "client": "all",
-                "status": false,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "剑与侠道",
-                "href": "/topic/jianyuxiadao",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
+                "name": "专题",
+                "children": [
+                    {
+                        "name": "剑三资料片",
+                        "href": "/topic/",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "剑三欢迎你",
+                        "href": "/exam",
+                        "client": "all",
+                        "status": false,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "剑与侠道",
+                        "href": "/topic/jianyuxiadao",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    }
+                ]
             }
         ]
     },
     {
-        "name": "账号",
+        "name": "用户",
         "icon": "",
         "children": [
             {
-                "name": "注册/登录账号",
-                "href": "/account/",
-                "client": "std",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
+                "name": "账号",
+                "children": [
+                    {
+                        "name": "注册/登录账号",
+                        "href": "/account/",
+                        "client": "std",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "资料设置",
+                        "href": "/dashboard/profile",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "亲友/黑名单",
+                        "href": "/dashboard/privacy",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": true,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "反馈中心",
+                        "href": "/dashboard/feedback",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "申请签约",
+                        "href": "/dashboard/cooperation",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "注销账号",
+                        "href": "/dashboard/feedback/erase",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    }
+                ]
             },
             {
-                "name": "资料设置",
-                "href": "/dashboard/profile",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
+                "name": "资产",
+                "children": [
+                    {
+                        "name": "盒币兑换",
+                        "href": "/dashboard/boxcoin",
+                        "client": "std",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "金箔提现",
+                        "href": "/dashboard/cny",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "银铛兑换",
+                        "href": "/dashboard/points",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "卡密/激活码",
+                        "href": "/dashboard/card",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    }
+                ]
             },
             {
-                "name": "亲友/黑名单",
-                "href": "/dashboard/privacy",
-                "client": "all",
-                "status": true,
-                "hasMark": true,
-                "markcls": "ishot"
-            },
-            {
-                "name": "反馈中心",
-                "href": "/dashboard/feedback",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "申请签约",
-                "href": "/dashboard/cooperation",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "注销账号",
-                "href": "/dashboard/feedback/erase",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            }
-        ]
-    },
-    {
-        "name": "资产",
-        "icon": "",
-        "children": [
-            {
-                "name": "盒币兑换",
-                "href": "/dashboard/boxcoin",
-                "client": "std",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "金箔提现",
-                "href": "/dashboard/cny",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "银铛兑换",
-                "href": "/dashboard/points",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "卡密/激活码",
-                "href": "/dashboard/card",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            }
-        ]
-    },
-    {
-        "name": "增值服务",
-        "icon": "",
-        "children": [
-            {
-                "name": "付费版账号",
-                "href": "/vip/premium/?from=header_box",
-                "client": "std",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
-            },
-            {
-                "name": "积分商城",
-                "href": "/vip/mall/",
-                "client": "all",
-                "status": true,
-                "hasMark": false,
-                "markcls": "ishot"
+                "name": "增值服务",
+                "children": [
+                    {
+                        "name": "付费版账号",
+                        "href": "/vip/premium/?from=header_box",
+                        "client": "std",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "积分商城",
+                        "href": "/vip/mall/",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    }
+                ]
             }
         ]
     }

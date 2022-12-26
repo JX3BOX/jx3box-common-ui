@@ -7,7 +7,7 @@
         <div class="u-list">
             <div class="u-list__item" v-for="(value, index) in data" :key="index">
                 <div class="u-group">
-                    <img  class="u-group-icon" :src="homeicon_hover" alt="">
+                    <!-- <img  class="u-group-icon" :src="value.icon" alt=""> -->
                     <span class="u-group-name">{{ value.name }}</span>
                 </div>
 
@@ -59,15 +59,6 @@ export default {
         };
     },
     computed: {
-        homeicon: function () {
-            return __imgPath + "image/box/home.svg";
-        },
-        homeicon_hover: function () {
-            return __imgPath + "image/box/home_on.svg";
-        },
-        originicon: function () {
-            return __imgPath + "image/box/origin.svg";
-        },
         list: function () {
             return this.data.filter((item, i) => {
                 return item.status && (item.client == this.client || item.client == "all");
@@ -122,60 +113,9 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/box.less";
+@import "../assets/css/box2.less";
 </style>
 
 <style scoped lang="less">
-.c-header-search {
-    float: none;
-    .w(auto);
-    margin: 0 20px 10px 20px;
-    box-sizing: border-box;
-    padding: 0;
-    .none;
-}
 
-.u-list {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    max-height: 450px;
-    padding: 20px;
-}
-
-.u-list__item {
-    .mb(10px);
-    .ml(18px);
-}
-
-.u-group {
-    margin-bottom: 5px;
-    .pr;
-}
-
-.u-group-icon {
-    .size(18px, 18px);
-    .pa;
-    left: -25px;
-}
-
-.u-subtitle {
-    font-size: 12px;
-}
-
-.u-link {
-    .u-txt {
-        font-size: 14px;
-        color: #fff;
-    }
-
-    &.not-client {
-        .none;
-    }
-}
-@media screen and (max-width: @ipad-y) {
-    .c-header-search {
-        .db;
-    }
-}
 </style>
