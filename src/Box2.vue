@@ -14,6 +14,7 @@
                 <div class="u-content">
                     <div class="u-content__item" v-for="(item, i) in value.children" :key="i">
                         <template v-if="item.children">
+                            <div class="u-subtitle">{{ item.name }}</div>
                             <a
                                 v-for="child in item.children"
                                 :key="child.name"
@@ -156,6 +157,10 @@ export default {
     .size(18px, 18px);
     .pa;
     left: -25px;
+}
+
+.u-subtitle {
+    font-size: 12px;
 }
 
 .u-link {
