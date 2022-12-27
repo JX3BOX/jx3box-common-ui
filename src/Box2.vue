@@ -116,7 +116,3 @@ export default {
 <style lang="less">
 @import "../assets/css/box2.less";
 </style>
-
-<style scoped lang="less">
-
-</style>

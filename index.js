@@ -1,5 +1,5 @@
 import Header from './src/Header.vue'
-import Box from './src/Box.vue'
+// import Box from './src/Box.vue'
 import Breadcrumb from './src/Breadcrumb.vue'
 
 import LeftSidebar from './src/LeftSidebar.vue'
@@ -34,7 +34,7 @@ import WikiPanel from './src/wiki/WikiPanel.vue'
 const components = {
     Header,
     Breadcrumb,
-    Box,
+    // Box,
 
     LeftSidebar,
     LeftSideToggle,
