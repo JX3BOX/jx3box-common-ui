@@ -285,6 +285,25 @@
         ]
     },
     {
+        "name": "竞技（PvP）",
+        "icon": "",
+        "children": [
+            {
+                "name": "工具",
+                "children": [
+                    {
+                        "name": "沙盘查询",
+                        "href": "/pvp/sandbox",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "name": "资历",
         "icon": "",
         "children": [
@@ -339,7 +358,7 @@
                     },
                     {
                         "name": "坐骑大全",
-                        "href": "/pet/",
+                        "href": "/horse/",
                         "client": "all",
                         "status": false,
                         "hasMark": false,
@@ -462,25 +481,6 @@
         ]
     },
     {
-        "name": "竞技",
-        "icon": "",
-        "children": [
-            {
-                "name": "工具",
-                "children": [
-                    {
-                        "name": "沙盘查询",
-                        "href": "/pvp/sandbox",
-                        "client": "all",
-                        "status": true,
-                        "hasMark": false,
-                        "markcls": "ishot"
-                    }
-                ]
-            }
-        ]
-    },
-    {
         "name": "茶馆",
         "icon": "",
         "children": [
@@ -588,7 +588,7 @@
                     },
                     {
                         "name": "剑三欢迎你",
-                        "href": "/exam",
+                        "href": "/topic/welcome",
                         "client": "all",
                         "status": false,
                         "hasMark": false,

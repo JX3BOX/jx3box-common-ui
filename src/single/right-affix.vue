@@ -65,7 +65,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .right-affix {
     position: fixed;
     display: flex;
@@ -76,7 +76,7 @@ export default {
     top: @header-height + @bread-height + 100px;
     background-color: #fafbfc;
     padding: 8px 5px;
-    z-index: 99999;
+    z-index: 200;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     .item {
