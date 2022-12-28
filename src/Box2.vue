@@ -1,7 +1,10 @@
 <template>
     <div class="c-jx3box" :class="{ on: status, isOverlay: overlayEnable && isOverlay }">
         <!-- search -->
-        <header-search @click.native.stop />
+        <div class="c-jx3box-top">
+            <a href="/" class="u-home"><i class="el-icon-s-home"></i></a>
+            <header-search @click.native.stop />
+        </div>
 
         <!-- list -->
         <div class="u-list">

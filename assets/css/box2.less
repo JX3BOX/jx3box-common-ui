@@ -1,8 +1,7 @@
+@import './mixin.less';
 .c-header-jx3box {
     background-color: @bg-black;
     .z(800);
-    overflow-y: auto;
-    overflow-x: hidden;
     .w(100%);
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
     transition: 0.5s ease-in-out;
@@ -38,10 +37,12 @@
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        height: 480px;
+        height: 520px;
         padding: 20px;
         .clearfix;
         overflow: auto;
+
+        .scrollbar(4px, #555);
     }
 
     .u-list__item {
@@ -110,11 +111,41 @@
     background-color: rgba(0, 0, 0, 0.85);
 }
 
+
+.c-jx3box-top{
+    display: flex;
+    padding:0 10px;
+    gap:10px;
+    .u-home{
+        background-color:#3d4044;
+        .size(30px,30px);
+        .r(50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color:#eee;
+        .none;
+    }
+    .c-header-search{
+        margin:0;
+        flex:1;
+    }
+}
+
 @media screen and (max-width:@phone){
     .c-header-jx3box{
         .u-close{
             .pa;.rb(0);
         }
+        .u-list{
+            padding-left:0;
+            padding-right:0;
+        }
         height: calc(100vh - @header-height);
+    }
+    .c-jx3box-top{
+        .u-home{
+            display: flex;
+        }
     }
 }
