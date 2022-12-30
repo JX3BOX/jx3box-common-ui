@@ -120,14 +120,6 @@
                         "status": true,
                         "hasMark": false,
                         "markcls": "ishot"
-                    },
-                    {
-                        "name": "图标大全",
-                        "href": "/app/icons/",
-                        "client": "all",
-                        "status": true,
-                        "hasMark": false,
-                        "markcls": "ishot"
                     }
                 ]
             }
@@ -142,7 +134,7 @@
                 "icon": "",
                 "children": [
                     {
-                        "name": "秘境攻略",
+                        "name": "副本攻略",
                         "href": "/fb/",
                         "client": "all",
                         "status": true,
@@ -177,27 +169,6 @@
                         "status": true,
                         "hasMark": false,
                         "markcls": "ishot"
-                    }
-                ]
-            },
-            {
-                "name": "工具",
-                "children": [
-                    {
-                        "name": "团队平台",
-                        "href": "/team/",
-                        "client": "all",
-                        "status": true,
-                        "hasMark": false,
-                        "markcls": "ishot"
-                    },
-                    {
-                        "name": "战斗分析",
-                        "href": "/battle/#/public",
-                        "client": "all",
-                        "status": true,
-                        "hasMark": false,
-                        "markcls": "ishot"
                     },
                     {
                         "name": "秘境掉落",
@@ -219,6 +190,27 @@
                         "name": "八荒模拟",
                         "href": "/app/bhhj",
                         "client": "origin",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    }
+                ]
+            },
+            {
+                "name": "工具",
+                "children": [
+                    {
+                        "name": "团队平台",
+                        "href": "/team/",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "战斗分析",
+                        "href": "/battle/#/public",
+                        "client": "all",
                         "status": true,
                         "hasMark": false,
                         "markcls": "ishot"
@@ -250,6 +242,14 @@
                         "status": true,
                         "hasMark": false,
                         "markcls": "ishot"
+                    },
+                    {
+                        "name": "图标大全",
+                        "href": "/app/icons/",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
                     }
                 ]
             },
@@ -265,6 +265,30 @@
                         "markcls": "ishot"
                     },
                     {
+                        "name": "金价走势",
+                        "href": "/app/price/",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "物价大全",
+                        "href": "/pvg/item_price",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "技艺助手",
+                        "href": "/pvg/manufacture",
+                        "client": "all",
+                        "status": true,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
                         "name": "科举题库",
                         "href": "https://j3cx.com/exam/",
                         "client": "all",
@@ -273,7 +297,7 @@
                         "markcls": "ishot"
                     },
                     {
-                        "name": "其他更多",
+                        "name": "工具社区",
                         "href": "/tool/",
                         "client": "all",
                         "status": true,
@@ -413,18 +437,18 @@
                 "name": "数据",
                 "children": [
                     {
-                        "name": "家具大全",
-                        "href": "/furniture/",
-                        "client": "all",
-                        "status": true,
-                        "hasMark": false,
-                        "markcls": "ishot"
-                    },
-                    {
                         "name": "外观大全",
                         "href": "/exterior",
                         "client": "all",
                         "status": false,
+                        "hasMark": false,
+                        "markcls": "ishot"
+                    },
+                    {
+                        "name": "家具大全",
+                        "href": "/furniture/",
+                        "client": "all",
+                        "status": true,
                         "hasMark": false,
                         "markcls": "ishot"
                     }
@@ -444,33 +468,6 @@
                     {
                         "name": "剑三编辑器",
                         "href": "https://movieeditor.jx3.xoyo.com/index.html",
-                        "client": "all",
-                        "status": true,
-                        "hasMark": false,
-                        "markcls": "ishot"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "休闲",
-        "icon": "",
-        "children": [
-            {
-                "name": "工具",
-                "children": [
-                    {
-                        "name": "技艺助手",
-                        "href": "/pvg/manufacture",
-                        "client": "all",
-                        "status": true,
-                        "hasMark": false,
-                        "markcls": "ishot"
-                    },
-                    {
-                        "name": "物价大全",
-                        "href": "/pvg/item_price",
                         "client": "all",
                         "status": true,
                         "hasMark": false,
