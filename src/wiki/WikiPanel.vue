@@ -9,7 +9,7 @@
         <div class="m-panel-head">
             <slot name="head-before"></slot>
             <div class="m-panel-actions">
-                <QRcode v-if="wikiPost" class="u-qr" />
+                <QRcode v-if="wikiPost && showQR" class="u-qr" />
                 <slot name="head-actions"></slot>
             </div>
             <div class="m-panel-title">
@@ -85,7 +85,24 @@ import {
 import { getStat } from "@jx3box/jx3box-common/js/stat";
 export default {
     name: "WikiPost",
-    props: ["scene", "wikiPost", "borderNone"],
+    props: {
+        wikiPost: {
+            type: Object,
+            default: null,
+        },
+        scene: {
+            type: String,
+            default: "default",
+        },
+        borderNone: {
+            type: Boolean,
+            default: false,
+        },
+        showQR: {
+            type: Boolean,
+            default: true,
+        },
+    },
     data() {
         return {
             stat: null,
