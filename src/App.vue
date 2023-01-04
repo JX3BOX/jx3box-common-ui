@@ -172,12 +172,12 @@
             <el-radio label="l">l-120/168</el-radio>
             <el-radio label="xl">xl-150/210</el-radio>
           </el-radio-group>
-          <div style="padding:60px">
+          <div style="padding:60px;background-color: #e3e3e3;">
             <Avatar
               :id="8"
-              url="https://qzapp.qlogo.cn/qzapp/101870778/8384D5764DF76997E566D346B3EE78D6/100?x-oss-process=style/avatar_s"
+              url="https://console.cnyixun.com/upload/avatar/2022/3/2/8_9860765.png"
               :size="avatar_size"
-              frame="Xmas_2"
+              frame="moon_1"
             />
           </div>
         </el-tab-pane>

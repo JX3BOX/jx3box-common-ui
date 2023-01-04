@@ -22,8 +22,8 @@
         svg-inline
         src="../assets/img/leftsidebar/close.svg"
       /> -->
-      <span v-show="isOpen">&lt;</span>
-      <span v-show="!isOpen">&gt;</span>
+      <span v-show="isOpen"><i class="el-icon-arrow-left"></i></span>
+      <span v-show="!isOpen"><i class="el-icon-arrow-right"></i></span>
       <!-- <img
         v-show="!isOpen"
         svg-inline

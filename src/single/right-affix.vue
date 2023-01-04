@@ -99,24 +99,26 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .right-affix {
     position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    right: 20px;
-    top: 25%;
+    right: @aside-right;
+    top: @header-height + @bread-height + 100px;
     background-color: #fafbfc;
-    padding: 5px;
-    z-index: 99999;
+    padding: 8px 5px;
+    z-index: 200;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
     .item {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 35px;
-        height: 35px;
+        width: 32px;
+        height: 32px;
         cursor: pointer;
         &:hover {
             background-color: #eee;

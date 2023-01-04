@@ -63,6 +63,8 @@ export default {
 .c-avatar {
     .pr;
     .dbi;
+    background-color: #ffffff;
+    .r(100%);
     &.xl{
         @pic:150px;
         @frame:210px;

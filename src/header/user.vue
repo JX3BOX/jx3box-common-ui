@@ -56,7 +56,7 @@
                         </li>
                         <hr />
                         <template v-for="(item, i) in panel">
-                            <li :key="'panel-' + i" v-if="isAdmin || !item.onlyAdmin">
+                            <li :key="'panel-' + i" v-if="isEditor || !item.onlyAdmin">
                                 <a :href="item.link">{{ item.label }}</a>
                             </li>
                         </template>

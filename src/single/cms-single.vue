@@ -215,7 +215,6 @@ export default {
       this.other_authors = other_authors;
     },
     toComment () {
-      console.log(111)
       this.$refs.commentView.scrollIntoView({
         block: "center",
         behavior: "auto"
