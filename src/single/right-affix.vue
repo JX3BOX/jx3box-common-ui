@@ -3,6 +3,11 @@
         <div class="item">
             <fav :postId="postId" :postType="postType" :postTitle="postTitle" :hiddenNum="true"></fav>
         </div>
+        <el-tooltip v-if="showComment" effect="dark" content="去评论" placement="left">
+            <div class="item" @click="toComment">
+                <i class="el-icon-chat-dot-square"></i>
+            </div>
+        </el-tooltip>
         <el-tooltip effect="dark" content="回到顶部" placement="bottom">
             <div class="item" v-show="scrollBtnShow" @click="goTop">
                 <div class="to-top"></div>
@@ -15,7 +20,7 @@
 import Fav from "../interact/Fav2.vue";
 export default {
     name: "RightAffix",
-    props: ["postId", "postType", "postTitle"],
+    props: ["postId", "postType", "postTitle", "showComment"],
     data() {
         return {
             scrollToptimer: null,
@@ -41,6 +46,9 @@ export default {
                 }
                 self.isTop = true;
             }, 30);
+        },
+        toComment() {
+            this.$emit("toComment");
         },
     },
     mounted() {
@@ -89,18 +97,23 @@ export default {
         &:hover {
             background-color: #f6fcff;
         }
+        .el-icon-chat-dot-square {
+            font-size: 20px;
+            font-weight: bold;
+            color: #3871e0;
+        }
     }
     .to-top {
         width: 0;
         height: 0;
         border-left: 12px solid transparent;
         border-right: 12px solid transparent;
-        border-bottom: 18px solid skyblue;
+        border-bottom: 18px solid #5a9cf9;
     }
 }
-@media screen and (max-width:@smallpc){
-    .right-affix{
-        right:0;
+@media screen and (max-width: @smallpc) {
+    .right-affix {
+        right: 0;
     }
 }
 </style>

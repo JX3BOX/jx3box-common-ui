@@ -50,7 +50,7 @@
             />
 
             <!-- 评论 -->
-            <div class="m-single-comment">
+            <div ref="commentView" class="m-single-comment">
                 <el-divider content-position="left">评论</el-divider>
                 <Comment :id="id" category="post" v-if="id && allow_comment" />
                 <el-alert title="作者没有开启评论功能" type="warning" show-icon v-else></el-alert>
@@ -62,7 +62,13 @@
             <slot name="single-footer"></slot>
         </footer>
 
-        <right-affix :postId="id" :postType="post_type" :postTitle="post_title"></right-affix>
+        <right-affix
+            :postId="id"
+            :postType="post_type"
+            :postTitle="post_title"
+            :showComment="id && allow_comment"
+            @toComment="toComment($event)"
+        ></right-affix>
     </div>
 </template>
 
@@ -169,6 +175,12 @@ export default {
         loadAuthors({ super_author, other_authors }) {
             this.super_author = super_author;
             this.other_authors = other_authors;
+        },
+        toComment() {
+            this.$refs.commentView.scrollIntoView({
+                block: "center",
+                behavior: "auto",
+            });
         },
     },
     watch: {
