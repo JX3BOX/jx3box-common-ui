@@ -76,7 +76,10 @@
       />
 
       <!-- 评论 -->
-      <div class="m-single-comment">
+      <div
+        ref="commentView"
+        class="m-single-comment"
+      >
         <el-divider content-position="left">评论</el-divider>
         <Comment
           :id="id"
@@ -101,6 +104,8 @@
       :postId="id"
       :postType="post_type"
       :postTitle="post_title"
+      :showComment="id && allow_comment"
+      @toComment="toComment($event)"
     ></right-affix>
   </div>
 </template>
@@ -209,6 +214,13 @@ export default {
       this.super_author = super_author;
       this.other_authors = other_authors;
     },
+    toComment () {
+      console.log(111)
+      this.$refs.commentView.scrollIntoView({
+        block: "center",
+        behavior: "auto"
+      })
+    }
   },
   watch: {
     extend_data: {

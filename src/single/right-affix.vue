@@ -9,6 +9,19 @@
       ></fav>
     </div>
     <el-tooltip
+      v-if="showComment"
+      effect="dark"
+      content="去评论"
+      placement="left"
+    >
+      <div
+        class="item"
+        @click="toComment"
+      >
+        <i class="el-icon-chat-dot-square"></i>
+      </div>
+    </el-tooltip>
+    <el-tooltip
       effect="dark"
       content="回到顶部"
       placement="bottom"
@@ -32,6 +45,7 @@ export default {
     "postId",
     "postType",
     "postTitle",
+    "showComment"
   ],
   data () {
     return {
@@ -58,6 +72,9 @@ export default {
         };
         self.isTop = true;
       }, 30);
+    },
+    toComment () {
+      this.$emit('toComment')
     }
   },
   mounted () {
@@ -104,13 +121,18 @@ export default {
         &:hover {
             background-color: #eee;
         }
+        .el-icon-chat-dot-square {
+            font-size: 20px;
+            font-weight: bold;
+            color: #3871e0;
+        }
     }
     .to-top {
         width: 0;
         height: 0;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
-        border-bottom: 15px solid skyblue;
+        border-bottom: 15px solid #5a9cf9;
     }
 }
 </style>
