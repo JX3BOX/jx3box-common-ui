@@ -7,10 +7,15 @@ function getPostAuthors(post_id) {
 function uploadImage(formData){
     return $cms().post(`/api/cms/upload/avatar`, formData);
 }
-
+//获取装扮
+function getDecoration(params) {
+    return $cms().get(`/api/cms/user/decoration`,{
+        params
+    });
+}
 // 通用上传
 function upload(formData){
     return $cms().post(`/api/cms/upload`, formData);
 }
 
-export { getPostAuthors, uploadImage, upload };
+export { getPostAuthors, uploadImage, upload,getDecoration };
