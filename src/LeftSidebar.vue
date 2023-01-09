@@ -77,7 +77,7 @@ export default {
         this.setDecoration(JSON.parse(decoration_sidebar))
         return;
       }
-      getDecoration({using:1,type:'sidebar'}).then(data=>{
+      getDecoration({using:1}).then(data=>{
         let res=data.data.data
         if(res.length==0){
           //空 则为无主题，不再加载接口，界面设No
@@ -87,7 +87,6 @@ export default {
         let decoration=res.filter(val => {
           return val.type === 'sidebar'
         })
-        console.log(decoration)
         if(decoration.length>0){
           sessionStorage.setItem('decoration_sidebar',JSON.stringify(decoration[0]))
           this.setDecoration(decoration[0])
