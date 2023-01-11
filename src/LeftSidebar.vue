@@ -39,6 +39,7 @@ import Bus from "../service/bus";
 import { isApp } from "../assets/js/app.js";
 import {getDecoration} from "../service/cms"
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import User from '@jx3box/jx3box-common'
 export default {
   name: "LeftSidebar",
   props: ["open", "withoutBread"],
@@ -117,7 +118,7 @@ export default {
   },
   created: function () {
     this.isOpen = this.open === undefined ? true : this.open;
-    this.getDecoration()
+    User.isLogin() && this.getDecoration()
   },
 };
 </script>
