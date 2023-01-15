@@ -7,7 +7,7 @@
             'without-bread': withoutBread,
         }"
     v-if="!isApp"
-    :style="decoration"
+    :style="{backgroundImage:bg}"
   >
     <div class="c-sidebar-left-inner">
       <slot></slot>
@@ -39,25 +39,29 @@ import Bus from "../service/bus";
 import { isApp } from "../assets/js/app.js";
 import {getDecoration} from "../service/cms"
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import User from '@jx3box/jx3box-common'
+import User from '@jx3box/jx3box-common/js/user'
 export default {
   name: "LeftSidebar",
-  props: ["open", "withoutBread"],
+  props: ["open", "withoutBread","uid"],
   data: function () {
     return {
       isOpen: true,
+      user_id:null,
       isApp: isApp(),
-      decoration:{}
+      bg:""
     };
   },
   computed: {
     stickyHeader: function () {
       return this.withoutBread;
-    },
+    }
   },
   watch: {
     open: function (newval) {
       this.isOpen = newval === undefined ? true : !!newval;
+    },
+    uid: function (newval) {
+      this.user_id = newval ;
     },
   },
   methods: {
@@ -69,8 +73,9 @@ export default {
         return __imgPath + `decoration/images/${val}/${type}.png`;
     },
     getDecoration(){
-      let decoration_sidebar=sessionStorage.getItem('decoration_sidebar')
+      let decoration_sidebar=sessionStorage.getItem('decoration_sidebar'+this.uid)
       if(decoration_sidebar == 'no'){
+        this.bg =""
         return;
       }
       //已有缓存，读取解析
@@ -78,29 +83,29 @@ export default {
         this.setDecoration(JSON.parse(decoration_sidebar))
         return;
       }
-      getDecoration({using:1}).then(data=>{
+      getDecoration({using:1,user_id:this.user_id}).then(data=>{
         let res=data.data.data
         if(res.length==0){
           //空 则为无主题，不再加载接口，界面设No
-          sessionStorage.setItem('decoration_sidebar','no')
+          sessionStorage.setItem('decoration_sidebar'+this.uid,'no')
+          this.bg =""
           return;
         }
         let decoration=res.filter(val => {
           return val.type === 'sidebar'
         })
         if(decoration.length>0){
-          sessionStorage.setItem('decoration_sidebar',JSON.stringify(decoration[0]))
+          sessionStorage.setItem('decoration_sidebar'+this.uid,JSON.stringify(decoration[0]))
           this.setDecoration(decoration[0])
         }else{
           //空 则为无主题，不再加载接口，界面设No
-          sessionStorage.setItem('decoration_sidebar','no')
+          sessionStorage.setItem('decoration_sidebar'+this.uid,'no')
+          this.bg =""
         }
       })
     },
     setDecoration(decoration_sidebar){
-        this.decoration={
-          'background-image':'url('+this.showDecoration(decoration_sidebar.val,decoration_sidebar.type)+')'
-        }
+        this.bg = `url(${this.showDecoration(decoration_sidebar.val,decoration_sidebar.type)})`;
     }
   },
   mounted: function () {
@@ -118,7 +123,10 @@ export default {
   },
   created: function () {
     this.isOpen = this.open === undefined ? true : this.open;
-    User.isLogin() && this.getDecoration()
+    this.user_id = this.uid
+    if(this.user_id){
+      this.getDecoration()
+    }
   },
 };
 </script>

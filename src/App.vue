@@ -17,8 +17,8 @@
       bread info
     </Breadcrumb>
 
-    <LeftSidebar :open="true">
-      <LeftSideToggle :mobileOnly="true" />
+    <LeftSidebar :open="true" :uid="8">
+      <LeftSideToggle :mobileOnly="true"/>
       <Author
         :author="author"
         :uid="8"
