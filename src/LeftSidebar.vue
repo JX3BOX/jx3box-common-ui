@@ -62,6 +62,8 @@ export default {
     },
     uid: function (newval) {
       this.user_id = newval ;
+      this.getDecoration()
+
     },
   },
   methods: {
@@ -73,7 +75,10 @@ export default {
         return __imgPath + `decoration/images/${val}/${type}.png`;
     },
     getDecoration(){
-      let decoration_sidebar=sessionStorage.getItem('decoration_sidebar'+this.uid)
+      if(!this.user_id){
+        return;
+      }
+      let decoration_sidebar=sessionStorage.getItem('decoration_sidebar'+this.user_id)
       if(decoration_sidebar == 'no'){
         this.bg =""
         return;
@@ -87,7 +92,7 @@ export default {
         let res=data.data.data
         if(res.length==0){
           //空 则为无主题，不再加载接口，界面设No
-          sessionStorage.setItem('decoration_sidebar'+this.uid,'no')
+          sessionStorage.setItem('decoration_sidebar'+this.user_id,'no')
           this.bg =""
           return;
         }
@@ -95,11 +100,11 @@ export default {
           return val.type === 'sidebar'
         })
         if(decoration.length>0){
-          sessionStorage.setItem('decoration_sidebar'+this.uid,JSON.stringify(decoration[0]))
+          sessionStorage.setItem('decoration_sidebar'+this.user_id,JSON.stringify(decoration[0]))
           this.setDecoration(decoration[0])
         }else{
           //空 则为无主题，不再加载接口，界面设No
-          sessionStorage.setItem('decoration_sidebar'+this.uid,'no')
+          sessionStorage.setItem('decoration_sidebar'+this.user_id,'no')
           this.bg =""
         }
       })
@@ -124,9 +129,7 @@ export default {
   created: function () {
     this.isOpen = this.open === undefined ? true : this.open;
     this.user_id = this.uid
-    if(this.user_id){
-      this.getDecoration()
-    }
+    this.getDecoration()
   },
 };
 </script>
