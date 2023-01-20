@@ -10,7 +10,7 @@
                 />
             </div>
         </el-tooltip>
-        <el-dialog title="品鉴评分" :visible.sync="visible" custom-class="w-boxcoin-pop" :close-on-click-modal="false">
+        <el-dialog title="品鉴评分" :visible.sync="visible" custom-class="w-boxcoin-pop" :close-on-click-modal="false" append-to-body>
             <div class="w-boxcoin-admin-content">
                 <div class="u-left">
                     <em class="u-label">本月状态</em>
