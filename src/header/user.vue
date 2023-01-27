@@ -237,24 +237,30 @@ export default {
                 if (user_last_login && dayjs(user_last_login).isToday()) {
                     console.log("已签到");
                 } else {
-                    userSignIn()
-                        .then((res) => {
-                            let msg = this.$message({
-                                type: "success",
-                                message: "签到成功",
-                                customClass: "c-header-signin",
-                                duration: 0,
+                    // 延迟2秒执行 feedback#501
+                    const signTimer = setTimeout(() => {
+                        userSignIn()
+                            .then((res) => {
+                                let msg = this.$message({
+                                    type: "success",
+                                    message: "签到成功",
+                                    customClass: "c-header-signin",
+                                    duration: 0,
+                                });
+                                // 模拟手动关闭
+                                setTimeout(() => {
+                                    msg.close();
+                                }, 3000);
+                                localStorage.setItem("user_last_login", JSON.stringify(dayjs()));
+                            })
+                            .catch((err) => {
+                                localStorage.setItem("user_last_login", JSON.stringify(dayjs()));
+                                console.log(dayjs.tz.guess());
+                            })
+                            .finally(() => {
+                                clearTimeout(signTimer);
                             });
-                            // 模拟手动关闭
-                            setTimeout(() => {
-                                msg.close();
-                            }, 3000);
-                            localStorage.setItem("user_last_login", JSON.stringify(dayjs()));
-                        })
-                        .catch((err) => {
-                            localStorage.setItem("user_last_login", JSON.stringify(dayjs()));
-                            console.log(dayjs.tz.guess());
-                        })
+                    }, 2000);
                 }
             } catch (e) {
                 console.log(e);

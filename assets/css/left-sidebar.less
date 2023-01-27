@@ -1,141 +1,137 @@
 .c-sidebar-left {
-  .w(@aside-left - 40px);
-  box-sizing: border-box;
-  padding: 10px;
-  .pf;
-  .z(600);
-  left: 0;
-  top: @header-height + @bread-height;
-  bottom: 0;
-  background-color: @bg-light;
-  border-right: 1px solid #eee;
+    .w(@aside-left - 40px);
+    box-sizing: border-box;
+    padding: 10px;
+    .pf;
+    .z(600);
+    left: 0;
+    top: @header-height + @bread-height;
+    bottom: 0;
+    background-color: @bg-light;
+    border-right: 1px solid #eee;
 }
 
 .c-sidebar-left.without-bread {
-  top: @header-height;
+    top: @header-height;
 }
 
 .c-sidebar-left-inner {
-  .size(100%);
-  overflow-y: hidden;
-
-  &:hover {
+    .size(100%);
     overflow-y: auto;
-  }
 
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
 
-  &::-webkit-scrollbar-track,
-  &::-webkit-scrollbar-track-piece {
-    background-color: #fafafa;
-    border-radius: 6px;
-  }
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-track-piece {
+        background-color: #fafafa;
+        border-radius: 6px;
+    }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: #eee;
-    border-radius: 6px;
-  }
+    &::-webkit-scrollbar-thumb {
+        background-color: #eee;
+        border-radius: 6px;
+    }
 
-  &::-webkit-scrollbar-button,
-  &::-webkit-scrollbar-corner,
-  &::-webkit-resizer {
-    display: none;
-  }
+    &::-webkit-scrollbar-button,
+    &::-webkit-scrollbar-corner,
+    &::-webkit-resizer {
+        display: none;
+    }
 }
 
 // 笔记本<1440 缩小双边栏
 @media screen and (max-width: @smallpc) {
-  .c-sidebar-left {
-    .w(@aside-left - 40px);
-  }
+    .c-sidebar-left {
+        .w(@aside-left - 40px);
+    }
 }
 
 // 平板横屏
 @media screen and (max-width: @notebook) {
-  .c-sidebar-left {
-    .w(@aside-left - 60px);
-  }
+    .c-sidebar-left {
+        .w(@aside-left - 60px);
+    }
 }
 
 @media screen and (max-width: @phone) {
     .c-sidebar-left-inner {
-      overflow-y: auto;
+        overflow-y: auto;
     }
 }
 
 // 折叠相关逻辑
 .c-sidebar-left-toggle {
-  display: block;
-  .pa;
-  .rb(-21px, calc(50% - 20px));
-  width: 20px;
-  height: 40px;
-  line-height: 40px;
-  .pointer;
-  text-align: center;
-  background-color: @bg-light;
-  border-right: 1px solid #eee;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  border-radius: 0px 2px 2px 0px;
-  font-size: 16px;
-  color: #999;
+    display: block;
+    .pa;
+    .rb(-21px, calc(50% - 20px));
+    width: 20px;
+    height: 40px;
+    line-height: 40px;
+    .pointer;
+    text-align: center;
+    background-color: @bg-light;
+    border-right: 1px solid #eee;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    border-radius: 0px 2px 2px 0px;
+    font-size: 16px;
+    color: #999;
 
-  &:hover {
-    color: #222;
-  }
+    &:hover {
+        color: #222;
+    }
 
-  &.close-sidebar-left {
-    right: 0;
-  }
+    &.close-sidebar-left {
+        right: 0;
+    }
 
-  svg {
-    fill: @color;
-  }
+    svg {
+        fill: @color;
+    }
 }
 
 .closeLeftSidebar() {
-  transition: 0.2s ease-in-out;
-  transform: translateX(-100%);
+    transition: 0.2s ease-in-out;
+    transform: translateX(-100%);
 }
 
 .openLeftSidebar() {
-  transition: 0.2s ease-in-out;
-  transform: translateX(0);
+    transition: 0.2s ease-in-out;
+    transform: translateX(0);
 }
 
 .c-sidebar-left.isclose {
-  .closeLeftSidebar();
+    .closeLeftSidebar();
 
-  .c-sidebar-left-toggle {
-    transition: 0.2s ease-in-out;
-    transform: translateX(100%);
-  }
+    .c-sidebar-left-toggle {
+        transition: 0.2s ease-in-out;
+        transform: translateX(100%);
+    }
 }
 
 .c-sidebar-left.isopen {
-  .openLeftSidebar();
+    .openLeftSidebar();
 
-  .c-sidebar-left-toggle {
-    transition: 0.2s ease-in-out;
-    transform: translateX(0);
-  }
+    .c-sidebar-left-toggle {
+        transition: 0.2s ease-in-out;
+        transform: translateX(0);
+    }
 }
 
 @media screen and (max-width: @ipad) {
-  .c-sidebar-left-toggle {
-    .none;
-  }
+    .c-sidebar-left-toggle {
+        .none;
+    }
 
-  .c-sidebar-left.isopen {
-    box-shadow: 2px 0 3px rgba(0, 0, 0, .1);
-  }
+    .c-sidebar-left.isopen {
+        box-shadow: 2px 0 3px rgba(0, 0, 0, 0.1);
+    }
 }
 
 @media print {
-  .c-sidebar-left {
-    .none;
-  }
+    .c-sidebar-left {
+        .none;
+    }
 }
