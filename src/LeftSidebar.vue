@@ -88,7 +88,7 @@ export default {
         this.setDecoration(JSON.parse(decoration_sidebar))
         return;
       }
-      getDecoration({using:1,user_id:this.user_id}).then(data=>{
+      getDecoration({using:1,user_id:this.user_id,type:'sidebar'}).then(data=>{
         let res=data.data.data
         if(res.length==0){
           //空 则为无主题，不再加载接口，界面设No
@@ -96,17 +96,19 @@ export default {
           this.bg =""
           return;
         }
-        let decoration=res.filter(val => {
-          return val.type === 'sidebar'
-        })
-        if(decoration.length>0){
-          sessionStorage.setItem('decoration_sidebar'+this.user_id,JSON.stringify(decoration[0]))
-          this.setDecoration(decoration[0])
-        }else{
-          //空 则为无主题，不再加载接口，界面设No
-          sessionStorage.setItem('decoration_sidebar'+this.user_id,'no')
-          this.bg =""
-        }
+        sessionStorage.setItem('decoration_sidebar'+this.user_id,JSON.stringify(res[0]))
+        this.setDecoration(res[0])
+        // let decoration=res.filter(val => {
+        //   return val.type === 'sidebar'
+        // })
+        // if(decoration.length>0){
+         
+        //   this.setDecoration(decoration[0])
+        // }else{
+        //   //空 则为无主题，不再加载接口，界面设No
+        //   sessionStorage.setItem('decoration_sidebar'+this.user_id,'no')
+        //   this.bg =""
+        // }
       })
     },
     setDecoration(decoration_sidebar){
