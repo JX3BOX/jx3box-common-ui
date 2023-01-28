@@ -3,7 +3,7 @@
         <template v-if="isLogin">
             <!-- user msg -->
             <div class="c-header-msg" id="c-header-msg">
-                <el-tooltip effect="dark" content="我的消息" placement="bottom">
+                <el-tooltip effect="dark" content="消息中心" placement="bottom">
                     <a class="u-msg" :href="url.msg">
                         <i class="u-icon u-icon-msg">
                             <i class="u-pop" style="display: none" v-show="pop"></i>
@@ -15,11 +15,69 @@
 
             <!-- user panel -->
             <div class="c-header-panel" id="c-header-panel">
-                <el-tooltip effect="dark" content="发布中心" placement="bottom">
+                <el-tooltip effect="dark" content="创作中心" placement="bottom">
                     <a class="u-post" :href="url.publish">
                         <img class="u-add" svg-inline src="../../assets/img/header/add.svg" />
                     </a>
                 </el-tooltip>
+            </div>
+
+            <div class="c-header-panel c-header-assets" @mouseenter="onAssetsHover" @mouseleave="onAssetsBlur">
+                <span class="u-post">
+                    <img class="u-add" svg-inline src="../../assets/img/header/coin.svg" />
+                </span>
+
+                <div class="u-assets" v-show="showAssets">
+                    <div class="u-divider">当前资产</div>
+
+                    <div class="u-detail">
+                        <a class="u-item">
+                            <span class="u-label"><i class="el-icon-user"></i> 等级</span>
+                            <span class="u-value">{{ level }}</span>
+                        </a>
+                        <a class="u-item" href="/dashboard/boxcoin">
+                            <span class="u-label"><i class="el-icon-coin"></i> 盒币</span>
+                            <span class="u-value">{{ asset.box_coin }}</span>
+                        </a>
+                        <a class="u-item" href="/dashboard/cny">
+                            <span class="u-label"><i class="el-icon-wallet"></i> 金箔</span>
+                            <span class="u-value">{{ asset.cny }}</span>
+                        </a>
+                        <a class="u-item" href="/dashboard/points">
+                            <span class="u-label"><i class="el-icon-sugar"></i> 银铛</span>
+                            <span class="u-value">{{ asset.points }}</span>
+                        </a>
+                        <a class="u-item" href="/dashboard/card">
+                            <span class="u-label"><i class="el-icon-bank-card"></i> 卡密</span>
+                            <span class="u-value">{{ asset.ext_info ? asset.ext_info.keycode : 0 }}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- vip -->
+            <div class="c-header-panel" id="c-header-vip">
+                <el-tooltip effect="dark" content="会员" placement="bottom">
+                    <a class="u-post" href="/vip/premium">
+                        <img class="u-add" svg-inline src="../../assets/img/header/vip.svg" />
+                    </a>
+                </el-tooltip>
+            </div>
+
+
+            <!-- manage -->
+            <div class="c-header-panel c-header-manage" id="c-header-manage" v-if="isEditor" @mouseenter="showManage = true" @mouseleave="showManage = false">
+                <span class="u-post">
+                    <img class="u-add" svg-inline src="../../assets/img/header/manage.svg" />
+                </span>
+                <ul class="u-menu" v-show="showManage">
+                    <li v-if="isAdmin">
+                        <a href="/admin">站点配置</a>
+                    </li>
+                    <li v-if="isEditor">
+                        <a href="https://os.jx3box.com/admin">管理平台</a>
+                    </li>
+                </ul>
             </div>
 
             <!-- user info -->
@@ -126,6 +184,12 @@ export default {
                 was_pro: 0,
             },
 
+            // assets
+            showAssets: false,
+
+            // manage
+            showManage: false,
+
             // 链接
             login_url: __Links.account.login + "?redirect=" + location.href,
             register_url: __Links.account.register + "?redirect=" + location.href,
@@ -169,6 +233,9 @@ export default {
         siteRoot: function () {
             return location.host.includes("origin") ? __OriginRoot : __Root;
         },
+        level: function (){
+            return User.getLevel(this.asset.experience)
+        }
     },
     watch: {
         fold(val) {
@@ -277,6 +344,12 @@ export default {
             getMyInfo().then((res) => {
                 this.isSuperAuthor = !!res.sign;
             });
+        },
+        onAssetsHover: function (){
+            this.showAssets = true;
+        },
+        onAssetsBlur: function (){
+            this.showAssets = false;
         },
 
         // 初始化
