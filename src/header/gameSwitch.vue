@@ -1,8 +1,21 @@
 <template>
-    <div class="c-header-origin c-game-switch">
-        <div class="u-current u-item on">
-            <!-- <img class="u-img" :src="currentGame.img" alt=""> -->
-            <span class="on">{{currentGame.name}}</span>
+    <div class="c-game-switch">
+        <div class="u-current on" @click.stop="onShow">
+            <span>{{ currentGame.name }}</span>
+        </div>
+
+        <div class="m-game-list" v-show="showMore">
+            <a
+                class="u-game-item"
+                v-for="item in games"
+                :key="item.key"
+                :class="{ active: current === item.key, disabled: item.disabled }"
+                :href="itemHref(item)"
+                @click.stop="handleClick(item)"
+            >
+                <img class="u-img" :src="item.img" alt="" />
+                <span>{{ item.name }}</span>
+            </a>
         </div>
     </div>
 </template>
@@ -18,76 +31,173 @@ export default {
                     name: "剑网3",
                     img: __imgPath + "image/xsj/jx3czb.png",
                     key: "jx3",
-                    path: "https://www.jx3box.com"
+                    path: "https://www.jx3box.com",
+                    disabled: false,
                 },
                 {
                     name: "缘起",
                     img: __imgPath + "image/xsj/jx3yq.png",
                     key: "jx3origin",
-                    path: "https://origin.jx3box.com"
+                    path: "https://origin.jx3box.com",
+                    disabled: false,
                 },
                 {
-                    name: '剑网1:归来',
+                    name: "剑网1:归来",
                     img: __imgPath + "image/xsj/jx1gl.png",
                     key: "jx1",
-                    path: "https://jx1.jx3box.com"
+                    path: "https://jx1.jx3box.com",
+                    disabled: true,
                 },
                 {
                     name: "指尖江湖",
                     img: __imgPath + "image/xsj/zjjh.png",
                     key: "zjjh",
-                    path: "https://zjjh.jx3box.com"
+                    path: "https://zjjh.jx3box.com",
+                    disabled: true,
                 },
                 {
                     name: "指尖对弈",
                     img: __imgPath + "image/xsj/zjdy.png",
                     key: "zjdy",
-                    path: "https://zjdy.jx3box.com"
+                    path: "https://zjdy.jx3box.com",
+                    disabled: true,
                 },
                 {
-                    name: '剑侠世界3',
+                    name: "剑侠世界3",
                     img: __imgPath + "image/xsj/jxsj3.png",
                     key: "jxsj3",
-                    path: "https://jxsj3.jx3box.com"
+                    path: "https://jxsj3.jx3box.com",
+                    disabled: true,
                 },
                 {
                     name: "双生视界",
                     img: __imgPath + "image/xsj/sssj.png",
                     key: "sssj",
-                    path: "https://sssj.jx3box.com"
+                    path: "https://sssj.jx3box.com",
+                    disabled: true,
                 },
                 {
                     name: "剑侠世界",
                     img: __imgPath + "image/xsj/jxsj.png",
                     key: "jxsj",
-                    path: "https://jxsj.jx3box.com"
-                }
+                    path: "https://jxsj.jx3box.com",
+                    disabled: true,
+                },
             ],
-            current: 'jx3'
-        }
+            current: "jx3",
+
+            showMore: false
+        };
     },
     computed: {
         currentGame() {
             return this.games.find((item) => item.key == this.current);
+        },
+    },
+    mounted() {
+        const _host = window.location.host;
+        const _game = this.games.find((item) => item.path.indexOf(_host) > -1);
+        if (_game) {
+            this.current = _game.key;
+        }
+        this.close()
+    },
+    methods: {
+        handleClick(item) {
+            if (item.disabled) {
+                return;
+            }
+            this.current = item.key;
+        },
+        itemHref(item) {
+            if (item.disabled) {
+                return "javascript:;";
+            }
+            return item.path;
+        },
+        onShow() {
+            this.showMore = !this.showMore;
+        },
+        close() {
+            document.addEventListener("click", () => {
+                this.showMore = false;
+            });
         }
     }
-}
+};
 </script>
 
 <style lang="less">
 .c-game-switch {
     .fl;
-    margin: 20px 0;
+    margin: 18px 0;
     .mr(10px);
     .pr;
     .u-current {
         .flex;
         align-items: center;
         .pointer;
+        .dbi;
+        .y(top);
+        font-size: 14px;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 4px;
+        .pr;
+        .z(1);
         .u-img {
             width: 20px;
             height: 20px;
             margin-right: 5px;
+        }
+
+        &.on {
+            background-color: @primary;
+            .pointer;
+        }
+    }
+    .m-game-list {
+        position: absolute;
+        top: calc(100% + 14px);
+        left: -10px;
+        width: 300px;
+        background-color: #24292e;
+        padding: 10px;
+        border: 1px solid rgba(27, 31, 35, 0.15);
+        border-radius: 4px;
+        box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
+        margin-top: 6px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        .u-game-item {
+            .flex;
+            align-items: center;
+            padding: 10px 20px;
+            .pointer;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 14px;
+            .u-img {
+                width: 24px;
+                height: 24px;
+                margin-right: 5px;
+                border-radius: 4px;
+            }
+            &.active {
+                background-color: @primary;
+                color: #fff;
+            }
+            &:not(.disabled) {
+                &:hover {
+                    background-color: @primary;
+                    color: #fff;
+                }
+            }
+            &.disabled {
+                filter: grayscale(100%);
+                color: #c0c4cc;
+                cursor: not-allowed;
+            }
         }
     }
 }
