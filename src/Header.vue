@@ -10,7 +10,10 @@
             <header-logo />
 
             <!-- origin -->
-            <clientSwitch :defaultValue="client" />
+            <!-- <clientSwitch :defaultValue="client" /> -->
+
+            <!-- game -->
+            <gameSwitch />
 
             <!-- search -->
             <header-search :client="client" />
@@ -38,6 +41,7 @@ import search from "./header/search.vue";
 import nav from "./header/nav.vue";
 import user from "./header/user.vue";
 import Box from "../src/Box2.vue";
+import gameSwitch from "./header/gameSwitch.vue";
 
 export default {
     name: "Header",
@@ -82,11 +86,12 @@ export default {
     mounted: function () {},
     components: {
         "header-logo": logo,
-        clientSwitch,
+        // clientSwitch,
         "header-search": search,
         "header-nav": nav,
         "header-user": user,
         Box,
+        gameSwitch,
     },
 };
 </script>

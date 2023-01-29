@@ -287,8 +287,6 @@ body {
     }
 
     .u-menu {
-        // .none;
-
         background-clip: padding-box;
         background-color: #fff;
         color: @color;
@@ -380,6 +378,10 @@ body {
         vertical-align: -2px;
         display: inline-block;
         margin-right: 3px;
+    }
+
+    .off {
+        filter: grayscale(100%);
     }
 }
 
@@ -712,6 +714,10 @@ body {
             align-items: center;
             justify-content: space-between;
             padding: 5px 0;
+
+            .u-value {
+                font-weight: bold;
+            }
         }
     }
 }
@@ -872,6 +878,83 @@ body {
     &:hover {
         .u-dropdown {
             opacity: 0.7;
+        }
+    }
+
+    .m-info {
+        background-clip: padding-box;
+        background-color: #fff;
+        color: #3d454d;
+        border: 1px solid rgba(27, 31, 35, 0.15);
+        border-radius: 4px;
+        box-shadow: 0 3px 12px rgb(27 31 35 / 15%);
+        right: 0;
+        list-style: none;
+        position: absolute;
+        z-index: 820;
+        top: 100%;
+        width: 400px;
+
+        .u-profile {
+            background-color: #F4F6F7;
+            padding: 10px;
+        }
+
+        .u-id {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+        .u-copy {
+            margin-left: 5px;
+            .pointer;
+
+            &:hover {
+                color: @primary;
+            }
+        }
+        .m-vip {
+            margin-top: 5px;
+        }
+        .u-vip {
+            margin-left: 10px;
+        }
+
+        .u-actions {
+            width: 100%;
+            .flex;
+
+            .el-button {
+                border-radius: 0;
+                flex: 1;
+
+                &:first-of-type {
+                    border-left-width: 0;
+                }
+                &:last-of-type {
+                    border-right-width: 0;
+                }
+            }
+        }
+
+        .m-other {
+            .u-item {
+                display: block;
+                padding: 5px 10px;
+                color: #454545;
+
+                &:hover {
+                    background: @primary;
+                    color: #fff;
+                }
+            }
+            .u-logout {
+                padding: 0 10px 10px 10px;
+
+                .el-button {
+                    width: 100%;
+                }
+            }
         }
     }
 }

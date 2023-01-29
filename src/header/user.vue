@@ -1,7 +1,7 @@
 <template>
     <div class="c-header-user" id="c-header-user">
         <template v-if="isLogin">
-            <!-- user msg -->
+            <!-- 消息中心 -->
             <div class="c-header-msg" id="c-header-msg">
                 <el-tooltip effect="dark" content="消息中心" placement="bottom">
                     <a class="u-msg" :href="url.msg">
@@ -13,7 +13,7 @@
                 </el-tooltip>
             </div>
 
-            <!-- user panel -->
+            <!-- 创作中心 -->
             <div class="c-header-panel" id="c-header-panel">
                 <el-tooltip effect="dark" content="创作中心" placement="bottom">
                     <a class="u-post" :href="url.publish">
@@ -21,19 +21,19 @@
                     </a>
                 </el-tooltip>
             </div>
-
+            <!-- 我的资产 -->
             <div class="c-header-panel c-header-assets" @mouseenter="onAssetsHover" @mouseleave="onAssetsBlur">
                 <span class="u-post">
                     <img class="u-add" svg-inline src="../../assets/img/header/coin.svg" />
                 </span>
 
                 <div class="u-assets" v-show="showAssets">
-                    <div class="u-divider">当前资产</div>
+                    <div class="u-divider">我的资产</div>
 
                     <div class="u-detail">
                         <a class="u-item">
                             <span class="u-label"><i class="el-icon-user"></i> 等级</span>
-                            <span class="u-value">{{ level }}</span>
+                            <span class="u-value">Lv.{{ level }}</span>
                         </a>
                         <a class="u-item" href="/dashboard/boxcoin">
                             <span class="u-label"><i class="el-icon-coin"></i> 盒币</span>
@@ -64,9 +64,14 @@
                 </el-tooltip>
             </div>
 
-
             <!-- manage -->
-            <div class="c-header-panel c-header-manage" id="c-header-manage" v-if="isEditor" @mouseenter="showManage = true" @mouseleave="showManage = false">
+            <div
+                class="c-header-panel c-header-manage"
+                id="c-header-manage"
+                v-if="isEditor"
+                @mouseenter="showManage = true"
+                @mouseleave="showManage = false"
+            >
                 <span class="u-post">
                     <img class="u-add" svg-inline src="../../assets/img/header/manage.svg" />
                 </span>
@@ -84,48 +89,63 @@
             <div class="c-header-info">
                 <div class="c-header-profile" id="c-header-profile" @click="showmenu">
                     <img class="u-avatar" :src="user.avatar" />
-                    <span class="u-dropdown"></span>
-                    <ul class="u-menu" v-show="!fold">
-                        <li>
-                            <a class="u-me" :href="url.homepage">
-                                <b>{{ showUserName(user.name) }}</b>
-                                <img
-                                    v-if="isSuperAuthor"
-                                    :src="super_author_icon"
-                                    class="u-superauthor-profile"
-                                    alt="superauthor"
-                                    title="签约作者"
-                                />
-                                <em>(UID : {{ user.uid }})</em>
+                    <div class="m-info" v-show="!fold">
+                        <div class="u-profile">
+                            <b :title="user.name">{{ showUserName(user.name) }}</b>
+                            <div class="u-id">
+                                <span>魔盒UID：{{ user.uid }}</span>
+                                <i class="el-icon-document-copy u-copy" @click.stop="copyText(user.uid)"></i>
+                            </div>
+                            <div class="m-vip">
+                                <a href="/dashboard/cooperation">
+                                    <img
+                                        :src="super_author_icon"
+                                        class="u-superauthor-profile"
+                                        alt="superauthor"
+                                        title="签约作者"
+                                        :class="{ off: !isSuperAuthor }"
+                                /></a>
+
+                                <a
+                                    class="u-vip"
+                                    href="/vip/premium?from=header_usermenu"
+                                    target="_blank"
+                                    title="专业版"
+                                >
+                                    <i class="i-icon-vip" :class="{ on: isPRO }">{{ vipType }}</i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <el-button-group class="u-actions">
+                            <a class="el-button el-button--default" :href="url.profile">资料设置</a>
+                            <a class="el-button el-button--default" :href="url.homepage">个人主页</a>
+                            <a class="el-button el-button--default" href="/dashboard/frame">主题风格</a>
+                        </el-button-group>
+
+                        <div class="m-other">
+                            <a href="/dashboard/fav" class="u-item">
+                                我的收藏
                             </a>
-                        </li>
-                        <li>
-                            <a class="u-vip" href="/vip/premium?from=header_usermenu" target="_blank">
-                                <i class="i-icon-vip" :class="{ on: isVIP || isPRO }">{{ vipType }}</i>
-                                <span class="u-vip-type">
-                                    <template v-if="isVIP || isPRO">
-                                        {{ vipTypeTxt }}
-                                        <span class="u-vip-left">({{ vipLeftDays }}天)</span>
-                                    </template>
-                                    <template v-else>升级账号类型</template>
-                                </span>
-                                <!-- <span class="u-expire" v-if="expire_date">(有效期至:{{expire_date}})</span> -->
+                            <a href="/team/role/manage" class="u-item">
+                                我的角色
                             </a>
-                        </li>
-                        <hr />
-                        <template v-for="(item, i) in panel">
-                            <li :key="'panel-' + i" v-if="isEditor || !item.onlyAdmin">
-                                <a :href="item.link">{{ item.label }}</a>
-                            </li>
-                        </template>
-                        <hr />
-                        <li>
-                            <a :href="url.profile">设置</a>
-                        </li>
-                        <li>
-                            <a @click="logout()">登出</a>
-                        </li>
-                    </ul>
+                            <a href="/dashboard/purchases" class="u-item">
+                                付费购买的资源
+                            </a>
+                            <a href="/vip/mall" class="u-item">
+                                积分商城兑好礼
+                            </a>
+                            <hr>
+                            <a href="/dashboard/feedback" class="u-item">
+                                反馈中心
+                            </a>
+                            <hr>
+                            <div class="u-logout">
+                                <el-button @click="logout">退出登录</el-button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </template>
@@ -148,6 +168,7 @@ import { getMsg, getMenu } from "../../service/header";
 import { getMyInfo, userSignIn } from "../../service/author";
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
+import { copyText } from "../../assets/js/utils";
 dayjs.extend(isToday);
 export default {
     props: [],
@@ -171,6 +192,7 @@ export default {
                 dashboard: __Links.dashboard.home,
                 profile: __Links.dashboard.profile,
                 homepage: "/author/" + User.getInfo().uid,
+
             },
 
             // VIP
@@ -204,7 +226,7 @@ export default {
             return User._isPRO(this.asset) || false;
         },
         vipType: function () {
-            return this.isPRO ? "PRO" : "PRE";
+            return "PRO";
         },
         vipTypeTxt: function () {
             return this.isPRO ? "专业版" : "高级版";
@@ -233,9 +255,9 @@ export default {
         siteRoot: function () {
             return location.host.includes("origin") ? __OriginRoot : __Root;
         },
-        level: function (){
-            return User.getLevel(this.asset.experience)
-        }
+        level: function () {
+            return User.getLevel(this.asset.experience);
+        },
     },
     watch: {
         fold(val) {
@@ -345,12 +367,13 @@ export default {
                 this.isSuperAuthor = !!res.sign;
             });
         },
-        onAssetsHover: function (){
+        onAssetsHover: function () {
             this.showAssets = true;
         },
-        onAssetsBlur: function (){
+        onAssetsBlur: function () {
             this.showAssets = false;
         },
+        copyText,
 
         // 初始化
         init: function () {
