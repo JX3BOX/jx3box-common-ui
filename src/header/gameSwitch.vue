@@ -4,7 +4,7 @@
             <span>{{ currentGame.name }}</span>
         </div>
 
-        <div class="m-game-list" v-show="showMore">
+        <div class="c-game-list" v-show="showMore">
             <a
                 class="u-game-item"
                 v-for="item in games"
@@ -35,18 +35,11 @@ export default {
                     disabled: false,
                 },
                 {
-                    name: "缘起",
+                    name: "剑网3缘起",
                     img: __imgPath + "image/xsj/jx3yq.png",
                     key: "jx3origin",
                     path: "https://origin.jx3box.com",
                     disabled: false,
-                },
-                {
-                    name: "剑网1:归来",
-                    img: __imgPath + "image/xsj/jx1gl.png",
-                    key: "jx1",
-                    path: "https://jx1.jx3box.com",
-                    disabled: true,
                 },
                 {
                     name: "指尖江湖",
@@ -70,23 +63,30 @@ export default {
                     disabled: true,
                 },
                 {
-                    name: "双生视界",
-                    img: __imgPath + "image/xsj/sssj.png",
-                    key: "sssj",
-                    path: "https://sssj.jx3box.com",
-                    disabled: true,
-                },
-                {
                     name: "剑侠世界",
                     img: __imgPath + "image/xsj/jxsj.png",
                     key: "jxsj",
                     path: "https://jxsj.jx3box.com",
                     disabled: true,
                 },
+                {
+                    name: "剑网1:归来",
+                    img: __imgPath + "image/xsj/jx1gl.png",
+                    key: "jx1",
+                    path: "https://jx1.jx3box.com",
+                    disabled: true,
+                },
+                {
+                    name: "双生视界",
+                    img: __imgPath + "image/xsj/sssj.png",
+                    key: "sssj",
+                    path: "https://sssj.jx3box.com",
+                    disabled: true,
+                },
             ],
             current: "jx3",
 
-            showMore: false
+            showMore: false,
         };
     },
     computed: {
@@ -100,7 +100,7 @@ export default {
         if (_game) {
             this.current = _game.key;
         }
-        this.close()
+        this.close();
     },
     methods: {
         handleClick(item) {
@@ -122,15 +122,32 @@ export default {
             document.addEventListener("click", () => {
                 this.showMore = false;
             });
-        }
-    }
+        },
+    },
 };
 </script>
 
 <style lang="less">
+.arrow(t,@width,@color,@x:50%) {
+    &:before {
+        bottom: 100%;
+        left: @x;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-style: solid;
+        border-color: transparent;
+        border-bottom-color: @color;
+        border-width: unit(@width, px);
+        @margin: -@width;
+        margin-left: unit(@margin, px);
+    }
+}
 .c-game-switch {
     .fl;
-    margin: 18px 0;
+    margin: 15px 0;
     .mr(10px);
     .pr;
     .u-current {
@@ -142,6 +159,8 @@ export default {
         font-size: 14px;
         color: #fff;
         padding: 5px 10px;
+        background-color: #7d7d7d;
+        border: 2px solid #303133;
         border-radius: 4px;
         .pr;
         .z(1);
@@ -156,7 +175,9 @@ export default {
             .pointer;
         }
     }
-    .m-game-list {
+}
+.c-game-list {
+        .arrow(t,5px,@bg-black,12%);
         position: absolute;
         top: calc(100% + 14px);
         left: -10px;
@@ -169,10 +190,13 @@ export default {
         margin-top: 6px;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        // gap:10px;
+        grid-row-gap: 8px;
+        grid-column-gap: 10px;
         .u-game-item {
             .flex;
             align-items: center;
-            padding: 10px 20px;
+            padding: 6px;
             .pointer;
             border-radius: 4px;
             color: #fff;
@@ -200,5 +224,4 @@ export default {
             }
         }
     }
-}
 </style>
