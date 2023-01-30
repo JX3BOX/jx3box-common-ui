@@ -42,6 +42,10 @@ function checkGiftStatus(accessUserId){
     return $pay().get(`/api/cny/consume/user-charge/to/${accessUserId}/check-status`)
 }
 
+function batchReward(articleType,count,data){
+    return $pay().post(`/api/inspire/batch/article/${articleType}/coins/${count}`, data);
+}
+
 export {
     getPostBoxcoinRecords,
     grantBoxcoin,
@@ -52,4 +56,5 @@ export {
     sendCny,
     checkCnyStatus,
     checkGiftStatus,
+    batchReward,
 };

@@ -69,7 +69,7 @@
             @confirm="addUser"
           />
           <el-button @click="visible = true">用户POP</el-button>
-
+          <BatchReward/>
           <Thx
             :postId="23865"
             postType="bbs"
@@ -217,6 +217,7 @@ import singlebox from "./single/cms-single.vue";
 import PostHeader from "./single/PostHeader.vue";
 import PostCollection from "./single/PostCollection.vue";
 
+import BatchReward from "./single/batchReward.vue";
 import Thx from "./single/Thx.vue";
 import Collection from "./single/Collection.vue";
 import Creators from "./single/Creators.vue";
@@ -264,6 +265,7 @@ export default {
     PostHeader,
     PostCollection,
 
+    BatchReward,
     Thx,
     Collection,
     Creators,

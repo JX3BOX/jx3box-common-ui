@@ -28,6 +28,7 @@ import menuBy from "./src/filters/menuBy.vue";
 import clientBy from "./src/filters/clientBy.vue";
 import zlpBy from "./src/filters/zlpBy.vue";
 
+import batchReward from './src/single/batchReward.vue'
 import Thx from './src/single/Thx.vue'
 import WikiPanel from './src/wiki/WikiPanel.vue'
 
@@ -46,7 +47,8 @@ const components = {
     RightSideMsg,
     Author,
     Avatar,
-
+    
+    batchReward,
     Thx,
     Like,
     Down,
