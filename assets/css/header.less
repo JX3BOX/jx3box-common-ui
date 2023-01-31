@@ -266,6 +266,9 @@ body {
     position: absolute;
     right: 10px;
     top: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
 
     .u-dropdown {
         border-bottom: 0 solid transparent;
@@ -387,14 +390,15 @@ body {
 
 //消息面板
 .c-header-msg {
-    float: left;
     position: relative;
     height: 100%;
 
     .u-msg {
-        display: block;
-        // height: 32px;
-        padding: 29px 10px 18px 10px;
+        .h(100%);
+        .flex;
+        align-items: center;
+
+        padding: 0 10px;
         &:hover {
             opacity: 0.7;
         }
@@ -406,7 +410,7 @@ body {
         height: 17px;
         display: block;
         .pr;
-        top: -1px;
+        top: 1px;
         // margin-top: 9px;
         svg {
             width: 100%;
@@ -602,7 +606,6 @@ body {
 
 //操作面板
 .c-header-panel {
-    float: left;
     position: relative;
     height: 100%;
     user-select: none;
@@ -610,8 +613,10 @@ body {
     box-sizing: border-box;
 
     .u-post {
-        .db;
-        padding: 24px 10px 21px 10px;
+        padding: 0 10px;
+        height: 100%;
+        .flex;
+        align-items: center;
     }
 
     .u-add {
@@ -642,7 +647,6 @@ body {
 
 // 用户资产
 .c-header-assets {
-    float: left;
     position: relative;
     height: 100%;
 
@@ -654,8 +658,10 @@ body {
         }
     }
     .u-asset {
-        .db;
-        padding: 28px 10px 20px 10px;
+        padding: 0 10px;
+        height: 100%;
+        .flex;
+        align-items: center;
         &:hover {
             .tm(0.7);
         }
@@ -677,7 +683,7 @@ body {
         color: #3d454d;
         border: 1px solid rgba(27, 31, 35, 0.15);
         border-radius: 4px;
-        box-shadow: 0 3px 12px rgba(0,0,0,.1);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
         right: 0;
         list-style: none;
         margin: -6px 0 0 0;
@@ -736,19 +742,28 @@ body {
     }
 }
 
-// 管理菜单
-.c-header-manage {
-    .u-manage {
-        padding: 24px 8px 21px 8px;
+// vip
+.c-header-vip {
+    height: 100%;
+    .u-vip {
+        padding: 0 10px;
+        height: 100%;
+        .flex;
+        align-items: center;
     }
 }
 
-// vip
-.c-header-vip {
-    .u-vip {
-        padding: 24px 10px 20px 10px;
+// 管理菜单
+.c-header-manage {
+    height: 100%;
+    .u-manage {
+        padding: 0 10px;
+        height: 100%;
+        .flex;
+        align-items: center;
     }
 }
+
 
 //登录、注册
 .c-header-login {
@@ -828,10 +843,6 @@ body {
 }
 
 // 用户信息
-.c-header-info {
-    float: left;
-    padding: 16px 0;
-}
 .c-header-profile {
     cursor: pointer;
     position: relative;
@@ -916,7 +927,7 @@ body {
     color: #3d454d;
     border: 1px solid rgba(27, 31, 35, 0.15);
     border-radius: 4px;
-    box-shadow: 0 3px 12px rgba(0,0,0,.1);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
     right: 0;
     list-style: none;
     position: absolute;
@@ -931,17 +942,17 @@ body {
         padding: 10px;
     }
 
-    .u-basic{
+    .u-basic {
         .flex;
         align-items: center;
-        gap:3px;
+        gap: 3px;
     }
 
-    .u-displayname{
+    .u-displayname {
         .fz(15px);
         .nobreak;
         max-width: 200px;
-        color:@color;
+        color: @color;
         .bold;
     }
 
@@ -949,7 +960,9 @@ body {
         font-size: 12px;
         color: #999;
         margin-top: 6px;
-        b{color:@color;}
+        b {
+            color: @color;
+        }
     }
     .u-copy {
         margin-left: 5px;
@@ -978,7 +991,7 @@ body {
     }
 
     .u-other {
-        padding:10px 5px;
+        padding: 10px 5px;
         .u-item {
             display: block;
             padding: 5px 10px;
@@ -989,7 +1002,7 @@ body {
                 color: #fff;
             }
 
-            i{
+            i {
                 .mr(5px);
             }
         }
