@@ -33,7 +33,7 @@
                         <span class="u-item">
                             <!-- <span class="u-item-primary>" -->
                             <span class="u-label"><i class="el-icon-user"></i> 等级</span>
-                            <span class="u-value">Lv.{{ level }}</span>
+                            <span class="u-value" :style="levelStyle">Lv.{{ level }}</span>
                             <!-- </span> -->
                             <!-- <span class="u-item-extend"><a href="/notice/28917" target="_blank">[权益]</a></span> -->
                         </span>
@@ -111,60 +111,87 @@
             <div class="c-header-info">
                 <div class="c-header-profile" id="c-header-profile" @click="showmenu">
                     <img class="u-avatar" :src="user.avatar" />
-                    <div class="c-header-userdata" v-show="!fold">
-                        <div class="u-profile">
-                            <div class="u-basic">
-                                <a class="u-displayname" href="/dashboard" :title="user.name">{{
-                                    showUserName(user.name)
-                                }}</a>
-                                <a class="u-sign" href="/dashboard/cooperation">
-                                    <img
-                                        :src="super_author_icon"
-                                        class="u-superauthor-profile"
-                                        alt="superauthor"
-                                        title="签约作者"
-                                        :class="{ off: !isSuperAuthor }"
-                                /></a>
-                                <a
-                                    class="u-vip"
-                                    href="/vip/premium?from=header_usermenu"
-                                    target="_blank"
-                                    title="专业版账号"
-                                >
-                                    <i class="i-icon-vip" :class="{ on: isPRO }">{{ vipType }}</i>
+                    <template v-if="isPhone">
+                        <ul class="u-menu" v-show="!fold">
+                            <li>
+                                <a href="/dashboard">个人中心</a>
+                            </li>
+                            <li>
+                                <a :href="url.msg">消息中心</a>
+                            </li>
+                            <li>
+                                <a :href="url.publish">发布中心</a>
+                            </li>
+                            <hr />
+                            <li v-if="isAdmin">
+                                <a href="/admin">站点配置</a>
+                            </li>
+                            <li v-if="isEditor">
+                                <a href="https://os.jx3box.com/admin">管理平台</a>
+                            </li>
+                            <li>
+                                <a @click="logout">退出登录</a>
+                            </li>
+                        </ul>
+                    </template>
+                    <template v-else>
+                        <div class="c-header-userdata" v-show="!fold">
+                            <div class="u-profile">
+                                <div class="u-basic">
+                                    <a class="u-displayname" href="/dashboard" :title="user.name">{{
+                                        showUserName(user.name)
+                                    }}</a>
+                                    <a class="u-sign" href="/dashboard/cooperation">
+                                        <img
+                                            :src="super_author_icon"
+                                            class="u-superauthor-profile"
+                                            alt="superauthor"
+                                            title="签约作者"
+                                            :class="{ off: !isSuperAuthor }"
+                                    /></a>
+                                    <a
+                                        class="u-vip"
+                                        href="/vip/premium?from=header_usermenu"
+                                        target="_blank"
+                                        title="专业版账号"
+                                    >
+                                        <i class="i-icon-vip" :class="{ on: isPRO }">{{ vipType }}</i>
+                                    </a>
+                                </div>
+                                <div class="u-id">
+                                    <span
+                                        >魔盒UID：<b>{{ user.uid }}</b></span
+                                    >
+                                    <i class="el-icon-document-copy u-copy" @click.stop="copyText(user.uid)"></i>
+                                </div>
+                            </div>
+
+                            <el-button-group class="u-actions">
+                                <a class="el-button el-button--default" :href="url.profile">资料设置</a>
+                                <a class="el-button el-button--default" :href="url.homepage">个人主页</a>
+                                <a class="el-button el-button--default" href="/dashboard/frame">主题风格</a>
+                            </el-button-group>
+
+                            <div class="u-other">
+                                <a href="/dashboard/fav" class="u-item"><i class="el-icon-star-off"></i>收藏订阅 </a>
+                                <a href="/team/role/manage" class="u-item"><i class="el-icon-user"></i>角色管理 </a>
+                                <a href="/dashboard/purchases" class="u-item"
+                                    ><i class="el-icon-shopping-cart-2"></i>已购资源
                                 </a>
-                            </div>
-                            <div class="u-id">
-                                <span
-                                    >魔盒UID：<b>{{ user.uid }}</b></span
-                                >
-                                <i class="el-icon-document-copy u-copy" @click.stop="copyText(user.uid)"></i>
-                            </div>
-                        </div>
-
-                        <el-button-group class="u-actions">
-                            <a class="el-button el-button--default" :href="url.profile">资料设置</a>
-                            <a class="el-button el-button--default" :href="url.homepage">个人主页</a>
-                            <a class="el-button el-button--default" href="/dashboard/frame">主题风格</a>
-                        </el-button-group>
-
-                        <div class="u-other">
-                            <a href="/dashboard/fav" class="u-item"><i class="el-icon-star-off"></i>收藏订阅 </a>
-                            <a href="/team/role/manage" class="u-item"><i class="el-icon-user"></i>角色管理 </a>
-                            <a href="/dashboard/purchases" class="u-item"
-                                ><i class="el-icon-shopping-cart-2"></i>已购资源
-                            </a>
-                            <a href="/dashboard/mall" class="u-item"><i class="el-icon-shopping-bag-1"></i>订单中心 </a>
-                            <hr />
-                            <a href="/dashboard/feedback" class="u-item"
-                                ><i class="el-icon-phone-outline"></i>反馈帮助
-                            </a>
-                            <hr />
-                            <div class="u-logout">
-                                <el-button @click="logout" size="small">退出登录</el-button>
+                                <a href="/dashboard/mall" class="u-item"
+                                    ><i class="el-icon-shopping-bag-1"></i>订单中心
+                                </a>
+                                <hr />
+                                <a href="/dashboard/feedback" class="u-item"
+                                    ><i class="el-icon-phone-outline"></i>反馈帮助
+                                </a>
+                                <hr />
+                                <div class="u-logout">
+                                    <el-button @click="logout" size="small">退出登录</el-button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </template>
                 </div>
             </div>
         </template>
@@ -181,7 +208,7 @@
 <script>
 import User from "@jx3box/jx3box-common/js/user";
 import { showDate } from "@jx3box/jx3box-common/js/moment";
-import { __Links, __Root, __imgPath, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __Links, __Root, __imgPath, __OriginRoot, __userLevelColor } from "@jx3box/jx3box-common/data/jx3box.json";
 import panel from "../../assets/data/panel.json";
 import { getMsg, getMenu } from "../../service/header";
 import { getMyInfo, userSignIn } from "../../service/author";
@@ -196,6 +223,7 @@ export default {
             panel,
             isEditor: false,
             isAdmin: false,
+            isPhone: window.innerWidth < 768,
 
             // 是否有消息
             pop: false,
@@ -275,6 +303,11 @@ export default {
         },
         level: function () {
             return User.getLevel(this.asset.experience);
+        },
+        levelStyle: function () {
+            return {
+                color: __userLevelColor[this.level],
+            };
         },
     },
     watch: {

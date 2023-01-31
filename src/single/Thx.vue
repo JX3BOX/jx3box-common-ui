@@ -1,50 +1,35 @@
 <template>
     <div class="w-thx">
-        <div class="w-thx-panel">
-            <boxcoin-admin
-                :postId="postId"
-                :postType="postType"
-                v-if="hasRight && adminBoxcoinEnable && boxcoin_enable"
-                :userId="userId"
-                :max="admin_max"
-                :min="admin_min"
-                :own="admin_left"
-                :total="admin_total"
-                :points="admin_points"
-                :authors="authors"
-                @updateRecord="updateRecord"
-                :client="client"
-            />
-            <Like :postId="postId" :postType="postType"></Like>
-            <fav :postId="postId" :postType="postType" :postTitle="postTitle"></fav>
-            <boxcoin-user
-                :postId="postId"
-                :postType="postType"
-                :boxcoin="boxcoin"
-                :userId="userId"
-                :own="user_left"
-                :points="user_points"
-                :authors="authors"
-                v-if="userBoxcoinEnable && boxcoin_enable"
-                @updateRecord="updateRecord"
-                :client="client"
-            />
-            <Share :postId="postId" :postType="postType" :client="client" />
-        </div>
-        <div class="w-thx-records">
-            <boxcoin-records
-                :postId="postId"
-                :postType="postType"
-                :postClient="client"
-                :cacheRecord="cacheRecord"
-                :mode="mode"
-            />
-        </div>
-        <div class="w-thx-copyright">
-            &copy;
-            所有原创作品，著作权归作者所有，所有未经授权的非署名转载或抄袭将有权追究法律责任，所有法律事务由专聘律师代理。<br />
-            签约作者独家特约稿件，及所有魔盒官方评分作品用户一经兑现则视为有偿付费稿件，所有商业稿件的转载引用需同时征得魔盒平台授权。
-        </div>
+        <template v-if="type === 'batchReward'">
+            <!-- 批量打赏 -->
+            <BatchReward :postType="postType" :items="items" :boxcoin="boxcoin" :own="user_left" :points="user_points"
+                :authors="authors" :client="client" v-if="userBoxcoinEnable && boxcoin_enable"
+                @updateRecord="updateRecord" />
+        </template>
+        <template v-else>
+            <div class="w-thx-panel">
+                <boxcoin-admin :postId="postId" :postType="postType"
+                    v-if="hasRight && adminBoxcoinEnable && boxcoin_enable" :userId="userId" :max="admin_max"
+                    :min="admin_min" :own="admin_left" :total="admin_total" :points="admin_points" :authors="authors"
+                    @updateRecord="updateRecord" :client="client" />
+                <Like :postId="postId" :postType="postType"></Like>
+                <fav :postId="postId" :postType="postType" :postTitle="postTitle"></fav>
+                <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left"
+                    :points="user_points" :authors="authors" v-if="userBoxcoinEnable && boxcoin_enable"
+                    @updateRecord="updateRecord" :client="client" />
+                <Share :postId="postId" :postType="postType" :client="client" />
+            </div>
+            <div class="w-thx-records">
+                <boxcoin-records :postId="postId" :postType="postType" :postClient="client" :cacheRecord="cacheRecord"
+                    :mode="mode" />
+            </div>
+            <div class="w-thx-copyright">
+                &copy;
+                所有原创作品，著作权归作者所有，所有未经授权的非署名转载或抄袭将有权追究法律责任，所有法律事务由专聘律师代理。<br />
+                签约作者独家特约稿件，及所有魔盒官方评分作品用户一经兑现则视为有偿付费稿件，所有商业稿件的转载引用需同时征得魔盒平台授权。
+            </div>
+        </template>
+
     </div>
 </template>
 
@@ -52,6 +37,7 @@
 import Like from "../interact/Like2.vue";
 import Share from "../interact/Share2.vue";
 import Fav from "../interact/Fav2.vue";
+import BatchReward from "../interact/batchReward.vue";
 import BoxcoinRecords from "../interact/boxcoin_records.vue";
 import BoxcoinAdmin from "../interact/boxcoin_admin.vue";
 import BoxcoinUser from "../interact/boxcoin_user.vue";
@@ -60,6 +46,7 @@ import { getPostBoxcoinConfig, getBoxcoinStatus } from "../../service/thx";
 export default {
     name: "Thx",
     props: [
+        "type",
         "postId",
         "postType",
         "postTitle",
@@ -69,11 +56,13 @@ export default {
         "mode",
         "authors",
         "client",
+        "items"
     ],
     components: {
         Like,
         Share,
         Fav,
+        BatchReward,
         "boxcoin-records": BoxcoinRecords,
         "boxcoin-admin": BoxcoinAdmin,
         "boxcoin-user": BoxcoinUser,
@@ -144,7 +133,7 @@ export default {
             this.cacheRecord = data;
         },
     },
-    created: function () {},
+    created: function () { },
 };
 </script>
 
