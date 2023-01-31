@@ -90,7 +90,6 @@
             <div
                 class="c-header-panel c-header-manage"
                 id="c-header-manage"
-                v-if="isEditor"
                 @mouseenter="showManage = true"
                 @mouseleave="showManage = false"
             >
@@ -98,6 +97,12 @@
                     <img class="u-add" svg-inline src="../../assets/img/header/manage.svg" />
                 </span>
                 <ul class="u-menu" v-show="showManage">
+                    <li>
+                        <a href="/team/role/group">我的团队</a>
+                    </li>
+                    <li>
+                        <a href="/dashboard/cooperation">签约中心</a>
+                    </li>
                     <li v-if="isAdmin">
                         <a href="/admin">站点配置</a>
                     </li>
