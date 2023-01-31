@@ -30,9 +30,9 @@
           <Collection :id="59" :defaultVisible="true" />
           <UserPop title="添加用户" v-model="visible" @confirm="addUser" />
           <el-button @click="visible = true">用户POP</el-button>
-          <Thx :postId="23865" postType="bbs" postTitle="bbs23865的标题" type="batchReward" :userId="7"
-            :adminBoxcoinEnable="true" :userBoxcoinEnable="true"
-            :items="[{ user_id: 10, article_id: '11111', article_type: '' }]" />
+          <!-- :postId="23865" -->
+          <Thx postType="bbs" postTitle="bbs23865的标题" type="batchReward" :userId="7" :adminBoxcoinEnable="true"
+            :userBoxcoinEnable="true" :postId="[{ user_id: 10, article_id: '11111', article_type: '' }]" />
           <hr />
           <Like mode="heart" :count="100" :showCount="true" />
           <Down :count="100" :showCount="true" />

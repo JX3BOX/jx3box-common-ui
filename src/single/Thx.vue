@@ -2,7 +2,7 @@
     <div class="w-thx">
         <template v-if="type === 'batchReward'">
             <!-- 批量打赏 -->
-            <BatchReward :postType="postType" :items="items" :boxcoin="boxcoin" :own="user_left" :points="user_points"
+            <batch-reward :postType="postType" :items="postId" :boxcoin="boxcoin" :own="user_left" :points="user_points"
                 :authors="authors" :client="client" v-if="userBoxcoinEnable && boxcoin_enable"
                 @updateRecord="updateRecord" />
         </template>
@@ -56,13 +56,12 @@ export default {
         "mode",
         "authors",
         "client",
-        "items"
     ],
     components: {
         Like,
         Share,
         Fav,
-        BatchReward,
+        "batch-reward": BatchReward,
         "boxcoin-records": BoxcoinRecords,
         "boxcoin-admin": BoxcoinAdmin,
         "boxcoin-user": BoxcoinUser,
