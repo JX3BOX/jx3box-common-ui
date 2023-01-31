@@ -174,6 +174,12 @@ export default {
             background-color: @primary;
             .pointer;
         }
+
+        transition: 0.05s ease-in;
+        &:hover{
+            background-color: lighten(@primary,2%);
+            color:#eee;
+        }
     }
 }
 .c-game-list {
