@@ -176,52 +176,57 @@ export default {
         }
     }
 }
+@media screen and (max-width: @phone) {
+    .c-game-switch {
+        margin-left: 15px;
+    }
+}
 .c-game-list {
-        .arrow(t,5px,@bg-black,12%);
-        position: absolute;
-        top: calc(100% + 14px);
-        left: -10px;
-        width: 300px;
-        background-color: #24292e;
-        padding: 10px;
-        border: 1px solid rgba(27, 31, 35, 0.15);
+    .arrow(t,5px,@bg-black,12%);
+    position: absolute;
+    top: calc(100% + 14px);
+    left: -10px;
+    width: 300px;
+    background-color: #24292e;
+    padding: 10px;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
+    margin-top: 6px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    // gap:10px;
+    grid-row-gap: 8px;
+    grid-column-gap: 10px;
+    .u-game-item {
+        .flex;
+        align-items: center;
+        padding: 6px;
+        .pointer;
         border-radius: 4px;
-        box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
-        margin-top: 6px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        // gap:10px;
-        grid-row-gap: 8px;
-        grid-column-gap: 10px;
-        .u-game-item {
-            .flex;
-            align-items: center;
-            padding: 6px;
-            .pointer;
+        color: #fff;
+        font-size: 14px;
+        .u-img {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
             border-radius: 4px;
+        }
+        &.active {
+            background-color: @primary;
             color: #fff;
-            font-size: 14px;
-            .u-img {
-                width: 24px;
-                height: 24px;
-                margin-right: 5px;
-                border-radius: 4px;
-            }
-            &.active {
+        }
+        &:not(.disabled) {
+            &:hover {
                 background-color: @primary;
                 color: #fff;
             }
-            &:not(.disabled) {
-                &:hover {
-                    background-color: @primary;
-                    color: #fff;
-                }
-            }
-            &.disabled {
-                filter: grayscale(100%);
-                color: #c0c4cc;
-                cursor: not-allowed;
-            }
+        }
+        &.disabled {
+            filter: grayscale(100%);
+            color: #c0c4cc;
+            cursor: not-allowed;
         }
     }
+}
 </style>
