@@ -7,7 +7,7 @@
                     <a class="u-msg" :href="url.msg">
                         <i class="u-icon u-icon-msg">
                             <i class="u-pop" style="display: none" v-show="pop"></i>
-                            <img svg-inline src="../../assets/img/header/msg.svg" />
+                            <img svg-inline src="../../assets/img/header/bell.svg" />
                         </i>
                     </a>
                 </el-tooltip>
@@ -17,47 +17,69 @@
             <div class="c-header-panel" id="c-header-panel">
                 <el-tooltip effect="dark" content="创作中心" placement="bottom">
                     <a class="u-post" :href="url.publish">
-                        <img class="u-add" svg-inline src="../../assets/img/header/add.svg" />
+                        <img class="u-add" svg-inline src="../../assets/img/header/edit.svg" />
                     </a>
                 </el-tooltip>
             </div>
+
             <!-- 我的资产 -->
             <div class="c-header-panel c-header-assets" @mouseenter="onAssetsHover" @mouseleave="onAssetsBlur">
-                <span class="u-post">
-                    <img class="u-add" svg-inline src="../../assets/img/header/coin.svg" />
-                </span>
+                <a class="u-asset" href="/dashboard/boxcoin">
+                    <img class="u-coin" svg-inline src="../../assets/img/header/coin.svg" />
+                </a>
 
                 <div class="u-assets" v-show="showAssets">
-                    <div class="u-divider">我的资产</div>
-
                     <div class="u-detail">
-                        <a class="u-item">
+                        <span class="u-item">
+                            <!-- <span class="u-item-primary>" -->
                             <span class="u-label"><i class="el-icon-user"></i> 等级</span>
-                            <span class="u-value">Lv.{{ level }}</span>
-                        </a>
-                        <a class="u-item" href="/dashboard/boxcoin">
-                            <span class="u-label"><i class="el-icon-coin"></i> 盒币</span>
-                            <span class="u-value">{{ asset.box_coin }}</span>
-                        </a>
-                        <a class="u-item" href="/dashboard/cny">
-                            <span class="u-label"><i class="el-icon-wallet"></i> 金箔</span>
-                            <span class="u-value">{{ asset.cny }}</span>
-                        </a>
-                        <a class="u-item" href="/dashboard/points">
-                            <span class="u-label"><i class="el-icon-sugar"></i> 银铛</span>
-                            <span class="u-value">{{ asset.points }}</span>
-                        </a>
-                        <a class="u-item" href="/dashboard/card">
-                            <span class="u-label"><i class="el-icon-bank-card"></i> 卡密</span>
-                            <span class="u-value">{{ asset.ext_info ? asset.ext_info.keycode : 0 }}</span>
-                        </a>
+                            <span class="u-value" :style="levelStyle">Lv.{{ level }}</span>
+                            <!-- </span> -->
+                            <!-- <span class="u-item-extend"><a href="/notice/28917" target="_blank">[权益]</a></span> -->
+                        </span>
+                        <span class="u-item">
+                            <span class="u-item-primary"
+                                ><span class="u-label"><i class="el-icon-coin"></i> 盒币</span>
+                                <span class="u-value">{{ asset.box_coin }}</span></span
+                            >
+                            <span class="u-item-extend"
+                                ><a href="/dashboard/boxcoin" target="_blank">[兑换通宝]</a></span
+                            >
+                        </span>
+                        <span class="u-item">
+                            <span class="u-item-primary"
+                                ><span class="u-label"><i class="el-icon-wallet"></i> 金箔</span
+                                ><span class="u-value">{{ asset.cny }}</span></span
+                            >
+                            <span class="u-item-extend"
+                                ><a href="/vip/cny" target="_blank">[充值]</a>
+                                <a href="/dashboard/cny" target="_blank">[提现]</a></span
+                            >
+                        </span>
+                        <span class="u-item">
+                            <span class="u-item-primary"
+                                ><span class="u-label"><i class="el-icon-sugar"></i> 银铛</span>
+                                <span class="u-value">{{ asset.points }}</span></span
+                            >
+                            <span class="u-item-extend"
+                                ><a href="/vip/mall" target="_blank">[兑礼]</a
+                                ><a href="/vip/lottery" target="_blank">[抽奖]</a></span
+                            >
+                        </span>
+                        <span class="u-item">
+                            <span class="u-item-primary"
+                                ><span class="u-label"><i class="el-icon-bank-card"></i> 卡密</span>
+                                <span class="u-value">{{ asset.ext_info ? asset.ext_info.keycode : 0 }}</span></span
+                            >
+                            <span class="u-item-extend"><a href="/dashboard/card" target="_blank">[查看]</a></span>
+                        </span>
                     </div>
                 </div>
             </div>
 
             <!-- vip -->
             <div class="c-header-panel" id="c-header-vip">
-                <el-tooltip effect="dark" content="会员" placement="bottom">
+                <el-tooltip effect="dark" content="会员中心" placement="bottom">
                     <a class="u-post" href="/vip/premium">
                         <img class="u-add" svg-inline src="../../assets/img/header/vip.svg" />
                     </a>
@@ -89,63 +111,78 @@
             <div class="c-header-info">
                 <div class="c-header-profile" id="c-header-profile" @click="showmenu">
                     <img class="u-avatar" :src="user.avatar" />
-                    <div class="m-info" v-show="!fold">
-                        <div class="u-profile">
-                            <b :title="user.name">{{ showUserName(user.name) }}</b>
-                            <div class="u-id">
-                                <span>魔盒UID：{{ user.uid }}</span>
-                                <i class="el-icon-document-copy u-copy" @click.stop="copyText(user.uid)"></i>
-                            </div>
-                            <div class="m-vip">
-                                <a href="/dashboard/cooperation">
-                                    <img
-                                        :src="super_author_icon"
-                                        class="u-superauthor-profile"
-                                        alt="superauthor"
-                                        title="签约作者"
-                                        :class="{ off: !isSuperAuthor }"
-                                /></a>
+                    <template v-if="isPhone">
+                        <ul class="u-menu" v-show="!fold">
+                            <li>
+                                <a href="/dashboard">个人中心</a>
+                            </li>
+                            <li>
+                                <a :href="url.msg">消息中心</a>
+                            </li>
+                            <li>
+                                <a :href="url.publish">发布中心</a>
+                            </li>
+                            <li v-if="isAdmin">
+                                <a href="/admin">站点配置</a>
+                            </li>
+                            <li v-if="isEditor">
+                                <a href="https://os.jx3box.com/admin">管理平台</a>
+                            </li>
+                            <hr>
+                            <li>
+                                <a @click="logout">退出登录</a>
+                            </li>
+                        </ul>
+                    </template>
+                    <template v-else>
+                        <div class="m-info" v-show="!fold">
+                            <div class="u-profile">
+                                <b :title="user.name">{{ showUserName(user.name) }}</b>
+                                <div class="u-id">
+                                    <span>魔盒UID：{{ user.uid }}</span>
+                                    <i class="el-icon-document-copy u-copy" @click.stop="copyText(user.uid)"></i>
+                                </div>
+                                <div class="m-vip">
+                                    <a href="/dashboard/cooperation">
+                                        <img
+                                            :src="super_author_icon"
+                                            class="u-superauthor-profile"
+                                            alt="superauthor"
+                                            title="签约作者"
+                                            :class="{ off: !isSuperAuthor }"
+                                    /></a>
 
-                                <a
-                                    class="u-vip"
-                                    href="/vip/premium?from=header_usermenu"
-                                    target="_blank"
-                                    title="专业版"
-                                >
-                                    <i class="i-icon-vip" :class="{ on: isPRO }">{{ vipType }}</i>
-                                </a>
+                                    <a
+                                        class="u-vip"
+                                        href="/vip/premium?from=header_usermenu"
+                                        target="_blank"
+                                        title="专业版"
+                                    >
+                                        <i class="i-icon-vip" :class="{ on: isPRO }">{{ vipType }}</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <el-button-group class="u-actions">
+                                <a class="el-button el-button--default" :href="url.profile">资料设置</a>
+                                <a class="el-button el-button--default" :href="url.homepage">个人主页</a>
+                                <a class="el-button el-button--default" href="/dashboard/frame">主题风格</a>
+                            </el-button-group>
+
+                            <div class="m-other">
+                                <a href="/dashboard/fav" class="u-item"> 我的收藏 </a>
+                                <a href="/team/role/manage" class="u-item"> 我的角色 </a>
+                                <a href="/dashboard/purchases" class="u-item"> 付费购买的资源 </a>
+                                <a href="/vip/mall" class="u-item"> 积分商城兑好礼 </a>
+                                <hr />
+                                <a href="/dashboard/feedback" class="u-item"> 反馈中心 </a>
+                                <hr />
+                                <div class="u-logout">
+                                    <el-button @click="logout">退出登录</el-button>
+                                </div>
                             </div>
                         </div>
-
-                        <el-button-group class="u-actions">
-                            <a class="el-button el-button--default" :href="url.profile">资料设置</a>
-                            <a class="el-button el-button--default" :href="url.homepage">个人主页</a>
-                            <a class="el-button el-button--default" href="/dashboard/frame">主题风格</a>
-                        </el-button-group>
-
-                        <div class="m-other">
-                            <a href="/dashboard/fav" class="u-item">
-                                我的收藏
-                            </a>
-                            <a href="/team/role/manage" class="u-item">
-                                我的角色
-                            </a>
-                            <a href="/dashboard/purchases" class="u-item">
-                                付费购买的资源
-                            </a>
-                            <a href="/vip/mall" class="u-item">
-                                积分商城兑好礼
-                            </a>
-                            <hr>
-                            <a href="/dashboard/feedback" class="u-item">
-                                反馈中心
-                            </a>
-                            <hr>
-                            <div class="u-logout">
-                                <el-button @click="logout">退出登录</el-button>
-                            </div>
-                        </div>
-                    </div>
+                    </template>
                 </div>
             </div>
         </template>
@@ -162,7 +199,7 @@
 <script>
 import User from "@jx3box/jx3box-common/js/user";
 import { showDate } from "@jx3box/jx3box-common/js/moment";
-import { __Links, __Root, __imgPath, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __Links, __Root, __imgPath, __OriginRoot, __userLevelColor } from "@jx3box/jx3box-common/data/jx3box.json";
 import panel from "../../assets/data/panel.json";
 import { getMsg, getMenu } from "../../service/header";
 import { getMyInfo, userSignIn } from "../../service/author";
@@ -192,7 +229,6 @@ export default {
                 dashboard: __Links.dashboard.home,
                 profile: __Links.dashboard.profile,
                 homepage: "/author/" + User.getInfo().uid,
-
             },
 
             // VIP
@@ -257,6 +293,14 @@ export default {
         },
         level: function () {
             return User.getLevel(this.asset.experience);
+        },
+        levelStyle: function () {
+            return {
+                color: __userLevelColor[this.level],
+            };
+        },
+        isPhone: function () {
+            return window.innerWidth < 768;
         },
     },
     watch: {
