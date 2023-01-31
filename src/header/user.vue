@@ -111,8 +111,7 @@
             <div class="c-header-info">
                 <div class="c-header-profile" id="c-header-profile" @click="showmenu">
                     <img class="u-avatar" :src="user.avatar" />
-                    <div class="c-header-userdata">
-                        <!--  v-show="!fold" -->
+                    <div class="c-header-userdata" v-show="!fold">
                         <div class="u-profile">
                             <div class="u-basic">
                                 <a class="u-displayname" href="/dashboard" :title="user.name">{{
