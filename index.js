@@ -46,7 +46,7 @@ const components = {
     RightSideMsg,
     Author,
     Avatar,
-
+    
     Thx,
     Like,
     Down,

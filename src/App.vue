@@ -1,42 +1,19 @@
 <template>
   <div class="container-page">
     <Header></Header>
-    <Breadcrumb
-      name="频道名称"
-      slug="slug"
-      root="/slug"
-      :publishEnable="true"
-      :feedbackEnable="true"
-      :adminEnable="true"
-    >
-      <img
-        slot="logo"
-        svg-inline
-        src="../assets/img/jx3.svg"
-      />
+    <Breadcrumb name="频道名称" slug="slug" root="/slug" :publishEnable="true" :feedbackEnable="true" :adminEnable="true">
+      <img slot="logo" svg-inline src="../assets/img/jx3.svg" />
       bread info
     </Breadcrumb>
 
     <LeftSidebar :open="true" :uid="8">
-      <LeftSideToggle :mobileOnly="true"/>
-      <Author
-        :author="author"
-        :uid="8"
-      />
+      <LeftSideToggle :mobileOnly="true" />
+      <Author :author="author" :uid="8" />
     </LeftSidebar>
 
-    <Main
-      :withoutLeft="false"
-      :withoutRight="false"
-    >
-      <el-tabs
-        v-model="tab"
-        type="card"
-      >
-        <el-tab-pane
-          label="CMS作品"
-          name="post"
-        >
+    <Main :withoutLeft="false" :withoutRight="false">
+      <el-tabs v-model="tab" type="card">
+        <el-tab-pane label="CMS作品" name="post">
           <el-radio-group v-model="post_id">
             <el-radio label="41346">临时测试</el-radio>
             <el-radio label="35605">Markdown</el-radio>
@@ -45,66 +22,23 @@
             <el-radio label="30582">小册和联合创作者</el-radio>
             <el-radio label="31129">无小册和联合创作者</el-radio>
           </el-radio-group>
-          <singlebox
-            :post="post"
-            @extendUpdate="updateExtend"
-          />
+          <singlebox :post="post" @extendUpdate="updateExtend" />
         </el-tab-pane>
-        <el-tab-pane
-          label="通用组件"
-          name="widget"
-        >
+        <el-tab-pane label="通用组件" name="widget">
           <PostHeader :post="post" />
-          <Creators
-            :postId="30432"
-            style="margin-bottom: 10px"
-          />
-          <Collection
-            :id="59"
-            :defaultVisible="true"
-          />
-          <UserPop
-            title="添加用户"
-            v-model="visible"
-            @confirm="addUser"
-          />
+          <Creators :postId="30432" style="margin-bottom: 10px" />
+          <Collection :id="59" :defaultVisible="true" />
+          <UserPop title="添加用户" v-model="visible" @confirm="addUser" />
           <el-button @click="visible = true">用户POP</el-button>
-
-          <Thx
-            :postId="23865"
-            postType="bbs"
-            postTitle="bbs23865的标题"
-            :userId="7"
-            :adminBoxcoinEnable="true"
-            :userBoxcoinEnable="true"
-          />
-
+          <Thx :postId="23865" postType="bbs" postTitle="bbs23865的标题" type="batchReward" :userId="7"
+            :adminBoxcoinEnable="true" :userBoxcoinEnable="true"
+            :items="[{ user_id: 10, article_id: '11111', article_type: '' }]" />
           <hr />
-
-          <Like
-            mode="heart"
-            :count="100"
-            :showCount="true"
-          />
-          <Down
-            :count="100"
-            :showCount="true"
-          />
-          <Mark
-            label="KEY"
-            value="VALUE"
-            BGL="#000"
-            BGR="#F39"
-          />
-          <Fav
-            post-id="90"
-            post-type="jx3dat"
-            post-title="jx3dat测试标题"
-          />
-          <Feed
-            post-id="90"
-            post-type="jx3dat"
-          />
+          <Like mode="heart" :count="100" :showCount="true" />
+          <Down :count="100" :showCount="true" />
+          <Mark label="KEY" value="VALUE" BGL="#000" BGR="#F39" />
+          <Fav post-id="90" post-type="jx3dat" post-title="jx3dat测试标题" />
+          <Feed post-id="90" post-type="jx3dat" />
           <Print title="传入标题" />
           <QRcode />
           <Sharing />
@@ -114,24 +48,15 @@
           <markBy />
           <menuBy :data="['test1', 'test2']" />
           <orderBy />
-          <tagBy
-            :data="['PVE', 'PVX']"
-            :type="tag"
-          />
+          <tagBy :data="['PVE', 'PVX']" :type="tag" />
           <clientBy type="" />
           <zlpBy />
 
           <hr />
-          <uploadImage
-            v-model="upload"
-            info="非必选。首页海报尺寸1100*300（推荐2200*600支持高分屏），最大20M。"
-          ></uploadImage>
+          <uploadImage v-model="upload" info="非必选。首页海报尺寸1100*300（推荐2200*600支持高分屏），最大20M。"></uploadImage>
           <AuthorMedal :author-id="8"></AuthorMedal>
         </el-tab-pane>
-        <el-tab-pane
-          label="百科组件"
-          name="wiki"
-        >
+        <el-tab-pane label="百科组件" name="wiki">
           <WikiPanel :wiki-post="wikiPost">
             <template slot="head-title">
               <i class="el-icon-location-information"></i>
@@ -148,22 +73,13 @@
           </WikiPanel>
           <hr />
 
-          <WikiRevisions
-            type="achievement"
-            source-id="2996"
-          />
+          <WikiRevisions type="achievement" source-id="2996" />
           <hr />
 
-          <WikiComments
-            type="achievement"
-            source-id="2996"
-          />
+          <WikiComments type="achievement" source-id="2996" />
           <hr />
         </el-tab-pane>
-        <el-tab-pane
-          label="头像"
-          name="avatar"
-        >
+        <el-tab-pane label="头像" name="avatar">
           <el-radio-group v-model="avatar_size">
             <el-radio label="xxs">xxs-36/48</el-radio>
             <el-radio label="xs">xs-48/68</el-radio>
@@ -173,12 +89,8 @@
             <el-radio label="xl">xl-150/210</el-radio>
           </el-radio-group>
           <div style="padding:60px;background-color: #e3e3e3;">
-            <Avatar
-              :id="8"
-              url="https://console.cnyixun.com/upload/avatar/2022/3/2/8_9860765.png"
-              :size="avatar_size"
-              frame="moon_1"
-            />
+            <Avatar :id="8" url="https://console.cnyixun.com/upload/avatar/2022/3/2/8_9860765.png" :size="avatar_size"
+              frame="moon_1" />
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -349,6 +261,6 @@ export default {
 
 <style lang="less">
 body {
-    padding-top: 0;
+  padding-top: 0;
 }
 </style>
