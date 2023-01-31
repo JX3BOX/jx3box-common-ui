@@ -3,7 +3,7 @@
         <template v-if="isLogin">
             <!-- 消息中心 -->
             <div class="c-header-msg" id="c-header-msg">
-                <el-tooltip effect="dark" content="消息中心" placement="bottom">
+                <el-tooltip effect="dark" content="消息中心" placement="bottom" popper-class="c-header-tooltip">
                     <a class="u-msg" :href="url.msg">
                         <i class="u-icon u-icon-msg">
                             <i class="u-pop" style="display: none" v-show="pop"></i>
@@ -15,7 +15,7 @@
 
             <!-- 创作中心 -->
             <div class="c-header-panel" id="c-header-panel">
-                <el-tooltip effect="dark" content="创作中心" placement="bottom">
+                <el-tooltip effect="dark" content="创作中心" placement="bottom" popper-class="c-header-tooltip">
                     <a class="u-post" :href="url.publish">
                         <img class="u-add" svg-inline src="../../assets/img/header/edit.svg" />
                     </a>
@@ -78,9 +78,9 @@
             </div>
 
             <!-- vip -->
-            <div class="c-header-panel" id="c-header-vip">
-                <el-tooltip effect="dark" content="会员中心" placement="bottom">
-                    <a class="u-post" href="/vip/premium">
+            <div class="c-header-panel c-header-vip" id="c-header-vip">
+                <el-tooltip effect="dark" content="会员中心" placement="bottom" popper-class="c-header-tooltip">
+                    <a class="u-post u-vip" href="/vip/premium">
                         <img class="u-add" svg-inline src="../../assets/img/header/vip.svg" />
                     </a>
                 </el-tooltip>
@@ -93,7 +93,7 @@
                 @mouseenter="showManage = true"
                 @mouseleave="showManage = false"
             >
-                <span class="u-post">
+                <span class="u-post u-manage">
                     <img class="u-add" svg-inline src="../../assets/img/header/manage.svg" />
                 </span>
                 <ul class="u-menu" v-show="showManage">
@@ -311,7 +311,10 @@ export default {
         },
         levelStyle: function () {
             return {
-                color: __userLevelColor[this.level],
+                background: __userLevelColor[this.level],
+                color: '#fff',
+                padding: '2px 8px',
+                borderRadius: '2px',
             };
         },
     },
