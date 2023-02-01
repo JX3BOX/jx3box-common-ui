@@ -3,21 +3,28 @@
         <div class="u-author">
             <Avatar class="u-avatar" :uid="uid" :url="data.user_avatar" size="s" :frame="data.user_avatar_frame" />
             <div class="u-info">
-                <a class="u-name" :href="authorLink(uid)" target="_blank">
-                    <span>{{ (data.display_name && data.display_name.slice(0, 8)) || "未知" }}</span>
+                <div class="u-name">
                     <el-tooltip class="item" effect="dark" content="签约作者" placement="top" v-if="isSuperAuthor">
-                        <a class="u-superauthor" href="/dashboard/#/cooperation" target="_blank">
+                        <a class="u-superauthor" href="/about/superauthor" target="_blank">
                             <img :src="super_author_icon" alt="superauthor" />
                         </a>
                     </el-tooltip>
-                </a>
+                    <a class="u-displayname" :href="authorLink(uid)" target="_blank">
+                        {{ data.display_name || "未知" }}
+                    </a>
+                </div>
                 <div class="u-extend">
                     <el-tooltip class="item" effect="dark" placement="top">
                         <div slot="content">
                             <span class="u-tips">经验值：{{ data.experience }}</span>
                         </div>
-                        <span class="u-level" :class="'lv-' + level" :style="{ backgroundColor: showLevelColor(level) }"
-                            >Lv.{{ level }}</span
+                        <a
+                            class="u-level"
+                            :class="'lv-' + level"
+                            :style="{ backgroundColor: showLevelColor(level) }"
+                            href="/about/incentives"
+                            target="_blank"
+                            >Lv.{{ level }}</a
                         >
                     </el-tooltip>
                     <el-tooltip class="item" effect="dark" :content="vipTypeTitle" placement="top" v-if="isVip">
@@ -101,99 +108,107 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
-.u-author {
-    .clearfix;
-    .db;
-    .mb(10px);
-    .pr;
-}
-.u-avatar {
-    .fl;
-    .mr(15px);
-    .size(68px);
-}
-.u-name {
-    .lh(2.2);
-    .bold;
-    color: @darkblue;
-    &:hover {
-        color: #f39;
-    }
-    .nobreak;
-}
-.u-info {
-    .pr;
-    top: -4px;
-    .h(68px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.u-bio {
-    .fz(12px, 2);
-    .break(3);
-    color: #888;
-    padding: 0 5px;
-}
-.u-extend {
-    display: flex;
-}
-.u-level {
-    padding: 2px 8px;
-    .fz(12px, 14px);
-    color: #fff;
-    background-color: #aaa;
-    border-radius: 2px;
-
-    &.lv-1 {
-        background-color: #32d3c4;
-    }
-    &.lv-2 {
-        background-color: #86c0fb;
-    }
-    &.lv-3 {
-        background-color: #33d9ff;
-    }
-    &.lv-4 {
-        background-color: #ffdb2a;
-    }
-    &.lv-5 {
-        background-color: #ffa739;
-    }
-    &.lv-6 {
-        background-color: #ff70b2;
-    }
-    &.lv-7 {
-        background-color: #ff3399;
-    }
-    &.lv-8 {
-        background-color: #f93c3c;
-    }
-}
-.u-vip {
-    .ml(5px);
-    .db;
-    .i-icon-vip {
+<style lang="less">
+.c-author-info {
+    .u-author {
+        .clearfix;
         .db;
-        vertical-align: baseline;
-        padding: 2px 6px;
-        .fz(12px, 14px);
-        font-style: normal;
-        border-radius: 2px;
-        background-color: #ddd;
-        color: #fff;
-        &.on {
-            background-color: #6f42c1;
+        .mb(10px);
+        .pr;
+    }
+    .u-avatar {
+        .fl;
+        .mr(15px);
+        .size(68px);
+    }
+    .u-name {
+        .flex;
+        align-items: center;
+    }
+    .u-displayname {
+        .lh(2.2);
+        .bold;
+        color: @darkblue;
+        .nobreak;
+        &:hover {
+            color: #f39;
         }
     }
-}
-.u-superauthor {
-    margin-left: 4px;
-    display: inline-block;
-    vertical-align: -2px;
-    img {
-        width: 16px;
+    .u-superauthor {
+        // margin-left: 4px;
+        // display: inline-block;
+        // vertical-align: -2px;
+        .fz(12px);
+        flex-shrink: 0;
+        img {
+            .size(16px);
+        }
+    }
+
+    .u-info {
+        .pr;
+        top: -4px;
+        .h(68px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .u-bio {
+        .fz(12px, 2);
+        .break(3);
+        color: #888;
+        padding: 0 5px;
+    }
+    .u-extend {
+        display: flex;
+        align-items: center;
+    }
+    .u-level {
+        padding: 2px 8px;
+        .fz(12px, 14px);
+        color: #fff;
+        background-color: #aaa;
+        border-radius: 2px;
+
+        &.lv-1 {
+            background-color: #32d3c4;
+        }
+        &.lv-2 {
+            background-color: #86c0fb;
+        }
+        &.lv-3 {
+            background-color: #33d9ff;
+        }
+        &.lv-4 {
+            background-color: #ffdb2a;
+        }
+        &.lv-5 {
+            background-color: #ffa739;
+        }
+        &.lv-6 {
+            background-color: #ff70b2;
+        }
+        &.lv-7 {
+            background-color: #ff3399;
+        }
+        &.lv-8 {
+            background-color: #f93c3c;
+        }
+    }
+    .u-vip {
+        .ml(5px);
+        .i-icon-vip {
+            .db;
+            padding: 2px 6px;
+            .fz(12px, 14px);
+            font-style: normal;
+            border-radius: 2px;
+            background-color: #ddd;
+            color: #fff;
+            &.on {
+                background-color: #6f42c1;
+            }
+        }
     }
 }
 </style>

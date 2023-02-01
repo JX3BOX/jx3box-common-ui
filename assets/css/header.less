@@ -73,7 +73,7 @@ body {
         // font-style: italic;
     }
 
-    margin-right: 5px;
+    // margin-right: 5px;
 }
 @media screen and (max-width: @phone) {
     .c-header-logo {
@@ -681,13 +681,15 @@ body {
         background-clip: padding-box;
         background-color: #fff;
         color: #3d454d;
+        // color:#c0c4cc;
+        // background-color:@bg-black;
         border: 1px solid rgba(27, 31, 35, 0.15);
         border-radius: 4px;
         box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
         right: 0;
         list-style: none;
         margin: -6px 0 0 0;
-        padding: 15px;
+        padding: 10px 0;
         position: absolute;
         z-index: 820;
         top: 100%;
@@ -718,22 +720,49 @@ body {
 
     .u-detail {
         .u-item {
+            .db;
             font-size: 12px;
             color: #454545;
-            .flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 5px 0;
+            // color:#c0c4cc;
+            // .flex;
+            // align-items: center;
+            // justify-content: space-between;
+            padding: 5px 15px;
+
+            &:hover {
+                background-color: @color-link;
+                .u-label{
+                    color:#fff;
+                }
+                .u-value {
+                    color: #fff;
+                }
+            }
+
+            .u-item-primary {
+                .flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .u-label {
+                color: #454545;
+            }
 
             .u-value {
                 font-weight: bold;
                 .ml(5px);
-                color: #da076a;
+                // color: #fba524;
+                // color: #e9015f;
+                color: @color-link;
             }
             .u-item-extend {
+                .none;
                 a {
+                    // color:#fff;
                     .ml(5px);
                     &:hover {
+                        // color:#c0c4cc;
                         color: @pink;
                     }
                 }
@@ -761,10 +790,11 @@ body {
         height: 100%;
         .flex;
         align-items: center;
-        svg{.size(19px);}
+        svg {
+            .size(19px);
+        }
     }
 }
-
 
 //登录、注册
 .c-header-login {

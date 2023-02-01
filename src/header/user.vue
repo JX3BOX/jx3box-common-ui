@@ -22,6 +22,15 @@
                 </el-tooltip>
             </div>
 
+            <!-- vip -->
+            <div class="c-header-panel c-header-vip" id="c-header-vip">
+                <el-tooltip effect="dark" content="会员中心" placement="bottom" popper-class="c-header-tooltip">
+                    <a class="u-post u-vip" href="/vip/premium">
+                        <img class="u-add" svg-inline src="../../assets/img/header/vip.svg" />
+                    </a>
+                </el-tooltip>
+            </div>
+
             <!-- 我的资产 -->
             <div class="c-header-panel c-header-assets" @mouseenter="onAssetsHover" @mouseleave="onAssetsBlur">
                 <a class="u-asset" href="/dashboard/boxcoin">
@@ -31,25 +40,25 @@
                 <div class="u-assets" v-show="showAssets">
                     <div class="u-detail">
                         <span class="u-item">
-                            <!-- <span class="u-item-primary>" -->
-                            <span class="u-label"><i class="el-icon-user"></i> 等级</span>
-                            <span class="u-value" :style="levelStyle">Lv.{{ level }}</span>
-                            <!-- </span> -->
-                            <!-- <span class="u-item-extend"><a href="/notice/28917" target="_blank">[权益]</a></span> -->
+                            <a class="u-item-primary" href="/about/incentives" target="_blank">
+                                <span class="u-label"><i class="el-icon-user"></i> 等级</span>
+                                <span class="u-value" :style="levelStyle">Lv.{{ level }}</span>
+                            </a>
+                            <!-- <span class="u-item-extend"><a href="/about/incentives" target="_blank">[权益]</a></span> -->
                         </span>
                         <span class="u-item">
-                            <span class="u-item-primary"
+                            <a class="u-item-primary" href="/dashboard/boxcoin" target="_blank"
                                 ><span class="u-label"><i class="el-icon-coin"></i> 盒币</span>
-                                <span class="u-value">{{ asset.box_coin }}</span></span
+                                <span class="u-value">{{ asset.box_coin }}</span></a
                             >
                             <span class="u-item-extend"
                                 ><a href="/dashboard/boxcoin" target="_blank">[兑换通宝]</a></span
                             >
                         </span>
                         <span class="u-item">
-                            <span class="u-item-primary"
+                            <a class="u-item-primary" href="/dashboard/cny" target="_blank"
                                 ><span class="u-label"><i class="el-icon-wallet"></i> 金箔</span
-                                ><span class="u-value">{{ asset.cny }}</span></span
+                                ><span class="u-value">{{ asset.cny }}</span></a
                             >
                             <span class="u-item-extend"
                                 ><a href="/vip/cny" target="_blank">[充值]</a>
@@ -57,9 +66,9 @@
                             >
                         </span>
                         <span class="u-item">
-                            <span class="u-item-primary"
+                            <a class="u-item-primary" href="/dashboard/points" target="_blank"
                                 ><span class="u-label"><i class="el-icon-sugar"></i> 银铛</span>
-                                <span class="u-value">{{ asset.points }}</span></span
+                                <span class="u-value">{{ asset.points }}</span></a
                             >
                             <span class="u-item-extend"
                                 ><a href="/vip/mall" target="_blank">[兑礼]</a
@@ -67,23 +76,14 @@
                             >
                         </span>
                         <span class="u-item">
-                            <span class="u-item-primary"
+                            <a class="u-item-primary" href="/dashboard/card" target="_blank"
                                 ><span class="u-label"><i class="el-icon-bank-card"></i> 卡密</span>
-                                <span class="u-value">{{ asset.ext_info ? asset.ext_info.keycode : 0 }}</span></span
+                                <span class="u-value">{{ asset.ext_info ? asset.ext_info.keycode : 0 }}</span></a
                             >
                             <span class="u-item-extend"><a href="/dashboard/card" target="_blank">[查看]</a></span>
                         </span>
                     </div>
                 </div>
-            </div>
-
-            <!-- vip -->
-            <div class="c-header-panel c-header-vip" id="c-header-vip">
-                <el-tooltip effect="dark" content="会员中心" placement="bottom" popper-class="c-header-tooltip">
-                    <a class="u-post u-vip" href="/vip/premium">
-                        <img class="u-add" svg-inline src="../../assets/img/header/vip.svg" />
-                    </a>
-                </el-tooltip>
             </div>
 
             <!-- manage -->
@@ -103,11 +103,12 @@
                     <li>
                         <a href="/dashboard/cooperation">签约中心</a>
                     </li>
+                    <li v-if="isEditor">
+                        <hr />
+                        <a href="https://os.jx3box.com/admin">管理平台</a>
+                    </li>
                     <li v-if="isAdmin">
                         <a href="/admin">站点配置</a>
-                    </li>
-                    <li v-if="isEditor">
-                        <a href="https://os.jx3box.com/admin">管理平台</a>
                     </li>
                 </ul>
             </div>
@@ -172,9 +173,9 @@
                             </div>
 
                             <el-button-group class="u-actions">
-                                <a class="el-button el-button--default" :href="url.profile">资料设置</a>
-                                <a class="el-button el-button--default" :href="url.homepage">个人主页</a>
-                                <a class="el-button el-button--default" href="/dashboard/frame">主题风格</a>
+                                <a class="el-button el-button--default is-plain" :href="url.profile">资料设置</a>
+                                <a class="el-button el-button--default is-plain" :href="url.homepage">个人主页</a>
+                                <a class="el-button el-button--default is-plain" href="/dashboard/frame">主题风格</a>
                             </el-button-group>
 
                             <div class="u-other">
@@ -192,7 +193,7 @@
                                 </a>
                                 <hr />
                                 <div class="u-logout">
-                                    <el-button @click="logout" size="small">退出登录</el-button>
+                                    <el-button @click="logout" size="small" plain>退出登录</el-button>
                                 </div>
                             </div>
                         </div>
@@ -312,9 +313,9 @@ export default {
         levelStyle: function () {
             return {
                 background: __userLevelColor[this.level],
-                color: '#fff',
-                padding: '2px 8px',
-                borderRadius: '2px',
+                color: "#fff",
+                padding: "2px 8px",
+                borderRadius: "2px",
             };
         },
     },
@@ -448,15 +449,7 @@ export default {
         },
 
         showUserName: function (val) {
-            if (val) {
-                if (val.length < 5) {
-                    return val;
-                } else {
-                    return val.slice(0, 4) + "..";
-                }
-            } else {
-                return "匿名";
-            }
+            return val || "匿名";
         },
     },
     created: function () {
