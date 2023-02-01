@@ -5,17 +5,16 @@
         </div>
 
         <div class="c-game-list" v-show="showMore">
-            <a
+            <span
                 class="u-game-item"
                 v-for="item in games"
                 :key="item.key"
                 :class="{ active: current === item.key, disabled: item.disabled }"
-                :href="itemHref(item)"
                 @click.stop="handleClick(item)"
             >
                 <img class="u-img" :src="item.img" alt="" />
                 <span>{{ item.name }}</span>
-            </a>
+            </span>
         </div>
     </div>
 </template>
@@ -31,14 +30,14 @@ export default {
                     name: "剑网3",
                     img: __imgPath + "image/xsj/jx3czb.png",
                     key: "jx3",
-                    path: "https://www.jx3box.com",
+                    path: "www.jx3box.com",
                     disabled: false,
                 },
                 {
                     name: "剑网3缘起",
                     img: __imgPath + "image/xsj/jx3yq.png",
                     key: "jx3origin",
-                    path: "https://origin.jx3box.com",
+                    path: "origin.jx3box.com",
                     disabled: false,
                 },
                 {
@@ -107,14 +106,25 @@ export default {
             if (item.disabled) {
                 return;
             }
+            if (['jx3', 'jx3origin'].includes(this.current) && ['jx3', 'jx3origin'].includes(item.key)) {
+                const _current = this.games.find((game) => game.key == this.current);
+                const _next = this.games.find((game) => game.key == item.key);
+
+                location.href = location.href.replace(
+                    _current.path,
+                    _next.path
+                );
+            } else {
+                location.href = item.path;
+            }
             this.current = item.key;
         },
-        itemHref(item) {
-            if (item.disabled) {
-                return "javascript:;";
-            }
-            return item.path;
-        },
+        // itemHref(item) {
+        //     if (item.disabled) {
+        //         return "javascript:;";
+        //     }
+        //     return item.path;
+        // },
         onShow() {
             this.showMore = !this.showMore;
         },

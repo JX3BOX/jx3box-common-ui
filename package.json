@@ -1,6 +1,6 @@
 {
   "name": "@jx3box/jx3box-common-ui",
-  "version": "6.7.6",
+  "version": "6.7.7",
   "description": "JX3BOX UI",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "inspect": "vue inspect > output.js",
-    "update": "npm --registry https://registry.npmjs.org install @jx3box/jx3box-common@latest @jx3box/jx3box-data@latest",
+    "update": "npm --registry https://registry.npmjs.org install @jx3box/jx3box-common@latest @jx3box/jx3box-data@latest @jx3box/jx3box-comment-ui@latest @jx3box/jx3box-editor@latest",
     "header": "vue-cli-service build --target lib --name newheader src/Header.vue && cp public/index.html dist/newheader.html"
   },
   "eslintConfig": {
@@ -30,8 +30,10 @@
     "last 2 versions"
   ],
   "dependencies": {
+    "@jx3box/jx3box-comment-ui": "^1.7.8",
     "@jx3box/jx3box-common": "^7.6.2",
     "@jx3box/jx3box-data": "^3.0.3",
+    "@jx3box/jx3box-editor": "^1.6.9",
     "axios": "^0.26.1",
     "dayjs": "^1.11.0",
     "element-ui": "^2.13.2",
