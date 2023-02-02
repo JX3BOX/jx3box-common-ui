@@ -620,7 +620,7 @@ body {
     .u-pop-content {
         visibility: hidden;
         opacity: 0;
-        transition: visibility 0.35s, opacity 0.35s linear;
+        transition: visibility 0.15s, opacity 0.15s linear;
     }
 
     &:hover {
@@ -861,13 +861,18 @@ body {
     height: 100%;
     .flex;
     align-items: center;
+}
 
-    .c-header-userdata {
-        .u-delta;
-        top: calc(100% + 17px);
-        padding: 5px 0;
-        width: 400px;
+.c-header-userdata {
+    .u-delta;
+    &:after{
+        border-bottom-color:#f4f6f7;
+        right:20px;
     }
+
+    top: calc(100% + 17px);
+    // padding: 5px 0;
+    width: 400px;
 }
 
 // 用户信息
@@ -951,7 +956,7 @@ body {
 
 .c-header-userdata {
     background-clip: padding-box;
-    background-color: #fff;
+    // background-color: #fff;
     color: #3d454d;
     border: 1px solid rgba(27, 31, 35, 0.15);
     border-radius: 4px;
@@ -962,12 +967,14 @@ body {
     z-index: 820;
     top: 100%;
     width: 400px;
-    margin-top: 18px;
+    margin-top: 10px;
     margin-right: -10px;
 
     .u-profile {
         background-color: #f4f6f7;
-        padding: 10px;
+        padding: 12px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
     }
 
     .u-basic {
@@ -982,6 +989,9 @@ body {
         max-width: 200px;
         color: @color;
         .bold;
+        &:hover {
+            color: @color-link;
+        }
     }
 
     .u-id {

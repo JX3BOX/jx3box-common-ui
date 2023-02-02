@@ -1,6 +1,6 @@
 import axios from "axios";
 import { $helper, $cms } from "@jx3box/jx3box-common/js/https.js";
-import { __dataPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __ossMirror } from "@jx3box/jx3box-common/data/jx3box.json";
 
 function getMsg() {
     return $helper({ mute: true }).get("/api/messages/unread_total");
@@ -25,7 +25,7 @@ function getMenu(key) {
 }
 
 function getGames(){
-    return axios.get(__dataPath + 'data/product/games.json')
+    return axios.get(__ossMirror + 'data/product/games.json')
 }
 
 export { getMsg, getNav, getPanel, getBox, getMenu, getGames };

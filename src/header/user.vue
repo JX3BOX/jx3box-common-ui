@@ -95,21 +95,15 @@
                     <img class="u-add" svg-inline src="../../assets/img/header/manage.svg" />
                 </span>
                 <ul class="u-menu u-pop-content">
-                    <!-- <li>
-                        <a href="/team/role/group">我的团队</a>
-                    </li>
-                    <li>
-                        <a href="/dashboard/cooperation">签约中心</a>
-                    </li> -->
                     <li v-for="item in finalPanel" :key="item.label">
-                        <a :href="item.link">{{ item.label }}</a>
+                        <a :href="item.link" target="_blank">{{ item.label }}</a>
                     </li>
                     <hr v-if="finalPanel.length" />
                     <li v-if="isEditor">
-                        <a href="https://os.jx3box.com/admin">管理平台</a>
+                        <a href="https://os.jx3box.com/admin" target="_blank">管理平台</a>
                     </li>
                     <li v-if="isAdmin">
-                        <a href="/admin">站点配置</a>
+                        <a href="/admin" target="_blank">站点配置</a>
                     </li>
                 </ul>
             </div>
