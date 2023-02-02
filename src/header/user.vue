@@ -32,12 +32,12 @@
             </div>
 
             <!-- 我的资产 -->
-            <div class="c-header-panel c-header-assets" @mouseenter="onAssetsHover" @mouseleave="onAssetsBlur">
+            <div class="c-header-panel c-header-assets">
                 <a class="u-asset" href="/dashboard/boxcoin">
                     <img class="u-coin" svg-inline src="../../assets/img/header/coin.svg" />
                 </a>
 
-                <div class="u-assets" v-show="showAssets">
+                <div class="u-assets u-pop-content">
                     <div class="u-detail">
                         <span class="u-item">
                             <a class="u-item-primary" href="/about/incentives" target="_blank">
@@ -90,21 +90,22 @@
             <div
                 class="c-header-panel c-header-manage"
                 id="c-header-manage"
-                @mouseenter="showManage = true"
-                @mouseleave="showManage = false"
             >
                 <span class="u-post u-manage">
                     <img class="u-add" svg-inline src="../../assets/img/header/manage.svg" />
                 </span>
-                <ul class="u-menu" v-show="showManage">
-                    <li>
+                <ul class="u-menu u-pop-content">
+                    <!-- <li>
                         <a href="/team/role/group">我的团队</a>
                     </li>
                     <li>
                         <a href="/dashboard/cooperation">签约中心</a>
+                    </li> -->
+                    <li v-for="item in finalPanel" :key="item.label">
+                        <a :href="item.link">{{ item.label }}</a>
                     </li>
+                    <hr v-if="finalPanel.length" />
                     <li v-if="isEditor">
-                        <hr />
                         <a href="https://os.jx3box.com/admin">管理平台</a>
                     </li>
                     <li v-if="isAdmin">
@@ -114,11 +115,11 @@
             </div>
 
             <!-- user info -->
-            <div class="c-header-info">
-                <div class="c-header-profile" id="c-header-profile" @click="showmenu">
+            <div class="c-header-panel c-header-info">
+                <div class="c-header-profile" id="c-header-profile">
                     <img class="u-avatar" :src="user.avatar" />
                     <template v-if="isPhone">
-                        <ul class="u-menu" v-show="!fold">
+                        <ul class="u-menu u-pop-content">
                             <li>
                                 <a href="/dashboard">个人中心</a>
                             </li>
@@ -141,7 +142,7 @@
                         </ul>
                     </template>
                     <template v-else>
-                        <div class="c-header-userdata" v-show="!fold">
+                        <div class="c-header-userdata u-pop-content">
                             <div class="u-profile">
                                 <div class="u-basic">
                                     <a class="u-displayname" href="/dashboard" :title="user.name">{{
@@ -318,6 +319,16 @@ export default {
                 borderRadius: "2px",
             };
         },
+        finalPanel: function() {
+            // 只返回前两个
+            return this.panel.filter(item => {
+                // 只返回有权限的
+                if (item.onlyAdmin) {
+                    return this.isAdmin
+                }
+                return true
+            }).slice(0, 2)
+        }
     },
     watch: {
         fold(val) {
@@ -330,18 +341,6 @@ export default {
         checkMSG: function () {
             getMsg().then((res) => {
                 this.pop = !!res.data.data.unread;
-            });
-        },
-
-        // 面板
-        showmenu: function (e) {
-            e.stopPropagation();
-            this.fold = !this.fold;
-        },
-        closeExpandList: function () {
-            const vm = this;
-            document.addEventListener("click", function () {
-                vm.fold = true;
             });
         },
         loadPanel: function () {
@@ -427,11 +426,13 @@ export default {
                 this.isSuperAuthor = !!res.sign;
             });
         },
-        onAssetsHover: function () {
-            this.showAssets = true;
+        handleMouseEnter: function (key, val) {
+            this[key] = val;
         },
-        onAssetsBlur: function () {
-            this.showAssets = false;
+        handleMouseLeave: function (key, val) {
+            setTimeout(() => {
+                this[key] = val;
+            }, 300);
         },
         copyText,
 
@@ -453,7 +454,6 @@ export default {
         },
     },
     created: function () {
-        this.closeExpandList();
         this.init();
     },
     components: {},

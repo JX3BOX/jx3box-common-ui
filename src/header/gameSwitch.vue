@@ -21,6 +21,7 @@
 
 <script>
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import { getGames } from "../../service/header";
 export default {
     name: "gameSwitch",
     data() {
@@ -40,48 +41,6 @@ export default {
                     path: "origin.jx3box.com",
                     disabled: false,
                 },
-                {
-                    name: "指尖江湖",
-                    img: __imgPath + "image/xsj/zjjh.png",
-                    key: "zjjh",
-                    path: "https://zjjh.jx3box.com",
-                    disabled: true,
-                },
-                {
-                    name: "指尖对弈",
-                    img: __imgPath + "image/xsj/zjdy.png",
-                    key: "zjdy",
-                    path: "https://zjdy.jx3box.com",
-                    disabled: true,
-                },
-                {
-                    name: "剑侠世界3",
-                    img: __imgPath + "image/xsj/jxsj3.png",
-                    key: "jxsj3",
-                    path: "https://jxsj3.jx3box.com",
-                    disabled: true,
-                },
-                {
-                    name: "剑侠世界",
-                    img: __imgPath + "image/xsj/jxsj.png",
-                    key: "jxsj",
-                    path: "https://jxsj.jx3box.com",
-                    disabled: true,
-                },
-                {
-                    name: "剑网1:归来",
-                    img: __imgPath + "image/xsj/jx1gl.png",
-                    key: "jx1",
-                    path: "https://jx1.jx3box.com",
-                    disabled: true,
-                },
-                {
-                    name: "双生视界",
-                    img: __imgPath + "image/xsj/sssj.png",
-                    key: "sssj",
-                    path: "https://sssj.jx3box.com",
-                    disabled: true,
-                },
             ],
             current: "jx3",
 
@@ -100,6 +59,7 @@ export default {
             this.current = _game.key;
         }
         this.close();
+        this.loadGames();
     },
     methods: {
         handleClick(item) {
@@ -133,6 +93,11 @@ export default {
                 this.showMore = false;
             });
         },
+        loadGames() {
+            getGames().then(res => {
+                this.games = this.games.concat(res?.data);
+            })
+        }
     },
 };
 </script>

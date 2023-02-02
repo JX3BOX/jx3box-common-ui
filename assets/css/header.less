@@ -6,6 +6,44 @@ body {
     padding-top: @header-height;
     color: @color;
 }
+// 三角
+.u-delta {
+    .pa;
+    background-clip: padding-box;
+    background-color: #fff;
+    color: @color;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    right: -5px;
+    list-style: none;
+    margin: -6px 0 0 0;
+    position: absolute;
+    z-index: 820;
+    top: 100%;
+
+    &:before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        left: auto;
+        right: 14px;
+        top: -16px;
+        border: 8px solid transparent;
+        border-bottom-color: rgba(27, 31, 35, 0.15);
+    }
+
+    &:after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        left: auto;
+        right: 15px;
+        top: -14px;
+        border: 7px solid transparent;
+        border-bottom-color: #fff;
+    }
+}
 
 .c-header {
     position: fixed;
@@ -290,42 +328,9 @@ body {
     }
 
     .u-menu {
-        background-clip: padding-box;
-        background-color: #fff;
-        color: @color;
-        border: 1px solid rgba(27, 31, 35, 0.15);
-        border-radius: 4px;
-        box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
-        right: 0;
-        list-style: none;
-        margin: -6px 0 0 0;
+        .u-delta;
         padding: 5px 0;
-        position: absolute;
-        .z(820);
-        top: 100%;
         width: 160px;
-
-        &:before {
-            content: "";
-            display: inline-block;
-            position: absolute;
-            left: auto;
-            right: 9px;
-            top: -16px;
-            border: 8px solid transparent;
-            border-bottom-color: rgba(27, 31, 35, 0.15);
-        }
-
-        &:after {
-            content: "";
-            display: inline-block;
-            position: absolute;
-            left: auto;
-            right: 10px;
-            top: -14px;
-            border: 7px solid transparent;
-            border-bottom-color: #fff;
-        }
 
         a {
             display: block;
@@ -612,6 +617,19 @@ body {
     cursor: pointer;
     box-sizing: border-box;
 
+    .u-pop-content {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0.35s, opacity 0.35s linear;
+    }
+
+    &:hover {
+        .u-pop-content {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
     .u-post {
         padding: 0 10px;
         height: 100%;
@@ -641,7 +659,9 @@ body {
 
 @media screen and (max-width: @ipad) {
     .c-header-panel {
-        display: none;
+        &:not(&.c-header-info) {
+            display: none;
+        }
     }
 }
 
@@ -677,45 +697,9 @@ body {
     }
 
     .u-assets {
-        .pa;
-        background-clip: padding-box;
-        background-color: #fff;
-        color: #3d454d;
-        // color:#c0c4cc;
-        // background-color:@bg-black;
-        border: 1px solid rgba(27, 31, 35, 0.15);
-        border-radius: 4px;
-        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-        right: 0;
-        list-style: none;
-        margin: -6px 0 0 0;
-        padding: 10px 0;
-        position: absolute;
-        z-index: 820;
-        top: 100%;
+        .u-delta;
         width: 200px;
-
-        &:before {
-            content: "";
-            display: inline-block;
-            position: absolute;
-            left: auto;
-            right: 9px;
-            top: -16px;
-            border: 8px solid transparent;
-            border-bottom-color: rgba(27, 31, 35, 0.15);
-        }
-
-        &:after {
-            content: "";
-            display: inline-block;
-            position: absolute;
-            left: auto;
-            right: 10px;
-            top: -14px;
-            border: 7px solid transparent;
-            border-bottom-color: #fff;
-        }
+        padding: 10px 0;
     }
 
     .u-detail {
@@ -731,8 +715,8 @@ body {
 
             &:hover {
                 background-color: @color-link;
-                .u-label{
-                    color:#fff;
+                .u-label {
+                    color: #fff;
                 }
                 .u-value {
                     color: #fff;
@@ -871,6 +855,19 @@ body {
     // background-color: @primary;
     // .mr(10px);
     // }
+}
+
+.c-header-info {
+    height: 100%;
+    .flex;
+    align-items: center;
+
+    .c-header-userdata {
+        .u-delta;
+        top: calc(100% + 17px);
+        padding: 5px 0;
+        width: 400px;
+    }
 }
 
 // 用户信息

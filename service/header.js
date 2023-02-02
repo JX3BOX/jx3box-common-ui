@@ -24,4 +24,8 @@ function getMenu(key) {
     return $cms().get(`/api/cms/config/menu/${key}`);
 }
 
-export { getMsg, getNav, getPanel, getBox, getMenu };
+function getGames(){
+    return axios.get(__dataPath + 'data/product/games.json')
+}
+
+export { getMsg, getNav, getPanel, getBox, getMenu, getGames };
