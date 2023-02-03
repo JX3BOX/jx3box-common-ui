@@ -2,8 +2,9 @@
     <div class="w-thx">
         <template v-if="type === 'batchReward'">
             <!-- 批量打赏 -->
-            <batch-reward :postType="postType" :items="postId" :boxcoin="boxcoin" :own="user_left" :points="user_points"
-                :authors="authors" :client="client" v-if="userBoxcoinEnable && boxcoin_enable"
+            <batch-reward :postType="postType" :items="postId" :boxcoin="boxcoin" :userId="userId" :own="admin_left" :points="admin_points"
+                :authors="authors" :client="client" v-if="hasRight && adminBoxcoinEnable && boxcoin_enable" :max="admin_max"
+                    :min="admin_min" :total="admin_total"
                 @updateRecord="updateRecord" />
         </template>
         <template v-else>
