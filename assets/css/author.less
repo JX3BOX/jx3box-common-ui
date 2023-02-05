@@ -1,5 +1,4 @@
 .c-author {
-
     .u-tips {
         .db;
         color: #555;
@@ -7,15 +6,22 @@
     }
 
     .u-label {
-        margin: 15px 0 10px 0;
-        padding: 0 5px 10px 5px;
-        i {
+        padding: 10px 0;
+        .flex;
+        align-items: center;
+        i,
+        svg {
+            .size(16px);
             .mr(5px);
         }
         span {
-            .fz(13px);
+            .fz(12px);
+            .bold;
         }
-        border-bottom: 1px solid @border;
+        // border-bottom: 1px solid @border;
+    }
+    .u-more{
+        fill:#aaa;
     }
 
     @keyframes living-icon-ani {
@@ -59,14 +65,16 @@
         animation-delay: 0.2s;
     }
 
-    .u-interact{
+    .u-interact {
         .mt(5px);
         display: flex;
     }
-    .u-links{
+    .u-links {
         .mt(15px);
     }
-
+    .u-block{
+        .mt(20px);
+    }
 }
 
 .c-sidebar-left .c-author {

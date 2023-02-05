@@ -1,18 +1,21 @@
 <template>
     <div class="c-author-posts" v-if="ready">
         <div class="u-label">
-            <i class="el-icon-notebook-2"></i>
-            <span>作者最新作品</span>
-            <a :href="uid | authorLink" class="u-more" target="_blank">全部 &raquo;</a>
+            <!-- <i class="el-icon-notebook-2"></i> -->
+            <img svg-inline src="../../assets/img/leftsidebar/post.svg" />
+            <span>作品</span>
+            <a :href="uid | authorLink" class="u-more" target="_blank"
+                ><img svg-inline src="../../assets/img/leftsidebar/more.svg"
+            /></a>
         </div>
 
         <ul class="u-list" v-if="data && data.length">
             <li v-for="(item, i) in data" :key="i">
                 <a class="u-item" :href="url(item.ID, item.post_type)" target="_blank">
-                    <span
-                        ><i class="u-icon el-icon-arrow-right"></i>
-                        {{ item.post_title || item.post_type + "/无标题" }}</span
-                    >
+                    <span>
+                        <img svg-inline src="../../assets/img/leftsidebar/arrow.svg" class="u-icon" />
+                        {{ item.post_title || item.post_type + "/无标题" }}
+                    </span>
                 </a>
             </li>
         </ul>
@@ -63,9 +66,8 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .c-author-posts {
-    // margin:0 10px;
     ul {
         list-style: none;
         margin: 0;
@@ -76,7 +78,7 @@ export default {
     }
     .u-item {
         .db;
-        padding: 3px 10px 3px 5px;
+        padding: 3px 2px;
         .nobreak;
         .fz(12px,2);
         color: #666;
@@ -84,7 +86,10 @@ export default {
         &:hover {
             color: @pink;
             // background-color:#fff;
-            border-bottom: 1px solid @border;
+            // border-bottom: 1px solid @border;
+            .u-icon{
+                transform: translateX(5px);
+            }
         }
     }
     .u-icon {
@@ -93,20 +98,10 @@ export default {
         // .y;
         color: #999;
         // .mr(5px);
+        transition: all 0.3s;
     }
 
     .u-label {
-        margin: 15px 0 10px 0;
-        padding: 0 5px 10px 5px;
-        i {
-            .mr(5px);
-            .y;
-        }
-        span {
-            .fz(13px);
-        }
-        border-bottom: 1px solid @border;
-
         .pr;
         .u-more {
             .fz(12px);

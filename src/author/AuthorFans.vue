@@ -1,22 +1,8 @@
 <template>
     <div class="c-author-fans" v-if="list && list.length">
-        <!--<div class="f-main-box">
-            <div class="f-left">
-                <div class="f-l-box"><div class="f-l-title">粉丝团</div></div>
-            </div>
-            <div class="f-right">
-                <div class="f-r-box"><div class="f-r-num">共{{list.length}}人</div></div>
-                <div class="f-r-line f-r-w-80 f-r-mb"></div>
-                <div class="f-r-line f-r-w-70 f-r-mb"></div>
-                <div class="f-r-line f-r-w-30 f-r-mb"></div>
-                <div class="f-r-line f-r-w-20 f-r-mb"></div>
-                <div class="f-r-line f-r-w-30 f-r-mb"></div>
-                <div class="f-r-line f-r-w-70 f-r-mb"></div>
-                <div class="f-r-line f-r-w-80"></div>
-            </div>
-        </div> -->
         <div class="u-label">
-            <i class="el-icon-star-off"></i>
+            <!-- <i class="el-icon-star-off"></i> -->
+            <img svg-inline src="../../assets/img/leftsidebar/fans.svg" />
             <span>粉丝榜</span>
         </div>
         <div class="f-avatar">
@@ -29,11 +15,11 @@
                 :key="item.pay_user_id"
             >
                 <a class="u-fan" :href="authorLink(item.pay_user_id)"
-                    ><el-avatar class="u-avatar" shape="circle" :size="26" :src="showAvatar(item.pay_user.avatar)"
+                    ><el-avatar class="u-avatar" shape="circle" :size="20" :src="showAvatar(item.pay_user.avatar)"
                         ><i class="el-icon-s-custom"></i></el-avatar
                 ></a>
             </el-tooltip>
-            <el-avatar class="u-avatar u-more" shape="circle" :size="26" v-if="total > MAX_LENGTH">
+            <el-avatar class="u-avatar u-more" shape="circle" :size="20" v-if="total > MAX_LENGTH">
                 <span class="f-avatar-num" v-if="total > 99">···</span>
                 <span class="f-avatar-num" v-else>+{{ total - MAX_LENGTH }}</span>
             </el-avatar>
@@ -57,7 +43,7 @@ export default {
         return {
             list: [],
             total: 0,
-            MAX_LENGTH : 6,
+            MAX_LENGTH : 8,
         };
     },
     methods: {
@@ -81,7 +67,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .c-author-fans {
     box-sizing: border-box;
     // padding: 10px;
@@ -156,7 +142,6 @@ export default {
         }
     }
     .f-avatar {
-        .mt(10px);
         height: 30px;
         .f-avatar-num {
             .fz(12px);
@@ -168,10 +153,12 @@ export default {
         }
     }
     .f-bottom {
-        .mt(10px);
+        .mt(5px);
         .fz(12px, 14px);
         font-weight: 400;
-        color: rgba(0, 0, 0, 0.5);
+        color: #888;
+        transform: scale(0.8);
+        transform-origin: 0 0;
     }
 }
 </style>

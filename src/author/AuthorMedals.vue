@@ -1,20 +1,23 @@
 <template>
     <div class="c-author-medals" v-if="ready">
         <div class="u-label">
-            <i class="el-icon-trophy"></i>
+            <!-- <i class="el-icon-trophy"></i> -->
+            <img svg-inline src="../../assets/img/leftsidebar/medal.svg" />
             <span>作者荣誉</span>
         </div>
         <div class="u-medals" v-if="medals && medals.length">
-            <a
-                :href="getMedalLink(item)"
-                target="_blank"
-                class="u-medal"
+            <el-tooltip
+                class="item"
+                effect="dark"
+                :content="item.medal_desc"
+                placement="top"
                 v-for="item in medals"
                 :key="item.id"
-                :title="item.medal_desc"
             >
-                <img class="u-medal-img" :src="showIcon(item.medal)" />
-            </a>
+                <a :href="getMedalLink(item)" target="_blank" class="u-medal">
+                    <img class="u-medal-img" :src="showIcon(item.medal)" />
+                </a>
+            </el-tooltip>
         </div>
     </div>
 </template>
@@ -55,7 +58,7 @@ export default {
             return __imgPath + "image/medals/user/" + medal + ".gif";
         },
         getMedalLink(medal) {
-            return getMedalLink(medal.rank_id, medal.medal_type || 'rank');
+            return getMedalLink(medal.rank_id, medal.medal_type || "rank");
         },
     },
     created: function () {},
@@ -63,23 +66,17 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .c-author-medals {
-    .u-label {
-        i {
-            .y;
-        }
-    }
     .u-medals {
-        padding:0 3px;
         display: flex;
-        .u-medal {
-            cursor: pointer;
-            .mr(2px);
-            .u-medal-img {
-                width: 20px;
-                height: 20px;
-            }
+    }
+    .u-medal {
+        cursor: pointer;
+        .mr(2px);
+        .u-medal-img {
+            width: 20px;
+            height: 20px;
         }
     }
 }
