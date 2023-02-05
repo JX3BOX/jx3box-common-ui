@@ -1,14 +1,24 @@
 <template>
     <div class="c-author-teams" v-if="ready">
         <div class="u-label">
-            <i class="el-icon-school"></i>
-            <span>所属团队</span>
+            <!-- <i class="el-icon-school"></i> -->
+            <img svg-inline src="../../assets/img/leftsidebar/united.svg" />
+            <span>所在团队</span>
         </div>
         <div class="u-teams">
-            <a class="u-team" v-for="(item, i) in teams" :key="i" :href="teamLink(item.team_id)" target="_blank">
-                <img class="u-team-logo" :src="showTeamLogo(item.team_logo)" />
-                <span class="u-team-name">{{ item.team_name }}@{{ item.team_server }}</span>
-            </a>
+            <el-tooltip
+                class="item"
+                effect="dark"
+                :content="item.team_name + '@' + item.team_server"
+                placement="top"
+                v-for="(item, i) in teams"
+                :key="i"
+            >
+                <a class="u-team" :href="teamLink(item.team_id)" target="_blank">
+                    <img class="u-team-logo" :src="showTeamLogo(item.team_logo)" />
+                    <span class="u-team-name">{{ item.team_name }}@{{ item.team_server }}</span>
+                </a>
+            </el-tooltip>
         </div>
     </div>
 </template>
@@ -48,7 +58,7 @@ export default {
     methods: {
         loadTeams: function () {
             getUserPublicTeams(this.uid).then((data) => {
-                this.teams = data && data.slice(0, 5);
+                this.teams = data && data.slice(0, 8);
             });
         },
         teamLink: function (team_id) {
@@ -63,36 +73,35 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .c-author-teams {
-    .mt(10px);
-    .u-label{
-        i{
-            .y;
-        }
+    .u-teams {
+        .flex;
     }
     .u-team {
         .db;
-        background-color: #f5f7fa;
-        .mb(6px);
+        // background-color: #f5f7fa;
+        // .mb(6px);
         &:hover {
             // background-color: #e6f0fb;
-            .u-team-name{
-                color:@pink;
+            .u-team-name {
+                color: @pink;
             }
         }
-        padding: 4px 4px;
+        // padding: 4px 0;
         .r(3px);
+        .mr(5px);
     }
     .u-team-logo {
-        .size(24px);
-        .y;
-        .mr(4px);
-        .r(4px);
+        .size(19px);
+        // .mr(4px);
+        .r(50%);
+        .db;
     }
     .u-team-name {
         .fz(12px);
-        color: #555;
+        color: #56677a;
+        .none;
     }
 }
 </style>

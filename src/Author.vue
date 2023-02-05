@@ -7,12 +7,12 @@
                 <AuthorGift :uid="uid" />
             </div>
             <!-- <AuthorMsg :uid="uid" /> -->
-            <AuthorLink class="u-links" :uid="uid" :data="data" />
-            <AuthorMedals class="u-trophy" :uid="uid" />
-            <AuthorTeams class="u-teams" :uid="uid" />
-            <AuthorFans class="u-fans" :uid="uid" />
+            <AuthorLink class="u-block u-links" :uid="uid" :data="data" />
+            <AuthorMedals class="u-block u-trophy" :uid="uid" />
+            <AuthorTeams class="u-block u-teams" :uid="uid" />
+            <AuthorFans class="u-block u-fans" :uid="uid" />
             <slot></slot>
-            <AuthorPosts class="u-posts" :uid="uid" />
+            <AuthorPosts class="u-block u-posts" :uid="uid" />
         </template>
     </div>
 </template>
