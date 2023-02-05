@@ -3,7 +3,7 @@
         <div class="u-label">
             <!-- <i class="el-icon-notebook-2"></i> -->
             <img svg-inline src="../../assets/img/leftsidebar/post.svg" />
-            <span>作品</span>
+            <span>最新作品</span>
             <a :href="uid | authorLink" class="u-more" target="_blank"
                 ><img svg-inline src="../../assets/img/leftsidebar/more.svg"
             /></a>
