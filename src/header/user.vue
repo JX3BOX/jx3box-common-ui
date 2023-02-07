@@ -42,7 +42,7 @@
                         <span class="u-item">
                             <a class="u-item-primary" href="/about/incentives" target="_blank">
                                 <span class="u-label"><i class="el-icon-user"></i> 等级</span>
-                                <span class="u-value" :style="levelStyle">Lv.{{ level }}</span>
+                                <span class="u-value u-level" :style="levelStyle">Lv.{{ level }}</span>
                             </a>
                             <!-- <span class="u-item-extend"><a href="/about/incentives" target="_blank">[权益]</a></span> -->
                         </span>
@@ -87,23 +87,24 @@
             </div>
 
             <!-- manage -->
-            <div
-                class="c-header-panel c-header-manage"
-                id="c-header-manage"
-            >
+            <div class="c-header-panel c-header-manage" id="c-header-manage">
                 <span class="u-post u-manage">
                     <img class="u-add" svg-inline src="../../assets/img/header/manage.svg" />
                 </span>
                 <ul class="u-menu u-pop-content">
                     <li v-for="item in finalPanel" :key="item.label">
-                        <a :href="item.link" target="_blank">{{ item.label }}</a>
+                        <a :href="item.link" target="_blank"
+                            ><i :class="item.icon || 'el-icon-present'"></i> {{ item.label }}</a
+                        >
                     </li>
                     <hr v-if="finalPanel.length" />
                     <li v-if="isEditor">
-                        <a href="https://os.jx3box.com/admin" target="_blank">管理平台</a>
+                        <a href="https://os.jx3box.com/admin" target="_blank"
+                            ><i class="el-icon-receiving"></i> 管理平台</a
+                        >
                     </li>
                     <li v-if="isAdmin">
-                        <a href="/admin" target="_blank">站点配置</a>
+                        <a href="/admin"><i class="el-icon-setting"></i> 站点配置</a>
                     </li>
                 </ul>
             </div>
@@ -313,16 +314,18 @@ export default {
                 borderRadius: "2px",
             };
         },
-        finalPanel: function() {
+        finalPanel: function () {
             // 只返回前两个
-            return this.panel.filter(item => {
-                // 只返回有权限的
-                if (item.onlyAdmin) {
-                    return this.isAdmin
-                }
-                return true
-            }).slice(0, 2)
-        }
+            return this.panel
+                .filter((item) => {
+                    // 只返回有权限的
+                    if (item.onlyAdmin) {
+                        return this.isAdmin;
+                    }
+                    return true;
+                })
+                .slice(0, 2);
+        },
     },
     watch: {
         fold(val) {
