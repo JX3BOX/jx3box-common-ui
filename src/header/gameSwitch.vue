@@ -121,7 +121,7 @@ export default {
     }
 }
 .c-game-switch {
-    .fl;
+    display:inline-flex;
     margin: 15px 0;
     .mr(10px);
     .pr;

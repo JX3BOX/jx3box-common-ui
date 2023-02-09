@@ -40,7 +40,7 @@ import clientSwitch from "./header/clientSwitch.vue";
 import search from "./header/search.vue";
 import nav from "./header/nav.vue";
 import user from "./header/user.vue";
-import Box from "../src/Box2.vue";
+import Box from "../src/Box.vue";
 import gameSwitch from "./header/gameSwitch.vue";
 
 export default {

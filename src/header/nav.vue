@@ -2,17 +2,14 @@
     <nav class="c-header-nav" v-if="finalNav">
         <div class="u-item-box" v-for="item in finalNav" :key="'header-nav-' + item.key">
             <template v-if="item.status && matchedClient(item.client)">
-                <template
-                    v-if="item.children && item.children.length"
-                >
+                <template v-if="item.children && item.children.length">
                     <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
                         <a
                             class="u-item el-dropdown-link"
                             :class="{ on: isFocus(item.link) }"
                             :href="item.link"
                             :target="isSelf(item.link)"
-                            >{{ item.label
-                            }}<i class="el-icon-arrow-down el-icon--right"></i
+                            >{{ item.label }}<i class="el-icon-arrow-down el-icon--right"></i
                         ></a>
                         <el-dropdown-menu slot="dropdown" class="c-header-menu">
                             <el-dropdown-item
@@ -23,26 +20,15 @@
                                 <a
                                     :href="subitem.link"
                                     :target="isSelf(subitem.link)"
-                                    v-if="
-                                        subitem.status &&
-                                        matchedClient(subitem.client)
-                                    "
-                                    >{{ subitem.label }}
-                                    <span v-if="subitem.desc">{{
-                                        subitem.desc
-                                    }}</span></a
+                                    v-if="subitem.status && matchedClient(subitem.client)"
+                                    >{{ subitem.label }} <span v-if="subitem.desc">{{ subitem.desc }}</span></a
                                 ></el-dropdown-item
                             >
                         </el-dropdown-menu>
                     </el-dropdown>
                 </template>
                 <template v-else>
-                    <a
-                        class="u-item"
-                        :class="{ on: isFocus(item.link) }"
-                        :href="item.link"
-                        >{{ item.label }}</a
-                    >
+                    <a class="u-item" :class="{ on: isFocus(item.link) }" :href="item.link">{{ item.label }}</a>
                 </template>
             </template>
         </div>
@@ -50,13 +36,13 @@
 </template>
 
 <script>
-import default_nav from '../../assets/data/nav.json'
+import default_nav from "../../assets/data/nav.json";
 import { getMenu } from "../../service/header";
 export default {
     props: [],
     data: function () {
         return {
-            nav: default_nav
+            nav: default_nav,
         };
     },
     computed: {
@@ -69,7 +55,7 @@ export default {
             navChildren.forEach((child) => {
                 const parentKey = child.parentKey;
                 // 匹配客户端
-                const parent = finalNav.find((n) => n.key === parentKey)
+                const parent = finalNav.find((n) => n.key === parentKey);
 
                 if (parent) {
                     if (!parent.children) {
@@ -79,11 +65,11 @@ export default {
                 }
             });
 
-            return finalNav
+            return finalNav;
         },
         client() {
-            return location.href.includes("origin") ? "origin" : "std"
-        }
+            return location.href.includes("origin") ? "origin" : "std";
+        },
     },
     methods: {
         isFocus: function (type) {
@@ -103,20 +89,92 @@ export default {
                 } else {
                     getMenu("nav").then((res) => {
                         if (res.data) {
-                            this.nav = res?.data?.data?.val
+                            this.nav = res?.data?.data?.val;
                             sessionStorage.setItem("nav", JSON.stringify(this.nav));
                         }
                     });
                 }
             } catch (e) {
                 this.nav = default_nav;
-                console.log('loadNav error', e);
+                console.log("loadNav error", e);
             }
-        }
+        },
     },
     created: function () {
-        this.loadNav()
+        this.loadNav();
     },
     components: {},
 };
 </script>
+
+<style lang="less">
+//菜单
+.c-header-nav {
+    .fl;
+    font-family: Montserrat, "Helvetica Neue", sans-serif;
+    .clearfix;
+    .u-item-box {
+        .fl;
+    }
+    .u-item {
+        .pointer;
+        display: block;
+        font-size: 14px;
+        line-height: @logo-size;
+        color: #fff;
+        // font-weight:300;
+        &:hover {
+            background-color: darken(@primary, 10%);
+        }
+        &.on {
+            // background-color: @primary;
+            .pr;
+            &:after {
+                content: "";
+                .db;
+                border-bottom: 3px solid @primary;
+                .pa;
+                .lb(0);
+                .w(100%);
+            }
+            &:hover {
+                background-color: @primary;
+            }
+        }
+        padding: 16px 15px;
+        transition: 0.1s ease-in;
+        i {
+            .none;
+        }
+    }
+    .u-menu {
+        .fl;
+        .el-icon-arrow-down {
+            .fz(12px);
+            color: #8e8e8e;
+        }
+    }
+}
+.c-header-menu {
+    .h(auto) !important;
+    .u-menu-item {
+        padding: 0;
+        a {
+            color: @color;
+            line-height: 16px;
+            padding: 10px 30px;
+            .db;
+            span {
+                .fz(12px);
+                color: #999;
+            }
+        }
+    }
+    .mt(0px) !important;
+}
+@media screen and (max-width: @ipad) {
+    .c-header-nav {
+        display: none;
+    }
+}
+</style>
