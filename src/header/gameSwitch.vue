@@ -159,7 +159,7 @@ export default {
 }
 @media screen and (max-width: @phone) {
     .c-game-switch {
-        margin-left: 15px;
+        margin-left: 2px;
     }
 }
 .c-game-list {
