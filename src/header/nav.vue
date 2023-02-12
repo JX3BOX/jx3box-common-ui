@@ -1,36 +1,82 @@
 <template>
     <nav class="c-header-nav" v-if="finalNav">
-        <div class="u-item-box" v-for="item in finalNav" :key="'header-nav-' + item.key">
-            <template v-if="item.status && matchedClient(item.client)">
-                <template v-if="item.children && item.children.length">
-                    <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
-                        <a
-                            class="u-item el-dropdown-link"
-                            :class="{ on: isFocus(item.link) }"
-                            :href="item.link"
-                            :target="isSelf(item.link)"
-                            >{{ item.label }}<i class="el-icon-arrow-down el-icon--right"></i
-                        ></a>
-                        <el-dropdown-menu slot="dropdown" class="c-header-menu">
-                            <el-dropdown-item
-                                v-for="(subitem, subIndex) in item.children"
-                                :key="'header-nav-drop-' + subitem.key + subIndex"
-                                class="u-menu-item"
-                            >
-                                <a
-                                    :href="subitem.link"
-                                    :target="isSelf(subitem.link)"
-                                    v-if="subitem.status && matchedClient(subitem.client)"
-                                    >{{ subitem.label }} <span v-if="subitem.desc">{{ subitem.desc }}</span></a
-                                ></el-dropdown-item
-                            >
-                        </el-dropdown-menu>
-                    </el-dropdown>
+        <div class="c-header-nav__pc">
+            <div class="u-item-box" v-for="item in finalNav" :key="'header-nav-' + item.key">
+                <template v-if="item.status && matchedClient(item.client)">
+                    <template v-if="item.children && item.children.length">
+                        <el-dropdown class="u-menu" :show-timeout="0" trigger="hover">
+                            <a
+                                class="u-item el-dropdown-link"
+                                :class="{ on: isFocus(item.link) }"
+                                :href="item.link"
+                                :target="isSelf(item.link)"
+                                >{{ item.label }}<i class="el-icon-arrow-down el-icon--right"></i
+                            ></a>
+                            <el-dropdown-menu slot="dropdown" class="c-header-menu">
+                                <el-dropdown-item
+                                    v-for="(subitem, subIndex) in item.children"
+                                    :key="'header-nav-drop-' + subitem.key + subIndex"
+                                    class="u-menu-item"
+                                >
+                                    <a
+                                        :href="subitem.link"
+                                        :target="isSelf(subitem.link)"
+                                        v-if="subitem.status && matchedClient(subitem.client)"
+                                        >{{ subitem.label }} <span v-if="subitem.desc">{{ subitem.desc }}</span></a
+                                    ></el-dropdown-item
+                                >
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                    </template>
+                    <template v-else>
+                        <a class="u-item" :class="{ on: isFocus(item.link) }" :href="item.link">{{ item.label }}</a>
+                    </template>
                 </template>
-                <template v-else>
-                    <a class="u-item" :class="{ on: isFocus(item.link) }" :href="item.link">{{ item.label }}</a>
-                </template>
-            </template>
+            </div>
+        </div>
+        <div class="c-header-nav__pad">
+            <el-menu mode="horizontal" class="c-quick-menu">
+                <el-submenu index="quick-menu" popper-class="c-quick-menu__submenu">
+                    <template slot="title">快捷导航</template>
+                    <el-menu-item v-for="item in finalNav" :key="'header-nav-' + item.key">
+                        <template v-if="item.status && matchedClient(item.client)">
+                            <el-submenu
+                                :index="item.key"
+                                class="c-header-menu"
+                                v-if="item.children && item.children.length"
+                            >
+                                <template slot="title">
+                                    <a
+                                        class="u-menu-item"
+                                        :class="{ on: isFocus(item.link) }"
+                                        :href="item.link"
+                                        :target="isSelf(item.link)"
+                                        >{{ item.label }}</a
+                                    ></template
+                                >
+                                <template v-for="(subitem, subIndex) in item.children">
+                                    <el-menu-item
+                                        v-if="subitem.status && matchedClient(subitem.client)"
+                                        :key="'header-nav-drop-' + subitem.key + subIndex"
+                                    >
+                                        <a
+                                            class="u-menu-item"
+                                            :href="subitem.link"
+                                            :target="isSelf(subitem.link)"
+                                            >{{ subitem.label }} <span v-if="subitem.desc">{{ subitem.desc }}</span>
+                                        </a>
+                                    </el-menu-item>
+                                </template>
+                            </el-submenu>
+                            <el-menu-item v-else>
+                                <a class="u-item" :class="{ on: isFocus(item.link) }" :href="item.link">{{
+                                    item.label
+                                }}</a>
+                            </el-menu-item>
+                        </template>
+                    </el-menu-item>
+                </el-submenu>
+            </el-menu>
         </div>
     </nav>
 </template>
@@ -40,13 +86,13 @@ import default_nav from "../../assets/data/nav.json";
 import { getMenu } from "../../service/header";
 export default {
     props: [],
-    data: function () {
+    data: function() {
         return {
             nav: default_nav,
         };
     },
     computed: {
-        finalNav: function ({ nav }) {
+        finalNav: function({ nav }) {
             // 父节点
             const finalNav = nav.filter((d) => !d.parentKey);
             // 子节点
@@ -72,13 +118,13 @@ export default {
         },
     },
     methods: {
-        isFocus: function (type) {
+        isFocus: function(type) {
             return location.pathname.includes(type);
         },
-        matchedClient: function (client) {
+        matchedClient: function(client) {
             return client == "all" ? true : client == this.client;
         },
-        isSelf: function (link) {
+        isSelf: function(link) {
             return link.startsWith("/") ? "_self" : "_blank";
         },
         loadNav() {
@@ -100,7 +146,7 @@ export default {
             }
         },
     },
-    created: function () {
+    created: function() {
         this.loadNav();
     },
     components: {},
@@ -172,8 +218,29 @@ export default {
     }
     .mt(0px) !important;
 }
+
+.c-header-nav__pad {
+    .c-quick-menu {
+        background: #24292e;
+    }
+    .el-submenu__title {
+        color: #fff !important;
+        i {
+            color: #fff;
+        }
+        &:hover {
+            background: #0366d6 !important;
+        }
+        height: 64px !important;
+    }
+}
+.c-quick-menu__submenu {
+    .u-menu-item, .u-item {
+        display: block;
+    }
+}
 @media screen and (max-width: @ipad) {
-    .c-header-nav {
+    .c-header-nav__pc {
         display: none;
     }
 }
