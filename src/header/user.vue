@@ -2,34 +2,13 @@
     <div class="c-header-user" id="c-header-user">
         <template v-if="isLogin">
             <!-- 消息中心 -->
-            <div class="c-header-msg" id="c-header-msg">
-                <el-tooltip effect="dark" content="消息中心" placement="bottom" popper-class="c-header-tooltip">
-                    <a class="u-msg" :href="url.msg">
-                        <i class="u-icon u-icon-msg">
-                            <i class="u-pop" style="display: none" v-show="pop"></i>
-                            <img svg-inline src="../../assets/img/header/bell.svg" />
-                        </i>
-                    </a>
-                </el-tooltip>
-            </div>
+            <message />
 
             <!-- 创作中心 -->
-            <div class="c-header-panel" id="c-header-panel">
-                <el-tooltip effect="dark" content="创作中心" placement="bottom" popper-class="c-header-tooltip">
-                    <a class="u-post" :href="url.publish">
-                        <img class="u-add" svg-inline src="../../assets/img/header/edit.svg" />
-                    </a>
-                </el-tooltip>
-            </div>
+            <publish />
 
             <!-- vip -->
-            <div class="c-header-panel c-header-vip" id="c-header-vip">
-                <el-tooltip effect="dark" content="会员中心" placement="bottom" popper-class="c-header-tooltip">
-                    <a class="u-post u-vip" href="/vip/premium">
-                        <img class="u-add" svg-inline src="../../assets/img/header/vip.svg" />
-                    </a>
-                </el-tooltip>
-            </div>
+            <vip />
 
             <!-- 我的资产 -->
             <div class="c-header-panel c-header-assets">
@@ -216,10 +195,19 @@ import { getMsg, getMenu } from "../../service/header";
 import { getMyInfo, userSignIn } from "../../service/author";
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
-import { copyText } from "../../assets/js/utils";
 dayjs.extend(isToday);
+
+import { copyText } from "../../assets/js/utils";
+
+import message from "./message.vue"
+import publish from "./publish.vue"
+import vip from "./vip.vue"
 export default {
-    props: [],
+    components: {
+        message,
+        publish,
+        vip
+    },
     data: function () {
         return {
             panel,
@@ -227,8 +215,6 @@ export default {
             isAdmin: false,
             isPhone: window.innerWidth < 768,
 
-            // 是否有消息
-            pop: false,
             // 是否折叠
             fold: true,
             // 登录信息
@@ -453,6 +439,5 @@ export default {
     created: function () {
         this.init();
     },
-    components: {},
 };
 </script>

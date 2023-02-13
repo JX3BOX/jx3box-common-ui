@@ -239,9 +239,23 @@ export default {
         display: block;
     }
 }
+.c-header-nav__pad {
+    .none;
+}
+@media screen and (max-width: @notebook) {
+    .c-header-nav__pc {
+        display: none;
+    }
+    .c-header-nav__pad {
+        display: block;
+    }
+}
+
 @media screen and (max-width: @ipad) {
     .c-header-nav__pc {
         display: none;
     }
 }
+
 </style>
+
