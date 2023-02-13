@@ -3,6 +3,7 @@
         <el-tooltip effect="dark" content="消息中心" placement="bottom" popper-class="c-header-tooltip">
             <a class="u-msg" :href="url">
                 <i class="u-icon u-icon-msg">
+                    <i class="u-pop" style="display: none" v-show="pop"></i>
                     <img svg-inline src="../../assets/img/header/bell.svg" />
                 </i>
             </a>
@@ -12,13 +13,26 @@
 
 <script>
 import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
+import { getMsg } from "../../service/header";
 export default {
     name: "message",
     data: function () {
         return {
             url: __Links.dashboard.msg,
+            pop: false,
         };
     },
+    mounted() {
+        this.checkMSG();
+    },
+    methods: {
+        // 消息
+        checkMSG: function () {
+            getMsg().then((res) => {
+                this.pop = !!res.data.data.unread;
+            });
+        },
+    }
 }
 </script>
 
