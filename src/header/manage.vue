@@ -17,7 +17,7 @@
                 <a href="/admin"><i class="el-icon-setting"></i> 站点配置</a>
             </li>
             <li v-if="isTeamMember">
-                <a href="/dashboard/feedback?tab=pending"><i class="el-icon-setting"></i> 反馈处理</a>
+                <a href="/dashboard/feedback?tab=pending"><i class="el-icon-message"></i> 反馈处理</a>
             </li>
         </ul>
     </div>
