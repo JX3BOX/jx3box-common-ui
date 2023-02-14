@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="c-header-nav__pad">
-            <el-menu mode="horizontal" class="c-quick-menu">
+            <el-menu mode="horizontal" class="c-quick-menu" v-model="activeIndex">
                 <el-submenu index="quick-menu" popper-class="c-quick-menu__submenu">
                     <template slot="title">快捷导航</template>
                     <el-menu-item v-for="item in finalNav" :key="'header-nav-' + item.key">
@@ -58,6 +58,7 @@
                                     <el-menu-item
                                         v-if="subitem.status && matchedClient(subitem.client)"
                                         :key="'header-nav-drop-' + subitem.key + subIndex"
+                                        :index="subitem.key"
                                     >
                                         <a
                                             class="u-menu-item"
@@ -89,6 +90,8 @@ export default {
     data: function() {
         return {
             nav: default_nav,
+
+            activeIndex: ""
         };
     },
     computed: {
@@ -235,14 +238,33 @@ export default {
     }
 }
 .c-quick-menu__submenu {
+    .el-menu {
+        min-width: 150px;
+    }
     .u-menu-item, .u-item {
         display: block;
+        color: @color;
     }
+    .el-menu-item {
+        min-width: 150px;
+        &:hover {
+            background-color: #e6f0fb;
+
+            .el-submenu__title {
+                background-color: #e6f0fb;
+            }
+        }
+    }
+    // .el-menu--horizontal {
+    //     .el-menu-item {
+    //         text-align: center;
+    //     }
+    // }
 }
 .c-header-nav__pad {
     .none;
 }
-@media screen and (max-width: @notebook) {
+@media screen and (max-width: @mininote) {
     .c-header-nav__pc {
         display: none;
     }
