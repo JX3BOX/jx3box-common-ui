@@ -76,11 +76,11 @@ export default {
 //怀旧服
 .c-header-origin {
     .fl;
-    margin: 15px 0;
-    .mr(10px);
+    margin: (@header-height - @logo-size - 2px)/2 0;
+    .mr(5px);
     .pr;
-    background-color: #7d7d7d;
-    border: 2px solid #303133;
+    background-color: #3a4248;
+    border: 2px solid @bg-black;
     border-radius: 4px;
     overflow: hidden;
     .u-active {
@@ -110,12 +110,6 @@ export default {
     }
     .on {
         cursor: default;
-    }
-}
-@media screen and (max-width: @phone) {
-    .c-header-origin {
-        .ml(10px);
-        .mt(16px);
     }
 }
 </style>

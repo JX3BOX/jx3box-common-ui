@@ -36,9 +36,12 @@ export default {
     display: inline-flex;
     flex-shrink: 0;
     flex-grow: 0;
+    height:@header-height;
+
+    @padding:(@header-height - @logo-size)/2;
 
     .u-pic {
-        padding: 16px 5px 16px 10px;
+        padding: @padding 10px;
         .db;
         width: @logo-size;
         height: @logo-size;
@@ -55,16 +58,20 @@ export default {
         }
     }
     .u-txt {
+        .db;
         color: #fff;
         font-family: Consolas;
         font-size: 20px;
         line-height: @logo-size;
-        padding: 16px 10px 16px 5px;
+        padding:  @padding 10px;
         transition: 0.15s ease-in-out;
-        &:hover {
+        // &:hover {
             background-color: #3a4248;
-            padding-left:10px;
-            margin-right: 5px;
+            // padding-left:10px;
+            margin-right: 10px;
+        // }
+        &:hover{
+            background-color:@color-link;
         }
     }
 }

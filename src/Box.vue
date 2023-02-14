@@ -1,7 +1,7 @@
 <template>
     <div class="c-jx3box" :class="{ on: status, isOverlay: overlayEnable && isOverlay }">
         <!-- search -->
-        <header-search @click.native.stop/>
+        <header-search @click.native.stop />
 
         <!-- list -->
         <ul class="u-list">
@@ -12,11 +12,11 @@
                     <span class="u-txt">首页</span>
                 </a>
             </li>
-            <li v-for="(item,i) in list" :key="i" :class="{'u-app-start':item.lf}">
+            <li v-for="(item, i) in list" :key="i" :class="{ 'u-app-start': item.lf }">
                 <a class="u-item" :href="item.href" :target="getTarget(item.href)">
                     <img class="u-pic" :src="getBoxIcon(item.img)" />
                     <!-- <img class="u-pic-hover" svg-inline :src="item.hover | getBoxIcon" /> -->
-                    <span class="u-txt">{{item.abbr}}</span>
+                    <span class="u-txt">{{ item.abbr }}</span>
                 </a>
             </li>
         </ul>
@@ -41,8 +41,8 @@ export default {
         return {
             status: false,
             isOverlay: false,
-            data : box,
-            client : location.href.includes('origin') ? 'origin' : 'std'
+            data: box,
+            client: location.href.includes("origin") ? "origin" : "std",
         };
     },
     computed: {
@@ -55,18 +55,18 @@ export default {
         originicon: function () {
             return __imgPath + "image/box/origin.svg";
         },
-        list : function (){
-            return this.data.filter((item,i) => {
-                return item.status && (item.client == this.client || item.client == 'all')
-            })
-        }
+        list: function () {
+            return this.data.filter((item, i) => {
+                return item.status && (item.client == this.client || item.client == "all");
+            });
+        },
     },
     methods: {
         closeBox: function () {
             Bus.$emit("toggleBox", false);
         },
-        matchedClient : function (client){
-            return client == 'all' ? true : client == this.client
+        matchedClient: function (client) {
+            return client == "all" ? true : client == this.client;
         },
         getBoxIcon: function (val) {
             return __imgPath + "image/box/" + val;
@@ -84,16 +84,16 @@ export default {
                 if (_box) {
                     this.data = _box;
                 } else {
-                    getMenu('box').then(res => {
+                    getMenu("box").then((res) => {
                         this.data = res.data?.data?.val;
                         sessionStorage.setItem("box", JSON.stringify(this.data));
                     });
                 }
-            } catch(e) {
+            } catch (e) {
                 this.data = box;
-                console.log('loadBox error', e);
+                console.log("loadBox error", e);
             }
-        }
+        },
     },
     created: function () {
         if (this.overlayEnable) {
@@ -130,16 +130,18 @@ export default {
 </style>
 
 <style scoped lang="less">
-.c-header-search {
-    float:none;
-    .w(auto);
-    margin:0 20px 10px 20px;
-    box-sizing: border-box;
-    padding:0;
-    .none;
-}
-@media screen and (max-width: @ipad-y) {
+.c-jx3box {
     .c-header-search {
+        float: none;
+        .w(auto);
+        margin: 0 20px 10px 20px;
+        box-sizing: border-box;
+        padding: 0;
+        .none;
+    }
+}
+@media screen and (max-width: @phone) {
+    .c-jx3box .c-header-search {
         .db;
     }
 }

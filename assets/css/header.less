@@ -4,6 +4,7 @@ body {
     padding-top: @header-height;
     color: @color;
 }
+
 // 三角
 .u-delta {
     .pa;
@@ -53,6 +54,7 @@ body {
     background-color: @bg-black;
     color: #fff;
     transition: 0.5s ease-in-out;
+    // overflow: hidden;
 }
 .c-header.isOverlay {
     background-color: rgba(0, 0, 0, 0.85);
@@ -60,7 +62,8 @@ body {
 
 .c-header-inner {
     // padding: 16px;
-    *zoom: 1;
+    // *zoom: 1;
+    // height:@header-height;
     &:after {
         content: "";
         display: table;

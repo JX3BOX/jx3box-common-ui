@@ -10,10 +10,10 @@
             <header-logo />
 
             <!-- origin -->
-            <!-- <clientSwitch :defaultValue="client" /> -->
+            <clientSwitch :defaultValue="client" />
 
             <!-- game -->
-            <gameSwitch />
+            <!-- <gameSwitch /> -->
 
             <!-- search -->
             <header-search :client="client" />
@@ -86,12 +86,12 @@ export default {
     mounted: function () {},
     components: {
         "header-logo": logo,
-        // clientSwitch,
         "header-search": search,
         "header-nav": nav,
         "header-user": user,
         Box,
-        gameSwitch,
+        clientSwitch,
+        // gameSwitch,
     },
 };
 </script>

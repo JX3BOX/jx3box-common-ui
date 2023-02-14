@@ -34,23 +34,25 @@ export default {
 //搜索
 .c-header-search {
     width: 220px;
-    padding: 16px 0;
+    // padding: 16px 0;
+    margin: (@header-height - @logo-size - 2px)/2 0;
 
     .u-form {
         position: relative;
     }
 
     .u-text {
-        background-color: hsla(0, 0%, 100%, 0.125);
+        background-color: #3a4248;
+        border: 2px solid @bg-black;
         // background-color:#636872;
-        border: 0;
+        // border: 0;
         box-shadow: none;
         color: #fff;
-        height: @logo-size;
+        height: @logo-size + 2px;
+        line-height: @logo-size + 2px;
         box-sizing: border-box;
-        border-radius: 3px;
+        border-radius: 4px;
         font-size: 14px;
-        line-height: @logo-size;
         padding: 0.625em 0.4375em;
         width: 100%;
 

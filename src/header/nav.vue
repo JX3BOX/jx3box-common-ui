@@ -60,10 +60,7 @@
                                         :key="'header-nav-drop-' + subitem.key + subIndex"
                                         :index="subitem.key"
                                     >
-                                        <a
-                                            class="u-menu-item"
-                                            :href="subitem.link"
-                                            :target="isSelf(subitem.link)"
+                                        <a class="u-menu-item" :href="subitem.link" :target="isSelf(subitem.link)"
                                             >{{ subitem.label }} <span v-if="subitem.desc">{{ subitem.desc }}</span>
                                         </a>
                                     </el-menu-item>
@@ -87,15 +84,15 @@ import default_nav from "../../assets/data/nav.json";
 import { getMenu } from "../../service/header";
 export default {
     props: [],
-    data: function() {
+    data: function () {
         return {
             nav: default_nav,
 
-            activeIndex: ""
+            activeIndex: "",
         };
     },
     computed: {
-        finalNav: function({ nav }) {
+        finalNav: function ({ nav }) {
             // 父节点
             const finalNav = nav.filter((d) => !d.parentKey);
             // 子节点
@@ -121,13 +118,13 @@ export default {
         },
     },
     methods: {
-        isFocus: function(type) {
+        isFocus: function (type) {
             return location.pathname.includes(type);
         },
-        matchedClient: function(client) {
+        matchedClient: function (client) {
             return client == "all" ? true : client == this.client;
         },
-        isSelf: function(link) {
+        isSelf: function (link) {
             return link.startsWith("/") ? "_self" : "_blank";
         },
         loadNav() {
@@ -149,7 +146,7 @@ export default {
             }
         },
     },
-    created: function() {
+    created: function () {
         this.loadNav();
     },
     components: {},
@@ -241,7 +238,8 @@ export default {
     .el-menu {
         min-width: 150px;
     }
-    .u-menu-item, .u-item {
+    .u-menu-item,
+    .u-item {
         display: block;
         color: @color;
     }
@@ -263,8 +261,11 @@ export default {
 }
 .c-header-nav__pad {
     .none;
+    .c-quick-menu {
+        border-bottom: none;
+    }
 }
-@media screen and (max-width: @mininote) {
+@media screen and (max-width: @ipad) {
     .c-header-nav__pc {
         display: none;
     }
@@ -273,11 +274,9 @@ export default {
     }
 }
 
-@media screen and (max-width: @ipad) {
-    .c-header-nav__pc {
+@media screen and (max-width: @ipad-y) {
+    .c-header-nav__pad {
         display: none;
     }
 }
-
 </style>
-
