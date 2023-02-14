@@ -3,7 +3,7 @@
         <i class="u-pic" id="c-header-logo" @click="toggleBox($event)" title="点击展开魔盒矩阵"
             ><img svg-inline src="../../assets/img/header/logo.svg"
         /></i>
-        <a class="u-txt" href="/" title="返回首页">魔盒</a>
+        <a class="u-txt" :class="{ on: isIndex }" href="/" title="返回首页">魔盒</a>
     </div>
 </template>
 
@@ -13,7 +13,9 @@ export default {
     name: "c-header-logo",
     props: [],
     data: function () {
-        return {};
+        return {
+            isIndex : /\/index\/?/.test(location.pathname)
+        };
     },
     computed: {},
     methods: {
@@ -36,9 +38,9 @@ export default {
     display: inline-flex;
     flex-shrink: 0;
     flex-grow: 0;
-    height:@header-height;
+    height: @header-height;
 
-    @padding:(@header-height - @logo-size)/2;
+    @padding: (@header-height - @logo-size)/2;
 
     .u-pic {
         padding: @padding 10px;
@@ -63,15 +65,26 @@ export default {
         font-family: Consolas;
         font-size: 20px;
         line-height: @logo-size;
-        padding:  @padding 10px;
+        padding: @padding 10px;
         transition: 0.15s ease-in-out;
         // &:hover {
-            background-color: #3a4248;
-            // padding-left:10px;
-            margin-right: 10px;
+        background-color: #3a4248;
+        // padding-left:10px;
+        margin-right: 10px;
         // }
-        &:hover{
-            background-color:@color-link;
+        &:hover {
+            background-color: @color-link;
+        }
+        &.on {
+            .pr;
+            &:after {
+                content: "";
+                .db;
+                border-bottom: 3px solid @primary;
+                .pa;
+                .lb(0);
+                .w(100%);
+            }
         }
     }
 }
