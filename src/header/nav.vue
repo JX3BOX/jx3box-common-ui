@@ -39,7 +39,7 @@
                 <el-submenu index="quick-menu" popper-class="c-quick-menu__submenu">
                     <template slot="title">快捷导航</template>
                     <el-menu-item v-for="item in finalNav" :key="'header-nav-' + item.key">
-                        <template v-if="item.status && matchedClient(item.client)">
+                        <template v-if="matchedClient(item.client)">
                             <el-submenu
                                 :index="item.key"
                                 class="c-header-menu"
@@ -56,7 +56,7 @@
                                 >
                                 <template v-for="(subitem, subIndex) in item.children">
                                     <el-menu-item
-                                        v-if="subitem.status && matchedClient(subitem.client)"
+                                        v-if="matchedClient(subitem.client)"
                                         :key="'header-nav-drop-' + subitem.key + subIndex"
                                         :index="subitem.key"
                                     >
@@ -94,9 +94,9 @@ export default {
     computed: {
         finalNav: function ({ nav }) {
             // 父节点
-            const finalNav = nav.filter((d) => !d.parentKey);
+            const finalNav = nav.filter((d) => !d.parentKey && d.status);
             // 子节点
-            const navChildren = nav.filter((c) => c.parentKey);
+            const navChildren = nav.filter((c) => c.parentKey && c.status);
 
             navChildren.forEach((child) => {
                 const parentKey = child.parentKey;
