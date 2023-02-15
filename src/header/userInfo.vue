@@ -96,7 +96,6 @@ export default {
             isPhone: window.innerWidth < 768,
             // 登录信息
             user: User.getInfo(),
-            isLogin: User.isLogin(),
             // links
             url: {
                 msg: __Links.dashboard.msg,
@@ -137,7 +136,7 @@ export default {
         logout: function () {
             User.destroy()
                 .then((res) => {
-                    this.isLogin = false;
+                    this.$emit('logout')
                     if (location.pathname.startsWith("/dashboard") || location.pathname.startsWith("/publish")) {
                         location.href = this.siteRoot;
                     }

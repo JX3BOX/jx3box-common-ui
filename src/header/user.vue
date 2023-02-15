@@ -17,7 +17,7 @@
             <manage />
 
             <!-- user info -->
-            <user-info :asset="asset" />
+            <user-info :asset="asset" @logout="logout" />
         </template>
         <template v-else>
             <div class="c-header-login">
@@ -126,6 +126,11 @@ export default {
                 this.loadAsset( )
                 this.signIn();
             }
+        },
+
+        // 退出登录
+        logout: function () {
+            this.isLogin = false;
         },
     },
     created: function () {
