@@ -29,7 +29,7 @@
                 <div class="c-header-userdata u-pop-content">
                     <div class="u-profile">
                         <div class="u-basic">
-                            <a class="u-displayname" href="/dashboard" :title="user.name">{{
+                            <a class="u-displayname" :href="url.homepage" :title="user.name" target="_blank">{{
                                 showUserName(user.name)
                             }}</a>
                             <a class="u-sign" href="/dashboard/cooperation">
@@ -58,8 +58,8 @@
                     </div>
 
                     <el-button-group class="u-actions">
+                        <a class="el-button el-button--default is-plain" href="/dashboard">个人中心</a>
                         <a class="el-button el-button--default is-plain" :href="url.profile">资料设置</a>
-                        <a class="el-button el-button--default is-plain" :href="url.homepage">个人主页</a>
                         <a class="el-button el-button--default is-plain" href="/dashboard/frame">主题风格</a>
                     </el-button-group>
 
