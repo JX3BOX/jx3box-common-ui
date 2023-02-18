@@ -1,5 +1,6 @@
 import { $cms } from "@jx3box/jx3box-common/js/https";
-
+import axios from "axios";
+import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 function getPostAuthors(post_id) {
     return $cms({ mute: true }).get(`/api/cms/post/${post_id}/authors`);
 }
@@ -10,8 +11,12 @@ function uploadImage(formData) {
 //获取装扮
 function getDecoration(params) {
     return $cms().get(`/api/cms/user/decoration`, {
-        params
+        params,
     });
+}
+function getDecorationJson() {
+    let url = __imgPath + "decoration/index.json";
+    return axios.get(url);
 }
 // 通用上传
 function upload(formData) {
@@ -23,4 +28,4 @@ function checkTeamMember() {
     return $cms().get(`/api/cms/config/teammates/check`);
 }
 
-export { getPostAuthors, uploadImage, upload, getDecoration, checkTeamMember };
+export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember };

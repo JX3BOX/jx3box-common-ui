@@ -35,6 +35,7 @@
                 </div>
             </div>
         </div>
+        <div class="u-honor" :style="honorStyle" v-if="honor">{{ honor }}</div>
         <div class="u-bio">{{ data.user_bio }}</div>
     </div>
 </template>
@@ -44,7 +45,11 @@ import { __server, __imgPath, __userLevel, __userLevelColor } from "@jx3box/jx3b
 import { authorLink } from "@jx3box/jx3box-common/js/utils";
 import User from "@jx3box/jx3box-common/js/user";
 import { getUserInfo } from "../../service/author";
+import { getDecoration, getDecorationJson } from "../../service/cms";
 import Avatar from "./Avatar.vue";
+const DECORATION_JSON = "decoration_json";
+const DECORATION_KEY = "decoration_me";
+const HONOR_KEY = "honor_me";
 export default {
     name: "AuthorInfo",
     props: ["uid"],
@@ -57,6 +62,8 @@ export default {
 
             isVIP: false,
             super_author_icon: __imgPath + "image/user/" + "superauthor.svg",
+            honor: "",
+            honorStyle: {},
         };
     },
     computed: {
@@ -85,7 +92,7 @@ export default {
         uid: {
             immediate: true,
             handler: function (val) {
-                val && this.loadData();
+                val && this.loadData() && this.getHonor();
             },
         },
     },
@@ -93,6 +100,8 @@ export default {
         loadData: function () {
             return getUserInfo(this.uid).then((data) => {
                 if (data) {
+                    console.log(data);
+
                     this.data = data;
                     this.$emit("ready", this.data);
                 }
@@ -101,6 +110,80 @@ export default {
         authorLink,
         showLevelColor: function (level) {
             return __userLevelColor[level];
+        },
+        getHonor() {
+            let user_id = this.uid;
+            if (!user_id) {
+                return;
+            }
+            let honor_local = sessionStorage.getItem(HONOR_KEY + user_id);
+            if (honor_local == "no") return;
+            //已有缓存，读取解析
+            if (honor_local) {
+                this.honor = honor_local;
+                this.getHonorStyle();
+                return;
+            }
+            getDecoration({ using: 1, user_id: user_id, type: "honor" }).then((data) => {
+                let res = data.data.data;
+                if (res.length == 0) {
+                    //空 则为无主题，不再加载接口，界面设No
+                    sessionStorage.setItem(HONOR_KEY + user_id, "no");
+                    return;
+                }
+                let honor = res[0];
+                sessionStorage.setItem(HONOR_KEY + user_id, honor.val);
+                this.honor = honor.val;
+                this.getHonorStyle();
+            });
+        },
+        //有称号后，获取样式配置
+        getHonorStyle() {
+            let user_id = this.uid;
+            let decoration_local = sessionStorage.getItem(DECORATION_KEY + user_id);
+            if (decoration_local) {
+                //解析本地缓存
+                let decoration_parse = JSON.parse(decoration_local);
+                if (!decoration_parse.status) return;
+
+                if (decoration_parse) {
+                    this.setHonorStyle(decoration_parse);
+                    return;
+                }
+            }
+            getDecoration({ using: 1, user_id: user_id, type: "homebg" }).then((data) => {
+                let res = data.data.data;
+                if (res.length == 0) {
+                    //空 则为无主题，不再加载接口，界面设No
+                    sessionStorage.setItem(DECORATION_KEY + user_id, JSON.stringify({ status: false }));
+                    return;
+                }
+                let decoration = res[0];
+                let decorationJson = sessionStorage.getItem(DECORATION_JSON);
+                if (!decorationJson) {
+                    //加载远程json，用于Honor颜色配置
+                    getDecorationJson().then((json) => {
+                        let decoration_json = json.data;
+                        let theme = JSON.parse(JSON.stringify(decoration_json[decoration.val]));
+                        theme.status = true;
+                        sessionStorage.setItem(DECORATION_KEY + this.uid, JSON.stringify(theme));
+                        //缓存远程JSON文件
+                        sessionStorage.setItem(DECORATION_JSON, JSON.stringify(decoration_json));
+                        this.setHonorStyle(theme);
+                    });
+                } else {
+                    let theme = JSON.parse(decorationJson)[decoration.val];
+                    theme.status = true;
+                    sessionStorage.setItem(DECORATION_KEY + this.uid, JSON.stringify(theme));
+                    this.setHonorStyle(theme);
+                }
+            });
+        },
+        setHonorStyle(style) {
+            this.honorStyle = {
+                "background-color": style.buttoncolor,
+                color: style.buttontextcolor,
+            };
         },
     },
     created: function () {},
@@ -209,6 +292,16 @@ export default {
                 background-color: #6f42c1;
             }
         }
+    }
+    .u-honor {
+        .dbi;
+        .mt(10px);
+        background-color: #494038;
+        color: #ffffff;
+        padding: 2px 50px 2px 10px;
+        .fz(12px,14px);
+        .mb(6px);
+        .r(2px);
     }
 }
 </style>
