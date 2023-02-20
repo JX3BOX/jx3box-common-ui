@@ -68,6 +68,18 @@ export default {
         }
         .pr;
     }
+    .u-pop {
+        width: 10px;
+        height: 10px;
+        color: #fff;
+        background-image: linear-gradient(#54a3ff, #006eed);
+        background-clip: padding-box;
+        border: 2px solid #24292e;
+        border-radius: 50%;
+        position: absolute;
+        right: -5px;
+        top: -6px;
+    }
 }
 
 @media screen and (max-width: @ipad) {
