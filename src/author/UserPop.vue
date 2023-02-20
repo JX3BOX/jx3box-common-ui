@@ -10,7 +10,7 @@
             <slot></slot>
         </div>
         <div class="u-input">
-            <el-input v-model.number="uid" placeholder="请输入UID（数字）"></el-input>
+            <el-input v-model.trim.lazy="search" placeholder="请输入用户 UID 或者昵称进行搜索"></el-input>
         </div>
         <div class="u-preview">
             <img class="u-avatar" :src="showAvatar(userdata.user_avatar)" />
@@ -25,14 +25,15 @@
 
 <script>
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
-import { getUserInfo } from "../../service/author";
+import { getUserInfoByUidOrName } from "../../service/author";
+import { debounce } from "lodash";
 export default {
     name: "userpop",
     props: ["title", "show"],
     data: function () {
         return {
             visible: false,
-            uid: "",
+            search: "",
             userdata: {
                 name: "",
                 avatar: "",
@@ -45,8 +46,8 @@ export default {
         event: "switchUserPop",
     },
     watch: {
-        uid: function (newval) {
-            getUserInfo(newval).then((data) => {
+        search: debounce(function (newval) {
+            getUserInfoByUidOrName({ search: newval }).then((data) => {
                 if (data) {
                     this.status = true;
                     this.userdata = data;
@@ -58,7 +59,7 @@ export default {
                     };
                 }
             });
-        },
+        }, 300),
         show: function (newval) {
             this.visible = newval;
         },
@@ -66,7 +67,6 @@ export default {
             this.$emit("switchUserPop", newval);
         },
     },
-    computed: {},
     methods: {
         confirm: function () {
             if (this.status) {

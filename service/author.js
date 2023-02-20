@@ -10,6 +10,15 @@ function getUserInfo(uid) {
         });
 }
 
+// 根据用户id或者昵称获取用户信息
+function getUserInfoByUidOrName(params) {
+    return $cms({ mute: true }).get(`/api/cms/user/search`, {
+        params: params,
+    }).then((res) => {
+        return res.data.data;
+    });
+}
+
 function getMyInfo(){
     return $cms({ mute: true })
         .get(`/api/cms/user/my/info`)
@@ -71,6 +80,7 @@ function userSignIn(){
 function getFansList(userid,limit) {
     return $pay().get(`/api/cny/consume/user-charge/rank/of/${userid}?limit=0`,);
 }
+
 export {
     getUserInfo,
     getUserPosts,
@@ -81,5 +91,6 @@ export {
     getSuperAuthor,
     getMyInfo,
     userSignIn,
-    getFansList
+    getFansList,
+    getUserInfoByUidOrName
 };
