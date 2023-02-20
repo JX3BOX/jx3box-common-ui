@@ -1,9 +1,7 @@
 <template>
-    <div class="c-header-logo">
-        <i class="u-pic" id="c-header-logo" @click="toggleBox($event)" title="点击展开魔盒矩阵"
-            ><img svg-inline src="../../assets/img/header/logo.svg"
-        /></i>
-        <a class="u-txt" :class="{ on: isIndex }" href="/" title="返回首页">魔盒</a>
+    <div class="c-header-logo" @click="toggleBox($event)" title="点击展开魔盒矩阵">
+        <i class="u-pic" id="c-header-logo"><img svg-inline src="../../assets/img/header/logo.svg" /></i>
+        <span class="u-txt" :class="{ on: isIndex }" href="/">魔盒</span>
     </div>
 </template>
 
@@ -14,7 +12,7 @@ export default {
     props: [],
     data: function () {
         return {
-            isIndex : /\/index\/?/.test(location.pathname)
+            isIndex: /\/index\/?/.test(location.pathname),
         };
     },
     computed: {},
@@ -43,12 +41,11 @@ export default {
     @padding: (@header-height - @logo-size)/2;
 
     .u-pic {
-        padding: @padding 10px;
         .db;
         width: @logo-size;
         height: @logo-size;
         float: left;
-
+        padding: @padding 10px;
         svg {
             .size(100%);
             fill: #fff;
@@ -65,27 +62,27 @@ export default {
         font-family: Consolas;
         font-size: 20px;
         line-height: @logo-size;
-        padding: @padding 10px;
+        padding: @padding 0;
         transition: 0.15s ease-in-out;
         // &:hover {
-        background-color: #3a4248;
+        // background-color: #3a4248;
         // padding-left:10px;
         margin-right: 10px;
         // }
-        &:hover {
-            background-color: @color-link;
-        }
-        &.on {
-            .pr;
-            &:after {
-                content: "";
-                .db;
-                border-bottom: 3px solid @primary;
-                .pa;
-                .lb(0);
-                .w(100%);
-            }
-        }
+        // &:hover {
+        //     background-color: @color-link;
+        // }
+        // &.on {
+        //     .pr;
+        //     &:after {
+        //         content: "";
+        //         .db;
+        //         border-bottom: 3px solid @primary;
+        //         .pa;
+        //         .lb(0);
+        //         .w(100%);
+        //     }
+        // }
     }
 }
 @media screen and (max-width: @phone) {
