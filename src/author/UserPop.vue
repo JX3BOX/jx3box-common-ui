@@ -11,17 +11,22 @@
         </div>
         <div class="u-input">
             <el-input v-model.trim.lazy="search" placeholder="请输入用户 UID 或者昵称进行搜索" @keydown.enter.native="onSearch">
-                <el-button slot="append" icon="el-icon-search" @click="onSearch"></el-button>
+                <i slot="prepend" class="el-icon-search"></i>
             </el-input>
+            <el-button class="u-search-btn" type="primary" @click="onSearch">搜索</el-button>
         </div>
-        <div class="u-preview">
+        <div class="u-preview" v-loading="loading">
             <img class="u-avatar" :src="showAvatar(userdata.user_avatar)" />
             <span class="u-name">{{ userdata.display_name || "-" }}</span>
+
+            <div class="u-empty" v-if="!status">
+                <i class="el-icon-warning-outline"></i>未找到匹配项
+            </div>
         </div>
-        <span slot="footer" class="dialog-footer">
-            <el-button @click="visible = false">取 消</el-button>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="cancel">取 消</el-button>
             <el-button type="primary" @click="confirm">确 定</el-button>
-        </span>
+        </div>
     </el-dialog>
 </template>
 
@@ -39,7 +44,8 @@ export default {
                 name: "",
                 avatar: "",
             },
-            status: false,
+            status: true,
+            loading: false,
         };
     },
     model: {
@@ -47,11 +53,11 @@ export default {
         event: "switchUserPop",
     },
     watch: {
-        show: function (newval) {
-            this.visible = newval;
+        show: function (val) {
+            this.visible = val;
         },
-        visible: function (newval) {
-            this.$emit("switchUserPop", newval);
+        visible: function (val) {
+            this.$emit("switchUserPop", val);
         },
     },
     methods: {
@@ -69,6 +75,15 @@ export default {
             return showAvatar(val, "l");
         },
         onSearch() {
+            if (!this.search) {
+                this.userdata = {
+                    name: "",
+                    avatar: "",
+                }
+                this.status = true;
+                return
+            }
+            this.loading = true;
             getUserInfoByUidOrName({ search: this.search }).then((data) => {
                 if (data) {
                     this.status = true;
@@ -80,7 +95,18 @@ export default {
                         avatar: "",
                     };
                 }
+            }).finally(() => {
+                this.loading = false;
             });
+        },
+        cancel() {
+            this.visible = false;
+            this.search = "";
+            this.userdata = {
+                name: "",
+                avatar: "",
+            };
+            this.status = true;
         }
     },
     mounted: function () {},
@@ -112,6 +138,18 @@ export default {
     }
     .u-tip {
         .fz(13px);
+    }
+    .u-input {
+        .flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .u-empty {
+        color: #999;
+        .x;
+    }
+    .dialog-footer {
+        text-align: center;
     }
 }
 
