@@ -10,18 +10,29 @@
             <slot></slot>
         </div>
         <div class="u-input">
-            <el-input v-model.trim.lazy="search" placeholder="请输入用户 UID 或者昵称进行搜索" @keydown.enter.native="onSearch">
+            <el-input
+                v-model.trim.lazy="search"
+                placeholder="请输入用户 UID 或者昵称进行搜索"
+                @keydown.enter.native="onSearch"
+            >
                 <i slot="prepend" class="el-icon-search"></i>
             </el-input>
-            <el-button class="u-search-btn" type="primary" @click="onSearch">搜索</el-button>
+            <el-button class="u-search-btn" type="primary" @click="onSearch" :disabled="!search">搜索</el-button>
         </div>
         <div class="u-preview" v-loading="loading">
-            <img class="u-avatar" :src="showAvatar(userdata.user_avatar)" />
-            <span class="u-name">{{ userdata.display_name || "-" }}</span>
-
-            <div class="u-empty" v-if="!status">
-                <i class="el-icon-warning-outline"></i>未找到匹配项
-            </div>
+            <template v-if="searched && status">
+                <a class="u-author" :href="'/author/' + userdata.ID" target="_blank">
+                    <img class="u-avatar" :src="showAvatar(userdata.user_avatar)" />
+                    <span class="u-name">{{ userdata.display_name || "-" }}</span>
+                </a>
+            </template>
+            <template v-else>
+                <img class="u-avatar" :src="showAvatar('')" />
+                <span class="u-name">-</span>
+                <div class="u-empty">
+                    <i class="el-icon-warning-outline"></i>{{ searched ? "未找到匹配项" : "请输入搜索条件" }}
+                </div>
+            </template>
         </div>
         <div slot="footer" class="dialog-footer">
             <el-button @click="cancel">取 消</el-button>
@@ -40,7 +51,9 @@ export default {
         return {
             visible: false,
             search: "",
+            searched: false,
             userdata: {
+                ID: "",
                 name: "",
                 avatar: "",
             },
@@ -79,25 +92,29 @@ export default {
                 this.userdata = {
                     name: "",
                     avatar: "",
-                }
+                };
                 this.status = true;
-                return
+                return;
             }
             this.loading = true;
-            getUserInfoByUidOrName({ search: this.search }).then((data) => {
-                if (data) {
-                    this.status = true;
-                    this.userdata = data;
-                } else {
-                    this.status = false;
-                    this.userdata = {
-                        name: "",
-                        avatar: "",
-                    };
-                }
-            }).finally(() => {
-                this.loading = false;
-            });
+            this.searched = false;
+            getUserInfoByUidOrName({ search: this.search })
+                .then((data) => {
+                    if (data) {
+                        this.status = true;
+                        this.userdata = data;
+                    } else {
+                        this.status = false;
+                        this.userdata = {
+                            name: "",
+                            avatar: "",
+                        };
+                    }
+                })
+                .finally(() => {
+                    this.loading = false;
+                    this.searched = true;
+                });
         },
         cancel() {
             this.visible = false;
@@ -107,7 +124,7 @@ export default {
                 avatar: "",
             };
             this.status = true;
-        }
+        },
     },
     mounted: function () {},
     components: {},
@@ -135,6 +152,19 @@ export default {
         .bold;
         .x;
         .db;
+    }
+    .u-author {
+        .db;
+        max-width: 280px;
+        .auto(x);
+        &:hover {
+            .u-avatar {
+                border-color: #ff71b8;
+            }
+            .u-name {
+                color: #ff71b8;
+            }
+        }
     }
     .u-tip {
         .fz(13px);
