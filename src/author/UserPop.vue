@@ -10,7 +10,9 @@
             <slot></slot>
         </div>
         <div class="u-input">
-            <el-input v-model.trim.lazy="search" placeholder="请输入用户 UID 或者昵称进行搜索"></el-input>
+            <el-input v-model.trim.lazy="search" placeholder="请输入用户 UID 或者昵称进行搜索" @keydown.enter.native="onSearch">
+                <el-button slot="append" icon="el-icon-search" @click="onSearch"></el-button>
+            </el-input>
         </div>
         <div class="u-preview">
             <img class="u-avatar" :src="showAvatar(userdata.user_avatar)" />
@@ -26,7 +28,6 @@
 <script>
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import { getUserInfoByUidOrName } from "../../service/author";
-import { debounce } from "lodash";
 export default {
     name: "userpop",
     props: ["title", "show"],
@@ -46,20 +47,6 @@ export default {
         event: "switchUserPop",
     },
     watch: {
-        search: debounce(function (newval) {
-            getUserInfoByUidOrName({ search: newval }).then((data) => {
-                if (data) {
-                    this.status = true;
-                    this.userdata = data;
-                } else {
-                    this.status = false;
-                    this.userdata = {
-                        name: "",
-                        avatar: "",
-                    };
-                }
-            });
-        }, 300),
         show: function (newval) {
             this.visible = newval;
         },
@@ -81,6 +68,20 @@ export default {
         showAvatar: function (val) {
             return showAvatar(val, "l");
         },
+        onSearch() {
+            getUserInfoByUidOrName({ search: this.search }).then((data) => {
+                if (data) {
+                    this.status = true;
+                    this.userdata = data;
+                } else {
+                    this.status = false;
+                    this.userdata = {
+                        name: "",
+                        avatar: "",
+                    };
+                }
+            });
+        }
     },
     mounted: function () {},
     components: {},
