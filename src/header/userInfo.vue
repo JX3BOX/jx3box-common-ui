@@ -1,7 +1,7 @@
 <template>
     <div class="c-header-panel c-header-info">
         <div class="c-header-profile" id="c-header-profile">
-            <img class="u-avatar" :src="user.avatar" />
+            <img class="u-avatar" :src="showAvatar(user.user_avatar)" />
             <template v-if="isPhone">
                 <ul class="u-menu u-pop-content">
                     <li>
@@ -29,8 +29,8 @@
                 <div class="c-header-userdata u-pop-content">
                     <div class="u-profile">
                         <div class="u-basic">
-                            <a class="u-displayname" :href="url.homepage" :title="user.name" target="_blank">{{
-                                showUserName(user.name)
+                            <a class="u-displayname" :href="url.homepage" :title="user.display_name" target="_blank">{{
+                                showUserName(user.display_name)
                             }}</a>
                             <a class="u-sign" href="/dashboard/cooperation">
                                 <img
@@ -51,9 +51,9 @@
                         </div>
                         <div class="u-id">
                             <span
-                                >魔盒UID：<b>{{ user.uid }}</b></span
+                                >魔盒UID：<b>{{ user.ID }}</b></span
                             >
-                            <i class="el-icon-document-copy u-copy" @click.stop="copyText(user.uid)"></i>
+                            <i class="el-icon-document-copy u-copy" @click.stop="copyText(user.ID)"></i>
                         </div>
                     </div>
 
@@ -85,12 +85,13 @@
 
 <script>
 import User from "@jx3box/jx3box-common/js/user";
+import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import { getMyInfo } from "../../service/author";
 import { __Links, __Root, __imgPath, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
 import { copyText } from "../../assets/js/utils";
 export default {
     name: "info",
-    props: ['asset'],
+    props: ["asset"],
     data() {
         return {
             isPhone: window.innerWidth < 768,
@@ -106,7 +107,7 @@ export default {
             },
 
             isSuperAuthor: false,
-        }
+        };
     },
     computed: {
         siteRoot: function () {
@@ -122,10 +123,10 @@ export default {
             return User._isPRO(this.asset) || false;
         },
         isAdmin() {
-            return User.isAdmin()
+            return User.isAdmin();
         },
         isEditor() {
-            return User.isEditor()
+            return User.isEditor();
         },
     },
     mounted() {
@@ -133,10 +134,11 @@ export default {
     },
     methods: {
         copyText,
+        showAvatar,
         logout: function () {
             User.destroy()
                 .then((res) => {
-                    this.$emit('logout')
+                    this.$emit("logout");
                     if (location.pathname.startsWith("/dashboard") || location.pathname.startsWith("/publish")) {
                         location.href = this.siteRoot;
                     }
@@ -154,10 +156,11 @@ export default {
             return val || "匿名";
         },
         loadMyInfo: function () {
-            getMyInfo().then((res) => {
-                this.isSuperAuthor = !!res.sign;
+            getMyInfo().then((data) => {
+                this.user = data;
+                this.isSuperAuthor = !!data.sign;
             });
         },
-    }
-}
+    },
+};
 </script>

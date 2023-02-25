@@ -29,7 +29,7 @@ export default {
         // 消息
         checkMSG: function () {
             getMsg().then((res) => {
-                this.pop = !!res.data.data.unread;
+                this.pop = !!(~~res.data.data.letter + ~~res.data.data.message);
             });
         },
     }
