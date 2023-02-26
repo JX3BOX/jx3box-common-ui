@@ -178,7 +178,7 @@ export default {
         },
         toComment() {
             this.$refs.commentView.scrollIntoView({
-                block: "center",
+                block: "start",
                 behavior: "auto",
             });
         },
