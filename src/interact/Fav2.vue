@@ -2,7 +2,8 @@
     <div class="w-fav2" :class="{ disabled: favorite }" @click="doFav">
         <el-tooltip effect="dark" :content="favContent" placement="top-start">
             <div>
-                <img class="u-icon" svg-inline src="../../assets/img/widget/star.svg" />
+                <img v-if="favorite" class="u-icon" svg-inline src="../../assets/img/widget/unstar.svg" />
+                <img v-else class="u-icon" svg-inline src="../../assets/img/widget/star.svg" />
                 <span class="u-count" v-if="!hiddenNum && total">{{ total }}</span>
             </div>
         </el-tooltip>
@@ -24,7 +25,7 @@ export default {
     },
     computed: {
         favContent() {
-            return this.favorite ? "取消收藏" : "收藏";
+            return this.favorite ? "已收藏" : "收藏";
         },
     },
     methods: {
