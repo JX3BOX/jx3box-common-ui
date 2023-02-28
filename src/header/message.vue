@@ -29,13 +29,12 @@ export default {
         // 消息
         checkMSG: function () {
             getMsg().then((res) => {
-                this.pop = !!(~~res.data.data.letter + ~~res.data.data.message);
+                this.pop = !!(Math.max(~~res.data.data.letter, 0) + ~~res.data.data.message);
             });
         },
-    }
-}
+    },
+};
 </script>
-
 
 <style lang="less">
 //消息面板
