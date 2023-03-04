@@ -18,6 +18,10 @@ function getDecorationJson() {
     let url = __imgPath + "decoration/index.json";
     return axios.get(url);
 }
+function getHonorJson() {
+    let url = __imgPath + "decoration/honor.json";
+    return axios.get(url);
+}
 // 通用上传
 function upload(formData) {
     return $cms().post(`/api/cms/upload`, formData);
@@ -28,4 +32,4 @@ function checkTeamMember() {
     return $cms().get(`/api/cms/config/teammates/check`);
 }
 
-export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember };
+export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember, getHonorJson };

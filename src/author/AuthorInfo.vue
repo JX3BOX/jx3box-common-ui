@@ -35,7 +35,9 @@
                 </div>
             </div>
         </div>
-        <div class="u-honor" :style="honorStyle" v-if="honor">{{ honor }}</div>
+        <div class="u-honor" :style="{ backgroundImage: `url(${imgUrl()})` }" v-if="honor">
+            <span :style="{ color: honor.color }">{{ honor.honor }}</span>
+        </div>
         <div class="u-bio">{{ data.user_bio }}</div>
     </div>
 </template>
@@ -45,11 +47,10 @@ import { __server, __imgPath, __userLevel, __userLevelColor } from "@jx3box/jx3b
 import { authorLink } from "@jx3box/jx3box-common/js/utils";
 import User from "@jx3box/jx3box-common/js/user";
 import { getUserInfo } from "../../service/author";
-import { getDecoration, getDecorationJson } from "../../service/cms";
+import { getDecoration, getHonorJson } from "../../service/cms";
 import Avatar from "./Avatar.vue";
-const DECORATION_JSON = "decoration_json";
-const DECORATION_KEY = "decoration_me";
-const HONOR_KEY = "honor_me";
+import { cloneDeep, inRange } from "lodash";
+const HONOR_IMG_KEY = "honor_img";
 export default {
     name: "AuthorInfo",
     props: ["uid"],
@@ -111,79 +112,83 @@ export default {
         showLevelColor: function (level) {
             return __userLevelColor[level];
         },
+        imgUrl: function () {
+            let item = this.honor;
+            if (!item) return;
+            if (item.isImgIndex) {
+                return __imgPath + `decoration/honor/${item.val}/${item.val}_${item.imgIndex}.${item.ext}`;
+            }
+            return __imgPath + `decoration/honor/${item.val}/${item.val}.${item.ext}`;
+        },
         getHonor() {
             let user_id = this.uid;
-            if (!user_id) {
-                return;
-            }
-            let honor_local = sessionStorage.getItem(HONOR_KEY + user_id);
-            if (honor_local == "no") return;
-            //已有缓存，读取解析
+            if (!user_id) return;
+            let honor_local = sessionStorage.getItem(HONOR_IMG_KEY + user_id);
             if (honor_local) {
-                this.honor = honor_local;
-                this.getHonorStyle();
+                //解析本地缓存
+                let honor_parse = JSON.parse(honor_local);
+                if (!honor_parse == "no") return;
+                this.honor = honor_parse;
                 return;
             }
             getDecoration({ using: 1, user_id: user_id, type: "honor" }).then((data) => {
                 let res = data.data.data;
                 if (res.length == 0) {
                     //空 则为无主题，不再加载接口，界面设No
-                    sessionStorage.setItem(HONOR_KEY + user_id, "no");
+                    sessionStorage.setItem(HONOR_IMG_KEY + user_id, "no");
                     return;
                 }
+                // res[0].server = "长安城";
+                // res[0].ranking = 0;
+                // res[0].extra = "备注";
                 let honor = res[0];
-                sessionStorage.setItem(HONOR_KEY + user_id, honor.val);
-                this.honor = honor.val;
-                this.getHonorStyle();
+                this.getHonorStyle(honor);
             });
         },
         //有称号后，获取样式配置
-        getHonorStyle() {
-            let user_id = this.uid;
-            let decoration_local = sessionStorage.getItem(DECORATION_KEY + user_id);
-            if (decoration_local) {
-                //解析本地缓存
-                let decoration_parse = JSON.parse(decoration_local);
-                if (!decoration_parse.status) return;
-
-                if (decoration_parse) {
-                    this.setHonorStyle(decoration_parse);
-                    return;
-                }
-            }
-            getDecoration({ using: 1, user_id: user_id, type: "homebg" }).then((data) => {
-                let res = data.data.data;
-                if (res.length == 0) {
-                    //空 则为无主题，不再加载接口，界面设No
-                    sessionStorage.setItem(DECORATION_KEY + user_id, JSON.stringify({ status: false }));
-                    return;
-                }
-                let decoration = res[0];
-                let decorationJson = sessionStorage.getItem(DECORATION_JSON);
-                if (!decorationJson) {
-                    //加载远程json，用于Honor颜色配置
-                    getDecorationJson().then((json) => {
-                        let decoration_json = json.data;
-                        let theme = JSON.parse(JSON.stringify(decoration_json[decoration.val]));
-                        theme.status = true;
-                        sessionStorage.setItem(DECORATION_KEY + this.uid, JSON.stringify(theme));
-                        //缓存远程JSON文件
-                        sessionStorage.setItem(DECORATION_JSON, JSON.stringify(decoration_json));
-                        this.setHonorStyle(theme);
-                    });
+        getHonorStyle(data) {
+            getHonorJson().then((res) => {
+                let honorList = res.data;
+                //过滤称号信息
+                let honorConfig = honorList[data.val];
+                //正则取出前缀
+                let prefix = honorConfig.prefix;
+                let regPrefix = honorConfig.prefix.match(/(?<=\{)(.+?)(?=\})/g);
+                let ranking = honorConfig.ranking;
+                let honorStr = honorConfig.year || "";
+                if (regPrefix) {
+                    honorStr = honorStr + (data[regPrefix[0]] || "");
                 } else {
-                    let theme = JSON.parse(decorationJson)[decoration.val];
-                    theme.status = true;
-                    sessionStorage.setItem(DECORATION_KEY + this.uid, JSON.stringify(theme));
-                    this.setHonorStyle(theme);
+                    honorStr = honorStr + prefix;
                 }
+                //排名处理
+                if (ranking.length > 0) {
+                    data.imgIndex = 0;
+                    for (let i = 0; i < ranking.length; i++) {
+                        //处在范围内取数组第三个值进行称号拼接
+                        if (data.ranking != undefined && inRange(Number(data.ranking), ranking[i][0], ranking[i][1])) {
+                            data.imgIndex = i;
+                            let str = ranking[i][2];
+                            //正则取出需替换值，如果没有则直接拼接
+                            let regStr = str.match(/(?<=\{)(.+?)(?=\})/g);
+                            if (regStr) {
+                                //包含花括号替换
+                                honorStr = honorStr + str.replace(/\{(.+?)\}/g, data[regStr[0]]);
+                            } else {
+                                honorStr = honorStr + str;
+                            }
+                            break;
+                        }
+                    }
+                }
+                data.honor = honorStr + honorConfig.suffix;
+                data.color = honorConfig.color;
+                data.ext = honorConfig.ext;
+                data.isHave = true;
+                data.isImgIndex = honorConfig.ranking.length > 0 ? true : false;
+                sessionStorage.setItem(HONOR_IMG_KEY + this.uid, JSON.stringify(data));
+                this.honor = data;
             });
-        },
-        setHonorStyle(style) {
-            this.honorStyle = {
-                "background-color": style.buttoncolor,
-                color: style.buttontextcolor,
-            };
         },
     },
     created: function () {},
@@ -295,12 +300,12 @@ export default {
     }
     .u-honor {
         .dbi;
-        .mt(10px);
-        background-color: #494038;
+        text-align: center;
+        .mb(10px);
+        .size(220px,45px);
+        // background-color: #494038;
         color: #ffffff;
-        padding: 2px 50px 2px 10px;
-        .fz(12px,14px);
-        .mb(6px);
+        .fz(10px,45px);
         .r(2px);
     }
 }
