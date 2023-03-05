@@ -35,7 +35,7 @@
 
 <script>
 export default {
-    name: "tagBy2",
+    name: "topicBy",
     props: {
         topics: {
             type: Array,
