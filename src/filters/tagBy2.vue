@@ -1,31 +1,31 @@
 <template>
-    <div class="w-filter-tags" ref="tagBy">
+    <div class="w-filter-topics" ref="tagBy">
         <el-popover
             v-model="visible"
             trigger="manual"
             ref="pop"
             :width="400"
-            popper-class="w-filter-tag__pop"
+            popper-class="w-filter-topic__pop"
             :popper-options="{ boundariesElement: 'parent' }"
         >
             <div class="w-filter-tag__content">
-                <div v-for="(group, key) in tags" :key="key">
-                    <div class="u-group-title">{{ key }}</div>
-                    <div class="u-group">
-                        <el-tag
-                            v-for="item in group"
-                            :key="item"
-                            @click="onTagClick(item)"
-                            class="u-tag"
-                            :effect="item === value ? 'dark' : 'plain'"
-                            >{{ item }}</el-tag
-                        >
-                    </div>
+                <div class="u-group">
+                    <el-tag
+                        v-for="item in computedTopics" :key="item"
+                        @click="onTagClick(item)"
+                        class="u-group-item u-tag"
+                        :effect="item === value ? 'dark' : 'plain'"
+                        >{{ item }}</el-tag
+                    >
                 </div>
             </div>
 
             <template #reference>
-                <span @click="onToggle" class="u-toggle" :class="{ active: !!value }">{{ activeText }}</span>
+                <span @click="onToggle" class="u-toggle" :class="{ active: !!value }">
+                    <i class="el-icon-s-operation"></i>
+                    {{ activeText }}
+                    <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
             </template>
         </el-popover>
     </div>
@@ -35,9 +35,9 @@
 export default {
     name: "tagBy2",
     props: {
-        tags: {
-            type: Object,
-            default: () => {},
+        topics: {
+            type: Array,
+            default: () => [],
         },
         modelValue: {
             type: String,
@@ -52,23 +52,27 @@ export default {
     data() {
         return {
             visible: false,
-            value: "",
+            value: "全部",
         };
     },
     computed: {
         activeText() {
             const { value } = this;
-            return value ? value : "主题";
+            return value === "全部" ? "主题" : value;
+        },
+        computedTopics() {
+            return ['全部', ...this.topics]
         },
     },
     watch: {
         modelValue: {
             immediate: true,
             handler(val) {
-                this.value = val;
+                this.value = val === '' ? '全部' : val;
             },
         },
         value(val) {
+            if (val === '全部') val = ''
             this.$emit("update:modelValue", val);
         },
     },

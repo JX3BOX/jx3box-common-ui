@@ -66,7 +66,7 @@
                     <clientBy type="" />
                     <zlpBy />
 
-                    <tagBy2 v-model="tag2" :tags="post_topics" />
+                    <tagBy2 v-model="tag2" :topics="post_topics" />
 
                     <hr />
                     <uploadImage
@@ -255,7 +255,7 @@ export default {
             upload: "",
             text: `<Text>text="使用：<BUFF 3222 1 desc>，持续<BUFF 3222 1 time>。\\\n" font=105 </text><Text>text="红豆沙做馅儿，精致细腻的广式月饼。" font=100 </text><Text>text="使用：能在唐门套装供应商处换取如下装备。\\\n" font=105 </text><Text>text="[燕云·重泉靴]" name="iteminfolink" eventid=513 script="this.nVersion=0 this.dwTabType=7 this.dwIndex=35244 this.OnItemLButtonDown=function() OnItemLinkDown(this) end" font=100 r=255 g=40 b=255 </text><Text>text="，" font=105 </text><Text>text="[燕云·铭松靴]" name="iteminfolink" eventid=513 script="this.nVersion=0 this.dwTabType=7 this.dwIndex=35245 this.OnItemLButtonDown=function() OnItemLinkDown(this) end" font=100 r=255 g=40 b=255 </text><Text>text="。" font=100 </text>`,
 
-            post_topics,
+            post_topics: post_topics['pve'],
             tag2: ''
         };
     },
