@@ -1,20 +1,22 @@
 <template>
-    <div class="w-filter-topics" ref="tagBy">
+    <div class="w-filter-topic" ref="tagBy">
         <el-popover
             v-model="visible"
             trigger="manual"
             ref="pop"
-            :width="400"
+            :width="380"
             popper-class="w-filter-topic__pop"
             :popper-options="{ boundariesElement: 'parent' }"
         >
-            <div class="w-filter-tag__content">
+            <div class="w-filter-topic__content">
                 <div class="u-group">
                     <el-tag
-                        v-for="item in computedTopics" :key="item"
+                        v-for="item in computedTopics"
+                        :key="item"
                         @click="onTagClick(item)"
-                        class="u-group-item u-tag"
-                        :effect="item === value ? 'dark' : 'plain'"
+                        class="u-group-item u-topic"
+                        :effect="item === value ? 'dark' : 'light'"
+                        size="small"
                         >{{ item }}</el-tag
                     >
                 </div>
@@ -61,18 +63,18 @@ export default {
             return value === "全部" ? "主题" : value;
         },
         computedTopics() {
-            return ['全部', ...this.topics]
+            return ["全部", ...this.topics];
         },
     },
     watch: {
         modelValue: {
             immediate: true,
             handler(val) {
-                this.value = val === '' ? '全部' : val;
+                this.value = val === "" ? "全部" : val;
             },
         },
         value(val) {
-            if (val === '全部') val = ''
+            if (val === "全部") val = "";
             this.$emit("update:modelValue", val);
         },
     },
@@ -106,5 +108,38 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/tag-by2.less";
+.w-filter-topic {
+    display: inline-block;
+    .u-toggle {
+        color: #606266;
+        font-size: 12px;
+        .pointer;
+    }
+}
+.w-filter-topic__content {
+    padding: 5px;
+}
+.w-filter-topic__pop {
+    .u-group-title {
+        color: #606266;
+        padding-bottom: 10px;
+    }
+    .u-group {
+        .flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .u-topic {
+        .pointer;
+        border: 1px solid transparent;
+        line-height: 26px;
+        height: 28px;
+        &:not(.el-tag--dark) {
+            background-color: #f1f8ff;
+        }
+        &:hover {
+            border: 1px solid @color-link;
+        }
+    }
+}
 </style>

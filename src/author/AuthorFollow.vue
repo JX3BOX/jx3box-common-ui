@@ -6,14 +6,12 @@
             :class="{ 'is-follow': isFollow, 'u-fans-box': isSelf }"
             size="mini"
             plain
-            :icon="btnIcon"
+            icon="el-icon-plus"
             @click="follow"
             :loading="loading"
             :disabled="isSelf"
+            >{{ btnText }}</el-button
         >
-            {{ btnText }}
-            <!-- <span class="u-follow-count">{{ formatFansNum(fansNum) }} </span> -->
-        </el-button>
         <el-popover
             v-else
             placement="bottom"
@@ -26,11 +24,9 @@
                     {{ item.label }}
                 </div>
             </div>
-            <el-button class="u-trigger" size="mini" :type="btnType" slot="reference"
-                >{{ btnText }}
-                <!-- TODO:后续在粉丝榜中展示粉丝数 -->
-                <!-- <span class="u-follow-count">{{ formatFansNum(fansNum) }}</span> -->
-            </el-button>
+            <el-button class="u-trigger" size="mini" :type="btnType" plain slot="reference" icon="el-icon-check">{{
+                btnText
+            }}</el-button>
         </el-popover>
     </div>
 </template>
@@ -55,10 +51,7 @@ export default {
     },
     computed: {
         btnText() {
-            return this.isFollow ? "已关注" : "关注";
-        },
-        btnIcon() {
-            return this.isSelf ? "el-icon-plus" : this.isFollow ? "" : "el-icon-plus";
+            return this.isFollow ? "已粉" : "关注";
         },
         btnType() {
             return this.isFollow ? "info" : "warning";
@@ -158,9 +151,9 @@ export default {
         cursor: default;
         &:hover {
             cursor: pointer;
-            background: #409eff;
+            background-color: @light-pink;
             color: #fff;
-            border-color: #409eff;
+            border-color: darken(@light-pink, 2%);
         }
     }
 
@@ -178,21 +171,21 @@ export default {
 }
 .c-author-follow-popover {
     //.u-follow-popover {
-        &.el-popover {
-            min-width: 100px;
-            padding: 0;
-            margin-top: 5px;
-            .u-action-list {
-                .u-action-item {
-                    text-align: center;
-                    cursor: pointer;
-                    padding: 8px 10px;
-                    &:hover {
-                        background: rgb(248, 248, 251);
-                    }
+    &.el-popover {
+        min-width: 100px;
+        padding: 0;
+        margin-top: 5px;
+        .u-action-list {
+            .u-action-item {
+                text-align: center;
+                cursor: pointer;
+                padding: 8px 10px;
+                &:hover {
+                    background: rgb(248, 248, 251);
                 }
             }
         }
+    }
     //}
     .u-follow-count {
         margin-left: 5px;

@@ -69,7 +69,7 @@ export default {
         return {
             loading: false,
             visible: false,
-            fitPoints: [50,100, 250, 520, 666, 888, 1314, 2288, 3344, 6666, 8888, 28888, 36888, 68888],
+            fitPoints: [50, 100, 250, 520, 666, 888, 1314, 2288, 3344, 6666, 8888, 28888, 36888, 68888],
 
             left: 0, //剩余量
             status: true, //默认可打赏
@@ -201,16 +201,15 @@ export default {
 <style scoped lang="less">
 .c-author-gift {
     .u-btn {
-        @color: #f9afd4;
-
-        background-color: #fff;
-        color: darken(@color, 10%);
-        border-color: darken(@color, 10%);
+        // @color: #f9afd4;
+        // background-color: #fff;
+        // color: darken(@color, 10%);
+        // border-color: darken(@color, 10%);
 
         &:hover {
-            background-color: @color;
+            background-color: @light-pink;
             color: #fff;
-            border-color: darken(@color, 2%);
+            border-color: darken(@light-pink, 2%);
         }
 
         &.is-disabled {
@@ -246,7 +245,7 @@ export default {
             .y;
             vertical-align: text-bottom;
         }
-        .u-charge{
+        .u-charge {
             .ml(8px);
         }
         .el-progress {

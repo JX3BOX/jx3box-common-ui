@@ -157,8 +157,8 @@ export default {
         .fz(12px, 14px);
         font-weight: 400;
         color: #888;
-        transform: scale(0.8);
-        transform-origin: 0 0;
+        // transform: scale(0.8);
+        // transform-origin: 0 0;
     }
 }
 </style>

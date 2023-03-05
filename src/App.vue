@@ -66,7 +66,7 @@
                     <clientBy type="" />
                     <zlpBy />
 
-                    <tagBy2 v-model="tag2" :topics="post_topics" />
+                    <topicBy v-model="tag2" :topics="post_topics" />
 
                     <hr />
                     <uploadImage
@@ -173,7 +173,7 @@ import orderBy from "./filters/orderBy.vue";
 import tagBy from "./filters/tagBy.vue";
 import clientBy from "./filters/clientBy.vue";
 import zlpBy from "./filters/zlpBy.vue";
-import tagBy2 from "./filters/tagBy2.vue";
+import topicBy from "./filters/topicBy.vue";
 
 import uploadImage from "./upload/upload_banner.vue";
 import AuthorMedal from "./medal/medal.vue";
@@ -227,7 +227,7 @@ export default {
         tagBy,
         clientBy,
         zlpBy,
-        tagBy2,
+        topicBy,
 
         uploadImage,
         AuthorMedal,

@@ -27,6 +27,7 @@ import orderBy from "./src/filters/orderBy.vue";
 import menuBy from "./src/filters/menuBy.vue";
 import clientBy from "./src/filters/clientBy.vue";
 import zlpBy from "./src/filters/zlpBy.vue";
+import topicBy from "./src/filters/topicBy.vue";
 
 import Thx from './src/single/Thx.vue'
 import WikiPanel from './src/wiki/WikiPanel.vue'
@@ -46,7 +47,7 @@ const components = {
     RightSideMsg,
     Author,
     Avatar,
-    
+
     Thx,
     Like,
     Down,
@@ -63,6 +64,7 @@ const components = {
     menuBy,
     clientBy,
     zlpBy,
+    topicBy,
 
     WikiPanel,
 }
