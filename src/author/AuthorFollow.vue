@@ -158,7 +158,9 @@ export default {
         cursor: default;
         &:hover {
             cursor: pointer;
-            background: #ecf5ff;
+            background: #409eff;
+            color: #fff;
+            border-color: #409eff;
         }
     }
 

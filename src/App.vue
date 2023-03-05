@@ -66,6 +66,8 @@
                     <clientBy type="" />
                     <zlpBy />
 
+                    <tagBy2 v-model="tag2" :tags="post_topics" />
+
                     <hr />
                     <uploadImage
                         v-model="upload"
@@ -171,6 +173,7 @@ import orderBy from "./filters/orderBy.vue";
 import tagBy from "./filters/tagBy.vue";
 import clientBy from "./filters/clientBy.vue";
 import zlpBy from "./filters/zlpBy.vue";
+import tagBy2 from "./filters/tagBy2.vue";
 
 import uploadImage from "./upload/upload_banner.vue";
 import AuthorMedal from "./medal/medal.vue";
@@ -181,6 +184,7 @@ import WikiComments from "./wiki/WikiComments.vue";
 import axios from "axios";
 import { __server } from "@jx3box/jx3box-common/data/jx3box.json";
 import { wiki } from "@jx3box/jx3box-common/js/wiki";
+import post_topics from "@jx3box/jx3box-common/data/post_topics.json";
 
 export default {
     name: "App",
@@ -223,6 +227,7 @@ export default {
         tagBy,
         clientBy,
         zlpBy,
+        tagBy2,
 
         uploadImage,
         AuthorMedal,
@@ -249,6 +254,9 @@ export default {
 
             upload: "",
             text: `<Text>text="使用：<BUFF 3222 1 desc>，持续<BUFF 3222 1 time>。\\\n" font=105 </text><Text>text="红豆沙做馅儿，精致细腻的广式月饼。" font=100 </text><Text>text="使用：能在唐门套装供应商处换取如下装备。\\\n" font=105 </text><Text>text="[燕云·重泉靴]" name="iteminfolink" eventid=513 script="this.nVersion=0 this.dwTabType=7 this.dwIndex=35244 this.OnItemLButtonDown=function() OnItemLinkDown(this) end" font=100 r=255 g=40 b=255 </text><Text>text="，" font=105 </text><Text>text="[燕云·铭松靴]" name="iteminfolink" eventid=513 script="this.nVersion=0 this.dwTabType=7 this.dwIndex=35245 this.OnItemLButtonDown=function() OnItemLinkDown(this) end" font=100 r=255 g=40 b=255 </text><Text>text="。" font=100 </text>`,
+
+            post_topics,
+            tag2: ''
         };
     },
     created: function () {
