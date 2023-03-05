@@ -15,7 +15,7 @@
 
         <LeftSidebar :open="true" :uid="8">
             <LeftSideToggle :mobileOnly="true" />
-            <Author :author="author" :uid="6037" />
+            <Author :author="author" :uid="37" />
         </LeftSidebar>
 
         <Main :withoutLeft="false" :withoutRight="false">
