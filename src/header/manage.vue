@@ -5,7 +5,7 @@
         </span>
         <ul class="u-menu u-pop-content">
             <li v-for="item in finalPanel" :key="item.label">
-                <a :href="item.link" target="_blank"
+                <a :href="item.link" :target="item.target || '_self'"
                     ><i :class="item.icon || 'el-icon-present'"></i> {{ item.label }}</a
                 >
             </li>
@@ -34,8 +34,8 @@ export default {
         return {
             panel,
 
-            isTeamMember: false
-        }
+            isTeamMember: false,
+        };
     },
     computed: {
         finalPanel: function () {
@@ -51,15 +51,15 @@ export default {
                 .slice(0, 2);
         },
         isAdmin() {
-            return User.isAdmin()
+            return User.isAdmin();
         },
         isEditor() {
-            return User.isEditor()
+            return User.isEditor();
         },
     },
     mounted() {
         this.loadPanel();
-        this.check()
+        this.check();
     },
     methods: {
         loadPanel: function () {
@@ -78,24 +78,24 @@ export default {
                 console.log("loadPanel error", e);
             }
         },
-        check: function() {
+        check: function () {
             try {
                 const isTeamMember = JSON.parse(localStorage.getItem("BoxTeam3"));
 
                 if (isTeamMember) {
-                    this.isTeamMember = isTeamMember === "true"
+                    this.isTeamMember = isTeamMember === "true";
                 } else {
-                    checkTeamMember().then(res => {
-                        this.isTeamMember = res.data.data
-                        localStorage.setItem("BoxTeam3", this.isTeamMember)
-                    })
+                    checkTeamMember().then((res) => {
+                        this.isTeamMember = res.data.data;
+                        localStorage.setItem("BoxTeam3", this.isTeamMember);
+                    });
                 }
             } catch (e) {
                 console.log("check error", e);
             }
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="less">
