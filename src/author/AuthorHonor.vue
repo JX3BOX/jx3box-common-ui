@@ -35,24 +35,23 @@ export default {
         getHonor() {
             let user_id = this.uid;
             if (!user_id) return;
-            let honor_local = sessionStorage.getItem(HONOR_IMG_KEY + user_id);
-            if (honor_local) {
-                //解析本地缓存
-                let honor_parse = JSON.parse(honor_local);
-                if (!honor_parse == "no") return;
-                this.honor = honor_parse;
-                return;
+            let honor_local = sessionStorage.getItem(HONOR_IMG_KEY + user_id) || "";
+            //解析本地缓存
+            if (honor_local == "no") return;
+            try {
+                this.honor = JSON.parse(honor_local);
+            } catch (err) {
+                getDecoration({ using: 1, user_id: user_id, type: "honor" }).then((data) => {
+                    let res = data.data.data || [];
+                    if (res.length == 0) {
+                        //空 则为无主题，不再加载接口，界面设No
+                        sessionStorage.setItem(HONOR_IMG_KEY + user_id, "no");
+                        return;
+                    }
+                    let honor = res[0];
+                    this.getHonorStyle(honor);
+                });
             }
-            getDecoration({ using: 1, user_id: user_id, type: "honor" }).then((data) => {
-                let res = data.data.data;
-                if (res.length == 0) {
-                    //空 则为无主题，不再加载接口，界面设No
-                    sessionStorage.setItem(HONOR_IMG_KEY + user_id, "no");
-                    return;
-                }
-                let honor = res[0];
-                this.getHonorStyle(honor);
-            });
         },
         //有称号后，获取样式配置
         getHonorStyle(data) {

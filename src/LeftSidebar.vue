@@ -78,25 +78,25 @@ export default {
             if (!this.user_id) {
                 return;
             }
-            let decoration_sidebar = sessionStorage.getItem(DECORATION_SIDEBAR + this.user_id);
+            let decoration_sidebar = sessionStorage.getItem(DECORATION_SIDEBAR + this.user_id) || "";
             if (decoration_sidebar == "no") return;
             //已有缓存，读取解析
-            if (decoration_sidebar) {
+            try {
                 let sidebar = JSON.parse(decoration_sidebar);
                 this.bg = this.showDecoration(sidebar.val, "sidebar");
-                return;
+            } catch (err) {
+                getDecoration({ using: 1, user_id: this.user_id, type: "sidebar" }).then((data) => {
+                    let res = data.data.data || [];
+                    if (res.length == 0) {
+                        //空 则为无主题，不再加载接口，界面设No
+                        sessionStorage.setItem(DECORATION_SIDEBAR + this.user_id, "no");
+                        return;
+                    }
+                    let sidebar = res[0];
+                    this.bg = this.showDecoration(sidebar.val, "sidebar");
+                    sessionStorage.setItem(DECORATION_SIDEBAR + this.user_id, JSON.stringify(sidebar));
+                });
             }
-            getDecoration({ using: 1, user_id: this.user_id, type: "sidebar" }).then((data) => {
-                let res = data.data.data;
-                if (res.length == 0) {
-                    //空 则为无主题，不再加载接口，界面设No
-                    sessionStorage.setItem(DECORATION_SIDEBAR + this.user_id, "no");
-                    return;
-                }
-                let sidebar = res[0];
-                this.bg = this.showDecoration(sidebar.val, "sidebar");
-                sessionStorage.setItem(DECORATION_SIDEBAR + this.user_id, JSON.stringify(sidebar));
-            });
         },
     },
     mounted: function () {
