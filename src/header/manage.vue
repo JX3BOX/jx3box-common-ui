@@ -83,7 +83,7 @@ export default {
                 const isTeamMember = JSON.parse(localStorage.getItem("BoxTeam3"));
 
                 if (isTeamMember) {
-                    this.isTeamMember = isTeamMember === "true";
+                    this.isTeamMember = isTeamMember === "true" || isTeamMember;
                 } else {
                     checkTeamMember().then((res) => {
                         this.isTeamMember = res.data.data;
