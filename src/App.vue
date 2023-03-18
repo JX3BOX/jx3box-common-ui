@@ -121,6 +121,7 @@
             </el-tabs>
 
             <RightSidebar>
+                <PostTopic></PostTopic>
                 <RightSideMsg>Hello</RightSideMsg>
                 <div id="directory"></div>
                 <PostCollection :id="59" />
@@ -145,6 +146,7 @@ import UserPop from "./author/UserPop.vue";
 import Main from "./Main.vue";
 import RightSidebar from "./RightSidebar.vue";
 import RightSideMsg from "./RightSideMsg.vue";
+import PostTopic from "./single/PostTopic.vue";
 
 import Footer from "./Footer.vue";
 import Bottom from "./Bottom.vue";
@@ -202,6 +204,7 @@ export default {
         singlebox,
         PostHeader,
         PostCollection,
+        PostTopic,
 
         Thx,
         Collection,

@@ -32,4 +32,20 @@ function checkTeamMember() {
     return $cms().get(`/api/cms/config/teammates/check`);
 }
 
-export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember, getHonorJson };
+function getSliders(source_type, source_ids) {
+    let _params = {
+        type: "slider",
+        source_type,
+        per: 10,
+    };
+
+    if (source_ids) {
+        _params.source_ids = source_ids;
+    }
+
+    return $cms({ mute: true }).get(`/api/cms/news/v2`, {
+        params: _params,
+    });
+}
+
+export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember, getHonorJson, getSliders };
