@@ -64,11 +64,12 @@ export default {
 
 <style lang="less" scoped>
 .c-post-topic {
-    }
+    margin-bottom: 10px;
+}
 .c-post-topic__banner {
     position: relative;
     height: 100px;
-    margin-top: 10px;
+    margin-top: 0;
     .c-topic-text {
         font-size: 12px;
         font-weight: 600;
