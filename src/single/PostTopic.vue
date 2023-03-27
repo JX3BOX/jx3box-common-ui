@@ -36,7 +36,7 @@ export default {
             return this.topicInfo ? `${dayjs(this.topicInfo.created_at).format('YYYY年MM月DD日')}荣登头条榜` : ''
         },
         topicImage() {
-            return this.topicInfo ? getThumbnail(this.topicInfo.img, [260, 78]) : ''
+            return this.topicInfo ? getThumbnail(this.topicInfo.img, [260*2, 78*2]) : ''
         },
     },
     watch: {
@@ -92,5 +92,9 @@ export default {
 .c-post-topic__img {
     display: flex;
     justify-content: center;
+    img{
+        .r(3px);
+        .size(260px,78px);
+    }
 }
 </style>
