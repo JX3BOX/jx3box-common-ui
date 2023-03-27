@@ -23,7 +23,7 @@ export default {
         },
         id: {
             type: Number,
-            default: 1546, // TODO: 临时写死，后期改为动态获取
+            default: 0,
         },
     },
     data() {
@@ -82,10 +82,10 @@ export default {
         white-space: nowrap;
     }
     .c-topic-bg {
-        width: 300px;
+        width: 270px;
         position: absolute;
         top: 50%;
-        left: 50%;
+        left: calc(50% + 5px);
         transform: translate(-50%, -50%);
     }
 }
