@@ -123,6 +123,12 @@ import User from "@jx3box/jx3box-common/js/user";
 import { cms as marks } from "@jx3box/jx3box-common/data/mark.json";
 export default {
     name: "Admin",
+    props: {
+        marksOptions: {
+            type: Object,
+            default: () => {},
+        }
+    },
     data() {
         return {
             // 可视
@@ -150,7 +156,6 @@ export default {
 
             // 角标
             mark: [],
-            mark_options: marks,
 
             // 高亮
             isHighlight: false,
@@ -197,6 +202,9 @@ export default {
         },
         isAdmin : function (){
             return User.isAdmin()
+        },
+        mark_options: function (){
+            return this.marksOptions && Object.keys(this.marksOptions) ? Object.assign({}, marks, this.marksOptions) : marks
         }
     },
     methods: {

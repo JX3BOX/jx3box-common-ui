@@ -98,8 +98,6 @@ export default {
         loadData: function () {
             return getUserInfo(this.uid).then((data) => {
                 if (data) {
-                    console.log(data);
-
                     this.data = data;
                     this.$emit("ready", this.data);
                 }

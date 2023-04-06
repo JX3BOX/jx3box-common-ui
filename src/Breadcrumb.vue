@@ -43,7 +43,7 @@
                 <span>反馈</span>
             </a>
             <Adminbutton v-if="adminEnable" class="u-admin" />
-            <Admin v-if="adminEnable" />
+            <Admin v-if="adminEnable" :marksOptions="adminMarks" />
             <slot name="op-prepend"></slot>
         </div>
     </div>
@@ -73,6 +73,7 @@ export default {
         "overlayEnable",
         "crumbEnable",
         "withoutLeft",
+        "adminMarks"
     ],
     data: function () {
         return {
