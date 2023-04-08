@@ -16,7 +16,7 @@
                 <Like :postId="postId" :postType="postType"></Like>
                 <fav :postId="postId" :postType="postType" :postTitle="postTitle"></fav>
                 <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left"
-                    :points="user_points" :authors="authors" v-if="userBoxcoinEnable && boxcoin_enable"
+                    :points="user_points" :authors="authors" v-if="userBoxcoinEnable && boxcoin_enable && allowGift"
                     @updateRecord="updateRecord" :client="client" />
                 <Share :postId="postId" :postType="postType" :client="client" />
             </div>
@@ -57,6 +57,7 @@ export default {
         "mode",
         "authors",
         "client",
+        "allowGift",
     ],
     components: {
         Like,
