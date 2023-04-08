@@ -46,19 +46,52 @@ import User from "@jx3box/jx3box-common/js/user";
 import { getPostBoxcoinConfig, getBoxcoinStatus } from "../../service/thx";
 export default {
     name: "Thx",
-    props: [
-        "type",
-        "postId",
-        "postType",
-        "postTitle",
-        "userId",
-        "adminBoxcoinEnable",
-        "userBoxcoinEnable",
-        "mode",
-        "authors",
-        "client",
-        "allowGift",
-    ],
+    props: {
+        type: {
+            type: String,
+            default: "normal",
+        },
+        postId: {
+            type: Number,
+            default: 0,
+        },
+        postType: {
+            type: String,
+            default: "",
+        },
+        postTitle: {
+            type: String,
+            default: "",
+        },
+        userId: {
+            type: Number,
+            default: 0,
+        },
+        authors: {
+            type: Array,
+            default: () => [],
+        },
+        mode: {
+            type: String,
+            default: "normal",
+        },
+        client: {
+            type: String,
+            default: "origin",
+        },
+        allowGift: {
+            type: Number,
+            default: 1,
+        },
+        adminBoxcoinEnable: {
+            type: Boolean,
+            default: false,
+        },
+        userBoxcoinEnable: {
+            type: Boolean,
+            default: false,
+        },
+    },
     components: {
         Like,
         Share,
