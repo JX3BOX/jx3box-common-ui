@@ -49,7 +49,7 @@
 </template>
 
 <script>
-const marks = {
+const default_marks = {
     newbie: "新手易用",
     advanced: "进阶推荐",
     recommended: "编辑精选",
@@ -57,17 +57,29 @@ const marks = {
 };
 export default {
     name: "markBy",
-    props: ["mode", "placeholder"],
+    props: {
+        placeholder: {
+            type: String,
+            default: "",
+        },
+        mode: {
+            type: String,
+            default: "",
+        },
+        marks: {
+            type: Object,
+            default: () => default_marks,
+        },
+    },
     data: function() {
         return {
             visible: false,
             mark: "",
-            marks,
         };
     },
     computed: {
         current: function() {
-            return marks[this.mark];
+            return this.marks[this.mark];
         },
         deftext: function() {
             return this.placeholder || "精选";
