@@ -160,8 +160,8 @@ export default {
             getMyInfo().then((data) => {
                 this.user = data;
                 this.isSuperAuthor = !!data.sign;
-
-                if (this.user.deleted) {
+            }).catch((err) => {
+                if (err?.data.code < -1) {
                     this.logout(true);
                 }
             });
