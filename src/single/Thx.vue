@@ -52,7 +52,7 @@ export default {
             default: "normal",
         },
         postId: {
-            type: Number,
+            type: [Number, Array],
             default: 0,
         },
         postType: {
@@ -77,7 +77,7 @@ export default {
         },
         client: {
             type: String,
-            default: "origin",
+            default: "std",
         },
         allowGift: {
             type: Number,

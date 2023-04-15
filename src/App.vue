@@ -39,13 +39,12 @@
                     <el-button @click="visible = true">用户POP</el-button>
                     <!-- :postId="23865" -->
                     <Thx
-                        postType="bbs"
+                        postType="bps"
                         postTitle="bbs23865的标题"
-                        type="batchReward"
-                        :userId="7"
+                        :userId="8"
                         :adminBoxcoinEnable="true"
                         :userBoxcoinEnable="true"
-                        :postId="[{ user_id: 10, article_id: '11111', article_type: '' }]"
+                        :postId="5575"
                     />
                     <hr />
                     <Like mode="heart" :count="100" :showCount="true" />

@@ -79,10 +79,23 @@ export default {
             return this.total - this.left;
         },
         ready: function () {
-            return this.isNotSelf && this.isEnough && this.count && this.remark;
+            // 不能给自己打赏，打赏目标不能是自己
+            // 打赏数量不能超过剩余数量
+            // 打赏数量不能为0
+            // 打赏寄语不能为空
+            return !!(
+                !this.isSelf &&
+                !this.targetIsSelf &&
+                this.isEnough &&
+                this.count &&
+                this.remark
+            );
         },
         isNotSelf: function () {
             return this.userId != User.getInfo().uid;
+        },
+        targetIsSelf: function () {
+            return this.chosen == this.userId;
         },
         isEnough: function () {
             return this.left && this.left >= this.count;
