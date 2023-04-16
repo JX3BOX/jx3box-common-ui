@@ -1,5 +1,5 @@
 <template>
-    <a class="c-avatar" :href="authorLink(uid)" :class="size">
+    <a class="c-avatar" :href="authorLink(uid)" :class="size" :style="style">
         <img :src="showAvatar(url)" class="c-avatar-pic" />
         <i class="c-avatar-frame" v-if="frame">
             <img :src="frameUrl" />
@@ -46,20 +46,32 @@ export default {
         };
     },
     computed: {
+        isNumberSize:function (){
+            return !isNaN(Number(this.size))
+        },
         frameUrl: function () {
             return __imgPath + `avatar/images/${this.frame}/${this.frame}.svg`;
         },
+        style:function (){
+            if(this.isNumberSize){
+                return {
+                    width:this.size+'px',
+                    height:this.size+'px'
+                }
+            }
+            return {}
+        }
     },
     methods: {
         showAvatar: function (val) {
-            return showAvatar(val, this.styles[this.size] * 3);
+            return showAvatar(val, this.isNumberSize ? this.size*3 : this.styles[this.size] * 3);
         },
         authorLink,
     },
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 .c-avatar {
     .pr;
     .dbi;
