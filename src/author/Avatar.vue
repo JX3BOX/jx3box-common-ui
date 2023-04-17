@@ -1,5 +1,5 @@
 <template>
-    <a class="c-avatar" :href="authorLink(uid)" :class="size" :style="style">
+    <a class="c-avatar" :href="authorLink(uid)" :class="size" :style="style" target="_blank">
         <img :src="showAvatar(url)" class="c-avatar-pic" />
         <i class="c-avatar-frame" v-if="frame">
             <img :src="frameUrl" />
