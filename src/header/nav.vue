@@ -129,7 +129,7 @@ export default {
         },
         loadNav() {
             try {
-                const nav = JSON.parse(sessionStorage.getItem("nav"));
+                const nav = sessionStorage.getItem("nav") && JSON.parse(sessionStorage.getItem("nav")) || null;
                 if (nav) {
                     this.nav = nav;
                 } else {
