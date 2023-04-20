@@ -99,7 +99,7 @@ export default {
             return this.userId != User.getInfo().uid;
         },
         targetIsSelf: function () {
-            return this.chosen == this.userId;
+            return this.chosen == User.getInfo().uid;
         },
         isEnough: function () {
             const count = this.count === "custom" ? this.amount : this.count;
