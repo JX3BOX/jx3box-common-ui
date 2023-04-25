@@ -57,9 +57,12 @@ export default {
         },
     },
     watch : {
-        postId : function (val){
-            this.init();
-        }
+        postId: {
+            handler: function (val) {
+                val && this.init();
+            },
+            immediate: true,
+        },
     }
 };
 </script>
