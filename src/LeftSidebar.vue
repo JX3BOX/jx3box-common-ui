@@ -18,18 +18,8 @@
             @click="toggleLeftSide"
             :title="isOpen ? '收起侧边栏' : '打开侧边栏'"
         >
-            <!-- <img
-        v-show="isOpen"
-        svg-inline
-        src="../assets/img/leftsidebar/close.svg"
-      /> -->
             <span v-show="isOpen"><i class="el-icon-arrow-left"></i></span>
             <span v-show="!isOpen"><i class="el-icon-arrow-right"></i></span>
-            <!-- <img
-        v-show="!isOpen"
-        svg-inline
-        src="../assets/img/leftsidebar/open.svg"
-      /> -->
         </span>
     </aside>
 </template>
@@ -39,7 +29,6 @@ import Bus from "../service/bus";
 import { isApp } from "../assets/js/app.js";
 import { getDecoration } from "../service/cms";
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import User from "@jx3box/jx3box-common/js/user";
 const DECORATION_SIDEBAR = "decoration_sidebar";
 export default {
     name: "LeftSidebar",
