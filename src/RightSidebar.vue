@@ -1,17 +1,19 @@
 <template>
-    <aside class="c-sidebar-right c-sidebar" v-if="!isApp" :class="isOpen ? 'is-open' : 'is-close'">
+    <aside class="c-sidebar-right c-sidebar" v-if="!isApp" :class="[isOpen ? 'is-open' : 'is-close', {'show-toggle': showToggle}]">
         <div class="c-sidebar-right-inner">
             <slot></slot>
         </div>
-        <span
-            class="c-sidebar-right-toggle"
-            :class="!isOpen && 'close-sidebar-right'"
-            @click="toggleRightSide"
-            :title="isOpen ? '收起侧边栏' : '打开侧边栏'"
-        >
-            <span v-show="!isOpen"><i class="el-icon-arrow-left"></i></span>
-            <span v-show="isOpen"><i class="el-icon-arrow-right"></i></span>
-        </span>
+        <template v-if="showToggle">
+            <span
+                class="c-sidebar-right-toggle"
+                :class="!isOpen && 'close-sidebar-right'"
+                @click="toggleRightSide"
+                :title="isOpen ? '收起侧边栏' : '打开侧边栏'"
+            >
+                <span v-show="!isOpen"><i class="el-icon-arrow-left"></i></span>
+                <span v-show="isOpen"><i class="el-icon-arrow-right"></i></span>
+            </span>
+        </template>
     </aside>
 </template>
 
@@ -20,7 +22,13 @@ import Bus from "../service/bus";
 import { isApp } from "../assets/js/app.js";
 export default {
     name: "RightSidebar",
-    props: [],
+    props: {
+        // 展示收起按钮
+        showToggle: {
+            type: Boolean,
+            default: false,
+        },
+    },
     data: function() {
         return {
             isApp: isApp(),
