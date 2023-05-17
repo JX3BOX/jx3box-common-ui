@@ -11,7 +11,7 @@
                 <img
                     class="u-icon"
                     svg-inline
-                    src="../../assets/img/widget/like2.svg"
+                    :src="likeImg"
                 />
                 <span class="u-count" v-if="count">{{ count }}</span>
             </div>
@@ -21,7 +21,6 @@
 
 <script>
 import { postStat, getStat } from "@jx3box/jx3box-common/js/stat";
-import { getRewrite } from "@jx3box/jx3box-common/js/utils";
 import _ from "lodash";
 export default {
     name: "Like2",
@@ -30,6 +29,8 @@ export default {
         return {
             status: true,
             count: 0,
+
+            likeImg: require("../../assets/img/widget/like4.png"),
         };
     },
     computed: {
@@ -49,11 +50,15 @@ export default {
         // 点赞
         addLike: function () {
             if (!this.ready) return;
+            this.likeImg = require("../../assets/img/widget/like4ing.gif");
             this.count++;
             if (this.status) {
                 postStat(this.postType, this.postId, "likes");
             }
             this.status = false;
+            _.debounce(() => {
+                this.likeImg = require("../../assets/img/widget/like4.png");
+            }, 2800)();
         },
     },
     watch : {
