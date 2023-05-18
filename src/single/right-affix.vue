@@ -1,16 +1,16 @@
 <template>
-    <div class="right-affix">
+    <div class="c-right-affix" :class="{ 'is-close': !isOpen }">
         <div class="item">
             <fav :postId="postId" :postType="postType" :postTitle="postTitle" :hiddenNum="true"></fav>
         </div>
         <el-tooltip v-if="showComment" effect="dark" content="去评论" placement="left">
-            <div class="item" @click="toComment">
+            <div class="u-item" @click="toComment">
                 <i class="el-icon-chat-dot-square"></i>
             </div>
         </el-tooltip>
         <el-tooltip effect="dark" content="回到顶部" placement="bottom">
-            <div class="item" v-show="scrollBtnShow" @click="goTop">
-                <div class="to-top"></div>
+            <div class="u-item" v-show="scrollBtnShow" @click="goTop">
+                <div class="u-to-top"></div>
             </div>
         </el-tooltip>
     </div>
@@ -18,6 +18,7 @@
 
 <script>
 import Fav from "../interact/Fav2.vue";
+import Bus from "../../service/bus";
 export default {
     name: "RightAffix",
     props: ["postId", "postType", "postTitle", "showComment"],
@@ -26,6 +27,8 @@ export default {
             scrollToptimer: null,
             scrollBtnShow: false,
             isTop: true,
+
+            isOpen: true,
         };
     },
     components: {
@@ -69,12 +72,27 @@ export default {
             }
             self.isTop = false;
         });
+
+        Bus.$on("toggleRightSide", (data) => {
+            this.isOpen = data;
+        });
     },
 };
 </script>
 
 <style lang="less">
-.right-affix {
+.closeLeftSidebar() {
+    transition: 0.2s ease-in-out;
+    transform: translateX(100%);
+}
+
+.openLeftSidebar() {
+    transition: 0.2s ease-in-out;
+    transform: translateX(0);
+}
+
+.c-right-affix {
+    .openLeftSidebar();
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -87,7 +105,7 @@ export default {
     z-index: 200;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
-    .item {
+    .u-item {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -106,21 +124,26 @@ export default {
             .size(26px);
         }
     }
-    .to-top {
+    .u-to-top {
         width: 0;
         height: 0;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
         border-bottom: 16px solid #87ceeb;
     }
+
+    &.is-close {
+        .closeLeftSidebar();
+        right: 42px;
+    }
 }
 @media screen and (max-width: @smallpc) {
-    .right-affix {
+    .c-right-affix {
         right: 0;
     }
 }
 @media screen and (max-width: @phone) {
-    .right-affix {
+    .c-right-affix {
         .none;
     }
 }
