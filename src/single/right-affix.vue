@@ -119,4 +119,9 @@ export default {
         right: 0;
     }
 }
+@media screen and (max-width: @phone) {
+    .right-affix {
+        .none;
+    }
+}
 </style>
