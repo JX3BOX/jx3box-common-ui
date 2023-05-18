@@ -14,7 +14,7 @@
         </div>
         <a class="u-channel" :href="rootLink" :class="{on:withoutLeft}">
             <i class="u-channel-logo">
-                <img :src="getAppIcon(slug)" v-if="!$slots.logo"/>
+                <img :src="getAppIcon(icon || slug)" v-if="!$slots.logo"/>
                 <slot name="logo"></slot>
             </i>
             <span class="u-title">{{ name }}</span>
@@ -73,7 +73,8 @@ export default {
         "overlayEnable",
         "crumbEnable",
         "withoutLeft",
-        "adminMarks"
+        "adminMarks",
+        "icon"
     ],
     data: function () {
         return {
