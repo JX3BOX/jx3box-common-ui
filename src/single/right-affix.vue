@@ -28,7 +28,7 @@ export default {
             scrollBtnShow: false,
             isTop: true,
 
-            isOpen: true,
+            isOpen: false,
         };
     },
     components: {
