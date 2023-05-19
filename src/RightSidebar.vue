@@ -46,13 +46,13 @@ export default {
             this.isOpen = data;
         });
 
-        // if (window.innerWidth < 1024) {
-        //     this.isOpen = false;
+        if (window.innerWidth < 1024) {
+            this.isOpen = false;
 
-        //     document.addEventListener("click", function () {
-        //         Bus.$emit("toggleRightSide", false);
-        //     });
-        // }
+            // document.addEventListener("click", function () {
+            //     Bus.$emit("toggleRightSide", false);
+            // });
+        }
     },
 };
 </script>
