@@ -2,7 +2,7 @@
     <div class="w-boxcoin-user" v-if="allowBoxcoin">
         <el-tooltip effect="dark" content="投币" placement="top-start">
             <div class="w-boxcoin-block" @click="openBoxcoinPop">
-                <img class="u-icon" svg-inline src="../../assets/img/widget/heart1.svg" />
+                <img class="u-icon" svg-inline :src="likeImg" />
                 <span class="u-count" v-if="boxcoin">{{boxcoin}}</span>
             </div>
         </el-tooltip>
@@ -51,6 +51,7 @@
 import { rewardBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
 import Contributors from './Contributors.vue';
+import _ from "lodash";
 export default {
     name: "BoxcoinUser",
     props: ["boxcoin", "postType", "postId", "userId", "own", "points", "authors",'client'],
@@ -70,6 +71,8 @@ export default {
             chargeLink: "/vip/boxcoin?redirect=" + location.href,
 
             chosen: '', // 被选中的人
+
+            likeImg: require("../../assets/img/widget/like4.png"),
         };
     },
     computed: {
@@ -105,7 +108,12 @@ export default {
     methods: {
         openBoxcoinPop: function () {
             if (User.isLogin()) {
+                this.likeImg = require("../../assets/img/widget/like4ing.gif");
                 this.visible = true;
+
+                _.debounce(() => {
+                    this.likeImg = require("../../assets/img/widget/like4.png");
+                }, 2800)();
             } else {
                 User.toLogin();
             }
