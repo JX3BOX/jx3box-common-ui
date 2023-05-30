@@ -2,6 +2,7 @@
     <a
         class="u-message el-button el-button--warning el-button--medium u-op-public"
         @click="onButtonClick"
+        v-if="isEditor"
     >
         <i class="el-icon-message"></i>
         <span>私信</span>
@@ -10,6 +11,7 @@
 
 <script>
 import { sendMessage } from "../../service/admin";
+import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "AdminDirectMessage",
     props: {
@@ -28,6 +30,11 @@ export default {
         userId: {
             type: Number,
             default: 0,
+        },
+    },
+    computed: {
+        isEditor() {
+            return User.isEditor();
         },
     },
     methods: {
