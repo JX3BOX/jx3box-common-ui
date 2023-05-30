@@ -12,4 +12,8 @@ function postSetting(data) {
     return $cms().put(`/api/cms/post/${data.ID}/setting`, data);
 }
 
-export { getSetting, postSetting };
+function sendMessage(data){
+    return $cms().post(`/api/cms/admin/direct-message`, data);
+}
+
+export { getSetting, postSetting, sendMessage };
