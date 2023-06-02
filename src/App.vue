@@ -119,7 +119,7 @@
                 </el-tab-pane>
             </el-tabs>
 
-            <RightSidebar :showToggle="true">
+            <RightSidebar :showToggle="false">
                 <PostTopic></PostTopic>
                 <RightSideMsg>Hello</RightSideMsg>
                 <div id="directory"></div>

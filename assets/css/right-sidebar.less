@@ -1,9 +1,11 @@
-.c-sidebar-right{
-    .pf;.rt(0,@header-height + @bread-height);.z(400);
-    bottom:0;
+.c-sidebar-right {
+    .pf;
+    .rt(0,@header-height + @bread-height);
+    .z(400);
+    bottom: 0;
     .w(@aside-right);
-    background-color:#fff;
-    border-left:1px solid #eee;
+    background-color: #fff;
+    border-left: 1px solid #eee;
     box-sizing: border-box;
 
     &.show-toggle {
@@ -18,6 +20,11 @@
         top: 0;
         &.show-toggle {
             background-color: #fff;
+            .pf;
+            .rt(0,@header-height + @bread-height);
+            .z(400);
+            bottom: 0;
+            .w(@aside-right);
         }
     }
 }
@@ -48,7 +55,7 @@
     }
 }
 
-.c-sidebar-right-title{
+.c-sidebar-right-title {
     font-size: 18px;
     line-height: 24px;
     font-weight: 300;
@@ -56,16 +63,15 @@
     padding: 0 0 5px 0;
     border-bottom: 1px solid #ebeef5;
 
-    .u-icon{
+    .u-icon {
         width: 24px;
         height: 24px;
         margin-right: 10px;
     }
 }
 
-.c-sidebar-right-list{
-
-    .u-item{
+.c-sidebar-right-list {
+    .u-item {
         .db;
         height: 48px;
         line-height: 48px;
@@ -75,19 +81,20 @@
         border-bottom: 1px solid #ebeef5;
         font-size: 13px;
         font-weight: 500;
-        transition: border-bottom-color .3s;
+        transition: border-bottom-color 0.3s;
         outline: none;
         .pr;
 
-        &:hover{
-            color:@primary;
+        &:hover {
+            color: @primary;
         }
 
-        &:after{
+        &:after {
             content: "\e6e0";
-            .pa;.rt(0,50%);
+            .pa;
+            .rt(0,50%);
             transform: translateY(-50%);
-            font-family: element-icons!important;
+            font-family: element-icons !important;
             speak: none;
             font-style: normal;
             font-weight: 400;
@@ -178,7 +185,7 @@
 // }
 
 // 平板横屏
-@media screen and (max-width:@smallpc){
+@media screen and (max-width: @smallpc) {
     // .c-sidebar-right{
     //     .ps;
     //     .w(auto);
@@ -186,6 +193,8 @@
     // }
 }
 
-@media print{
-    .c-sidebar-right{.none;}
+@media print {
+    .c-sidebar-right {
+        .none;
+    }
 }
