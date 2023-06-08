@@ -1,11 +1,11 @@
-import { $helper } from "@jx3box/jx3box-common/js/https.js";
+import { $cms } from "@jx3box/jx3box-common/js/https.js";
 
 function getBreadcrumb(name) {
-    return $helper().get(`/api/breadcrumb/${name}`);
+    return $cms().get(`/api/cms/breadcrumb/${name}`);
 }
 
 function getBreadcrumbs(params) {
-    return $helper().get(`/api/breadcrumbs`, {
+    return $cms().get(`/api/cms/breadcrumb`, {
         params: params,
     });
 }

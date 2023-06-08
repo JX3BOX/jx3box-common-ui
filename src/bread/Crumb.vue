@@ -16,10 +16,7 @@ export default {
     mounted() {
         getBreadcrumb(this.name).then((res) => {
             res = res.data;
-            this.html =
-                res.code === 200 && res.data.breadcrumb
-                    ? res.data.breadcrumb.html
-                    : "";
+            this.html = res.data?.html || "";
         });
     },
 };
