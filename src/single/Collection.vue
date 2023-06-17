@@ -21,7 +21,7 @@
 
 <script>
 import { getLink } from "@jx3box/jx3box-common/js/utils";
-import { getCollection } from "../../service/helper";
+import { getCollection } from "../../service/cms";
 export default {
     name: "Collection",
     props: ["id", "defaultVisible"],
@@ -68,7 +68,7 @@ export default {
         },
         loadData: function() {
             getCollection(this.id).then((res) => {
-                this.data = res.data?.data?.collection;
+                this.data = res.data?.data;
                 this.$emit('collectionUpdate',this.data)
             });
         },

@@ -48,4 +48,8 @@ function getSliders(source_type, source_ids) {
     });
 }
 
-export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember, getHonorJson, getSliders };
+function getCollection(id) {
+    return $cms({ mute: true }).get(`/api/cms/post/collection/${id}`);
+}
+
+export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember, getHonorJson, getSliders, getCollection };
