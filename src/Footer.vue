@@ -8,11 +8,11 @@
             <div class="c-footer-right">
                 <a class="u-about" :href="about" target="_blank">关于我们</a>
                 <em>|</em>
-                <a class="u-doc" href="/help" target="_blank">帮助文档</a>
+                <a class="u-doc" href="/tool?subtype=4" target="_blank">帮助文档</a>
                 <em>|</em>
                 <a class="u-log" href="https://github.com/JX3BOX" target="_blank">代码仓库</a>
                 <em>|</em>
-                <a class="u-feedback" :href="feedback" target="_blank">反馈建议</a>
+                <a class="u-feedback" href="/feedback" target="_blank">反馈建议</a>
             </div>
             <slot></slot>
         </div>
