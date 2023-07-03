@@ -32,11 +32,12 @@ function checkTeamMember() {
     return $cms().get(`/api/cms/config/teammates/check`);
 }
 
-function getSliders(source_type, source_ids) {
+function getSliders(source_type, source_ids, client="std") {
     let _params = {
         type: "slider",
         source_type,
         per: 10,
+        client,
     };
 
     if (source_ids) {

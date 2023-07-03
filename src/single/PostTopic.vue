@@ -38,6 +38,9 @@ export default {
         topicImage() {
             return this.topicInfo ? getThumbnail(this.topicInfo.img, [260*2, 78*2]) : ''
         },
+        client() {
+            return location.href.includes("origin") ? "origin" : "std";
+        },
     },
     watch: {
         id: {
@@ -50,7 +53,7 @@ export default {
     },
     methods: {
         loadData() {
-            getSliders(this.type, this.id).then((res) => {
+            getSliders(this.type, this.id, this.client).then((res) => {
                 if (res.data.data?.list) {
                     // 取创建时间最新的一条
                     const list = res.data.data.list.sort((a, b) => dayjs(b.created_at).isAfter(dayjs(a.created_at)) ? 1 : -1);
