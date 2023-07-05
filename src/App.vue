@@ -9,6 +9,7 @@
             :feedbackEnable="true"
             :adminEnable="true"
             :crumb-enable="true"
+            :topicEnable="true"
         >
             <img slot="logo" svg-inline src="../assets/img/jx3.svg" />
             bread info

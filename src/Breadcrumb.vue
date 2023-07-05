@@ -43,7 +43,7 @@
                 <span>反馈</span>
             </a>
             <Adminbutton v-if="adminEnable" class="u-admin" />
-            <ListAdmin v-if="adminEnable" />
+            <ListAdmin v-if="topicEnable" />
             <Admin v-if="adminEnable" :marksOptions="adminMarks" />
             <slot name="op-prepend"></slot>
         </div>
@@ -71,6 +71,7 @@ export default {
         "root",
         "publishEnable",
         "adminEnable",
+        "topicEnable",
         "feedbackEnable",
         "overlayEnable",
         "crumbEnable",

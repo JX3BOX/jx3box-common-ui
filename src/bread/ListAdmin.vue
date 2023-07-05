@@ -42,6 +42,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="c-admin-buttons">
+                    <!-- <el-button type="primary" @click="submit" :loading="pushing">提交</el-button> -->
+                    <el-button type="plain" @click="close">关闭</el-button>
+                </div>
             </div>
         </el-drawer>
     </div>
