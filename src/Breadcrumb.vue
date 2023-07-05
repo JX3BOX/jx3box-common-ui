@@ -43,6 +43,7 @@
                 <span>反馈</span>
             </a>
             <Adminbutton v-if="adminEnable" class="u-admin" />
+            <ListAdmin v-if="adminEnable" />
             <Admin v-if="adminEnable" :marksOptions="adminMarks" />
             <slot name="op-prepend"></slot>
         </div>
@@ -57,6 +58,7 @@ import User from "@jx3box/jx3box-common/js/user";
 import Admin from "./bread/Admin";
 import Crumb from "./bread/Crumb";
 import Adminbutton from "./bread/Adminbutton";
+import ListAdmin from "./bread/ListAdmin";
 
 import { isApp } from "../assets/js/app.js";
 import Bus from "../service/bus";
@@ -121,6 +123,7 @@ export default {
         Admin,
         Crumb,
         Adminbutton,
+        ListAdmin,
     },
 };
 </script>
