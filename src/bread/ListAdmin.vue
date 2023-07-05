@@ -14,14 +14,34 @@
             :visible.sync="show"
             :before-close="close"
             :append-to-body="true"
+            :modal="false"
             :withHeader="false"
         >
             <div class="c-admin-wrapper" v-loading="loading">
                 <el-divider content-position="left">当前主题</el-divider>
-                <div class="m-bucket-list">
-                    <el-tag v-for="item in upList" :key="item.id" @close="del(item.id)" closable>{{ item.name }}</el-tag>
+                <div class="m-bucket-list" v-if="upList && upList.length">
+                    <div v-for="item in upList" :key="item.id" class="m-bucket-item">
+                        <el-tag size="medium">{{ item.name }}</el-tag>
+                        <div class="m-bucket-op">
+                            <el-button type="text" class="u-op-btn" icon="el-icon-download" @click="update(item.id, item.status)">下架</el-button>
+                            <el-button type="text" class="u-op-btn" icon="el-icon-delete" @click="del(item.id)">删除</el-button>
+                        </div>
+                    </div>
                 </div>
+                <el-empty v-else description="暂无主题"></el-empty>
+
+                <el-button class="u-bucket-add" icon="el-icon-plus" type="primary" @click="add">添加主题</el-button>
+
                 <el-divider content-position="left">下架主题</el-divider>
+                <div class="m-bucket-list">
+                    <div v-for="item in downList" :key="item.id" class="m-bucket-item">
+                        <el-tag size="medium">{{ item.name }}</el-tag>
+                        <div class="m-bucket-op">
+                            <el-button type="text" class="u-op-btn" icon="el-icon-upload2" @click="update(item.id, item.status)">上架</el-button>
+                            <el-button type="text" class="u-op-btn" icon="el-icon-delete" @click="del(item.id)">删除</el-button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </el-drawer>
     </div>
@@ -30,7 +50,6 @@
 <script>
 import { addTopicBucket, deleteTopicBucket, updateTopicBucket, getTopicBucket } from "../../service/admin";
 import User from "@jx3box/jx3box-common/js/user";
-import { RadioButton, RadioGroup } from "element-ui";
 export default {
     name: "ListAdmin",
     props: {
@@ -150,10 +169,23 @@ export default {
     .u-admin-setting {
         .pointer;
     }
-    .m-bucket-list{
-        .flex;
-        gap: 5px;
-        flex-wrap: wrap;
+    .m-bucket-list {
+        .m-bucket-item {
+            .flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px;
+            border-radius: 3px;
+
+            // odd
+            &:nth-child(odd) {
+                background-color: #f7f7f7;
+            }
+        }
+    }
+    .u-bucket-add {
+        margin-top: 20px;
+        width: 100%;
     }
 }
 </style>
