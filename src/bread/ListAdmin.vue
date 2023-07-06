@@ -18,30 +18,18 @@
             :withHeader="false"
         >
             <div class="c-admin-wrapper" v-loading="loading">
-                <el-divider content-position="left">当前主题</el-divider>
-                <div class="m-bucket-list" v-if="upList && upList.length">
-                    <div v-for="item in upList" :key="item.id" class="m-bucket-item">
-                        <el-tag size="medium">{{ item.name }}</el-tag>
+                <el-divider content-position="left">主题管理</el-divider>
+                <div class="m-bucket-list" v-if="list && list.length">
+                    <div v-for="item in list" :key="item.id" class="m-bucket-item">
+                        <el-tag size="medium" :type="item.status ? '' : 'info'">{{ item.name }}</el-tag>
                         <div class="m-bucket-op">
-                            <el-button type="text" class="u-op-btn" icon="el-icon-download" @click="update(item.id, item.status)">下架</el-button>
+                            <el-button type="text" class="u-op-btn" icon="el-icon-download" @click="update(item.id, item.status)">{{ item.status ? '下架' : '上架' }}</el-button>
                             <el-button type="text" class="u-op-btn" icon="el-icon-delete" @click="del(item.id)">删除</el-button>
                         </div>
                     </div>
                 </div>
                 <el-empty v-else description="暂无主题"></el-empty>
 
-                <el-button class="u-bucket-add" icon="el-icon-plus" type="primary" @click="add">添加主题</el-button>
-
-                <el-divider content-position="left">下架主题</el-divider>
-                <div class="m-bucket-list">
-                    <div v-for="item in downList" :key="item.id" class="m-bucket-item">
-                        <el-tag size="medium">{{ item.name }}</el-tag>
-                        <div class="m-bucket-op">
-                            <el-button type="text" class="u-op-btn" icon="el-icon-upload2" @click="update(item.id, item.status)">上架</el-button>
-                            <el-button type="text" class="u-op-btn" icon="el-icon-delete" @click="del(item.id)">删除</el-button>
-                        </div>
-                    </div>
-                </div>
                 <div class="c-admin-buttons">
                     <!-- <el-button type="primary" @click="submit" :loading="pushing">提交</el-button> -->
                     <el-button type="plain" @click="close">关闭</el-button>
@@ -77,14 +65,6 @@ export default {
     computed: {
         hasRight() {
             return User.isEditor();
-        },
-        // 上架主题
-        upList() {
-            return this.list.filter((item) => item.status == 1);
-        },
-        // 下架主题
-        downList() {
-            return this.list.filter((item) => item.status == 0);
         },
     },
     watch: {
@@ -174,6 +154,8 @@ export default {
         .pointer;
     }
     .m-bucket-list {
+        max-height: 300px;
+        overflow: auto;
         .m-bucket-item {
             .flex;
             align-items: center;
