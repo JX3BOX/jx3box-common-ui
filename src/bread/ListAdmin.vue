@@ -23,8 +23,8 @@
                     <div v-for="item in list" :key="item.id" class="m-bucket-item">
                         <el-tag size="medium" :type="item.status ? '' : 'info'">{{ item.name }}</el-tag>
                         <div class="m-bucket-op">
-                            <el-button type="text" class="u-op-btn" icon="el-icon-download" @click="update(item.id, item.status)">{{ item.status ? '下架' : '上架' }}</el-button>
-                            <el-button type="text" class="u-op-btn" icon="el-icon-delete" @click="del(item.id)">删除</el-button>
+                            <el-button :type="item.status ? 'warning' : 'success'" plain size="mini" class="u-op-btn" :icon="item.status ? 'el-icon-download' : 'el-icon-upload2'" @click="update(item.id, item.status)">{{ item.status ? '下架' : '上架' }}</el-button>
+                            <el-button type="info" plain size="mini" class="u-op-btn" icon="el-icon-delete" @click="del(item.id)">删除</el-button>
                         </div>
                     </div>
                 </div>
@@ -160,7 +160,7 @@ export default {
             .flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 5px;
+            padding: 5px;
             border-radius: 3px;
 
             // odd
