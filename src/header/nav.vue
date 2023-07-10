@@ -10,6 +10,12 @@
                                 :class="{ on: isFocus(item.link) }"
                                 :href="item.link"
                                 :target="isSelf(item.link)"
+                                v-reporter="{
+                                    data: {
+                                        item: item.link,
+                                    },
+                                    caller: 'index_nav',
+                                }"
                                 >{{ item.label }}<i class="el-icon-arrow-down el-icon--right"></i
                             ></a>
                             <el-dropdown-menu slot="dropdown" class="c-header-menu">
@@ -21,6 +27,12 @@
                                     <a
                                         :href="subitem.link"
                                         :target="isSelf(subitem.link)"
+                                        v-reporter="{
+                                            data: {
+                                                item: subitem.link,
+                                            },
+                                            caller: 'index_nav',
+                                        }"
                                         v-if="subitem.status && matchedClient(subitem.client)"
                                         >{{ subitem.label }} <span v-if="subitem.desc">{{ subitem.desc }}</span></a
                                     ></el-dropdown-item
@@ -29,7 +41,18 @@
                         </el-dropdown>
                     </template>
                     <template v-else>
-                        <a class="u-item" :class="{ on: isFocus(item.link) }" :href="item.link">{{ item.label }}</a>
+                        <a
+                            class="u-item"
+                            :class="{ on: isFocus(item.link) }"
+                            :href="item.link"
+                            v-reporter="{
+                                data: {
+                                    item: item.link,
+                                },
+                                caller: 'index_nav',
+                            }"
+                            >{{ item.label }}</a
+                        >
                     </template>
                 </template>
             </div>
@@ -51,6 +74,12 @@
                                         :class="{ on: isFocus(item.link) }"
                                         :href="item.link"
                                         :target="isSelf(item.link)"
+                                        v-reporter="{
+                                            data: {
+                                                item: item.link,
+                                            },
+                                            caller: 'index_nav',
+                                        }"
                                         >{{ item.label }}</a
                                     ></template
                                 >
@@ -60,16 +89,34 @@
                                         :key="'header-nav-drop-' + subitem.key + subIndex"
                                         :index="subitem.key"
                                     >
-                                        <a class="u-menu-item" :href="subitem.link" :target="isSelf(subitem.link)"
+                                        <a
+                                            class="u-menu-item"
+                                            :href="subitem.link"
+                                            :target="isSelf(subitem.link)"
+                                            v-reporter="{
+                                                data: {
+                                                    item: subitem.link,
+                                                },
+                                                caller: 'index_nav',
+                                            }"
                                             >{{ subitem.label }} <span v-if="subitem.desc">{{ subitem.desc }}</span>
                                         </a>
                                     </el-menu-item>
                                 </template>
                             </el-submenu>
                             <el-menu-item v-else>
-                                <a class="u-item" :class="{ on: isFocus(item.link) }" :href="item.link">{{
-                                    item.label
-                                }}</a>
+                                <a
+                                    class="u-item"
+                                    :class="{ on: isFocus(item.link) }"
+                                    v-reporter="{
+                                        data: {
+                                            item: item.link,
+                                        },
+                                        caller: 'index_nav',
+                                    }"
+                                    :href="item.link"
+                                    >{{ item.label }}</a
+                                >
                             </el-menu-item>
                         </template>
                     </el-menu-item>
@@ -129,7 +176,7 @@ export default {
         },
         loadNav() {
             try {
-                const nav = sessionStorage.getItem("nav") && JSON.parse(sessionStorage.getItem("nav")) || null;
+                const nav = (sessionStorage.getItem("nav") && JSON.parse(sessionStorage.getItem("nav"))) || null;
                 if (nav) {
                     this.nav = nav;
                 } else {

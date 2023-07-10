@@ -6,14 +6,33 @@
         <!-- list -->
         <ul class="u-list">
             <li>
-                <a class="u-item" href="/index">
+                <a
+                    class="u-item"
+                    href="/index"
+                    v-reporter="{
+                        data: {
+                            item: '/index',
+                        },
+                        caller: 'index_nav_matrix',
+                    }"
+                >
                     <img class="u-pic" svg-inline :src="homeicon" />
                     <img class="u-pic-hover" svg-inline :src="homeicon" />
                     <span class="u-txt">首页</span>
                 </a>
             </li>
             <li v-for="(item, i) in list" :key="i" :class="{ 'u-app-start': item.lf }">
-                <a class="u-item" :href="item.href" :target="getTarget(item.href)">
+                <a
+                    class="u-item"
+                    :href="item.href"
+                    :target="getTarget(item.href)"
+                    v-reporter="{
+                        data: {
+                            item: item.href,
+                        },
+                        caller: 'index_nav_matrix',
+                    }"
+                >
                     <img class="u-pic" :src="getBoxIcon(item.img)" />
                     <!-- <img class="u-pic-hover" svg-inline :src="item.hover | getBoxIcon" /> -->
                     <span class="u-txt">{{ item.abbr }}</span>
