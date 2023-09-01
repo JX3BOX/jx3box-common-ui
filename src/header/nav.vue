@@ -12,7 +12,7 @@
                                 :target="isSelf(item.link)"
                                 v-reporter="{
                                     data: {
-                                        item: item.link,
+                                        item: trimSlash(item.link),
                                     },
                                     caller: 'index_nav',
                                 }"
@@ -29,7 +29,7 @@
                                         :target="isSelf(subitem.link)"
                                         v-reporter="{
                                             data: {
-                                                item: subitem.link,
+                                                item: trimSlash(subitem.link),
                                             },
                                             caller: 'index_nav',
                                         }"
@@ -47,7 +47,7 @@
                             :href="item.link"
                             v-reporter="{
                                 data: {
-                                    item: item.link,
+                                    item: trimSlash(item.link),
                                 },
                                 caller: 'index_nav',
                             }"
@@ -76,7 +76,7 @@
                                         :target="isSelf(item.link)"
                                         v-reporter="{
                                             data: {
-                                                item: item.link,
+                                                item: trimSlash(item.link),
                                             },
                                             caller: 'index_nav',
                                         }"
@@ -95,7 +95,7 @@
                                             :target="isSelf(subitem.link)"
                                             v-reporter="{
                                                 data: {
-                                                    item: subitem.link,
+                                                    item: trimSlash(subitem.link),
                                                 },
                                                 caller: 'index_nav',
                                             }"
@@ -110,7 +110,7 @@
                                     :class="{ on: isFocus(item.link) }"
                                     v-reporter="{
                                         data: {
-                                            item: item.link,
+                                            item: trimSlash(item.link),
                                         },
                                         caller: 'index_nav',
                                     }"
@@ -129,6 +129,7 @@
 <script>
 import default_nav from "../../assets/data/nav.json";
 import { getMenu } from "../../service/header";
+import { trimSlash } from "../../assets/js/utils";
 export default {
     props: [],
     data: function () {
@@ -192,6 +193,7 @@ export default {
                 console.log("loadNav error", e);
             }
         },
+        trimSlash,
     },
     created: function () {
         this.loadNav();

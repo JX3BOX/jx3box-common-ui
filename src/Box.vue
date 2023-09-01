@@ -28,7 +28,7 @@
                     :target="getTarget(item.href)"
                     v-reporter="{
                         data: {
-                            item: item.href,
+                            item: trimSlash(item.href),
                         },
                         caller: 'index_nav_matrix',
                     }"
@@ -53,6 +53,7 @@ import Bus from "../service/bus";
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import box from "../assets/data/box.json";
 import { getMenu } from "../service/header.js";
+import { trimSlash } from "../assets/js/utils";
 export default {
     name: "Box",
     props: ["overlayEnable"],
@@ -113,6 +114,7 @@ export default {
                 console.log("loadBox error", e);
             }
         },
+        trimSlash,
     },
     created: function () {
         if (this.overlayEnable) {
