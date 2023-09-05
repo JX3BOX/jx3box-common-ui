@@ -1,8 +1,11 @@
 <template>
     <div class="c-post-topic" v-show="topicInfo">
         <div class="c-post-topic__banner">
-            <span class="c-topic-text">{{ topicText }}</span>
-            <img class="c-topic-bg" src="../../assets/img/rightsidebar/topic_bg.svg" alt="">
+            <div class="c-topic-text">
+                <div class="c-topic-text__year">{{ year }}</div>
+                <div class="c-topic-text__text">{{ topicText }}</div>
+            </div>
+            <img class="c-topic-bg" src="../../assets/img/rightsidebar/topic_bg_bps.svg" alt="">
         </div>
         <div class="c-post-topic__img">
             <img :src="topicImage" alt="">
@@ -19,11 +22,11 @@ export default {
     props: {
         type: {
             type: String,
-            default: "face",
+            default: "bps",
         },
         id: {
             type: Number,
-            default: 0,
+            default: 46917,
         },
     },
     data() {
@@ -33,7 +36,10 @@ export default {
     },
     computed: {
         topicText() {
-            return this.topicInfo ? `${dayjs(this.topicInfo.created_at).format('YYYY年MM月DD日')}荣登头条榜` : ''
+            return this.topicInfo ? `${dayjs(this.topicInfo.created_at).format('MM月DD日')}荣登头条榜` : ''
+        },
+        year() {
+            return dayjs(this.topicInfo.created_at).format('YYYY年')
         },
         topicImage() {
             return this.topicInfo ? getThumbnail(this.topicInfo.img, [260*2, 78*2]) : ''
@@ -71,26 +77,32 @@ export default {
 }
 .c-post-topic__banner {
     position: relative;
-    height: 100px;
-    margin-top: 0;
+    // height: 100px;
+    margin-bottom: 10px;
     .c-topic-text {
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 700;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        bottom: 16px;
+        right: 0;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
         z-index: 1;
-        color: #fff;
+        color: #FFD28F;
         letter-spacing: 1px;
         white-space: nowrap;
+        margin-right: 8px;
+    }
+    .c-topic-text__year {
+        margin-bottom: 2px;
+        text-align: right;
     }
     .c-topic-bg {
         width: 270px;
-        position: absolute;
-        top: 50%;
-        left: calc(50% + 5px);
-        transform: translate(-50%, -50%);
+        // position: absolute;
+        // top: 50%;
+        // left: calc(50% + 5px);
+        // transform: translate(-50%, -50%);
     }
 }
 .c-post-topic__img {
