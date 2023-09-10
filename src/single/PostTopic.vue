@@ -39,7 +39,7 @@ export default {
             return this.topicInfo ? `${dayjs(this.topicInfo.created_at).format('MM月DD日')}荣登头条榜` : ''
         },
         year() {
-            return this.topicInfo ? dayjs(this.topicInfo.created_at).format('YYYY年')
+            return this.topicInfo ? dayjs(this.topicInfo.created_at).format('YYYY年') : ""
         },
         topicImage() {
             return this.topicInfo ? getThumbnail(this.topicInfo.img, [260*2, 78*2]) : ''
