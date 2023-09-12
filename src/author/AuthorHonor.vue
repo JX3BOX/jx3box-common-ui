@@ -1,6 +1,6 @@
 <template>
     <div class="c-author-honor" :style="{ backgroundImage: `url(${imgUrl()})` }" v-if="honor">
-        <span :style="{ color: honor.color }">{{ honor.honor }}</span>
+        <span v-if="!isJdt" :style="{ color: honor.color }">{{ honor.honor }}</span>
     </div>
 </template>
 <script>
@@ -22,6 +22,11 @@ export default {
                 val && this.getHonor();
             },
         },
+    },
+    computed: {
+        isJdt() {
+            return this.honor?.val?.toLowerCase()?.includes('jdt')
+        }
     },
     methods: {
         imgUrl: function () {
