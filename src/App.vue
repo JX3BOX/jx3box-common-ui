@@ -271,7 +271,7 @@ export default {
     },
     methods: {
         addUser: function (val) {
-            console.log(val);
+            // console.log(val);
         },
         loadPost: function () {
             axios.get(`/api/cms/post/${this.post_id}`).then((res) => {
@@ -280,7 +280,7 @@ export default {
             });
         },
         updateExtend: function (val) {
-            console.log(val);
+            // console.log(val);
         },
     },
     watch: {

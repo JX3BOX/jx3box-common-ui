@@ -63,7 +63,9 @@ export default {
             // if(location.pathname.startsWith('/index') || location.pathname.startsWith('/origin')){
             //     location.href = 'https://' + item.to
             // }else{
-            location.href = location.href.replace(item.from, item.to);
+            // 如果起始不是www，则添加www
+            const from = item.form.startsWith('www') ? item.form : 'www.' + item.form
+            location.href = location.href.replace(from, item.to);
             // }
         },
     },
