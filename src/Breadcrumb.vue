@@ -22,6 +22,7 @@
         <!-- 面包屑内容 -->
         <Crumb :name="slug" v-if="crumbEnable" />
         <slot></slot>
+        <slot name="title"></slot>
         <div class="u-op">
             <slot name="op-append"></slot>
             <a
