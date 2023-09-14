@@ -22,7 +22,7 @@
         <!-- 面包屑内容 -->
         <Crumb :name="slug" v-if="crumbEnable" />
         <slot></slot>
-        <slot name="title"></slot>
+        <slot v-if="show" name="title"></slot>
         <div class="u-op">
             <slot name="op-append"></slot>
             <a
@@ -87,6 +87,7 @@ export default {
             isNotAdmin: !User.isEditor(),
             isOverlay: false,
             isApp: isApp(),
+            show: false
         };
     },
     computed: {
@@ -101,8 +102,24 @@ export default {
         },
         publishLink,
         getAppIcon,
+        onShowTitle(e) {
+            // 小屏不显示
+            if (window.innerWidth < 1680) {
+                return;
+            }
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            if (scrollTop > 100) {
+                this.show = true;
+            } else {
+                this.show = false;
+            }
+        }
+    },
+    beforeDestroy() {
+        document.removeEventListener("scroll", this.onShowTitle);
     },
     mounted: function () {
+        document.addEventListener("scroll", this.onShowTitle);
         Bus.$on("toggleLeftSide", (data) => {
             this.isOpen = data;
         });
