@@ -64,7 +64,7 @@ export default {
             //     location.href = 'https://' + item.to
             // }else{
             // 如果起始不是www，则添加www
-            const from = item.form.startsWith('www') ? item.form : 'www.' + item.form
+            const from = item.from?.startsWith('www') ? item.from : 'www.' + item.from
             location.href = location.href.replace(from, item.to);
             // }
         },
