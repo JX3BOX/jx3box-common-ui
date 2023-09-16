@@ -63,10 +63,9 @@ export default {
             // if(location.pathname.startsWith('/index') || location.pathname.startsWith('/origin')){
             //     location.href = 'https://' + item.to
             // }else{
-            // 如果起始不是www，则添加www
-            console.log(item)
-            // const from = item.from?.startsWith('www') ? item.from : 'www.' + item.from
-            location.href = location.href.replace(item.from, item.to);
+            const href = location.href.replace(location.host, item.to);
+            location.href = href;
+            // location.href = location.href.replace(item.from, item.to);
             // }
         },
     },
