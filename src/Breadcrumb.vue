@@ -22,7 +22,9 @@
         <!-- 面包屑内容 -->
         <Crumb :name="slug" v-if="crumbEnable" />
         <slot></slot>
-        <slot v-if="show" name="title"></slot>
+        <div class="c-breadcrumb__title" v-if="show">
+            <slot name="title"></slot>
+        </div>
         <div class="u-op">
             <slot name="op-append"></slot>
             <a
