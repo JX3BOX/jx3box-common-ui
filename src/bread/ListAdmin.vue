@@ -31,8 +31,8 @@
                 <el-empty v-else description="暂无主题"></el-empty>
 
                 <div class="c-admin-buttons">
-                    <!-- <el-button type="primary" @click="submit" :loading="pushing">提交</el-button> -->
-                    <el-button type="plain" @click="close">关闭</el-button>
+                    <el-button type="success" @click="add" icon="el-icon-plus">新增</el-button>
+                    <el-button type="plain" @click="close" icon="el-icon-close">关闭</el-button>
                 </div>
             </div>
         </el-drawer>
@@ -119,7 +119,7 @@ export default {
             });
         },
         add() {
-            this.$prompt("请输入主题名称", "提示", {
+            this.$prompt("请输入主题名称", "新增主题", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 inputPattern: /\S+/,
