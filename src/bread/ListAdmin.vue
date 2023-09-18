@@ -24,6 +24,7 @@
                         <el-tag size="medium" :type="item.status ? '' : 'info'">{{ item.name }}</el-tag>
                         <div class="m-bucket-op">
                             <el-button :type="item.status ? 'warning' : 'success'" plain size="mini" class="u-op-btn" :icon="item.status ? 'el-icon-download' : 'el-icon-upload2'" @click="update(item.id, item.status)">{{ item.status ? '下架' : '上架' }}</el-button>
+                            <el-button @click="edit(item)" plain size="mini" icon="el-icon-edit">修改</el-button>
                             <el-button type="info" plain size="mini" class="u-op-btn" icon="el-icon-delete" @click="del(item.id)">删除</el-button>
                         </div>
                     </div>
@@ -32,7 +33,7 @@
 
                 <div class="c-admin-buttons">
                     <el-button type="success" @click="add" icon="el-icon-plus">新增</el-button>
-                    <el-button type="plain" @click="close" icon="el-icon-close">关闭</el-button>
+                    <!-- <el-button type="plain" @click="close" icon="el-icon-close">关闭</el-button> -->
                 </div>
             </div>
         </el-drawer>
@@ -140,6 +141,28 @@ export default {
                 })
                 .catch(() => {});
         },
+        edit(item) {
+            this.$prompt("请输入主题名称", "修改主题", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                inputPattern: /\S+/,
+                inputErrorMessage: "主题名称不能为空",
+                inputValue: item.name,
+            })
+                .then(({ value }) => {
+                    const data = {
+                        name: value,
+                    };
+                    updateTopicBucket(item.id, data).then((res) => {
+                        this.$message({
+                            type: "success",
+                            message: "修改成功!",
+                        });
+                        this.loadData();
+                    });
+                })
+                .catch(() => {})
+        }
     },
 };
 </script>
