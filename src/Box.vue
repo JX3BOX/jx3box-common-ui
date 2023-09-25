@@ -11,7 +11,7 @@
                     href="/index"
                     v-reporter="{
                         data: {
-                            item: '/index',
+                            item: `${prefix}:/index`,
                         },
                         caller: 'index_nav_matrix',
                     }"
@@ -80,6 +80,9 @@ export default {
                 return item.status && (item.client == this.client || item.client == "all");
             });
         },
+        prefix: function (){
+            return this.client === 'std' ? 'www' : 'origin';
+        }
     },
     methods: {
         closeBox: function () {
@@ -114,7 +117,9 @@ export default {
                 console.log("loadBox error", e);
             }
         },
-        trimSlash,
+        trimSlash(link) {
+            return trimSlash(`${this.prefix}:${link}`);
+        },
     },
     created: function () {
         if (this.overlayEnable) {

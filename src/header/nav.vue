@@ -164,6 +164,9 @@ export default {
         client() {
             return location.href.includes("origin") ? "origin" : "std";
         },
+        prefix() {
+            return this.client === 'std' ? 'www' : 'origin';
+        }
     },
     methods: {
         isFocus: function (type) {
@@ -193,7 +196,9 @@ export default {
                 console.log("loadNav error", e);
             }
         },
-        trimSlash,
+        trimSlash(link) {
+            return trimSlash(`${this.prefix}:${link}`);
+        },
     },
     created: function () {
         this.loadNav();
