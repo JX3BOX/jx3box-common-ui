@@ -1,13 +1,13 @@
 import { Notification } from 'element-ui';
 // 复制
-export function copyText(text){
+export function copyText(text) {
     if (window.navigator.clipboard) {
-        window.navigator.clipboard.writeText(text).then(function() {
+        window.navigator.clipboard.writeText(text).then(function () {
             Notification.success({
                 title: '复制成功',
             });
             console.log('Async: Copying to clipboard was successful!');
-        }, function(err) {
+        }, function (err) {
             console.error('Async: Could not copy text: ', err);
         });
     } else {
@@ -28,6 +28,23 @@ export function copyText(text){
 }
 
 // 去除最后的/
-export function trimSlash (str) {
+export function trimSlash(str) {
     return str.replace(/\/$/, "");
+}
+
+// 监听 localStorage 的改变
+export function dispatchEventStorage() {
+    const _setItem = localStorage.setItem
+
+    localStorage.setItem = function (key, val) {
+        // 注册一个名称为 setItemEvent 的事件
+        let setEvent = new Event('setItemEvent')
+        // key 为改变的 key， newVal 为改变的 value
+        setEvent.key = key
+        setEvent.newVal = val
+
+        window.dispatchEvent(setEvent)
+
+        _setItem.apply(this, arguments)
+    }
 }

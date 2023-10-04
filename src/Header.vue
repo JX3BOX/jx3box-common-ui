@@ -32,7 +32,7 @@
 
 <script>
 import _ from "lodash";
-import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
+// import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import { isApp, KW } from "../assets/js/app.js";
 
 import logo from "./header/logo.vue";
@@ -41,7 +41,7 @@ import search from "./header/search.vue";
 import nav from "./header/nav.vue";
 import user from "./header/user.vue";
 import Box from "../src/Box.vue";
-import gameSwitch from "./header/gameSwitch.vue";
+// import gameSwitch from "./header/gameSwitch.vue";
 
 export default {
     name: "Header",

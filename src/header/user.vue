@@ -10,11 +10,17 @@
             <!-- vip -->
             <vip />
 
+            <!-- 商城 -->
+            <shop />
+
             <!-- 我的资产 -->
             <asset :asset="asset" />
 
             <!-- manage -->
             <manage />
+
+            <!-- 语言切换 -->
+            <lang-switch />
 
             <!-- user info -->
             <user-info :asset="asset" @logout="logout" />
@@ -43,6 +49,8 @@ import vip from "./vip.vue"
 import asset from "./asset.vue"
 import manage from "./manage.vue"
 import userInfo from './userInfo.vue';
+import langSwitch from "./langSwitch.vue";
+import shop from "./shop.vue";
 export default {
     components: {
         message,
@@ -50,7 +58,9 @@ export default {
         vip,
         asset,
         manage,
-        userInfo
+        userInfo,
+        langSwitch,
+        shop
     },
     data: function () {
         return {
