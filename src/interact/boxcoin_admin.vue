@@ -112,8 +112,16 @@ export default {
             return location.href.includes('origin') ? 'origin' : 'std'
         },
         fitPoints : function (){
-            return this.points.filter(item => item <= this.left)
+            const points = this.points.filter(item => item <= this.left)
+            if (this.isSignAuthor) {
+                // 最大值为1000
+                return points.filter(item => item <= 1000)
+            }
+            return points
         },
+        isSignAuthor : function (){
+            return User.getInfo().group == 32;
+        }
     },
     watch: {
         own : function (val){

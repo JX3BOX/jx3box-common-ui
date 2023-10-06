@@ -53,6 +53,7 @@ export default {
     methods: {
         onLangChange(lang) {
             localStorage.setItem("lang", lang);
+            location.reload();
         },
     },
 };
