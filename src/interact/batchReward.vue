@@ -13,7 +13,7 @@
                   <em class="u-label">本月状态</em>
                   已用<b>{{ this.used }}</b> 剩余<b>{{ this.left }}</b> 总计<b>{{ this.total }}</b>
                   <el-progress
-                      :percentage="100 - (this.used * 100) / this.total"
+                      :percentage="this.total ? 100 - (this.used * 100 / this.total) : 0"
                       :stroke-width="15"
                       :text-inside="true"
                   ></el-progress>
