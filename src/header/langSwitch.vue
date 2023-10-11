@@ -8,7 +8,7 @@
                 v-for="item in langs"
                 :key="item.key"
                 @click="onLangChange(item.key)"
-                :class="{ 'is-active': item.key === currentLang }"
+                :class="{ 'is-active': item.key === currentLang, 'is-disabled': item.disabled }"
             >
                 <a>{{ item.name }}</a>
             </li>
@@ -30,17 +30,17 @@ export default {
                 {
                     name: "繁体中文",
                     key: "zh-tw",
-                    disabled: false,
+                    disabled: true,
                 },
                 {
                     name: "Tiếng Việt",
                     key: "vi",
-                    disabled: false,
+                    disabled: true,
                 },
                 {
                     name: "English",
                     key: "en-us",
-                    disabled: false,
+                    disabled: true,
                 },
             ], // 语言列表 简体中文、繁体中文、英文、越南语
             currentLang: "zh-cn", // 当前语言
@@ -80,6 +80,17 @@ export default {
             a {
                 color: @primary;
                 font-weight: 600;
+            }
+        }
+        &.is-disabled {
+            a {
+                color: #999;
+                cursor: not-allowed;
+            }
+            &:hover a {
+                // .tm(0);
+                background-color: #fff;
+                color: #999;
             }
         }
     }
