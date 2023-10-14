@@ -45,6 +45,10 @@ export default {
             type: String,
             default: "",
         },
+        label: {
+            type: String,
+            default: "主题",
+        }
     },
     emits: ["update:modelValue"],
     model: {
@@ -60,7 +64,7 @@ export default {
     computed: {
         activeText() {
             const { value } = this;
-            return value === "全部" ? "主题" : value;
+            return value === "全部" ? this.label : value;
         },
         computedTopics() {
             return ["全部", ...this.topics];
