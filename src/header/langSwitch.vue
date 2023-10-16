@@ -7,7 +7,7 @@
             <li
                 v-for="item in langs"
                 :key="item.key"
-                @click="onLangChange(item.key)"
+                @click="onLangChange(item)"
                 :class="{ 'is-active': item.key === currentLang, 'is-disabled': item.disabled }"
             >
                 <a>{{ item.name }}</a>
@@ -51,8 +51,9 @@ export default {
         this.currentLang = lang;
     },
     methods: {
-        onLangChange(lang) {
-            localStorage.setItem("lang", lang);
+        onLangChange({disabled, key}) {
+            if (disabled) return;
+            localStorage.setItem("lang", key);
             location.reload();
         },
     },

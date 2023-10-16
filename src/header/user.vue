@@ -20,7 +20,7 @@
             <manage />
 
             <!-- 语言切换 -->
-            <lang-switch />
+            <!-- <lang-switch /> -->
 
             <!-- user info -->
             <user-info :asset="asset" @logout="logout" />
@@ -49,7 +49,7 @@ import vip from "./vip.vue"
 import asset from "./asset.vue"
 import manage from "./manage.vue"
 import userInfo from './userInfo.vue';
-import langSwitch from "./langSwitch.vue";
+// import langSwitch from "./langSwitch.vue";
 import shop from "./shop.vue";
 export default {
     components: {
@@ -59,7 +59,7 @@ export default {
         asset,
         manage,
         userInfo,
-        langSwitch,
+        // langSwitch,
         shop
     },
     data: function () {
