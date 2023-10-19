@@ -13,13 +13,21 @@
                     <li>
                         <a :href="url.publish">发布中心</a>
                     </li>
-                    <hr />
-                    <li v-if="isAdmin">
-                        <a href="/admin">站点配置</a>
+                    <hr>
+                    <li v-for="item in userPanel" :key="item.label">
+                        <a :href="item.link" :target="item.target || '_self'">
+                            <!-- <i :class="item.icon || 'el-icon-present'"></i> -->
+                            {{ item.label }}
+                        </a>
                     </li>
-                    <li v-if="isEditor">
-                        <a href="https://os.jx3box.com/admin">管理平台</a>
-                    </li>
+                    <template v-if="isEditor">
+                        <li v-for="item in adminPanel" :key="item.label">
+                            <a :href="item.link" :target="item.target || '_self'">
+                                <!-- <i :class="item.icon || 'el-icon-present'"></i> -->
+                                {{ item.label }}
+                            </a>
+                        </li>
+                    </template>
                     <li>
                         <a @click="logout">退出登录</a>
                     </li>
@@ -33,26 +41,13 @@
                                 showUserName(user.display_name)
                             }}</a>
                             <a class="u-sign" href="/dashboard/cooperation">
-                                <img
-                                    :src="super_author_icon"
-                                    class="u-superauthor-profile"
-                                    alt="superauthor"
-                                    title="签约作者"
-                                    :class="{ off: !isSuperAuthor }"
-                            /></a>
-                            <a
-                                class="u-vip"
-                                href="/vip/premium?from=header_usermenu"
-                                target="_blank"
-                                title="专业版账号"
-                            >
+                                <img :src="super_author_icon" class="u-superauthor-profile" alt="superauthor" title="签约作者" :class="{ off: !isSuperAuthor }" /></a>
+                            <a class="u-vip" href="/vip/premium?from=header_usermenu" target="_blank" title="专业版账号">
                                 <i class="i-icon-vip" :class="{ on: isPRO }">{{ vipType }}</i>
                             </a>
                         </div>
                         <div class="u-id">
-                            <span
-                                >魔盒UID：<b>{{ user.ID }}</b></span
-                            >
+                            <span>魔盒UID：<b>{{ user.ID }}</b></span>
                             <i class="el-icon-document-copy u-copy" @click.stop="copyText(user.ID)"></i>
                         </div>
                     </div>
@@ -66,8 +61,7 @@
                     <div class="u-other">
                         <a href="/dashboard/fav" class="u-item"><i class="el-icon-star-off"></i>收藏订阅 </a>
                         <a href="/team/role/manage" class="u-item"><i class="el-icon-user"></i>角色管理 </a>
-                        <a href="/dashboard/purchases" class="u-item"
-                            ><i class="el-icon-shopping-cart-2"></i>已购资源
+                        <a href="/dashboard/purchases" class="u-item"><i class="el-icon-shopping-cart-2"></i>已购资源
                         </a>
                         <a href="/dashboard/mall" class="u-item"><i class="el-icon-shopping-bag-1"></i>订单中心 </a>
                         <hr />
@@ -89,6 +83,7 @@ import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import { getMyInfo } from "../../service/author";
 import { __Links, __Root, __imgPath, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
 import { copyText } from "../../assets/js/utils";
+import { getMenu } from "../../service/header";
 export default {
     name: "info",
     props: ["asset"],
@@ -107,6 +102,8 @@ export default {
             },
 
             isSuperAuthor: false,
+
+            panel: [],
         };
     },
     computed: {
@@ -125,17 +122,28 @@ export default {
         isAdmin() {
             return User.isAdmin();
         },
+        userPanel: function () {
+            return this.panel.filter((item) => {
+                return !item.onlyAdmin;
+            });
+        },
+        adminPanel: function () {
+            return this.panel.filter((item) => {
+                return item.onlyAdmin;
+            });
+        },
         isEditor() {
             return User.isEditor();
         },
     },
     mounted() {
         this.loadMyInfo();
+        this.loadPanel();
     },
     methods: {
         copyText,
         showAvatar,
-        logout: function (mute=false) {
+        logout: function (mute = false) {
             User.destroy()
                 .then((res) => {
                     this.$emit("logout");
@@ -157,14 +165,32 @@ export default {
             return val || "匿名";
         },
         loadMyInfo: function () {
-            getMyInfo().then((data) => {
-                this.user = data;
-                this.isSuperAuthor = !!data.sign;
-            }).catch((err) => {
-                if (err?.data.code < -1) {
-                    this.logout(true);
+            getMyInfo()
+                .then((data) => {
+                    this.user = data;
+                    this.isSuperAuthor = !!data.sign;
+                })
+                .catch((err) => {
+                    if (err?.data.code < -1) {
+                        this.logout(true);
+                    }
+                });
+        },
+        loadPanel: function () {
+            try {
+                const panel = JSON.parse(sessionStorage.getItem("panel"));
+                if (panel) {
+                    this.panel = panel;
+                } else {
+                    getMenu("panel").then((res) => {
+                        this.panel = res.data?.data?.val;
+                        sessionStorage.setItem("panel", JSON.stringify(this.panel));
+                    });
                 }
-            });
+            } catch (e) {
+                this.panel = panel;
+                console.log("loadPanel error", e);
+            }
         },
     },
 };
