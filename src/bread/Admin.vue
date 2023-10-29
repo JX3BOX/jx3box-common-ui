@@ -11,32 +11,24 @@
     >
         <div class="c-admin-wrapper">
             <!-- <template v-if="isAdmin"> -->
-                <el-divider content-position="left">状态变更</el-divider>
-                <el-radio-group v-model="post_status" size="small" class="c-admin-status">
-                    <el-radio-button
-                        v-for="(option, key) in status_options"
-                        :label="key"
-                        :key="key"
-                    >{{ option }}</el-radio-button>
-                </el-radio-group>
+            <el-divider content-position="left">状态变更</el-divider>
+            <el-radio-group v-model="post_status" size="small" class="c-admin-status">
+                <el-radio-button v-for="(option, key) in status_options" :label="key" :key="key">{{
+                    option
+                }}</el-radio-button>
+            </el-radio-group>
             <!-- </template> -->
 
             <el-divider content-position="left">可见性变更</el-divider>
             <el-radio-group v-model="visible" size="small" class="c-admin-status">
-                <el-radio-button
-                    v-for="(option, key) in visible_options"
-                    :label="key"
-                    :key="key"
-                >{{ option }}</el-radio-button>
+                <el-radio-button v-for="(option, key) in visible_options" :label="key" :key="key">{{
+                    option
+                }}</el-radio-button>
             </el-radio-group>
 
             <el-divider content-position="left">推荐角标</el-divider>
             <el-checkbox-group v-model="mark" class="c-admin-mark">
-                <el-checkbox
-                    v-for="(option, key) in mark_options"
-                    :label="key"
-                    :key="key"
-                >{{option}}</el-checkbox>
+                <el-checkbox v-for="(option, key) in mark_options" :label="key" :key="key">{{ option }}</el-checkbox>
             </el-checkbox-group>
 
             <el-divider content-position="left">加粗高亮</el-divider>
@@ -52,11 +44,7 @@
             </template>
 
             <el-divider content-position="left">是否置顶</el-divider>
-            <el-switch
-                v-model="isSticky"
-                active-text="置顶"
-                class="switch-post-pinned drawer-item-content"
-            ></el-switch>
+            <el-switch v-model="isSticky" active-text="置顶" class="switch-post-pinned drawer-item-content"></el-switch>
 
             <el-divider content-position="left">封面海报</el-divider>
             <div class="c-admin-banner">
@@ -74,9 +62,7 @@
                 <el-input class="u-banner" v-model="post_banner" size="small">
                     <span slot="prepend">海报地址</span>
                     <span slot="append">
-                        <span class="u-btn" @click="removeBanner">
-                            <i class="el-icon-circle-close"></i> 移除海报
-                        </span>
+                        <span class="u-btn" @click="removeBanner"> <i class="el-icon-circle-close"></i> 移除海报 </span>
                     </span>
                 </el-input>
             </div>
@@ -113,11 +99,7 @@
 <script>
 import Bus from "../../service/bus";
 import { getRewrite } from "@jx3box/jx3box-common/js/utils";
-import {
-    __cms,
-    __postType,
-    __visibleMap,
-} from "@jx3box/jx3box-common/data/jx3box.json";
+import { __cms, __postType, __visibleMap } from "@jx3box/jx3box-common/data/jx3box.json";
 import { getSetting, postSetting } from "../../service/admin";
 import User from "@jx3box/jx3box-common/js/user";
 import { cms as marks } from "@jx3box/jx3box-common/data/mark.json";
@@ -127,7 +109,20 @@ export default {
         marksOptions: {
             type: Object,
             default: () => {},
-        }
+        },
+        // 入口是否是后台管理/list
+        fromList: {
+            type: Boolean,
+            default: false,
+        },
+        show: {
+            type: Boolean,
+            default: false,
+        },
+        postId: {
+            type: [Number, String],
+            default: 0,
+        },
     },
     data() {
         return {
@@ -200,12 +195,14 @@ export default {
                 sticky: this.isSticky ? Date.now() : null,
             };
         },
-        isAdmin : function (){
-            return User.isAdmin()
+        isAdmin: function () {
+            return User.isAdmin();
         },
-        mark_options: function (){
-            return this.marksOptions && Object.keys(this.marksOptions) ? Object.assign({}, marks, this.marksOptions) : marks
-        }
+        mark_options: function () {
+            return this.marksOptions && Object.keys(this.marksOptions)
+                ? Object.assign({}, marks, this.marksOptions)
+                : marks;
+        },
     },
     methods: {
         // 是否有权限
@@ -214,10 +211,7 @@ export default {
         },
         // 获取pid
         checkPostID: function () {
-            this.pid =
-                getRewrite("pid") ||
-                (this.$route && this.$route.params && this.$route.params.id) ||
-                0;
+            this.pid = getRewrite("pid") || (this.$route && this.$route.params && this.$route.params.id) || 0;
         },
         // 获取type
         checkChannel: function () {
@@ -253,17 +247,7 @@ export default {
         // 拉
         pull: function () {
             getSetting(this.pid).then((data) => {
-                let {
-                    ID,
-                    color,
-                    mark,
-                    post_status,
-                    post_author,
-                    sticky,
-                    post_banner,
-                    post_type,
-                    visible,
-                } = data;
+                let { ID, color, mark, post_status, post_author, sticky, post_banner, post_type, visible } = data;
                 this.pid = ID;
                 this.post_status = post_status;
                 this.visible = visible;
@@ -289,6 +273,7 @@ export default {
         push: function () {
             postSetting(this.data)
                 .then((res) => {
+                    this.$emit("update", this.data);
                     this.$message({
                         message: "设置成功",
                         type: "success",
@@ -303,6 +288,18 @@ export default {
     watch: {
         "$route.params.id": function (id) {
             this.checkPostID();
+        },
+        show: {
+            immediate: true,
+            handler(bol) {
+                if (this.fromList) {
+                    this.dialog_visible = bol;
+                    if (bol) {
+                        this.pid = this.postId;
+                        this.pull();
+                    }
+                }
+            },
         },
     },
     created: function () {
