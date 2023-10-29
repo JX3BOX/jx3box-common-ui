@@ -253,6 +253,9 @@ export default {
         // 关闭
         close(done) {
             this.dialog_visible = false;
+            this.$emit("update", {
+                show: false,
+            });
         },
         // 拉
         pull: function () {
@@ -283,7 +286,10 @@ export default {
         push: function () {
             postSetting(this.data)
                 .then((res) => {
-                    this.$emit("update", this.data);
+                    this.$emit("update", {
+                        show: false,
+                        data: this.data,
+                    });
                     this.$message({
                         message: "设置成功",
                         type: "success",
