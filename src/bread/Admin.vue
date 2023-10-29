@@ -31,7 +31,8 @@
                 <el-checkbox v-for="(option, key) in mark_options" :label="key" :key="key">{{ option }}</el-checkbox>
             </el-checkbox-group>
 
-            <el-divider content-position="left">加粗高亮</el-divider>
+            <el-divider content-position="left">高亮置顶</el-divider>
+            <el-checkbox class="c-admin-highlight-checkbox" v-model="isSticky">置顶</el-checkbox>
             <el-checkbox class="c-admin-highlight-checkbox" v-model="isHighlight">开启高亮</el-checkbox>
             <template v-if="isHighlight">
                 <el-color-picker
@@ -42,9 +43,6 @@
                 ></el-color-picker>
                 <span class="c-admin-highlight-preview" :style="{ color: color }">预览高亮效果</span>
             </template>
-
-            <el-divider content-position="left">是否置顶</el-divider>
-            <el-switch v-model="isSticky" active-text="置顶" class="switch-post-pinned drawer-item-content"></el-switch>
 
             <el-divider content-position="left">封面海报</el-divider>
             <div class="c-admin-banner">
@@ -69,8 +67,15 @@
 
             <el-divider content-position="left">元信息</el-divider>
             <div class="c-admin-info">
-                <div class="c-admin-type">
-                    <el-select v-model="post_type" placeholder="请选择类型" class="drawer-item-content">
+                <div class="w-select c-admin-type">
+                    <div class="u-select-label">板块</div>
+                    <el-select
+                        v-model="post_type"
+                        placeholder="请选择板块"
+                        style="width: 100%"
+                        class="u-select drawer-item-content"
+                        :disabled="appDisabled"
+                    >
                         <el-option
                             v-for="type in type_options"
                             :key="type.value"
@@ -80,11 +85,11 @@
                     </el-select>
                 </div>
                 <div class="c-admin-author">
-                    <el-input
-                        v-model="post_author"
-                        placeholder="请输入作者uid"
-                        class="input-author drawer-item-content"
-                    ></el-input>
+                    <el-input v-model="post_author" placeholder="请输入作者ID" class="input-author drawer-item-content">
+                        <template #prepend>
+                            <span class="u-keyword">作者ID</span>
+                        </template>
+                    </el-input>
                 </div>
             </div>
 
@@ -122,6 +127,11 @@ export default {
         postId: {
             type: [Number, String],
             default: 0,
+        },
+        // 是否禁止板块选择
+        appDisabled: {
+            type: Boolean,
+            default: false,
         },
     },
     data() {
