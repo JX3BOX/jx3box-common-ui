@@ -79,7 +79,7 @@ export default {
             if (item.type == "custom") {
                 return item.url;
             } else {
-                return getLink(item.type, item.id);
+                return getLink(item.post_type || item.type, item.id);
             }
         },
     },
