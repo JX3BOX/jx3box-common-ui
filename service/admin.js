@@ -14,7 +14,7 @@ function postSetting(data) {
 
 // 管理员发送私信
 function sendMessage(data) {
-    return $cms().post(`/api/cms/admin/direct-message`, data);
+    return $cms().post(`/api/cms/manage/message`, data);
 }
 
 // 管理员新增自定义主题
