@@ -31,8 +31,8 @@
   ],
   "dependencies": {
     "@jx3box/jx3box-comment-ui": "^1.7.16",
-    "@jx3box/jx3box-common": "^8.0.2",
-    "@jx3box/jx3box-data": "^3.5.2",
+    "@jx3box/jx3box-common": "^8.0.3",
+    "@jx3box/jx3box-data": "^3.5.3",
     "@jx3box/jx3box-editor": "^1.9.9",
     "@jx3box/reporter": "^0.0.4",
     "axios": "^0.26.1",

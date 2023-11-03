@@ -44,6 +44,7 @@
                                 <img :src="super_author_icon" class="u-superauthor-profile" alt="superauthor" title="签约作者" :class="{ off: !isSuperAuthor }" /></a>
                             <a class="u-vip" href="/vip/premium?from=header_usermenu" target="_blank" title="专业版账号">
                                 <i class="i-icon-vip" :class="{ on: isPRO }">{{ vipType }}</i>
+                                <span class="u-expire">有效期至：{{ pro_expire_date }}</span>
                             </a>
                         </div>
                         <div class="u-id">
@@ -81,6 +82,7 @@
 import User from "@jx3box/jx3box-common/js/user";
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import { getMyInfo } from "../../service/author";
+import { showDate } from "@jx3box/jx3box-common/js/moment";
 import { __Links, __Root, __imgPath, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
 import { copyText } from "../../assets/js/utils";
 import { getMenu } from "../../service/header";
@@ -134,6 +136,9 @@ export default {
         },
         isEditor() {
             return User.isEditor();
+        },
+        pro_expire_date: function() {
+            return this.asset.pro_expire_date ? showDate(this.asset.pro_expire_date) : '-';
         },
     },
     mounted() {
