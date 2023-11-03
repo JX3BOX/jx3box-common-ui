@@ -44,7 +44,7 @@
                                 <img :src="super_author_icon" class="u-superauthor-profile" alt="superauthor" title="签约作者" :class="{ off: !isSuperAuthor }" /></a>
                             <a class="u-vip" href="/vip/premium?from=header_usermenu" target="_blank" title="专业版账号">
                                 <i class="i-icon-vip" :class="{ on: isPRO }">{{ vipType }}</i>
-                                <span class="u-expire">有效期至：{{ pro_expire_date }}</span>
+                                <span class="u-expire" v-if="isPRO">（有效期至：{{ pro_expire_date }}）</span>
                             </a>
                         </div>
                         <div class="u-id">
