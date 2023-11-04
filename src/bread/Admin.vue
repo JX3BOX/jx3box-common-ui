@@ -12,7 +12,7 @@
         <div class="c-admin-wrapper">
             <!-- <template v-if="isAdmin"> -->
             <el-divider content-position="left">状态变更</el-divider>
-            <el-radio-group v-model="post_status" class="c-admin-status">
+            <el-radio-group v-model="post_status" class="c-admin-status" size="small">
                 <el-radio-button v-for="(option, key) in status_options" :label="key" :key="key">{{
                     option
                 }}</el-radio-button>
@@ -20,14 +20,14 @@
             <!-- </template> -->
 
             <el-divider content-position="left">可见性变更</el-divider>
-            <el-radio-group v-model="visible" class="c-admin-status">
+            <el-radio-group v-model="visible" class="c-admin-status" size="small">
                 <el-radio-button v-for="(option, key) in visible_options" :label="key" :key="key">{{
                     option
                 }}</el-radio-button>
             </el-radio-group>
 
             <el-divider content-position="left">推荐角标</el-divider>
-            <el-checkbox-group v-model="mark" class="c-admin-mark">
+            <el-checkbox-group v-model="mark" class="c-admin-mark" size="small">
                 <el-checkbox v-for="(option, key) in mark_options" :label="key" :key="key">{{ option }}</el-checkbox>
             </el-checkbox-group>
 
@@ -67,7 +67,6 @@
             <el-divider content-position="left">元信息</el-divider>
             <div class="c-admin-info">
                 <div class="w-select c-admin-type">
-                    <div class="u-select-label">板块</div>
                     <el-select
                         v-model="post_type"
                         placeholder="请选择板块"
@@ -75,6 +74,7 @@
                         class="u-select drawer-item-content"
                         :disabled="appDisabled"
                     >
+                        <span slot="prepend">板块</span>
                         <el-option
                             v-for="type in type_options"
                             :key="type.value"
