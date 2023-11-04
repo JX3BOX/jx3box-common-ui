@@ -130,6 +130,19 @@
 import default_nav from "../../assets/data/nav.json";
 import { getMenu } from "../../service/header";
 import { trimSlash } from "../../assets/js/utils";
+
+const activeNav = {
+    index: ['index'],
+    macro: ['macro', 'pz'],
+    tool: ['app', 'jx3dat', 'dbm'],
+    bps: ['bps', 'jcl', 'battle'],
+    fb: ['fb','baizhan','team', 'jdt', 'rank'],
+    cj: ['cj', 'item', 'knowledge', 'quest'],
+    pvx: ['face', 'adventure', 'pvg'],
+    bbs: ['bbs','topic','event'],
+    pvp: ['pvp']
+}
+
 export default {
     props: [],
     data: function () {
@@ -170,7 +183,15 @@ export default {
     },
     methods: {
         isFocus: function (type) {
-            return location.pathname.includes(type);
+            let active = '';
+            const pathname = location.pathname?.split('/')?.filter(Boolean)?.[0] || '';
+            for (const key in activeNav) {
+                if (activeNav[key].includes(pathname)) {
+                    active = key;
+                    break;
+                }
+            }
+            return type.includes(active);
         },
         matchedClient: function (client) {
             return client == "all" ? true : client == this.client;
