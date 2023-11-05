@@ -28,6 +28,10 @@ export default {
             type: Number,
             default: 46917,
         },
+        postBanner: {
+            type: String,
+            default: "",
+        },
     },
     data() {
         return {
@@ -42,7 +46,8 @@ export default {
             return this.topicInfo ? dayjs(this.topicInfo.created_at).format('YYYY年') : ""
         },
         topicImage() {
-            return this.topicInfo ? getThumbnail(this.topicInfo.img, [260*2, 78*2]) : ''
+            const img = this.postBanner || this.topicInfo?.img;
+            return getThumbnail(img, [260*2, 78*2])
         },
         client() {
             return location.href.includes("origin") ? "origin" : "std";
