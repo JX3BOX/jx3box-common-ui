@@ -184,7 +184,7 @@ export default {
     methods: {
         isFocus: function (type) {
             let active = '';
-            const pathname = location.pathname?.split('/')?.filter(Boolean)?.[0] || 'index';
+            const pathname = location.pathname?.split('/')?.filter(Boolean)?.[0] || '';
             for (const key in activeNav) {
                 if (activeNav[key].includes(pathname)) {
                     active = key;
