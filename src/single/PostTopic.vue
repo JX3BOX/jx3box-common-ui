@@ -106,11 +106,14 @@ export default {
     }
 }
 .c-post-topic__img {
-    display: flex;
-    justify-content: center;
+    .pr;
+    overflow: hidden;
+    .r(4px);
+    min-height: 71px;
     img{
-        .r(3px);
-        .size(260px,78px);
+        .pa;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 </style>
