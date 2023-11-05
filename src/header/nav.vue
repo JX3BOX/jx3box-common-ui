@@ -191,7 +191,7 @@ export default {
                     break;
                 }
             }
-            return type.includes(active);
+            return active && type.includes(active);
         },
         matchedClient: function (client) {
             return client == "all" ? true : client == this.client;
