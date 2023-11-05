@@ -134,7 +134,7 @@ import { trimSlash } from "../../assets/js/utils";
 const activeNav = {
     index: ['index'],
     macro: ['macro', 'pz'],
-    tool: ['app', 'jx3dat', 'dbm'],
+    tool: ['app', 'jx3dat', 'dbm', 'tool'],
     bps: ['bps', 'jcl', 'battle'],
     fb: ['fb','baizhan','team', 'jdt', 'rank'],
     cj: ['cj', 'item', 'knowledge', 'quest'],
@@ -186,7 +186,7 @@ export default {
             let active = '';
             const pathname = location.pathname?.split('/')?.filter(Boolean)?.[0] || '';
             for (const key in activeNav) {
-                if (activeNav[key].includes(pathname)) {
+                if (pathname && activeNav[key].includes(pathname)) {
                     active = key;
                     break;
                 }
