@@ -139,7 +139,7 @@ const activeNav = {
     fb: ['fb','baizhan','team', 'jdt', 'rank'],
     cj: ['cj', 'item', 'knowledge', 'quest'],
     pvx: ['face', 'adventure', 'pvg'],
-    bbs: ['bbs','topic','event'],
+    bbs: ['bbs','topic','event', 'emotion', 'joke', 'namespace', 'collection'],
     pvp: ['pvp']
 }
 
