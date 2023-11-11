@@ -51,7 +51,7 @@ export default {
                 beforeClose: (action, instance, done) => {
                     if (action === "confirm") {
                         const data = {
-                            id: this.sourceId,
+                            source_id: this.sourceId,
                             source_type: this.sourceType,
                             user_id: this.userId,
                             content: "运营通知：" + instance.inputValue,
