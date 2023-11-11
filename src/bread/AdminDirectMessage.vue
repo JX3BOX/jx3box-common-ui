@@ -55,6 +55,8 @@ export default {
                             source_type: this.sourceType,
                             user_id: this.userId,
                             content: "运营通知：" + instance.inputValue,
+                            type: "system",
+                            subtype: "admin_message"
                         };
                         sendMessage(data).then(() => {
                             this.$message.success("私信成功");
