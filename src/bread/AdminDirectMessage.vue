@@ -20,7 +20,7 @@ export default {
             default: "medium",
         },
         sourceId: {
-            type: Number,
+            type: [Number, String],
             default: 0,
         },
         sourceType: {
