@@ -39,9 +39,11 @@
                     class="c-admin-highlight-block"
                     v-model="color"
                     :predefine="color_options"
+                    size="mini"
                 ></el-color-picker>
-                <span class="c-admin-highlight-preview" :style="{ color: color }">预览高亮效果</span>
+                <span class="c-admin-highlight-preview" :style="{ color: color }" style="margin-right: 10px;">预览高亮效果</span>
             </template>
+            <el-checkbox class="c-admin-highlight-checkbox" v-model="isStar" :true-label="1" :false-label="0">精选</el-checkbox>
 
             <el-divider content-position="left">封面海报</el-divider>
             <div class="c-admin-banner">
@@ -176,6 +178,7 @@ export default {
             // 置顶
             isSticky: false,
             sticky: 0,
+            isStar: 0,
 
             // 海报
             uploadurl: __cms + "api/cms/upload",
@@ -202,6 +205,7 @@ export default {
                 color: this.isHighlight ? this.color : "",
                 mark: this.mark || [],
                 sticky: this.isSticky ? Date.now() : null,
+                star: this.isStar
             };
         },
         isAdmin: function () {
@@ -259,7 +263,7 @@ export default {
         // 拉
         pull: function () {
             getSetting(this.pid).then((data) => {
-                let { ID, color, mark, post_status, post_author, sticky, post_banner, post_type, visible } = data;
+                let { ID, color, mark, post_status, post_author, sticky, post_banner, post_type, visible, star } = data;
                 this.pid = ID;
                 this.post_status = post_status;
                 this.visible = visible;
@@ -271,6 +275,8 @@ export default {
                 this.mark = mark || [];
                 this.sticky = sticky || 0;
                 if (this.sticky) this.isSticky = true;
+
+                this.isStar = star || 0;
 
                 // 设置加载完成标识
                 this.pulled = true;
