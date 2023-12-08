@@ -58,12 +58,12 @@ export default {
         },
         actions() {
             return [
-                {
-                    label: "发送私信",
-                    action: () => {
-                        window.open("/dashboard/letter?receiver=" + this.uid);
-                    },
-                },
+                // {
+                //     label: "发送私信",
+                //     action: () => {
+                //         window.open("/dashboard/letter?receiver=" + this.uid);
+                //     },
+                // },
                 {
                     label: "取消关注",
                     action: () => {
