@@ -1,7 +1,7 @@
 <template>
     <div class="c-header-panel c-header-shop">
         <el-tooltip effect="dark" content="积分商城" placement="bottom" popper-class="c-header-tooltip">
-            <a class="u-present" href="/vip/mall" target="_blank">
+            <a class="u-present" href="/vip/mall">
                 <img class="u-icon" svg-inline src="../../assets/img/header/gift.svg" />
             </a>
         </el-tooltip>

@@ -7,45 +7,45 @@
         <div class="u-assets u-pop-content">
             <div class="u-detail">
                 <span class="u-item">
-                    <a class="u-item-primary" href="/about/incentives" target="_blank">
+                    <a class="u-item-primary" href="/about/incentives" :target="target">
                         <span class="u-label"><i class="el-icon-user"></i> 等级</span>
                         <span class="u-value u-level" :style="levelStyle">Lv.{{ level }}</span>
                     </a>
-                    <!-- <span class="u-item-extend"><a href="/about/incentives" target="_blank">[权益]</a></span> -->
+                    <!-- <span class="u-item-extend"><a href="/about/incentives" :target="target">[权益]</a></span> -->
                 </span>
                 <span class="u-item">
-                    <a class="u-item-primary" href="/dashboard/boxcoin" target="_blank"
+                    <a class="u-item-primary" href="/dashboard/boxcoin" :target="target"
                         ><span class="u-label"><i class="el-icon-coin"></i> 盒币</span>
                         <span class="u-value">{{ asset.box_coin }}</span></a
                     >
-                    <span class="u-item-extend"><a href="/dashboard/boxcoin" target="_blank">[兑换通宝]</a></span>
+                    <span class="u-item-extend"><a href="/dashboard/boxcoin" :target="target">[兑换通宝]</a></span>
                 </span>
                 <span class="u-item">
-                    <a class="u-item-primary" href="/dashboard/cny" target="_blank"
+                    <a class="u-item-primary" href="/dashboard/cny" :target="target"
                         ><span class="u-label"><i class="el-icon-wallet"></i> 金箔</span
                         ><span class="u-value">{{ asset.cny }}</span></a
                     >
                     <span class="u-item-extend"
-                        ><a href="/vip/cny" target="_blank">[充值]</a>
-                        <a href="/dashboard/cny" target="_blank">[提现]</a></span
+                        ><a href="/vip/cny" :target="target">[充值]</a>
+                        <a href="/dashboard/cny" :target="target">[提现]</a></span
                     >
                 </span>
                 <span class="u-item">
-                    <a class="u-item-primary" href="/dashboard/points" target="_blank"
+                    <a class="u-item-primary" href="/dashboard/points" :target="target"
                         ><span class="u-label"><i class="el-icon-sugar"></i> 银铛</span>
                         <span class="u-value">{{ asset.points }}</span></a
                     >
                     <span class="u-item-extend"
-                        ><a href="/vip/mall" target="_blank">[兑礼]</a
-                        ><a href="/vip/lottery" target="_blank">[抽奖]</a></span
+                        ><a href="/vip/mall" :target="target">[兑礼]</a
+                        ><a href="/vip/lottery" :target="target">[抽奖]</a></span
                     >
                 </span>
                 <span class="u-item">
-                    <a class="u-item-primary" href="/dashboard/card" target="_blank"
+                    <a class="u-item-primary" href="/dashboard/card" :target="target"
                         ><span class="u-label"><i class="el-icon-bank-card"></i> 卡密</span>
                         <span class="u-value">{{ asset.ext_info ? asset.ext_info.keycode : 0 }}</span></a
                     >
-                    <span class="u-item-extend"><a href="/dashboard/card" target="_blank">[查看]</a></span>
+                    <span class="u-item-extend"><a href="/dashboard/card" :target="target">[查看]</a></span>
                 </span>
             </div>
         </div>
@@ -61,6 +61,7 @@ export default {
     data() {
         return {
             // VIP
+            target: "_self",
         };
     },
     computed: {
