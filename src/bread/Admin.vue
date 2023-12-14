@@ -98,27 +98,18 @@
                 </div>
             </div>
 
-            <div class="c-admin-extend">
-                <div class="u-condition u-map">
-                    <span class="u-prepend el-input-group__prepend">地图</span>
-                    <el-select
-                        v-model="params.map"
-                        filterable
-                        placeholder="请选择"
-                        size="small"
-                        clearable
-                        multiple
-                        collapse-tags
-                    >
-                        <el-option
-                            v-for="index in mapKeys"
-                            :key="index"
-                            :label="mapIndex[index] + '(' + index + ')'"
-                            :value="index"
-                        >
-                            <span class="u-label">{{ mapIndex[index] }}</span>
-                            <span class="u-value">{{ index }}</span>
+            <div class="c-admin-extend" v-if="showExtend">
+                <div class="u-condition u-map" v-if="Object.keys(subtypeMap)">
+                    <span class="u-prepend el-input-group__prepend">子类型</span>
+                    <el-select v-model="post_subtype" filterable placeholder="请选择" clearable>
+                        <el-option v-for="(label, value) in subtypeMap" :value="value" :label="label" :key="value">
                         </el-option>
+                    </el-select>
+                </div>
+                <div class="u-condition u-map">
+                    <span class="u-prepend el-input-group__prepend">标签</span>
+                    <el-select v-model="tag" filterable placeholder="请选择" clearable multiple collapse-tags>
+                        <el-option v-for="value in tags" :value="value" :label="value" :key="value"> </el-option>
                     </el-select>
                 </div>
             </div>
@@ -138,6 +129,7 @@ import { __cms, __postType, __visibleMap } from "@jx3box/jx3box-common/data/jx3b
 import { getSetting, postSetting } from "../../service/admin";
 import User from "@jx3box/jx3box-common/js/user";
 import { cms as marks } from "@jx3box/jx3box-common/data/mark.json";
+import { getTopicBucket } from "../../service/cms";
 export default {
     name: "Admin",
     props: {
@@ -167,10 +159,14 @@ export default {
             type: Boolean,
             default: false,
         },
+        subtypeMap: {
+            type: Object,
+            default: () => {},
+        },
         app: {
             type: String,
             default: "",
-        }
+        },
     },
     data() {
         return {
@@ -225,6 +221,9 @@ export default {
             // 类型
             post_type: "",
             type_options: [],
+            post_subtype: "",
+            tag: [],
+            tags: [],
 
             // 作者
             post_author: "",
@@ -300,7 +299,7 @@ export default {
         // 拉
         pull: function () {
             getSetting(this.pid).then((data) => {
-                let { ID, color, mark, post_status, post_author, sticky, post_banner, post_type, visible, star } = data;
+                let { ID, color, mark, post_status, post_author, sticky, post_banner, post_type, visible, star, post_subtype, tags } = data;
                 this.pid = ID;
                 this.post_status = post_status;
                 this.visible = visible;
@@ -314,6 +313,8 @@ export default {
                 if (this.sticky) this.isSticky = true;
 
                 this.isStar = star || 0;
+                this.tags = tags || [];
+                this.post_subtype = post_subtype || "";
 
                 // 设置加载完成标识
                 this.pulled = true;
@@ -342,6 +343,13 @@ export default {
                     this.close();
                 });
         },
+        // 获取topic标签
+        loadTopic() {
+            getTopicBucket({ type: "bbs" }).then((res) => {
+                const data = res.data.data?.map((item) => item.name) || [];
+                this.tags = data;
+            });
+        },
     },
     watch: {
         "$route.params.id": function (id) {
@@ -365,6 +373,10 @@ export default {
         this.checkHasRight();
         // 预设信息
         this.initTypeOptions();
+
+        if (this.showExtend && this.app) {
+            this.loadTopic();
+        }
     },
     mounted: function () {
         // 基本信息

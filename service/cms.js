@@ -53,4 +53,9 @@ function getCollection(id) {
     return $cms({ mute: true }).get(`/api/cms/post/collection/${id}`);
 }
 
-export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember, getHonorJson, getSliders, getCollection };
+// 获取自定义主题
+function getTopicBucket(params) {
+    return $cms().get(`/api/cms/topic/bucket`, { params });
+}
+
+export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember, getHonorJson, getSliders, getCollection, getTopicBucket, };

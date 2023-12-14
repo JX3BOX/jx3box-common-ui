@@ -47,7 +47,7 @@
             </a>
             <Adminbutton v-if="adminEnable" class="u-admin" />
             <ListAdmin v-if="topicEnable" />
-            <Admin v-if="adminEnable" :marksOptions="adminMarks" />
+            <Admin v-if="adminEnable" :marksOptions="adminMarks" :show-extend="true" :app="slug" :subtypeMap="subtypeMap" />
             <slot name="op-prepend"></slot>
         </div>
     </div>
@@ -80,7 +80,9 @@ export default {
         "crumbEnable",
         "withoutLeft",
         "adminMarks",
-        "icon"
+        "icon",
+        // "subtypeMap",
+        "showExtend"
     ],
     data: function () {
         return {
@@ -89,7 +91,14 @@ export default {
             isNotAdmin: !User.isEditor(),
             isOverlay: false,
             isApp: isApp(),
-            show: false
+            show: false,
+
+            subtypeMap: {
+                1: "攻略心得",
+                2: "萌新指南",
+                3: "江湖异闻",
+                4: "同人创作"
+            }
         };
     },
     computed: {
