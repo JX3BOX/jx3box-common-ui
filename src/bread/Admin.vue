@@ -41,9 +41,13 @@
                     :predefine="color_options"
                     size="mini"
                 ></el-color-picker>
-                <span class="c-admin-highlight-preview" :style="{ color: color }" style="margin-right: 10px;">预览高亮效果</span>
+                <span class="c-admin-highlight-preview" :style="{ color: color }" style="margin-right: 10px"
+                    >预览高亮效果</span
+                >
             </template>
-            <el-checkbox class="c-admin-highlight-checkbox" v-model="isStar" :true-label="1" :false-label="0">精选</el-checkbox>
+            <el-checkbox class="c-admin-highlight-checkbox" v-model="isStar" :true-label="1" :false-label="0"
+                >精选</el-checkbox
+            >
 
             <el-divider content-position="left">封面海报</el-divider>
             <div class="c-admin-banner">
@@ -94,6 +98,31 @@
                 </div>
             </div>
 
+            <div class="c-admin-extend">
+                <div class="u-condition u-map">
+                    <span class="u-prepend el-input-group__prepend">地图</span>
+                    <el-select
+                        v-model="params.map"
+                        filterable
+                        placeholder="请选择"
+                        size="small"
+                        clearable
+                        multiple
+                        collapse-tags
+                    >
+                        <el-option
+                            v-for="index in mapKeys"
+                            :key="index"
+                            :label="mapIndex[index] + '(' + index + ')'"
+                            :value="index"
+                        >
+                            <span class="u-label">{{ mapIndex[index] }}</span>
+                            <span class="u-value">{{ index }}</span>
+                        </el-option>
+                    </el-select>
+                </div>
+            </div>
+
             <div class="c-admin-buttons">
                 <el-button type="primary" @click="submit" :loading="pushing">提交</el-button>
                 <el-button type="plain" @click="close">取消</el-button>
@@ -134,6 +163,14 @@ export default {
             type: Boolean,
             default: false,
         },
+        showExtend: {
+            type: Boolean,
+            default: false,
+        },
+        app: {
+            type: String,
+            default: "",
+        }
     },
     data() {
         return {
@@ -205,7 +242,7 @@ export default {
                 color: this.isHighlight ? this.color : "",
                 mark: this.mark || [],
                 sticky: this.isSticky ? Date.now() : null,
-                star: this.isStar
+                star: this.isStar,
             };
         },
         isAdmin: function () {
