@@ -81,7 +81,7 @@ export default {
         "withoutLeft",
         "adminMarks",
         "icon",
-        // "subtypeMap",
+        "subtypeMap",
         "showExtend"
     ],
     data: function () {
@@ -92,13 +92,6 @@ export default {
             isOverlay: false,
             isApp: isApp(),
             show: false,
-
-            subtypeMap: {
-                1: "攻略心得",
-                2: "萌新指南",
-                3: "江湖异闻",
-                4: "同人创作"
-            }
         };
     },
     computed: {

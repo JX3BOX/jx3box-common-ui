@@ -242,6 +242,8 @@ export default {
                 mark: this.mark || [],
                 sticky: this.isSticky ? Date.now() : null,
                 star: this.isStar,
+                tags: this.tag,
+                post_subtype: this.post_subtype,
             };
         },
         isAdmin: function () {
@@ -313,7 +315,7 @@ export default {
                 if (this.sticky) this.isSticky = true;
 
                 this.isStar = star || 0;
-                this.tags = tags || [];
+                this.tag = tags || [];
                 this.post_subtype = post_subtype || "";
 
                 // 设置加载完成标识
@@ -373,10 +375,6 @@ export default {
         this.checkHasRight();
         // 预设信息
         this.initTypeOptions();
-
-        if (this.showExtend && this.app) {
-            this.loadTopic();
-        }
     },
     mounted: function () {
         // 基本信息
@@ -390,6 +388,10 @@ export default {
             // 文章类型的加载
             if (this.pid && this.hasRight) {
                 this.pull();
+            }
+
+            if (this.showExtend && this.app && this.dialog_visible) {
+                this.loadTopic();
             }
         });
     },
