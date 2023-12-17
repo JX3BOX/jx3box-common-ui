@@ -1,6 +1,6 @@
 <template>
     <div class="m-single-collection" v-if="list && list.length">
-        <!-- <div class="u-title"><i class="el-icon-connection"></i> 关联</div>
+        <div class="u-title"><i class="el-icon-connection"></i> 关联</div>
         <ul class="u-list">
             <li v-for="(item, i) in list" :key="i">
                 <el-tooltip class="item" effect="dark" :content="item.title" placement="left">
@@ -10,10 +10,10 @@
                     </a>
                 </el-tooltip>
             </li>
-        </ul> -->
-        <a class="u-image" :href="`collection/${store.id}`">
+        </ul>
+        <!-- <a class="u-image" :href="`collection/${store.id}`">
             <img :src="getCover(store.image)" />
-        </a>
+        </a> -->
     </div>
 </template>
 
