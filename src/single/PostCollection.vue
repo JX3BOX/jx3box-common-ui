@@ -1,6 +1,6 @@
 <template>
     <div class="m-single-collection" v-if="list && list.length">
-        <div class="u-title"><i class="el-icon-connection"></i> 关联</div>
+        <!-- <div class="u-title"><i class="el-icon-connection"></i> 关联</div>
         <ul class="u-list">
             <li v-for="(item, i) in list" :key="i">
                 <el-tooltip class="item" effect="dark" :content="item.title" placement="left">
@@ -10,12 +10,16 @@
                     </a>
                 </el-tooltip>
             </li>
-        </ul>
+        </ul> -->
+        <a class="u-image" :href="`collection/${store.id}`">
+            <img :src="getCover(store.image)" />
+        </a>
     </div>
 </template>
 
 <script>
-import { getLink } from "@jx3box/jx3box-common/js/utils";
+import { showAvatar, getLink, resolveImagePath, authorLink } from "@jx3box/jx3box-common/js/utils";
+import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import { getCollection } from "../../service/cms";
 export default {
     name: "PostCollection",
@@ -55,11 +59,22 @@ export default {
                 return getLink(item.type, item.id);
             }
         },
+        getCover: function (val) {
+            return val ? resolveImagePath(val) : `${__imgPath}image/collection/default_cover.png`;
+        },
     },
 };
 </script>
 <style scoped lang="less">
 .m-single-collection {
+    .u-image {
+        img {
+            .w(100%);
+            height: 226px;
+            object-fit: cover;
+            // border-radius: 4px;
+        }
+    }
     .u-title {
         font-weight: 300;
         font-size: 20px;
