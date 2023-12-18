@@ -1,15 +1,22 @@
 <template>
     <div class="m-medal">
-        <a :href="medalLink(item)" target="_blank" class="u-medal" v-for="item in medals" :key="item.id" :title="item.medal_desc">
-            <img class="u-medal-img" :src="showIcon(item.medal)">
+        <a
+            :href="medalLink(item)"
+            target="_blank"
+            class="u-medal"
+            v-for="item in medals"
+            :key="item.id"
+            :title="item.medal_desc"
+        >
+            <img class="u-medal-img" :src="showIcon(item.medal)" />
         </a>
     </div>
 </template>
 
 <script>
-import { getMedalLink } from '@jx3box/jx3box-common/js/utils'
+import { getMedalLink } from "@jx3box/jx3box-common/js/utils";
 export default {
-    name: 'author_medal',
+    name: "author_medal",
     props: {
         medals: {
             type: Array,
@@ -18,14 +25,14 @@ export default {
         showIcon: {
             type: Function,
             default: () => true,
-        }
+        },
     },
     methods: {
-        medalLink({ rank_id, medal_type = 'rank' }) {
-            return getMedalLink(rank_id, medal_type)
-        }
-    }
-}
+        medalLink({ rank_id, medal_type = "rank" }) {
+            return rank_id ? getMedalLink(rank_id, medal_type) : "";
+        },
+    },
+};
 </script>
 
 <style lang="less">
