@@ -78,9 +78,9 @@
 import _ from "lodash";
 import QRcode from "../interact/QRcode";
 import {
-    getThumbnail,
     authorLink,
     ts2str,
+    showAvatar,
 } from "@jx3box/jx3box-common/js/utils";
 import { getStat } from "@jx3box/jx3box-common/js/stat";
 export default {
@@ -128,7 +128,7 @@ export default {
         author_url: authorLink,
         ts2str,
         thumbnail_url: function(val) {
-            return getThumbnail(val, 72, true);
+            return showAvatar(val);
         },
     },
     components: {
