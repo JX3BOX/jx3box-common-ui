@@ -40,7 +40,7 @@
 
 <script>
 import WikiPanel from "./WikiPanel";
-import { wiki } from "@jx3box/jx3box-common/js/wiki";
+import { wiki } from "@jx3box/jx3box-common/js/wiki_v2";
 import { getLink, authorLink, ts2str } from "@jx3box/jx3box-common/js/utils";
 import { __Root, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
 
@@ -49,7 +49,7 @@ export default {
     props: ["type", "sourceId", "isGame"],
     data: function () {
         return {
-            versions: null,
+            versions: [],
         };
     },
     computed: {
@@ -94,10 +94,10 @@ export default {
                     .then(
                         (res) => {
                             res = res.data;
-                            this.versions = res.code === 200 ? res.data.versions : false;
+                            this.versions = res.data || [];
                         },
                         () => {
-                            this.versions = false;
+                            this.versions = [];
                         }
                     );
                 }
