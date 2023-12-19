@@ -100,7 +100,7 @@
 
             <div class="c-admin-extend" v-if="showExtend">
                 <div class="u-condition u-map" v-if="Object.keys(subtypeMap)">
-                    <span class="u-prepend el-input-group__prepend">子类型</span>
+                    <span class="u-prepend el-input-group__prepend">类型</span>
                     <el-select v-model="post_subtype" filterable placeholder="请选择" clearable>
                         <el-option v-for="(label, value) in subtypeMap" :value="value" :label="label" :key="value">
                         </el-option>
