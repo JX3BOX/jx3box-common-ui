@@ -99,7 +99,7 @@
             </div>
 
             <div class="c-admin-extend" v-if="showExtend">
-                <div class="u-condition u-map" v-if="Object.keys(subtypeMap)">
+                <div class="u-condition u-map" v-if="subtypeMap && Object.keys(subtypeMap)">
                     <span class="u-prepend el-input-group__prepend">类型</span>
                     <el-select v-model="post_subtype" filterable placeholder="请选择" clearable>
                         <el-option v-for="(label, value) in subtypeMap" :value="value" :label="label" :key="value">
@@ -107,8 +107,8 @@
                     </el-select>
                 </div>
                 <div class="u-condition u-map">
-                    <span class="u-prepend el-input-group__prepend">标签</span>
-                    <el-select v-model="tag" filterable placeholder="请选择" clearable multiple collapse-tags>
+                    <span class="u-prepend el-input-group__prepend">主题</span>
+                    <el-select v-model="topics" filterable placeholder="请选择" clearable multiple collapse-tags>
                         <el-option v-for="value in tags" :value="value" :label="value" :key="value"> </el-option>
                     </el-select>
                 </div>
@@ -222,7 +222,7 @@ export default {
             post_type: "",
             type_options: [],
             post_subtype: "",
-            tag: [],
+            topics: [],
             tags: [],
 
             // 作者
@@ -242,7 +242,7 @@ export default {
                 mark: this.mark || [],
                 sticky: this.isSticky ? Date.now() : null,
                 star: this.isStar,
-                tags: this.tag,
+                topics: this.topics,
                 post_subtype: this.post_subtype,
             };
         },
@@ -301,7 +301,7 @@ export default {
         // 拉
         pull: function () {
             getSetting(this.pid).then((data) => {
-                let { ID, color, mark, post_status, post_author, sticky, post_banner, post_type, visible, star, post_subtype, tags } = data;
+                let { ID, color, mark, post_status, post_author, sticky, post_banner, post_type, visible, star, post_subtype, topics } = data;
                 this.pid = ID;
                 this.post_status = post_status;
                 this.visible = visible;
@@ -315,7 +315,7 @@ export default {
                 if (this.sticky) this.isSticky = true;
 
                 this.isStar = star || 0;
-                this.tag = tags || [];
+                this.topics = topics?.map(item => item.topic) || [];
                 this.post_subtype = post_subtype || "";
 
                 // 设置加载完成标识
