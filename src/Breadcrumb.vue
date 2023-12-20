@@ -47,7 +47,7 @@
             </a>
             <Adminbutton v-if="adminEnable" class="u-admin" />
             <ListAdmin v-if="topicEnable" />
-            <Admin v-if="adminEnable" :marksOptions="adminMarks" :show-extend="true" :app="slug" :subtypeMap="subtypeMap" />
+            <Admin v-if="adminEnable" :marksOptions="adminMarks" :show-extend="showExtend" :app="slug" :subtypeMap="subtypeMap" />
             <slot name="op-prepend"></slot>
         </div>
     </div>
