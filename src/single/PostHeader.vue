@@ -128,6 +128,14 @@ export default {
             return this.post?.client || "std";
         },
     },
+    watch: {
+        post: {
+            deep: true,
+            handler: function(val) {
+                this.countWords();
+            },
+        }
+    },
     methods: {
         showClientLabel: function(val) {
             return __clients[val];
@@ -142,7 +150,6 @@ export default {
         }
     },
     mounted: function() {
-        this.countWords();
     },
 };
 </script>
