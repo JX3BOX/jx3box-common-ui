@@ -59,6 +59,11 @@
                 {{ views }}
             </span>
 
+            <span class="u-word-count u-sub-block" v-if="wordCount" title="累计字数">
+                <i class="el-icon-sunny"></i>
+                {{ wordCount }}
+            </span>
+
             <!-- 编辑 -->
             <a class="u-edit u-sub-block" :href="edit_link" v-if="canEdit">
                 <i class="u-icon-edit el-icon-edit-outline"></i>
@@ -73,11 +78,14 @@ import { __Root,__clients } from "@jx3box/jx3box-common/data/jx3box.json";
 import { showDate, showTime } from "@jx3box/jx3box-common/js/moment";
 import { editLink, authorLink } from "@jx3box/jx3box-common/js/utils.js";
 import User from "@jx3box/jx3box-common/js/user.js";
+import $ from "jquery";
 export default {
     name: "single-header",
     props: ["post", "stat"],
     data: function() {
-        return {};
+        return {
+            wordCount: 0,
+        };
     },
     computed: {
         url: function() {
@@ -124,8 +132,18 @@ export default {
         showClientLabel: function(val) {
             return __clients[val];
         },
+        countWords: function (){
+            this.$nextTick(() => {
+                // 需要去除空格 \n \g
+                const text = $('.c-article').text()?.replace(/[\s|\n|\r|\t|\g|\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\，|\。|\？|\：|\；|\‘|\’|\”|\“|\、|\·|\！|\（|\）|\》|\《|\『|\』]/g, '');
+
+                this.wordCount = text?.length || 0;
+            })
+        }
     },
-    mounted: function() {},
+    mounted: function() {
+        this.countWords();
+    },
 };
 </script>
 

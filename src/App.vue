@@ -247,7 +247,7 @@ export default {
             tab: "avatar",
 
             post: "",
-            post_id: "69014",
+            post_id: "14497",
 
             author: "",
             wikiPost: null,
