@@ -2,27 +2,62 @@
     <div class="w-thx">
         <template v-if="type === 'batchReward'">
             <!-- 批量打赏 -->
-            <batch-reward :postType="postType" :items="postId" :boxcoin="boxcoin" :userId="userId" :own="admin_left" :points="admin_points"
-                :authors="authors" :client="client" v-if="hasRight && adminBoxcoinEnable && boxcoin_enable" :max="admin_max"
-                    :min="admin_min" :total="admin_total"
-                @updateRecord="updateRecord" />
+            <batch-reward
+                :postType="postType"
+                :items="postId"
+                :boxcoin="boxcoin"
+                :userId="userId"
+                :own="admin_left"
+                :points="admin_points"
+                :authors="authors"
+                :client="client"
+                v-if="hasRight && adminBoxcoinEnable && boxcoin_enable"
+                :max="admin_max"
+                :min="admin_min"
+                :total="admin_total"
+                @updateRecord="updateRecord"
+            />
         </template>
         <template v-else>
             <div class="w-thx-panel">
-                <boxcoin-admin :postId="postId" :postType="postType"
-                    v-if="hasRight && adminBoxcoinEnable && boxcoin_enable" :userId="userId" :max="admin_max"
-                    :min="admin_min" :own="admin_left" :total="admin_total" :points="admin_points" :authors="authors"
-                    @updateRecord="updateRecord" :client="client" />
+                <boxcoin-admin
+                    :postId="postId"
+                    :postType="postType"
+                    v-if="hasRight && adminBoxcoinEnable && boxcoin_enable"
+                    :userId="userId"
+                    :max="admin_max"
+                    :min="admin_min"
+                    :own="admin_left"
+                    :total="admin_total"
+                    :points="admin_points"
+                    :authors="authors"
+                    @updateRecord="updateRecord"
+                    :client="client"
+                />
                 <Like :postId="postId" :postType="postType"></Like>
                 <fav :postId="postId" :postType="postType" :postTitle="postTitle"></fav>
-                <boxcoin-user :postId="postId" :postType="postType" :boxcoin="boxcoin" :userId="userId" :own="user_left"
-                    :points="user_points" :authors="authors" v-if="userBoxcoinEnable && boxcoin_enable && allowGift"
-                    @updateRecord="updateRecord" :client="client" />
+                <boxcoin-user
+                    :postId="postId"
+                    :postType="postType"
+                    :boxcoin="boxcoin"
+                    :userId="userId"
+                    :own="user_left"
+                    :points="user_points"
+                    :authors="authors"
+                    v-if="userBoxcoinEnable && boxcoin_enable && allowGift"
+                    @updateRecord="updateRecord"
+                    :client="client"
+                />
                 <Share :postId="postId" :postType="postType" :client="client" />
             </div>
             <div class="w-thx-records">
-                <boxcoin-records :postId="postId" :postType="postType" :postClient="client" :cacheRecord="cacheRecord"
-                    :mode="mode" />
+                <boxcoin-records
+                    :postId="postId"
+                    :postType="postType"
+                    :postClient="client"
+                    :cacheRecord="cacheRecord"
+                    :mode="mode"
+                />
             </div>
             <div class="w-thx-copyright">
                 &copy;
@@ -30,7 +65,6 @@
                 签约作者独家特约稿件，及所有魔盒官方评分作品用户一经兑现则视为有偿付费稿件，所有商业稿件的转载引用需同时征得魔盒平台授权。
             </div>
         </template>
-
     </div>
 </template>
 
@@ -52,7 +86,7 @@ export default {
             default: "normal",
         },
         postId: {
-            type: [Number, Array],
+            type: [Number, Array, String],
             default: 0,
         },
         postType: {
@@ -167,7 +201,7 @@ export default {
             this.cacheRecord = data;
         },
     },
-    created: function () { },
+    created: function () {},
 };
 </script>
 
