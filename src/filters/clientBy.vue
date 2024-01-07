@@ -17,13 +17,13 @@
 
 <script>
 const clients = {
-    all: "全部版本",
+    all: "双端",
     std: "重制",
     origin: "缘起",
 };
 export default {
     name: "clientBy",
-    props: ["type", "clients"],
+    props: ["type", "clients", "showWujie"],
     data: function () {
         return {
             client: this.type || "",
@@ -31,7 +31,12 @@ export default {
     },
     computed: {
         computedClients: function () {
-            return this.clients || clients;
+            if (this.showWujie) {
+                return Object.assign({}, this.clients || clients, {
+                    wujie: "无界",
+                });
+            }
+            return clients;
         },
     },
     methods: {
