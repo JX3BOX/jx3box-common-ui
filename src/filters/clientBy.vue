@@ -1,6 +1,9 @@
 <template>
     <div class="w-filter-client">
         <ul>
+            <li class="u-client" :class="{on: client == ''}" @click="filter('')">
+                全部
+            </li>
             <li
                 class="u-client"
                 :class="{ on: client == value }"
@@ -23,7 +26,7 @@ export default {
     props: ["type", "clients"],
     data: function () {
         return {
-            client: this.type || "all",
+            client: this.type || "",
         };
     },
     computed: {

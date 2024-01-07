@@ -20,32 +20,6 @@
             </el-dropdown-menu>
         </el-dropdown>
     </span>
-    <!-- <div class="w-filter-mark" :class="{ on: visible }" v-else>
-        <span class="u-label" @click="toggleFilter">
-            <span class="u-current-filter">筛选 : {{ current || "全部" }}</span>
-            <span class="u-toggle">
-                <i class="el-icon-arrow-down"></i>
-                <i class="el-icon-arrow-up"></i>
-            </span>
-        </span>
-        <span class="u-options">
-            <span
-                class="u-mode u-all"
-                :class="{ on: mark == '' }"
-                @click="filter('')"
-                ><i class="el-icon-s-operation"></i> 全部</span
-            >
-            <span
-                class="u-mode"
-                :class="{ on: mark == key }"
-                v-for="(label, key) in marks"
-                :key="key"
-                @click="filter(key)"
-                ><i class="el-icon-user"></i> {{ label }}</span
-            >
-            <slot></slot>
-        </span>
-    </div> -->
 </template>
 
 <script>
@@ -62,9 +36,9 @@ export default {
             type: String,
             default: "",
         },
-        mode: {
+        type: {
             type: String,
-            default: "",
+            default: "mark",
         },
         marks: {
             type: Object,
@@ -91,7 +65,7 @@ export default {
         },
         filter: function(key) {
             this.mark = key;
-            this.$emit("filter", { type: "mark", val: key });
+            this.$emit("filter", { type: this.type, val: key });
             this.visible = false;
         },
     },
