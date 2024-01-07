@@ -4,7 +4,7 @@
             <li
                 class="u-client"
                 :class="{ on: client == value }"
-                v-for="(label, value) in clients"
+                v-for="(label, value) in computedClients"
                 :key="value"
                 @click="filter(value)"
             >{{ label }}</li>
@@ -20,14 +20,17 @@ const clients = {
 };
 export default {
     name: "clientBy",
-    props: ["type"],
+    props: ["type", "clients"],
     data: function () {
         return {
             client: this.type || "all",
-            clients,
         };
     },
-    computed: {},
+    computed: {
+        computedClients: function () {
+            return this.clients || clients;
+        },
+    },
     methods: {
         filter: function (val) {
             this.client = val;
