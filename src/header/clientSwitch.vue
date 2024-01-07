@@ -25,7 +25,7 @@ export default {
             clientThink: false,
             clients: [
                 {
-                    name: "重制",
+                    name: "旗舰",
                     client: "std",
                     from: "origin.jx3box.com",
                     to: "www.jx3box.com",

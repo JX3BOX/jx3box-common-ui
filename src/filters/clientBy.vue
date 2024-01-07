@@ -1,7 +1,7 @@
 <template>
     <div class="w-filter-client">
         <ul>
-            <li class="u-client" :class="{on: client == ''}" @click="filter('')" v-if="clients">
+            <li class="u-client" :class="{on: client == ''}" @click="filter('')">
                 全部
             </li>
             <li
@@ -16,14 +16,13 @@
 </template>
 
 <script>
-const clients = {
-    all: "双端",
-    std: "重制",
+const _clients = {
+    std: "旗舰",
     origin: "缘起",
 };
 export default {
     name: "clientBy",
-    props: ["type", "clients", "showWujie"],
+    props: ["type", "clients", "showWujie","showAll"],
     data: function () {
         return {
             client: this.type || "",
@@ -31,11 +30,18 @@ export default {
     },
     computed: {
         computedClients: function () {
+            let clients = this.clients || _clients;
             if (this.showWujie) {
-                return Object.assign({}, this.clients || clients, {
+                clients = Object.assign({}, clients, {
                     wujie: "无界",
                 });
             }
+            if (this.showAll) {
+                clients = Object.assign({}, clients, {
+                    all: "全端",
+                });
+            }
+            console.log(clients)
             return clients;
         },
     },
