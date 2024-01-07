@@ -1,7 +1,7 @@
 <template>
     <div class="w-filter-client">
         <ul>
-            <li class="u-client" :class="{on: client == ''}" @click="filter('')">
+            <li class="u-client" :class="{on: client == ''}" @click="filter('')" v-if="clients">
                 全部
             </li>
             <li
