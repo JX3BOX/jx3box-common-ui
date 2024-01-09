@@ -34,7 +34,7 @@
             <!-- 客户端 -->
             <div class="u-meta u-sub-block">
                 <em class="u-label">适用客户端</em>
-                <span class="u-value u-client" :class="client">{{ showClientLabel(client) }}</span>
+                <span class="u-value u-client" :class="'i-client-' + client">{{ showClientLabel(client) }}</span>
             </div>
 
             <!-- 发布日期 -->
@@ -155,6 +155,23 @@ export default {
 </script>
 
 <style lang="less">
+.i-client-all{
+    border: 1px solid #a26ef7;
+    color: #a26ef7;
+}
+.i-client-std{
+    border: 1px solid #f0b400;
+    color: #f0b400;
+}
+.i-client-origin{
+    border: 1px solid #0eb7ce;
+    color: #0eb7ce;
+}
+.i-client-wujie{
+    border: 1px solid #fc79bf;
+    color: #fc79bf;
+}
+
 .m-single-header {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -233,10 +250,6 @@ export default {
     .fz(12px, 20px);
     color: #666;
 
-    @origin: #0eb7ce;
-    @std: #f0b400;
-    @all: #a26ef7;
-
     .u-client {
         // .fl;
         font-style: normal;
@@ -244,21 +257,6 @@ export default {
         padding: 0px 5px;
         .r(3px);
         // .mr(10px);
-
-        &.std {
-            border: 1px solid @std;
-            color: @std;
-        }
-
-        &.origin {
-            border: 1px solid @origin;
-            color: @origin;
-        }
-
-        &.all {
-            border: 1px solid @all;
-            color: @all;
-        }
     }
 
     * {
