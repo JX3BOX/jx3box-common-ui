@@ -137,8 +137,8 @@ const activeNav = {
     tool: ['app', 'jx3dat', 'dbm', 'tool'],
     bps: ['bps', 'jcl', 'battle'],
     fb: ['fb','baizhan','team', 'jdt', 'rank'],
-    wiki: ['wiki', 'item', 'knowledge', 'quest'],
-    pvx: ['face', 'adventure', 'pvg', 'pvx', 'homeland', 'pet', 'horse', 'furniture', 'reputation', 'book', 'exam'],
+    cj: ['wiki', 'item', 'knowledge', 'quest', 'cj'],
+    pvx: ['face', 'adventure', 'pvg', 'pvx', 'homeland', 'pet', 'horse', 'furniture', 'reputation', 'book', 'exam', 'body'],
     bbs: ['bbs','topic', 'emotion', 'joke', 'namespace', 'collection'],
     pvp: ['pvp']
 }
