@@ -128,10 +128,14 @@ export default {
       },
       submit: function () {
           this.submitting = true;
+          let client = this.client || this.hostClient;
+        if (!['std', 'origin', 'all'].includes(client)) {
+            client = 'std'
+        }
           batchReward(this.postType, this.count, {
               items: this.items,
               remark: this.remark,
-              client: this.client || this.hostClient,
+              client: client,
           })
               .then((res) => {
                   return res.data.data;

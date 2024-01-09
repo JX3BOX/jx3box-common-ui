@@ -139,9 +139,13 @@ export default {
         submit: function () {
             this.submitting = true;
             const count = this.count === "custom" ? this.amount : this.count;
+            let client = this.client || this.hostClient;
+            if (!['std', 'origin', 'all'].includes(client)) {
+                client = 'std'
+            }
             grantBoxcoin(this.postType, this.postId, this.chosen || this.userId, count, {
                 remark: this.remark,
-                client : this.client || this.hostClient
+                client : client
             })
                 .then((res) => {
                     this.$message({

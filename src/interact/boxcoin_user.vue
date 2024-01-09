@@ -123,10 +123,14 @@ export default {
             this.chosen = userId
         },
         submit: function () {
-            const count = this.count === 'custom' ? this.amount : this.count
+            const count = this.count === 'custom' ? this.amount : this.count;
+            let client = this.client || this.hostClient;
+            if (!['std', 'origin', 'all'].includes(client)) {
+                client = 'std'
+            }
             rewardBoxcoin(this.postType, this.postId, this.chosen || this.userId, count, {
                 remark: this.remark,
-                client : this.client || this.hostClient
+                client: client
             })
                 .then((res) => {
                     this.$message({

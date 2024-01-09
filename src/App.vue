@@ -46,7 +46,7 @@
                         :userId="8"
                         :adminBoxcoinEnable="true"
                         :userBoxcoinEnable="true"
-                        :postId="5575"
+                        :postId="73440"
                     />
                     <hr />
                     <Like mode="heart" :count="100" :showCount="true" />
