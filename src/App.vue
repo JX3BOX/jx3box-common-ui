@@ -58,6 +58,8 @@
                     <QRcode />
                     <Sharing />
 
+                    <PostGuide :post="post" />
+
                     <hr />
 
                     <markBy />
@@ -160,6 +162,7 @@ import PostCollection from "./single/PostCollection.vue";
 import Thx from "./single/Thx.vue";
 import Collection from "./single/Collection.vue";
 import Creators from "./single/Creators.vue";
+import PostGuide from "./single/PostGuide.vue";
 
 import Mark from "./interact/Mark.vue";
 import Fav from "./interact/Fav.vue";
@@ -241,6 +244,7 @@ export default {
         WikiComments,
 
         UserPop,
+        PostGuide,
     },
     data: function () {
         return {

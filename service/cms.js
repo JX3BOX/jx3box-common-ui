@@ -58,4 +58,4 @@ function getTopicBucket(params) {
     return $cms().get(`/api/cms/topic/bucket`, { params });
 }
 
-export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember, getHonorJson, getSliders, getCollection, getTopicBucket, };
+export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember, getHonorJson, getSliders, getCollection, getTopicBucket };
