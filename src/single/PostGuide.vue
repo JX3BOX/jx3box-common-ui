@@ -2,10 +2,10 @@
     <div class="m-post-guide" v-if="hasGuide">
         <a :href="getPostLink(post.prev_post)" class="el-button el-button--default el-button--small" :class="{'is-disabled': !post.prev_post }">
             <i class="el-icon-arrow-left"></i>
-            <span>上一篇</span>
+            <span>上一篇: {{ getPostTitle(post.prev_post) }}</span>
         </a>
         <a :href="getPostLink(post.next_post)" class="el-button el-button--default el-button--small" :class="{'is-disabled': !post.next_post }">
-            <span>下一篇</span>
+            <span>下一篇: {{ getPostTitle(post.next_post) }}</span>
             <i class="el-icon-arrow-right"></i>
         </a>
     </div>
@@ -25,9 +25,12 @@ export default {
         }
     },
     methods: {
-        getPostLink(id) {
+        getPostLink({ ID: id }) {
             return id ? location.origin + "/post/" + id : "javascript:;";
         },
+        getPostTitle(item) {
+            return item?.post_title || "";
+        }
     },
 };
 </script>
