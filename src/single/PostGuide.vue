@@ -1,13 +1,19 @@
 <template>
     <div class="m-post-guide" v-if="hasGuide">
-        <a :href="getPostLink(post.prev_post)" class="el-button el-button--default el-button--small u-prev" :class="{'is-disabled': !post.prev_post }">
+    <div class="u-prev">
+        <a :href="getPostLink(post.prev_post)" class="el-button el-button--default el-button--small" :class="{'is-disabled': !post.prev_post }">
             <i class="el-icon-arrow-left"></i>
-            <span>上一篇: {{ getPostTitle(post.prev_post) }}</span>
+            <span>上一篇</span>
         </a>
-        <a :href="getPostLink(post.next_post)" class="el-button el-button--default el-button--small u-next" :class="{'is-disabled': !post.next_post }">
-            <span>下一篇: {{ getPostTitle(post.next_post) }}</span>
+        <a :href="getPostLink(post.prev_post)" class="u-post-title">{{ getPostTitle(post.prev_post) }}</a>
+    </div>
+    <div class="u-next">
+        <a :href="getPostLink(post.next_post)" class="el-button el-button--default el-button--small" :class="{'is-disabled': !post.next_post }">
+            <span>下一篇</span>
             <i class="el-icon-arrow-right"></i>
         </a>
+        <a :href="getPostLink(post.prev_post)" class="u-post-title">{{ getPostTitle(post.next_post) }}</a>
+    </div>
     </div>
 </template>
 
@@ -42,6 +48,17 @@ export default {
     .flex;
     align-items: center;
     justify-content: space-between;
+
+    .u-post-title {
+        margin-left: 5px;
+        font-size: 14px;
+        color: #666;
+
+        &:hover {
+            color: #0366d6;
+            box-shadow: 0 1px 0 #0366d6;
+        }
+    }
 }
 
 @media screen and (max-width: @phone) {
