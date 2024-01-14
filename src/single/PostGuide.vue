@@ -50,12 +50,12 @@ export default {
     justify-content: space-between;
 
     .u-post-title {
-        margin-left: 5px;
+        margin-left: 10px;
         font-size: 14px;
-        color: #666;
+        // color: #666;
 
         &:hover {
-            color: #0366d6;
+            // color: #0366d6;
             box-shadow: 0 1px 0 #0366d6;
         }
     }
@@ -72,10 +72,16 @@ export default {
 
         .u-prev {
             margin-bottom: 10px;
+            span{
+                margin-left:5px;
+            }
         }
 
         .u-next {
             margin-left: 0;
+            span{
+                margin-right:5px;
+            }
         }
     }
 }
