@@ -58,4 +58,23 @@ function getTopicBucket(params) {
     return $cms().get(`/api/cms/topic/bucket`, { params });
 }
 
-export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember, getHonorJson, getSliders, getCollection, getTopicBucket };
+// 获取config
+function getConfig(params) {
+    return $cms().get(`/api/cms/config`, { params }).then((res) => {
+        return res.data.data;
+    });
+}
+
+// 获取用户meta
+function getUserMeta(params) {
+    return $cms().get(`/api/cms/user/my/meta`, { params }).then((res) => {
+        return res.data.data;
+    });
+}
+
+// 设置用户meta
+function setUserMeta(key,data) {
+    return $cms().post(`/api/cms/user/my/meta?key=${key}`, data);
+}
+
+export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember, getHonorJson, getSliders, getCollection, getTopicBucket, getConfig, getUserMeta, setUserMeta };
