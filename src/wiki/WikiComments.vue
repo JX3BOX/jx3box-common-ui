@@ -29,19 +29,12 @@
                         <i class="el-icon-chat-dot-round"></i>
                         <span>回复</span>
                     </h4>
-                    <textarea
-                        class="u-reply-content"
-                        v-model="reply_form.content"
-                    ></textarea>
+                    <textarea class="u-reply-content" v-model="reply_form.content"></textarea>
                     <div class="u-author">
                         <span>昵称：</span>
                         <input v-model="reply_form.user_nickname" type="text" />
                     </div>
-                    <el-button
-                        type="primary"
-                        class="u-submit"
-                        @click="create_comment(reply_form)"
-                    >
+                    <el-button type="primary" class="u-submit" @click="create_comment(reply_form)">
                         <i class="el-icon-check"></i>
                         <span>提交</span>
                     </el-button>
@@ -54,7 +47,7 @@
 <script>
 import WikiPanel from "./WikiPanel";
 import Comment from "./WikiComment.vue";
-import { wikiComment } from "@jx3box/jx3box-common/js/wiki";
+import { wikiComment } from "@jx3box/jx3box-common/js/wiki_v2";
 import User from "@jx3box/jx3box-common/js/user";
 
 export default {
@@ -81,33 +74,25 @@ export default {
     methods: {
         get_comments() {
             if (!this.type || !this.sourceId) return;
-            // WikiComment.list(this.type, this.sourceId, this.client)
             this.loading = true;
-            wikiComment.list({ type: this.type, id: this.sourceId }, { client: this.client, page: this.page })
-            .then(
-                (res) => {
+            wikiComment
+                .list({ type: this.type, id: this.sourceId }, { client: this.client, page: this.page })
+                .then((res) => {
                     res = res.data;
-                    if (res.code === 200) {
-                        let comments = res.data.comments;
-                        for (let i = 0; i < comments.length; i++) {
-                            comments[i]["reply_form"] = {
-                                show: false,
-                                content: "",
-                                user_nickname: User.getInfo().name,
-                            };
-                        }
-                        this.page = res.data.current_page;
-                        this.total = res.data.total
-                        this.comments = filter(comments, 0);
-                        // this.comments = comments;
-                        this.loading = false;
+                    let comments = res.data.list;
+                    for (let i = 0; i < comments.length; i++) {
+                        comments[i]["reply_form"] = {
+                            show: false,
+                            content: "",
+                            user_nickname: User.getInfo().name,
+                        };
                     }
-                },
-                () => {
-                    this.comments = false;
+                    this.page = res.data.page;
+                    this.total = res.data.total;
+                    this.comments = filter(comments, 0);
+                    // this.comments = comments;
                     this.loading = false;
-                }
-            );
+                });
 
             function filter(comments, parent) {
                 let outputs = [];
@@ -122,13 +107,13 @@ export default {
                                 user_id: c.user_id,
                                 user_nickname: c.user_nickname,
                                 id: c.id,
-                            }
+                            };
                             item.reply_form = {
                                 show: false,
                                 content: "",
                                 user_nickname: User.getInfo().name,
-                            }
-                            return item
+                            };
+                            return item;
                         });
                         outputs.push(c);
                     }
@@ -146,38 +131,23 @@ export default {
                 return;
             }
             const data = {
-                comment: {
-                    type: this.type,
-                    source_id: this.sourceId,
-                    parent_id: parent_id,
-                    user_nickname: form.user_nickname || User.getInfo().name,
-                    content: form.content,
-                },
-                client: this.client
-            }
-            wikiComment.post({ data }, {})
-                .then(
-                    (res) => {
-                        res = res.data;
-                        if (res.code === 200) {
-                            form.content = "";
-                            this.$message({
-                                message: "提交成功，请等待审核",
-                                type: "success",
-                            });
-                        } else
-                            this.$message({
-                                message: `${res.message}`,
-                                type: "warning",
-                            });
-                    },
-                    () => {
-                        this.$message({
-                            message: "网络异常，提交失败",
-                            type: "warning",
-                        });
-                    }
-                )
+                type: this.type,
+                source_id: this.sourceId,
+                parent_id: parent_id,
+                user_nickname: form.user_nickname || User.getInfo().name,
+                content: form.content,
+                client: this.client,
+            };
+            wikiComment
+                .post(data)
+                .then((res) => {
+                    res = res.data;
+                    form.content = "";
+                    this.$message({
+                        message: "提交成功，请等待审核",
+                        type: "success",
+                    });
+                })
                 .finally(() => {
                     form.show = false;
                 });
@@ -185,7 +155,7 @@ export default {
         handleCurrentChange(page) {
             this.page = page;
             this.get_comments();
-        }
+        },
     },
     components: {
         WikiPanel,

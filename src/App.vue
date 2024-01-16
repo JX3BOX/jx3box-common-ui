@@ -100,7 +100,7 @@
                     <WikiRevisions type="achievement" source-id="2996" />
                     <hr />
 
-                    <WikiComments type="achievement" source-id="2996" />
+                    <WikiComments type="achievement" source-id="456" />
                     <hr />
                 </el-tab-pane>
                 <el-tab-pane label="头像" name="avatar">
