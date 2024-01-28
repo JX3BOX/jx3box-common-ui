@@ -45,11 +45,8 @@ import { __server, __imgPath, __userLevel, __userLevelColor } from "@jx3box/jx3b
 import { authorLink } from "@jx3box/jx3box-common/js/utils";
 import User from "@jx3box/jx3box-common/js/user";
 import { getUserInfo } from "../../service/author";
-import { getDecoration, getHonorJson } from "../../service/cms";
 import Avatar from "./Avatar.vue";
 import Honor from "./AuthorHonor.vue";
-import { cloneDeep, inRange } from "lodash";
-const HONOR_IMG_KEY = "honor_img";
 export default {
     name: "AuthorInfo",
     props: ["uid"],

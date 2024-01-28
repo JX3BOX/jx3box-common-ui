@@ -46,10 +46,19 @@ function getDouyu(ids) {
             return res.data.data;
         });
 }
-
+// 获取用户勋章
 function getUserMedals(uid) {
     return $next({ mute: true })
-        .get("/api/user/" + uid + "/medals")
+        .get("/api/next2/user/" + uid + "/medals")
+        .then((res) => {
+            return res.data.data;
+        });
+}
+
+// 获取用户称号
+function getUserHonors(uid) {
+    return $next({ mute: true })
+        .get("/api/next2/user/" + uid + "/honors")
         .then((res) => {
             return res.data.data;
         });
@@ -92,5 +101,6 @@ export {
     getMyInfo,
     userSignIn,
     getFansList,
-    getUserInfoByUidOrName
+    getUserInfoByUidOrName,
+    getUserHonors
 };
