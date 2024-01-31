@@ -26,8 +26,8 @@ export default {
     },
     computed: {
         isJdt() {
-            return this.honor?.val?.toLowerCase()?.includes('jdt')
-        }
+            return this.honor?.val?.toLowerCase()?.includes("jdt");
+        },
     },
     methods: {
         imgUrl: function () {
@@ -65,19 +65,27 @@ export default {
             getHonorJson().then((res) => {
                 let honorList = res.data;
                 let honorConfig = honorList[data.img];
+                let only = honorConfig.only;
                 let prefix = honorConfig.prefix;
                 let regPrefix = honorConfig.prefix.match(/\{([^{}]+?)\}/g);
                 let ranking = honorConfig.ranking;
                 let honorStr = honorConfig.year || "";
-                if (regPrefix) {
-                    honorStr = honorStr + (data[regPrefix[0].slice(1, -1)] || "");
+                if (!only) {
+                    if (regPrefix) {
+                        honorStr = honorStr + (data[regPrefix[0].slice(1, -1)] || "");
+                    } else {
+                        honorStr = honorStr + prefix;
+                    }
                 } else {
-                    honorStr = honorStr + prefix;
+                    honorStr = prefix;
                 }
                 if (ranking.length > 0) {
                     data.imgIndex = 0;
                     for (let i = 0; i < ranking.length; i++) {
-                        if (honor.ranking !== undefined && inRange(Number(honor.ranking), ranking[i][0], ranking[i][1])) {
+                        if (
+                            honor.ranking !== undefined &&
+                            inRange(Number(honor.ranking), ranking[i][0], ranking[i][1])
+                        ) {
                             data.imgIndex = i;
                             let str = ranking[i][2];
                             let regStr = str.match(/\{([^{}]+?)\}/g);
