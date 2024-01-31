@@ -64,6 +64,11 @@ function getUserHonors(uid) {
         });
 }
 
+function getUserHonor(uid) {
+    return $cms({ mute: true })
+        .get(`/api/cms/user/honor/${uid}/using`)
+}
+
 function getFrames() {
     return axios.get(__imgPath + "avatar/index.json");
 }
@@ -102,5 +107,6 @@ export {
     userSignIn,
     getFansList,
     getUserInfoByUidOrName,
-    getUserHonors
+    getUserHonors,
+    getUserHonor
 };
