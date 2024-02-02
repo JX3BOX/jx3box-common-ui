@@ -104,7 +104,7 @@ export default {
             data.img = honorConfig.img;
             data.img_ext = honorConfig.img_ext;
             data.isHave = true;
-            data.isImgIndex = ranking.length > 0;
+            data.isImgIndex = ranking?.length > 0;
             sessionStorage.setItem(HONOR_IMG_KEY + this.uid, JSON.stringify(data));
             this.honor = data;
         },
