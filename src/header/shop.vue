@@ -13,6 +13,7 @@
 
 <script>
 import { getConfig, getUserMeta, setUserMeta } from "../../service/cms";
+import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "shop",
     data: function () {
