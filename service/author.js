@@ -48,8 +48,8 @@ function getDouyu(ids) {
 }
 // 获取用户勋章
 function getUserMedals(uid) {
-    return $next({ mute: true })
-        .get("/api/next2/user/" + uid + "/medals")
+    return $cms({ mute: true })
+        .get("/api/cms/user/medal/" + uid)
         .then((res) => {
             return res.data.data;
         });

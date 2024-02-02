@@ -1,10 +1,10 @@
 <template>
-    <div class="c-author-honor" :style="{ backgroundImage: `url(${imgUrl()})` }" v-if="honor">
+    <a class="c-author-honor" :style="{ backgroundImage: `url(${imgUrl()})` }" v-if="honor" :href="url" target="_blank">
         <span v-if="!isJdt" :style="{ color: honor.color }">{{ honor.honor }}</span>
-    </div>
+    </a>
 </template>
 <script>
-import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __imgPath, __Root } from "@jx3box/jx3box-common/data/jx3box.json";
 import { getUserHonor } from "../../service/author";
 import { inRange } from "lodash";
 const HONOR_IMG_KEY = "honor_img";
@@ -27,6 +27,9 @@ export default {
         isJdt() {
             return this.honor?.honor_info?.img?.toLowerCase()?.includes("jdt");
         },
+        url() {
+            return this.honor?.honor_info?.url ? __Root + this.honor?.honor_info?.url : "";
+        }
     },
     methods: {
         imgUrl: function () {
