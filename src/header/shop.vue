@@ -29,7 +29,8 @@ export default {
              * 1. 用户第一次进入页面时，没有记录，则显示，并记录到meta
              * 2. 用户第二次进入页面，此时meta有记录，但是用户并未进入会员中心，则显示
              */
-            let meta = await getUserMeta({ key: "mall_pop" });
+            let meta = null
+            meta = meta = User.isLogin() && await getUserMeta({ key: "mall_pop" });
             let config = await getConfig({ key: "mall" });
 
             if (meta == null) {
