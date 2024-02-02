@@ -25,16 +25,13 @@ export default {
     },
     computed: {
         isJdt() {
-            return this.honor?.val?.toLowerCase()?.includes("jdt");
+            return this.honor?.honor_info?.img?.toLowerCase()?.includes("jdt");
         },
     },
     methods: {
         imgUrl: function () {
-            let item = this.honor;
+            let item = this.honor?.honor_info;
             if (!item) return;
-            if (item.isImgIndex) {
-                return __imgPath + `decoration/honor/${item.img}/${item.img}_${item.imgIndex}.${item.img_ext}`;
-            }
             return __imgPath + `decoration/honor/${item.img}/${item.img}.${item.img_ext}`;
         },
         getHonor() {
@@ -67,7 +64,6 @@ export default {
             let ranking = honorConfig.ranking;
             let honorStr = honorConfig.year || "";
 
-            console.log(honorConfig, regPrefix)
             if (!only) {
                 if (regPrefix) {
                     honorStr = honorStr + (data[regPrefix[0].slice(1, -1)] || "");
@@ -77,7 +73,7 @@ export default {
             } else {
                 honorStr = prefix;
             }
-            if (ranking.length > 0) {
+            if (ranking?.length > 0) {
                 data.imgIndex = 0;
                 for (let i = 0; i < ranking.length; i++) {
                     if (
