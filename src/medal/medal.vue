@@ -28,8 +28,9 @@ export default {
         },
     },
     methods: {
-        medalLink({ rank_id, medal_type = "rank" }) {
-            return rank_id ? getMedalLink(rank_id, medal_type) : "";
+        getMedalLink(medal) {
+            if (medal.medal_url) return `${__Root}${medal.medal_url}`
+            return medal.rank_id ? getMedalLink(medal.rank_id, medal.medal_type || "rank") : "";
         },
     },
 };
