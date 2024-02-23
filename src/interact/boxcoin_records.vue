@@ -114,7 +114,7 @@ export default {
     methods: {
         loadData: function () {
             getPostBoxcoinRecords(this.postType, this.postId, this.params).then((res) => {
-                this.list = res.data.data.list;
+                this.list = res.data.data?.list || [];
                 this.total = res.data.data.page.total;
                 this.boxcoin = res.data.data.fromManager + res.data.data.fromUser;
                 this.$parent.boxcoin = this.boxcoin;
