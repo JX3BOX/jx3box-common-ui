@@ -17,13 +17,13 @@
             <asset :asset="asset" />
 
             <!-- manage -->
-            <manage />
+            <manage :isTeammate="isTeammate" />
 
             <!-- 语言切换 -->
             <!-- <lang-switch /> -->
 
             <!-- user info -->
-            <user-info :asset="asset" @logout="logout" />
+            <user-info :asset="asset" @logout="logout" @update="update" />
         </template>
         <template v-else>
             <div class="c-header-login">
@@ -43,12 +43,12 @@ import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 dayjs.extend(isToday);
 
-import message from "./message.vue"
-import publish from "./publish.vue"
-import vip from "./vip.vue"
-import asset from "./asset.vue"
-import manage from "./manage.vue"
-import userInfo from './userInfo.vue';
+import message from "./message.vue";
+import publish from "./publish.vue";
+import vip from "./vip.vue";
+import asset from "./asset.vue";
+import manage from "./manage.vue";
+import userInfo from "./userInfo.vue";
 // import langSwitch from "./langSwitch.vue";
 import shop from "./shop.vue";
 export default {
@@ -60,7 +60,7 @@ export default {
         manage,
         userInfo,
         // langSwitch,
-        shop
+        shop,
     },
     data: function () {
         return {
@@ -83,6 +83,8 @@ export default {
             // 链接
             login_url: __Links.account.login + "?redirect=" + location.href,
             register_url: __Links.account.register + "?redirect=" + location.href,
+
+            isTeammate: false,
         };
     },
     methods: {
@@ -133,7 +135,7 @@ export default {
         // 初始化
         init: function () {
             if (this.isLogin) {
-                this.loadAsset( )
+                this.loadAsset();
                 this.signIn();
             }
         },
@@ -141,6 +143,10 @@ export default {
         // 退出登录
         logout: function () {
             this.isLogin = false;
+        },
+        // 更新用户信息
+        update: function ({ is_teammate }) {
+            this.isTeammate = is_teammate;
         },
     },
     created: function () {

@@ -103,6 +103,7 @@ import { getMenu } from "../../service/header";
 export default {
     name: "info",
     props: ["asset"],
+    emits: ["update"],
     data() {
         return {
             isPhone: window.innerWidth < 768,
@@ -120,6 +121,7 @@ export default {
             isSuperAuthor: false,
 
             panel: [],
+            isTeammate: false,
         };
     },
     computed: {
@@ -147,9 +149,6 @@ export default {
             return this.panel.filter((item) => {
                 return item.onlyAdmin;
             });
-        },
-        isTeammate() {
-            return JSON.parse(sessionStorage.getItem("is_teammate"));
         },
         pro_expire_date: function () {
             return this.asset.pro_expire_date ? showDate(this.asset.pro_expire_date) : "-";
@@ -188,7 +187,8 @@ export default {
                 .then((data) => {
                     this.user = data;
                     this.isSuperAuthor = !!data.sign;
-                    sessionStorage.setItem("is_teammate", JSON.stringify(data.is_teammate));
+                    this.isTeammate = this.user?.is_teammate;
+                    this.$emit("update", this.user);
                 })
                 .catch((err) => {
                     if (err?.data.code < -1) {

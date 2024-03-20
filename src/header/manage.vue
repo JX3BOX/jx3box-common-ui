@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import User from "@jx3box/jx3box-common/js/user";
 import panel from "../../assets/data/panel.json";
 import { getMenu } from "../../service/header";
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
@@ -34,6 +33,12 @@ export default {
         return {
             panel,
         };
+    },
+    props: {
+        isTeammate: {
+            type: Boolean,
+            default: false,
+        },
     },
     computed: {
         userPanel: function () {
@@ -45,9 +50,6 @@ export default {
             return this.panel.filter((item) => {
                 return item.onlyAdmin;
             });
-        },
-        isTeammate() {
-            return JSON.parse(sessionStorage.getItem("is_teammate"));
         },
     },
     mounted() {
