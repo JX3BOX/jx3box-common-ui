@@ -40,8 +40,7 @@ export default {
                 clients = Object.assign({}, clients, {
                     all: "全端",
                 });
-            }
-            console.log(clients)
+            } 
             return clients;
         },
     },

@@ -13,14 +13,14 @@
                     <li>
                         <a :href="url.publish">发布中心</a>
                     </li>
-                    <hr>
+                    <hr />
                     <li v-for="item in userPanel" :key="item.label">
                         <a :href="item.link" :target="item.target || '_self'">
                             <!-- <i :class="item.icon || 'el-icon-present'"></i> -->
                             {{ item.label }}
                         </a>
                     </li>
-                    <template v-if="isEditor">
+                    <template v-if="isTeammate">
                         <li v-for="item in adminPanel" :key="item.label">
                             <a :href="item.link" :target="item.target || '_self'">
                                 <!-- <i :class="item.icon || 'el-icon-present'"></i> -->
@@ -41,14 +41,27 @@
                                 showUserName(user.display_name)
                             }}</a>
                             <a class="u-sign" href="/dashboard/cooperation">
-                                <img :src="super_author_icon" class="u-superauthor-profile" alt="superauthor" title="签约作者" :class="{ off: !isSuperAuthor }" /></a>
-                            <a class="u-vip" href="/vip/premium?from=header_usermenu" target="_blank" title="专业版账号">
+                                <img
+                                    :src="super_author_icon"
+                                    class="u-superauthor-profile"
+                                    alt="superauthor"
+                                    title="签约作者"
+                                    :class="{ off: !isSuperAuthor }"
+                            /></a>
+                            <a
+                                class="u-vip"
+                                href="/vip/premium?from=header_usermenu"
+                                target="_blank"
+                                title="专业版账号"
+                            >
                                 <i class="i-icon-vip" :class="{ on: isPRO }">{{ vipType }}</i>
                                 <span class="u-expire" v-if="isPRO">（有效期至：{{ pro_expire_date }}）</span>
                             </a>
                         </div>
                         <div class="u-id">
-                            <span>魔盒UID：<b>{{ user.ID }}</b></span>
+                            <span
+                                >魔盒UID：<b>{{ user.ID }}</b></span
+                            >
                             <i class="el-icon-document-copy u-copy" @click.stop="copyText(user.ID)"></i>
                         </div>
                     </div>
@@ -62,7 +75,8 @@
                     <div class="u-other">
                         <a href="/dashboard/fav" class="u-item"><i class="el-icon-star-off"></i>收藏订阅 </a>
                         <a href="/team/role/manage" class="u-item"><i class="el-icon-user"></i>角色管理 </a>
-                        <a href="/dashboard/purchases" class="u-item"><i class="el-icon-shopping-cart-2"></i>已购资源
+                        <a href="/dashboard/purchases" class="u-item"
+                            ><i class="el-icon-shopping-cart-2"></i>已购资源
                         </a>
                         <a href="/dashboard/mall" class="u-item"><i class="el-icon-shopping-bag-1"></i>订单中心 </a>
                         <hr />
@@ -134,11 +148,11 @@ export default {
                 return item.onlyAdmin;
             });
         },
-        isEditor() {
-            return User.isEditor();
+        isTeammate() {
+            return JSON.parse(sessionStorage.getItem("is_teammate"));
         },
-        pro_expire_date: function() {
-            return this.asset.pro_expire_date ? showDate(this.asset.pro_expire_date) : '-';
+        pro_expire_date: function () {
+            return this.asset.pro_expire_date ? showDate(this.asset.pro_expire_date) : "-";
         },
     },
     mounted() {
@@ -174,6 +188,7 @@ export default {
                 .then((data) => {
                     this.user = data;
                     this.isSuperAuthor = !!data.sign;
+                    sessionStorage.setItem("is_teammate", JSON.stringify(data.is_teammate));
                 })
                 .catch((err) => {
                     if (err?.data.code < -1) {

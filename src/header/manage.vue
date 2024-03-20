@@ -6,15 +6,15 @@
         <ul class="u-menu u-pop-content">
             <li v-for="item in userPanel" :key="item.label">
                 <a :href="item.link" :target="item.target || '_self'" class="u-menu-item">
-                    <img :src="resolveImg(item.icon)" svg-inline class="u-menu-icon" :alt="item.icon">
+                    <img :src="resolveImg(item.icon)" svg-inline class="u-menu-icon" :alt="item.icon" />
                     {{ item.label }}
                 </a>
             </li>
             <hr v-if="userPanel.length" />
-            <template v-if="isEditor">
+            <template v-if="isTeammate">
                 <li v-for="item in adminPanel" :key="item.label">
                     <a :href="item.link" :target="item.target || '_self'" class="u-menu-item">
-                        <img :src="resolveImg(item.icon)" svg-inline class="u-menu-icon" :alt="item.icon">
+                        <img :src="resolveImg(item.icon)" svg-inline class="u-menu-icon" :alt="item.icon" />
                         {{ item.label }}
                     </a>
                 </li>
@@ -46,8 +46,8 @@ export default {
                 return item.onlyAdmin;
             });
         },
-        isEditor() {
-            return User.isEditor();
+        isTeammate() {
+            return JSON.parse(sessionStorage.getItem("is_teammate"));
         },
     },
     mounted() {
@@ -72,7 +72,7 @@ export default {
         },
         resolveImg: function (img) {
             // return __imgPath + "image/header/panel/" + img;
-            return 'https://img.jx3box.com/image/box/pvp.svg'
+            return "https://img.jx3box.com/image/box/pvp.svg";
         },
     },
 };
@@ -92,7 +92,6 @@ export default {
         svg {
             .size(19px);
         }
-
     }
     .u-menu {
         .u-menu-item {
@@ -103,7 +102,7 @@ export default {
         .u-menu-icon {
             width: 16px;
             height: 16px;
-    }
+        }
     }
 }
 </style>
