@@ -31,7 +31,9 @@ export default {
              * 2. 用户第二次进入页面，此时meta有记录，但是用户并未进入会员中心，则显示
              */
             let meta = null
-            meta = User.isLogin() && await getUserMeta({ key: 'vip_pop' });
+            if (User.isLogin()) {
+                meta = await getUserMeta({ key: "vip_pop" });
+            }
             let config = await getConfig({ key: "vip" });
 
 

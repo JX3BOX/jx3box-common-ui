@@ -29,9 +29,15 @@ export default {
             /**
              * 1. 用户第一次进入页面时，没有记录，则显示，并记录到meta
              * 2. 用户第二次进入页面，此时meta有记录，但是用户并未进入会员中心，则显示
+             *
+             * meta如果为null，说明用户未登录，不显示
+             * meta如果为0，说明用户已经看过，不显示，同时比较config的值，如果config的值大于local，更新local为config的值和meta为1
+             * meta如果为1，说明用户未看过，显示
              */
             let meta = null
-            meta = meta = User.isLogin() && await getUserMeta({ key: "mall_pop" });
+            if (User.isLogin()) {
+                meta = await getUserMeta({ key: "mall_pop" });
+            }
             let config = await getConfig({ key: "mall" });
 
             if (meta == null) {
