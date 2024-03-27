@@ -17,7 +17,7 @@
             <asset :asset="asset" />
 
             <!-- manage -->
-            <manage :isTeammate="isTeammate" />
+            <manage :isTeammate="isTeammate" v-if="isTeammate" />
 
             <!-- 语言切换 -->
             <!-- <lang-switch /> -->
