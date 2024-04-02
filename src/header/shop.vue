@@ -61,7 +61,7 @@ export default {
 
                         localStorage.setItem('mall_pop', config.val);
 
-                        setUserMeta("mall_pop", { val: 1 });
+                        // setUserMeta("mall_pop", { val: 1 });
                     }
                 }
             }

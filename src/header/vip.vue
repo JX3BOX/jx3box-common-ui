@@ -58,7 +58,7 @@ export default {
 
                         localStorage.setItem('vip_pop', config.val);
 
-                        setUserMeta("vip_pop", { val: 1 });
+                        // setUserMeta("vip_pop", { val: 1 });
                     }
                 }
             }
