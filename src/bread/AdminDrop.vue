@@ -25,6 +25,7 @@
 import Bus from "../../service/bus";
 import User from "@jx3box/jx3box-common/js/user";
 import DesignTask from "./DesignTask.vue";
+import { sendMessage } from "../../service/admin";
 export default {
     name: "AdminDrop",
     components: {
@@ -80,7 +81,7 @@ export default {
                 beforeClose: (action, instance, done) => {
                     if (action === "confirm") {
                         const data = {
-                            source_id: this.sourceId,
+                            source_id: String(this.sourceId),
                             source_type: this.sourceType,
                             user_id: this.userId,
                             content: "运营通知：" + instance.inputValue,

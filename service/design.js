@@ -7,3 +7,7 @@ export const createDesignTask = (data) => {
 export const getDesignTask = (params) => {
     return $cms().get(`/api/cms/design/task/log`, { params });
 }
+
+export const getConfigBannerTypes = (params) => {
+    return $cms().get(`/api/cms/config/banner/types`, { params });
+}

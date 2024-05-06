@@ -48,7 +48,7 @@
             <!-- <Adminbutton v-if="adminEnable" class="u-admin" /> -->
             <!-- <ListAdmin v-if="topicEnable" /> -->
             <Admin v-if="adminEnable" :marksOptions="adminMarks" :show-extend="showExtend" :app="slug" :subtypeMap="subtypeMap" />
-            <AdminDrop v-if="adminEnable" />
+            <!-- <AdminDrop v-if="adminEnable" /> -->
             <slot name="op-prepend"></slot>
         </div>
     </div>
@@ -149,7 +149,7 @@ export default {
         Crumb,
         // Adminbutton,
         // ListAdmin,
-        AdminDrop,
+        // AdminDrop,
     },
 };
 </script>
