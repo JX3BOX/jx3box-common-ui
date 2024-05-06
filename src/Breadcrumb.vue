@@ -45,9 +45,10 @@
                 <i class="el-icon-info"></i>
                 <span>反馈</span>
             </a>
-            <Adminbutton v-if="adminEnable" class="u-admin" />
-            <ListAdmin v-if="topicEnable" />
+            <!-- <Adminbutton v-if="adminEnable" class="u-admin" /> -->
+            <!-- <ListAdmin v-if="topicEnable" /> -->
             <Admin v-if="adminEnable" :marksOptions="adminMarks" :show-extend="showExtend" :app="slug" :subtypeMap="subtypeMap" />
+            <AdminDrop v-if="adminEnable" />
             <slot name="op-prepend"></slot>
         </div>
     </div>
@@ -62,6 +63,7 @@ import Admin from "./bread/Admin";
 import Crumb from "./bread/Crumb";
 import Adminbutton from "./bread/Adminbutton";
 import ListAdmin from "./bread/ListAdmin";
+import AdminDrop from "./bread/AdminDrop";
 
 import { isApp } from "../assets/js/app.js";
 import Bus from "../service/bus";
@@ -145,8 +147,9 @@ export default {
     components: {
         Admin,
         Crumb,
-        Adminbutton,
-        ListAdmin,
+        // Adminbutton,
+        // ListAdmin,
+        AdminDrop,
     },
 };
 </script>
