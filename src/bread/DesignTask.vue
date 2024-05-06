@@ -1,11 +1,11 @@
 <template>
     <el-dialog custom-class="m-design-task" :width="isPhone ? '95%' : '600px'" :visible="modelValue" @close="close" title="快捷推送" append-to-body>
-        <el-form :model="form" :rules="rules" ref="form" :label-position="isPhone ? 'top' : 'left'" label-width="80px">
-            <el-form-item label="标题" required>
+        <el-form :model="form" ref="form" :label-position="isPhone ? 'top' : 'left'" label-width="80px">
+            <el-form-item label="标题">
                 <el-input v-model="form.title" placeholder="请输入标题"></el-input>
             </el-form-item>
             <el-form-item label="类型">
-                <el-select v-model="form.type" placeholder="请选择类型" style="width:100%;">
+                <el-select v-model="form.type" placeholder="请选择类型" style="width:100%;" filterable>
                     <el-option v-for="item in config" :key="item.id" :label="item.label" :value="item.name"></el-option>
                 </el-select>
             </el-form-item>
@@ -21,7 +21,7 @@
             近期推送
         </el-divider>
         <template v-if="logs && logs.length">
-            <el-table :data="logs" border size="small">
+            <el-table :data="logs" border size="small" max-height="300px">
                 <el-table-column label="推送时间" prop="push_at" align="center">
                     <template #default="{row}">
                         {{ formatTime(row.push_at) }}
@@ -76,11 +76,6 @@ export default {
             colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
 
             logs: [],
-            rules: {
-                title: [
-                    { required: true, message: "请输入标题", trigger: "blur" },
-                ],
-            },
             config: [],
 
             isPhone: window.innerWidth < 768
@@ -143,6 +138,7 @@ export default {
         loadConfig() {
             getConfigBannerTypes({ _no_page: 1 }).then(res => {
                 this.config = res.data.data || [];
+                this.config = this.config.filter(item => item.parent_id == 1);
             })
         },
         formatTime(time) {
@@ -154,6 +150,9 @@ export default {
 
 <style lang="less">
 .m-design-task {
+.el-form-item {
+    margin-bottom: 12px;
+}
     .m-star-line {
         .el-form-item__content {
             top: 10px;
