@@ -1,6 +1,6 @@
 <template>
-    <el-dialog custom-class="m-design-task" :visible="modelValue" @close="close" title="快捷推送" append-to-body>
-        <el-form :model="form" :rules="rules" ref="form" label-position="left" label-width="80px">
+    <el-dialog custom-class="m-design-task" :width="isPhone ? '95%' : '600px'" :visible="modelValue" @close="close" title="快捷推送" append-to-body>
+        <el-form :model="form" :rules="rules" ref="form" :label-position="isPhone ? 'top' : 'left'" label-width="80px">
             <el-form-item label="标题" required>
                 <el-input v-model="form.title" placeholder="请输入标题"></el-input>
             </el-form-item>
@@ -81,7 +81,9 @@ export default {
                     { required: true, message: "请输入标题", trigger: "blur" },
                 ],
             },
-            config: []
+            config: [],
+
+            isPhone: window.innerWidth < 768
         }
     },
     watch: {
@@ -159,6 +161,16 @@ export default {
     }
     .u-time {
         color: #c0c4cc;
+    }
+}
+
+@media screen and (max-width: @phone) {
+    .m-design-task {
+        .m-star-line {
+            .el-form-item__content {
+                top: 0;
+            }
+        }
     }
 }
 </style>
