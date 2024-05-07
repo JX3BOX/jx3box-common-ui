@@ -48,7 +48,7 @@
 import { createDesignTask, getDesignTask, getConfigBannerTypes } from "../../service/design";
 import {pick} from "lodash";
 import dayjs from "dayjs";
-import User from "@jx3box/jx3box-common/js/utils/user";
+import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "DesignTask",
     props: {
