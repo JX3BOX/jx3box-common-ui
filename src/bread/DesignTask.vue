@@ -9,6 +9,11 @@
                     <el-option v-for="item in config" :key="item.id" :label="item.label" :value="item.name"></el-option>
                 </el-select>
             </el-form-item>
+            <el-form-item label="版本">
+                <el-radio-group v-model="form.version">
+                    <el-radio-button v-for="(label, key) in versions" :key="key" :label="key">{{ label }}</el-radio-button>
+                </el-radio-group>
+            </el-form-item>
             <el-form-item label="备注">
                 <el-input v-model="form.remark" placeholder="请输入备注"></el-input>
             </el-form-item>
@@ -73,6 +78,7 @@ export default {
                 remark: "",
                 star: 0,
                 subtype: "",
+                version: "std"
             },
             colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
 
@@ -81,6 +87,13 @@ export default {
 
             isPhone: window.innerWidth < 768,
             isEditor: User.isEditor(),
+
+            versions: {
+                "std": "旗舰",
+                "origin": "缘起",
+                "wujie": "无界",
+                "all": "全端"
+            }
         }
     },
     watch: {
@@ -105,6 +118,8 @@ export default {
                 title: "",
                 remark: "",
                 star: 0,
+                subtype: "",
+                version: "std",
             }
 
             this.$refs?.form?.clearValidate();
@@ -116,6 +131,7 @@ export default {
             data.remark = this.form.remark;
             data.star = this.form.star;
             data.subtype = this.form.type;
+            data.version = this.form.version;
 
             data.source_type = this.post?.post_type;
             data.source_id = String(this.post?.ID);
