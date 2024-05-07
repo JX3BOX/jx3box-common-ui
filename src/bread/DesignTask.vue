@@ -48,6 +48,7 @@
 import { createDesignTask, getDesignTask, getConfigBannerTypes } from "../../service/design";
 import {pick} from "lodash";
 import dayjs from "dayjs";
+import User from "@jx3box/jx3box-common/js/utils/user";
 export default {
     name: "DesignTask",
     props: {
@@ -78,7 +79,8 @@ export default {
             logs: [],
             config: [],
 
-            isPhone: window.innerWidth < 768
+            isPhone: window.innerWidth < 768,
+            isEditor: User.isEditor(),
         }
     },
     watch: {
@@ -92,7 +94,7 @@ export default {
         }
     },
     mounted() {
-        this.loadConfig();
+        this.isEditor && this.loadConfig();
     },
     methods: {
         close(){
