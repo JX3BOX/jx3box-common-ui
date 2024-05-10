@@ -1,6 +1,6 @@
 <template>
     <a class="c-author-honor" :style="{ backgroundImage: `url(${imgUrl()})` }" v-if="honor" :href="url" target="_blank">
-        <span v-if="!isJdt" :style="{ color: honor.color }">{{ honor.honor }}</span>
+        <span :style="{ color: honor.color }">{{ honor.honor }}</span>
     </a>
 </template>
 <script>
@@ -24,9 +24,6 @@ export default {
         },
     },
     computed: {
-        isJdt() {
-            return this.honor?.honor_info?.img?.toLowerCase()?.includes("jdt");
-        },
         url() {
             return this.honor?.honor_info?.url ? __Root + this.honor?.honor_info?.url : "";
         }
