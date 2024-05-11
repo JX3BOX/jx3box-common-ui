@@ -189,7 +189,8 @@ export default {
                     this.isSuperAuthor = !!data.sign;
                     this.isTeammate = this.user?.is_teammate;
                     localStorage.setItem("is_teammate", this.isTeammate);
-                    localStorage.setItem("permission", this.user?.permission);
+                    const permissions = this.user?.permission?.map(item => item.action)?.join(",");
+                    localStorage.setItem("jx3box_permission", permissions);
                     this.$emit("update", this.user);
                 })
                 .catch((err) => {

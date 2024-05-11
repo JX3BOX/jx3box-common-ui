@@ -103,11 +103,12 @@ export default {
                     this.form.title = this.post.post_title;
                 }
                 this.loadLogs();
+
+                if (User.isTeammate()) {
+                    this.loadConfig();
+                }
             }
         }
-    },
-    mounted() {
-        this.isEditor && this.loadConfig();
     },
     methods: {
         close(){
