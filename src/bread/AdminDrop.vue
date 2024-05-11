@@ -11,7 +11,7 @@
                 <el-dropdown-item v-if="isEditor" command="directMessage" icon="el-icon-message">
                     <span>私信</span>
                 </el-dropdown-item>
-                <el-dropdown-item icon="el-icon-upload" command="designTask">
+                <el-dropdown-item icon="el-icon-upload" command="designTask" v-if="hasPermission('push_banner')">
                     <span>推送</span>
                 </el-dropdown-item>
             </el-dropdown-menu>
@@ -100,6 +100,9 @@ export default {
         },
         designTask() {
             this.showDesignTask = true;
+        },
+        hasPermission(permission) {
+            return User.hasPermission(permission);
         }
     }
 };
