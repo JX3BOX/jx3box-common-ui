@@ -21,20 +21,28 @@
             <el-form-item label="简介">
                 <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="form.introduction"> </el-input>
             </el-form-item>
-
-            <el-divider content-position="left">附图</el-divider>
-            <div class="u-imgs">
-                <div
-                    :class="`u-imgs-item ${form.banner_img === item && 'active'}`"
-                    v-for="(item, i) in form.extra_images"
-                    :key="i"
-                    @click="setBannerIndex(item)"
-                >
-                    <el-image :src="item" fit="cover" style="width: 148px; height: 148px" />
-                    <div class="u-mark">封面</div>
-                </div>
-            </div>
         </el-form>
+
+        <el-divider content-position="left">附图</el-divider>
+        <div class="u-imgs">
+            <div
+                :class="`u-imgs-item ${form.banner_img === item && 'active'}`"
+                v-for="(item, i) in form.extra_images"
+                :key="i"
+                @click="setBannerIndex(item)"
+            >
+                <el-image :src="item" fit="cover" style="width: 148px; height: 148px" />
+                <div class="u-mark">封面</div>
+            </div>
+        </div>
+
+        <el-divider content-position="left"></el-divider>
+
+        <div class="u_r_box">
+            <el-popover placement="top" trigger="manual" size="mini" content="请确认此操作不可逆" v-model="visible">
+                <el-checkbox slot="reference" v-model="checked">我已确认此操作不可逆</el-checkbox>
+            </el-popover>
+        </div>
         <template #footer>
             <el-button @click="close">取 消</el-button>
             <el-button type="primary" @click="onConfirm">确 定</el-button>
@@ -66,12 +74,14 @@ export default {
     emits: ["update:modelValue"],
     data() {
         return {
+            visible: false,
+            checked: false,
             form: {
                 category: "",
                 id: "",
                 introduction: "",
-                banner_img: "",
-                extra_images: [],
+                banner_img: undefined,
+                extra_images: undefined,
             },
             categoryList: [],
             isPhone: window.innerWidth < 768,
@@ -84,6 +94,11 @@ export default {
                 this.initForm();
             }
         },
+        checked(val) {
+            if (val) {
+                this.visible = false;
+            }
+        },
     },
     methods: {
         initForm() {
@@ -91,7 +106,7 @@ export default {
             const content = this.post.post_content;
             this.form.introduction = this.getIntroduction(content);
             const imgs = this.getImgSrc(content);
-            this.form.extra_images = [...new Set(imgs)];
+            if (imgs.length > 0) this.form.extra_images = [...new Set(imgs)];
         },
 
         close() {
@@ -110,6 +125,10 @@ export default {
             }
             if (!this.form.category) {
                 this.$message.error("请选择分类!");
+                return;
+            }
+            if (!this.checked) {
+                this.visible = true;
                 return;
             }
             recoverTopicFromPosts(this.form).then(() => {
@@ -153,6 +172,10 @@ export default {
 </script>
 
 <style lang="less">
+.u_r_box {
+    display: flex;
+    justify-content: flex-end;
+}
 .u-imgs {
     display: flex;
     overflow-x: auto;
