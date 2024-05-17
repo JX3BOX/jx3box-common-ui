@@ -5,7 +5,14 @@
                 ><i class="el-icon-setting"></i> 管理<i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item v-if="isEditor" command="toggleAdminPanel" icon="el-icon-setting">
+                <el-dropdown-item v-if="isEditor && !isCommunity" command="toggleAdminPanel" icon="el-icon-setting">
+                    <span>设置</span>
+                </el-dropdown-item>
+                <el-dropdown-item
+                    v-else-if="isEditor && isCommunity"
+                    command="toggleCommunityAdminPanel"
+                    icon="el-icon-setting"
+                >
                     <span>设置</span>
                 </el-dropdown-item>
                 <el-dropdown-item v-if="isEditor" command="directMessage" icon="el-icon-message">
@@ -21,6 +28,7 @@
         </el-dropdown>
 
         <design-task v-model="showDesignTask" :post="post"></design-task>
+        <CommunityAdmin v-model="communityAdminVisible" :post="post" />
         <MoveToCommunityDialog v-model="moveVisible" :post="post" />
     </div>
 </template>
@@ -31,13 +39,19 @@ import User from "@jx3box/jx3box-common/js/user";
 import DesignTask from "./DesignTask.vue";
 import MoveToCommunityDialog from "./MoveToCommunityDialog.vue";
 import { sendMessage } from "../../service/admin";
+import CommunityAdmin from "./CommunityAdmin.vue";
 export default {
     name: "AdminDrop",
     components: {
         DesignTask,
         MoveToCommunityDialog,
+        CommunityAdmin,
     },
     props: {
+        isCommunity: {
+            type: Boolean,
+            default: false,
+        },
         showMove: {
             type: Boolean,
             default: false,
@@ -58,6 +72,7 @@ export default {
     data() {
         return {
             moveVisible: false,
+            communityAdminVisible: false,
             showDesignTask: false,
         };
     },
@@ -75,6 +90,9 @@ export default {
     methods: {
         handleCommand(command) {
             this[command]();
+        },
+        toggleCommunityAdminPanel() {
+            this.communityAdminVisible = true;
         },
         toggleAdminPanel() {
             Bus.$emit("toggleAdminPanel");
