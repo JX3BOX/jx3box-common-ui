@@ -1,10 +1,10 @@
 <template>
     <el-dialog custom-class="m-design-task" :width="isPhone ? '95%' : '600px'" :visible="modelValue" @close="close" title="快捷推送" append-to-body>
-        <el-form :model="form" ref="form" :label-position="isPhone ? 'top' : 'left'" label-width="80px">
-            <el-form-item label="标题">
+        <el-form :model="form" ref="form" :rules="rules" :label-position="isPhone ? 'top' : 'left'" label-width="80px">
+            <el-form-item label="标题" prop="title">
                 <el-input v-model="form.title" placeholder="请输入标题"></el-input>
             </el-form-item>
-            <el-form-item label="类型">
+            <el-form-item label="类型" prop="type">
                 <el-select v-model="form.type" placeholder="请选择类型" style="width:100%;" filterable>
                     <el-option v-for="item in config" :key="item.id" :label="item.label" :value="item.name"></el-option>
                 </el-select>
@@ -92,7 +92,16 @@ export default {
                 "std": "旗舰",
                 "origin": "缘起",
                 "wujie": "无界",
-                "test": "tifu"
+                "test": "体服"
+            },
+
+            rules: {
+                title: [
+                    { required: true, message: "请输入标题", trigger: "blur"}
+                ],
+                type: [
+                    { required: true, message: "请选择类型", trigger: "change"}
+                ]
             }
         }
     },
@@ -101,6 +110,9 @@ export default {
             if (val) {
                 if (this.post) {
                     this.form.title = this.post.post_title;
+                    if (this.post?.post_type) {
+                        this.form.type = this.post.post_type;
+                    }
                 }
                 this.loadLogs();
 
