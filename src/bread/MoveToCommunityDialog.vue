@@ -134,11 +134,17 @@ export default {
                 this.visible = true;
                 return;
             }
-            recoverTopicFromPosts(this.form).then(() => {
-                this.$message.success("操作成功");
-                this.close();
-                this.clearForm();
-            });
+
+            this.$refs.form?.validate(valid => {
+                if (valid) {
+                    recoverTopicFromPosts(this.form).then(() => {
+                        this.$message.success("操作成功");
+                        this.close();
+                        this.clearForm();
+                    });
+                }
+            })
+
         },
         onCancel() {
             this.close();
