@@ -92,7 +92,7 @@ export default {
                 "std": "旗舰",
                 "origin": "缘起",
                 "wujie": "无界",
-                "test": "tifu"
+                "test": "体服"
             }
         }
     },
