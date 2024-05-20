@@ -9,7 +9,7 @@
     >
         <el-form :model="form" ref="form" :rules="rules" :label-position="isPhone ? 'top' : 'left'" label-width="80px">
             <el-form-item label="分类" prop="category">
-                <el-select v-model="form.category" placeholder="请选择文章分类" style="width: 100%" filterable>
+                <el-select v-model="form.category" placeholder="请选择帖子分类" style="width: 100%" filterable>
                     <el-option
                         v-for="item in categoryList"
                         :key="item.id"
