@@ -164,6 +164,9 @@ export default {
         post_client: function () {
             return this.post?.client || "all";
         },
+        community_id: function () {
+            return this.post?.community_id || 0;
+        },
     },
     methods: {
         updateCollection: function (val) {
@@ -204,6 +207,18 @@ export default {
                 }
             },
         },
+        community_id: {
+            immediate: true,
+            handler(val) {
+                if (val && val != 0) {
+                    // 防止死循环
+                    if (location.href.includes(`/community/${val}`)) {
+                        return;
+                    }
+                    location.href = `/community/${val}`;
+                }
+            }
+        }
     },
 };
 </script>
