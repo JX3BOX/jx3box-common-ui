@@ -13,6 +13,9 @@
         >
             <img slot="logo" svg-inline src="../assets/img/jx3.svg" />
             bread info
+            <template #op-prepend>
+                <AdminDrop :post="post" :user-id="8" :showMove="true"/>
+            </template>
         </Breadcrumb>
 
         <LeftSidebar :open="true" :uid="8">
@@ -20,34 +23,24 @@
             <Author :author="author" :uid="8" />
         </LeftSidebar>
 
-        <Main :withoutLeft="false" :withoutRight="false">
+        <Main :withoutLeft="false" :withoutRight="false" style="padding:20px;">
             <el-tabs v-model="tab" type="card">
-                <el-tab-pane label="CMS作品" name="post">
-                    <el-radio-group v-model="post_id">
-                        <el-radio label="41346">临时测试</el-radio>
-                        <el-radio label="35605">Markdown</el-radio>
-                        <el-radio label="32035">仅小册</el-radio>
-                        <el-radio label="30017">仅联合创作者</el-radio>
-                        <el-radio label="30582">小册和联合创作者</el-radio>
-                        <el-radio label="31129">无小册和联合创作者</el-radio>
-                    </el-radio-group>
-                    <singlebox :post="post" @extendUpdate="updateExtend" />
-                </el-tab-pane>
+
                 <el-tab-pane label="通用组件" name="widget">
-                    <PostHeader :post="post" />
-                    <Creators :postId="30432" style="margin-bottom: 10px" />
-                    <Collection :id="59" :defaultVisible="true" />
+                    <!-- <PostHeader :post="post" /> -->
+                    <!-- <Creators :postId="30432" style="margin-bottom: 10px" /> -->
+                    <!-- <Collection :id="59" :defaultVisible="true" /> -->
                     <UserPop title="添加用户" v-model="visible" @confirm="addUser" />
                     <el-button @click="visible = true">用户POP</el-button>
                     <!-- :postId="23865" -->
-                    <Thx
+                    <!-- <Thx
                         postType="bps"
                         postTitle="bbs23865的标题"
                         :userId="8"
                         :adminBoxcoinEnable="true"
                         :userBoxcoinEnable="true"
                         :postId="73440"
-                    />
+                    /> -->
                     <hr />
                     <Like mode="heart" :count="100" :showCount="true" />
                     <Down :count="100" :showCount="true" />
@@ -76,8 +69,21 @@
                         v-model="upload"
                         info="非必选。首页海报尺寸1100*300（推荐2200*600支持高分屏），最大20M。"
                     ></uploadImage>
-                    <AuthorMedal :author-id="8"></AuthorMedal>
+                    <!-- <AuthorMedal :author-id="8"></AuthorMedal> -->
                 </el-tab-pane>
+
+                <el-tab-pane label="CMS作品" name="post">
+                    <el-radio-group v-model="post_id">
+                        <el-radio label="41346">临时测试</el-radio>
+                        <el-radio label="35605">Markdown</el-radio>
+                        <el-radio label="32035">仅小册</el-radio>
+                        <el-radio label="30017">仅联合创作者</el-radio>
+                        <el-radio label="30582">小册和联合创作者</el-radio>
+                        <el-radio label="31129">无小册和联合创作者</el-radio>
+                    </el-radio-group>
+                    <singlebox :post="post" @extendUpdate="updateExtend" />
+                </el-tab-pane>
+
                 <el-tab-pane label="百科组件" name="wiki">
                     <WikiPanel :wiki-post="wikiPost">
                         <template slot="head-title">
@@ -103,8 +109,9 @@
                     <WikiComments type="achievement" source-id="456" />
                     <hr />
                 </el-tab-pane>
+
                 <el-tab-pane label="头像" name="avatar">
-                    <el-radio-group v-model="avatar_size">
+                    <el-radio-group v-model="avatar_size" style="margin-bottom:10px;">
                         <el-radio label="xxs">xxs-36/48</el-radio>
                         <el-radio label="xs">xs-48/68</el-radio>
                         <el-radio label="s">s-68/88</el-radio>
@@ -115,7 +122,7 @@
                     <div style="padding: 60px; background-color: #e3e3e3">
                         <Avatar
                             :id="8"
-                            url="https://console.cnyixun.com/upload/avatar/2022/3/2/8_9860765.png"
+                            url="https://cdn.jx3box.com/upload/avatar/2022/3/2/8_9860765.png"
                             :size="avatar_size"
                             frame="moon_1"
                         />
@@ -123,9 +130,9 @@
                 </el-tab-pane>
             </el-tabs>
 
-            <RightSidebar :showToggle="false">
-                <PostTopic></PostTopic>
+            <RightSidebar :showToggle="false" style="padding:15px;">
                 <RightSideMsg>Hello</RightSideMsg>
+                <PostTopic></PostTopic>
                 <div id="directory"></div>
                 <PostCollection :id="59" />
             </RightSidebar>
@@ -139,6 +146,7 @@
 <script>
 import Header from "./Header.vue";
 import Breadcrumb from "./Breadcrumb.vue";
+import AdminDrop from "./bread/AdminDrop.vue";
 
 import LeftSidebar from "./LeftSidebar.vue";
 import LeftSideToggle from "./LeftSideToggle.vue";
@@ -156,12 +164,11 @@ import Bottom from "./Bottom.vue";
 
 // import cmsList from "./list/cms-list.vue";
 import singlebox from "./single/cms-single.vue";
-import PostHeader from "./single/PostHeader.vue";
 import PostCollection from "./single/PostCollection.vue";
-
-import Thx from "./single/Thx.vue";
-import Collection from "./single/Collection.vue";
-import Creators from "./single/Creators.vue";
+//import PostHeader from "./single/PostHeader.vue";
+// import Thx from "./single/Thx.vue";
+//import Collection from "./single/Collection.vue";
+//import Creators from "./single/Creators.vue";
 import PostGuide from "./single/PostGuide.vue";
 
 import Mark from "./interact/Mark.vue";
@@ -182,7 +189,7 @@ import zlpBy from "./filters/zlpBy.vue";
 import topicBy from "./filters/topicBy.vue";
 
 import uploadImage from "./upload/upload_banner.vue";
-import AuthorMedal from "./medal/medal.vue";
+// import AuthorMedal from "./medal/medal.vue";
 
 import WikiPanel from "./wiki/WikiPanel.vue";
 import WikiRevisions from "./wiki/WikiRevisions.vue";
@@ -197,6 +204,8 @@ export default {
     components: {
         Header,
         Breadcrumb,
+        AdminDrop,
+
         LeftSidebar,
         LeftSideToggle,
         Main,
@@ -206,13 +215,13 @@ export default {
 
         // cmsList,
         singlebox,
-        PostHeader,
+        // PostHeader,
         PostCollection,
         PostTopic,
 
-        Thx,
-        Collection,
-        Creators,
+        // Thx,
+        // Collection,
+        // Creators,
 
         RightSideMsg,
         Author,
@@ -237,7 +246,7 @@ export default {
         topicBy,
 
         uploadImage,
-        AuthorMedal,
+        // AuthorMedal,
 
         WikiPanel,
         WikiRevisions,
@@ -248,10 +257,10 @@ export default {
     },
     data: function () {
         return {
-            tab: "avatar",
+            tab: "widget",
 
-            post: "",
-            post_id: "14497",
+            post: {},
+            post_id: "65668",
 
             author: "",
             wikiPost: null,

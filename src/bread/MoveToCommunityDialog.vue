@@ -7,9 +7,9 @@
         title="迁移至论坛"
         append-to-body
     >
-        <el-form :model="form" ref="form" :label-position="isPhone ? 'top' : 'left'" label-width="80px">
-            <el-form-item label="分类">
-                <el-select v-model="form.category" placeholder="请选择文章分类" style="width: 100%" filterable>
+        <el-form :model="form" ref="form" :rules="rules" :label-position="isPhone ? 'top' : 'left'" label-width="80px">
+            <el-form-item label="分类" prop="category">
+                <el-select v-model="form.category" placeholder="请选择帖子分类" style="width: 100%" filterable>
                     <el-option
                         v-for="item in categoryList"
                         :key="item.id"
@@ -45,7 +45,7 @@
         </div>
         <template #footer>
             <el-button @click="close">取 消</el-button>
-            <el-button type="primary" @click="onConfirm">确 定</el-button>
+            <el-button type="primary" @click="onConfirm" :disabled="!checked">确 定</el-button>
         </template>
     </el-dialog>
 </template>
@@ -85,6 +85,9 @@ export default {
             },
             categoryList: [],
             isPhone: window.innerWidth < 768,
+            rules: {
+                category: [{ required: true, message: "请选择分类", trigger: "blur" }],
+            }
         };
     },
     watch: {
@@ -131,11 +134,17 @@ export default {
                 this.visible = true;
                 return;
             }
-            recoverTopicFromPosts(this.form).then(() => {
-                this.$message.success("操作成功");
-                this.close();
-                this.clearForm();
-            });
+
+            this.$refs.form?.validate(valid => {
+                if (valid) {
+                    recoverTopicFromPosts(this.form).then(() => {
+                        this.$message.success("操作成功");
+                        this.close();
+                        this.clearForm();
+                    });
+                }
+            })
+
         },
         onCancel() {
             this.close();
