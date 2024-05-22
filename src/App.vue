@@ -260,7 +260,7 @@ export default {
             tab: "widget",
 
             post: {},
-            post_id: "65668",
+            post_id: "12839",
 
             author: "",
             wikiPost: null,
