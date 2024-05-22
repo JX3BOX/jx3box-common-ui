@@ -28,7 +28,7 @@
         </el-dropdown>
 
         <design-task v-model="showDesignTask" :post="post"></design-task>
-        <CommunityAdmin v-model="communityAdminVisible" :post="post" />
+        <CommunityAdmin v-model="communityAdminVisible" :postId="post.id" />
         <MoveToCommunityDialog v-model="moveVisible" :post="post" />
     </div>
 </template>
@@ -81,10 +81,18 @@ export default {
             return User.isEditor();
         },
         sourceId() {
-            return this.post?.ID;
+            if (this.isCommunity) {
+                return this.post?.id;
+            } else {
+                return this.post?.ID;
+            }
         },
         sourceType() {
-            return this.post?.post_type;
+            if (this.isCommunity) {
+                return "community";
+            } else {
+                return this.post?.post_type;
+            }
         },
     },
     methods: {
