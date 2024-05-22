@@ -15,3 +15,22 @@ export const updateTopicItem = (id, data) => {
 export const deleteTopic = (id) => {
     return $next().delete(`${API_PREFIX}/community/discussion/manage/topic/item/${id}`);
 };
+
+// status = pass:审核通过, reject:审核不通过 wait:待审核
+export const auditTopic = (id, action) => {
+    return $next().put(`${API_PREFIX}/community/discussion/manage/topic/item/${id}/audit/${action}`);
+};
+
+/**
+ *
+ * @param {*} id 帖子id
+ * @param {*} action 动作 top:置顶,star: 加精, hight: 高亮
+ * @param {*} value 1:确认操作, 0:取消操作
+ */
+export const manageTopic = (id, action, value) => {
+    return $next().put(`${API_PREFIX}/community/discussion/manage/topic/item/${id}/opt/${action}/${value}`);
+};
+
+export const getTopicDetails = (id) => {
+    return $next().get(`${API_PREFIX}/community/discussion/topic/item/${id}`);
+};

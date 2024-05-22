@@ -132,16 +132,29 @@ import { getMenu } from "../../service/header";
 import { trimSlash } from "../../assets/js/utils";
 
 const activeNav = {
-    index: ['index'],
-    macro: ['macro', 'pz'],
-    tool: ['app', 'jx3dat', 'dbm', 'tool'],
-    bps: ['bps', 'jcl', 'battle'],
-    fb: ['fb','baizhan','team', 'jdt', 'rank'],
-    cj: ['wiki', 'item', 'knowledge', 'quest', 'cj'],
-    pvx: ['face', 'adventure', 'pvg', 'pvx', 'homeland', 'pet', 'horse', 'furniture', 'reputation', 'book', 'exam', 'body'],
-    bbs: ['bbs','topic', 'emotion', 'joke', 'namespace', 'collection'],
-    pvp: ['pvp']
-}
+    index: ["index"],
+    macro: ["macro", "pz"],
+    tool: ["app", "jx3dat", "dbm", "tool"],
+    bps: ["bps", "jcl", "battle"],
+    fb: ["fb", "baizhan", "team", "jdt", "rank"],
+    cj: ["wiki", "item", "knowledge", "quest", "cj"],
+    pvx: [
+        "face",
+        "adventure",
+        "pvg",
+        "pvx",
+        "homeland",
+        "pet",
+        "horse",
+        "furniture",
+        "reputation",
+        "book",
+        "exam",
+        "body",
+    ],
+    bbs: ["bbs", "topic", "emotion", "joke", "namespace", "collection", "community"],
+    pvp: ["pvp"],
+};
 
 export default {
     props: [],
@@ -178,13 +191,13 @@ export default {
             return location.href.includes("origin") ? "origin" : "std";
         },
         prefix() {
-            return this.client === 'std' ? 'www' : 'origin';
-        }
+            return this.client === "std" ? "www" : "origin";
+        },
     },
     methods: {
         isFocus: function (type) {
-            let active = '';
-            const pathname = location.pathname?.split('/')?.filter(Boolean)?.[0] || '';
+            let active = "";
+            const pathname = location.pathname?.split("/")?.filter(Boolean)?.[0] || "";
             for (const key in activeNav) {
                 if (pathname && activeNav[key].includes(pathname)) {
                     active = key;

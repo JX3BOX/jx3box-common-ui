@@ -10,7 +10,7 @@
     >
         <div class="c-admin-wrapper">
             <el-divider content-position="left">标签</el-divider>
-            <!-- <el-radio-group v-model="tages" class="c-admin-status" size="small">
+            <!-- <el-radio-group v-model="tags" class="c-admin-status" size="small">
                 <el-radio-button v-for="(option, key) in categoryList" :label="key" :key="key">{{
                     option
                 }}</el-radio-button>
@@ -20,7 +20,7 @@
                 <div class="u-condition u-map">
                     <span class="u-prepend el-input-group__prepend">标签</span>
                     <el-select
-                        v-model="post.tages"
+                        v-model="form.tags"
                         multiple
                         filterable
                         allow-create
@@ -42,10 +42,34 @@
             </div>
 
             <el-divider content-position="left">高亮置顶</el-divider>
-            <el-checkbox class="c-admin-highlight-checkbox" v-model="form.is_top">置顶</el-checkbox>
-            <el-checkbox class="c-admin-highlight-checkbox" v-model="form.is_star" :true-label="1" :false-label="0"
-                >精选</el-checkbox
+            <el-checkbox
+                class="c-admin-highlight-checkbox"
+                v-model="form.is_top"
+                @change="onManageTopic($event, 'top')"
+                :true-label="1"
+                :false-label="0"
             >
+                置顶
+            </el-checkbox>
+            <el-checkbox
+                class="c-admin-highlight-checkbox"
+                v-model="form.is_category_top"
+                @change="onManageTopic($event, 'category_top')"
+                :true-label="1"
+                :false-label="0"
+            >
+                分类置顶
+            </el-checkbox>
+
+            <el-checkbox
+                class="c-admin-highlight-checkbox"
+                v-model="form.is_star"
+                @change="onManageTopic($event, 'star')"
+                :true-label="1"
+                :false-label="0"
+            >
+                精选
+            </el-checkbox>
             <el-checkbox class="c-admin-highlight-checkbox" v-model="form.is_hight">高亮</el-checkbox>
             <span v-show="showColors">
                 <el-color-picker
@@ -62,20 +86,28 @@
             <el-divider content-position="left">状态变更</el-divider>
             <div>
                 <el-button type="danger" @click="deleteTopic">删除帖子</el-button>
-                <el-button type="warning">转为待审核</el-button>
+                <el-button type="warning" @click="handleCheck">转为待审核</el-button>
             </div>
 
-            <el-divider content-position="left">确认操作</el-divider>
+            <el-divider content-position="left"></el-divider>
             <div>
-                <el-button type="primary" @click="submit" :loading="pushing">提交修改</el-button>
-                <el-button type="plain" @click="close">取消</el-button>
+                <!-- <el-button type="primary" @click="submit" :loading="pushing">提交修改</el-button> -->
+                <el-button type="primary" @click="close">关闭窗口</el-button>
             </div>
         </div>
     </el-drawer>
 </template>
 
 <script>
-import { deleteTopic, getTopicBucket, updateTopicItem } from "../../service/community";
+import { post } from "jquery";
+import {
+    auditTopic,
+    deleteTopic,
+    getTopicBucket,
+    getTopicDetails,
+    manageTopic,
+    updateTopicItem,
+} from "../../service/community";
 
 export default {
     name: "CommunityAdmin",
@@ -84,11 +116,9 @@ export default {
             type: Boolean,
             default: false,
         },
-        post: {
-            type: Object,
-            default: () => {
-                return {};
-            },
+        postId: {
+            type: Number,
+            default: 0,
         },
     },
     model: {
@@ -98,7 +128,7 @@ export default {
     emits: ["update:modelValue"],
     data() {
         return {
-            isHighlight: true,
+            post: null,
             pushing: false,
             categoryList: [],
             color: "rgb(255,0,1)",
@@ -112,10 +142,11 @@ export default {
             ],
             form: {
                 category: "",
-                tages: [],
-                is_top: false,
-                is_star: false,
-                is_hight: false,
+                tags: [],
+                is_top: 0,
+                is_star: 0,
+                is_hight: 0,
+                is_category_top: 0,
             },
         };
     },
@@ -130,30 +161,30 @@ export default {
             return {
                 ...this.post,
                 category: this.form.category,
-                tages: this.form.tages,
-                is_top: this.form.is_top ? 1 : 0,
-                is_star: this.form.is_star ? 1 : 0,
-                is_hight: this.form.is_hight ? 1 : 0,
+                tags: this.form.tags,
+                is_top: this.form.is_top,
+                is_star: this.form.is_star,
+                is_hight: this.form.is_hight,
+                is_category_top: this.form.is_category_top,
                 // color: this.color,
             };
         },
     },
     watch: {
+        post() {
+            this.form = {
+                ...this.form,
+                is_hight: this.post.is_hight,
+                category: this.post.category,
+                is_top: this.post.is_top,
+                is_star: this.post.is_star,
+                tags: this.post.tags,
+                is_category_top: this.post.is_category_top,
+            };
+        },
         modelValue(val) {
             if (val) {
-                if (this.post.is_hight === 1) {
-                    this.form.is_hight = true;
-                }
-                if (this.post.is_star === 1) {
-                    this.form.is_star = true;
-                }
-                if (this.post.is_top === 1) {
-                    this.form.is_top = true;
-                }
-                if (this.post.tages) {
-                    this.form.tages = this.post.tages;
-                }
-                this.form.category = this.post.category;
+                this.getTopicDetails();
             }
         },
     },
@@ -161,27 +192,53 @@ export default {
         this.getCategoryList();
     },
     methods: {
+        onManageTopic(e, action) {
+            const value = e ? 1 : 0;
+            manageTopic(this.post.id, action, value).then(() => {
+                this.$message({
+                    type: "success",
+                    message: "操作成功!",
+                });
+            });
+        },
+        handleCheck() {
+            this.$confirm(`此操作将该数据转为 待审核 状态, 是否继续?`, "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning",
+            }).then(() => {
+                auditTopic(id, "wait").then(() => {
+                    this.$message({
+                        type: "success",
+                        message: "操作成功!",
+                    });
+                    this.load();
+                });
+            });
+        },
         submit() {
             const id = this.post.id;
             if (!id) {
                 this.$message.error("ID不存在!");
                 return;
             }
-            // updateTopicItem(id, this.params).then((res) => {
-            this.$message.success("修改成功");
-            this.$emit("update:modelValue", false);
-            // });
+            updateTopicItem(id, this.params).then((res) => {
+                this.$message.success("修改成功");
+                this.$emit("update:modelValue", false);
+            });
         },
         // 关闭
         close() {
             this.form = {
                 category: "",
-                tages: [],
+                tags: [],
                 is_top: false,
                 is_star: false,
                 is_hight: false,
             };
-            this.$emit("update:modelValue", false);
+            this.$nextTick(() => {
+                this.$emit("update:modelValue", false);
+            });
         },
         getCategoryList() {
             getTopicBucket({ type: "community" }).then((res) => {
@@ -207,6 +264,11 @@ export default {
                     this.$emit("update:modelValue", false);
                     window.location.href = "/community";
                 });
+            });
+        },
+        getTopicDetails() {
+            getTopicDetails(this.postId).then((res) => {
+                this.post = res.data.data;
             });
         },
     },
