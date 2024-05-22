@@ -53,6 +53,16 @@
             </el-checkbox>
             <el-checkbox
                 class="c-admin-highlight-checkbox"
+                v-model="form.is_category_top"
+                @change="onManageTopic($event, 'category_top')"
+                :true-label="1"
+                :false-label="0"
+            >
+                分类置顶
+            </el-checkbox>
+
+            <el-checkbox
+                class="c-admin-highlight-checkbox"
                 v-model="form.is_star"
                 @change="onManageTopic($event, 'star')"
                 :true-label="1"
@@ -133,9 +143,10 @@ export default {
             form: {
                 category: "",
                 tags: [],
-                is_top: "0",
-                is_star: "0",
-                is_hight: "0",
+                is_top: 0,
+                is_star: 0,
+                is_hight: 0,
+                is_category_top: 0,
             },
         };
     },
@@ -154,6 +165,7 @@ export default {
                 is_top: this.form.is_top,
                 is_star: this.form.is_star,
                 is_hight: this.form.is_hight,
+                is_category_top: this.form.is_category_top,
                 // color: this.color,
             };
         },
@@ -167,6 +179,7 @@ export default {
                 is_top: this.post.is_top,
                 is_star: this.post.is_star,
                 tags: this.post.tags,
+                is_category_top: this.post.is_category_top,
             };
         },
         modelValue(val) {
