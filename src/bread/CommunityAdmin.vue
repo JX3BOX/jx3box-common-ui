@@ -10,11 +10,6 @@
     >
         <div class="c-admin-wrapper">
             <el-divider content-position="left">标签</el-divider>
-            <!-- <el-radio-group v-model="tags" class="c-admin-status" size="small">
-                <el-radio-button v-for="(option, key) in categoryList" :label="key" :key="key">{{
-                    option
-                }}</el-radio-button>
-            </el-radio-group> -->
 
             <div class="c-admin-extend">
                 <div class="u-condition u-map">
@@ -28,81 +23,78 @@
                         placeholder="请选择"
                         clearable
                     >
-                        <!-- <el-option v-for="item in categoryList" :value="item.name" :label="item.name" :key="item.id">
-                        </el-option> -->
-                    </el-select>
-                </div>
-                <!-- <div class="u-condition u-map">
-                    <span class="u-prepend el-input-group__prepend">分类</span>
-                    <el-select v-model="post.category" filterable placeholder="请选择" clearable>
-                        <el-option v-for="item in categoryList" :value="item.name" :label="item.name" :key="item.id">
+                        <el-option v-for="item in tags" :value="item.label" :label="item.label" :key="item.uuid">
                         </el-option>
                     </el-select>
-                </div> -->
+                </div>
             </div>
 
             <el-divider content-position="left">高亮置顶</el-divider>
-            <el-checkbox
-                class="c-admin-highlight-checkbox"
-                v-model="form.is_top"
-                @change="onManageTopic($event, 'top')"
-                :true-label="1"
-                :false-label="0"
-            >
-                置顶
-            </el-checkbox>
-            <el-checkbox
-                class="c-admin-highlight-checkbox"
-                v-model="form.is_category_top"
-                @change="onManageTopic($event, 'category_top')"
-                :true-label="1"
-                :false-label="0"
-            >
-                分类置顶
-            </el-checkbox>
 
-            <el-checkbox
-                class="c-admin-highlight-checkbox"
-                v-model="form.is_star"
-                @change="onManageTopic($event, 'star')"
-                :true-label="1"
-                :false-label="0"
-            >
-                精选
-            </el-checkbox>
-            <el-checkbox class="c-admin-highlight-checkbox" v-model="form.is_hight">高亮</el-checkbox>
-            <span v-show="showColors">
-                <el-color-picker
-                    class="c-admin-highlight-block"
-                    v-model="color"
-                    :predefine="color_options"
-                    size="mini"
-                ></el-color-picker>
-                <span class="c-admin-highlight-preview" :style="{ color: color }" style="margin-right: 10px"
-                    >预览高亮效果</span
+            <p class="c-admin-space">
+                <span class="c-admin-lable">置顶：</span>
+                <el-checkbox-group
+                    v-model="isTopStatus"
+                    @change="onTopStatusChange"
+                    class="c-admin-status"
+                    size="small"
                 >
-            </span>
+                    <el-checkbox-button :label="1">全局置顶</el-checkbox-button>
+                    <el-checkbox-button :label="2">版内置顶</el-checkbox-button>
+                </el-checkbox-group>
+            </p>
+            <p class="c-admin-space">
+                <span class="c-admin-lable">精选：</span>
+                <el-switch
+                    v-model="form.is_star"
+                    @change="onManageTopic($event, 'star')"
+                    :active-value="1"
+                    :inactive-value="0"
+                />
+            </p>
+
+            <p class="c-admin-space">
+                <span class="c-admin-lable">高亮：</span>
+                <el-switch
+                    @change="onManageTopic($event, 'hight')"
+                    v-model="form.is_hight"
+                    :active-value="1"
+                    :inactive-value="0"
+                />
+                <span v-show="showColors">
+                    <el-color-picker
+                        class="c-admin-highlight-block"
+                        v-model="color"
+                        :predefine="color_options"
+                        size="mini"
+                    ></el-color-picker>
+                    <span class="c-admin-highlight-preview" :style="{ color: color }" style="margin-right: 10px">
+                        预览高亮效果
+                    </span>
+                </span>
+            </p>
 
             <el-divider content-position="left">状态变更</el-divider>
             <div>
-                <el-button type="danger" @click="deleteTopic">删除帖子</el-button>
-                <el-button type="warning" @click="handleCheck">转为待审核</el-button>
+                <el-button type="danger" size="small" icon="el-icon-delete" @click="deleteTopic">删除帖子</el-button>
+                <el-button type="warning" size="small" icon="el-icon-refresh-left" @click="handleCheck"
+                    >转为待审核</el-button
+                >
             </div>
 
-            <el-divider content-position="left"></el-divider>
-            <div>
-                <!-- <el-button type="primary" @click="submit" :loading="pushing">提交修改</el-button> -->
-                <el-button type="primary" @click="close">关闭窗口</el-button>
+            <div class="c-admin-buttons">
+                <el-button type="primary" @click="submit" :loading="pushing">提交修改</el-button>
+                <el-button type="plain" @click="close">取消</el-button>
             </div>
         </div>
     </el-drawer>
 </template>
 
 <script>
-import { post } from "jquery";
 import {
     auditTopic,
     deleteTopic,
+    getCommunityTags,
     getTopicBucket,
     getTopicDetails,
     manageTopic,
@@ -128,6 +120,8 @@ export default {
     emits: ["update:modelValue"],
     data() {
         return {
+            tags: [],
+            isTopStatus: [],
             post: null,
             pushing: false,
             categoryList: [],
@@ -182,6 +176,16 @@ export default {
                 is_category_top: this.post.is_category_top,
             };
         },
+        form() {
+            const isTopStatus = [];
+            if (this.form.is_top == 1) {
+                isTopStatus.push(1);
+            }
+            if (this.form.is_category_top == 1) {
+                isTopStatus.push(2);
+            }
+            this.isTopStatus = isTopStatus;
+        },
         modelValue(val) {
             if (val) {
                 this.getTopicDetails();
@@ -190,11 +194,32 @@ export default {
     },
     created: function () {
         this.getCategoryList();
+        this.getCommunityTags();
     },
     methods: {
+        onTopStatusChange(vals) {
+            if (vals.includes(1) && this.form.is_top == 0) {
+                this.onManageTopic(true, "top");
+            }
+            if (!vals.includes(1) && this.form.is_top == 1) {
+                this.onManageTopic(false, "top");
+            }
+            if (vals.includes(2) && this.form.is_category_top == 0) {
+                this.onManageTopic(true, "category_top");
+            }
+            if (!vals.includes(2) && this.form.is_category_top == 1) {
+                this.onManageTopic(false, "category_top");
+            }
+        },
         onManageTopic(e, action) {
             const value = e ? 1 : 0;
             manageTopic(this.post.id, action, value).then(() => {
+                if (action === "top") {
+                    this.form.is_top = value;
+                }
+                if (action === "category_top") {
+                    this.form.is_category_top = value;
+                }
                 this.$message({
                     type: "success",
                     message: "操作成功!",
@@ -222,9 +247,18 @@ export default {
                 this.$message.error("ID不存在!");
                 return;
             }
-            updateTopicItem(id, this.params).then((res) => {
+            updateTopicItem(id, {
+                ...this.post,
+                tags: this.form.tags,
+                is_top: 0,
+            }).then((res) => {
                 this.$message.success("修改成功");
                 this.$emit("update:modelValue", false);
+            });
+        },
+        getCommunityTags() {
+            getCommunityTags().then((tags) => {
+                this.tags = tags;
             });
         },
         // 关闭
@@ -232,10 +266,11 @@ export default {
             this.form = {
                 category: "",
                 tags: [],
-                is_top: false,
-                is_star: false,
-                is_hight: false,
+                is_top: 0,
+                is_star: 0,
+                is_hight: 0,
             };
+            this.isTopStatus = [];
             this.$nextTick(() => {
                 this.$emit("update:modelValue", false);
             });
@@ -277,4 +312,20 @@ export default {
 
 <style lang="less">
 @import "../../assets/css/admin.less";
+.c-admin-space {
+    .flex;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 28px;
+    gap: 4px;
+}
+.c-admin-lable {
+    font-size: 14px;
+    font-weight: 500;
+}
+.c-admin-buttons {
+    width: 100%;
+    position: absolute;
+    bottom: 80px;
+}
 </style>

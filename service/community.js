@@ -1,4 +1,5 @@
 import { $cms, $next } from "@jx3box/jx3box-common/js/https";
+
 const API_PREFIX = `/api/next2`;
 // 获取分类
 export function getTopicBucket(params) {
@@ -34,3 +35,12 @@ export const manageTopic = (id, action, value) => {
 export const getTopicDetails = (id) => {
     return $next().get(`${API_PREFIX}/community/discussion/topic/item/${id}`);
 };
+
+// 菜单
+export function getCommunityTags() {
+    return $cms()
+        .get(`/api/cms/menu-group/community_tags`)
+        .then((res) => {
+            return res.data.data.menus || [];
+        });
+}
