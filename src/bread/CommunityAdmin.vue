@@ -227,6 +227,11 @@ export default {
             });
         },
         handleCheck() {
+            const id = this.post.id;
+            if (!id) {
+                this.$message.error("ID不存在!");
+                return;
+            }
             this.$confirm(`此操作将该数据转为 待审核 状态, 是否继续?`, "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
@@ -237,7 +242,8 @@ export default {
                         type: "success",
                         message: "操作成功!",
                     });
-                    this.load();
+                    this.$emit("update:modelValue", false);
+                    window.location.href = "/community";
                 });
             });
         },
