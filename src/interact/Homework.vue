@@ -43,7 +43,7 @@
                 </div>
             </div>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="visible = false">取 消</el-button>
+                <el-button @click="onClose">取 消</el-button>
                 <el-button type="primary" @click="submit" :disabled="!ready || submitting">确 定</el-button>
             </span>
         </el-dialog>
@@ -162,9 +162,6 @@ export default {
         }
     },
     methods: {
-        openBoxcoinPop: function () {
-            this.visible = true;
-        },
         // 选择要打赏的对象
         handleChosen(userId) {
             this.chosen = userId
@@ -196,7 +193,7 @@ export default {
                 })
                 .finally(() => {
                     this.submitting = false;
-                    this.visible = false;
+                    this.onClose();
                 });
         },
         insertCurrentRelease: function() {
