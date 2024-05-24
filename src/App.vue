@@ -32,6 +32,7 @@
                     <!-- <Collection :id="59" :defaultVisible="true" /> -->
                     <UserPop title="添加用户" v-model="visible" @confirm="addUser" />
                     <el-button @click="visible = true">用户POP</el-button>
+                    <el-button @click="homeworkVisible=true">作业组件</el-button>
                     <!-- :postId="23865" -->
                     <!-- <Thx
                         postType="bps"
@@ -50,6 +51,8 @@
                     <Print title="传入标题" />
                     <QRcode />
                     <Sharing />
+
+                    <homework v-model="homeworkVisible" post-type="comment" :post-id="19382" :userId="8719" client="std"></homework>
 
                     <PostGuide :post="post" />
 
@@ -198,6 +201,7 @@ import axios from "axios";
 import { __server } from "@jx3box/jx3box-common/data/jx3box.json";
 import { wiki } from "@jx3box/jx3box-common/js/wiki";
 import post_topics from "@jx3box/jx3box-common/data/post_topics.json";
+import Homework from './interact/Homework.vue';
 
 export default {
     name: "App",
@@ -232,6 +236,7 @@ export default {
         Down,
         Fav,
         Feed,
+        Homework,
 
         Print,
         Sharing,
@@ -273,7 +278,9 @@ export default {
             text: `<Text>text="使用：<BUFF 3222 1 desc>，持续<BUFF 3222 1 time>。\\\n" font=105 </text><Text>text="红豆沙做馅儿，精致细腻的广式月饼。" font=100 </text><Text>text="使用：能在唐门套装供应商处换取如下装备。\\\n" font=105 </text><Text>text="[燕云·重泉靴]" name="iteminfolink" eventid=513 script="this.nVersion=0 this.dwTabType=7 this.dwIndex=35244 this.OnItemLButtonDown=function() OnItemLinkDown(this) end" font=100 r=255 g=40 b=255 </text><Text>text="，" font=105 </text><Text>text="[燕云·铭松靴]" name="iteminfolink" eventid=513 script="this.nVersion=0 this.dwTabType=7 this.dwIndex=35245 this.OnItemLButtonDown=function() OnItemLinkDown(this) end" font=100 r=255 g=40 b=255 </text><Text>text="。" font=100 </text>`,
 
             post_topics: post_topics['pve'],
-            tag2: ''
+            tag2: '',
+
+            homeworkVisible: false,
         };
     },
     created: function () {

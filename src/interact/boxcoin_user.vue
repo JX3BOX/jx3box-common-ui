@@ -11,7 +11,7 @@
                 <div class="u-left">
                     <em class="u-label">当前拥有盒币</em>
                     <b>{{left}}</b>
-                    <a class="u-charge" :href="chargeLink" target="_blank">[充值]</a>
+                    <!-- <a class="u-charge" :href="chargeLink" target="_blank">[充值]</a> -->
                 </div>
                 <div class="u-list">
                     <em class="u-label">❤️ 打赏</em>
