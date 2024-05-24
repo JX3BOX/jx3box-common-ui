@@ -1,6 +1,6 @@
 <template>
     <el-drawer
-        class="c-admin"
+        class="c-admin c-community-admin"
         title="管理面板"
         :visible.sync="modelValue"
         :before-close="close"
@@ -9,8 +9,25 @@
         :withHeader="false"
     >
         <div class="c-admin-wrapper">
-            <el-divider content-position="left">标签</el-divider>
-
+            <el-divider content-position="left">信息设置</el-divider>
+            <div class="c-admin-extend">
+                <div class="u-condition u-map">
+                    <el-input v-model="form.title" placeholder="请输入标题" class="input-author drawer-item-content">
+                        <template #prepend>
+                            <span class="u-keyword">标题</span>
+                        </template>
+                    </el-input>
+                </div>
+            </div>
+            <div class="c-admin-extend">
+                <div class="u-condition u-map">
+                    <span class="u-prepend el-input-group__prepend">分类</span>
+                    <el-select v-model="form.category" filterable placeholder="请选择">
+                        <el-option v-for="item in categoryList" :value="item.name" :label="item.name" :key="item.name">
+                        </el-option>
+                    </el-select>
+                </div>
+            </div>
             <div class="c-admin-extend">
                 <div class="u-condition u-map">
                     <span class="u-prepend el-input-group__prepend">标签</span>
@@ -26,6 +43,21 @@
                         <el-option v-for="item in tags" :value="item.label" :label="item.label" :key="item.uuid">
                         </el-option>
                     </el-select>
+                </div>
+            </div>
+            <div class="c-admin-extend">
+                <div class="u-condition u-map">
+                    <div>
+                        <el-input
+                            v-model="form.user_id"
+                            placeholder="请输入作者ID"
+                            class="input-author drawer-item-content"
+                        >
+                            <template #prepend>
+                                <span class="u-keyword">作者ID</span>
+                            </template>
+                        </el-input>
+                    </div>
                 </div>
             </div>
 
@@ -151,18 +183,6 @@ export default {
         showColors() {
             return this.form.is_hight;
         },
-        params() {
-            return {
-                ...this.post,
-                category: this.form.category,
-                tags: this.form.tags,
-                is_top: this.form.is_top,
-                is_star: this.form.is_star,
-                is_hight: this.form.is_hight,
-                is_category_top: this.form.is_category_top,
-                // color: this.color,
-            };
-        },
     },
     watch: {
         post() {
@@ -174,6 +194,8 @@ export default {
                 is_star: this.post.is_star,
                 tags: this.post.tags,
                 is_category_top: this.post.is_category_top,
+                user_id: this.post.user_id,
+                title: this.post.title,
             };
         },
         form() {
@@ -256,10 +278,13 @@ export default {
             updateTopicItem(id, {
                 ...this.post,
                 tags: this.form.tags,
-                is_top: 0,
+                user_id: this.form.user_id,
+                title: this.form.title,
+                category: this.form.category,
             }).then((res) => {
                 this.$message.success("修改成功");
                 this.$emit("update:modelValue", false);
+                window.location.reload();
             });
         },
         getCommunityTags() {
@@ -318,20 +343,35 @@ export default {
 
 <style lang="less">
 @import "../../assets/css/admin.less";
-.c-admin-space {
-    .flex;
-    align-items: center;
-    flex-wrap: wrap;
-    height: 28px;
-    gap: 4px;
-}
-.c-admin-lable {
-    font-size: 14px;
-    font-weight: 500;
-}
-.c-admin-buttons {
-    width: 100%;
-    position: absolute;
-    bottom: 80px;
+.c-community-admin {
+    .c-admin-space {
+        .flex;
+        align-items: center;
+        flex-wrap: wrap;
+        height: 28px;
+        gap: 4px;
+    }
+    .c-admin-lable {
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .c-admin-buttons {
+        width: 100%;
+        padding-top: 30px;
+        // position: absolute;
+        // bottom: 50px;
+    }
+    .c-admin-extend .u-map .u-prepend {
+        font-size: 14px;
+        min-width: 62px;
+    }
+    .c-admin-extend .u-map .el-select {
+        margin-left: 62px;
+    }
+    .el-input-group__prepend {
+        text-align: center;
+        min-width: 62px;
+        box-sizing: border-box;
+    }
 }
 </style>
