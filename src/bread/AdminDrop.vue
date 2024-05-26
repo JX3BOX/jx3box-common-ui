@@ -5,17 +5,20 @@
                 ><i class="el-icon-setting"></i> 管理<i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item v-if="isEditor && !isCommunity" command="toggleAdminPanel" icon="el-icon-setting">
+                <el-dropdown-item v-if="hasPermission('update_post')" command="editPost" icon="el-icon-edit-outline">
+                    <span>编辑</span>
+                </el-dropdown-item>
+                <el-dropdown-item v-if="!isCommunity && hasPermission('update_post')" command="toggleAdminPanel" icon="el-icon-setting">
                     <span>设置</span>
                 </el-dropdown-item>
                 <el-dropdown-item
-                    v-else-if="isEditor && isCommunity"
+                    v-else-if="isCommunity"
                     command="toggleCommunityAdminPanel"
                     icon="el-icon-setting"
                 >
                     <span>设置</span>
                 </el-dropdown-item>
-                <el-dropdown-item v-if="isEditor" command="directMessage" icon="el-icon-message">
+                <el-dropdown-item v-if="hasPermission('create_system_message')" command="directMessage" icon="el-icon-message">
                     <span>私信</span>
                 </el-dropdown-item>
                 <el-dropdown-item v-if="isEditor && showMove" command="onMoveToCommunity" icon="el-icon-refresh">
@@ -28,7 +31,7 @@
         </el-dropdown>
 
         <design-task v-model="showDesignTask" :post="post"></design-task>
-        <CommunityAdmin v-model="communityAdminVisible" :postId="post.id" />
+        <CommunityAdmin v-model="communityAdminVisible" :postId="post && post.id" />
         <MoveToCommunityDialog v-model="moveVisible" :post="post" />
     </div>
 </template>
@@ -40,6 +43,7 @@ import DesignTask from "./DesignTask.vue";
 import MoveToCommunityDialog from "./MoveToCommunityDialog.vue";
 import { sendMessage } from "../../service/admin";
 import CommunityAdmin from "./CommunityAdmin.vue";
+import { editLink } from "@jx3box/jx3box-common/js/utils";
 export default {
     name: "AdminDrop",
     components: {
@@ -94,6 +98,9 @@ export default {
                 return this.post?.post_type;
             }
         },
+        edit_link: function() {
+            return editLink(this.post?.post_type, this.post?.ID);
+        },
     },
     methods: {
         handleCommand(command) {
@@ -140,6 +147,9 @@ export default {
         },
         designTask() {
             this.showDesignTask = true;
+        },
+        editPost() {
+            location.href = this.edit_link + '?from=admin';
         },
         hasPermission(permission) {
             return User.hasPermission(permission);

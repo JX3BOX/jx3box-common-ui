@@ -122,7 +122,7 @@ export default {
             return editLink(this.post?.post_type, this.post?.ID);
         },
         canEdit: function() {
-            return this.post?.post_author == User.getInfo().uid || User.isEditor();
+            return this.post?.post_author == User.getInfo().uid
         },
         client: function() {
             return this.post?.client || "std";
