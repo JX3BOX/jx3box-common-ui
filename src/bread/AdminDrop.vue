@@ -5,9 +5,6 @@
                 ><i class="el-icon-setting"></i> 管理<i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item v-if="hasPermission('update_post')" command="editPost" icon="el-icon-edit-outline">
-                    <span>编辑</span>
-                </el-dropdown-item>
                 <el-dropdown-item v-if="!isCommunity && hasPermission('update_post')" command="toggleAdminPanel" icon="el-icon-setting">
                     <span>设置</span>
                 </el-dropdown-item>
@@ -17,6 +14,9 @@
                     icon="el-icon-setting"
                 >
                     <span>设置</span>
+                </el-dropdown-item>
+                <el-dropdown-item v-if="hasPermission('update_post') && !isCommunity" command="editPost" icon="el-icon-edit-outline">
+                    <span>编辑</span>
                 </el-dropdown-item>
                 <el-dropdown-item v-if="hasPermission('create_system_message')" command="directMessage" icon="el-icon-message">
                     <span>私信</span>
