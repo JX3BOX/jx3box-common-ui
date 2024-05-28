@@ -28,7 +28,7 @@
                     </el-select>
                 </div>
             </div>
-            <div class="c-admin-extend">
+            <div class="c-admin-extend m-community-tag">
                 <div class="u-condition u-map">
                     <span class="u-prepend el-input-group__prepend">标签</span>
                     <el-select
@@ -39,10 +39,21 @@
                         default-first-option
                         placeholder="请选择"
                         clearable
+                        @change="onTagChange"
                     >
                         <el-option v-for="item in tags" :value="item.label" :label="item.label" :key="item.uuid">
                         </el-option>
                     </el-select>
+                </div>
+                <div  class="m-community-tag__content">
+                    <template v-if="finalTags.length">
+                        <div class="m-community-tag__list" v-for="item in finalTags" :key="item.uuid">
+                            <el-input v-model="item.label"></el-input>
+                            <el-color-picker v-model="item.color"
+                            :predefine="color_options"></el-color-picker>
+                        </div>
+                    </template>
+                    <el-alert title="暂未设置标签" v-else type="info" show-icon :closable="false"></el-alert>
                 </div>
             </div>
             <div class="c-admin-extend">
@@ -79,7 +90,6 @@
                 <span class="c-admin-lable">精选：</span>
                 <el-switch
                     v-model="form.is_star"
-                    @change="onManageTopic($event, 'star')"
                     :active-value="1"
                     :inactive-value="0"
                 />
@@ -88,7 +98,6 @@
             <p class="c-admin-space">
                 <span class="c-admin-lable">高亮：</span>
                 <el-switch
-                    @change="onManageTopic($event, 'hight')"
                     v-model="form.is_hight"
                     :active-value="1"
                     :inactive-value="0"
@@ -131,7 +140,9 @@ import {
     getTopicDetails,
     manageTopic,
     updateTopicItem,
+    manageTopicAll
 } from "../../service/community";
+import {cloneDeep} from "lodash";
 
 export default {
     name: "CommunityAdmin",
@@ -174,6 +185,8 @@ export default {
                 is_hight: 0,
                 is_category_top: 0,
             },
+
+            finalTags: []
         };
     },
     computed: {
@@ -185,19 +198,6 @@ export default {
         },
     },
     watch: {
-        post() {
-            this.form = {
-                ...this.form,
-                is_hight: this.post.is_hight,
-                category: this.post.category,
-                is_top: this.post.is_top,
-                is_star: this.post.is_star,
-                tags: this.post.tags,
-                is_category_top: this.post.is_category_top,
-                user_id: this.post.user_id,
-                title: this.post.title,
-            };
-        },
         form() {
             const isTopStatus = [];
             if (this.form.is_top == 1) {
@@ -208,15 +208,14 @@ export default {
             }
             this.isTopStatus = isTopStatus;
         },
-        modelValue(val) {
+        modelValue: async function(val) {
             if (val) {
-                this.getTopicDetails();
+                await this.getCategoryList();
+                await this.getCommunityTags();
+                await this.getTopicDetails();
             }
         },
-    },
-    created: function () {
-        this.getCategoryList();
-        this.getCommunityTags();
+
     },
     methods: {
         onTopStatusChange(vals) {
@@ -269,7 +268,7 @@ export default {
                 });
             });
         },
-        submit() {
+        async submit() {
             const id = this.post.id;
             if (!id) {
                 this.$message.error("ID不存在!");
@@ -286,6 +285,14 @@ export default {
                 this.$emit("update:modelValue", false);
                 window.location.reload();
             });
+
+            const data = {
+                is_top: this.isTopStatus.includes(1) ? 1 : 0,
+                is_category_top: this.isTopStatus.includes(2) ? 1 : 0,
+                is_star: this.form.is_star,
+                is_hight: this.form.is_hight,
+                color: this.color,
+            };
         },
         getCommunityTags() {
             getCommunityTags().then((tags) => {
@@ -335,8 +342,36 @@ export default {
         getTopicDetails() {
             getTopicDetails(this.postId).then((res) => {
                 this.post = res.data.data;
+                this.form = {
+                    ...this.form,
+                    is_hight: this.post.is_hight,
+                    category: this.post.category,
+                    is_top: this.post.is_top,
+                    is_star: this.post.is_star,
+                    tags: this.post.tags,
+                    is_category_top: this.post.is_category_top,
+                    user_id: this.post.user_id,
+                    title: this.post.title,
+                }
+
+                this.onTagChange();
             });
         },
+        onTagChange() {
+            const tags = this.form.tags.map((item) => {
+                const tag = this.tags.find((tag) => tag.label === item);
+
+                if (tag) {
+                    return tag;
+                }
+
+                return {
+                    label: item,
+                    color: "rgb(255,0,1)",
+                }
+            });
+            this.finalTags = tags;
+        }
     },
 };
 </script>
@@ -372,6 +407,31 @@ export default {
         text-align: center;
         min-width: 62px;
         box-sizing: border-box;
+    }
+
+    .m-community-tag {
+        .u-prepend {
+            border-bottom-left-radius: 0!important;
+        }
+        .el-input__inner {
+            border-bottom-right-radius: 0!important;
+        }
+    }
+
+    .m-community-tag__content {
+        border: 1px solid #dcdfe6;
+        border-top: none;
+        padding: 10px;
+    }
+
+    .m-community-tag__list {
+        .flex;
+        align-items: center;
+        gap: 10px;
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
     }
 }
 </style>

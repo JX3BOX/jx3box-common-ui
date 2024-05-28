@@ -14,7 +14,7 @@
             <img slot="logo" svg-inline src="../assets/img/jx3.svg" />
             bread info
             <template #op-prepend>
-                <AdminDrop :post="post" :user-id="8" :showMove="true"/>
+                <AdminDrop :post="community" :isCommunity="true" :user-id="8" :showMove="true"/>
             </template>
         </Breadcrumb>
 
@@ -202,6 +202,7 @@ import { __server } from "@jx3box/jx3box-common/data/jx3box.json";
 import { wiki } from "@jx3box/jx3box-common/js/wiki";
 import post_topics from "@jx3box/jx3box-common/data/post_topics.json";
 import Homework from './interact/Homework.vue';
+import { getTopicDetails } from "../service/community"
 
 export default {
     name: "App",
@@ -281,6 +282,8 @@ export default {
             tag2: '',
 
             homeworkVisible: false,
+
+            community: {}
         };
     },
     created: function () {
@@ -288,6 +291,8 @@ export default {
             res = res.data;
             this.wikiPost = res.data;
         });
+
+        this.loadCommunity();
     },
     methods: {
         addUser: function (val) {
@@ -301,6 +306,11 @@ export default {
         },
         updateExtend: function (val) {
             // console.log(val);
+        },
+        loadCommunity: function () {
+            getTopicDetails(72).then((res) => {
+                this.community = res.data.data;
+            });
         },
     },
     watch: {

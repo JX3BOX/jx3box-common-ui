@@ -32,6 +32,10 @@ export const manageTopic = (id, action, value) => {
     return $next().put(`${API_PREFIX}/community/discussion/manage/topic/item/${id}/opt/${action}/${value}`);
 };
 
+export const manageTopicAll = (id, data) => {
+    return $next().put(`${API_PREFIX}/community/discussion/manage/topic/item/${id}/opt`, data);
+}
+
 export const getTopicDetails = (id) => {
     return $next().get(`${API_PREFIX}/community/discussion/topic/item/${id}`);
 };
