@@ -261,7 +261,7 @@ export default {
                     message: "操作成功!",
                 });
                 this.$emit("update:modelValue", false);
-                window.reload();
+                location.reload();
             });
         },
         getCommunityTags() {
