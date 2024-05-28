@@ -46,7 +46,7 @@
                     </el-select>
                 </div>
                 <div  class="m-community-tag__content">
-                    <template v-if="finalTags.length">
+                    <template v-if="finalTags && finalTags.length">
                         <div class="m-community-tag__list" v-for="item in finalTags" :key="item.uuid">
                             <el-input v-model="item.label"></el-input>
                             <el-color-picker v-model="item.color"

@@ -78,7 +78,8 @@ export default {
                 remark: "",
                 star: 0,
                 subtype: "",
-                version: "std"
+                version: "std",
+                type: ""
             },
             colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
 
@@ -133,6 +134,7 @@ export default {
                 star: 0,
                 subtype: "",
                 version: "std",
+                type: ""
             }
 
             this.$refs?.form?.clearValidate();
