@@ -41,7 +41,7 @@
                         clearable
                         @change="onTagChange"
                     >
-                        <el-option v-for="item in tags" :value="item.label" :label="item.label" :key="item.uuid">
+                        <el-option v-for="item in tags" :value="item.label" :label="item.label" :key="item.label">
                         </el-option>
                     </el-select>
                 </div>
@@ -75,19 +75,18 @@
             <el-divider content-position="left">高亮置顶</el-divider>
 
             <p class="c-admin-space">
-                <span class="c-admin-lable">置顶：</span>
+                <span class="c-admin-label">置顶：</span>
                 <el-checkbox-group
-                    v-model="isTopStatus"
-                    @change="onTopStatusChange"
+                    v-model="topStatus"
                     class="c-admin-status"
                     size="small"
                 >
-                    <el-checkbox-button :label="1">全局置顶</el-checkbox-button>
-                    <el-checkbox-button :label="2">版内置顶</el-checkbox-button>
+                    <el-checkbox-button label="is_top">全局置顶</el-checkbox-button>
+                    <el-checkbox-button label="is_category_top">版内置顶</el-checkbox-button>
                 </el-checkbox-group>
             </p>
             <p class="c-admin-space">
-                <span class="c-admin-lable">精选：</span>
+                <span class="c-admin-label">精选：</span>
                 <el-switch
                     v-model="form.is_star"
                     :active-value="1"
@@ -96,7 +95,7 @@
             </p>
 
             <p class="c-admin-space">
-                <span class="c-admin-lable">高亮：</span>
+                <span class="c-admin-label">高亮：</span>
                 <el-switch
                     v-model="form.is_hight"
                     :active-value="1"
@@ -105,7 +104,7 @@
                 <span v-show="showColors">
                     <el-color-picker
                         class="c-admin-highlight-block"
-                        v-model="color"
+                        v-model="form.hight_color"
                         :predefine="color_options"
                         size="mini"
                     ></el-color-picker>
@@ -164,7 +163,7 @@ export default {
     data() {
         return {
             tags: [],
-            isTopStatus: [],
+            topStatus: [],
             post: null,
             pushing: false,
             categoryList: [],
@@ -184,6 +183,7 @@ export default {
                 is_star: 0,
                 is_hight: 0,
                 is_category_top: 0,
+                hight_color: "rgb(255,0,1)",
             },
 
             finalTags: []
@@ -198,16 +198,6 @@ export default {
         },
     },
     watch: {
-        form() {
-            const isTopStatus = [];
-            if (this.form.is_top == 1) {
-                isTopStatus.push(1);
-            }
-            if (this.form.is_category_top == 1) {
-                isTopStatus.push(2);
-            }
-            this.isTopStatus = isTopStatus;
-        },
         modelValue: async function(val) {
             if (val) {
                 await this.getCategoryList();
@@ -218,35 +208,6 @@ export default {
 
     },
     methods: {
-        onTopStatusChange(vals) {
-            if (vals.includes(1) && this.form.is_top == 0) {
-                this.onManageTopic(true, "top");
-            }
-            if (!vals.includes(1) && this.form.is_top == 1) {
-                this.onManageTopic(false, "top");
-            }
-            if (vals.includes(2) && this.form.is_category_top == 0) {
-                this.onManageTopic(true, "category_top");
-            }
-            if (!vals.includes(2) && this.form.is_category_top == 1) {
-                this.onManageTopic(false, "category_top");
-            }
-        },
-        onManageTopic(e, action) {
-            const value = e ? 1 : 0;
-            manageTopic(this.post.id, action, value).then(() => {
-                if (action === "top") {
-                    this.form.is_top = value;
-                }
-                if (action === "category_top") {
-                    this.form.is_category_top = value;
-                }
-                this.$message({
-                    type: "success",
-                    message: "操作成功!",
-                });
-            });
-        },
         handleCheck() {
             const id = this.post.id;
             if (!id) {
@@ -274,25 +235,34 @@ export default {
                 this.$message.error("ID不存在!");
                 return;
             }
-            updateTopicItem(id, {
+
+            const promises = [];
+
+            promises.push(updateTopicItem(id, {
                 ...this.post,
-                tags: this.form.tags,
                 user_id: this.form.user_id,
                 title: this.form.title,
                 category: this.form.category,
-            }).then((res) => {
-                this.$message.success("修改成功");
-                this.$emit("update:modelValue", false);
-                window.location.reload();
-            });
+            }));
 
-            const data = {
-                is_top: this.isTopStatus.includes(1) ? 1 : 0,
-                is_category_top: this.isTopStatus.includes(2) ? 1 : 0,
+            promises.push(manageTopicAll(id, {
+                is_top: this.topStatus.includes("is_top") ? 1 : 0,
+                is_category_top: this.topStatus.includes("is_category_top") ? 1 : 0,
                 is_star: this.form.is_star,
                 is_hight: this.form.is_hight,
-                color: this.color,
-            };
+                hight_color: this.form.hight_color,
+                color_tag: this.finalTags,
+            }));
+
+
+            Promise.all(promises).then(() => {
+                this.$message({
+                    type: "success",
+                    message: "操作成功!",
+                });
+                this.$emit("update:modelValue", false);
+                window.reload();
+            });
         },
         getCommunityTags() {
             getCommunityTags().then((tags) => {
@@ -348,13 +318,21 @@ export default {
                     category: this.post.category,
                     is_top: this.post.is_top,
                     is_star: this.post.is_star,
-                    tags: this.post.tags,
                     is_category_top: this.post.is_category_top,
                     user_id: this.post.user_id,
                     title: this.post.title,
+                    hight_color: this.post.hight_color,
+                    tags: this.post?.color_tag?.map((item) => item.label) || [],
                 }
 
-                this.onTagChange();
+                this.finalTags = this.post.color_tag;
+                this.topStatus = [];
+                if (this.post.is_top) {
+                    this.topStatus.push("is_top");
+                }
+                if (this.post.is_category_top) {
+                    this.topStatus.push("is_category_top");
+                }
             });
         },
         onTagChange() {
@@ -386,7 +364,7 @@ export default {
         height: 28px;
         gap: 4px;
     }
-    .c-admin-lable {
+    .c-admin-label {
         font-size: 14px;
         font-weight: 500;
     }

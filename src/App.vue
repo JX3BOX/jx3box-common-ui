@@ -308,7 +308,8 @@ export default {
             // console.log(val);
         },
         loadCommunity: function () {
-            getTopicDetails(72).then((res) => {
+            // 72
+            getTopicDetails(82).then((res) => {
                 this.community = res.data.data;
             });
         },
