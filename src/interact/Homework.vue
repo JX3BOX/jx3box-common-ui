@@ -56,7 +56,7 @@ import User from "@jx3box/jx3box-common/js/user";
 import { getBreadcrumb } from "@jx3box/jx3box-common/js/api_misc";
 export default {
     name: "Homework",
-    props: ["postType", "postId", "userId", "client", "modelValue"],
+    props: ["postType", "postId", "userId", "client", "modelValue", "articleId", "category"],
     model: {
         prop: "modelValue",
         event: "update:modelValue"
@@ -176,7 +176,8 @@ export default {
             const fn = this.type === 'reward' ? rewardBoxcoin : grantBoxcoin;
             fn(this.postType, this.postId, this.userId, count, {
                 remark: this.remark,
-                client : client
+                client : client,
+                redirect: `/${this.category}/${this.articleId}`
             })
                 .then((res) => {
                     this.$message({
