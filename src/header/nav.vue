@@ -152,7 +152,7 @@ const activeNav = {
         "exam",
         "body",
     ],
-    bbs: ["bbs", "topic", "emotion", "joke", "namespace", "collection", "community"],
+    community: ["bbs", "topic", "emotion", "joke", "namespace", "collection", "community"],
     pvp: ["pvp"],
 };
 
