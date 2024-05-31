@@ -5,10 +5,10 @@
                 <div class="c-topic-text__year">{{ year }}</div>
                 <div class="c-topic-text__text">{{ topicText }}</div>
             </div>
-            <img class="c-topic-bg" src="../../assets/img/rightsidebar/topic_bg_bps.svg" alt="">
+            <img class="c-topic-bg" src="../../assets/img/rightsidebar/topic_bg_bps.svg" alt="" />
         </div>
         <div class="c-post-topic__img">
-            <img :src="topicImage" alt="">
+            <img :src="topicImage" alt="" />
         </div>
     </div>
 </template>
@@ -35,19 +35,22 @@ export default {
     },
     data() {
         return {
-            topicInfo: null
-        }
+            topicInfo: null,
+        };
     },
     computed: {
         topicText() {
-            return this.topicInfo ? `${dayjs(this.topicInfo.created_at).format('MM月DD日')}荣登头条榜` : ''
+            return this.topicInfo ? `${dayjs(this.topicInfo.created_at).format("MM月DD日")}荣登头条榜` : "";
         },
         year() {
-            return this.topicInfo ? dayjs(this.topicInfo.created_at).format('YYYY年') : ""
+            return this.topicInfo ? dayjs(this.topicInfo.created_at).format("YYYY年") : "";
         },
         topicImage() {
             const img = this.postBanner || this.topicInfo?.img;
-            return getThumbnail(img, [260*2, 78*2])
+            if (img.indexOf(".gif") > -1) {
+                return img;
+            }
+            return getThumbnail(img, [260 * 2, 78 * 2]);
         },
         client() {
             return location.href.includes("origin") ? "origin" : "std";
@@ -59,21 +62,23 @@ export default {
             handler(val) {
                 if (!val) return;
                 this.loadData();
-            }
-        }
+            },
+        },
     },
     methods: {
         loadData() {
             getSliders(this.type, this.id, this.client).then((res) => {
                 if (res.data.data?.list) {
                     // 取创建时间最新的一条
-                    const list = res.data.data.list.sort((a, b) => dayjs(b.created_at).isAfter(dayjs(a.created_at)) ? 1 : -1);
+                    const list = res.data.data.list.sort((a, b) =>
+                        dayjs(b.created_at).isAfter(dayjs(a.created_at)) ? 1 : -1
+                    );
                     this.topicInfo = list[0];
                 }
             });
         },
-    }
-}
+    },
+};
 </script>
 
 <style lang="less" scoped>
@@ -93,7 +98,7 @@ export default {
         // left: 50%;
         // transform: translate(-50%, -50%);
         z-index: 1;
-        color: #FFD28F;
+        color: #ffd28f;
         letter-spacing: 1px;
         white-space: nowrap;
         margin-right: 8px;
@@ -115,7 +120,7 @@ export default {
     overflow: hidden;
     .r(4px);
     min-height: 71px;
-    img{
+    img {
         .pa;
         left: 50%;
         transform: translateX(-50%);
