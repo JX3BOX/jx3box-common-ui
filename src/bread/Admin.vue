@@ -282,7 +282,7 @@ export default {
         // 上传
         uploadSuccess: function (res, file, list) {
             this.banner_preview = URL.createObjectURL(file.raw);
-            this.post_banner = res.data[0];
+            this.post_banner = res.data?.[0] || "";
         },
         uploadFail: function (err, file, fileList) {
             this.$message.error("上传失败");

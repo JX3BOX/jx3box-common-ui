@@ -72,6 +72,27 @@
                 </div>
             </div>
 
+            <el-divider content-position="left">封面海报</el-divider>
+            <div class="c-admin-banner">
+                <el-upload
+                    class="c-admin-upload el-upload--picture-card"
+                    :action="uploadurl"
+                    :with-credentials="true"
+                    :show-file-list="false"
+                    :on-success="uploadSuccess"
+                    :on-error="uploadFail"
+                >
+                    <img v-if="post_banner" :src="post_banner" />
+                    <i class="el-icon-plus"></i>
+                </el-upload>
+                <el-input class="u-banner" v-model="post_banner">
+                    <span slot="prepend">海报地址</span>
+                    <span slot="append">
+                        <span class="u-btn" @click="removeBanner"> <i class="el-icon-circle-close"></i> 移除海报 </span>
+                    </span>
+                </el-input>
+            </div>
+
             <el-divider content-position="left">高亮置顶</el-divider>
 
             <p class="c-admin-space">
@@ -141,7 +162,7 @@ import {
     updateTopicItem,
     manageTopicAll
 } from "../../service/community";
-import {cloneDeep} from "lodash";
+import { __cms } from "@jx3box/jx3box-common/data/jx3box.json";
 
 export default {
     name: "CommunityAdmin",
@@ -186,7 +207,12 @@ export default {
                 hight_color: "rgb(255,0,1)",
             },
 
-            finalTags: []
+            finalTags: [],
+
+            // 海报
+            uploadurl: __cms + "api/cms/upload",
+            banner_preview: "",
+            post_banner: "",
         };
     },
     computed: {
@@ -243,6 +269,7 @@ export default {
                 user_id: this.form.user_id,
                 title: this.form.title,
                 category: this.form.category,
+                banner_img: this.post_banner,
             }));
 
             promises.push(manageTopicAll(id, {
@@ -327,6 +354,7 @@ export default {
 
                 this.finalTags = this.post.color_tag;
                 this.topStatus = [];
+                this.post_banner = this.post.banner_img;
                 if (this.post.is_top) {
                     this.topStatus.push("is_top");
                 }
@@ -349,7 +377,19 @@ export default {
                 }
             });
             this.finalTags = tags;
-        }
+        },
+        // 上传
+        uploadSuccess: function (res, file, list) {
+            this.banner_preview = URL.createObjectURL(file.raw);
+            this.post_banner = res.data[0];
+        },
+        uploadFail: function (err, file, fileList) {
+            this.$message.error("上传失败");
+            console.log(err);
+        },
+        removeBanner: function () {
+            this.post_banner = "";
+        },
     },
 };
 </script>
