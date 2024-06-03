@@ -8,18 +8,26 @@
         :modal="false"
         :withHeader="false"
     >
-        <div class="c-admin-wrapper">
+        <div class="c-admin-wrapper c-community-wrapper">
             <el-divider content-position="left">信息设置</el-divider>
             <div class="c-admin-extend">
-                <div class="u-condition u-map">
+                <div class="u-condition u-map u-title-condition">
+                    <span class="u-prepend el-input-group__prepend">
+                        <el-select v-model="form.category" filterable placeholder="请选择">
+                            <el-option
+                                v-for="item in categoryList"
+                                :value="item.name"
+                                :label="item.name"
+                                :key="item.name"
+                            >
+                            </el-option>
+                        </el-select>
+                    </span>
                     <el-input v-model="form.title" placeholder="请输入标题" class="input-author drawer-item-content">
-                        <template #prepend>
-                            <span class="u-keyword">标题</span>
-                        </template>
                     </el-input>
                 </div>
             </div>
-            <div class="c-admin-extend">
+            <!-- <div class="c-admin-extend">
                 <div class="u-condition u-map">
                     <span class="u-prepend el-input-group__prepend">分类</span>
                     <el-select v-model="form.category" filterable placeholder="请选择">
@@ -27,7 +35,7 @@
                         </el-option>
                     </el-select>
                 </div>
-            </div>
+            </div> -->
             <div class="c-admin-extend m-community-tag">
                 <div class="u-condition u-map">
                     <span class="u-prepend el-input-group__prepend">标签</span>
@@ -45,12 +53,11 @@
                         </el-option>
                     </el-select>
                 </div>
-                <div  class="m-community-tag__content">
+                <div class="m-community-tag__content">
                     <template v-if="finalTags && finalTags.length">
                         <div class="m-community-tag__list" v-for="item in finalTags" :key="item.uuid">
                             <el-input v-model="item.label"></el-input>
-                            <el-color-picker v-model="item.color"
-                            :predefine="color_options"></el-color-picker>
+                            <el-color-picker v-model="item.color" :predefine="color_options"></el-color-picker>
                         </div>
                     </template>
                     <el-alert title="暂未设置标签" v-else type="info" show-icon :closable="false"></el-alert>
@@ -66,6 +73,12 @@
                         >
                             <template #prepend>
                                 <span class="u-keyword">作者ID</span>
+                            </template>
+                            <template #append>
+                                <a class="m-user" :href="authorLink(userInfo.ID)" target="_blank">
+                                    <el-avatar class="u-avatar"  :src="userInfo.user_avatar" size="small" />
+                                    {{ userInfo.display_name || "匿名" }}
+                                </a>
                             </template>
                         </el-input>
                     </div>
@@ -97,31 +110,19 @@
 
             <p class="c-admin-space">
                 <span class="c-admin-label">置顶：</span>
-                <el-checkbox-group
-                    v-model="topStatus"
-                    class="c-admin-status"
-                    size="small"
-                >
-                    <el-checkbox-button label="is_top">全局置顶</el-checkbox-button>
-                    <el-checkbox-button label="is_category_top">版内置顶</el-checkbox-button>
+                <el-checkbox-group v-model="topStatus" class="c-admin-status" size="small">
+                    <el-checkbox label="is_top">全局置顶</el-checkbox>
+                    <el-checkbox label="is_category_top">版内置顶</el-checkbox>
                 </el-checkbox-group>
             </p>
             <p class="c-admin-space">
                 <span class="c-admin-label">精选：</span>
-                <el-switch
-                    v-model="form.is_star"
-                    :active-value="1"
-                    :inactive-value="0"
-                />
+                <el-switch v-model="form.is_star" :active-value="1" :inactive-value="0" />
             </p>
 
             <p class="c-admin-space">
                 <span class="c-admin-label">高亮：</span>
-                <el-switch
-                    v-model="form.is_hight"
-                    :active-value="1"
-                    :inactive-value="0"
-                />
+                <el-switch v-model="form.is_hight" :active-value="1" :inactive-value="0" />
                 <span v-show="showColors">
                     <el-color-picker
                         class="c-admin-highlight-block"
@@ -135,17 +136,17 @@
                 </span>
             </p>
 
-            <el-divider content-position="left">状态变更</el-divider>
-            <div>
-                <el-button type="danger" size="small" icon="el-icon-delete" @click="deleteTopic">删除帖子</el-button>
-                <el-button type="warning" size="small" icon="el-icon-refresh-left" @click="handleCheck"
-                    >转为待审核</el-button
-                >
-            </div>
-
-            <div class="c-admin-buttons">
-                <el-button type="primary" @click="submit" :loading="pushing">提交修改</el-button>
-                <el-button type="plain" @click="close">取消</el-button>
+            <div class="c-community-buttons">
+                <div class="c-community-buttons_left">
+                    <el-button type="danger" size="small" icon="el-icon-delete" @click="deleteTopic">删除帖子</el-button>
+                    <el-button type="warning" size="small" icon="el-icon-refresh-left" @click="handleCheck"
+                        >转为待审核</el-button
+                    >
+                </div>
+                <div class="c-community-buttons_right">
+                    <el-button type="primary" size="small" @click="submit" :loading="pushing">提交修改</el-button>
+                    <el-button type="plain" size="small" @click="close">取消</el-button>
+                </div>
             </div>
         </div>
     </el-drawer>
@@ -160,9 +161,12 @@ import {
     getTopicDetails,
     manageTopic,
     updateTopicItem,
-    manageTopicAll
+    manageTopicAll,
 } from "../../service/community";
 import { __cms } from "@jx3box/jx3box-common/data/jx3box.json";
+import {getUserInfo} from "../../service/author";
+import { debounce } from "lodash";
+import { authorLink } from "@jx3box/jx3box-common/js/utils";
 
 export default {
     name: "CommunityAdmin",
@@ -205,6 +209,7 @@ export default {
                 is_hight: 0,
                 is_category_top: 0,
                 hight_color: "rgb(255,0,1)",
+                user_id: "",
             },
 
             finalTags: [],
@@ -213,6 +218,8 @@ export default {
             uploadurl: __cms + "api/cms/upload",
             banner_preview: "",
             post_banner: "",
+
+            userInfo: {},
         };
     },
     computed: {
@@ -224,16 +231,22 @@ export default {
         },
     },
     watch: {
-        modelValue: async function(val) {
+        modelValue: async function (val) {
             if (val) {
                 await this.getCategoryList();
                 await this.getCommunityTags();
                 await this.getTopicDetails();
             }
         },
-
+        "form.user_id": debounce(function (id) {
+            id &&
+                getUserInfo(id).then((res) => {
+                    this.userInfo = res || {};
+                });
+        }, 500),
     },
     methods: {
+        authorLink,
         handleCheck() {
             const id = this.post.id;
             if (!id) {
@@ -264,23 +277,26 @@ export default {
 
             const promises = [];
 
-            promises.push(updateTopicItem(id, {
-                ...this.post,
-                user_id: this.form.user_id,
-                title: this.form.title,
-                category: this.form.category,
-                banner_img: this.post_banner,
-            }));
+            promises.push(
+                updateTopicItem(id, {
+                    ...this.post,
+                    user_id: this.form.user_id,
+                    title: this.form.title,
+                    category: this.form.category,
+                    banner_img: this.post_banner,
+                })
+            );
 
-            promises.push(manageTopicAll(id, {
-                is_top: this.topStatus.includes("is_top") ? 1 : 0,
-                is_category_top: this.topStatus.includes("is_category_top") ? 1 : 0,
-                is_star: this.form.is_star,
-                is_hight: this.form.is_hight,
-                hight_color: this.form.hight_color,
-                color_tag: this.finalTags,
-            }));
-
+            promises.push(
+                manageTopicAll(id, {
+                    is_top: this.topStatus.includes("is_top") ? 1 : 0,
+                    is_category_top: this.topStatus.includes("is_category_top") ? 1 : 0,
+                    is_star: this.form.is_star,
+                    is_hight: this.form.is_hight,
+                    hight_color: this.form.hight_color,
+                    color_tag: this.finalTags,
+                })
+            );
 
             Promise.all(promises).then(() => {
                 this.$message({
@@ -350,7 +366,7 @@ export default {
                     title: this.post.title,
                     hight_color: this.post.hight_color,
                     tags: this.post?.color_tag?.map((item) => item.label) || [],
-                }
+                };
 
                 this.finalTags = this.post.color_tag;
                 this.topStatus = [];
@@ -374,7 +390,7 @@ export default {
                 return {
                     label: item,
                     color: "rgb(255,0,1)",
-                }
+                };
             });
             this.finalTags = tags;
         },
@@ -408,11 +424,17 @@ export default {
         font-size: 14px;
         font-weight: 500;
     }
-    .c-admin-buttons {
-        width: 100%;
-        padding-top: 30px;
-        // position: absolute;
-        // bottom: 50px;
+
+    .c-community-wrapper {
+        height: 100%;
+    }
+    .c-community-buttons {
+        .flex;
+        justify-content: space-between;
+        align-items: center;
+        .pa;
+        width: calc(100% - 40px);
+        bottom: 20px;
     }
     .c-admin-extend .u-map .u-prepend {
         font-size: 14px;
@@ -429,10 +451,10 @@ export default {
 
     .m-community-tag {
         .u-prepend {
-            border-bottom-left-radius: 0!important;
+            border-bottom-left-radius: 0 !important;
         }
         .el-input__inner {
-            border-bottom-right-radius: 0!important;
+            border-bottom-right-radius: 0 !important;
         }
     }
 
@@ -450,6 +472,20 @@ export default {
         &:not(:last-child) {
             margin-bottom: 10px;
         }
+    }
+
+    .u-title-condition {
+        .flex;
+        .el-select {
+            margin-left: 0 !important;
+            top: 10px;
+            left: -10px;
+        }
+    }
+    .m-user {
+        .flex;
+        align-items: center;
+        gap: 5px;
     }
 }
 </style>
