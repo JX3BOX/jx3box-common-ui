@@ -280,7 +280,7 @@ export default {
             promises.push(
                 updateTopicItem(id, {
                     ...this.post,
-                    user_id: this.form.user_id,
+                    user_id: Number(this.form.user_id),
                     title: this.form.title,
                     category: this.form.category,
                     banner_img: this.post_banner,
