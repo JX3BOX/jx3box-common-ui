@@ -12,7 +12,7 @@
             <span>下一篇</span>
             <i class="el-icon-arrow-right"></i>
         </a>
-        <a :href="getPostLink(post.prev_post)" class="u-post-title">{{ getPostTitle(post.next_post) }}</a>
+        <a :href="getPostLink(post.next_post)" class="u-post-title">{{ getPostTitle(post.next_post) }}</a>
     </div>
     </div>
 </template>
