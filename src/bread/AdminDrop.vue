@@ -21,7 +21,7 @@
                 <el-dropdown-item v-if="hasPermission('create_system_message')" command="directMessage" icon="el-icon-message">
                     <span>私信</span>
                 </el-dropdown-item>
-                <el-dropdown-item v-if="isEditor && showMove" command="onMoveToCommunity" icon="el-icon-refresh">
+                <el-dropdown-item v-if="hasPermission('manage_post_move') && showMove" command="onMoveToCommunity" icon="el-icon-refresh">
                     <span>转移</span>
                 </el-dropdown-item>
                 <el-dropdown-item icon="el-icon-upload" command="designTask" v-if="hasPermission('push_banner')">
@@ -81,9 +81,6 @@ export default {
         };
     },
     computed: {
-        isEditor() {
-            return User.isEditor();
-        },
         sourceId() {
             if (this.isCommunity) {
                 return this.post?.id;
