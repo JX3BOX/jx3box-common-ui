@@ -72,16 +72,8 @@ export default {
     height: 100%;
 
     .u-icon-msg {
-        width: 17px;
-        height: 17px;
-        display: block;
         .pr;
-        top: 1px;
-        svg {
-            width: 100%;
-            height: 100%;
-        }
-        .pr;
+        .size(18px);
     }
 
     .u-pop {

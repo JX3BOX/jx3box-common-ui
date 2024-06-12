@@ -90,10 +90,6 @@ export default {
         height: 100%;
         .flex;
         align-items: center;
-
-        svg {
-            .size(19px);
-        }
     }
     .u-menu {
         .u-menu-item {

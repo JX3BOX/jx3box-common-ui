@@ -85,15 +85,7 @@ export default {
 // 用户资产
 .c-header-assets {
     position: relative;
-    height: 100%;
-
-    .u-coin {
-        .db;
-        .size(15px);
-        * {
-            fill: #fff !important;
-        }
-    }
+    height: 100%; 
     .u-asset {
         padding: 0 10px;
         height: 100%;
@@ -102,15 +94,6 @@ export default {
         &:hover {
             .tm(0.7);
         }
-    }
-
-    .u-icon {
-        .size(16px);
-        // font-size: 15px;
-        display: block;
-        // height: 32px;
-        padding: 24px 10px 10px 10px;
-        .pointer;
     }
 
     .u-assets {

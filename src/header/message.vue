@@ -54,18 +54,8 @@ export default {
         cursor: pointer;
     }
     .u-icon-msg {
-        // .mt(10px);
-        width: 17px;
-        height: 17px;
-        display: block;
         .pr;
-        top: 1px;
-        // margin-top: 9px;
-        svg {
-            width: 100%;
-            height: 100%;
-        }
-        .pr;
+        .size(18px)
     }
     .u-pop {
         width: 10px;

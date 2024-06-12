@@ -94,6 +94,13 @@ body {
         vertical-align: middle;
         width: 0;
     }
+    svg {
+        fill: #fff;
+        .size(18px);
+        &:hover{
+            opacity: 0.7;
+        }
+    }
 
     .u-avatar {
         width: 24px;
@@ -193,13 +200,7 @@ body {
         height: 100%;
         .flex;
         align-items: center;
-    }
-
-    .u-add {
-        fill: #fff;
-        vertical-align: middle;
-        // margin-right: 4px;
-    }
+    } 
 
     &.on {
         .u-menu {
@@ -207,8 +208,7 @@ body {
         }
     }
 
-    &:hover {
-        .u-add,
+    &:hover { 
         .u-dropdown {
             opacity: 0.7;
         }

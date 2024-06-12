@@ -82,17 +82,9 @@ export default {
         }
     }
 
-    .u-icon-msg {
-        width: 17px;
-        height: 17px;
-        display: block;
+    .u-icon-msg { 
         .pr;
-        top: 1px;
-        svg {
-            width: 100%;
-            height: 100%;
-        }
-        .pr;
+        .size(18px);
     }
 
     .u-pop {
@@ -107,11 +99,6 @@ export default {
         right: -5px;
         top: -6px;
         z-index: 1;
-    }
-
-    .u-icon {
-        color: #fff;
-        .size(16px);
-    }
+    } 
 }
 </style>
