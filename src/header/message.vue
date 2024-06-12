@@ -48,9 +48,6 @@ export default {
         align-items: center;
 
         padding: 0 10px;
-        &:hover {
-            opacity: 0.7;
-        }
         cursor: pointer;
     }
     .u-icon-msg {
@@ -68,6 +65,7 @@ export default {
         position: absolute;
         right: -5px;
         top: -6px;
+        .z(1);
     }
 }
 
