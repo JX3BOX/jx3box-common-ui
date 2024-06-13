@@ -15,7 +15,7 @@
                 <span class="u-title-text">{{ title }}</span>
                 <template v-if="titleExtra">
                     <span class="u-client" :class="'i-client-' + client">{{ showClientLabel(client) }}</span>
-                    <span class="u-client u-zlp">{{ zlp }}</span>
+                    <span class="u-client u-zlp" v-if="zlp">{{ zlp }}</span>
                 </template>
             </span>
         </div>
