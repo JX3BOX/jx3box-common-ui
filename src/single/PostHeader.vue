@@ -5,10 +5,18 @@
             <span class="u-title u-sub-block" :href="url" :title="title">
                 <i class="u-original" v-if="isOriginal">原创</i>
                 <i class="u-private" v-if="post.post_status != 'publish' || !!~~post.visible">
-                    <i class="el-icon-lock" v-if="post.post_status == 'draft' || post.post_status == 'pending' || !!~~post.visible" style="color:#fb9b24"></i>
-                    <i class="el-icon-delete" v-if="post.post_status == 'dustbin'" style="color:#c00"></i>
+                    <i
+                        class="el-icon-lock"
+                        v-if="post.post_status == 'draft' || post.post_status == 'pending' || !!~~post.visible"
+                        style="color: #fb9b24"
+                    ></i>
+                    <i class="el-icon-delete" v-if="post.post_status == 'dustbin'" style="color: #c00"></i>
                 </i>
                 <span class="u-title-text">{{ title }}</span>
+                <template v-if="titleExtra">
+                    <span class="u-client" :class="'i-client-' + client">{{ showClientLabel(client) }}</span>
+                    <span class="u-client u-zlp">{{ zlp }}</span>
+                </template>
             </span>
         </div>
 
@@ -38,7 +46,7 @@
             </div>
 
             <!-- 发布日期 -->
-            <span class="u-podate u-sub-block"  :title="'发布日期:' + post_time">
+            <span class="u-podate u-sub-block" :title="'发布日期:' + post_time">
                 <i class="u-icon-podate">
                     <img svg-inline src="../../assets/img/single/podate.svg" />
                 </i>
@@ -74,100 +82,107 @@
 </template>
 
 <script>
-import { __Root,__clients } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __Root, __clients } from "@jx3box/jx3box-common/data/jx3box.json";
 import { showDate, showTime } from "@jx3box/jx3box-common/js/moment";
 import { editLink, authorLink } from "@jx3box/jx3box-common/js/utils.js";
 import User from "@jx3box/jx3box-common/js/user.js";
 import $ from "jquery";
 export default {
     name: "single-header",
-    props: ["post", "stat"],
-    data: function() {
+    props: ["post", "stat", "titleExtra"],
+    data: function () {
         return {
             wordCount: 0,
         };
     },
     computed: {
-        url: function() {
+        url: function () {
             return location.href;
         },
-        isOriginal: function() {
+        isOriginal: function () {
             return !!~~this.post?.original;
         },
-        title: function() {
+        title: function () {
             return this.post?.post_title || "无标题";
         },
-        author_link: function() {
+        author_link: function () {
             return authorLink(this.post?.post_author);
         },
-        author_name: function() {
+        author_name: function () {
             return this.post?.author_info?.display_name || "匿名";
         },
-        post_date: function() {
+        post_date: function () {
             return showDate(new Date(this.post?.post_date));
         },
-        update_date: function() {
+        update_date: function () {
             return showDate(new Date(this.post?.post_modified));
         },
-        post_time: function() {
+        post_time: function () {
             return showTime(new Date(this.post?.post_date));
         },
-        update_time: function() {
+        update_time: function () {
             return showTime(new Date(this.post?.post_modified));
         },
-        views: function() {
+        views: function () {
             return this.stat?.views || "-";
         },
-        edit_link: function() {
+        edit_link: function () {
             return editLink(this.post?.post_type, this.post?.ID);
         },
-        canEdit: function() {
-            return this.post?.post_author == User.getInfo().uid
+        canEdit: function () {
+            return this.post?.post_author == User.getInfo().uid;
         },
-        client: function() {
+        client: function () {
             return this.post?.client || "std";
+        },
+        zlp: function () {
+            return this.post?.zlp || "";
         },
     },
     watch: {
         post: {
             deep: true,
-            handler: function(val) {
+            handler: function (val) {
                 this.countWords();
             },
-        }
+        },
     },
     methods: {
-        showClientLabel: function(val) {
+        showClientLabel: function (val) {
             return __clients[val];
         },
-        countWords: function (){
+        countWords: function () {
             this.$nextTick(() => {
                 // 需要去除空格 \n \g
-                const text = $('.c-article').text()?.replace(/[\s|\n|\r|\t|\g|\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\，|\。|\？|\：|\；|\‘|\’|\”|\“|\、|\·|\！|\（|\）|\》|\《|\『|\』]/g, '');
+                const text = $(".c-article")
+                    .text()
+                    ?.replace(
+                        /[\s|\n|\r|\t|\g|\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\，|\。|\？|\：|\；|\‘|\’|\”|\“|\、|\·|\！|\（|\）|\》|\《|\『|\』]/g,
+                        ""
+                    );
 
                 this.wordCount = text?.length || 0;
-            })
-        }
+            });
+        },
     },
-    mounted: function() {
-    },
+    mounted: function () {},
 };
 </script>
 
 <style lang="less">
-.i-client-all{
+.i-client-all {
     border: 1px solid #a26ef7;
     color: #a26ef7;
 }
-.i-client-std{
+.i-client-std {
     border: 1px solid #f0b400;
     color: #f0b400;
 }
-.i-client-origin{
+.i-client-origin {
     border: 1px solid #0eb7ce;
     color: #0eb7ce;
 }
-.i-client-wujie{
+.i-client-wujie {
     border: 1px solid #fc79bf;
     color: #fc79bf;
 }
@@ -207,6 +222,11 @@ export default {
         .db;
         .nobreak;
     }
+
+    .u-client {
+        .none;
+    }
+
     .u-author {
         .pr;
     }
@@ -327,6 +347,24 @@ export default {
     .m-single-info {
         .u-podate {
             .none;
+        }
+    }
+
+    .m-single-title {
+        .u-client {
+            font-style: normal;
+            .fz(12px);
+            padding: 0px 5px;
+            .r(3px);
+            line-height: 20px;
+            .dbi;
+            margin-left: 2px;
+        }
+
+        .u-zlp {
+            background-color: #eee;
+            border: 1px solid #fa80a2;
+            color: #fa80a2;
         }
     }
 }
