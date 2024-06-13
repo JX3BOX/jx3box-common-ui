@@ -358,11 +358,10 @@ export default {
             .r(3px);
             line-height: 20px;
             .dbi;
-            margin-left: 2px;
+            margin-left: 5px;
         }
 
         .u-zlp {
-            background-color: #eee;
             border: 1px solid #fa80a2;
             color: #fa80a2;
         }

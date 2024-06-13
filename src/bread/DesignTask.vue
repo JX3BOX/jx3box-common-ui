@@ -147,6 +147,7 @@ export default {
             data.star = this.form.star;
             data.subtype = this.form.type;
             data.version = this.form.version;
+            data.client = data.client == 'origin' ? 'origin' : 'std';
 
             data.source_type = this.post?.post_type;
             data.source_id = String(this.post?.ID);
