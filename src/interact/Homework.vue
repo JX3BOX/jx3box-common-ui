@@ -1,6 +1,6 @@
 <template>
     <div class="w-boxcoin-admin">
-        <el-dialog title="批改作业" :visible="modelValue" custom-class="w-boxcoin-pop" :close-on-click-modal="false" append-to-body @close="onClose">
+        <el-dialog :title="dialogTitle" :visible="modelValue" custom-class="w-boxcoin-pop" :close-on-click-modal="false" append-to-body @close="onClose">
             <div class="w-boxcoin-admin-content">
                 <div class="u-left" v-if="type=='grant'">
                     <em class="u-label">本月状态</em>
@@ -56,7 +56,7 @@ import User from "@jx3box/jx3box-common/js/user";
 import { getBreadcrumb } from "@jx3box/jx3box-common/js/api_misc";
 export default {
     name: "Homework",
-    props: ["postType", "postId", "userId", "client", "modelValue", "articleId", "category"],
+    props: ["postType", "postId", "userId", "client", "modelValue", "articleId", "category", "title"],
     model: {
         prop: "modelValue",
         event: "update:modelValue"
@@ -149,6 +149,9 @@ export default {
                 return "std"
             }
             return this.client
+        },
+        dialogTitle() {
+            return this.title || '批改作业'
         }
     },
     watch: {
