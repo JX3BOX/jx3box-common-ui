@@ -12,7 +12,7 @@
                     <b>{{left}}</b>
                     <!-- <a class="u-charge" :href="chargeLink" target="_blank">[充值]</a> -->
                 </div>
-                <el-radio-group class="u-homework-type" v-model="type" size="small" v-if="isSuperAdmin">
+                <el-radio-group class="u-homework-type" v-model="type" size="small" v-if="hasPermission">
                     <el-radio-button label="reward">打赏</el-radio-button>
                     <el-radio-button label="grant">品鉴</el-radio-button>
                 </el-radio-group>
@@ -91,8 +91,8 @@ export default {
         left() {
             return this.type === "reward" ? this.user_left : this.admin_left;
         },
-        isSuperAdmin() {
-            return User.isSuperAdmin();
+        hasPermission() { 
+            return User.hasPermission('manage_bbs_reward');
         },
         total: function () {
             return this.admin_total;
