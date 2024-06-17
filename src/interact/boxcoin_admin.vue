@@ -59,7 +59,7 @@ import { getBreadcrumb } from "@jx3box/jx3box-common/js/api_misc";
 import Contributors from './Contributors.vue';
 export default {
     name: "BoxcoinAdmin",
-    props: ["postType", "postId", "userId", "own", "total", "points", "max", "min", 'authors','client'],
+    props: ["postType", "postId", "userId", "own", "total", "points", "max", "min", 'authors','client',"category"],
     components: {
         Contributors
     },
@@ -145,7 +145,9 @@ export default {
             }
             grantBoxcoin(this.postType, this.postId, this.chosen || this.userId, count, {
                 remark: this.remark,
-                client : client
+                client : client,
+                // 如果有category，传入category
+                category : this.category
             })
                 .then((res) => {
                     this.$message({

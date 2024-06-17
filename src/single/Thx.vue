@@ -3,6 +3,7 @@
         <template v-if="type === 'batchReward'">
             <!-- 批量打赏 -->
             <batch-reward
+                v-if="hasRight && adminBoxcoinEnable && boxcoin_enable"
                 :postType="postType"
                 :items="postId"
                 :boxcoin="boxcoin"
@@ -11,19 +12,19 @@
                 :points="admin_points"
                 :authors="authors"
                 :client="finalClient"
-                v-if="hasRight && adminBoxcoinEnable && boxcoin_enable"
                 :max="admin_max"
                 :min="admin_min"
                 :total="admin_total"
+                :category="category"
                 @updateRecord="updateRecord"
             />
         </template>
         <template v-else>
             <div class="w-thx-panel">
                 <boxcoin-admin
+                    v-if="hasRight && adminBoxcoinEnable && boxcoin_enable"
                     :postId="postId"
                     :postType="postType"
-                    v-if="hasRight && adminBoxcoinEnable && boxcoin_enable"
                     :userId="userId"
                     :max="admin_max"
                     :min="admin_min"
@@ -31,12 +32,14 @@
                     :total="admin_total"
                     :points="admin_points"
                     :authors="authors"
-                    @updateRecord="updateRecord"
                     :client="finalClient"
+                    :category="category"
+                    @updateRecord="updateRecord"
                 />
                 <Like :postId="postId" :postType="postType"></Like>
                 <fav :postId="postId" :postType="postType" :postTitle="postTitle"></fav>
                 <boxcoin-user
+                    v-if="userBoxcoinEnable && boxcoin_enable && allowGift"
                     :postId="postId"
                     :postType="postType"
                     :boxcoin="boxcoin"
@@ -44,9 +47,9 @@
                     :own="user_left"
                     :points="user_points"
                     :authors="authors"
-                    v-if="userBoxcoinEnable && boxcoin_enable && allowGift"
-                    @updateRecord="updateRecord"
                     :client="finalClient"
+                    :category="category"
+                    @updateRecord="updateRecord"
                 />
                 <Share :postId="postId" :postType="postType" :client="client" />
             </div>
@@ -124,6 +127,9 @@ export default {
         userBoxcoinEnable: {
             type: Boolean,
             default: false,
+        },
+        category: {
+            default: undefined,
         },
     },
     components: {

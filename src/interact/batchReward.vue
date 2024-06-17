@@ -73,6 +73,7 @@ export default {
       "total",
       "max",
       "min",
+      "category"
   ],
   components: {
       Contributors,
@@ -136,6 +137,7 @@ export default {
               items: this.items,
               remark: this.remark,
               client: client,
+              category: this.category,
           })
               .then((res) => {
                   return res.data.data;

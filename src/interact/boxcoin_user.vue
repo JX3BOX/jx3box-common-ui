@@ -54,7 +54,7 @@ import Contributors from './Contributors.vue';
 import _ from "lodash";
 export default {
     name: "BoxcoinUser",
-    props: ["boxcoin", "postType", "postId", "userId", "own", "points", "authors",'client'],
+    props: ["boxcoin", "postType", "postId", "userId", "own", "points", "authors",'client',"category"],
     components: {
         Contributors
     },
@@ -130,7 +130,8 @@ export default {
             }
             rewardBoxcoin(this.postType, this.postId, this.chosen || this.userId, count, {
                 remark: this.remark,
-                client: client
+                client: client,
+                category: this.category
             })
                 .then((res) => {
                     this.$message({
