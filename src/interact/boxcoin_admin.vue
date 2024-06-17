@@ -147,7 +147,7 @@ export default {
                 remark: this.remark,
                 client : client,
                 // 如果有category，传入category
-                category : this.category
+                redirect: this.category ? `/${this.category}/${this.postId}` : undefined
             })
                 .then((res) => {
                     this.$message({

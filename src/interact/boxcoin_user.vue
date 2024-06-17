@@ -131,7 +131,7 @@ export default {
             rewardBoxcoin(this.postType, this.postId, this.chosen || this.userId, count, {
                 remark: this.remark,
                 client: client,
-                category: this.category
+                redirect: this.category ? `/${this.category}/${this.postId}` : undefined
             })
                 .then((res) => {
                     this.$message({

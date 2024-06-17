@@ -137,7 +137,7 @@ export default {
               items: this.items,
               remark: this.remark,
               client: client,
-              category: this.category,
+              redirect: this.category ? `/${this.category}/${this.postId}` : undefined,
           })
               .then((res) => {
                   return res.data.data;
