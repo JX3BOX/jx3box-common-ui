@@ -90,7 +90,7 @@ export default {
             isEditor: User.isEditor(),
 
             versions: {
-                "std": "旗舰",
+                "std": "剑三",
                 "origin": "缘起",
                 "wujie": "无界",
                 "test": "体服"

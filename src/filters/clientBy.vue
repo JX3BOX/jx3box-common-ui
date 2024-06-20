@@ -17,7 +17,7 @@
 
 <script>
 const _clients = {
-    std: "旗舰",
+    std: "剑三",
     origin: "缘起",
 };
 export default {
@@ -40,7 +40,7 @@ export default {
                 clients = Object.assign({}, clients, {
                     all: "全端",
                 });
-            } 
+            }
             return clients;
         },
     },
