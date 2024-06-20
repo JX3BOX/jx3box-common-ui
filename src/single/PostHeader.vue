@@ -43,6 +43,7 @@
             <div class="u-meta u-sub-block">
                 <em class="u-label">适用客户端</em>
                 <span class="u-value u-client" :class="'i-client-' + client">{{ showClientLabel(client) }}</span>
+                <span class="u-value u-client i-client-wujie">无界</span>
             </div>
 
             <!-- 发布日期 -->
@@ -138,6 +139,9 @@ export default {
         zlp: function () {
             return this.post?.zlp || "";
         },
+        is_wujie: function () {
+            return this.post?.is_wujie
+        },
     },
     watch: {
         post: {
@@ -183,8 +187,10 @@ export default {
     color: #0eb7ce;
 }
 .i-client-wujie {
-    border: 1px solid #fc79bf;
-    color: #fc79bf;
+    border: 1px solid #00dcda;
+    color: #3ae0f1;
+    background: #eff;
+    margin-left: 5px;
 }
 
 .m-single-header {
