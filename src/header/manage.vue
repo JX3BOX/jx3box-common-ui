@@ -8,7 +8,7 @@
         </span>
         <ul class="u-menu u-pop-content">
             <li v-for="item in userPanel" :key="item.label">
-                <a :href="item.link" :target="item.target || '_self'" class="u-menu-item">
+                <a :href="item.link" :target="item.target || '_self'" class="u-menu-item" @click="onClick(item)">
                     <img :src="resolveImg(item.icon)" svg-inline class="u-menu-icon" :alt="item.icon" />
                     {{ item.label }}
                     <span v-if="showPop" class="u-new">New!</span>
@@ -89,10 +89,16 @@ export default {
             const local = localStorage.getItem("jb_panel_meta");
 
             if (local) {
-                this.showPop = item?.meta != local
+                this.showPop = item?.meta && item?.meta != local
             } else {
                 localStorage.setItem("jb_panel_meta", item?.meta);
                 this.showPop = true
+            }
+        },
+        onClick(item) {
+            if (item.meta) {
+                localStorage.setItem("jb_panel_meta", item.meta);
+                this.showPop = false
             }
         }
     },
