@@ -11,6 +11,7 @@
                 <a :href="item.link" :target="item.target || '_self'" class="u-menu-item">
                     <img :src="resolveImg(item.icon)" svg-inline class="u-menu-icon" :alt="item.icon" />
                     {{ item.label }}
+                    <span v-if="showPop" class="u-new">New!</span>
                 </a>
             </li>
             <hr v-if="userPanel.length" />
@@ -19,7 +20,6 @@
                     <a :href="item.link" :target="item.target || '_self'" class="u-menu-item">
                         <img :src="resolveImg(item.icon)" svg-inline class="u-menu-icon" :alt="item.icon" />
                         {{ item.label }}
-                        <span v-if="showPop">New!</span>
                     </a>
                 </li>
             </template>
@@ -120,6 +120,9 @@ export default {
                 .u-menu-icon {
                     filter: invert(100%) sepia(0%) saturate(5658%) hue-rotate(215deg) brightness(114%) contrast(106%);
                 }
+                .u-new {
+                    color: #fff;
+                }
             }
         }
         .u-menu-icon {
@@ -144,6 +147,15 @@ export default {
         right: -5px;
         top: -6px;
         z-index: 1;
+    }
+
+    .u-new {
+        color: #f00;
+        font-size: 12px;
+        margin-left: 4px;
+        background-color: rgba(72, 193, 15, 0.1);
+        color: rgba(72, 193, 15, 1);
+        padding: 0px 6px;
     }
 }
 </style>
