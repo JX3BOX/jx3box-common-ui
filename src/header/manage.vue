@@ -1,10 +1,10 @@
 <template>
     <div class="c-header-panel c-header-manage" id="c-header-manage">
         <span class="u-post u-manage">
-            <i class="u-icon u-icon-msg">
+            <!-- <i class="u-icon u-icon-msg"> -->
                 <i class="u-pop" style="display: none" v-show="showPop"></i>
                 <img class="u-add" svg-inline src="../../assets/img/header/manage.svg" />
-            </i>
+            <!-- </i> -->
         </span>
         <ul class="u-menu u-pop-content">
             <li v-for="item in userPanel" :key="item.label">
@@ -144,8 +144,8 @@ export default {
         border: 2px solid #24292e;
         border-radius: 50%;
         position: absolute;
-        right: -5px;
-        top: -6px;
+        right: 4px;
+        top: 18px;
         z-index: 1;
     }
 
