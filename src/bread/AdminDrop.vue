@@ -65,7 +65,7 @@ export default {
             default: "medium",
         },
         post: {
-            type: Object,
+            type: [Object, String],
             default: () => {},
         },
         userId: {

@@ -176,7 +176,7 @@ export default {
             default: false,
         },
         postId: {
-            type: Number,
+            type: [Number, String],
             default: 0,
         },
     },

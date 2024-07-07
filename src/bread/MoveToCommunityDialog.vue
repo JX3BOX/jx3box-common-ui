@@ -61,7 +61,7 @@ export default {
             default: false,
         },
         post: {
-            type: Object,
+            type: [Object, String],
             default: () => {
                 return {};
             },

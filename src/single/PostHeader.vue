@@ -44,7 +44,7 @@
             <div class="u-meta u-sub-block">
                 <em class="u-label">适用客户端</em>
                 <span class="u-value u-client" :class="'i-client-' + client">{{ showClientLabel(client) }}</span>
-                <span class="u-value u-client i-client-wujie">无界</span>
+                <span class="u-value u-client i-client-wujie" v-if="is_wujie">无界</span>
             </div>
 
             <!-- 发布日期 -->
