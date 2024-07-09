@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { getSliders } from "../../service/cms";
+import { getSlider } from "../../service/cms";
 import { getThumbnail } from "@jx3box/jx3box-common/js/utils";
 import dayjs from "dayjs";
 export default {
@@ -67,14 +67,11 @@ export default {
     },
     methods: {
         loadData() {
-            getSliders(this.type, this.id, this.client).then((res) => {
-                if (res.data.data?.list) {
-                    // 取创建时间最新的一条
-                    const list = res.data.data.list.sort((a, b) =>
-                        dayjs(b.created_at).isAfter(dayjs(a.created_at)) ? 1 : -1
-                    );
-                    this.topicInfo = list[0];
-                }
+            getSlider({
+                source_type: this.type,
+                source_id: this.id,
+            }).then((res) => {
+                this.topicInfo = res.data?.data
             });
         },
     },

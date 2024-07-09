@@ -45,6 +45,10 @@ function getSliders(source_type, source_ids, client="std") {
     });
 }
 
+function getSlider(params) {
+    return $cms({ mute: true }).get(`/api/cms/news/item`, { params });
+}
+
 function getCollection(id) {
     return $cms({ mute: true }).get(`/api/cms/post/collection/${id}`);
 }
@@ -74,4 +78,4 @@ function setUserMeta(key,data) {
 }
 
 export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember,
-    getSliders, getCollection, getTopicBucket, getConfig, getUserMeta, setUserMeta };
+    getSliders,getSlider, getCollection, getTopicBucket, getConfig, getUserMeta, setUserMeta };
