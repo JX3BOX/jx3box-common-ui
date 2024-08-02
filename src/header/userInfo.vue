@@ -73,8 +73,8 @@
                     </el-button-group>
 
                     <div class="u-other">
+                        <a href="/dashboard/role" class="u-item"><i class="el-icon-user"></i>角色管理 </a>
                         <a href="/dashboard/fav" class="u-item"><i class="el-icon-star-off"></i>收藏订阅 </a>
-                        <a href="/team/role/manage" class="u-item"><i class="el-icon-user"></i>角色管理 </a>
                         <a href="/dashboard/purchases" class="u-item"
                             ><i class="el-icon-shopping-cart-2"></i>已购资源
                         </a>
