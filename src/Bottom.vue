@@ -6,13 +6,13 @@
 </template>
 
 <script>
-import { __Root, feedback } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __Root } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "Bottom",
     data: function() {
         return {
             homepage: __Root,
-            feedback: feedback + '&subject=' + location.href,
+            feedback: '/feedback' + '&refer=' + location.href,
         };
     },
 };

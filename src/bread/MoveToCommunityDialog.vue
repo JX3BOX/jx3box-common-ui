@@ -25,14 +25,8 @@
 
         <el-divider content-position="left">附图</el-divider>
         <div class="u-imgs">
-            <div
-                :class="`u-imgs-item ${form.banner_img === item && 'active'}`"
-                v-for="(item, i) in form.extra_images"
-                :key="i"
-                @click="setBannerIndex(item)"
-            >
+            <div :class="`u-imgs-item`" v-for="(item, i) in form.extra_images" :key="i">
                 <el-image :src="item" fit="cover" style="width: 148px; height: 148px" />
-                <div class="u-mark">封面</div>
             </div>
         </div>
 
@@ -80,14 +74,13 @@ export default {
                 category: "",
                 id: "",
                 introduction: "",
-                banner_img: undefined,
                 extra_images: undefined,
             },
             categoryList: [],
             isPhone: window.innerWidth < 768,
             rules: {
                 category: [{ required: true, message: "请选择分类", trigger: "blur" }],
-            }
+            },
         };
     },
     watch: {
@@ -116,10 +109,7 @@ export default {
             this.$emit("update:modelValue", false);
         },
         clearForm() {
-            this.form = { category: "", id: "", introduction: "", banner_img: "", extra_images: [] };
-        },
-        setBannerIndex(img) {
-            this.form.banner_img = img;
+            this.form = { category: "", id: "", introduction: "", extra_images: [] };
         },
         onConfirm() {
             if (!this.post?.ID) {
@@ -135,7 +125,7 @@ export default {
                 return;
             }
 
-            this.$refs.form?.validate(valid => {
+            this.$refs.form?.validate((valid) => {
                 if (valid) {
                     recoverTopicFromPosts(this.form).then(() => {
                         this.$message.success("操作成功");
@@ -143,8 +133,7 @@ export default {
                         this.clearForm();
                     });
                 }
-            })
-
+            });
         },
         onCancel() {
             this.close();
