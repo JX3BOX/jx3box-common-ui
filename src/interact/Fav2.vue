@@ -86,6 +86,7 @@ export default {
         color: #888;
         .ml(10px);
         top: 4px;
+        .pr;
     }
 }
 </style>
