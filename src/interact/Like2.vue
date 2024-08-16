@@ -11,7 +11,7 @@
                 <img
                     class="u-icon"
                     svg-inline
-                    src="../../assets/img/widget/like2.svg"
+                    :src="iconPath"
                 />
                 <span class="u-count" v-if="count">{{ count }}</span>
             </div>
@@ -21,6 +21,7 @@
 
 <script>
 import { postStat, getStat } from "@jx3box/jx3box-common/js/stat";
+import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "Like2",
     props: ["postType", "postId"],
@@ -33,6 +34,9 @@ export default {
     computed: {
         ready() {
             return this.postType && this.postId;
+        },
+        iconPath() {
+            return __cdn + "design/vector/icon/like.svg"
         },
     },
     methods: {
