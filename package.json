@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common-ui",
-    "version": "8.9.16",
+    "version": "8.9.17",
     "description": "JX3BOX UI",
     "main": "index.js",
     "scripts": {
