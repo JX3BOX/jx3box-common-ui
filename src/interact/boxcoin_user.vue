@@ -2,7 +2,7 @@
     <div class="w-boxcoin-user" v-if="allowBoxcoin">
         <el-tooltip effect="dark" content="投币" placement="top-start">
             <div class="w-boxcoin-block" @click="openBoxcoinPop">
-                <img class="u-icon" svg-inline :src="likeImg" />
+                <img class="u-icon" svg-inline :src="iconPath" />
                 <span class="u-count" v-if="boxcoin">{{boxcoin}}</span>
             </div>
         </el-tooltip>
@@ -52,6 +52,7 @@ import { rewardBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
 import Contributors from './Contributors.vue';
 import _ from "lodash";
+import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "BoxcoinUser",
     props: ["boxcoin", "postType", "postId", "userId", "own", "points", "authors",'client',"category"],
@@ -71,8 +72,6 @@ export default {
             chargeLink: "/vip/boxcoin?redirect=" + location.href,
 
             chosen: '', // 被选中的人
-
-            likeImg: require("../../assets/img/widget/like4.png"),
         };
     },
     computed: {
@@ -98,7 +97,10 @@ export default {
         },
         isCustom(){
             return this.count === 'custom'
-        }
+        },
+        iconPath() {
+            return __cdn + "design/vector/icon/reward.svg"
+        },
     },
     watch: {
         own : function (val){
@@ -162,11 +164,12 @@ export default {
         .size(26px);
         .y;
         .pr;
-        top: -2px;
     }
     .u-count {
         color: #888;
         .ml(10px);
+        top: 4px;
+        .pr;
     }
     .u-charge {
         .underline(@color-link);

@@ -29,7 +29,7 @@
             <div slot="reference">
                 <el-tooltip class="item" effect="dark" content="分享" placement="top">
                     <div v-if="simple">
-                        <img class="u-icon u-simple-icon" svg-inline src="../../assets/img/widget/share.svg" />
+                        <img class="u-icon u-simple-icon" svg-inline :src="iconPath" />
                         <!-- <i class="el-icon-position"></i> -->
                         <span class="u-text">分享</span>
                     </div>
@@ -37,7 +37,7 @@
                         v-else
                         class="u-icon"
                         svg-inline
-                        src="../../assets/img/widget/share2.svg"
+                        :src="iconPath"
                     />
                 </el-tooltip>
             </div>
@@ -49,9 +49,10 @@
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import QrcodeVue from "qrcode.vue";
 import _ from "lodash";
+import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "Share2",
-    // meta: { title, summary, banner, desc } 
+    // meta: { title, summary, banner, desc }
     props: ["postType", "postId", "meta", "simple"],
     data: function () {
         return {
@@ -111,6 +112,9 @@ export default {
                 tieba: this.shareToTieba,
                 qq: this.shareToQQ,
             }
+        },
+        iconPath() {
+            return __cdn + "design/vector/icon/share.svg"
         },
     },
     methods: {

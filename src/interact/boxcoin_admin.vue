@@ -6,7 +6,7 @@
                     @click="openBoxcoinPop"
                     class="u-icon"
                     svg-inline
-                    src="../../assets/img/widget/like3.svg"
+                    :src="iconPath"
                 />
             </div>
         </el-tooltip>
@@ -57,6 +57,7 @@ import { grantBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
 import { getBreadcrumb } from "@jx3box/jx3box-common/js/api_misc";
 import Contributors from './Contributors.vue';
+import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "BoxcoinAdmin",
     props: ["postType", "postId", "userId", "own", "total", "points", "max", "min", 'authors','client',"category"],
@@ -121,7 +122,10 @@ export default {
         },
         isSignAuthor : function (){
             return User.getInfo().group == 32;
-        }
+        },
+        iconPath() {
+            return __cdn + "design/vector/icon/taste.svg"
+        },
     },
     watch: {
         own : function (val){
