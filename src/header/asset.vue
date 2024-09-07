@@ -20,7 +20,7 @@
                     >
                     <span class="u-item-extend"><a href="/dashboard/boxcoin" :target="target">[兑换通宝]</a></span>
                 </span>
-                <span class="u-item">
+                <!-- <span class="u-item">
                     <a class="u-item-primary" href="/dashboard/cny" :target="target"
                         ><span class="u-label"><i class="el-icon-wallet"></i> 金箔</span
                         ><span class="u-value">{{ asset.cny }}</span></a
@@ -29,10 +29,10 @@
                         ><a href="/vip/cny" :target="target">[充值]</a>
                         <a href="/dashboard/cny" :target="target">[提现]</a></span
                     >
-                </span>
+                </span> -->
                 <span class="u-item">
                     <a class="u-item-primary" href="/dashboard/points" :target="target"
-                        ><span class="u-label"><i class="el-icon-sugar"></i> 银铛</span>
+                        ><span class="u-label"><i class="el-icon-sugar"></i> 积分</span>
                         <span class="u-value">{{ asset.points }}</span></a
                     >
                     <span class="u-item-extend"
@@ -85,7 +85,7 @@ export default {
 // 用户资产
 .c-header-assets {
     position: relative;
-    height: 100%; 
+    height: 100%;
     .u-asset {
         padding: 0 10px;
         height: 100%;
