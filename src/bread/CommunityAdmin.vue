@@ -144,7 +144,7 @@
                     >
                 </div>
                 <div class="c-community-buttons_right">
-                    <el-button type="primary" size="small" @click="submit" :loading="pushing">提交修改</el-button>
+                    <el-button type="primary" size="small" @click="submit" :loading="pushing">提交</el-button>
                     <el-button type="plain" size="small" @click="close">取消</el-button>
                 </div>
             </div>
@@ -253,7 +253,7 @@ export default {
                 this.$message.error("ID不存在!");
                 return;
             }
-            this.$confirm(`此操作将该数据转为 待审核 状态, 是否继续?`, "提示", {
+            this.$confirm(`此操作将该数据转为【待审核】状态, 是否继续?`, "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning",
@@ -337,7 +337,7 @@ export default {
                 this.$message.error("ID不存在!");
                 return;
             }
-            this.$confirm("此操作将删除该数据, 是否继续?", "提示", {
+            this.$confirm("此操作将【删除】该数据, 是否继续?", "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning",
@@ -492,11 +492,13 @@ export default {
 @media screen and (max-width: @phone) {
     .c-community-admin {
         .c-community-buttons {
-            // width: unset !important;
+            width: 100%;
             justify-content: space-between;
+            .pr;
+            bottom: 0;
         }
 
-        .u-delete {
+        .u-delete, .u-check {
             span {
                 display: none !important;
             }
