@@ -1,30 +1,46 @@
 <template>
     <div class="w-boxcoin-admin">
-        <el-dialog :title="dialogTitle" :visible="modelValue" custom-class="w-boxcoin-pop" :close-on-click-modal="false" append-to-body @close="onClose">
+        <el-dialog
+            :title="dialogTitle"
+            :visible="modelValue"
+            custom-class="w-boxcoin-pop"
+            :close-on-click-modal="false"
+            append-to-body
+            @close="onClose"
+        >
             <div class="w-boxcoin-admin-content">
-                <div class="u-left" v-if="type=='grant'">
+                <div class="u-left" v-if="type == 'grant'">
                     <em class="u-label">本月状态</em>
-                    已用<b>{{this.used}}</b> 剩余<b>{{this.left}}</b> 总计<b>{{this.total}}</b>
-                    <el-progress :percentage="this.total ? 100 - (this.used * 100 / this.total) : 0" :stroke-width="15" :text-inside="true"></el-progress>
+                    已用<b>{{ this.used }}</b> 剩余<b>{{ this.left }}</b> 总计<b>{{ this.total }}</b>
+                    <el-progress
+                        :percentage="this.total ? 100 - (this.used * 100) / this.total : 0"
+                        :stroke-width="15"
+                        :text-inside="true"
+                    ></el-progress>
                 </div>
                 <div class="u-left" v-else>
                     <em class="u-label">当前拥有盒币</em>
-                    <b>{{left}}</b>
+                    <b>{{ left }}</b>
                     <!-- <a class="u-charge" :href="chargeLink" target="_blank">[充值]</a> -->
                 </div>
                 <el-radio-group class="u-homework-type" v-model="type" size="small" v-if="hasPermission">
-                    <el-radio-button label="reward">打赏</el-radio-button>
                     <el-radio-button label="grant">品鉴</el-radio-button>
+                    <el-radio-button label="reward">打赏</el-radio-button>
                 </el-radio-group>
                 <div class="u-list">
-                    <em class="u-label">❤️ {{ type == 'reward' ? '打赏' : '品鉴' }}</em>
+                    <em class="u-label">❤️ {{ type == "reward" ? "打赏" : "品鉴" }}</em>
                     <div class="u-points">
                         <el-radio-group v-model="count">
                             <el-radio :label="item" v-for="item in fitPoints" :key="item" border>
-                                <b>{{item}}</b>盒币
+                                <b>{{ item }}</b
+                                >盒币
                             </el-radio>
                             <el-radio label="custom" border>自定义</el-radio>
-                            <el-input v-model="amount" v-show="count === 'custom'" placeholder="输入自定义数量"></el-input>
+                            <el-input
+                                v-model="amount"
+                                v-show="count === 'custom'"
+                                placeholder="输入自定义数量"
+                            ></el-input>
                         </el-radio-group>
                     </div>
                 </div>
@@ -38,7 +54,9 @@
                             :maxlength="30"
                             show-word-limit
                         ></el-input>
-                        <el-button :disabled="fetchingCurrentRelease" @click="insertCurrentRelease">插入当前版本</el-button>
+                        <el-button :disabled="fetchingCurrentRelease" @click="insertCurrentRelease"
+                            >插入当前版本</el-button
+                        >
                     </div>
                 </div>
             </div>
@@ -51,7 +69,7 @@
 </template>
 
 <script>
-import { grantBoxcoin, getPostBoxcoinConfig,getBoxcoinStatus,rewardBoxcoin } from "../../service/thx.js";
+import { grantBoxcoin, getPostBoxcoinConfig, getBoxcoinStatus, rewardBoxcoin } from "../../service/thx.js";
 import User from "@jx3box/jx3box-common/js/user";
 import { getBreadcrumb } from "@jx3box/jx3box-common/js/api_misc";
 export default {
@@ -59,14 +77,14 @@ export default {
     props: ["postType", "postId", "userId", "client", "modelValue", "articleId", "category", "title"],
     model: {
         prop: "modelValue",
-        event: "update:modelValue"
+        event: "update:modelValue",
     },
     data: function () {
         return {
             count: 0,
 
             remark: "不错，加油！",
-            chosen: '', // 被选中的人
+            chosen: "", // 被选中的人
             amount: "",
 
             submitting: false,
@@ -91,8 +109,8 @@ export default {
         left() {
             return this.type === "reward" ? this.user_left : this.admin_left;
         },
-        hasPermission() { 
-            return User.hasPermission('manage_bbs_reward');
+        hasPermission() {
+            return User.hasPermission("manage_bbs_reward");
         },
         total: function () {
             return this.admin_total;
@@ -106,13 +124,7 @@ export default {
             // 打赏数量不能超过剩余数量
             // 打赏数量不能为0
             // 打赏寄语不能为空
-            return !!(
-                !this.isSelf &&
-                !this.targetIsSelf &&
-                this.isEnough &&
-                count &&
-                this.remark
-            );
+            return !!(!this.isSelf && !this.targetIsSelf && this.isEnough && count && this.remark);
         },
         isNotSelf: function () {
             return this.userId != User.getInfo().uid;
@@ -124,94 +136,101 @@ export default {
             const count = this.count === "custom" ? this.amount : this.count;
             return this.left && this.left >= count;
         },
-        allowBoxcoin : function (){
-            return this.postType && this.postId && (this.userId || (this.authors && this.authors.length))
+        allowBoxcoin: function () {
+            return this.postType && this.postId && (this.userId || (this.authors && this.authors.length));
         },
-        hostClient : function (){
-            return location.href.includes('origin') ? 'origin' : 'std'
+        hostClient: function () {
+            return location.href.includes("origin") ? "origin" : "std";
         },
-        points : function (){
-            return this.type === 'reward' ? this.user_points : this.admin_points
+        points: function () {
+            return this.type === "reward" ? this.user_points : this.admin_points;
         },
-        fitPoints : function (){
-            const points = this.points.filter(item => item <= this.left)
+        fitPoints: function () {
+            const points = this.points.filter((item) => item <= this.left);
             if (this.isSignAuthor) {
                 // 最大值为1000
-                return points.filter(item => item <= 1000)
+                return points.filter((item) => item <= 1000);
             }
-            return points
+            return points;
         },
-        isSignAuthor : function (){
+        isSignAuthor: function () {
             return User.getInfo().group == 32;
         },
-        finalClient: function() {
-            if (this.client == 'wujie') {
-                return "std"
+        finalClient: function () {
+            if (this.client == "wujie") {
+                return "std";
             }
-            return this.client
+            return this.client;
         },
         dialogTitle() {
-            return this.title || '批改作业'
-        }
+            return this.title || "批改作业";
+        },
     },
     watch: {
-        own : function (val){
-            this.left = val
+        own: function (val) {
+            this.left = val;
         },
         modelValue: function (val) {
             if (val) {
                 this.loadBoxcoinConfig();
+
+                if (this.hasPermission) {
+                    this.type = 'grant'
+                }
             }
-        }
+        },
     },
     methods: {
         // 选择要打赏的对象
         handleChosen(userId) {
-            this.chosen = userId
+            this.chosen = userId;
         },
         submit: function () {
             this.submitting = true;
             const count = this.count === "custom" ? this.amount : this.count;
             let client = this.client || this.hostClient;
-            if (!['std', 'origin', 'all'].includes(client)) {
-                client = 'std'
+            if (!["std", "origin", "all"].includes(client)) {
+                client = "std";
             }
-            const fn = this.type === 'reward' ? rewardBoxcoin : grantBoxcoin;
+            const fn = this.type === "reward" ? rewardBoxcoin : grantBoxcoin;
             fn(this.postType, this.postId, this.userId, count, {
                 remark: this.remark,
-                client : client,
-                redirect: `/${this.category}/${this.articleId}`
+                client: client,
+                redirect: `/${this.category}/${this.articleId}`,
             })
                 .then((res) => {
                     this.$message({
                         message: "操作成功",
                         type: "success",
                     });
-                    return res.data.data
+                    return res.data.data;
                 })
                 .then((data) => {
                     // 1.扣除额度
                     this.left -= this.count;
                     // 2.将修改emit出去
-                    this.$emit('updateRecord', data);
+                    this.$emit("updateRecord", data);
                 })
                 .finally(() => {
                     this.submitting = false;
                     this.onClose();
                 });
         },
-        insertCurrentRelease: function() {
+        insertCurrentRelease: function () {
             this.fetchingCurrentRelease = true;
-            getBreadcrumb(`current-release-${this.hostClient}`).then(res => {
-                this.remark += res;
-            }).catch(err => {
-                this.$message({
-                    message: "获取失败",
-                    type: "error",
+            getBreadcrumb(`current-release-${this.hostClient}`)
+                .then((res) => {
+                    this.remark += res;
+                })
+                .catch((err) => {
+                    this.$message({
+                        message: "获取失败",
+                        type: "error",
+                    });
+                })
+                .finally(() => {
+                    this.fetchingCurrentRelease = false;
                 });
-            }).finally(() => {
-                this.fetchingCurrentRelease = false;
-            });
         },
         loadBoxcoinConfig: function () {
             User.isLogin() &&

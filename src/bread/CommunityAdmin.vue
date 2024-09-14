@@ -138,8 +138,8 @@
 
             <div class="c-community-buttons">
                 <div class="c-community-buttons_left">
-                    <el-button type="danger" size="small" icon="el-icon-delete" @click="deleteTopic">删除帖子</el-button>
-                    <el-button type="warning" size="small" icon="el-icon-refresh-left" @click="handleCheck"
+                    <el-button type="danger" class="u-delete" size="small" icon="el-icon-delete" @click="deleteTopic">删除帖子</el-button>
+                    <el-button type="warning" class="u-check" size="small" icon="el-icon-refresh-left" @click="handleCheck"
                         >转为待审核</el-button
                     >
                 </div>
@@ -337,7 +337,7 @@ export default {
                 this.$message.error("ID不存在!");
                 return;
             }
-            this.$confirm("此操作将 删除 该数据, 是否继续?", "提示", {
+            this.$confirm("此操作将删除该数据, 是否继续?", "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning",
@@ -487,5 +487,21 @@ export default {
         align-items: center;
         gap: 5px;
     }
+}
+
+@media screen and (max-width: @phone) {
+    .c-community-admin {
+        .c-community-buttons {
+            // width: unset !important;
+            justify-content: space-between;
+        }
+
+        .u-delete {
+            span {
+                display: none !important;
+            }
+        }
+    }
+
 }
 </style>
