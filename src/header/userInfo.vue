@@ -68,7 +68,7 @@
 
                     <el-button-group class="u-actions">
                         <a class="el-button el-button--default is-plain" href="/dashboard">个人中心</a>
-                        <a class="el-button el-button--default is-plain" :href="url.profile">资料设置</a>
+                        <a class="el-button el-button--default is-plain" @click="changeAlternate">切换马甲</a>
                         <a class="el-button el-button--default is-plain" href="/dashboard/frame">主题风格</a>
                     </el-button-group>
 
@@ -89,6 +89,8 @@
                 </div>
             </template>
         </div>
+
+        <alternate></alternate>
     </div>
 </template>
 
@@ -100,10 +102,16 @@ import { showDate } from "@jx3box/jx3box-common/js/moment";
 import { __Links, __Root, __imgPath, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
 import { copyText } from "../../assets/js/utils";
 import { getMenu } from "../../service/header";
+import Bus from "../../service/bus";
+
+import alternate from "./alternate.vue";
 export default {
     name: "info",
     props: ["asset"],
     emits: ["update"],
+    components: {
+        alternate,
+    },
     data() {
         return {
             isPhone: window.innerWidth < 768,
@@ -215,6 +223,9 @@ export default {
                 console.log("loadPanel error", e);
             }
         },
+        changeAlternate: function() {
+            Bus.$emit("showAlternate");
+        }
     },
 };
 </script>
