@@ -3,7 +3,7 @@
         append-to-body
         :visible.sync="visible"
         custom-class="c-alternate"
-        width="360px"
+        width="320px"
         :show-close="false"
         title="切换马甲"
     >
@@ -36,7 +36,7 @@
                     <i class="el-icon-close"></i>
                 </div>
             </div>
-            <div class="c-alternate-btn el-button el-button--primary" :class="{'is-disabled': overLength}" @click="onAddAlternate">新增马甲</div>
+            <div class="c-alternate-btn" :class="{'is-disabled': overLength}" @click="onAddAlternate">+</div>
         </div>
     </el-dialog>
 </template>
@@ -51,9 +51,16 @@ export default {
     name: "alternate",
     data() {
         return {
-            visible: true,
+            visible: false,
 
-            alternate: [],
+            alternate: [
+                // {
+                //     uid: 100,
+                //     name: "马甲1",
+                //     avatar: "https://avatar.jx3box.com/avatar/1",
+                //     created_at: 1620000000000,
+                // },
+            ],
         };
     },
     computed: {
@@ -152,12 +159,16 @@ export default {
 
 <style lang="less">
 .c-alternate {
+    .el-dialog__title{
+        .fz(12px);
+    }
     .el-dialog__body {
         padding: 0;
     }
     .el-dialog__header {
         padding: 10px;
         border-bottom: #dcdfe6 1px solid;
+
     }
     .c-alternate__content {
         max-height: 600px;
@@ -169,9 +180,10 @@ export default {
         .pointer;
         padding: 10px;
         .pr;
+        border-bottom: 1px solid #eee;
 
         &:hover {
-            background-color: #f5f5f5;
+            background-color: @bg-light;
 
             .u-remove {
                 display: block;
@@ -232,11 +244,18 @@ export default {
     }
 
     .c-alternate-btn {
-        padding: 10px;
+        // padding: 10px;
         text-align: center;
         .pointer;
-        width: 100%;
-        border-radius: 0;
+        // width: 100%;
+        // border-radius: 0;
+        .size(100%,74px);
+        .fz(40px,74px);
+        color:#999;
+        &:hover{
+            background-color:@bg-light;
+            color:#888;
+        }
     }
 }
 </style>
