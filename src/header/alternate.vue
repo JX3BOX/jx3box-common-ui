@@ -40,6 +40,7 @@ import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import dayjs from "dayjs";
 import User from "@jx3box/jx3box-common/js/user";
 import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
+import { refreshAuth } from "../../service/cms"
 export default {
     name: "alternate",
     data() {
@@ -131,7 +132,7 @@ export default {
                 type: "warning",
             })
                 .then(() => {
-                    User.update(item).then(() => {
+                    User.update(item).then(async () => {
                         localStorage.setItem(
                             "jx3box-alternate-" + item.uid,
                             JSON.stringify({
@@ -139,6 +140,7 @@ export default {
                                 created_at: Number(localStorage.getItem("created_at")),
                             })
                         );
+                        await refreshAuth();
                         location.reload();
                         this.visible = false;
                     });
