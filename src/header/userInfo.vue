@@ -185,6 +185,9 @@ export default {
                         type: "success",
                         duration: 1000,
                     });
+
+                    // 清除马甲
+                    localStorage.removeItem("jx3box-alternate-" + User.getInfo().uid);
                 });
         },
         showUserName: function (val) {
