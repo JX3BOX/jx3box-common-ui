@@ -2,8 +2,8 @@
     <div class="w-fav2" :class="{ disabled: favorite }" @click="doFav">
         <el-tooltip effect="dark" :content="favContent" placement="top-start">
             <div>
-                <img v-if="favorite" class="u-icon" svg-inline src="../../assets/img/widget/unstar.svg" />
-                <img v-else class="u-icon" svg-inline src="../../assets/img/widget/star.svg" />
+                <img v-if="favorite" class="u-icon" svg-inline :src="unstarIcon" />
+                <img v-else class="u-icon" svg-inline :src="starIcon" />
                 <span class="u-count" v-if="!hiddenNum && total">{{ total }}</span>
             </div>
         </el-tooltip>
@@ -16,7 +16,7 @@ import { hasFav, addFav, delFav } from "../../service/fav";
 import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "Fav2",
-    props: ["postType", "postId", "postTitle", "hiddenNum"],
+    props: ["postType", "postId", "postTitle", "hiddenNum", "isOld"],
     data: function () {
         return {
             login: User.isLogin(),
@@ -29,10 +29,10 @@ export default {
             return this.favorite ? "已收藏" : "收藏";
         },
         starIcon() {
-            return __cdn + "design/vector/icon/collect.svg"
+            return this.isOld ? require("../../assets/img/widget/star.svg") : __cdn + "design/vector/icon/collect.svg"
         },
         unstarIcon() {
-            return __cdn + "design/vector/icon/uncollect.svg"
+            return this.isOld ? require("../../assets/img/widget/unstar.svg") : __cdn + "design/vector/icon/uncollect.svg"
         },
     },
     methods: {

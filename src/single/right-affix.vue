@@ -1,7 +1,7 @@
 <template>
     <div class="c-right-affix" :class="{ 'is-close': !isOpen }">
         <div class="item">
-            <fav :postId="postId" :postType="postType" :postTitle="postTitle" :hiddenNum="true"></fav>
+            <fav :postId="postId" :postType="postType" :postTitle="postTitle" :hiddenNum="true" :isOld="true"></fav>
         </div>
         <el-tooltip v-if="showComment" effect="dark" content="去评论" placement="left">
             <div class="u-item" @click="toComment">
