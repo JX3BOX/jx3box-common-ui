@@ -41,7 +41,7 @@ import search from "./header/search.vue";
 import nav from "./header/nav.vue";
 import user from "./header/user.vue";
 import Box from "../src/Box.vue";
-import { isMiniProgram } from "@jx3box/jx3box-common/js/utils";
+import { isMiniProgram, miniprogramHack } from "@jx3box/jx3box-common/js/utils";
 // import gameSwitch from "./header/gameSwitch.vue";
 
 export default {
@@ -67,6 +67,9 @@ export default {
 
             if (isMiniProgram()) {
                 document.documentElement.classList.add("wechat-miniprogram");
+
+                // 微信小程序hack
+                miniprogramHack();
             }
         },
 
