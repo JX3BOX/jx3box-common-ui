@@ -41,6 +41,7 @@ import search from "./header/search.vue";
 import nav from "./header/nav.vue";
 import user from "./header/user.vue";
 import Box from "../src/Box.vue";
+import { isMiniProgram } from "@jx3box/jx3box-common/js/utils";
 // import gameSwitch from "./header/gameSwitch.vue";
 
 export default {
@@ -62,6 +63,10 @@ export default {
         checkIsWebView: function () {
             if (window.navigator.userAgent.includes(KW)) {
                 document.documentElement.classList.add("env-app");
+            }
+
+            if (isMiniProgram()) {
+                document.documentElement.classList.add("wechat-miniprogram");
             }
         },
 
