@@ -52,6 +52,7 @@
                     @updateRecord="updateRecord"
                 />
                 <Share :postId="postId" :postType="postType" :client="client" />
+                <watch-later :category="postType" :title="postTitle"></watch-later>
             </div>
             <div class="w-thx-records">
                 <boxcoin-records
@@ -79,6 +80,8 @@ import BatchReward from "../interact/batchReward.vue";
 import BoxcoinRecords from "../interact/boxcoin_records.vue";
 import BoxcoinAdmin from "../interact/boxcoin_admin.vue";
 import BoxcoinUser from "../interact/boxcoin_user.vue";
+import WatchLater from "../interact/watchLater.vue";
+
 import User from "@jx3box/jx3box-common/js/user";
 import { getPostBoxcoinConfig, getBoxcoinStatus } from "../../service/thx";
 export default {
@@ -140,6 +143,7 @@ export default {
         "boxcoin-records": BoxcoinRecords,
         "boxcoin-admin": BoxcoinAdmin,
         "boxcoin-user": BoxcoinUser,
+        WatchLater,
     },
     data: function () {
         return {
