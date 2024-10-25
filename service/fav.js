@@ -21,8 +21,8 @@ function addWatchLater(data) {
     return $n.post(`api/next2/userdata/favorite/item`, data)
 }
 
-function delWatchLater(id) {
-    return $n.delete(`api/next2/userdata/favorite/item/${id}`)
+function delWatchLater(params) {
+    return $n.delete(`api/next2/userdata/favorite/item`, { params })
 }
 
 export { hasFav, addFav, delFav, addWatchLater, delWatchLater };

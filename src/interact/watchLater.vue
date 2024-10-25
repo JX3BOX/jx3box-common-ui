@@ -12,7 +12,8 @@
 <script>
 import User from "@jx3box/jx3box-common/js/user";
 import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
-import { addWatchLater } from "../../service/fav";
+import { addWatchLater, delWatchLater } from "../../service/fav";
+import { omit } from "lodash";
 export default {
     name: "WatchLater",
     props: {
@@ -65,7 +66,9 @@ export default {
         },
         rmWatchLater: function () {
             // remove watch later
-            this.favorite = false;
+            delWatchLater(omit(this.data, ['title'])).then(() => {
+                this.favorite = false;
+            });
         },
     }
 }
