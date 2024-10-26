@@ -51,8 +51,8 @@
                     :category="category"
                     @updateRecord="updateRecord"
                 />
-                <Share :postId="postId" :postType="postType" :client="client" />
                 <watch-later :category="postType" :title="postTitle"></watch-later>
+                <Share :postId="postId" :postType="postType" :client="client" />
             </div>
             <div class="w-thx-records">
                 <boxcoin-records
