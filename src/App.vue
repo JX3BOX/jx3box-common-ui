@@ -265,7 +265,7 @@ export default {
     },
     data: function () {
         return {
-            tab: "widget",
+            tab: "post",
 
             post: {},
             post_id: "79820",

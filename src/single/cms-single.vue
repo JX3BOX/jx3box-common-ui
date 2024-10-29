@@ -47,6 +47,7 @@
                 :userBoxcoinEnable="true"
                 :authors="authors"
                 :client="post_client"
+                showRss
             />
 
             <!-- 评论 -->
