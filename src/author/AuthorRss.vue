@@ -2,7 +2,9 @@
     <div class="c-author-rss">
         <el-button
             class="u-btn"
+            :class="{ 'u-fans-box': isSelf }"
             size="mini"
+            plain
             @click="subscribe"
             :loading="loading"
             :disabled="isSelf"
@@ -128,17 +130,19 @@ export default {
         cursor: default;
         &:hover {
             cursor: pointer;
-            // background-color: @light-pink;
-            // color: #fff;
-            // border-color: darken(@light-pink, 2%);
+            background-color: @light-pink;
+            color: #fff;
+            border-color: darken(@light-pink, 2%);
 
             .u-icon {
-                filter: invert(30%) sepia(87%) saturate(1486%) hue-rotate(194deg) brightness(87%) contrast(107%);
+                filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(198deg) brightness(104%) contrast(101%);
             }
         }
     }
     .u-icon {
         .size(12px);
+        .pr;
+        top: 1px;
     }
 }
 
