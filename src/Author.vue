@@ -3,7 +3,8 @@
         <AuthorInfo :uid="uid" @ready="installModules" />
         <template v-if="data">
             <div class="u-interact">
-                <AuthorFollow style="margin-right: 8px" :uid="uid" />
+                <!-- <AuthorFollow style="margin-right: 8px" :uid="uid" /> -->
+                <AuthorRss style="margin-right: 8px" :uid="uid" />
                 <!-- <AuthorGift :uid="uid" /> -->
                 <el-button icon="el-icon-message" class="u-btn" size="mini" @click="onMessage">私信</el-button>
             </div>
@@ -21,13 +22,14 @@
 <script>
 import AuthorInfo from "./author/AuthorInfo.vue";
 import AuthorLink from "./author/AuthorLink.vue";
-import AuthorFollow from "./author/AuthorFollow.vue";
+// import AuthorFollow from "./author/AuthorFollow.vue";
 // import AuthorMsg from "./author/AuthorMsg.vue";
 // import AuthorGift from "./author/AuthorGift.vue";
 // import AuthorFans from "./author/AuthorFans.vue";
 import AuthorMedals from "./author/AuthorMedals.vue";
 import AuthorTeams from "./author/AuthorTeams.vue";
 import AuthorPosts from "./author/AuthorPosts.vue";
+import AuthorRss from "./author/AuthorRss.vue";
 export default {
     name: "Author",
     props: ["uid"],
@@ -47,13 +49,14 @@ export default {
     components: {
         AuthorInfo,
         AuthorLink,
-        AuthorFollow,
+        // AuthorFollow,
         // AuthorMsg,
         // AuthorGift,
         AuthorMedals,
         AuthorTeams,
         AuthorPosts,
         // AuthorFans,
+        AuthorRss,
     },
 };
 </script>
