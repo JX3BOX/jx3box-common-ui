@@ -26,6 +26,10 @@ export default {
             type: Number,
             default: 0,
         },
+        data: {
+            type: Object,
+            default: () => {},
+        },
     },
     data() {
         return {
@@ -80,9 +84,10 @@ export default {
             if (this.subscribed) {
                 this.unsubscribe({ id: this.uid });
             } else {
-                subscribeAuthor({ id: this.uid })
+                subscribeAuthor({ id: this.uid, data: { title: this.data?.display_name } })
                     .then((res) => {
                         this.subscribed = true;
+                        this.$message.success("订阅成功");
                     })
                     .catch((err) => {
                         console.log(err);

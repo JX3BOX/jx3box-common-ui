@@ -4,7 +4,7 @@
         <template v-if="data">
             <div class="u-interact">
                 <!-- <AuthorFollow style="margin-right: 8px" :uid="uid" /> -->
-                <AuthorRss style="margin-right: 8px" :uid="uid" />
+                <AuthorRss style="margin-right: 8px" :uid="uid" :data="data" />
                 <!-- <AuthorGift :uid="uid" /> -->
                 <el-button class="u-btn" size="mini" @click="onMessage">
                     <img class="u-msg-icon" svg-inline :src="src" />
