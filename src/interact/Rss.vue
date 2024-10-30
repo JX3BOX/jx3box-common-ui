@@ -42,6 +42,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        title: {
+            type: String,
+            default: "",
+        },
     },
     data() {
         return {
@@ -87,6 +91,9 @@ export default {
             return {
                 type: this.type,
                 id: this.id,
+                data: {
+                    title: this.title
+                }
             }
         },
         isLogin() {

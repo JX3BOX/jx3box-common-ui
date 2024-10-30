@@ -51,7 +51,7 @@ export default {
             return User.isLogin();
         },
         src() {
-            return __cdn + "design/vector/icon/rss_origin.svg";
+            return __cdn + "design/vector/icon/rss_author.svg";
         }
     },
     watch: {
@@ -142,7 +142,8 @@ export default {
     .u-icon {
         .size(12px);
         .pr;
-        top: 1px;
+        top: 2px;
+        filter: invert(40%) sepia(5%) saturate(419%) hue-rotate(182deg) brightness(89%) contrast(84%);
     }
 }
 

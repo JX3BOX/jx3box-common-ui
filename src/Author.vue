@@ -6,7 +6,10 @@
                 <!-- <AuthorFollow style="margin-right: 8px" :uid="uid" /> -->
                 <AuthorRss style="margin-right: 8px" :uid="uid" />
                 <!-- <AuthorGift :uid="uid" /> -->
-                <el-button icon="el-icon-message" class="u-btn" size="mini" @click="onMessage">私信</el-button>
+                <el-button class="u-btn" size="mini" @click="onMessage">
+                    <img class="u-msg-icon" svg-inline :src="src" />
+                    私信
+                </el-button>
             </div>
             <!-- <AuthorMsg :uid="uid" /> -->
             <AuthorLink class="u-block u-links" :uid="uid" :data="data" />
@@ -30,12 +33,14 @@ import AuthorMedals from "./author/AuthorMedals.vue";
 import AuthorTeams from "./author/AuthorTeams.vue";
 import AuthorPosts from "./author/AuthorPosts.vue";
 import AuthorRss from "./author/AuthorRss.vue";
+import {__cdn} from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "Author",
     props: ["uid"],
     data: function () {
         return {
             data: "",
+            src: __cdn + "design/vector/icon/message.svg",
         };
     },
     methods: {

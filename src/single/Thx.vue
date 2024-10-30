@@ -38,7 +38,7 @@
                 />
                 <Like :postId="postId" :postType="postType"></Like>
                 <fav :postId="postId" :postType="postType" :postTitle="postTitle"></fav>
-                <Rss v-if="showRss" :type="postType" :id="postId"></Rss>
+                <Rss v-if="showRss" :type="postType" :id="postId" :title="postTitle"></Rss>
                 <boxcoin-user
                     v-if="userBoxcoinEnable && boxcoin_enable && allowGift"
                     :postId="postId"
