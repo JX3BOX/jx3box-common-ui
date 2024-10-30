@@ -142,7 +142,7 @@ export default {
     .u-icon {
         .size(12px);
         .pr;
-        top: 2px;
+        top: 1px;
         filter: invert(40%) sepia(5%) saturate(419%) hue-rotate(182deg) brightness(89%) contrast(84%);
     }
 }
