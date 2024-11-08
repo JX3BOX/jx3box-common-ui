@@ -133,7 +133,7 @@ export default {
 .c-author-rss {
     .u-btn.el-button {
         cursor: default;
-        &:hover {
+        &:not(&.is-disabled):hover {
             cursor: pointer;
             background-color: @light-pink;
             color: #fff;
@@ -141,6 +141,12 @@ export default {
 
             .u-icon {
                 filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(198deg) brightness(104%) contrast(101%);
+            }
+        }
+        &.is-disabled {
+            cursor: not-allowed !important;
+            .u-icon {
+                filter: invert(74%) sepia(12%) saturate(138%) hue-rotate(182deg) brightness(106%) contrast(88%);
             }
         }
     }
