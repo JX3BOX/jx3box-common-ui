@@ -77,5 +77,10 @@ function setUserMeta(key,data) {
     return $cms().post(`/api/cms/user/my/meta?key=${key}`, data);
 }
 
+// 刷新凭证
+function refreshAuth() {
+    return $cms().post(`/api/cms/user/account/email/refresh`);
+}
+
 export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember,
-    getSliders,getSlider, getCollection, getTopicBucket, getConfig, getUserMeta, setUserMeta };
+    getSliders,getSlider, getCollection, getTopicBucket, getConfig, getUserMeta, setUserMeta, refreshAuth };

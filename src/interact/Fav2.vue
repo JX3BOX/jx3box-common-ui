@@ -16,7 +16,7 @@ import { hasFav, addFav, delFav } from "../../service/fav";
 import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "Fav2",
-    props: ["postType", "postId", "postTitle", "hiddenNum"],
+    props: ["postType", "postId", "postTitle", "hiddenNum", "isOld"],
     data: function () {
         return {
             login: User.isLogin(),
@@ -29,10 +29,10 @@ export default {
             return this.favorite ? "已收藏" : "收藏";
         },
         starIcon() {
-            return __cdn + "design/vector/icon/collect.svg"
+            return this.isOld ? require("../../assets/img/widget/star.svg") : __cdn + "design/vector/icon/collect.svg"
         },
         unstarIcon() {
-            return __cdn + "design/vector/icon/uncollect.svg"
+            return this.isOld ? require("../../assets/img/widget/unstar.svg") : __cdn + "design/vector/icon/uncollect.svg"
         },
     },
     methods: {

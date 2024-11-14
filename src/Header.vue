@@ -41,6 +41,8 @@ import search from "./header/search.vue";
 import nav from "./header/nav.vue";
 import user from "./header/user.vue";
 import Box from "../src/Box.vue";
+import { isMiniProgram, miniprogramHack } from "@jx3box/jx3box-common/js/utils";
+import miniprogram from "@jx3box/jx3box-common/data/miniprogram.json";
 // import gameSwitch from "./header/gameSwitch.vue";
 
 export default {
@@ -62,6 +64,26 @@ export default {
         checkIsWebView: function () {
             if (window.navigator.userAgent.includes(KW)) {
                 document.documentElement.classList.add("env-app");
+            }
+
+            if (isMiniProgram()) {
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const appid = urlParams.get("appid");
+                const item = miniprogram?.find((item) => item.appid === appid);
+
+                if (appid && item) {
+                    document.documentElement.classList.add("env-miniprogram" + item.id);
+
+                    window.JX3BOX_ENV = item.id?.toUpperCase() + "_MINIPROGRAM";
+                } else {
+                    document.documentElement.classList.add("wechat-miniprogram");
+
+                    window.JX3BOX_ENV = "MINIPROGRAM";
+
+                    // 微信小程序hack
+                    miniprogramHack();
+                }
             }
         },
 

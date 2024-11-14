@@ -157,9 +157,9 @@ export default {
         cursor: default;
         &:hover {
             cursor: pointer;
-            background-color: @light-pink ;
-            color: #fff ;
-            border-color: darken(@light-pink, 2%) ;
+            background-color: @light-pink;
+            color: #fff;
+            border-color: darken(@light-pink, 2%);
         }
     }
 

@@ -1,12 +1,5 @@
 <template>
-    <el-dialog
-        append-to-body
-        :visible.sync="visible"
-        custom-class="c-alternate"
-        width="320px"
-        :show-close="false"
-        title="切换马甲"
-    >
+    <el-dialog append-to-body :visible.sync="visible" custom-class="c-alternate" width="320px" title="切换马甲">
         <div class="c-alternate__content">
             <div
                 class="c-alternate-item"
@@ -32,11 +25,11 @@
                     </span>
                 </div>
 
-                <div class="u-remove" @click.stop="onRemoveAlternate(item)">
+                <div class="u-remove" @click.stop="onRemoveAlternate(item)" v-if="profile.uid != item.uid">
                     <i class="el-icon-close"></i>
                 </div>
             </div>
-            <div class="c-alternate-btn" :class="{'is-disabled': overLength}" @click="onAddAlternate">+</div>
+            <div class="c-alternate-btn" :class="{ 'is-disabled': overLength }" @click="onAddAlternate">+</div>
         </div>
     </el-dialog>
 </template>
@@ -47,6 +40,7 @@ import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import dayjs from "dayjs";
 import User from "@jx3box/jx3box-common/js/user";
 import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
+import { refreshAuth } from "../../service/cms"
 export default {
     name: "alternate",
     data() {
@@ -88,6 +82,23 @@ export default {
                     return JSON.parse(localStorage.getItem(key));
                 });
 
+                // 如果当前号码不在马甲列表中，添加到列表中
+                if (!this.alternate.find((alt) => alt.uid == this.profile.uid)) {
+                    const data = {
+                        uid: this.profile.uid,
+                        name: this.profile.name,
+                        avatar: localStorage.getItem("avatar"),
+                        created_at: Number(localStorage.getItem("created_at")),
+                        group: ~~this.profile.group,
+                        bind_wx: ~~this.profile.bind_wx,
+                        token: localStorage.getItem("token"),
+                        status: ~~this.profile.status,
+                    };
+                    this.alternate.unshift(data);
+
+                    localStorage.setItem("jx3box-alternate-" + this.profile.uid, JSON.stringify(data));
+                }
+
                 // 当前激活的排在第一
                 this.alternate.sort((a, b) => {
                     return a.uid == this.profile.uid ? -1 : 1;
@@ -96,7 +107,9 @@ export default {
                 console.error(error);
             }
         },
-        showAvatar,
+        showAvatar(url) {
+            return showAvatar(url, "m");
+        },
         getFormatTime(time) {
             return dayjs(time).format("YYYY-MM-DD HH:mm:ss");
         },
@@ -110,13 +123,16 @@ export default {
                 this.$message.error("该马甲已过期，请重新登录");
                 return;
             }
+            if (this.profile.uid == item.uid) {
+                return;
+            }
             this.$confirm("确定要切换到该马甲吗？", "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning",
             })
                 .then(() => {
-                    User.update(item).then(() => {
+                    User.update(item).then(async () => {
                         localStorage.setItem(
                             "jx3box-alternate-" + item.uid,
                             JSON.stringify({
@@ -124,6 +140,7 @@ export default {
                                 created_at: Number(localStorage.getItem("created_at")),
                             })
                         );
+                        await refreshAuth();
                         location.reload();
                         this.visible = false;
                     });
@@ -159,16 +176,15 @@ export default {
 
 <style lang="less">
 .c-alternate {
-    .el-dialog__title{
+    .el-dialog__title {
         .fz(12px);
     }
     .el-dialog__body {
         padding: 0;
     }
     .el-dialog__header {
-        padding: 10px;
+        // padding: 10px;
         border-bottom: #dcdfe6 1px solid;
-
     }
     .c-alternate__content {
         max-height: 600px;
@@ -251,10 +267,10 @@ export default {
         // border-radius: 0;
         .size(100%,74px);
         .fz(40px,74px);
-        color:#999;
-        &:hover{
-            background-color:@bg-light;
-            color:#888;
+        color: #999;
+        &:hover {
+            background-color: @bg-light;
+            color: #888;
         }
     }
 }

@@ -204,6 +204,8 @@ import post_topics from "@jx3box/jx3box-common/data/post_topics.json";
 import Homework from './interact/Homework.vue';
 import { getTopicDetails } from "../service/community"
 
+import { isMiniProgram, miniprogramHack } from "@jx3box/jx3box-common/js/utils";
+
 export default {
     name: "App",
     components: {
@@ -263,10 +265,10 @@ export default {
     },
     data: function () {
         return {
-            tab: "widget",
+            tab: "post",
 
             post: {},
-            post_id: "81999",
+            post_id: "79820",
 
             author: "",
             wikiPost: null,
