@@ -63,6 +63,7 @@
                     <orderBy />
                     <tagBy :data="['PVE', 'PVX']" :type="tag" />
                     <clientBy type="" />
+                    <versionBy value="" />
                     <zlpBy />
 
                     <topicBy v-model="tag2" :topics="post_topics" />
@@ -190,6 +191,7 @@ import tagBy from "./filters/tagBy.vue";
 import clientBy from "./filters/clientBy.vue";
 import zlpBy from "./filters/zlpBy.vue";
 import topicBy from "./filters/topicBy.vue";
+import versionBy from "./filters/versionBy.vue";
 
 import uploadImage from "./upload/upload_banner.vue";
 // import AuthorMedal from "./medal/medal.vue";
@@ -252,6 +254,7 @@ export default {
         clientBy,
         zlpBy,
         topicBy,
+        versionBy,
 
         uploadImage,
         // AuthorMedal,
