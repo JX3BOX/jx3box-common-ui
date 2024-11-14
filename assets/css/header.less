@@ -1,5 +1,8 @@
 @import "./icon.less";
 
+html{
+    scroll-behavior: smooth;
+}
 body {
     padding-top: @header-height;
     color: @color;
@@ -200,7 +203,7 @@ body {
         height: 100%;
         .flex;
         align-items: center;
-    } 
+    }
 
     &.on {
         .u-menu {
@@ -208,7 +211,7 @@ body {
         }
     }
 
-    &:hover { 
+    &:hover {
         .u-dropdown {
             opacity: 0.7;
         }
