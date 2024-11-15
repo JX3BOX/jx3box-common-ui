@@ -74,7 +74,7 @@ import User from "@jx3box/jx3box-common/js/user";
 import { getBreadcrumb } from "@jx3box/jx3box-common/js/api_misc";
 export default {
     name: "Homework",
-    props: ["postType", "postId", "userId", "client", "modelValue", "articleId", "category", "title"],
+    props: ["postType", "postId", "userId", "client", "modelValue", "articleId", "category", "title", "placeholder"],
     model: {
         prop: "modelValue",
         event: "update:modelValue",
@@ -262,6 +262,9 @@ export default {
         onClose() {
             this.$emit("update:modelValue", false);
         },
+    },
+    mounted() {
+        this.remark = this.placeholder || "不错，加油！";
     },
 };
 </script>
