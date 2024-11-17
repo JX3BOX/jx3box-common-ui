@@ -2,8 +2,12 @@ import axios from "axios";
 import { $helper, $cms, $next } from "@jx3box/jx3box-common/js/https.js";
 import { __dataPath } from "@jx3box/jx3box-common/data/jx3box.json";
 
-function getMsg() {
+function getLetter() {
     return $next({ mute: true }).get("/api/letter/unread/count");
+}
+
+function getMsg() {
+    return $next({ mute: true }).get("/api/next2/userdata/messages/unread_total");
 }
 
 function getNav(client = "std") {
@@ -28,4 +32,4 @@ function getGames() {
     return axios.get(__dataPath + 'data/product/games.json')
 }
 
-export { getMsg, getNav, getPanel, getBox, getMenu, getGames };
+export { getLetter, getNav, getPanel, getBox, getMenu, getGames, getMsg };

@@ -13,7 +13,7 @@
 
 <script>
 import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
-import { getMsg } from "../../service/header";
+import { getLetter, getMsg } from "../../service/header";
 export default {
     name: "message",
     data: function () {
@@ -27,10 +27,10 @@ export default {
     },
     methods: {
         // 消息
-        checkMSG: function () {
-            getMsg().then((res) => {
-                this.pop = !!(Math.max(~~res.data.data.letter, 0) + ~~res.data.data.message);
-            });
+        checkMSG: async function () {
+            const letterRes = await getLetter();
+            const msgRes = await getMsg();
+            this.pop = !!(Math.max(~~letterRes.data.data.letter, 0) || Math.max(~~msgRes.data.data.unread_count, 0));
         },
     },
 };
