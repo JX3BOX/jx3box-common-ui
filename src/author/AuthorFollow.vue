@@ -134,6 +134,7 @@ export default {
             });
         },
         loadFans() {
+            if (!this.uid) return;
             this.loading = true;
             getFansCount(this.uid)
                 .then((res) => {
