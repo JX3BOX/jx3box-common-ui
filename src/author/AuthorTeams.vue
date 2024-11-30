@@ -57,6 +57,7 @@ export default {
     },
     methods: {
         loadTeams: function () {
+            if (!~~this.uid) return;
             getUserPublicTeams(this.uid).then((data) => {
                 this.teams = data && data.slice(0, 8);
             });
