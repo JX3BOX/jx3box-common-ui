@@ -24,6 +24,9 @@
                         </el-select>
                     </span>
                     <el-input v-model="form.title" placeholder="请输入标题" class="input-author drawer-item-content">
+                        <template #append>
+                            <el-button icon="el-icon-edit" @click="onEdit"></el-button>
+                        </template>
                     </el-input>
                 </div>
             </div>
@@ -406,6 +409,9 @@ export default {
         removeBanner: function () {
             this.post_banner = "";
         },
+        onEdit() {
+            window.open(`/publish/#/community/${this.postId}?from=admin`, "_blank")
+        }
     },
 };
 </script>
