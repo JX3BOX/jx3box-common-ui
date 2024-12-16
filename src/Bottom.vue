@@ -12,7 +12,8 @@ export default {
     data: function() {
         return {
             homepage: __Root,
-            feedback: '/feedback' + '&refer=' + location.href,
+            // feedback: '/feedback' + '&refer=' + location.href,
+            feedback: "mailto:service@jx3box.com?subject=Feedback",
         };
     },
 };
