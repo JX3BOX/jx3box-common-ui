@@ -145,7 +145,7 @@ export default {
             data.title = this.form.title;
             data.remark = this.form.remark;
             data.star = this.form.star;
-            data.subtype = this.form.type;
+            data.subtype = this.post?._subtype || this.form.type; // 此处针对特殊的community
             data.version = this.form.version;
             data.client = data.client == 'origin' ? 'origin' : 'std';
 
