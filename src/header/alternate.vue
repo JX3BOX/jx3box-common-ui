@@ -197,6 +197,7 @@ export default {
         padding: 10px;
         .pr;
         border-bottom: 1px solid #eee;
+        .fz(13px);
 
         &:hover {
             background-color: @bg-light;
