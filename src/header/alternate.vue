@@ -80,7 +80,7 @@ export default {
 
                 this.alternate = alternate.map((key) => {
                     return JSON.parse(localStorage.getItem(key));
-                });
+                })?.filter((alt) => !this.isExpired(alt.created_at));
 
                 // 如果当前号码不在马甲列表中，添加到列表中
                 if (!this.alternate.find((alt) => alt.uid == this.profile.uid)) {
