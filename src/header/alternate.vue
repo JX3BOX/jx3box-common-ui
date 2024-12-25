@@ -115,7 +115,7 @@ export default {
         },
         // 判断是否已过期
         isExpired(time) {
-            return User.isExpired(time);
+            return dayjs().diff(time, "day") > 30;
         },
         // 选择马甲
         onSelectAlternate(item) {
