@@ -4,7 +4,7 @@
     </a>
 </template>
 <script>
-import { __imgPath, __Root } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __cdn, __Root } from "@jx3box/jx3box-common/data/jx3box.json";
 import { getUserHonor } from "../../service/author";
 import { inRange } from "lodash";
 const HONOR_IMG_KEY = "honor_img";
@@ -32,7 +32,7 @@ export default {
         imgUrl: function () {
             let item = this.honor?.honor_info;
             if (!item) return;
-            return __imgPath + `decoration/honor/${item.img}/${item.img}.${item.img_ext}`;
+            return __cdn + `design/decoration/honor/${item.img}/${item.img}.${item.img_ext}`;
         },
         getHonor() {
             let user_id = this.uid;

@@ -28,7 +28,7 @@
 import Bus from "../service/bus";
 import { isApp } from "../assets/js/app.js";
 import { getDecoration } from "../service/cms";
-import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 const DECORATION_SIDEBAR = "decoration_sidebar";
 export default {
     name: "LeftSidebar",
@@ -61,7 +61,7 @@ export default {
             Bus.$emit("toggleLeftSide", status);
         },
         showDecoration: function (val, type) {
-            return __imgPath + `decoration/images/${val}/${type}.png`;
+            return __cdn + `design/decoration/images/${val}/${type}.png`;
         },
         getDecoration() {
             if (!this.user_id) {
