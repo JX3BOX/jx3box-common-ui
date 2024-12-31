@@ -173,9 +173,19 @@ export default {
             User.destroy()
                 .then((res) => {
                     this.$emit("logout");
+
+                    // 清除马甲所有马甲信息
+                    let keys = Object.keys(localStorage);
+                    let alternate = keys.filter((key) => key.startsWith("jx3box-alternate-"));
+
+                    alternate.forEach((key) => {
+                        localStorage.removeItem(key);
+                    });
+
                     if (location.pathname.startsWith("/dashboard") || location.pathname.startsWith("/publish")) {
                         location.href = this.siteRoot;
                     }
+
                 })
                 .then(() => {
                     if (mute) return;
@@ -185,9 +195,6 @@ export default {
                         type: "success",
                         duration: 1000,
                     });
-
-                    // 清除马甲
-                    localStorage.removeItem("jx3box-alternate-" + User.getInfo().uid);
                 });
         },
         showUserName: function (val) {
