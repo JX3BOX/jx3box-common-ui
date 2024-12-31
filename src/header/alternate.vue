@@ -78,9 +78,16 @@ export default {
                 let keys = Object.keys(localStorage);
                 let alternate = keys.filter((key) => key.startsWith("jx3box-alternate-"));
 
-                this.alternate = alternate.map((key) => {
-                    return JSON.parse(localStorage.getItem(key));
-                })?.filter((alt) => !this.isExpired(alt.created_at));
+                alternate.forEach((key) => {
+                    const item = JSON.parse(localStorage.getItem(key));
+                    if (this.isExpired(item.created_at)) {
+                        localStorage.removeItem(key);
+                    }
+
+                    if (!this.alternate.find((alt) => alt.uid == item.uid)) {
+                        this.alternate.push(item);
+                    }
+                });
 
                 // 如果当前没有马甲，添加当前登录用户
                 if (!this.alternate?.length) {
