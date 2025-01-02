@@ -91,8 +91,12 @@ function userSignIn(){
     return $pay({ mute: true }).get(`/api/personal/task/everyday/sign-in`)
 }
 
-function getFansList(userid,limit) {
-    return $pay().get(`/api/cny/consume/user-charge/rank/of/${userid}?limit=0`,);
+function getFansList(userid, limit) {
+    return $next().get(`/api/next2/rss/user-list/author/${userid}/vip-subscriber?limit=${limit}`)
+}
+
+function getSummary(uid) {
+    return $next().get(`/api/next2/rss/summary/author/${uid}`)
 }
 
 export {
@@ -108,5 +112,6 @@ export {
     getFansList,
     getUserInfoByUidOrName,
     getUserHonors,
-    getUserHonor
+    getUserHonor,
+    getSummary
 };
