@@ -72,6 +72,8 @@ export default {
                 const appid = urlParams.get("appid");
                 const item = miniprogram?.find((item) => item.appid === appid);
 
+                document.documentElement.classList.add("v-miniprogram");
+
                 if (appid && item) {
                     document.documentElement.classList.add("env-miniprogram" + item.id);
 
