@@ -40,7 +40,7 @@ export default {
     },
     computed: {
         btnText() {
-            return this.subscribed ? "已订阅" : "订阅";
+            return this.subscribed ? "已关注" : "关注";
         },
         btnType() {
             return !this.subscribed ? "info" : "warning";
@@ -87,7 +87,7 @@ export default {
                 subscribeAuthor({ id: this.uid, data: { title: this.data?.display_name } })
                     .then((res) => {
                         this.subscribed = true;
-                        this.$message.success("订阅成功");
+                        this.$message.success("关注成功");
                     })
                     .catch((err) => {
                         console.log(err);

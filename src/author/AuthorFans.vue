@@ -5,7 +5,7 @@
             <img svg-inline src="../../assets/img/leftsidebar/fans.svg" />
             <span>粉丝榜</span>
         </div>
-        <div class="f-avatar">
+        <div class="f-avatar" v-if="list.length">
             <el-tooltip
                 class="item"
                 effect="dark"
@@ -61,7 +61,7 @@ export default {
             });
 
             getFansList(this.uid, this.fansLimit).then((res) => {
-                this.list = res.data.data.list;
+                this.list = res.data.data.list || [];
             });
         },
         showAvatar,
