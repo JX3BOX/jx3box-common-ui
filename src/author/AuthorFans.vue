@@ -22,7 +22,7 @@
         </div>
         <div class="f-bottom">
             粉丝数: <span class="u-count">{{ fans_count }}</span
-            >，累计收到盒币打赏: <span class="u-count">{{ boxcoin_count }}</span>
+            ><template v-if="boxcoin_count">，累计收到盒币打赏: <span class="u-count">{{ boxcoin_count }}</span></template>
         </div>
     </div>
 </template>
