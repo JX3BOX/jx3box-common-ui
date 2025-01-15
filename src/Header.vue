@@ -92,6 +92,16 @@ export default {
         // 检查
         init: function () {
             this.checkIsWebView();
+
+            const token = this.getUrlParam("__token");
+
+            token && localStorage.setItem("__token", token);
+        },
+
+        getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            return r ? decodeURIComponent(r[2]) : null;
         },
     },
     created: function () {
