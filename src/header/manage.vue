@@ -2,18 +2,21 @@
     <div class="c-header-panel c-header-manage" id="c-header-manage">
         <span class="u-post u-manage">
             <!-- <i class="u-icon u-icon-msg"> -->
-                <i class="u-pop" style="display: none" v-show="showPop"></i>
+                <i class="u-pop" style="display: none" v-show="showPop || !isAuth"></i>
                 <img class="u-add" svg-inline src="../../assets/img/header/manage.svg" />
             <!-- </i> -->
         </span>
         <ul class="u-menu u-pop-content">
-            <li v-for="item in userPanel" :key="item.label">
-                <a :href="item.link" :target="item.target || '_self'" class="u-menu-item" @click="onClick(item)">
-                    <img :src="resolveImg(item.icon)" svg-inline class="u-menu-icon" :alt="item.icon" />
-                    {{ item.label }}
-                    <span v-if="showPop" class="u-new">New!</span>
-                </a>
-            </li>
+            <template v-for="item in userPanel">
+                <li :key="item.label" v-if="item.remark == 'auth' ? !isAuth: true">
+                    <a :href="item.link" :target="item.target || '_self'" class="u-menu-item" @click="onClick(item)">
+                        <img :src="resolveImg(item.icon)" svg-inline class="u-menu-icon" :alt="item.icon" />
+                        {{ item.label }}
+                        <span v-if="showPop" class="u-new">New!</span>
+                        <span v-if="item.remark == 'auth' && !isAuth" class="u-new">New!</span>
+                    </a>
+                </li>
+            </template>
             <hr v-if="userPanel.length" />
             <template v-if="isTeammate">
                 <li v-for="item in adminPanel" :key="item.label">
@@ -31,6 +34,7 @@
 import panel from "../../assets/data/panel.json";
 import { getMenu } from "../../service/header";
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "Manage",
     data() {
@@ -57,6 +61,9 @@ export default {
                 return item.onlyAdmin;
             });
         },
+        isAuth() {
+            return User.isPhoneMember();
+        }
     },
     mounted() {
         this.loadPanel();
