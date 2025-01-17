@@ -50,7 +50,7 @@
 import search from "./header/search.vue";
 import _ from "lodash";
 import Bus from "../service/bus";
-import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __imgPath, __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 import box from "../assets/data/box.json";
 import { getMenu } from "../service/header.js";
 import { trimSlash } from "../assets/js/utils";
@@ -92,7 +92,9 @@ export default {
             return client == "all" ? true : client == this.client;
         },
         getBoxIcon: function (val) {
-            return __imgPath + "image/box/" + val;
+            val = val && val?.replace(".png", ".svg");
+            let web_url = __cdn + "logo-light/" + val;
+            return web_url;
         },
         getTarget: function (val) {
             if (window.innerWidth < 768 || val?.startsWith("/")) {
