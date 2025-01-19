@@ -115,7 +115,6 @@ export default {
                             })
                             .catch((err) => {
                                 localStorage.setItem("user_last_login", JSON.stringify(dayjs()));
-                                console.log(dayjs.tz.guess());
                             })
                             .finally(() => {
                                 clearTimeout(signTimer);
