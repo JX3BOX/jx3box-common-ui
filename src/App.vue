@@ -314,7 +314,7 @@ export default {
         },
         loadCommunity: function () {
             // 72
-            getTopicDetails(120).then((res) => {
+            getTopicDetails(4339).then((res) => {
                 this.community = res.data.data;
             });
         },
