@@ -1,6 +1,6 @@
 import axios from "axios";
-import { $helper, $cms, $next } from "@jx3box/jx3box-common/js/https.js";
-import { __dataPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import { $cms, $next } from "@jx3box/jx3box-common/js/https.js";
+import { __dataPath, __ossRoot } from "@jx3box/jx3box-common/data/jx3box.json";
 
 function getLetter() {
     return $next({ mute: true }).get("/api/letter/unread/count");
@@ -32,4 +32,11 @@ function getGames() {
     return axios.get(__dataPath + 'data/product/games.json')
 }
 
-export { getLetter, getNav, getPanel, getBox, getMenu, getGames, getMsg };
+// 获取全局配置
+function getGlobalConfig() {
+    return axios.get(`${__ossRoot}config/global.json`).then((res) => {
+        return res.data;
+    });
+}
+
+export { getLetter, getNav, getPanel, getBox, getMenu, getGames, getMsg, getGlobalConfig };
