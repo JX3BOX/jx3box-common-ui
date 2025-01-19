@@ -282,6 +282,7 @@ export default {
 
             promises.push(
                 updateTopicItem(id, {
+                    ...this.post,
                     user_id: Number(this.form.user_id),
                     title: this.form.title,
                     category: this.form.category,
