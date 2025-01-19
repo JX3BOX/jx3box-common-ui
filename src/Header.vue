@@ -102,6 +102,7 @@ export default {
 
                 if (User.isLogin()) {
                     if (token_version != global_token_version) {
+                        localStorage.setItem("token_version", global_token_version);
                         User.destroy().then((res) => {
                             this.$refs.user?.logout();
                             // 清除马甲所有马甲信息
