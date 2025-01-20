@@ -37,7 +37,7 @@ export const manageTopicAll = (id, data) => {
 }
 
 export const getTopicDetails = (id) => {
-    return $next().get(`${API_PREFIX}/community/discussion/topic/item/${id}`);
+    return $next().get(`${API_PREFIX}/community/discussion/manage/topic/item/${id}`);
 };
 
 // 菜单
