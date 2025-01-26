@@ -52,7 +52,7 @@
                     :category="category"
                     @updateRecord="updateRecord"
                 />
-                <watch-later :category="postType" :title="postTitle"></watch-later>
+                <watch-later :category="postType" :title="postTitle" :author-id="authorId" :banner="banner"></watch-later>
                 <Share :postId="postId" :postType="postType" :client="client" />
             </div>
             <div class="w-thx-records">
@@ -139,6 +139,14 @@ export default {
         showRss: {
             type: Boolean,
             default: false,
+        },
+        authorId: {
+            type: Number,
+            default: 0,
+        },
+        banner: {
+            type: String,
+            default: "",
         },
     },
     components: {
