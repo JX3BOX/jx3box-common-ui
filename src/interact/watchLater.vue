@@ -25,6 +25,14 @@ export default {
             type: String,
             default: "",
         },
+        authorId: {
+            type: Number,
+            default: 0,
+        },
+        banner: {
+            type: String,
+            default: "",
+        },
     },
     data: function () {
         return {
@@ -47,6 +55,8 @@ export default {
                 category: this.category,
                 link: location.href,
                 title: this.title,
+                author_id: this.authorId,
+                banner: this.banner,
             }
         }
     },
