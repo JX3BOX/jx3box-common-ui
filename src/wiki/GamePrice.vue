@@ -1,19 +1,20 @@
 <template>
     <span class="c-game-price">
-        <span v-if="formartPrice(price,'zhuan')">
-            {{formartPrice(price,'zhuan')}}
+        <span v-if="price < 0">-</span>
+        <span v-if="formartPrice(price, 'zhuan')">
+            {{ formartPrice(price, "zhuan") }}
             <img src="../../assets/img/price/zhuan.png" alt="砖" />
         </span>
-        <span v-if="formartPrice(price,'jin')">
-            {{formartPrice(price,'jin')}}
+        <span v-if="formartPrice(price, 'jin')">
+            {{ formartPrice(price, "jin") }}
             <img src="../../assets/img/price/jin.png" alt="金" />
         </span>
-        <span v-if="formartPrice(price,'yin')">
-            {{formartPrice(price,'yin')}}
+        <span v-if="formartPrice(price, 'yin')">
+            {{ formartPrice(price, "yin") }}
             <img src="../../assets/img/price/yin.png" alt="银" />
         </span>
-        <span v-if="formartPrice(price,'tong')">
-            {{formartPrice(price,'tong')}}
+        <span v-if="formartPrice(price, 'tong')">
+            {{ formartPrice(price, "tong") }}
             <img src="../../assets/img/price/tong.png" alt="铜" />
         </span>
     </span>
@@ -23,15 +24,9 @@
 export default {
     name: "GamePrice",
     props: ["price"],
-    components: {},
-    data: function () {
-        return {
-        };
-    },
-    computed: {},
-    watch: {},
     methods: {
         formartPrice(price = 0, unit) {
+            if (price < 0) price = -price;
             let result = {
                 zhuan: Math.floor(price * 0.01 * 0.01 * 0.0001) || 0,
                 jin: Math.floor((price * 0.01 * 0.01) % 10000) || 0,
@@ -41,17 +36,13 @@ export default {
             return result[unit];
         },
     },
-    filters: {},
-    created: function () {},
-    mounted: function () {},
 };
 </script>
 
 <style lang="less">
-    .c-game-price{
-        img{
-            .y;
-        }
+.c-game-price {
+    img {
+        .y;
     }
-    
+}
 </style>
