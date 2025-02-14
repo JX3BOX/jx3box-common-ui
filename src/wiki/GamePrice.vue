@@ -1,20 +1,20 @@
 <template>
-    <span class="c-game-price">
-        <span v-if="price < 0">-</span>
-        <span v-if="formartPrice(price, 'zhuan')">
-            {{ formartPrice(price, "zhuan") }}
+    <span class="c-game-price" :class="{ 'is-align': align }">
+        <span class="u-neg" v-if="price < 0">- </span>
+        <span class="u-zhuan" v-if="formatPrice(price, 'zhuan') || align">
+            <span class="u-value">{{ formatPrice(price, "zhuan") }}</span>
             <img src="../../assets/img/price/zhuan.png" alt="砖" />
         </span>
-        <span v-if="formartPrice(price, 'jin')">
-            {{ formartPrice(price, "jin") }}
+        <span class="u-jin" v-if="formatPrice(price, 'jin') || align">
+            <span class="u-value">{{ formatPrice(price, "jin") }}</span>
             <img src="../../assets/img/price/jin.png" alt="金" />
         </span>
-        <span v-if="formartPrice(price, 'yin')">
-            {{ formartPrice(price, "yin") }}
+        <span class="u-yin" v-if="formatPrice(price, 'yin') || align">
+            <span class="u-value">{{ formatPrice(price, "yin") }}</span>
             <img src="../../assets/img/price/yin.png" alt="银" />
         </span>
-        <span v-if="formartPrice(price, 'tong')">
-            {{ formartPrice(price, "tong") }}
+        <span class="u-tong" v-if="formatPrice(price, 'tong') || align">
+            <span class="u-value">{{ formatPrice(price, "tong") }}</span>
             <img src="../../assets/img/price/tong.png" alt="铜" />
         </span>
     </span>
@@ -23,9 +23,9 @@
 <script>
 export default {
     name: "GamePrice",
-    props: ["price"],
+    props: ["price", "align", "align-price"],
     methods: {
-        formartPrice(price = 0, unit) {
+        formatPrice(price = 0, unit) {
             if (price < 0) price = -price;
             let result = {
                 zhuan: Math.floor(price * 0.01 * 0.01 * 0.0001) || 0,
@@ -43,6 +43,34 @@ export default {
 .c-game-price {
     img {
         .y;
+    }
+
+    &.is-align {
+        .u-jin {
+            .u-value {
+                display: inline-flex;
+                width: 4ch;
+                justify-content: flex-end;
+                overflow: hidden;
+            }
+            .u-value::before {
+                content: "0000";
+                color: #eee;
+            }
+        }
+        .u-yin,
+        .u-tong {
+            .u-value {
+                display: inline-flex;
+                width: 2ch;
+                justify-content: flex-end;
+                overflow: hidden;
+            }
+            .u-value::before {
+                content: "00";
+                color: #eee;
+            }
+        }
     }
 }
 </style>
