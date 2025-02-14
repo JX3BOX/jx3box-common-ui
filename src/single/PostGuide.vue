@@ -28,7 +28,7 @@ export default {
     },
     computed: {
         hasGuide() {
-            return this.post.prev_post || this.post.next_post;
+            return ~~this.post.prev_post || ~~this.post.next_post;
         }
     },
     methods: {
