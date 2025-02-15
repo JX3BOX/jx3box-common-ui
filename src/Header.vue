@@ -69,11 +69,16 @@ export default {
                 const urlParams = new URLSearchParams(window.location.search);
                 const appid = urlParams.get("appid");
                 const item = miniprogram?.find((item) => item.appid === appid);
+                const from = urlParams.get("_from");
 
                 document.documentElement.classList.add("v-miniprogram");
 
+                if (from) {
+                    document.documentElement.classList.add("from-" + from);
+                }
+
                 if (appid && item) {
-                    document.documentElement.classList.add("env-miniprogram" + item.id);
+                    document.documentElement.classList.add("env-miniprogram-" + item.id);
 
                     window.JX3BOX_ENV = item.id?.toUpperCase() + "_MINIPROGRAM";
                 } else {

@@ -271,7 +271,7 @@ export default {
             tab: "post",
 
             post: {},
-            post_id: "79820",
+            post_id: "77714",
 
             author: "",
             wikiPost: null,
