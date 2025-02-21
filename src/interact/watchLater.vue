@@ -33,6 +33,10 @@ export default {
             type: String,
             default: "",
         },
+        contentId: {
+            type: Number,
+            default: 0,
+        }
     },
     data: function () {
         return {
@@ -57,6 +61,7 @@ export default {
                 title: this.title,
                 author_id: this.authorId,
                 banner: this.banner,
+                content_meta_id: this.contentId,
             }
         }
     },
@@ -76,7 +81,7 @@ export default {
         },
         rmWatchLater: function () {
             // remove watch later
-            delWatchLater(omit(this.data, ['title'])).then(() => {
+            delWatchLater(omit(this.data, ['title', 'author_id', 'banner', 'content_meta_id'])).then(() => {
                 this.favorite = false;
             });
         },
