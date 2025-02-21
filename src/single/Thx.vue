@@ -52,7 +52,7 @@
                     :category="category"
                     @updateRecord="updateRecord"
                 />
-                <watch-later :category="postType" :title="postTitle" :author-id="authorId" :banner="banner"></watch-later>
+                <watch-later :category="postType" :title="postTitle" :author-id="authorId" :banner="banner" :content-id="postId"></watch-later>
                 <Share :postId="postId" :postType="postType" :client="client" />
             </div>
             <div class="w-thx-records">
