@@ -52,7 +52,7 @@
                     :category="category"
                     @updateRecord="updateRecord"
                 />
-                <watch-later :category="postType" :title="postTitle" :author-id="authorId" :banner="banner" :content-id="postId"></watch-later>
+                <watch-later :category="postType" :title="postTitle" :author-id="authorId" :banner="banner" :content-id="contentMetaId"></watch-later>
                 <Share :postId="postId" :postType="postType" :client="client" />
             </div>
             <div class="w-thx-records">
@@ -147,6 +147,10 @@ export default {
         banner: {
             type: String,
             default: "",
+        },
+        contentMetaId: {
+            type: Number,
+            default: 0,
         },
     },
     components: {
