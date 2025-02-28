@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common-ui",
-    "version": "9.2.2",
+    "version": "9.2.3",
     "description": "JX3BOX UI",
     "main": "index.js",
     "scripts": {
@@ -34,7 +34,7 @@
         "@jx3box/jx3box-comment-ui": "^2.0.3",
         "@jx3box/jx3box-common": "^8.6.3",
         "@jx3box/jx3box-data": "^3.7.7",
-        "@jx3box/jx3box-editor": "^2.2.24",
+        "@jx3box/jx3box-editor": "^2.2.25",
         "@jx3box/reporter": "^0.0.4",
         "axios": "^0.26.1",
         "dayjs": "^1.11.0",
@@ -43,6 +43,7 @@
         "lodash": "^4.17.15",
         "qrcode.vue": "^1.7.0",
         "url": "^0.11.0",
+        "v-code-diff": "^1.13.1",
         "vue": "^2.6.11"
     },
     "devDependencies": {
