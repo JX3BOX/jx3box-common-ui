@@ -226,6 +226,8 @@ export default {
             padding: 20px;
             box-sizing: border-box;
             .r(5px);
+            height: 100%;
+            overflow: hidden;
         }
         .m-content-view {
             margin: 0;
