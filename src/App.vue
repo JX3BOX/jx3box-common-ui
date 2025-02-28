@@ -14,7 +14,7 @@
             <img slot="logo" svg-inline src="../assets/img/jx3.svg" />
             bread info
             <template #op-prepend>
-                <AdminDrop :post="community" :isCommunity="true" :user-id="8" :showMove="true"/>
+                <AdminDrop :post="community" :isCommunity="true" :user-id="8" :showMove="true" />
             </template>
         </Breadcrumb>
 
@@ -23,16 +23,15 @@
             <Author :author="author" :uid="8" />
         </LeftSidebar>
 
-        <Main :withoutLeft="false" :withoutRight="false" style="padding:20px;">
+        <Main :withoutLeft="false" :withoutRight="false" style="padding: 20px">
             <el-tabs v-model="tab" type="card">
-
                 <el-tab-pane label="通用组件" name="widget">
                     <!-- <PostHeader :post="post" /> -->
                     <!-- <Creators :postId="30432" style="margin-bottom: 10px" /> -->
                     <!-- <Collection :id="59" :defaultVisible="true" /> -->
                     <UserPop title="添加用户" v-model="visible" @confirm="addUser" />
                     <el-button @click="visible = true">用户POP</el-button>
-                    <el-button @click="homeworkVisible=true">作业组件</el-button>
+                    <el-button @click="homeworkVisible = true">作业组件</el-button>
                     <!-- :postId="23865" -->
                     <!-- <Thx
                         postType="bps"
@@ -52,7 +51,13 @@
                     <QRcode />
                     <Sharing />
 
-                    <homework v-model="homeworkVisible" post-type="comment" :post-id="19382" :userId="8719" client="std"></homework>
+                    <homework
+                        v-model="homeworkVisible"
+                        post-type="comment"
+                        :post-id="19382"
+                        :userId="8719"
+                        client="std"
+                    ></homework>
 
                     <PostGuide :post="post" />
 
@@ -115,7 +120,7 @@
                 </el-tab-pane>
 
                 <el-tab-pane label="头像" name="avatar">
-                    <el-radio-group v-model="avatar_size" style="margin-bottom:10px;">
+                    <el-radio-group v-model="avatar_size" style="margin-bottom: 10px">
                         <el-radio label="xxs">xxs-36/48</el-radio>
                         <el-radio label="xs">xs-48/68</el-radio>
                         <el-radio label="s">s-68/88</el-radio>
@@ -134,10 +139,11 @@
                 </el-tab-pane>
             </el-tabs>
 
-            <RightSidebar :showToggle="false" style="padding:15px;">
+            <RightSidebar :showToggle="false" style="padding: 15px">
                 <RightSideMsg>Hello</RightSideMsg>
                 <PostTopic></PostTopic>
                 <div id="directory"></div>
+                <PostVersion :post="post"></PostVersion>
                 <PostCollection :id="59" />
             </RightSidebar>
 
@@ -162,6 +168,7 @@ import Main from "./Main.vue";
 import RightSidebar from "./RightSidebar.vue";
 import RightSideMsg from "./RightSideMsg.vue";
 import PostTopic from "./single/PostTopic.vue";
+import PostVersion from "./single/PostVersion.vue";
 
 import Footer from "./Footer.vue";
 import Bottom from "./Bottom.vue";
@@ -203,8 +210,8 @@ import axios from "axios";
 import { __server } from "@jx3box/jx3box-common/data/jx3box.json";
 import { wiki } from "@jx3box/jx3box-common/js/wiki";
 import post_topics from "@jx3box/jx3box-common/data/post_topics.json";
-import Homework from './interact/Homework.vue';
-import { getTopicDetails } from "../service/community"
+import Homework from "./interact/Homework.vue";
+import { getTopicDetails } from "../service/community";
 
 import { isMiniProgram, miniprogramHack } from "@jx3box/jx3box-common/js/utils";
 
@@ -225,6 +232,7 @@ export default {
         // cmsList,
         singlebox,
         // PostHeader,
+        PostVersion,
         PostCollection,
         PostTopic,
 
@@ -271,7 +279,7 @@ export default {
             tab: "post",
 
             post: {},
-            post_id: "77714",
+            post_id: "96614",
 
             author: "",
             wikiPost: null,
@@ -283,12 +291,12 @@ export default {
             upload: "",
             text: `<Text>text="使用：<BUFF 3222 1 desc>，持续<BUFF 3222 1 time>。\\\n" font=105 </text><Text>text="红豆沙做馅儿，精致细腻的广式月饼。" font=100 </text><Text>text="使用：能在唐门套装供应商处换取如下装备。\\\n" font=105 </text><Text>text="[燕云·重泉靴]" name="iteminfolink" eventid=513 script="this.nVersion=0 this.dwTabType=7 this.dwIndex=35244 this.OnItemLButtonDown=function() OnItemLinkDown(this) end" font=100 r=255 g=40 b=255 </text><Text>text="，" font=105 </text><Text>text="[燕云·铭松靴]" name="iteminfolink" eventid=513 script="this.nVersion=0 this.dwTabType=7 this.dwIndex=35245 this.OnItemLButtonDown=function() OnItemLinkDown(this) end" font=100 r=255 g=40 b=255 </text><Text>text="。" font=100 </text>`,
 
-            post_topics: post_topics['pve'],
-            tag2: '',
+            post_topics: post_topics["pve"],
+            tag2: "",
 
             homeworkVisible: false,
 
-            community: {}
+            community: {},
         };
     },
     created: function () {

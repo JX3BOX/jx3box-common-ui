@@ -28,19 +28,19 @@ module.exports = {
         proxy: {
             "/api/vip": {
                 target: "https://pay.jx3box.com",
-                onProxyReq: function(request) {
+                onProxyReq: function (request) {
                     request.setHeader("origin", "");
                 },
             },
             "/api/inspire": {
                 target: "https://pay.jx3box.com",
-                onProxyReq: function(request) {
+                onProxyReq: function (request) {
                     request.setHeader("origin", "");
                 },
             },
             "/api/team": {
-                "target": "https://team.api.jx3box.com",
-                onProxyReq: function(request) {
+                target: "https://team.api.jx3box.com",
+                onProxyReq: function (request) {
                     request.setHeader("origin", "");
                 },
             },
@@ -48,9 +48,9 @@ module.exports = {
                 target: "https://cms.jx3box.com",
                 // target: process.env["DEV_SERVER"] == "true" ? "http://localhost:7100" : "https://cms.jx3box.com",
             },
-			"/api/article": {
-				target: "https://next2.jx3box.com",
-			},
+            "/api/article": {
+                target: "https://next2.jx3box.com",
+            },
             "/api/messages": {
                 target: "https://helper.jx3box.com",
             },
@@ -62,19 +62,25 @@ module.exports = {
             },
             "/api/personal": {
                 target: "https://pay.jx3box.com",
-                onProxyReq: function(request) {
+                onProxyReq: function (request) {
                     request.setHeader("origin", "");
                 },
             },
-            "/api/cny":{
+            "/api/cny": {
                 target: "https://pay.jx3box.com",
-                onProxyReq: function(request) {
+                onProxyReq: function (request) {
+                    request.setHeader("origin", "");
+                },
+            },
+            "/api/next2": {
+                target: "https://dev.next2.jx3box.com",
+                onProxyReq: function (request) {
                     request.setHeader("origin", "");
                 },
             },
             "/api": {
                 target: "https://dev.next2.jx3box.com",
-                onProxyReq: function(request) {
+                onProxyReq: function (request) {
                     request.setHeader("origin", "");
                 },
             },
@@ -102,10 +108,7 @@ module.exports = {
             .tap((options) => Object.assign(options, { limit: 10240 }));
 
         //💝 in-line svg imgs ~
-        config.module
-            .rule("vue")
-            .use("vue-svg-inline-loader")
-            .loader("vue-svg-inline-loader");
+        config.module.rule("vue").use("vue-svg-inline-loader").loader("vue-svg-inline-loader");
 
         //💖 import common less var * mixin ~
         const types = ["vue-modules", "vue", "normal-modules", "normal"];
@@ -116,11 +119,9 @@ module.exports = {
             // path.resolve(__dirname, './src/assets/css/var.less')
         );
         function addStyleResource(rule) {
-            rule.use("style-resource")
-                .loader("style-resources-loader")
-                .options({
-                    patterns: preload_styles,
-                });
+            rule.use("style-resource").loader("style-resources-loader").options({
+                patterns: preload_styles,
+            });
         }
         types.forEach((type) => addStyleResource(config.module.rule("less").oneOf(type)));
     },

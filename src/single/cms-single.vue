@@ -181,9 +181,15 @@ export default {
             this.other_authors = other_authors;
         },
         toComment() {
-            this.$refs.commentView.scrollIntoView({
-                block: "start",
-                behavior: "auto",
+            this.$nextTick(() => {
+                const element = this.$refs.commentView;
+                if (element) {
+                    const offsetTop = element.offsetTop + 75;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: "smooth",
+                    });
+                }
             });
         },
     },
@@ -218,8 +224,8 @@ export default {
                     }
                     location.href = `/community/${val}`;
                 }
-            }
-        }
+            },
+        },
     },
 };
 </script>

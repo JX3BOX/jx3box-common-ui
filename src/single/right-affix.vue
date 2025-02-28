@@ -3,7 +3,7 @@
         <div class="item">
             <fav :postId="postId" :postType="postType" :postTitle="postTitle" :hiddenNum="true" :isOld="true"></fav>
         </div>
-        <el-tooltip v-if="showComment" effect="dark" content="去评论" placement="left">
+        <el-tooltip v-if="showCommentBtn && showComment" effect="dark" content="去评论" placement="left">
             <div class="u-item" @click="toComment">
                 <i class="el-icon-chat-dot-square"></i>
             </div>
@@ -26,7 +26,7 @@ export default {
         return {
             scrollToptimer: null,
             scrollBtnShow: false,
-            isTop: true,
+            showCommentBtn: false, // 等待img等元素加载完毕再显示评论按钮
 
             isOpen: true,
         };
@@ -36,19 +36,10 @@ export default {
     },
     methods: {
         goTop() {
-            //设置定时器
-            const self = this;
-            this.scrollToptimer = setInterval(function () {
-                //获取滚动条距离顶部高度
-                var osTop = document.documentElement.scrollTop || document.body.scrollTop;
-                var ispeed = Math.floor(-osTop / 7);
-                document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed;
-                //到达顶部，清除定时器
-                if (osTop === 0) {
-                    clearInterval(self.scrollToptimer);
-                }
-                self.isTop = true;
-            }, 30);
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
         },
         toComment() {
             this.$emit("toComment");
@@ -66,12 +57,11 @@ export default {
             } else {
                 self.scrollBtnShow = false;
             }
-            //回到顶部过程中用户滚动滚动条，停止定时器
-            if (!self.isTop) {
-                clearInterval(self.scrollToptimer);
-            }
-            self.isTop = false;
         });
+
+        setTimeout(() => {
+            this.showCommentBtn = true;
+        }, 1000);
 
         Bus.$on("toggleRightSide", (data) => {
             this.isOpen = data;
@@ -120,7 +110,7 @@ export default {
             font-weight: bold;
             color: #3871e0;
         }
-        .w-fav2 svg{
+        .w-fav2 svg {
             .size(26px);
         }
     }
