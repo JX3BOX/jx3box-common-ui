@@ -1,16 +1,16 @@
 <template>
-    <div class="m-post-version" v-if="list && list.length">
+    <div class="c-post-version" v-if="list && list.length">
         <div class="m-title">
-            <div class="u-title"><i class="el-icon-time"></i> 历史版本</div>
+            <div class="u-title"><i class="u-icon el-icon-time"></i> 历史版本</div>
             <div class="u-op" @click="toggle"><i class="el-icon-d-caret"></i> 折叠</div>
         </div>
         <ul v-show="show" class="u-list">
             <!-- <el-button @click="onAdd">创建</el-button> -->
-            <li v-for="(item, i) in list" class="u-item" :key="i">
+            <li v-for="(item, i) in list" class="u-item" :key="i" @click="handleContrast(item)">
                 <div class="u-version">
                     <span>{{ item.version }}</span> - <span>{{ item.created_at }}</span>
                 </div>
-                <el-button size="small" type="text" @click="handleContrast(item)">对比</el-button>
+                <el-button class="u-compare" size="small" type="text"><i class="el-icon-sort u-icon"></i>对比</el-button>
             </li>
         </ul>
         <el-pagination small layout="prev, pager, next" :total="total" :current-page.sync="index" hide-on-single-page>
@@ -117,8 +117,8 @@ export default {
     },
 };
 </script>
-<style scoped lang="less">
-.m-post-version {
+<style lang="less">
+.c-post-version {
     .m-title {
         .flex;
         justify-content: space-between;
@@ -138,13 +138,20 @@ export default {
     }
     .u-title {
         font-weight: 300;
-        font-size: 20px;
+        font-size: 18px;
+        .flex;
+        align-items: center;
+        gap:5px;
+        .u-icon{
+            font-size: 20px;
+        }
     }
     .u-list {
         list-style: none;
-        padding: 10px 20px;
+        padding: 10px;
         margin: 0;
         li {
+            padding:0 10px;
             .fz(13px, 36px);
             .flex;
             justify-content: space-between;
@@ -153,6 +160,20 @@ export default {
             .nobreak;
             &:hover {
                 background-color: #e6f0fb;
+
+                .u-compare{
+                    .db;
+                }
+            }
+            .pointer;
+        }
+
+        .u-compare{
+            .none;
+
+            .u-icon{
+                transform : rotate(90deg);
+                margin-right:3px;
             }
         }
     }

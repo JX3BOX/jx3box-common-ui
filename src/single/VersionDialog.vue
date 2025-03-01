@@ -18,7 +18,7 @@
                     <el-select
                         class="u-select"
                         v-model="version1"
-                        placeholder="请选择版本1"
+                        placeholder="请选择"
                         @change="versionChange($event, 1)"
                     >
                         <el-option
@@ -34,7 +34,7 @@
                     <el-select
                         class="u-select"
                         v-model="version2"
-                        placeholder="请选择版本2"
+                        placeholder="请选择"
                         @change="versionChange($event, 2)"
                     >
                         <el-option
