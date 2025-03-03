@@ -10,7 +10,9 @@
                 <div class="u-version">
                     <span>{{ item.version }}</span> - <span>{{ item.created_at }}</span>
                 </div>
-                <el-button class="u-compare" size="small" type="text"><i class="el-icon-sort u-icon"></i>对比</el-button>
+                <el-button class="u-compare" size="small" type="text"
+                    ><i class="el-icon-sort u-icon"></i>对比</el-button
+                >
             </li>
         </ul>
         <el-pagination small layout="prev, pager, next" :total="total" :current-page.sync="index" hide-on-single-page>
@@ -38,7 +40,7 @@ export default {
         return {
             loading: false,
             index: 1,
-            pageSize: 50,
+            pageSize: 10, // 取最新的10个版本即可
             total: 0,
             list: [],
             show: true,
@@ -141,8 +143,8 @@ export default {
         font-size: 18px;
         .flex;
         align-items: center;
-        gap:5px;
-        .u-icon{
+        gap: 5px;
+        .u-icon {
             font-size: 20px;
         }
     }
@@ -151,7 +153,7 @@ export default {
         padding: 10px;
         margin: 0;
         li {
-            padding:0 10px;
+            padding: 0 10px;
             .fz(13px, 36px);
             .flex;
             justify-content: space-between;
@@ -161,19 +163,19 @@ export default {
             &:hover {
                 background-color: #e6f0fb;
 
-                .u-compare{
+                .u-compare {
                     .db;
                 }
             }
             .pointer;
         }
 
-        .u-compare{
+        .u-compare {
             .none;
 
-            .u-icon{
-                transform : rotate(90deg);
-                margin-right:3px;
+            .u-icon {
+                transform: rotate(90deg);
+                margin-right: 3px;
             }
         }
     }
