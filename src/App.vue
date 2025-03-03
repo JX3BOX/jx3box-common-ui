@@ -300,10 +300,10 @@ export default {
         };
     },
     created: function () {
-        wiki.getById(25594).then((res) => {
-            res = res.data;
-            this.wikiPost = res.data;
-        });
+        // wiki.getById(25594).then((res) => {
+        //     res = res.data;
+        //     this.wikiPost = res.data;
+        // });
 
         this.loadCommunity();
     },
