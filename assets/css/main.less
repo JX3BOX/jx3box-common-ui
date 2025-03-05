@@ -62,37 +62,44 @@ a{
     .c-main{margin:0;.w(100%);}
 }
 
-@media screen and (max-width:@phone){
-    .env-app{
-        .c-main{
-            .mt(0);
-        }
+.env-app{
+    .c-main{
+        .mt(0);
     }
+}
 
-    .v-miniprogram {
-        &.from-seasun {
-            .c-wiki-comments {
-                .none;
-            }
-
-            .m-single-comment {
-                .none;
-            }
-        }
-    }
-
-    .v-miniprogram {
-        .w-share2,.w-boxcoin-admin {
+.v-miniprogram {
+    // 针对seasun
+    &.from-seasun {
+        .c-wiki-comments {
             .none;
         }
+    }
 
-        .w-thx-records {
-            .u-client {
-                .none;
-            }
-            .u-delete {
-                .none;
-            }
+    .w-share2,.w-boxcoin-admin {
+        .none;
+    }
+
+    .w-thx-records {
+        .u-client {
+            .none;
+        }
+        .u-delete {
+            .none;
+        }
+    }
+
+    .m-single-comment {
+        .none;
+    }
+
+    .c-comment-box {
+        .none;
+    }
+
+    &.is-comment-show {
+        .m-single-comment {
+            .db;
         }
     }
 }
