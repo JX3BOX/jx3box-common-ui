@@ -19,7 +19,7 @@
             <slot></slot>
 
             <!-- user -->
-            <header-user ref="user" :client="client" />
+            <header-user ref="user" :client="client" :asset="asset" />
         </div>
         <Box class="c-header-jx3box" :overlayEnable="overlayEnable" :client="client" />
     </header>
@@ -48,6 +48,8 @@ export default {
         return {
             isOverlay: false,
             isApp: isApp(),
+
+            asset: {},
         };
     },
     computed: {
@@ -100,6 +102,10 @@ export default {
 
             token && localStorage.setItem("__token", token);
 
+            if (User.isLogin()) {
+                this.loadAsset();
+            }
+
             // 获取全局配置
             getGlobalConfig().then(async (res) => {
                 const global_token_version = res.token_version;
@@ -134,6 +140,18 @@ export default {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
             return r ? decodeURIComponent(r[2]) : null;
+        },
+        // 资产
+        loadAsset: function () {
+            User.getAsset().then((data) => {
+                this.asset = data;
+
+                const level = User.getLevel(this.asset?.experience);
+
+                if (level > 2) {
+                    document.documentElement.classList.add("is-comment-show");
+                }
+            });
         },
     },
     created: function () {

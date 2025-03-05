@@ -52,6 +52,22 @@ import userInfo from "./userInfo.vue";
 // import langSwitch from "./langSwitch.vue";
 import shop from "./shop.vue";
 export default {
+    props: {
+        asset: {
+            type: Object,
+            default: () => {
+                return {
+                    expire_date: "2022-03-07T00:00:00+08:00",
+                    total_day: 395,
+                    was_vip: 0,
+
+                    pro_expire_date: "2022-03-07T00:00:00+08:00",
+                    pro_total_day: 366,
+                    was_pro: 0,
+                };
+            },
+        }
+    },
     components: {
         message,
         publish,
@@ -68,17 +84,6 @@ export default {
             // 登录信息
             user: User.getInfo(),
             isLogin: User.isLogin(),
-
-            // VIP
-            asset: {
-                expire_date: "2022-03-07T00:00:00+08:00",
-                total_day: 395,
-                was_vip: 0,
-
-                pro_expire_date: "2022-03-07T00:00:00+08:00",
-                pro_total_day: 366,
-                was_pro: 0,
-            },
 
             // 链接
             login_url: __Links.account.login + "?redirect=" + location.href,
@@ -125,16 +130,9 @@ export default {
                 console.log(e);
             }
         },
-        // 资产
-        loadAsset: function () {
-            User.getAsset().then((data) => {
-                this.asset = data;
-            });
-        },
         // 初始化
         init: function () {
             if (this.isLogin) {
-                this.loadAsset();
                 this.signIn();
             }
         },
