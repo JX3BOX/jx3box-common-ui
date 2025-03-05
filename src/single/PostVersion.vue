@@ -46,6 +46,7 @@ export default {
             show: true,
             visible: false,
             commit_hash: "",
+            isMobile: window.innerWidth < 768,
         };
     },
     computed: {
@@ -91,6 +92,9 @@ export default {
                 });
         },
         handleContrast(item) {
+            if (this.isMobile) {
+                return;
+            }
             this.commit_hash = item.commit_hash;
             this.visible = true;
         },
@@ -165,6 +169,9 @@ export default {
 
                 .u-compare {
                     .db;
+                    @media screen and (max-width: @phone) {
+                        .none;
+                    }
                 }
             }
             .pointer;
