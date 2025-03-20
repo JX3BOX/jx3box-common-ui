@@ -112,8 +112,11 @@ export default {
                 const token_version = localStorage.getItem("token_version");
 
                 if (User.isLogin()) {
-                    if (token_version != global_token_version) {
+                    // 对于没有token_version或者token_version不是最新的用户，都需要登出
+                    if (!token_version || token_version != global_token_version) {
+                        // 先保存最新的token_version
                         localStorage.setItem("token_version", global_token_version);
+                        // 然后执行登出操作
                         User.destroy().then((res) => {
                             this.$refs.user?.logout();
                             // 清除马甲所有马甲信息
@@ -131,6 +134,11 @@ export default {
                                 location.href = this.siteRoot;
                             }
                         });
+                    }
+                } else {
+                    // 非登录状态也更新token_version，确保用户下次登录时使用新版本
+                    if (global_token_version) {
+                        localStorage.setItem("token_version", global_token_version);
                     }
                 }
             });
