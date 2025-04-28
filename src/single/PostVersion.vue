@@ -15,8 +15,8 @@
                 >
             </li>
         </ul>
-        <el-pagination small layout="prev, pager, next" :total="total" :current-page.sync="index" hide-on-single-page>
-        </el-pagination>
+        <!-- <el-pagination small layout="prev, pager, next" :total="total" :current-page.sync="index" hide-on-single-page>
+        </el-pagination> -->
         <version-dialog
             v-if="visible"
             v-model="visible"
