@@ -1,10 +1,10 @@
 <template>
     <div class="c-header-search" id="c-header-search">
         <div class="c-search">
-            <form class="u-form" :action="url" :target="isPhone ? '_self' : '_blank'">
-                <input class="u-text" type="text" autocomplete="off" name="q" placeholder="搜索.." />
+            <form class="u-form" @submit.prevent="handleSubmit">
+                <input class="u-text" type="text" autocomplete="off" name="q" placeholder="搜索.." ref="searchInput" />
                 <input type="hidden" name="client" :value="client" />
-                <i class="u-btn">
+                <i class="u-btn" @click="handleSubmit">
                     <img svg-inline src="../../assets/img/header/search-key-slash.svg" />
                 </i>
             </form>
@@ -24,7 +24,47 @@ export default {
         };
     },
     computed: {},
-    methods: {},
+    methods: {
+        handleSubmit(e) {
+            // 获取输入框的值
+            const searchValue = this.$refs.searchInput.value;
+            if (!searchValue) return;
+
+            // 检查输入是否为纯数字
+            if (/^\d+$/.test(searchValue)) {
+                // 如果是纯数字，直接跳转到 /{id}
+                const target = this.isPhone ? "_self" : "_blank";
+                const url = __Root + `post/${searchValue}`;
+                if (target === "_blank") {
+                    window.open(url, "_blank");
+                } else {
+                    window.location.href = url;
+                }
+            } else {
+                // 如果不是纯数字，使用原有搜索功能
+                const form = document.createElement("form");
+                form.method = "GET";
+                form.action = this.url;
+                form.target = this.isPhone ? "_self" : "_blank";
+
+                const searchInput = document.createElement("input");
+                searchInput.type = "hidden";
+                searchInput.name = "q";
+                searchInput.value = searchValue;
+
+                const clientInput = document.createElement("input");
+                clientInput.type = "hidden";
+                clientInput.name = "client";
+                clientInput.value = this.client;
+
+                form.appendChild(searchInput);
+                form.appendChild(clientInput);
+                document.body.appendChild(form);
+                form.submit();
+                document.body.removeChild(form);
+            }
+        },
+    },
     created: function () {},
     components: {},
 };
