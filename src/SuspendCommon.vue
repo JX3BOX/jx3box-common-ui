@@ -2,7 +2,7 @@
  * @Author: zhusha
  * @Date: 2025-05-13 10:00:27
  * @LastEditors: zhusha
- * @LastEditTime: 2025-05-20 17:52:25
+ * @LastEditTime: 2025-05-20 17:53:49
  * @Description: 悬浮窗组件
  * 关于搜索跳转的问题：如果项目需要跳转微信原生界面，需要引入微信sdk，并使用微信提供的api进行跳转
  <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>  版本可根据需要查询微信官方文档
@@ -656,7 +656,7 @@ html {
     }
 
     .m-pin-box {
-        gap: 1.25rem;
+        gap: 1.125rem;
 
         .u-item {
             .flex;
