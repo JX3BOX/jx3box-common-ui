@@ -1,16 +1,8 @@
 <template>
     <div class="container-page">
         <Header></Header>
-        <Breadcrumb
-            name="频道名称"
-            slug="slug"
-            root="/slug"
-            :publishEnable="true"
-            :feedbackEnable="true"
-            :adminEnable="true"
-            :crumb-enable="true"
-            :topicEnable="true"
-        >
+        <Breadcrumb name="频道名称" slug="slug" root="/slug" :publishEnable="true" :feedbackEnable="true"
+            :adminEnable="true" :crumb-enable="true" :topicEnable="true">
             <img slot="logo" svg-inline src="../assets/img/jx3.svg" />
             bread info
             <template #op-prepend>
@@ -51,13 +43,9 @@
                     <QRcode />
                     <Sharing />
 
-                    <homework
-                        v-model="homeworkVisible"
-                        post-type="comment"
-                        :post-id="19382"
-                        :userId="8719"
-                        client="std"
-                    ></homework>
+                    <homework v-model="homeworkVisible" post-type="comment" :post-id="19382" :userId="8719"
+                        client="std">
+                    </homework>
 
                     <PostGuide :post="post" />
 
@@ -74,10 +62,7 @@
                     <topicBy v-model="tag2" :topics="post_topics" />
 
                     <hr />
-                    <uploadImage
-                        v-model="upload"
-                        info="非必选。首页海报尺寸1100*300（推荐2200*600支持高分屏），最大20M。"
-                    ></uploadImage>
+                    <uploadImage v-model="upload" info="非必选。首页海报尺寸1100*300（推荐2200*600支持高分屏），最大20M。"></uploadImage>
                     <!-- <AuthorMedal :author-id="8"></AuthorMedal> -->
                 </el-tab-pane>
 
@@ -106,9 +91,7 @@
                             </a>
                             <span class="u-more">查看更多</span>
                         </template>
-                        <template slot="body"
-                            >正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容</template
-                        >
+                        <template slot="body">正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容正文内容</template>
                     </WikiPanel>
                     <hr />
 
@@ -129,12 +112,8 @@
                         <el-radio label="xl">xl-150/210</el-radio>
                     </el-radio-group>
                     <div style="padding: 60px; background-color: #e3e3e3">
-                        <Avatar
-                            :id="8"
-                            url="https://cdn.jx3box.com/upload/avatar/2022/3/2/8_9860765.png"
-                            :size="avatar_size"
-                            frame="moon_1"
-                        />
+                        <Avatar :id="8" url="https://cdn.jx3box.com/upload/avatar/2022/3/2/8_9860765.png"
+                            :size="avatar_size" frame="moon_1" />
                     </div>
                 </el-tab-pane>
             </el-tabs>
@@ -147,6 +126,26 @@
                 <PostCollection :id="59" />
             </RightSidebar>
 
+            <SuspendCommon :drawerOptions="{
+                author: {
+                    name: '作者名字',
+                    avatar: 'https://cdn.jx3box.com/upload/avatar/2022/3/2/8_9860765.png',
+                    author_id: 8
+                },
+                subscribeType: 'posts',
+                postType: 'macro',
+                id: 97147,
+                title: '薄嘴唇靓仔！！！'
+            }" @search="suspendSearch">
+                <template slot="default">
+                    <div style="display: flex;gap:1rem">
+                        <div>切换</div>
+                        <div>切换</div>
+                        <div>切换</div>
+                    </div>
+                </template>
+
+            </SuspendCommon>
             <Footer></Footer>
             <Bottom></Bottom>
         </Main>
@@ -202,7 +201,7 @@ import versionBy from "./filters/versionBy.vue";
 
 import uploadImage from "./upload/upload_banner.vue";
 // import AuthorMedal from "./medal/medal.vue";
-
+import SuspendCommon from "./SuspendCommon.vue";
 import WikiPanel from "./wiki/WikiPanel.vue";
 import WikiRevisions from "./wiki/WikiRevisions.vue";
 import WikiComments from "./wiki/WikiComments.vue";
@@ -266,7 +265,7 @@ export default {
 
         uploadImage,
         // AuthorMedal,
-
+        SuspendCommon,
         WikiPanel,
         WikiRevisions,
         WikiComments,
@@ -308,6 +307,9 @@ export default {
         this.loadCommunity();
     },
     methods: {
+        suspendSearch: function (val) {
+            console.log(val, '222');
+        },
         addUser: function (val) {
             // console.log(val);
         },
