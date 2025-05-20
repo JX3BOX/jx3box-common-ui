@@ -2,7 +2,7 @@
  * @Author: zhusha
  * @Date: 2025-05-13 10:00:27
  * @LastEditors: zhusha
- * @LastEditTime: 2025-05-20 16:13:32
+ * @LastEditTime: 2025-05-20 17:52:25
  * @Description: 悬浮窗组件
  * 关于搜索跳转的问题：如果项目需要跳转微信原生界面，需要引入微信sdk，并使用微信提供的api进行跳转
  <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>  版本可根据需要查询微信官方文档
@@ -35,7 +35,7 @@
             </div>
         </div>
         <!-- 样式分类（icon&more） -->
-        <div class="m-icon-box" v-if="btnConfig.showIcon">
+        <div class="m-icon-box" v-if="btnConfig.showIcon && !btnConfig.showHome">
             <div class="m-btn-box">
                 <!--        搜索按钮-->
                 <div v-if="btnConfig.showSearch" class="u-icon-d" @click="search">
@@ -61,6 +61,19 @@
             </div>
             <div class="m-more" v-if="btnConfig.showMore" @click="setMore">
                 <img class="u-icon" src="../assets/img/suspend/more.svg" svg-inline /> 更多
+            </div>
+        </div>
+        <!-- 横向固定内容区域 -->
+        <div class="m-pin-box" v-if="btnConfig.showPin && !btnConfig.showHome && !btnConfig.showIcon">
+            <div class="u-item" v-for="(item, index) in fixList" :key="'fix' + index">
+                <div class="u-text-r" v-if="item.type == 'text'">
+                    {{ item.title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] || '固' }}
+                </div>
+                <img :src="item.imgUrl" class="u-icon" v-else>
+            </div>
+            <!-- 不足三个时显示空位，只在编辑界面显示 -->
+            <div class="u-item" v-for="(item, index) in (3 - fixList.length)" :key="'fix_no' + index">
+                <img src="../assets/img/suspend/circle.svg" svg-inline class="u-icon">
             </div>
         </div>
         <!-- 抽屉弹出层，支持默认样式和自定义插槽样式 -->
@@ -192,7 +205,7 @@
                         <div class="u-text-r" v-if="item.type == 'text'">
                             {{ item.title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] || '固' }}
                         </div>
-                        <img src="https://cdn.jx3box.com/upload/avatar/2024/3/20/8_7694562.png" class="u-icon" v-else>
+                        <img :src="item.imgUrl" class="u-icon" v-else>
                         <div class="u-text">{{ item.title }}</div>
                         <div class="u-slash" v-if="fixIsEdit" @click="cancelFix(item)">
                             <img src="../assets/img/suspend/pin_slash_touchbar_24.svg" svg-inline />
@@ -300,8 +313,9 @@ export default {
     computed: {
         btnConfig() {
             const defaultConfig = {
-                showHome: false, //是否显示home区域，和Icon区域二选一
+                showHome: false, //是否显示home区域，和Icon区域二选一,home区域优先级高于icon区域
                 showIcon: true, //是否显示icon区域,此处为false后，则下列配置无效
+                showPin: true, //是否显示横向固定区域，需要home和icon都是false才有效
                 showSearch: true, //是否显示搜索图标
                 showFixed: true, //是否显示固定图标
                 showCollect: true, //是否显示收藏图标
@@ -635,9 +649,33 @@ html {
     .bold(700);
 
     .m-home-box,
+    .m-pin-box,
     .m-icon-box {
         .flex;
         .flex(o);
+    }
+
+    .m-pin-box {
+        gap: 1.25rem;
+
+        .u-item {
+            .flex;
+            .flex(o);
+
+            img {
+                .size(1.5rem);
+                .r(50%);
+            }
+
+            .u-text-r {
+                .size(1.5rem);
+                .r(50%);
+                background-color: #D9D9D9;
+                .flex;
+                .flex(o);
+            }
+        }
+
     }
 
     .m-btn-box {
