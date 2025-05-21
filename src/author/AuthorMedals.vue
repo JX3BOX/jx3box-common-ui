@@ -71,6 +71,7 @@ export default {
 .c-author-medals {
     .u-medals {
         display: flex;
+        flex-wrap: wrap;
     }
     .u-medal {
         cursor: pointer;
