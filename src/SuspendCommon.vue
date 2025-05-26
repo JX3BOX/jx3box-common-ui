@@ -626,7 +626,7 @@ export default {
 </script>
 
 <style lang="less">
-@bgColor: #282828;
+@bgColor: #24292E;
 @color: #FEDAA3;
 @color2: #24292E;
 
