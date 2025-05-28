@@ -25,7 +25,7 @@
 <script>
 import { getMedalLink } from "@jx3box/jx3box-common/js/utils";
 import { getUserMedals } from "../../service/author";
-import { __imgPath, __Root } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __cdn, __Root } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "AuthorMedals",
     props: ["uid"],
@@ -50,12 +50,12 @@ export default {
     },
     methods: {
         loadMedals: function () {
-            getUserMedals(this.uid).then((data) => {
+            getUserMedals(this.uid, {is_wear: 1}).then((data) => {
                 this.medals = data || [];
             });
         },
         showIcon(medal) {
-            return __imgPath + "image/medals/user/" + medal + ".gif";
+            return __cdn + "design/medals/user/" + medal + ".gif";
         },
         getMedalLink(medal) {
             if (medal.medal_url) return `${__Root}${medal.medal_url}`
