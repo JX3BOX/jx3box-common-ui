@@ -495,6 +495,7 @@ export default {
         },
         //获取收藏信息
         getCollectInfo() {
+            if(!this.drawerConfig.id && !this.drawerConfig.postType) return;
             getCollectList(this.drawerConfig.id, this.drawerConfig.postType).then(res => {
                 this.collectInfo = res.data.data
                 this.isCollect = this.collectInfo?.id > 0
@@ -569,31 +570,29 @@ export default {
         getSubscribeInfo() {
             let drawerConfig = this.drawerConfig
             // 作者相关接口
-            if (drawerConfig.subscribeType === 'author') {
-                getAuthorSubscribe(drawerConfig.author.author_id).then(res => {
+            if (drawerConfig.subscribeType === 'author' && drawerConfig.author.author_id) {
+                getSubscribeStatus(drawerConfig.author.author_id).then(res => {
                     this.isSubscribe = res.data.data?.subscribed
                     this.subscribeInfo = res.data.data
                 })
             }
             //帖子
-            if (drawerConfig.subscribeType === 'community') {
+            if (drawerConfig.subscribeType === 'community' && drawerConfig.id) {
                 getSubscribePostStatus(drawerConfig.id).then(res => {
-
                     this.isSubscribe = res.data.data?.subscribed
                     this.subscribeInfo = res.data.data
                 })
             }
             //文章
-            if (drawerConfig.subscribeType === 'posts') {
+            if (drawerConfig.subscribeType === 'posts' && drawerConfig.id && drawerConfig.postType) {
                 getSubscribeArticleStatus(drawerConfig.postType, drawerConfig.id).then(res => {
                     this.isSubscribe = res.data.data?.subscribed
                     this.subscribeInfo = res.data.data
                 })
             }
             //百科
-            if (drawerConfig.subscribeType === 'wiki') {
+            if (drawerConfig.subscribeType === 'wiki' && drawerConfig.id && drawerConfig.postType) {
                 getSubscribeWikiStatus(drawerConfig.postType, drawerConfig.id).then(res => {
-
                     this.isSubscribe = res.data.data?.subscribed
                     this.subscribeInfo = res.data.data
 
