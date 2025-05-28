@@ -47,9 +47,11 @@ function getDouyu(ids) {
         });
 }
 // 获取用户勋章
-function getUserMedals(uid) {
+function getUserMedals(uid, params) {
     return $cms({ mute: true })
-        .get("/api/cms/user/medal/" + uid)
+        .get("/api/cms/user/medal/" + uid, {
+            params
+        })
         .then((res) => {
             return res.data.data;
         });
