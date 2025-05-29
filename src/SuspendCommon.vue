@@ -637,8 +637,7 @@ html {
     .pf;
     .z(1994);
     bottom: 0;
-    margin: auto;
-
+    margin: 0 calc(calc(100% - 23.438rem) / 2);
     .w(23.438rem);
     padding: 1.25rem 0px 1.5rem 0px;
     border-radius: 1.25rem 1.25rem 0 0;
