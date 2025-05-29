@@ -512,11 +512,13 @@ export default {
                     unsubscribeAuthor(drawerConfig.author.author_id).then(res => {
                         this.isSubscribe = false;
                         this.subscribeInfo = {}
+                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
                     })
                 } else {
                     subscribeAuthor(drawerConfig.author.author_id, { title: drawerConfig.title }).then(res => {
                         this.isSubscribe = true;
                         this.subscribeInfo = res.data?.data
+                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
                     })
                 }
             }
@@ -526,11 +528,13 @@ export default {
                     unsubscribePost(drawerConfig.id).then(res => {
                         this.isSubscribe = false;
                         this.subscribeInfo = {}
+                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
                     })
                 } else {
                     subscribePost(drawerConfig.id, { title: drawerConfig.title }).then(res => {
                         this.isSubscribe = true;
                         this.subscribeInfo = res.data?.data
+                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
                     })
                 }
             }
@@ -540,11 +544,13 @@ export default {
                     unsubscribeArticle(drawerConfig.postType, drawerConfig.id).then(res => {
                         this.isSubscribe = false;
                         this.subscribeInfo = {}
+                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
                     })
                 } else {
                     subscribeArticle(drawerConfig.postType, drawerConfig.id, { title: drawerConfig.title }).then(res => {
                         this.isSubscribe = true;
                         this.subscribeInfo = res.data?.data
+                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
                     })
                 }
             }
@@ -554,15 +560,17 @@ export default {
                     unsubscribeWiki(drawerConfig.postType, drawerConfig.id).then(res => {
                         this.isSubscribe = false;
                         this.subscribeInfo = {}
+                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
                     })
                 } else {
                     subscribeWiki(drawerConfig.postType, drawerConfig.id, { title: drawerConfig.title }).then(res => {
                         this.isSubscribe = true;
                         this.subscribeInfo = res.data?.data
+                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
                     })
                 }
             }
-            this.$emit('subscribe', { isSubscribe: this.isSubscribe });
+
         },
         /**
          * 订阅状态查询
@@ -615,6 +623,7 @@ export default {
             }
             later(params).then(res => {
                 console.log(res)
+                this.$message.success("已添加稍后再看");
                 this.areaKey = 'home';
                 this.$emit('laterOn');
             })
