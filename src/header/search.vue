@@ -14,6 +14,7 @@
 
 <script>
 import { __Root } from "@jx3box/jx3box-common/data/jx3box.json";
+import {searchJump} from "../../assets/js/utils";
 export default {
     name: "search",
     data: function () {
@@ -25,44 +26,17 @@ export default {
     },
     computed: {},
     methods: {
-        handleSubmit(e) {
+        handleSubmit() {
             // 获取输入框的值
             const searchValue = this.$refs.searchInput.value;
             if (!searchValue) return;
 
-            // 检查输入是否为纯数字
-            if (/^\d+$/.test(searchValue)) {
-                // 如果是纯数字，直接跳转到 /{id}
-                const target = this.isPhone ? "_self" : "_blank";
-                const url = __Root + `post/${searchValue}`;
-                if (target === "_blank") {
-                    window.open(url, "_blank");
-                } else {
-                    window.location.href = url;
-                }
-            } else {
-                // 如果不是纯数字，使用原有搜索功能
-                const form = document.createElement("form");
-                form.method = "GET";
-                form.action = this.url;
-                form.target = this.isPhone ? "_self" : "_blank";
-
-                const searchInput = document.createElement("input");
-                searchInput.type = "hidden";
-                searchInput.name = "q";
-                searchInput.value = searchValue;
-
-                const clientInput = document.createElement("input");
-                clientInput.type = "hidden";
-                clientInput.name = "client";
-                clientInput.value = this.client;
-
-                form.appendChild(searchInput);
-                form.appendChild(clientInput);
-                document.body.appendChild(form);
-                form.submit();
-                document.body.removeChild(form);
-            }
+            searchJump({
+                searchValue: searchValue,
+                isPhone: this.isPhone,
+                url: this.url,
+                client: this.client,
+            });
         },
     },
     created: function () {},
