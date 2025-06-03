@@ -57,7 +57,7 @@ export function dispatchEventStorage() {
 
 // search 跳转公共函数
 export function searchJump({ searchValue, isPhone = false, client = "std", url }) {
-    searchValue = searchValue.trim()?.toLowerCase();
+    searchValue = searchValue.trim().toLowerCase();
     // 检查输入是否为纯数字
     if (/^\d+$/.test(searchValue)) {
         // 如果是纯数字，直接跳转到 /{id}
