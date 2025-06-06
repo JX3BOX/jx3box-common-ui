@@ -31,7 +31,8 @@
                 <slot name="default"></slot>
             </div>
             <div class="m-more" v-if="btnConfig.showMore" @click="setMore">
-                <img class="u-icon" src="../assets/img/suspend/more.svg" svg-inline /> 更多
+<!--                <img class="u-icon" src="../assets/img/suspend/more.svg" svg-inline /> -->
+                更多
             </div>
         </div>
         <!-- 样式分类（icon&more） -->
@@ -60,7 +61,8 @@
 
             </div>
             <div class="m-more" v-if="btnConfig.showMore" @click="setMore">
-                <img class="u-icon" src="../assets/img/suspend/more.svg" svg-inline /> 更多
+<!--                <img class="u-icon" src="../assets/img/suspend/more.svg" svg-inline /> -->
+                更多
             </div>
         </div>
         <!-- 横向固定内容区域 -->
@@ -78,8 +80,8 @@
         </div>
         <!-- 抽屉弹出层，支持默认样式和自定义插槽样式 -->
         <el-drawer :title="drawerConfig.drawerTitle" :visible.sync="drawer" :direction="drawerConfig.direction"
-            :with-header="false" custom-class="u-drawer" :modal-append-to-body="false" append-to-body class="p-drawer">
-            <div class="p-drawer-box" v-show="areaKey === 'home'">
+            :with-header="false" custom-class="u-drawer" :modal-append-to-body="false" append-to-body class="p-drawer-suspend">
+            <div class="p-drawer-suspend_box" v-show="areaKey === 'home'">
                 <div class="u-drawer-box">
                     <div class="u-item top" v-for="item in drawerFiltration(drawerType.one)" :key="item.type"
                         @click="clickDrawer(item)">
@@ -201,7 +203,7 @@
                         <div class="u-text">{{ fixPageConfig.title }}</div>
                     </div>
                     <!-- 只在编辑界面显示 -->
-                    <div class="u-item" v-for="(item, index) in fixIsEdit ? fixList : []" :key="'fix' + index">
+                    <div class="u-item" v-for="(item, index) in fixIsEdit ? fixList : []" :key="'fix' + index" @click="fixDataClick(item)">
                         <div class="u-text-r" v-if="item.type == 'text'">
                             {{ item.title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] || '固' }}
                         </div>
@@ -230,7 +232,15 @@
                     将页面固定
                 </div>
             </div>
-
+<!--            固定页面查看数据-->
+            <div class="p-drawer-fixData" v-show="areaKey === 'fixData'">
+<!--                展开界面图标-->
+                <div class="u-icon" @click="openUrl">
+                    <img src="../assets/img/suspend/pin_touchbar_24.svg" svg-inline/>
+                </div>
+                <iframe :src="iframeInfo.openurl" frameborder="0" width="100%" height="100%" v-if="iframeInfo?.url"/>
+                <span v-else>查找页面失败</span>
+            </div>
         </el-drawer>
     </div>
 </template>
@@ -308,6 +318,7 @@ export default {
             //是否已订阅
             isSubscribe: false,
             subscribeInfo: {},
+            iframeInfo:{}
         };
     },
     computed: {
@@ -465,6 +476,26 @@ export default {
             localStorage.setItem(this.fixPageConfig.key, JSON.stringify(this.fixList));
             this.areaKey = 'home';
             this.$emit('fixCancelIndividually');
+        },
+        /**
+         * @description: 固定数据点击查看，默认追加disabled标识，弹出层需隐藏掉按钮处理，点击展开按钮后跳转进页面
+         * @param {*} value
+         */
+        fixDataClick(value) {
+            console.log(value)
+            if(value.url.indexOf('?') !=-1){
+                value.openurl= value.url+'&disabled=true'
+            }else{
+                value.openurl= value.url+'?disabled=true'
+            }
+            this.iframeInfo=value;
+            this.areaKey='fixData'
+            this.$emit('fixDataSwitch')
+
+        },
+        //打开界面
+        openUrl(){
+            location.href=this.iframeInfo.url;
         },
         /**
          * @description: 收藏或订阅,操作完成后areaKey转到home界面
@@ -634,331 +665,9 @@ export default {
 </script>
 
 <style lang="less">
-@bgColor: #24292E;
-@color: #FEDAA3;
-@color2: #24292E;
 
 html {
     font-size: clamp(16px, calc(100vw / 414 * 16), 36px);
 }
-
-.p-suspend {
-    .pf;
-    .z(1994);
-    bottom: 0;
-    margin: 0 calc(calc(100% - 23.438rem) / 2);
-    .w(23.438rem);
-    padding: 1.25rem 0px 1.5rem 0px;
-    border-radius: 1.25rem 1.25rem 0 0;
-    background: @bgColor;
-    color: @color;
-    .fz(1rem, 1.5rem);
-    .bold(700);
-
-    .m-home-box,
-    .m-pin-box,
-    .m-icon-box {
-        .flex;
-        .flex(o);
-    }
-
-    .m-pin-box {
-        gap: 1.125rem;
-
-        .u-item {
-            .flex;
-            .flex(o);
-
-            img {
-                .size(1.5rem);
-                .r(50%);
-            }
-
-            .u-text-r {
-                .size(1.5rem);
-                .r(50%);
-                background-color: #D9D9D9;
-                .flex;
-                .flex(o);
-            }
-        }
-
-    }
-
-    .m-btn-box {
-        .flex;
-        align-items: center;
-        justify-content: space-between;
-        flex: auto;
-        // gap: 3rem;
-        padding: 0 1.25rem;
-
-        .u-icon-d {
-            .flex;
-            .flex(o);
-            .size(1.5rem);
-
-            .u-icon {
-                &.active {
-                    fill: #FEDAA3;
-                    stroke: #FEDAA3
-                }
-            }
-        }
-    }
-
-    .m-more {
-        .w(7.5rem);
-        .flex;
-        .flex(o);
-        flex-shrink: 0;
-        border-left: 0.5px solid rgba(254, 218, 163, 0.2);
-        gap: 0.5rem
-    }
-}
-
-.p-drawer {
-    .size(100%);
-    .lt(0);
-
-    .u-drawer {
-        border-radius: 1.25rem 1.25rem 0 0;
-        position: fixed !important;
-        bottom: 0;
-        margin: auto;
-        outline: none;
-        -webkit-tap-highlight-color: transparent;
-        user-select: none;
-        -webkit-touch-callout: none;
-        .w(23.438rem);
-        .h(auto) !important;
-        padding: 1.25rem 0.75rem 2.5rem 0.75rem;
-        background: @bgColor;
-
-        // .el-drawer__body {}
-
-        .p-drawer-box {
-            .flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .u-drawer-box {
-            .flex;
-            .w(100%);
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
-
-            .u-item {
-                border-radius: 12px;
-                background: rgba(255, 255, 255, 0.05);
-                .flex;
-                .flex(o);
-                flex-direction: column;
-                gap: 0.75rem;
-                flex: auto;
-                padding: 0.75rem 0;
-                box-sizing: border-box;
-
-                &.top {
-                    .h(6.875rem);
-                }
-
-
-                &.report {
-                    max-width: 50%;
-                }
-
-                .u-icon {
-                    .flex;
-                    .flex(o);
-                }
-
-                .u-self {
-                    .h(2.5rem);
-
-                    .flex;
-                    flex-direction: column;
-                    .flex(o);
-
-                    img {
-                        .size(1.5rem);
-                        .r(50%);
-                    }
-
-                    .u-circle-top {
-                        .pr;
-                        bottom: -0.75rem;
-                    }
-
-                    .u-circle-bottom {
-                        .flex;
-                        gap: 0;
-                    }
-
-                    .u-text-r {
-                        .size(1.5rem);
-                        .r(50%);
-                        background-color: #D9D9D9;
-                        .flex;
-                        .flex(o);
-                    }
-                }
-
-                .u-text {
-                    color: #ACAEAF;
-                    .fz(0.875rem, 1.25rem);
-                    .bold(700);
-
-                    &.search,
-                    &.fix {
-                        color: #FEDAA3;
-                    }
-
-                }
-
-                .u-author {
-                    //作者名字最多显示8个中文字符，超出后，第八个中文字符用...代替
-
-                    .fz(0.875rem, 1.25rem);
-                    .bold(700);
-                    .flex;
-                    .flex(o);
-                    gap: 0.2rem;
-                    padding: 0 0.75rem;
-                    box-sizing: border-box;
-                    color: #ACAEAF;
-                    .w(100%);
-
-                    .u-avatar {
-                        .size(1.25rem);
-                        overflow: hidden;
-                        .r(50%);
-                        flex-shrink: 0;
-                    }
-
-                    .u-author-name {
-                        flex: auto;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        min-width: 0;
-                    }
-                }
-            }
-        }
-
-        .p-drawer-fix,
-        .p-drawer-collect {
-            color: rgba(255, 255, 255, 0.40);
-
-            .u-collect-icon {
-                .flex;
-                .flex(o);
-                flex-direction: column;
-                .w(100%);
-                .mb(1.25rem);
-
-                .u-text {
-                    .fz(0.875rem, 1.25rem);
-                }
-            }
-
-            .u-collect-tips {
-                .fz(0.75rem, 1rem);
-                text-align: center;
-
-                .mb(1.25rem);
-
-                &.edit {
-                    .flex;
-                    align-items: center;
-                    .fz(0.875rem, 1.25rem);
-                }
-            }
-
-            .u-btn-box {
-                .flex;
-                .flex(o);
-                gap: 0.75rem;
-                .mb(1.25rem);
-
-                .u-btn {
-                    .flex;
-                    .flex(o);
-                    .fz(1rem, 1.5rem);
-                    .bold(700);
-                    border-radius: 0.75rem;
-                    background: rgba(255, 255, 255, 0.10);
-                    padding: 0.75rem 1rem;
-                    color: rgba(255, 255, 255, 0.40);
-                    flex: auto;
-
-                    &.collect {
-                        background-color: @color;
-                        color: @color2;
-                    }
-                }
-            }
-        }
-
-        .p-drawer-fix {
-            .u-edit-title {
-                .mb(1.25rem);
-                color: rgba(255, 255, 255, 0.60);
-                .fz(0.875rem, 1.25rem);
-                .bold(700);
-            }
-
-            .u-pin-box {
-                .mb(1.25rem);
-                .flex;
-                flex-direction: column;
-                gap: 0.75rem;
-
-                .u-item {
-                    .flex;
-                    align-items: center;
-                    gap: 0.75rem;
-                    padding: 0.5rem 1rem;
-                    align-self: stretch;
-                    .r(0.5rem);
-                    background: rgba(255, 255, 255, 0.10);
-
-                    .u-text-r,
-                    .u-icon {
-                        .size(1.875rem);
-                        .r(50%);
-                        flex-shrink: 0;
-                    }
-
-                    .u-text-r {
-                        .flex;
-                        .flex(o);
-                        background-color: #D9D9D9;
-                        color: #000;
-                    }
-
-                    .u-text {
-                        flex: auto;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        min-width: 0;
-                        color: #fff;
-                    }
-
-                    .u-slash {
-                        .flex;
-                        .flex(o);
-                        .size(1.875rem);
-                        flex-shrink: 0;
-                    }
-                }
-            }
-        }
-    }
-
-}
+@import "../assets/css/suspendCommon.less";
 </style>

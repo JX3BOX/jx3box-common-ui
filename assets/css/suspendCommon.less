@@ -1,0 +1,337 @@
+@bgColor: #24292E;
+@color: #FEDAA3;
+@color2: #24292E;
+
+.p-suspend {
+    .pf;
+    .lb(0);
+    .z(1994);
+    bottom: 0;
+    //margin: 0 calc(calc(100% - 23.438rem) / 2);
+    .w(100vw);
+    padding: 1.25rem 0px 1.5rem 0px;
+    border-radius: 1.25rem 1.25rem 0 0;
+    background: @bgColor;
+    color: @color;
+    .fz(1rem, 1.5rem);
+    .bold(700);
+
+    .m-home-box,
+    .m-pin-box,
+    .m-icon-box {
+        .flex;
+        .flex(o);
+    }
+
+    .m-pin-box {
+        gap: 1.125rem;
+
+        .u-item {
+            .flex;
+            .flex(o);
+
+            img {
+                .size(1.5rem);
+                .r(50%);
+            }
+
+            .u-text-r {
+                .size(1.5rem);
+                .r(50%);
+                background-color: #D9D9D9;
+                .flex;
+                .flex(o);
+            }
+        }
+
+    }
+
+    .m-btn-box {
+        .flex;
+        align-items: center;
+        justify-content: space-between;
+        flex: auto;
+        // gap: 3rem;
+        padding: 0 1.25rem;
+
+        .u-icon-d {
+            .flex;
+            .flex(o);
+            .size(1.5rem);
+
+            .u-icon {
+                &.active {
+                    fill: #FEDAA3;
+                    stroke: #FEDAA3
+                }
+            }
+        }
+    }
+
+    .m-more {
+        .w(7.5rem);
+        .flex;
+        .flex(o);
+        flex-shrink: 0;
+        border-left: 0.5px solid rgba(254, 218, 163, 0.2);
+        gap: 0.5rem
+    }
+}
+
+.p-drawer-suspend {
+    .size(100%);
+    .lt(0);
+
+    .u-drawer {
+        border-radius: 1.25rem 1.25rem 0 0;
+        position: fixed !important;
+        bottom: 0;
+        margin: auto;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        -webkit-touch-callout: none;
+        .w(100%);
+        .h(auto) !important;
+        padding: 1.25rem 0.75rem 2.5rem 0.75rem;
+        background: @bgColor;
+
+        // .el-drawer__body {}
+
+        .p-drawer-suspend_box {
+            .flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .u-drawer-box {
+            .flex;
+            .w(100%);
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+
+            .u-item {
+                border-radius: 12px;
+                background: rgba(255, 255, 255, 0.05);
+                .flex;
+                .flex(o);
+                flex-direction: column;
+                gap: 0.75rem;
+                flex: auto;
+                padding: 0.75rem 0;
+                box-sizing: border-box;
+
+                &.top {
+                    .h(6.875rem);
+                }
+
+
+                &.report {
+                    max-width: 50%;
+                }
+
+                .u-icon {
+                    .flex;
+                    .flex(o);
+                }
+
+                .u-self {
+                    .h(2.5rem);
+
+                    .flex;
+                    flex-direction: column;
+                    .flex(o);
+
+                    img {
+                        .size(1.5rem);
+                        .r(50%);
+                    }
+
+                    .u-circle-top {
+                        .pr;
+                        bottom: -0.75rem;
+                    }
+
+                    .u-circle-bottom {
+                        .flex;
+                        gap: 0;
+                    }
+
+                    .u-text-r {
+                        .size(1.5rem);
+                        .r(50%);
+                        background-color: #D9D9D9;
+                        .flex;
+                        .flex(o);
+                    }
+                }
+
+                .u-text {
+                    color: #ACAEAF;
+                    .fz(0.875rem, 1.25rem);
+                    .bold(700);
+
+                    &.search,
+                    &.fix {
+                        color: #FEDAA3;
+                    }
+
+                }
+
+                .u-author {
+                    //作者名字最多显示8个中文字符，超出后，第八个中文字符用...代替
+
+                    .fz(0.875rem, 1.25rem);
+                    .bold(700);
+                    .flex;
+                    .flex(o);
+                    gap: 0.2rem;
+                    padding: 0 0.75rem;
+                    box-sizing: border-box;
+                    color: #ACAEAF;
+                    .w(100%);
+
+                    .u-avatar {
+                        .size(1.25rem);
+                        overflow: hidden;
+                        .r(50%);
+                        flex-shrink: 0;
+                    }
+
+                    .u-author-name {
+                        flex: auto;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        min-width: 0;
+                    }
+                }
+            }
+        }
+
+        .p-drawer-fix,
+        .p-drawer-collect {
+            color: rgba(255, 255, 255, 0.40);
+
+            .u-collect-icon {
+                .flex;
+                .flex(o);
+                flex-direction: column;
+                .w(100%);
+                .mb(1.25rem);
+
+                .u-text {
+                    .fz(0.875rem, 1.25rem);
+                }
+            }
+
+            .u-collect-tips {
+                .fz(0.75rem, 1rem);
+                text-align: center;
+
+                .mb(1.25rem);
+
+                &.edit {
+                    .flex;
+                    align-items: center;
+                    .fz(0.875rem, 1.25rem);
+                }
+            }
+
+            .u-btn-box {
+                .flex;
+                .flex(o);
+                gap: 0.75rem;
+                .mb(1.25rem);
+
+                .u-btn {
+                    .flex;
+                    .flex(o);
+                    .fz(1rem, 1.5rem);
+                    .bold(700);
+                    border-radius: 0.75rem;
+                    background: rgba(255, 255, 255, 0.10);
+                    padding: 0.75rem 1rem;
+                    color: rgba(255, 255, 255, 0.40);
+                    flex: auto;
+
+                    &.collect {
+                        background-color: @color;
+                        color: @color2;
+                    }
+                }
+            }
+        }
+
+        .p-drawer-fix {
+            .u-edit-title {
+                .mb(1.25rem);
+                color: rgba(255, 255, 255, 0.60);
+                .fz(0.875rem, 1.25rem);
+                .bold(700);
+            }
+
+            .u-pin-box {
+                .mb(1.25rem);
+                .flex;
+                flex-direction: column;
+                gap: 0.75rem;
+
+                .u-item {
+                    .flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    padding: 0.5rem 1rem;
+                    align-self: stretch;
+                    .r(0.5rem);
+                    background: rgba(255, 255, 255, 0.10);
+
+                    .u-text-r,
+                    .u-icon {
+                        .size(1.875rem);
+                        .r(50%);
+                        flex-shrink: 0;
+                    }
+
+                    .u-text-r {
+                        .flex;
+                        .flex(o);
+                        background-color: #D9D9D9;
+                        color: #000;
+                    }
+
+                    .u-text {
+                        flex: auto;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        min-width: 0;
+                        color: #fff;
+                    }
+
+                    .u-slash {
+                        .flex;
+                        .flex(o);
+                        .size(1.875rem);
+                        flex-shrink: 0;
+                    }
+                }
+            }
+        }
+
+        .p-drawer-fixData{
+            .h(70vh);
+            .pr;
+            .u-icon{
+                .pa;
+                .z(3);
+               right:1.25rem;
+            }
+            span{
+                color:#fff;
+            }
+        }
+    }
+
+}
