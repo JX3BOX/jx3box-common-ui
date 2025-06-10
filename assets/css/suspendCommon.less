@@ -331,6 +331,15 @@
             span{
                 color:#fff;
             }
+            .u-iframe{
+                border-radius: 1.25rem 1.25rem 0 0;
+            }
+        }
+        .slide-up-enter-active, .slide-up-leave-active {
+            transition: transform 0.3s ease-in-out;
+        }
+        .slide-up-enter, .slide-up-leave-to /* .slide-up-leave-active in <2.1.8 */ {
+            transform: translateY(100%);
         }
     }
 
