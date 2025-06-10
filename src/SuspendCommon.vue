@@ -80,8 +80,9 @@
         </div>
         <!-- 抽屉弹出层，支持默认样式和自定义插槽样式 -->
         <el-drawer :title="drawerConfig.drawerTitle" :visible.sync="drawer" :direction="drawerConfig.direction"
-            :with-header="false" custom-class="u-drawer" :modal-append-to-body="false" append-to-body class="p-drawer-suspend">
-            <div class="p-drawer-suspend_box" v-show="areaKey === 'home'">
+            :with-header="false" custom-class="u-drawer" :modal-append-to-body="false" append-to-body class="p-drawer-suspend" @close="areaKey='home'">
+
+            <div class="p-drawer-suspend_box p-bt-transition" v-show="areaKey === 'home'">
                 <div class="u-drawer-box">
                     <div class="u-item top" v-for="item in drawerFiltration(drawerType.one)" :key="item.type"
                         @click="clickDrawer(item)">
@@ -150,8 +151,10 @@
                     </div>
                 </div>
             </div>
+
+            <transition name="slide-up">
             <!-- 收藏区域 、订阅区域 -->
-            <div class="p-drawer-collect" v-show="areaKey === 'collect' || areaKey === 'rss'">
+            <div class="p-drawer-collect p-bt-transition" v-show="areaKey === 'collect' || areaKey === 'rss'">
                 <div class="u-collect-icon">
                     <img src="../assets/img/suspend/collect_touchbar_100.svg" svg-inline
                         v-if="areaKey === 'collect' && !isCollect" />
@@ -179,8 +182,10 @@
                     <div class="u-btn" @click="laterOn">添加到稍后再看</div>
                 </div>
             </div>
+            </transition>
             <!-- 固定配置相关页面 -->
-            <div class="p-drawer-fix" v-show="areaKey === 'pin' || areaKey === 'fix'">
+            <transition name="slide-up">
+            <div class="p-drawer-fix p-bt-transition" v-show="areaKey === 'pin' || areaKey === 'fix'">
                 <!-- 固定，取消固定,超量 -->
                 <div class="u-collect-icon" v-if="!fixIsEdit">
                     <img src="../assets/img/suspend/pin_touchbar_100.svg" svg-inline
@@ -232,15 +237,18 @@
                     将页面固定
                 </div>
             </div>
-<!--            固定页面查看数据-->
-            <div class="p-drawer-fixData" v-show="areaKey === 'fixData'">
+            </transition>
+<!--            固定页面查看数据、或打开其他远程界面-->
+            <transition name="slide-up">
+            <div class="p-drawer-fixData p-bt-transition" v-show="areaKey === 'fixData'">
 <!--                展开界面图标-->
                 <div class="u-icon" @click="openUrl">
                     <img src="../assets/img/suspend/pin_touchbar_24.svg" svg-inline/>
                 </div>
-                <iframe :src="iframeInfo.openurl" frameborder="0" width="100%" height="100%" v-if="iframeInfo?.url"/>
+                <iframe :src="iframeInfo.openurl" frameborder="0" width="100%" height="100%" v-if="iframeInfo?.url" class="u-iframe"/>
                 <span v-else>查找页面失败</span>
             </div>
+            </transition>
         </el-drawer>
     </div>
 </template>
@@ -439,6 +447,14 @@ export default {
             }
             //稍后在看处理
             if (item.type === 'laterOn') this.laterOn()
+            //点击作者
+            console.log(item)
+            if (item.type === 'user') {
+                let url = '/author/' + this.drawerConfig.author.author_id;
+                this.iframeInfo={url:url,openurl:url};
+                this.areaKey='fixData'
+
+            }
             this.$emit('clickBtn', { type: item.type, text: item.text });
         },
         /**
@@ -482,7 +498,6 @@ export default {
          * @param {*} value
          */
         fixDataClick(value) {
-            console.log(value)
             if(value.url.indexOf('?') !=-1){
                 value.openurl= value.url+'&disabled=true'
             }else{
@@ -491,7 +506,6 @@ export default {
             this.iframeInfo=value;
             this.areaKey='fixData'
             this.$emit('fixDataSwitch')
-
         },
         //打开界面
         openUrl(){
