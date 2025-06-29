@@ -679,9 +679,5 @@ export default {
 </script>
 
 <style lang="less">
-
-html {
-    font-size: clamp(16px, calc(100vw / 414 * 16), 36px);
-}
 @import "../assets/css/suspendCommon.less";
 </style>
