@@ -57,6 +57,10 @@
                         <i class="el-icon-chat-dot-round"></i>
                         <span>回复</span>
                     </el-button>
+                    <template v-if="isEditor && !comment.parent_id">
+                        <el-button type="primary" class="u-reply" @click="onStar(comment)" plain :icon="comment.is_star ? 'el-icon-star-on' : 'el-icon-star-off'">{{ comment.is_star ? '取消加精' : '加精' }}</el-button>
+                        <el-button type="primary" class="u-reply" @click="onTop(comment)" plain icon="el-icon-top">{{ comment.is_top ? '取消置顶' : '置顶' }}</el-button>
+                    </template>
                     <!-- 更新时间 -->
                     <span
                         class="u-time"
@@ -97,10 +101,16 @@
 
 <script>
 import { authorLink, ts2str } from "@jx3box/jx3box-common/js/utils";
+import User from "@jx3box/jx3box-common/js/user";
 
 export default {
     name: "WikiComment",
     props: ["comments", "sourceId"],
+    computed: {
+        isEditor() {
+            return User.isEditor();
+        },
+    },
     methods: {
         author_url: authorLink,
         ts2str,
@@ -116,6 +126,34 @@ export default {
             }
             app.create_comment(form, parent_id);
         },
+        isParent(comment) {
+            return !comment.parent_id;
+        },
+        onStar(comment) {
+            let app = this.$parent;
+            if (!app.star_comment) app = app.$parent;
+            if (!app.star_comment) {
+                this.$message({
+                    message: "操作异常，请联系管理员",
+                    type: "warning",
+                });
+                return;
+            }
+            app.star_comment(comment, comment.is_star ? 0 : 1);
+
+        },
+        onTop(comment) {
+            let app = this.$parent;
+            if (!app.top_comment) app = app.$parent;
+            if (!app.top_comment) {
+                this.$message({
+                    message: "操作异常，请联系管理员",
+                    type: "warning",
+                });
+                return;
+            }
+            app.top_comment(comment, comment.is_top ? 0 : 1);
+        }
     },
 };
 </script>

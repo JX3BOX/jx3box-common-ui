@@ -156,6 +156,22 @@ export default {
             this.page = page;
             this.get_comments();
         },
+        star_comment(comment, is_star) {
+            wikiComment.star(comment.id, {
+                is_star
+            }).then(() => {
+                this.page = 1; // 重置页码
+                this.get_comments();
+            });
+        },
+        top_comment(comment, is_top) {
+            wikiComment.top(comment.id, {
+                is_top
+            }).then(() => {
+                this.page = 1; // 重置页码
+                this.get_comments();
+            });
+        },
     },
     components: {
         WikiPanel,
