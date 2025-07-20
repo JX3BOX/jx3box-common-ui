@@ -29,6 +29,14 @@
                             v-text="comment.parent.user_nickname"
                         ></a>
                     </template>
+                    <span class="u-mark u-top" v-if="comment.is_top">
+                        <i class="el-icon-download"></i>
+                        置顶
+                    </span>
+                    <span class="u-mark u-star" v-if="comment.is_star">
+                        <i class="el-icon-star-on"></i>
+                        精华
+                    </span>
                 </div>
                 <p class="u-content" v-html="comment.content"></p>
                 <!-- 其他 -->
