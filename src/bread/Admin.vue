@@ -17,6 +17,7 @@
                     option
                 }}</el-radio-button>
             </el-radio-group>
+            <el-button type="primary" size="small" class="u-refresh-btn" @click="onRefreshCache">刷新缓存</el-button>
             <!-- </template> -->
 
             <el-divider content-position="left">可见性变更</el-divider>
@@ -130,6 +131,7 @@ import { getSetting, postSetting } from "../../service/admin";
 import User from "@jx3box/jx3box-common/js/user";
 import { cms as marks } from "@jx3box/jx3box-common/data/mark.json";
 import { getTopicBucket } from "../../service/cms";
+import emitter from "../../assets/js/emitt";
 export default {
     name: "Admin",
     props: {
@@ -352,6 +354,12 @@ export default {
                 this.tags = data;
             });
         },
+        onRefreshCache() {
+            emitter.emit("refreshCache", {
+                type: this.post_type,
+                id: this.pid,
+            });
+        }
     },
     watch: {
         "$route.params.id": function (id) {
