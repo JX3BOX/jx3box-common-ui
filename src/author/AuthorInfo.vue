@@ -157,9 +157,10 @@ export default {
     }
     .u-bio {
         .fz(12px, 2);
-        .break(3);
+        .break(4);
         color: #888;
         padding: 0 5px;
+        white-space: pre-line;
     }
     .u-extend {
         display: flex;
