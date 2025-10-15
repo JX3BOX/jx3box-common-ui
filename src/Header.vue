@@ -67,8 +67,10 @@ export default {
                 document.documentElement.classList.add("env-app");
             }
 
+            const urlParams = new URLSearchParams(window.location.search);
+            const from = urlParams.get("from");
+            from && sessionStorage.setItem("from", from);
             if (isMiniProgram()) {
-                const urlParams = new URLSearchParams(window.location.search);
                 const appid = urlParams.get("appid");
                 const item = miniprogram?.find((item) => item.appid === appid);
                 const from = urlParams.get("_from");
@@ -92,6 +94,12 @@ export default {
                     miniprogramHack();
                 }
             }
+
+            // 如果来自推栏
+            if (sessionStorage.getItem("from") == 'tl') {
+                document.documentElement.classList.add("v-miniprogram");
+            }
+
         },
 
         // 检查
