@@ -31,7 +31,7 @@
                 <slot name="default"></slot>
             </div>
             <div class="m-more" v-if="btnConfig.showMore" @click="setMore">
-<!--                <img class="u-icon" src="../assets/img/suspend/more.svg" svg-inline /> -->
+                <!--                <img class="u-icon" src="../assets/img/suspend/more.svg" svg-inline /> -->
                 更多
             </div>
         </div>
@@ -43,14 +43,25 @@
                     <img class="u-icon" src="../assets/img/suspend/search.svg" svg-inline />
                 </div>
                 <!--        固定按钮-->
-                <div v-if="btnConfig.showFixed" class="u-icon-d" @click="clickDrawer({ type: 'pin', text: '固定按钮' }, 1)">
-                    <img class="u-icon active" src="../assets/img/suspend/pin_touchbar_24.svg" svg-inline
-                        v-if="!fixIsActive" />
+                <div
+                    v-if="btnConfig.showFixed"
+                    class="u-icon-d"
+                    @click="clickDrawer({ type: 'pin', text: '固定按钮' }, 1)"
+                >
+                    <img
+                        class="u-icon active"
+                        src="../assets/img/suspend/pin_touchbar_24.svg"
+                        svg-inline
+                        v-if="!fixIsActive"
+                    />
                     <img class="u-icon active" src="../assets/img/suspend/pin_slash_24.svg" svg-inline v-else />
                 </div>
                 <!--        收藏按钮-->
-                <div v-if="btnConfig.showCollect" class="u-icon-d"
-                    @click="clickDrawer({ type: 'collect', text: '收藏' }, 1)">
+                <div
+                    v-if="btnConfig.showCollect"
+                    class="u-icon-d"
+                    @click="clickDrawer({ type: 'collect', text: '收藏' }, 1)"
+                >
                     <img class="u-icon active" src="../assets/img/suspend/collect.svg" svg-inline v-if="!isCollect" />
                     <img class="u-icon active" src="../assets/img/suspend/collect_slash.svg" svg-inline v-else />
                 </div>
@@ -58,10 +69,9 @@
                 <div v-if="btnConfig.showLaterOn" class="u-icon-d" @click="laterOn">
                     <img class="u-icon" src="../assets/img/suspend/later-on.svg" svg-inline />
                 </div>
-
             </div>
             <div class="m-more" v-if="btnConfig.showMore" @click="setMore">
-<!--                <img class="u-icon" src="../assets/img/suspend/more.svg" svg-inline /> -->
+                <!--                <img class="u-icon" src="../assets/img/suspend/more.svg" svg-inline /> -->
                 更多
             </div>
         </div>
@@ -69,60 +79,80 @@
         <div class="m-pin-box" v-if="btnConfig.showPin && !btnConfig.showHome && !btnConfig.showIcon">
             <div class="u-item" v-for="(item, index) in fixList" :key="'fix' + index">
                 <div class="u-text-r" v-if="item.type == 'text'">
-                    {{ item.title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] || '固' }}
+                    {{ item.title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] || "固" }}
                 </div>
-                <img :src="item.imgUrl" class="u-icon" v-else>
+                <img :src="item.imgUrl" class="u-icon" v-else />
             </div>
             <!-- 不足三个时显示空位，只在编辑界面显示 -->
-            <div class="u-item" v-for="(item, index) in (3 - fixList.length)" :key="'fix_no' + index">
-                <img src="../assets/img/suspend/circle.svg" svg-inline class="u-icon">
+            <div class="u-item" v-for="(item, index) in 3 - fixList.length" :key="'fix_no' + index">
+                <img src="../assets/img/suspend/circle.svg" svg-inline class="u-icon" />
             </div>
         </div>
         <!-- 抽屉弹出层，支持默认样式和自定义插槽样式 -->
-        <el-drawer :title="drawerConfig.drawerTitle" :visible.sync="drawer" :direction="drawerConfig.direction"
-            :with-header="false" custom-class="u-drawer" :modal-append-to-body="false" append-to-body class="p-drawer-suspend" @close="areaKey='home'">
-
+        <el-drawer
+            :title="drawerConfig.drawerTitle"
+            :visible.sync="drawer"
+            :direction="drawerConfig.direction"
+            :with-header="false"
+            custom-class="u-drawer"
+            :modal-append-to-body="false"
+            append-to-body
+            class="p-drawer-suspend"
+            @close="areaKey = 'home'"
+        >
             <div class="p-drawer-suspend_box p-bt-transition" v-show="areaKey === 'home'">
                 <div class="u-drawer-box">
-                    <div class="u-item top" v-for="item in drawerFiltration(drawerType.one)" :key="item.type"
-                        @click="clickDrawer(item)">
+                    <div
+                        class="u-item top"
+                        v-for="item in drawerFiltration(drawerType.one)"
+                        :key="item.type"
+                        @click="clickDrawer(item)"
+                    >
                         <div class="u-icon" v-if="item.icon || item.icon_slash">
-                            <img :src="item.type == 'pin' ? fixIsActive ? item.icon_slash : item.icon : item.icon"
-                                svg-inline />
+                            <img
+                                :src="item.type == 'pin' ? (fixIsActive ? item.icon_slash : item.icon) : item.icon"
+                                svg-inline
+                            />
                         </div>
                         <div class="u-self" v-if="item.isSlot">
                             <!-- 三个圆堆叠式展示 -->
                             <div class="u-circle-top">
                                 <div v-if="fixList?.[0]">
                                     <div class="u-text-r" v-if="fixList?.[0]?.type == 'text'">
-                                        {{ fixList?.[0]?.title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] || '固' }}
+                                        {{ fixList?.[0]?.title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] || "固" }}
                                     </div>
-                                    <img :src="fixList?.[0]?.imgUrl" class="u-icon" v-else>
+                                    <img :src="fixList?.[0]?.imgUrl" class="u-icon" v-else />
                                 </div>
                                 <img src="../assets/img/suspend/circle.svg" svg-inline v-else />
-
                             </div>
                             <div class="u-circle-bottom">
                                 <div class="u-circle" v-for="(item, index) in 2" :key="item">
                                     <div v-if="fixList?.[index + 1]">
                                         <div class="u-text-r" v-if="fixList?.[index + 1]?.type == 'text'">
-                                            {{ fixList?.[index + 1].title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] || '固' }}
+                                            {{
+                                                fixList?.[index + 1].title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] ||
+                                                "固"
+                                            }}
                                         </div>
-                                        <img :src="fixList?.[index + 1].imgUrl" class="u-icon" v-else>
+                                        <img :src="fixList?.[index + 1].imgUrl" class="u-icon" v-else />
                                     </div>
                                     <img src="../assets/img/suspend/circle.svg" svg-inline v-else />
                                 </div>
                             </div>
-
                         </div>
                         <div class="u-text" :class="item.type">
-                            {{ item.type == 'pin' ? fixIsActive ? item.text_slash : item.text : item.text }}
+                            {{ item.type == "pin" ? (fixIsActive ? item.text_slash : item.text) : item.text }}
                         </div>
                     </div>
+                    <slot name="drawerBox1"></slot>
                 </div>
                 <div class="u-drawer-box">
-                    <div class="u-item" v-for="item in drawerFiltration(drawerType.two)" :key="item.type"
-                        @click="clickDrawer(item)">
+                    <div
+                        class="u-item"
+                        v-for="item in drawerFiltration(drawerType.two)"
+                        :key="item.type"
+                        @click="clickDrawer(item)"
+                    >
                         <div class="u-icon" v-if="item.icon">
                             <img :src="item.icon" svg-inline />
                         </div>
@@ -130,124 +160,171 @@
                             {{ item.text }}
                         </div>
                     </div>
+                    <slot name="drawerBox2"></slot>
                 </div>
                 <div class="u-drawer-box">
-                    <div class="u-item" :class="item.type" v-for="item in drawerFiltration(drawerType.three)"
-                        :key="item.type" @click="clickDrawer(item)">
+                    <div
+                        class="u-item"
+                        :class="item.type"
+                        v-for="item in drawerFiltration(drawerType.three)"
+                        :key="item.type"
+                        @click="clickDrawer(item)"
+                    >
                         <div class="u-author" v-if="item.isSlot">
                             <div class="u-avatar">
-                                <img :src="drawerConfig.author.avatar">
+                                <img :src="drawerConfig.author.avatar" />
                                 <!-- <slot name="avatar"></slot> -->
                             </div>
                             <div class="u-author-name">
                                 <!-- <slot name="author"></slot> -->
                                 {{ drawerConfig.author.name }}
                             </div>
-
                         </div>
                         <div class="u-text" v-if="!item.isSlot">
                             {{ item.text }}
                         </div>
                     </div>
+                    <slot name="drawerBox3"></slot>
                 </div>
             </div>
 
             <transition name="slide-up">
-            <!-- 收藏区域 、订阅区域 -->
-            <div class="p-drawer-collect p-bt-transition" v-show="areaKey === 'collect' || areaKey === 'rss'">
-                <div class="u-collect-icon">
-                    <img src="../assets/img/suspend/collect_touchbar_100.svg" svg-inline
-                        v-if="areaKey === 'collect' && !isCollect" />
-                    <img src="../assets/img/suspend/collect_slash_touchbar_100.svg" svg-inline
-                        v-if="areaKey === 'collect' && isCollect" />
-                    <img src="../assets/img/suspend/rss_touchbar_100.svg" svg-inline
-                        v-if="areaKey === 'rss' && !isSubscribe" />
-                    <img src="../assets/img/suspend/report_100.svg" svg-inline
-                        v-if="areaKey === 'rss' && isSubscribe" />
-                    <div class="u-text"
-                        v-if="(areaKey === 'collect' && !isCollect) || (areaKey === 'rss' && !isSubscribe)">
-                        {{ areaKey === 'collect' ? '收藏' : '订阅' }}作品
+                <!-- 收藏区域 、订阅区域 -->
+                <div class="p-drawer-collect p-bt-transition" v-show="areaKey === 'collect' || areaKey === 'rss'">
+                    <div class="u-collect-icon">
+                        <img
+                            src="../assets/img/suspend/collect_touchbar_100.svg"
+                            svg-inline
+                            v-if="areaKey === 'collect' && !isCollect"
+                        />
+                        <img
+                            src="../assets/img/suspend/collect_slash_touchbar_100.svg"
+                            svg-inline
+                            v-if="areaKey === 'collect' && isCollect"
+                        />
+                        <img
+                            src="../assets/img/suspend/rss_touchbar_100.svg"
+                            svg-inline
+                            v-if="areaKey === 'rss' && !isSubscribe"
+                        />
+                        <img
+                            src="../assets/img/suspend/report_100.svg"
+                            svg-inline
+                            v-if="areaKey === 'rss' && isSubscribe"
+                        />
+                        <div
+                            class="u-text"
+                            v-if="(areaKey === 'collect' && !isCollect) || (areaKey === 'rss' && !isSubscribe)"
+                        >
+                            {{ areaKey === "collect" ? "收藏" : "订阅" }}作品
+                        </div>
+                    </div>
+                    <div class="u-collect-tips" v-if="areaKey === 'collect'">
+                        {{ isCollect ? "你已经收藏该作品" : "喜欢程度不够？可以试试添加到稍后再看" }}
+                    </div>
+                    <div class="u-collect-tips" v-if="areaKey === 'rss'">
+                        {{ isSubscribe ? "你已经订阅该作品" : "喜欢程度不够？可以试试添加到稍后再看" }}
+                    </div>
+                    <div class="u-btn-box">
+                        <div class="u-btn collect" @click="collectOrSubscribe">
+                            {{
+                                areaKey === "collect"
+                                    ? isCollect
+                                        ? "取消收藏"
+                                        : "收藏"
+                                    : isSubscribe
+                                    ? "取消订阅"
+                                    : "订阅"
+                            }}作品
+                        </div>
+                        <div class="u-btn" @click="laterOn">添加到稍后再看</div>
                     </div>
                 </div>
-                <div class="u-collect-tips" v-if="areaKey === 'collect'">
-                    {{ isCollect ? '你已经收藏该作品' : '喜欢程度不够？可以试试添加到稍后再看' }}
-                </div>
-                <div class="u-collect-tips" v-if="areaKey === 'rss'">
-                    {{ isSubscribe ? '你已经订阅该作品' : '喜欢程度不够？可以试试添加到稍后再看' }}
-                </div>
-                <div class="u-btn-box">
-                    <div class="u-btn collect" @click="collectOrSubscribe">
-                        {{ areaKey === 'collect' ? isCollect ? '取消收藏' : '收藏' : isSubscribe ? '取消订阅' : '订阅' }}作品
-                    </div>
-                    <div class="u-btn" @click="laterOn">添加到稍后再看</div>
-                </div>
-            </div>
             </transition>
             <!-- 固定配置相关页面 -->
             <transition name="slide-up">
-            <div class="p-drawer-fix p-bt-transition" v-show="areaKey === 'pin' || areaKey === 'fix'">
-                <!-- 固定，取消固定,超量 -->
-                <div class="u-collect-icon" v-if="!fixIsEdit">
-                    <img src="../assets/img/suspend/pin_touchbar_100.svg" svg-inline
-                        v-if="!fixIsActive && !fixIsFull" />
-                    <img src="../assets/img/suspend/pin_slash_touchbar.svg" svg-inline
-                        v-if="fixIsActive && !fixIsFull" />
-                    <img src="../assets/img/suspend/report_100.svg" svg-inline v-if="fixIsFull" />
-                    <div class="u-text">{{ fixIsActive ? '取消固定' : '固定内容' }}</div>
-                </div>
-                <div class="u-collect-tips" v-if="!fixIsActive && !fixIsEdit">
-                    你可以随时在其他页面查看固定的内容
-                </div>
-                <div class="u-edit-title" v-if="fixIsEdit">固定内容</div>
-                <div class="u-pin-box">
-                    <div class="u-item" v-if="!fixIsEdit">
-                        <div class="u-text-r" v-if="fixPageConfig.type == 'text'">
-                            {{ fixPageConfig.title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] || '固' }}
-                        </div>
-                        <img :src="fixPageConfig.imgUrl" class="u-icon" v-else>
-                        <div class="u-text">{{ fixPageConfig.title }}</div>
+                <div class="p-drawer-fix p-bt-transition" v-show="areaKey === 'pin' || areaKey === 'fix'">
+                    <!-- 固定，取消固定,超量 -->
+                    <div class="u-collect-icon" v-if="!fixIsEdit">
+                        <img
+                            src="../assets/img/suspend/pin_touchbar_100.svg"
+                            svg-inline
+                            v-if="!fixIsActive && !fixIsFull"
+                        />
+                        <img
+                            src="../assets/img/suspend/pin_slash_touchbar.svg"
+                            svg-inline
+                            v-if="fixIsActive && !fixIsFull"
+                        />
+                        <img src="../assets/img/suspend/report_100.svg" svg-inline v-if="fixIsFull" />
+                        <div class="u-text">{{ fixIsActive ? "取消固定" : "固定内容" }}</div>
                     </div>
-                    <!-- 只在编辑界面显示 -->
-                    <div class="u-item" v-for="(item, index) in fixIsEdit ? fixList : []" :key="'fix' + index" @click="fixDataClick(item)">
-                        <div class="u-text-r" v-if="item.type == 'text'">
-                            {{ item.title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] || '固' }}
+                    <div class="u-collect-tips" v-if="!fixIsActive && !fixIsEdit">
+                        你可以随时在其他页面查看固定的内容
+                    </div>
+                    <div class="u-edit-title" v-if="fixIsEdit">固定内容</div>
+                    <div class="u-pin-box">
+                        <div class="u-item" v-if="!fixIsEdit">
+                            <div class="u-text-r" v-if="fixPageConfig.type == 'text'">
+                                {{ fixPageConfig.title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] || "固" }}
+                            </div>
+                            <img :src="fixPageConfig.imgUrl" class="u-icon" v-else />
+                            <div class="u-text">{{ fixPageConfig.title }}</div>
                         </div>
-                        <img :src="item.imgUrl" class="u-icon" v-else>
-                        <div class="u-text">{{ item.title }}</div>
-                        <div class="u-slash" v-if="fixIsEdit" @click="cancelFix(item)">
-                            <img src="../assets/img/suspend/pin_slash_touchbar_24.svg" svg-inline />
+                        <!-- 只在编辑界面显示 -->
+                        <div
+                            class="u-item"
+                            v-for="(item, index) in fixIsEdit ? fixList : []"
+                            :key="'fix' + index"
+                            @click="fixDataClick(item)"
+                        >
+                            <div class="u-text-r" v-if="item.type == 'text'">
+                                {{ item.title.match(/[\u3400-\u9FFF\uF900-\uFAFF]/)?.[0] || "固" }}
+                            </div>
+                            <img :src="item.imgUrl" class="u-icon" v-else />
+                            <div class="u-text">{{ item.title }}</div>
+                            <div class="u-slash" v-if="fixIsEdit" @click="cancelFix(item)">
+                                <img src="../assets/img/suspend/pin_slash_touchbar_24.svg" svg-inline />
+                            </div>
+                        </div>
+                        <!-- 不足三个时显示空位，只在编辑界面显示 -->
+                        <div
+                            class="u-item"
+                            v-for="(item, index) in fixIsEdit ? 3 - fixList.length : 0"
+                            :key="'fix_no' + index"
+                        >
+                            <img src="../assets/img/suspend/circle.svg" svg-inline class="u-icon" />
                         </div>
                     </div>
-                    <!-- 不足三个时显示空位，只在编辑界面显示 -->
-                    <div class="u-item" v-for="(item, index) in fixIsEdit ? (3 - fixList.length) : 0"
-                        :key="'fix_no' + index">
-                        <img src="../assets/img/suspend/circle.svg" svg-inline class="u-icon">
+                    <div class="u-btn-box" v-if="!fixIsEdit">
+                        <div class="u-btn collect" @click="fixClick">确定</div>
+                        <!-- <div class="u-btn">编辑固定内容</div> -->
+                    </div>
+                    <div class="u-collect-tips" v-if="fixIsActive && !fixIsEdit">你可以在原页面再次将其固定</div>
+                    <div class="u-collect-tips edit" v-if="fixIsEdit">
+                        在支持固定的页面可以按
+                        <img src="../assets/img/suspend/pin_touchbar_24.svg" svg-inline class="u-icon" />
+                        将页面固定
                     </div>
                 </div>
-                <div class="u-btn-box" v-if="!fixIsEdit">
-                    <div class="u-btn collect" @click="fixClick">确定</div>
-                    <!-- <div class="u-btn">编辑固定内容</div> -->
-                </div>
-                <div class="u-collect-tips" v-if="fixIsActive && !fixIsEdit">
-                    你可以在原页面再次将其固定
-                </div>
-                <div class="u-collect-tips edit" v-if="fixIsEdit">
-                    在支持固定的页面可以按
-                    <img src="../assets/img/suspend/pin_touchbar_24.svg" svg-inline class="u-icon" />
-                    将页面固定
-                </div>
-            </div>
             </transition>
-<!--            固定页面查看数据、或打开其他远程界面-->
+            <!--            固定页面查看数据、或打开其他远程界面-->
             <transition name="slide-up">
-            <div class="p-drawer-fixData p-bt-transition" v-show="areaKey === 'fixData'">
-<!--                展开界面图标-->
-                <div class="u-icon" @click="openUrl">
-                    <img src="../assets/img/suspend/pin_touchbar_24.svg" svg-inline/>
+                <div class="p-drawer-fixData p-bt-transition" v-show="areaKey === 'fixData'">
+                    <!--                展开界面图标-->
+                    <div class="u-icon" @click="openUrl">
+                        <img src="../assets/img/suspend/pin_touchbar_24.svg" svg-inline />
+                    </div>
+                    <iframe
+                        :src="iframeInfo.openurl"
+                        frameborder="0"
+                        width="100%"
+                        height="100%"
+                        v-if="iframeInfo?.url"
+                        class="u-iframe"
+                    />
+                    <span v-else>查找页面失败</span>
                 </div>
-                <iframe :src="iframeInfo.openurl" frameborder="0" width="100%" height="100%" v-if="iframeInfo?.url" class="u-iframe"/>
-                <span v-else>查找页面失败</span>
-            </div>
             </transition>
         </el-drawer>
     </div>
@@ -271,52 +348,58 @@ import {
     setCollect,
     getCollectList,
     cancelCollect,
-} from '../service/suspend'
+} from "../service/suspend";
 export default {
     components: {},
     props: {
         btnOptions: {
             type: Object,
             default: () => {
-                return {}
-            }
+                return {};
+            },
         },
         //通用弹出框配置
         drawerOptions: {
             type: Object,
             default: () => {
-                return {}
+                return {};
             },
         },
         //固定页缓存相关配置
         fixPageOptions: {
             type: Object,
             default: () => {
-                return {}
-            }
+                return {};
+            },
         },
     },
     data() {
         return {
             isDarkModeStatus: false,
             drawer: false,
-            areaKey: 'home',
+            areaKey: "home",
             //弹窗type组合
             drawerType: {
                 one: [
-                    { type: 'search', text: '搜索内容', icon: require('../assets/img/suspend/search_touchbar.svg') },
-                    { type: 'pin', text: '固定本页', icon: require('../assets/img/suspend/pin_touchbar.svg'), text_slash: '取消固定', icon_slash: require('../assets/img/suspend/pin_slash_touchbar_40.svg') },
-                    { type: 'fix', text: '查看固定', icon: null, isSlot: true },
+                    { type: "search", text: "搜索内容", icon: require("../assets/img/suspend/search_touchbar.svg") },
+                    {
+                        type: "pin",
+                        text: "固定本页",
+                        icon: require("../assets/img/suspend/pin_touchbar.svg"),
+                        text_slash: "取消固定",
+                        icon_slash: require("../assets/img/suspend/pin_slash_touchbar_40.svg"),
+                    },
+                    { type: "fix", text: "查看固定", icon: null, isSlot: true },
                 ],
                 two: [
-                    { type: 'collect', text: '收藏作品', icon: require('../assets/img/suspend/collect_touchbar.svg') },
-                    { type: 'rss', text: '订阅作品', icon: require('../assets/img/suspend/rss_touchbar.svg') },
-                    { type: 'laterOn', text: '稍后再看', icon: require('../assets/img/suspend/lafter_touchbar.svg') },
+                    { type: "collect", text: "收藏作品", icon: require("../assets/img/suspend/collect_touchbar.svg") },
+                    { type: "rss", text: "订阅作品", icon: require("../assets/img/suspend/rss_touchbar.svg") },
+                    { type: "laterOn", text: "稍后再看", icon: require("../assets/img/suspend/lafter_touchbar.svg") },
                 ],
                 three: [
-                    { type: 'user', text: '作者', isSlot: true, },
-                    { type: 'report', text: '举报' },
-                ]
+                    { type: "user", text: "作者", isSlot: true },
+                    { type: "report", text: "举报" },
+                ],
             },
             fixList: [],
             fixIsEdit: false, //固定页是否编辑状态
@@ -326,7 +409,7 @@ export default {
             //是否已订阅
             isSubscribe: false,
             subscribeInfo: {},
-            iframeInfo:{}
+            iframeInfo: {},
         };
     },
     computed: {
@@ -340,39 +423,39 @@ export default {
                 showCollect: true, //是否显示收藏图标
                 showLaterOn: true, //是否显示稍后再看图标
                 showMore: true, //是否显示更多
-            }
+            };
             return Object.assign({}, defaultConfig, this.btnOptions);
         },
         drawerConfig() {
             const defaultConfig = {
-                hideType: ['report'], //需要隐藏的type,如['search','pin']
-                direction: 'btt', //弹出框方向，btt、ttb、rtl、ltr
-                drawerTitle: '',//弹出框标题
+                hideType: ["report"], //需要隐藏的type,如['search','pin']
+                direction: "btt", //弹出框方向，btt、ttb、rtl、ltr
+                drawerTitle: "", //弹出框标题
                 author: {
-                    name: '', //作者名称
-                    avatar: '', //作者头像
-                    author_id: '', //作者id
+                    name: "", //作者名称
+                    avatar: "", //作者头像
+                    author_id: "", //作者id
                 },
-                subscribeType: '', //订阅类型，用于区分调用百科、文章、作者、帖子等订阅接口，
-                postType: '',//订阅、收藏接口的type,如'face','bps','article'等
-                id: '', //页面数据ID，用于收藏订阅操作
-                title: document.title || '', //默认固定标题,默认取页面标题
+                subscribeType: "", //订阅类型，用于区分调用百科、文章、作者、帖子等订阅接口，
+                postType: "", //订阅、收藏接口的type,如'face','bps','article'等
+                id: "", //页面数据ID，用于收藏订阅操作
+                title: document.title || "", //默认固定标题,默认取页面标题
                 url: window.location.href, //默认取浏览器地址
                 laterOn: {
                     author_id: 0,
-                    content_meta_id: 0
-                }
-            }
+                    content_meta_id: 0,
+                },
+            };
             return Object.assign({}, defaultConfig, this.drawerOptions);
         },
         fixPageConfig() {
             const defaultConfig = {
-                key: 'jx3box-common-fixed', //默认本地缓存Key
-                type: 'text', //默认固定类型，text、img
-                imgUrl: '', //type是img时需传入图片url用作显示
-                title: document.title || '', //默认固定标题,默认取页面标题
+                key: "jx3box-common-fixed", //默认本地缓存Key
+                type: "text", //默认固定类型，text、img
+                imgUrl: "", //type是img时需传入图片url用作显示
+                title: document.title || "", //默认固定标题,默认取页面标题
                 url: window.location.href, //默认取浏览器地址
-            }
+            };
             return Object.assign({}, defaultConfig, this.fixPageOptions);
         },
         //通过drawerConfig判断是否显示弹窗
@@ -389,7 +472,7 @@ export default {
         },
         // 通过fixList判断当前界面是否已经存在固定列表内
         fixIsActive() {
-            return this.fixList.some(item => item.url === this.fixPageConfig.url);
+            return this.fixList.some((item) => item.url === this.fixPageConfig.url);
         },
     },
     created() {
@@ -401,23 +484,23 @@ export default {
     methods: {
         isDarkModeFun() {
             // 使用 window.matchMedia 检查系统是否启用了暗色模式
-            const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
+            const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
             this.isDarkModeStatus = mediaQueryList.matches;
         },
         //搜索按钮点击事件
         search() {
-            this.$emit('search');
+            this.$emit("search");
         },
         //打开更多弹窗，父级界面如需在界面其他操作后打开，可通过ref调用此方法
         // 例如：this.$refs.suspendCommon.setMore()
         setMore() {
             this.drawer = true;
-            this.areaKey = 'home'
+            this.areaKey = "home";
         },
         // 筛选弹窗type，过滤掉需隐藏的type
         drawerFiltration(arr) {
             if (this.drawerConfig.hideType.length > 0) {
-                return arr.filter(item => !this.drawerConfig.hideType.includes(item.type));
+                return arr.filter((item) => !this.drawerConfig.hideType.includes(item.type));
             }
             return arr;
         },
@@ -431,31 +514,30 @@ export default {
         clickDrawer(item, type) {
             if (type == 1) this.drawer = true;
             // 支持切换界面的 type
-            let switchType = ['collect', 'rss', 'pin', 'fix'];
+            let switchType = ["collect", "rss", "pin", "fix"];
             if (switchType.includes(item.type)) {
                 this.areaKey = item.type;
             }
             // 如果点击的是search
-            if (item.type === 'search') {
+            if (item.type === "search") {
                 this.search();
             }
             //查看固定页转到编辑状态
-            if (item.type === 'fix') {
+            if (item.type === "fix") {
                 this.fixIsEdit = true;
             } else {
                 this.fixIsEdit = false;
             }
             //稍后在看处理
-            if (item.type === 'laterOn') this.laterOn()
+            if (item.type === "laterOn") this.laterOn();
             //点击作者
-            console.log(item)
-            if (item.type === 'user') {
-                let url = '/author/' + this.drawerConfig.author.author_id;
-                this.iframeInfo={url:url,openurl:url};
-                this.areaKey='fixData'
-
+            console.log(item);
+            if (item.type === "user") {
+                let url = "/author/" + this.drawerConfig.author.author_id;
+                this.iframeInfo = { url: url, openurl: url };
+                this.areaKey = "fixData";
             }
-            this.$emit('clickBtn', { type: item.type, text: item.text });
+            this.$emit("clickBtn", { type: item.type, text: item.text });
         },
         /**
          * @description: 固定页的确认点击事件,操作结束后areaKey转到home界面
@@ -466,7 +548,7 @@ export default {
             if (this.fixIsFull) return;
             // 判断是否已经存在，存在则执行删除操作
             if (this.fixIsActive) {
-                this.fixList = this.fixList.filter(item => item.url !== this.fixPageConfig.url);
+                this.fixList = this.fixList.filter((item) => item.url !== this.fixPageConfig.url);
                 localStorage.setItem(this.fixPageConfig.key, JSON.stringify(this.fixList));
             } else {
                 let json = {
@@ -474,12 +556,12 @@ export default {
                     title: this.fixPageConfig.title,
                     url: this.fixPageConfig.url,
                     imgUrl: this.fixPageConfig.imgUrl,
-                }
+                };
                 this.fixList.push(json);
                 localStorage.setItem(this.fixPageConfig.key, JSON.stringify(this.fixList));
             }
-            this.areaKey = 'home';
-            this.$emit('fixPage');
+            this.areaKey = "home";
+            this.$emit("fixPage");
         },
 
         /**
@@ -488,191 +570,190 @@ export default {
          * @return {*}
          * */
         cancelFix(value) {
-            this.fixList = this.fixList.filter(item => item.url !== value.url);
+            this.fixList = this.fixList.filter((item) => item.url !== value.url);
             localStorage.setItem(this.fixPageConfig.key, JSON.stringify(this.fixList));
-            this.areaKey = 'home';
-            this.$emit('fixCancelIndividually');
+            this.areaKey = "home";
+            this.$emit("fixCancelIndividually");
         },
         /**
          * @description: 固定数据点击查看，默认追加disabled标识，弹出层需隐藏掉按钮处理，点击展开按钮后跳转进页面
          * @param {*} value
          */
         fixDataClick(value) {
-            if(value.url.indexOf('?') !=-1){
-                value.openurl= value.url+'&disabled=true'
-            }else{
-                value.openurl= value.url+'?disabled=true'
+            if (value.url.indexOf("?") != -1) {
+                value.openurl = value.url + "&disabled=true";
+            } else {
+                value.openurl = value.url + "?disabled=true";
             }
-            this.iframeInfo=value;
-            this.areaKey='fixData'
-            this.$emit('fixDataSwitch')
+            this.iframeInfo = value;
+            this.areaKey = "fixData";
+            this.$emit("fixDataSwitch");
         },
         //打开界面
-        openUrl(){
-            location.href=this.iframeInfo.url;
+        openUrl() {
+            location.href = this.iframeInfo.url;
         },
         /**
          * @description: 收藏或订阅,操作完成后areaKey转到home界面
          * @return {*}
          */
         collectOrSubscribe() {
-            this.areaKey == 'collect' ? this.collect() : this.subscribe()
+            this.areaKey == "collect" ? this.collect() : this.subscribe();
         },
 
         /**
          * @description: 收藏或取消操作，操作完成后更新界面，无需跳转
          */
         collect() {
-            let drawerConfig = this.drawerConfig
+            let drawerConfig = this.drawerConfig;
             if (this.isCollect) {
                 //取消,需传入收藏id
-                cancelCollect(this.collectInfo.id,).then(res => {
+                cancelCollect(this.collectInfo.id).then((res) => {
                     this.isCollect = false;
-                    this.collectInfo = {}
-                })
+                    this.collectInfo = {};
+                });
             } else {
-                setCollect(drawerConfig.id, drawerConfig.postType, drawerConfig.title).then(res => {
+                setCollect(drawerConfig.id, drawerConfig.postType, drawerConfig.title).then((res) => {
                     this.isCollect = true;
-                    this.collectInfo = res.data?.data
-                })
+                    this.collectInfo = res.data?.data;
+                });
             }
-            this.$emit('collect', { isCollect: this.isCollect });
+            this.$emit("collect", { isCollect: this.isCollect });
         },
         //获取收藏信息
         getCollectInfo() {
-            if(!this.drawerConfig.id && !this.drawerConfig.postType) return;
-            getCollectList(this.drawerConfig.id, this.drawerConfig.postType).then(res => {
-                this.collectInfo = res.data.data
-                this.isCollect = this.collectInfo?.id > 0
-            })
+            if (!this.drawerConfig.id && !this.drawerConfig.postType) return;
+            getCollectList(this.drawerConfig.id, this.drawerConfig.postType).then((res) => {
+                this.collectInfo = res.data.data;
+                this.isCollect = this.collectInfo?.id > 0;
+            });
         },
         /**
          * @description: 订阅或取消操作，操作完成后更新界面，无需跳转,需根据subscribeType判断接口调用
          */
         subscribe() {
-            let drawerConfig = this.drawerConfig
+            let drawerConfig = this.drawerConfig;
             // 作者相关接口
-            if (drawerConfig.subscribeType === 'author') {
+            if (drawerConfig.subscribeType === "author") {
                 if (this.isSubscribe) {
-                    unsubscribeAuthor(drawerConfig.author.author_id).then(res => {
+                    unsubscribeAuthor(drawerConfig.author.author_id).then((res) => {
                         this.isSubscribe = false;
-                        this.subscribeInfo = {}
-                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
-                    })
+                        this.subscribeInfo = {};
+                        this.$emit("subscribe", { isSubscribe: this.isSubscribe });
+                    });
                 } else {
-                    subscribeAuthor(drawerConfig.author.author_id, { title: drawerConfig.title }).then(res => {
+                    subscribeAuthor(drawerConfig.author.author_id, { title: drawerConfig.title }).then((res) => {
                         this.isSubscribe = true;
-                        this.subscribeInfo = res.data?.data
-                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
-                    })
+                        this.subscribeInfo = res.data?.data;
+                        this.$emit("subscribe", { isSubscribe: this.isSubscribe });
+                    });
                 }
             }
             //帖子
-            if (drawerConfig.subscribeType === 'community') {
+            if (drawerConfig.subscribeType === "community") {
                 if (this.isSubscribe) {
-                    unsubscribePost(drawerConfig.id).then(res => {
+                    unsubscribePost(drawerConfig.id).then((res) => {
                         this.isSubscribe = false;
-                        this.subscribeInfo = {}
-                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
-                    })
+                        this.subscribeInfo = {};
+                        this.$emit("subscribe", { isSubscribe: this.isSubscribe });
+                    });
                 } else {
-                    subscribePost(drawerConfig.id, { title: drawerConfig.title }).then(res => {
+                    subscribePost(drawerConfig.id, { title: drawerConfig.title }).then((res) => {
                         this.isSubscribe = true;
-                        this.subscribeInfo = res.data?.data
-                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
-                    })
+                        this.subscribeInfo = res.data?.data;
+                        this.$emit("subscribe", { isSubscribe: this.isSubscribe });
+                    });
                 }
             }
             //文章
-            if (drawerConfig.subscribeType === 'posts') {
+            if (drawerConfig.subscribeType === "posts") {
                 if (this.isSubscribe) {
-                    unsubscribeArticle(drawerConfig.postType, drawerConfig.id).then(res => {
+                    unsubscribeArticle(drawerConfig.postType, drawerConfig.id).then((res) => {
                         this.isSubscribe = false;
-                        this.subscribeInfo = {}
-                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
-                    })
+                        this.subscribeInfo = {};
+                        this.$emit("subscribe", { isSubscribe: this.isSubscribe });
+                    });
                 } else {
-                    subscribeArticle(drawerConfig.postType, drawerConfig.id, { title: drawerConfig.title }).then(res => {
-                        this.isSubscribe = true;
-                        this.subscribeInfo = res.data?.data
-                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
-                    })
+                    subscribeArticle(drawerConfig.postType, drawerConfig.id, { title: drawerConfig.title }).then(
+                        (res) => {
+                            this.isSubscribe = true;
+                            this.subscribeInfo = res.data?.data;
+                            this.$emit("subscribe", { isSubscribe: this.isSubscribe });
+                        }
+                    );
                 }
             }
             //百科
-            if (drawerConfig.subscribeType === 'wiki') {
+            if (drawerConfig.subscribeType === "wiki") {
                 if (this.isSubscribe) {
-                    unsubscribeWiki(drawerConfig.postType, drawerConfig.id).then(res => {
+                    unsubscribeWiki(drawerConfig.postType, drawerConfig.id).then((res) => {
                         this.isSubscribe = false;
-                        this.subscribeInfo = {}
-                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
-                    })
+                        this.subscribeInfo = {};
+                        this.$emit("subscribe", { isSubscribe: this.isSubscribe });
+                    });
                 } else {
-                    subscribeWiki(drawerConfig.postType, drawerConfig.id, { title: drawerConfig.title }).then(res => {
+                    subscribeWiki(drawerConfig.postType, drawerConfig.id, { title: drawerConfig.title }).then((res) => {
                         this.isSubscribe = true;
-                        this.subscribeInfo = res.data?.data
-                        this.$emit('subscribe', { isSubscribe: this.isSubscribe });
-                    })
+                        this.subscribeInfo = res.data?.data;
+                        this.$emit("subscribe", { isSubscribe: this.isSubscribe });
+                    });
                 }
             }
-
         },
         /**
          * 订阅状态查询
          */
         getSubscribeInfo() {
-            let drawerConfig = this.drawerConfig
+            let drawerConfig = this.drawerConfig;
             // 作者相关接口
-            if (drawerConfig.subscribeType === 'author' && drawerConfig.author.author_id) {
-                getSubscribeStatus(drawerConfig.author.author_id).then(res => {
-                    this.isSubscribe = res.data.data?.subscribed
-                    this.subscribeInfo = res.data.data
-                })
+            if (drawerConfig.subscribeType === "author" && drawerConfig.author.author_id) {
+                getSubscribeStatus(drawerConfig.author.author_id).then((res) => {
+                    this.isSubscribe = res.data.data?.subscribed;
+                    this.subscribeInfo = res.data.data;
+                });
             }
             //帖子
-            if (drawerConfig.subscribeType === 'community' && drawerConfig.id) {
-                getSubscribePostStatus(drawerConfig.id).then(res => {
-                    this.isSubscribe = res.data.data?.subscribed
-                    this.subscribeInfo = res.data.data
-                })
+            if (drawerConfig.subscribeType === "community" && drawerConfig.id) {
+                getSubscribePostStatus(drawerConfig.id).then((res) => {
+                    this.isSubscribe = res.data.data?.subscribed;
+                    this.subscribeInfo = res.data.data;
+                });
             }
             //文章
-            if (drawerConfig.subscribeType === 'posts' && drawerConfig.id && drawerConfig.postType) {
-                getSubscribeArticleStatus(drawerConfig.postType, drawerConfig.id).then(res => {
-                    this.isSubscribe = res.data.data?.subscribed
-                    this.subscribeInfo = res.data.data
-                })
+            if (drawerConfig.subscribeType === "posts" && drawerConfig.id && drawerConfig.postType) {
+                getSubscribeArticleStatus(drawerConfig.postType, drawerConfig.id).then((res) => {
+                    this.isSubscribe = res.data.data?.subscribed;
+                    this.subscribeInfo = res.data.data;
+                });
             }
             //百科
-            if (drawerConfig.subscribeType === 'wiki' && drawerConfig.id && drawerConfig.postType) {
-                getSubscribeWikiStatus(drawerConfig.postType, drawerConfig.id).then(res => {
-                    this.isSubscribe = res.data.data?.subscribed
-                    this.subscribeInfo = res.data.data
-
-                })
+            if (drawerConfig.subscribeType === "wiki" && drawerConfig.id && drawerConfig.postType) {
+                getSubscribeWikiStatus(drawerConfig.postType, drawerConfig.id).then((res) => {
+                    this.isSubscribe = res.data.data?.subscribed;
+                    this.subscribeInfo = res.data.data;
+                });
             }
         },
         /**
-   * @description: 稍后再看,操作完成后areaKey转到home界面
-   * @return {*}
-   */
+         * @description: 稍后再看,操作完成后areaKey转到home界面
+         * @return {*}
+         */
         laterOn() {
-            let drawerConfig = this.drawerConfig
+            let drawerConfig = this.drawerConfig;
             let params = {
                 author_id: parseInt(drawerConfig.laterOn.author_id),
                 banner: "",
                 category: drawerConfig.postType,
                 content_meta_id: parseInt(drawerConfig.laterOn.content_meta_id),
                 link: drawerConfig.url,
-                title: drawerConfig.title
-            }
-            later(params).then(res => {
-                console.log(res)
+                title: drawerConfig.title,
+            };
+            later(params).then((res) => {
+                console.log(res);
                 this.$message.success("已添加稍后再看");
-                this.areaKey = 'home';
-                this.$emit('laterOn');
-            })
-
+                this.areaKey = "home";
+                this.$emit("laterOn");
+            });
         },
     },
 };
