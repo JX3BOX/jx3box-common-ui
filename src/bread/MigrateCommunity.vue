@@ -26,7 +26,6 @@
                 <div class="u-value"><a target="_blank" :href="postLink(post.post_type, post.ID)">查看</a></div>
             </div>
         </div>
-        <el-empty v-else></el-empty>
         <template #footer>
             <el-button @click="close" :loading="loading">关闭</el-button>
             <el-button type="primary" @click="submit" :loading="loading">确认</el-button>
