@@ -88,6 +88,7 @@ export default {
                 migrateCommunityPost({ community_id: this.communityId }).then((res) => {
                     this.$message.success("迁移成功");
                     this.close();
+                    location.href = '/community'
                 }).finally(() => {
                     this.loading = false;
                 });

@@ -56,5 +56,5 @@ export const getOriginalPost = (id) => {
 
 // 迁移帖子
 export const migrateCommunityPost = (data) => {
-    return $cms().post(`/api/cms/manage/post/migrate`, data);
+    return $cms().put(`/api/cms/manage/post/migrate`, data);
 };
