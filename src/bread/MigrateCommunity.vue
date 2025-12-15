@@ -26,7 +26,8 @@
                 <div class="u-value"><a target="_blank" :href="postLink(post.post_type, post.ID)">查看</a></div>
             </div>
         </div>
-        <template #footer>
+        <el-alert type="warning" title="该帖子不可迁移，不存在原帖子" :closable="false" show-icon v-else></el-alert>
+        <template #footer v-if="post">
             <el-button @click="close" :loading="loading">关闭</el-button>
             <el-button type="primary" @click="submit" :loading="loading">确认</el-button>
         </template>
@@ -46,7 +47,7 @@ export default {
         },
         communityId: {
             type: Number,
-            default: 5967,
+            default: 0,
         },
     },
     model: {
@@ -83,6 +84,9 @@ export default {
             });
         },
         submit() {
+            if (!this.post) {
+                return;
+            }
             this.$confirm("确认将该帖子迁回原板块？").then(() => {
                 this.loading = true;
                 migrateCommunityPost({ community_id: this.communityId }).then((res) => {
