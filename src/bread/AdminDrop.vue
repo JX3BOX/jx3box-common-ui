@@ -27,12 +27,16 @@
                 <el-dropdown-item icon="el-icon-upload" command="designTask" v-if="hasPermission('push_banner')">
                     <span>推送</span>
                 </el-dropdown-item>
+                <el-dropdown-item command="migrate" v-if="isCommunity" icon="el-icon-refresh">
+                    <span>迁移</span>
+                </el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
 
         <design-task v-model="showDesignTask" :post="post"></design-task>
         <CommunityAdmin v-model="communityAdminVisible" :postId="post && post.id" />
         <MoveToCommunityDialog v-model="moveVisible" :post="post" />
+        <MigrateCommunity v-model="showMigrate" :communityId="sourceId" />
     </div>
 </template>
 
@@ -41,6 +45,7 @@ import Bus from "../../service/bus";
 import User from "@jx3box/jx3box-common/js/user";
 import DesignTask from "./DesignTask.vue";
 import MoveToCommunityDialog from "./MoveToCommunityDialog.vue";
+import MigrateCommunity from "./MigrateCommunity.vue";
 import { sendMessage } from "../../service/admin";
 import CommunityAdmin from "./CommunityAdmin.vue";
 import { editLink } from "@jx3box/jx3box-common/js/utils";
@@ -50,11 +55,12 @@ export default {
         DesignTask,
         MoveToCommunityDialog,
         CommunityAdmin,
+        MigrateCommunity,
     },
     props: {
         isCommunity: {
             type: Boolean,
-            default: false,
+            default: true,
         },
         showMove: {
             type: Boolean,
@@ -78,6 +84,7 @@ export default {
             moveVisible: false,
             communityAdminVisible: false,
             showDesignTask: false,
+            showMigrate: false,
         };
     },
     computed: {
@@ -150,6 +157,10 @@ export default {
         },
         hasPermission(permission) {
             return User.hasPermission(permission);
+        },
+        migrate() {
+            console.log("migrate");
+            this.showMigrate = true;
         },
     },
 };
