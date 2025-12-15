@@ -48,3 +48,8 @@ export function getCommunityTags() {
             return res.data.data.menus || [];
         });
 }
+
+// 获取原帖子
+export const getOriginalPost = (id) => {
+    return $cms().get(`/api/cms/manage/post/by-community/${id}`);
+}
