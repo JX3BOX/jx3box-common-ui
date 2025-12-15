@@ -60,7 +60,7 @@ export default {
     props: {
         isCommunity: {
             type: Boolean,
-            default: true,
+            default: false,
         },
         showMove: {
             type: Boolean,
@@ -159,7 +159,6 @@ export default {
             return User.hasPermission(permission);
         },
         migrate() {
-            console.log("migrate");
             this.showMigrate = true;
         },
     },

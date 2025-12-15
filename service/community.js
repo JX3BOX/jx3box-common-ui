@@ -53,3 +53,8 @@ export function getCommunityTags() {
 export const getOriginalPost = (id) => {
     return $cms().get(`/api/cms/manage/post/by-community/${id}`);
 }
+
+// 迁移帖子
+export const migrateCommunityPost = (data) => {
+    return $cms().post(`/api/cms/manage/post/migrate`, data);
+};
