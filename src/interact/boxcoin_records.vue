@@ -21,7 +21,13 @@
                             <i title="品鉴"><img class svg-inline src="../../assets/img/widget/admin_gift.svg" /></i>
                         </template>
                     </span>
-                    <a class="u-meta u-user" :href="authorLink(item.operate_user_id)" target="_blank">
+                    <template v-if="item.ext_operate_user_info?.id == 1">
+                        <span class="u-meta u-user u-default">
+                            <img class="u-user-avatar" :src="showAvatar(item.ext_operate_user_info.avatar)" alt />
+                            <span>系统</span>
+                        </span>
+                    </template>
+                    <a v-else class="u-meta u-user" :href="authorLink(item.operate_user_id)" target="_blank">
                         <img class="u-user-avatar" :src="showAvatar(item.ext_operate_user_info.avatar)" alt />
                         <span>{{ item.ext_operate_user_info.display_name }}</span>
                     </a>

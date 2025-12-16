@@ -82,5 +82,10 @@ function refreshAuth() {
     return $cms().post(`/api/cms/user/account/email/refresh`);
 }
 
+// 获取用户permission
+function getUserPermission() {
+    return $cms().get(`/api/cms/account/permission/i`)
+}
+
 export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember,
-    getSliders,getSlider, getCollection, getTopicBucket, getConfig, getUserMeta, setUserMeta, refreshAuth };
+    getSliders,getSlider, getCollection, getTopicBucket, getConfig, getUserMeta, setUserMeta, refreshAuth, getUserPermission };
