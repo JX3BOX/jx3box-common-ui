@@ -39,12 +39,14 @@
                             :minlength="2"
                             :maxlength="30"
                             show-word-limit
+                            :disabled="!!is_anonymity"
                         ></el-input>
                         <el-button :disabled="fetchingCurrentRelease" @click="insertCurrentRelease">插入当前版本</el-button>
                     </div>
                 </div>
             </div>
-            <span slot="footer" class="dialog-footer">
+            <span slot="footer" class="dialog-footer w-boxcoin-admin-footer">
+                <el-checkbox border class="u-anonymity" v-model="is_anonymity" @change="onAnonymityChange" :true-label="1" :false-label="0">使用匿名品鉴</el-checkbox>
                 <el-button @click="visible = false">取 消</el-button>
                 <el-button type="primary" @click="submit" :disabled="!ready || submitting">确 定</el-button>
             </span>
@@ -73,6 +75,7 @@ export default {
             left : this.own,
             chosen: '', // 被选中的人
             amount: "",
+            is_anonymity: 0,
 
             submitting: false,
             fetchingCurrentRelease: false,
@@ -151,7 +154,8 @@ export default {
                 remark: this.remark,
                 client : client,
                 // 如果有category，传入category
-                redirect: this.category ? `/${this.category}/${this.postId}` : undefined
+                redirect: this.category ? `/${this.category}/${this.postId}` : undefined,
+                is_anonymity: this.is_anonymity,
             })
                 .then((res) => {
                     this.$message({
@@ -184,9 +188,22 @@ export default {
                 this.fetchingCurrentRelease = false;
             });
         },
-        init: function () {},
+        onAnonymityChange() {
+            if (this.is_anonymity) {
+                this.remark = "例行工作巡查";
+            }
+        }
     },
     created: function () {},
     mounted: function () {},
 };
 </script>
+
+<style lang="less">
+.w-boxcoin-admin-footer {
+    .u-anonymity {
+        float: left;
+        margin-left: 10px;
+    }
+}
+</style>
