@@ -12,10 +12,14 @@
         </el-tooltip>
         <el-dialog title="品鉴评分" :visible.sync="visible" custom-class="w-boxcoin-pop" :close-on-click-modal="false" append-to-body>
             <div class="w-boxcoin-admin-content">
+                <div class="u-left u-total-left">
+                    <em class="u-label">全年额度</em>
+                    已用<b>{{postTypeUsed}}</b> 剩余<b>{{postTypeLeft}}</b> 总计<b>{{totalLimit}}</b>
+                </div>
                 <div class="u-left">
                     <em class="u-label">本月状态</em>
-                    已用<b>{{this.used}}</b> 剩余<b>{{this.left}}</b> 总计<b>{{this.total}}</b>
-                    <el-progress :percentage="this.total ? 100 - (this.used * 100 / this.total) : 0" :stroke-width="15" :text-inside="true"></el-progress>
+                    已用<b>{{used}}</b> 剩余<b>{{left}}</b> 总计<b>{{total}}</b>
+                    <el-progress :percentage="total ? 100 - (used * 100 / total) : 0" :stroke-width="15" :text-inside="true"></el-progress>
                 </div>
                 <div class="u-list">
                     <em class="u-label">❤️ 品鉴</em>
@@ -62,7 +66,7 @@ import Contributors from './Contributors.vue';
 import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "BoxcoinAdmin",
-    props: ["postType", "postId", "userId", "own", "total", "points", "max", "min", 'authors','client',"category"],
+    props: ["postType", "postId", "userId", "own", "total", "points", "max", "min", 'authors','client',"category", "totalLimit", "postTypeUsed"],
     components: {
         Contributors
     },
@@ -75,7 +79,7 @@ export default {
             left : this.own,
             chosen: '', // 被选中的人
             amount: "",
-            is_anonymity: 0,
+            is_anonymity: 1,
 
             submitting: false,
             fetchingCurrentRelease: false,
@@ -129,6 +133,9 @@ export default {
         iconPath() {
             return __cdn + "design/vector/icon/taste.svg"
         },
+        postTypeLeft() {
+            return this.totalLimit - this.postTypeUsed;
+        }
     },
     watch: {
         own : function (val){
@@ -149,6 +156,15 @@ export default {
             let client = this.client || this.hostClient;
             if (!['std', 'origin', 'all'].includes(client)) {
                 client = 'std'
+            }
+            // 判断全年额度是否超限
+            if ((this.totalLimit > 0 && (this.postTypeUsed + Number(count) > this.totalLimit)) || this.totalLimit === 0) {
+                this.$message({
+                    message: `操作失败，已超出全年额度限制（${this.totalLimit}盒币）`,
+                    type: "error",
+                });
+                this.submitting = false;
+                return;
             }
             grantBoxcoin(this.postType, this.postId, this.chosen || this.userId, count, {
                 remark: this.remark,
@@ -194,7 +210,9 @@ export default {
             }
         }
     },
-    created: function () {},
+    created: function () {
+        this.remark = this.is_anonymity ? "例行工作巡查" : this.remark;
+    },
     mounted: function () {},
 };
 </script>
