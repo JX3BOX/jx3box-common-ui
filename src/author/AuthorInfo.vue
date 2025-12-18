@@ -1,7 +1,8 @@
 <template>
     <div class="c-author-info">
         <div class="u-author">
-            <Avatar class="u-avatar" :uid="uid" :url="data.user_avatar" size="s" :frame="data.user_avatar_frame" />
+            <Avatar class="u-avatar" :uid="uid" :url="data.user_avatar" size="s" :frame="data.user_avatar_frame" v-if="!anonymous" />
+            <Avatar v-else class="u-avatar" :url="defaultUrl" size="s"></Avatar>
             <div class="u-info">
                 <div class="u-name">
                     <el-tooltip class="item" effect="dark" content="签约作者" placement="top" v-if="isSuperAuthor">
@@ -9,12 +10,13 @@
                             <img :src="super_author_icon" alt="superauthor" />
                         </a>
                     </el-tooltip>
-                    <a class="u-displayname" :href="authorLink(uid)" target="_blank">
+                    <a class="u-displayname" :href="authorLink(uid)" target="_blank" v-if="!anonymous">
                         {{ data.display_name || "未知" }}
                     </a>
+                    <span class="u-displayname u-anonymous" v-else>神秘侠士</span>
                 </div>
                 <div class="u-extend">
-                    <el-tooltip class="item" effect="dark" placement="top">
+                    <el-tooltip class="item" effect="dark" placement="top" v-if="!anonymous">
                         <div slot="content">
                             <span class="u-tips">经验值：{{ data.experience }}</span>
                         </div>
@@ -27,7 +29,16 @@
                             >Lv.{{ level }}</a
                         >
                     </el-tooltip>
-                    <el-tooltip class="item" effect="dark" :content="vipTypeTitle" placement="top" v-if="isVip">
+                    <a
+                        v-else
+                        class="u-level"
+                        :class="'lv-' + level"
+                        :style="{ backgroundColor: showLevelColor(level) }"
+                        href="/about/incentives"
+                        target="_blank"
+                        >Lv.{{ level }}</a
+                    >
+                    <el-tooltip class="item" effect="dark" :content="vipTypeTitle" placement="top" v-if="isVip && !anonymous">
                         <a class="u-vip" href="/vip/premium?from=sidebar_author" target="_blank">
                             <i class="i-icon-vip on">{{ vipType }}</i>
                         </a>
@@ -41,7 +52,7 @@
 </template>
 
 <script>
-import { __server, __imgPath, __userLevel, __userLevelColor } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __server, __imgPath, __userLevel, __userLevelColor, __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 import { authorLink } from "@jx3box/jx3box-common/js/utils";
 import User from "@jx3box/jx3box-common/js/user";
 import { getUserInfo } from "../../service/author";
@@ -49,7 +60,7 @@ import Avatar from "./Avatar.vue";
 import Honor from "./AuthorHonor.vue";
 export default {
     name: "AuthorInfo",
-    props: ["uid"],
+    props: ["uid", "anonymous"],
     components: {
         Avatar,
         Honor,
@@ -64,7 +75,7 @@ export default {
     computed: {
         // level
         level: function () {
-            return User.getLevel(this.data?.experience);
+            return this.anonymous ? -1 : User.getLevel(this.data?.experience);
         },
 
         // vip
@@ -81,6 +92,9 @@ export default {
         // sign
         isSuperAuthor: function () {
             return this.data?.sign;
+        },
+        defaultUrl: function () {
+            return `${__cdn}/design/avatar/xisai/0-1.png`
         },
     },
     watch: {
@@ -134,6 +148,12 @@ export default {
         .nobreak;
         &:hover {
             color: #f39;
+        }
+    }
+    .u-anonymous {
+        color: #888;
+        &:hover {
+            color: #888;
         }
     }
     .u-superauthor {

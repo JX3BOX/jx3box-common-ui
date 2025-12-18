@@ -28,7 +28,8 @@
                 <i class="u-author-icon">
                     <img svg-inline src="../../assets/img/single/author.svg" />
                 </i>
-                <a class="u-name" :href="author_link">{{ author_name }}</a>
+                <a class="u-name" :href="author_link" v-if="!anonymous">{{ author_name }}</a>
+                <span class="u-name u-anonymous" v-else>神秘侠士</span>
             </div>
 
             <!-- 自定义字段 -->
@@ -75,7 +76,7 @@
             </span>
 
             <!-- 编辑 -->
-            <a class="u-edit u-sub-block" :href="edit_link" v-if="canEdit">
+            <a class="u-edit u-sub-block" :href="edit_link" v-if="canEdit && !anonymous">
                 <i class="u-icon-edit el-icon-edit-outline"></i>
                 <span>编辑</span>
             </a>
@@ -91,7 +92,7 @@ import User from "@jx3box/jx3box-common/js/user.js";
 import $ from "jquery";
 export default {
     name: "single-header",
-    props: ["post", "stat", "titleExtra"],
+    props: ["post", "stat", "titleExtra", "anonymous"],
     data: function () {
         return {
             wordCount: 0,
