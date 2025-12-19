@@ -24,11 +24,11 @@
                 <el-dropdown-item v-if="hasPermission('manage_post_move') && showMove" command="onMoveToCommunity" icon="el-icon-refresh">
                     <span>转移</span>
                 </el-dropdown-item>
-                <el-dropdown-item icon="el-icon-upload" command="designTask" v-if="hasPermission('push_banner')">
-                    <span>推送</span>
-                </el-dropdown-item>
                 <el-dropdown-item command="migrate" v-if="isCommunity" icon="el-icon-refresh">
                     <span>迁移</span>
+                </el-dropdown-item>
+                <el-dropdown-item icon="el-icon-upload" command="designTask" v-if="hasPermission('push_banner')">
+                    <span>推送</span>
                 </el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
