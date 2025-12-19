@@ -256,7 +256,7 @@ export default {
 
             User.isLogin() &&  getUserPermission().then(res => {
                 const permissions = res.data.data.permission?.map(item => item.action)
-                this.hasPermission = permissions.includes(`manage_boxcoin_${this.postType}`) || User.isSuperAdmin();
+                this.hasPermission = permissions.includes(`manage_boxcoin_${this.postType}`);
             })
         },
         // 用户打赏
