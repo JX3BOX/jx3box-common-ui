@@ -1,8 +1,7 @@
 <template>
     <div class="c-author-info">
         <div class="u-author">
-            <Avatar class="u-avatar" :uid="uid" :url="data.user_avatar" size="s" :frame="data.user_avatar_frame" v-if="!anonymous" />
-            <Avatar v-else class="u-avatar" :url="defaultUrl" size="s"></Avatar>
+            <Avatar class="u-avatar" :uid="uid" :url="data.user_avatar" size="s" :frame="data.user_avatar_frame" />
             <div class="u-info">
                 <div class="u-name">
                     <el-tooltip class="item" effect="dark" content="签约作者" placement="top" v-if="isSuperAuthor">
@@ -52,7 +51,7 @@
 </template>
 
 <script>
-import { __server, __imgPath, __userLevel, __userLevelColor, __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __server, __imgPath, __userLevel, __userLevelColor } from "@jx3box/jx3box-common/data/jx3box.json";
 import { authorLink } from "@jx3box/jx3box-common/js/utils";
 import User from "@jx3box/jx3box-common/js/user";
 import { getUserInfo } from "../../service/author";
@@ -92,9 +91,6 @@ export default {
         // sign
         isSuperAuthor: function () {
             return this.data?.sign;
-        },
-        defaultUrl: function () {
-            return `${__cdn}/design/avatar/xisai/0-1.png`
         },
     },
     watch: {
