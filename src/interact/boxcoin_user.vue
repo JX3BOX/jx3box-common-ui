@@ -1,7 +1,13 @@
 <template>
     <div class="w-boxcoin-user" v-if="allowBoxcoin">
-        <el-tooltip effect="dark" content="投币" placement="top-start">
+        <el-tooltip effect="dark" content="投币" placement="top-start" v-if="canGift">
             <div class="w-boxcoin-block" @click="openBoxcoinPop">
+                <img class="u-icon" svg-inline :src="iconPath" />
+                <span class="u-count" v-if="boxcoin">{{boxcoin}}</span>
+            </div>
+        </el-tooltip>
+        <el-tooltip effect="dark" content="您当前等级不够，不能够进行投币。" placement="top" v-else>
+             <div class="w-boxcoin-block disabled">
                 <img class="u-icon" svg-inline :src="iconPath" />
                 <span class="u-count" v-if="boxcoin">{{boxcoin}}</span>
             </div>
@@ -55,7 +61,7 @@ import _ from "lodash";
 import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "BoxcoinUser",
-    props: ["boxcoin", "postType", "postId", "userId", "own", "points", "authors",'client',"category"],
+    props: ["boxcoin", "postType", "postId", "userId", "own", "points", "authors",'client',"category","canGift"],
     components: {
         Contributors
     },

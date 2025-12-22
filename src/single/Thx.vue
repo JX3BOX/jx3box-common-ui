@@ -53,6 +53,7 @@
                     :client="finalClient"
                     :category="category"
                     @updateRecord="updateRecord"
+                    :canGift="lvEnough"
                 />
                 <watch-later :category="postType" :title="postTitle" :author-id="authorId" :banner="banner" :content-id="contentMetaId"></watch-later>
                 <Share :postId="postId" :postType="postType" :client="client" />
@@ -189,6 +190,8 @@ export default {
 
             admin_boxcoin_visible: 1,
             hasPermission: false,
+
+            lvEnough: false, // 用户权限是否足够
         };
     },
     computed: {
@@ -252,6 +255,15 @@ export default {
                 key: 'admin_boxcoin_visible'
             }).then((res) => {
                 this.admin_boxcoin_visible = Number(res?.val)
+            });
+
+            getConfig({
+                key: `level_has_gift_permission`
+            }).then((res) => {
+                User.isLogin() && User.getAsset().then((data) => {
+                    const asset = data;
+                    this.lvEnough = asset && asset.experience >= Number(res?.val);
+                });
             });
 
             User.isLogin() &&  getUserPermission().then(res => {
