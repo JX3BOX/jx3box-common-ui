@@ -16,7 +16,7 @@
                         <el-select v-model="form.category" filterable placeholder="请选择">
                             <el-option
                                 v-for="item in categoryList"
-                                :value="item.name"
+                                :value="item.mark"
                                 :label="item.name"
                                 :key="item.name"
                             >
