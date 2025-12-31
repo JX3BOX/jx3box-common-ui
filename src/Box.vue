@@ -93,7 +93,7 @@ export default {
         },
         getBoxIcon: function (val) {
             val = val && val?.replace(".png", ".svg");
-            let web_url = __cdn + "logo-light/" + val;
+            let web_url = __cdn + "logo/logo-light/" + val;
             return web_url;
         },
         getTarget: function (val) {
