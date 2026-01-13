@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common-ui",
-    "version": "9.5.18",
+    "version": "9.5.19",
     "description": "JX3BOX UI",
     "main": "index.js",
     "scripts": {
@@ -13,28 +13,16 @@
         "update": "npm --registry https://registry.npmjs.org install @jx3box/jx3box-common@latest @jx3box/jx3box-data@latest @jx3box/jx3box-comment-ui@latest @jx3box/jx3box-editor@latest",
         "header": "vue-cli-service build --target lib --name newheader src/Header.vue && cp public/index.html dist/newheader.html"
     },
-    "eslintConfig": {
-        "root": true,
-        "env": {
-            "node": true
-        },
-        "extends": [
-            "plugin:vue/essential"
-        ],
-        "rules": {},
-        "parserOptions": {
-            "parser": "babel-eslint"
-        }
-    },
     "browserslist": [
         "> 1%",
-        "last 2 versions"
+        "last 2 versions",
+        "not dead"
     ],
     "dependencies": {
-        "@jx3box/jx3box-comment-ui": "^2.0.7",
-        "@jx3box/jx3box-common": "^8.7.2",
-        "@jx3box/jx3box-data": "^3.8.3",
-        "@jx3box/jx3box-editor": "^2.2.32",
+        "@jx3box/jx3box-comment-ui": "^2.0.9",
+        "@jx3box/jx3box-common": "^8.7.4",
+        "@jx3box/jx3box-data": "^3.9.2",
+        "@jx3box/jx3box-editor": "^2.2.43",
         "@jx3box/reporter": "^0.0.4",
         "axios": "^0.26.1",
         "dayjs": "^1.11.0",
@@ -45,26 +33,27 @@
         "qrcode.vue": "^1.7.0",
         "url": "^0.11.0",
         "v-code-diff": "^1.13.1",
-        "vue": "^2.6.11"
+        "vue": "^2.7.16"
     },
     "devDependencies": {
-        "@babel/plugin-proposal-optional-chaining": "^7.14.5",
-        "@vue/cli-plugin-babel": "~4.3.0",
-        "@vue/cli-plugin-eslint": "~4.3.0",
-        "@vue/cli-plugin-vuex": "^4.0.0",
-        "@vue/cli-service": "~4.3.0",
+        "@babel/core": "^7.12.16",
+        "@babel/eslint-parser": "^7.12.16",
+        "@vue/cli-plugin-babel": "~5.0.8",
+        "@vue/cli-plugin-eslint": "~5.0.8",
+        "@vue/cli-plugin-vuex": "~5.0.8",
+        "@vue/cli-service": "~5.0.8",
         "babel-eslint": "^10.1.0",
-        "core-js": "^3.6.5",
+        "core-js": "^3.8.3",
         "cross-env": "^7.0.3",
         "csslab": "^4.0.3",
-        "eslint": "^6.7.2",
-        "eslint-plugin-vue": "^6.2.2",
-        "less": "^3.0.4",
-        "less-loader": "^5.0.0",
-        "style-resources-loader": "^1.3.3",
+        "eslint": "^7.32.0",
+        "eslint-plugin-vue": "^8.0.3",
+        "less": "^4.0.0",
+        "less-loader": "^8.0.0",
+        "style-resources-loader": "^1.4.1",
         "vue-cli-plugin-element": "~1.0.1",
-        "vue-svg-inline-loader": "^1.4.6",
-        "vue-template-compiler": "^2.6.11",
+        "vue-svg-inline-loader": "^2.1.0",
+        "vue-template-compiler": "^2.7.16",
         "weixin-js-sdk": "^1.6.0"
     },
     "repository": {

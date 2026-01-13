@@ -1,7 +1,7 @@
+require("events").EventEmitter.defaultMaxListeners = 2333;
 const path = require("path");
 const pkg = require("./package.json");
 const { JX3BOX } = require("@jx3box/jx3box-common");
-// const Setting = require("./setting.json");
 
 module.exports = {
     //❤️ define path for static files ~
@@ -23,8 +23,10 @@ module.exports = {
         //for lost
         "/",
 
-    //❤️ Porxy ~
+    //❤️ Proxy ~
     devServer: {
+        // Webpack 5 (Dev Server 4) 废弃了 disableHostCheck，改用 allowedHosts
+        allowedHosts: "all",
         proxy: {
             "/api/vip": {
                 target: "https://pay.jx3box.com",
@@ -46,7 +48,6 @@ module.exports = {
             },
             "/api/cms": {
                 target: "https://cms.jx3box.com",
-                // target: process.env["DEV_SERVER"] == "true" ? "http://localhost:7100" : "https://cms.jx3box.com",
             },
             "/api/article": {
                 target: "https://next2.jx3box.com",
@@ -85,27 +86,29 @@ module.exports = {
                 },
             },
         },
-        disableHostCheck: true,
+        client: {
+            overlay: {
+                warnings: false,
+                errors: false,
+            },
+        },
     },
-
+    configureWebpack: {
+        ignoreWarnings: [
+            // 使用正则匹配警告信息，匹配到的统统不显示
+            /Should not import the named export/,
+            // /export '.*' \(imported as '.*'\) was not found in/,
+        ],
+    },
     chainWebpack: (config) => {
-        //💘 html-webpack-plugin ~
-        // Multiple pages disable the block below
-        // config.plugin("html").tap(args => {
-        //     args[0].meta = {                            //------设置SEO信息
-        //         Keywords: Setting.keys,
-        //         Description: Setting.desc
-        //     };
-        //     args[0].title = Setting.title + SEO.title;  //------自动添加标题后缀
-        //     return args;
-        // });
-
         //💝 in-line small imgs ~
-        config.module
-            .rule("images")
-            .use("url-loader")
-            .loader("url-loader")
-            .tap((options) => Object.assign(options, { limit: 10240 }));
+        // Vue CLI 5 (Webpack 5) 修正写法：
+        // 不再使用 url-loader，而是修改 parser 配置
+        config.module.rule("images").set("parser", {
+            dataUrlCondition: {
+                maxSize: 10240, // 10kb
+            },
+        });
 
         //💝 in-line svg imgs ~
         config.module.rule("vue").use("vue-svg-inline-loader").loader("vue-svg-inline-loader");
@@ -116,7 +119,6 @@ module.exports = {
         preload_styles.push(
             path.resolve(__dirname, "./node_modules/csslab/base.less"),
             path.resolve(__dirname, "./node_modules/@jx3box/jx3box-common/css/var.less")
-            // path.resolve(__dirname, './src/assets/css/var.less')
         );
         function addStyleResource(rule) {
             rule.use("style-resource").loader("style-resources-loader").options({
