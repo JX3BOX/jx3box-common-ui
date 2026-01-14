@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common-ui",
-    "version": "9.5.19",
+    "version": "9.5.20",
     "description": "JX3BOX UI",
     "main": "index.js",
     "scripts": {
@@ -33,7 +33,7 @@
         "qrcode.vue": "^1.7.0",
         "url": "^0.11.0",
         "v-code-diff": "^1.13.1",
-        "vue": "^2.7.16"
+        "vue": "^2.6.11"
     },
     "devDependencies": {
         "@babel/core": "^7.12.16",
@@ -53,7 +53,7 @@
         "style-resources-loader": "^1.4.1",
         "vue-cli-plugin-element": "~1.0.1",
         "vue-svg-inline-loader": "^2.1.0",
-        "vue-template-compiler": "^2.7.16",
+        "vue-template-compiler": "^2.6.11",
         "weixin-js-sdk": "^1.6.0"
     },
     "repository": {
