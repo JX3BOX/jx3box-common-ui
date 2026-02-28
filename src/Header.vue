@@ -27,7 +27,7 @@
 
 <script>
 import _ from "lodash";
-import { isApp, KW } from "../assets/js/app.js";
+import { KW, isApp } from "../assets/js/app.js";
 
 import logo from "./header/logo.vue";
 import clientSwitch from "./header/clientSwitch.vue";
@@ -35,7 +35,7 @@ import search from "./header/search.vue";
 import nav from "./header/nav.vue";
 import user from "./header/user.vue";
 import Box from "../src/Box.vue";
-import { isMiniProgram, miniprogramHack, isApp } from "@jx3box/jx3box-common/js/utils";
+import { isMiniProgram, miniprogramHack, isApp as checkIsApp } from "@jx3box/jx3box-common/js/utils";
 import miniprogram from "@jx3box/jx3box-common/data/miniprogram.json";
 import { getGlobalConfig } from "../service/header.js";
 import User from "@jx3box/jx3box-common/js/user.js";
@@ -70,7 +70,7 @@ export default {
             const urlParams = new URLSearchParams(window.location.search);
             const from = urlParams.get("from");
             from && sessionStorage.setItem("from", from);
-            if (isMiniProgram() || isApp()) {
+            if (isMiniProgram() || checkIsApp()) {
                 const appid = urlParams.get("appid");
                 const item = miniprogram?.find((item) => item.appid === appid);
                 const from = urlParams.get("_from");
