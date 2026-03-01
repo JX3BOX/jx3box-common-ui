@@ -85,6 +85,7 @@ export default {
     border: 2px solid @bg-black;
     border-radius: 4px;
     overflow: hidden;
+    display: flex;
     .u-active {
         .db;
         .size(50%, 100%);
@@ -101,8 +102,8 @@ export default {
         }
     }
     .u-item {
-        .dbi;
-        .y(top);
+        //.dbi;
+        //.y(top);
         font-size: 14px;
         color: #fff;
         .pointer;
