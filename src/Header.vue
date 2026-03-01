@@ -96,10 +96,9 @@ export default {
             }
 
             // 如果来自推栏
-            if (sessionStorage.getItem("from") == 'tl') {
+            if (sessionStorage.getItem("from") == "tl") {
                 document.documentElement.classList.add("v-miniprogram");
             }
-
         },
 
         // 检查
@@ -107,6 +106,8 @@ export default {
             this.checkIsWebView();
 
             const token = this.getUrlParam("__token");
+            const env = this.getUrlParam("__env");
+            env && localStorage.setItem("__env", env);
 
             token && localStorage.setItem("__token", token);
 
